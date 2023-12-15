@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Excel.Report.Models;
 using Fanex.Athena.Excel.Report.UnitTests.TestableClasses;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
@@ -41,10 +41,10 @@ namespace Fanex.Athena.Excel.Report.UnitTests
 
         private static readonly WinLossByProductMetaModel MetaModel = new WinLossByProductMetaModel
         {
-            FromDate = new DateTime(2018, 1, 1),
-            ToDate = new DateTime(2018, 2, 2),
-            DrillDownFromDate = new DateTime(2018, 3, 3),
-            DrillDownToDate = new DateTime(2018, 4, 4),
+            FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+            ToDate = DateTimeHelper.CreateDateTime(2018, 2, 2),
+            DrillDownFromDate = DateTimeHelper.CreateDateTime(2018, 3, 3),
+            DrillDownToDate = DateTimeHelper.CreateDateTime(2018, 4, 4),
             CurrencyId = 1,
             DrillDownCurrencyId = 2,
             ProductOptions = new List<ProductOption>(),

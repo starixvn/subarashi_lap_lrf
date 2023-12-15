@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -67,8 +66,8 @@
                 const int Page = 2;
                 const int Rows = 50;
                 const string CurrencyName = "USD";
-                var fromDate = new DateTime(2018, 1, 1);
-                var toDate = new DateTime(2018, 1, 2);
+                var fromDate = DateTimeHelper.CreateDateTime(2018, 1, 1);
+                var toDate = DateTimeHelper.CreateDateTime(2018, 1, 2);
                 const int BetType = 1;
                 const string SortBy = "Index";
                 const string SortOrder = "asc";

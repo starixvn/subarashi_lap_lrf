@@ -1,11 +1,10 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Base.UnitTests;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Report.Interfaces;
 
@@ -128,8 +127,8 @@
         {
             return new SubsidiaryPerformanceMetaModel
             {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
                 ProductCodeList = "SB,BA",
                 SubsidiaryList = "New York,India",
                 BaseCurrency = "USD",

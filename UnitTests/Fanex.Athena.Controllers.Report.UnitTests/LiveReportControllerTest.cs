@@ -10,6 +10,7 @@
     using DataAccess.Core.Configuration.Interfaces;
     using Excel.Base.Entities;
     using Excel.Report;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
@@ -30,7 +31,7 @@
     {
         private const int CurrencyId = 999;
 
-        private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
+        private static readonly DateTime BalanceUpDate = DateTimeHelper.CreateDateTime(2017, 3, 4);
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
 

@@ -1,9 +1,9 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -62,8 +62,8 @@
         {
             var reportSetting = new ReportSetting
             {
-                MinDate = new DateTime(2021, 2, 15),
-                MaxDate = new DateTime(2021, 3, 30),
+                MinDate = DateTimeHelper.CreateDateTime(2021, 2, 15),
+                MaxDate = DateTimeHelper.CreateDateTime(2021, 3, 30),
             };
 
             _reportSettingService.GetSetting(PermissionKeys.ReportLeagueWinLoss, SessionService.LicenseeSession.LicenseeName).

@@ -28,7 +28,7 @@ namespace Fanex.Athena.Controllers.Report
 
             var metaModel = new ThirdPartyWinLossMetaModel
             {
-                FromDate = new DateTime(toDate.Year, toDate.Month, 1),
+                FromDate = DateTimeHelper.CreateDateTime(toDate.Year, toDate.Month, 1),
                 ToDate = toDate,
                 LicenseeId = licenseeSession.LicenseeId,
                 IsExcludedTestData = true,

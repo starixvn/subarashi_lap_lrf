@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -25,8 +26,8 @@
         private ILicenseeSettingService _licenseeSettingService;
         private IBalanceUpDataAccess _balanceUpDataAccess;
 
-        private static readonly DateTime MoveBetDay = new DateTime(2022, 1, 1);
-        private static readonly DateTime HistoryDate = new DateTime(2012, 1, 1);
+        private static readonly DateTime MoveBetDay = DateTimeHelper.CreateDateTime(2022, 1, 1);
+        private static readonly DateTime HistoryDate = DateTimeHelper.CreateDateTime(2012, 1, 1);
 
         [SetUp]
         public void SetUp()

@@ -249,8 +249,8 @@
         {
             // Arrange
             const int CurrencyId = -2, CustId = 1;
-            var fromDate = new DateTime(2017, 4, 1);
-            var toDate = new DateTime(2017, 4, 18);
+            var fromDate = DateTimeHelper.CreateDateTime(2017, 4, 1);
+            var toDate = DateTimeHelper.CreateDateTime(2017, 4, 18);
 
             StubProductAccess(new string[0]);
             _licenseeSettingService.IsFakeLicensee(Arg.Any<string>()).Returns(isFakeLicensee);
@@ -308,8 +308,8 @@
             var metaModel = new WinLossByProductMetaModel
             {
                 MemberId = memberId,
-                DrillDownFromDate = new DateTime(2017, 1, 1),
-                DrillDownToDate = new DateTime(2017, 2, 1),
+                DrillDownFromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                DrillDownToDate = DateTimeHelper.CreateDateTime(2017, 2, 1),
                 Username = ViewResources.ExternalId
             };
 

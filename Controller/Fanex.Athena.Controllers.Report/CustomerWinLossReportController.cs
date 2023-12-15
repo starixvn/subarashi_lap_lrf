@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
@@ -53,7 +52,7 @@
             var metaModel = new CustomerWinLossMetaModel
             {
                 IsExcludedTestData = true,
-                FromDate = isHistory ? new DateTime(DateTimeHelper.Today.Year, DateTimeHelper.Today.Month, 1)
+                FromDate = isHistory ? DateTimeHelper.CreateDateTime(DateTimeHelper.Today.Year, DateTimeHelper.Today.Month, 1)
                 : DateTimeHelper.Today,
                 BaseCurrency = userSession.DefaultBaseCurrency
             };

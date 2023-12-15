@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Service.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,7 +7,7 @@
     using Core.Users.Interfaces;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
 
     using Model.Core.DataDomain;
@@ -67,8 +66,8 @@
             // Arrange
             var metaModel = new SubsidiaryPerformanceMetaModel
             {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
                 ProductCodeList = "SB,BA",
                 SubsidiaryList = "123,143",
                 BaseCurrency = "EUR"
@@ -89,8 +88,8 @@
             // Arrange
             var metaModel = new SubsidiaryPerformanceMetaModel
             {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
                 ProductCodeList = "SB,BA",
                 SubsidiaryList = "New York,India",
                 BaseCurrency = "EUR",
@@ -119,8 +118,8 @@
             // Arrange
             var metaModel = new SubsidiaryPerformanceMetaModel
             {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
                 ProductCodeList = "SB,BA",
                 BaseCurrency = "EUR",
                 LicenseeName = LicenseeName
@@ -147,8 +146,8 @@
             // Arrange
             var metaModel = new SubsidiaryPerformanceMetaModel
             {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
                 ProductCodeList = "SB,BA",
                 SubsidiaryList = "New York,India",
                 BaseCurrency = "EUR",
@@ -178,8 +177,8 @@
             // Arrange
             var metaModel = new SubsidiaryPerformanceMetaModel
             {
-                FromDate = new DateTime(2017, 8, 30),
-                ToDate = new DateTime(2017, 8, 30),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 8, 30),
                 ProductCodeList = "SB,BA",
                 SubsidiaryList = "New York,India",
                 BaseCurrency = "EUR",

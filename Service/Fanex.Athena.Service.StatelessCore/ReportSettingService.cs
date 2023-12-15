@@ -94,7 +94,7 @@
             if (reportSetting.LimitRecentMonths > 0)
             {
                 var limitedMinDate = GetNowByTimeZone(reportSetting.TimeZone).Date.AddMonths(-reportSetting.LimitRecentMonths + 1);
-                limitedMinDate = new DateTime(limitedMinDate.Year, limitedMinDate.Month, 1);
+                limitedMinDate = DateTimeHelper.CreateDateTime(limitedMinDate.Year, limitedMinDate.Month, 1);
                 reportSetting.MinDate = DateTimeHelper.GetMaxDate(reportSetting.MinDate, limitedMinDate);
             }
 

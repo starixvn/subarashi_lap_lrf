@@ -32,7 +32,7 @@
             var result = ConvertHelper.ToDateTime(dateString, false);
 
             // Assert
-            Assert.That(result, Is.EqualTo(new DateTime(2016, 2, 3)));
+            Assert.That(result, Is.EqualTo(DateTimeHelper.CreateDateTime(2016, 2, 3)));
         }
 
         [Test]
@@ -45,7 +45,7 @@
             var result = ConvertHelper.ToDateTime(dateString, true);
 
             // Assert
-            Assert.That(result, Is.EqualTo(new DateTime(2016, 2, 1)));
+            Assert.That(result, Is.EqualTo(DateTimeHelper.CreateDateTime(2016, 2, 1)));
         }
     }
 }

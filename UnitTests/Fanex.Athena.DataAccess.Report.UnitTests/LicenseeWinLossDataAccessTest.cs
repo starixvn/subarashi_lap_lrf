@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -9,7 +8,7 @@
     using Core.UnitTests.TestHelpers;
 
     using Data;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DTO.Configuration;
     using Model.Core.MetaModel.Product;
     using Model.Report.MetaModel;
@@ -35,8 +34,8 @@
             var balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             var balance = new BalanceUp
             {
-                MoveBetsDay = new DateTime(2016, 8, 10),
-                BalanceUpDay = new DateTime(2016, 8, 31)
+                MoveBetsDay = DateTimeHelper.CreateDateTime(2016, 8, 10),
+                BalanceUpDay = DateTimeHelper.CreateDateTime(2016, 8, 31)
             };
             balanceUpDataAccess.GetBalanceUp().Returns(balance);
 
@@ -47,15 +46,15 @@
             _metaModel = new LicenseeWinLossMetaModel
             {
                 DrillDownCustomerId = 999,
-                DrillDownFromDate = new DateTime(2018, 1, 1),
-                DrillDownToDate = new DateTime(2018, 2, 2),
+                DrillDownFromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                DrillDownToDate = DateTimeHelper.CreateDateTime(2018, 2, 2),
                 ProductOptions = GetProductOptions(),
                 BaseCurrency = "USD",
                 ReportBy = 1,
                 LicenseeId = 2,
                 AgentListXml = "3",
-                FromDate = new DateTime(2017, 1, 1),
-                ToDate = new DateTime(2017, 2, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 2, 2),
                 DrawFilter = 4,
                 DefaultBaseCurrency = "AAA"
             };

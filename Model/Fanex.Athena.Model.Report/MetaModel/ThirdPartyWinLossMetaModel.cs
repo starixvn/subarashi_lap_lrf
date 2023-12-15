@@ -7,6 +7,7 @@
 namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
 
@@ -28,13 +29,13 @@ namespace Fanex.Athena.Model.Report.MetaModel
 
         public new DateTime FromDate
         {
-            get { return _fromDate ?? new DateTime(Year, Month, FromDay); }
+            get { return _fromDate ?? DateTimeHelper.CreateDateTime(Year, Month, FromDay); }
             set { _fromDate = value; }
         }
 
         public new DateTime ToDate
         {
-            get { return _toDate ?? new DateTime(Year, Month, ToDay); }
+            get { return _toDate ?? DateTimeHelper.CreateDateTime(Year, Month, ToDay); }
             set { _toDate = value; }
         }
 

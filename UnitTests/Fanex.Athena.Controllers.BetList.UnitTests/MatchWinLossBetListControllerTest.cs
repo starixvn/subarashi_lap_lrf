@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Model.BetList.MetaModel;
     using NSubstitute;
     using NUnit.Framework;
@@ -28,9 +28,9 @@
                 // Arrange
                 var metaModel = new BetListExcelMetaModel
                 {
-                    FromDate = new DateTime(2018, 2, 1),
-                    ToDate = new DateTime(2018, 2, 10),
-                    Date = new DateTime(2018, 2, 5)
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 2, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 2, 10),
+                    Date = DateTimeHelper.CreateDateTime(2018, 2, 5)
                 };
 
                 // Action
@@ -55,9 +55,9 @@
                 // Arrange
                 var metaModel = new BetListExcelMetaModel
                 {
-                    FromDate = new DateTime(2018, 2, 1),
-                    ToDate = new DateTime(2018, 2, 10),
-                    Date = new DateTime(2018, 2, 5)
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 2, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 2, 10),
+                    Date = DateTimeHelper.CreateDateTime(2018, 2, 5)
                 };
 
                 // Action
@@ -82,9 +82,9 @@
                 // Arrange
                 var metaModel = new BetListExcelMetaModel
                 {
-                    FromDate = new DateTime(2018, 2, 1),
-                    ToDate = new DateTime(2018, 2, 10),
-                    Date = new DateTime(2018, 2, 5)
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 2, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 2, 10),
+                    Date = DateTimeHelper.CreateDateTime(2018, 2, 5)
                 };
 
                 // Action
@@ -112,7 +112,7 @@
                     IsExportExcel = true,
                     CurrencyId = 0,
                     CurrencyName = "USD",
-                    FromDate = new DateTime(2018, 11, 11),
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 11, 11),
                     BetType = betTypeId,
                     HomeId = 2,
                     AwayId = 0,
@@ -151,7 +151,7 @@
                     CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
-                    FromDate = new DateTime(2018, 11, 11),
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 11, 11),
                     BetType = 1,
                     HomeId = 2,
                     AwayId = 3
@@ -186,7 +186,7 @@
                     IsExportExcel = true,
                     CurrencyId = 0,
                     CurrencyName = "USD",
-                    FromDate = new DateTime(2018, 11, 11),
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 11, 11),
                 };
 
                 CacheRefAdapter.GetBettype(metaModel.BetType).Returns(string.Empty);

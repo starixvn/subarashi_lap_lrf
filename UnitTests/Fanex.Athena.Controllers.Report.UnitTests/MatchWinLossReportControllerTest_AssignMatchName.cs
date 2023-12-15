@@ -4,6 +4,7 @@
     using System.Data;
     using Base.UnitTests;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using NSubstitute;
@@ -52,7 +53,7 @@
                 // Arrange
                 const int Bettype = 1231;
                 var row = CreateDataRow(Bettype);
-                row["KickoffTime"] = new DateTime(2018, 1, 2, 3, 4, 5);
+                row["KickoffTime"] = DateTimeHelper.CreateDateTime(2018, 1, 2, 3, 4, 5);
 
                 // Action
                 controller.AssignMatchName(row, Bettype);

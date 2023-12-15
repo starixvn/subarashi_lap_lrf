@@ -41,7 +41,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel.CustomerLog
         {
             get
             {
-                return new DateTime(Year, Month, FromDay);
+                return DateTimeHelper.CreateDateTime(Year, Month, FromDay);
             }
         }
 
@@ -49,7 +49,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel.CustomerLog
         {
             get
             {
-                return new DateTime(Year, Month, ToDay);
+                return DateTimeHelper.CreateDateTime(Year, Month, ToDay);
             }
         }
 

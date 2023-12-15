@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -43,7 +42,7 @@
             using (var controller = CreateController(productList))
             {
                 // Arrange
-                var setting = new ReportSetting { MinDate = new DateTime(2019, 1, 1), MaxDate = new DateTime(2019, 1, 2) };
+                var setting = new ReportSetting { MinDate = DateTimeHelper.CreateDateTime(2019, 1, 1), MaxDate = DateTimeHelper.CreateDateTime(2019, 1, 2) };
                 _reportSettingService.GetSetting(PermissionKeys.ReportCasinoTurnover,
                 DefaultLicenseeSession.LicenseeName).Returns(setting);
 

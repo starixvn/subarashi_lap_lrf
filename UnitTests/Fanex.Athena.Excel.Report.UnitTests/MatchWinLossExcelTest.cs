@@ -5,6 +5,7 @@ using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Excel.Report.UnitTests.TestableClasses;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Resources;
@@ -34,7 +35,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
 
         private static readonly MatchWinLossMetaModel MetaModel = new MatchWinLossMetaModel
         {
-            Date = new DateTime(2018, 1, 1)
+            Date = DateTimeHelper.CreateDateTime(2018, 1, 1)
         };
 
         private DataTable _contentData;

@@ -6,6 +6,7 @@
     using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service;
@@ -79,7 +80,7 @@
             var expectedData = new ResultAmendment
             {
                 Id = 1,
-                DateTime = new DateTime(2017, 01, 01, 12, 0, 0),
+                DateTime = DateTimeHelper.CreateDateTime(2017, 01, 01, 12, 0, 0),
                 DataFilePath = "Path1",
                 SessionId = "123123-123-1as23-123",
                 Content = "Content",

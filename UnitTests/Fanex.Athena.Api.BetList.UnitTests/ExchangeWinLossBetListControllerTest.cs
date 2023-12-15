@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
 
     using Base.UnitTests;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
 
     using Model.BetList.MetaModel;
@@ -55,8 +54,8 @@
                 // Arrange
                 var metaModel = new ExchangeBetListMetaModel
                 {
-                    FromDate = new DateTime(2018, 1, 2),
-                    ToDate = new DateTime(2018, 1, 1)
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 1, 2),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 1, 1)
                 };
 
                 // Action
@@ -75,8 +74,8 @@
                 // Arrange
                 var metaModel = new ExchangeBetListMetaModel
                 {
-                    FromDate = new DateTime(2018, 1, 1),
-                    ToDate = new DateTime(2018, 1, 2),
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 1, 2),
                     CurrencyId = 0,
                     CustId = 1
                 };
@@ -99,8 +98,8 @@
                 // Arrange
                 var metaModel = new ExchangeBetListMetaModel
                 {
-                    FromDate = new DateTime(2018, 1, 1),
-                    ToDate = new DateTime(2018, 1, 2),
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 1, 2),
                     CurrencyId = 0,
                     CustId = 0
                 };
@@ -123,8 +122,8 @@
                 // Arrange
                 var metaModel = new ExchangeBetListMetaModel
                 {
-                    FromDate = new DateTime(2018, 1, 1),
-                    ToDate = new DateTime(2018, 1, 2),
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 1, 2),
                     CurrencyId = currencyId,
                     CustId = 100,
                     BaseCurrency = inputBaseCurrency

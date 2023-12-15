@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Excel.Report.Helpers;
 using Fanex.Athena.Excel.Report.UnitTests.TestableClasses;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
@@ -30,8 +30,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
 
         private static readonly ThirdPartyWinLossMetaModel MetaModel = new ThirdPartyWinLossMetaModel
         {
-            FromDate = new DateTime(2017, 1, 1),
-            ToDate = new DateTime(2017, 2, 2),
+            FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+            ToDate = DateTimeHelper.CreateDateTime(2017, 2, 2),
             ProductOptions = new List<ProductOption>
                 {
                     new ProductOption

@@ -12,7 +12,7 @@
             FromDate = today;
             ToDate = today;
             MaxDate = today;
-            MinDate = new DateTime(2012, 1, 1); // 01/01/2012
+            MinDate = DateTimeHelper.CreateDateTime(2012, 1, 1); // 01/01/2012
             IsGetAll = true;
         }
 

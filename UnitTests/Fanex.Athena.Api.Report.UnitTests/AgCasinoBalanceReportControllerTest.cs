@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -223,8 +222,8 @@
             // Arrange
             _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
 
-            var fromDate = new DateTime(2017, 4, 1);
-            var toDate = new DateTime(2017, 4, 18);
+            var fromDate = DateTimeHelper.CreateDateTime(2017, 4, 1);
+            var toDate = DateTimeHelper.CreateDateTime(2017, 4, 18);
             var metaModel = new ThirdPartyWinLossMetaModel
             {
                 CurrencyId = currencyId,

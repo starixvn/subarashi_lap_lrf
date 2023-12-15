@@ -21,8 +21,8 @@
 
     public class ExchangeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
-        private readonly DateTime _minDate = new DateTime(2018, 2, 3);
-        private readonly DateTime _maxDate = new DateTime(2018, 8, 7);
+        private readonly DateTime _minDate = DateTimeHelper.CreateDateTime(2018, 2, 3);
+        private readonly DateTime _maxDate = DateTimeHelper.CreateDateTime(2018, 8, 7);
 
         private IReportSettingService _reportSettingService;
         private IExchangeWinLossDataAccess _dataAccess;

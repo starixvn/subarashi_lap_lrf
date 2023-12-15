@@ -113,8 +113,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
 
             var balanceUp = new BalanceUp
             {
-                BalanceUpDay = new DateTime(2019, 8, 15),
-                MoveBetsDay = new DateTime(2019, 8, 10)
+                BalanceUpDay = DateTimeHelper.CreateDateTime(2019, 8, 15),
+                MoveBetsDay = DateTimeHelper.CreateDateTime(2019, 8, 10)
             };
 
             var balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
@@ -140,8 +140,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Utility
             AutoBindMetaModelService.MapBalanceUpAndMoveBet(actionArgument, Substitute.For<IBalanceUpDataAccess>());
 
             // Assert
-            Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTime.MinValue));
-            Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTime.MinValue));
+            Assert.That(metaModel.MoveBetsDay, Is.EqualTo(DateTimeHelper.MinValue));
+            Assert.That(metaModel.BalanceUpDay, Is.EqualTo(DateTimeHelper.MinValue));
         }
 
         [Test]

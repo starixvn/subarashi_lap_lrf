@@ -9,6 +9,7 @@
     using Base.UnitTests;
 
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Auth.Enum;
@@ -30,7 +31,7 @@
 
     public class BettingTicketCenterControllerTest : CultureBaseControllerHelperTest
     {
-        private static readonly DateTime BalanceUpDate = new DateTime(2018, 11, 2);
+        private static readonly DateTime BalanceUpDate = DateTimeHelper.CreateDateTime(2018, 11, 2);
 
         private IProductService _productService;
 

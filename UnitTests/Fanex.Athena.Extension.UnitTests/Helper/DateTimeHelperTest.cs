@@ -44,7 +44,7 @@
             const int MaximumMonthRange = 6;
 
             // Action & Assert
-            TestIsValidMonthRange(new DateTime(fromYear, fromMonth, fromDay), new DateTime(toYear, toMonth, toDay), MaximumMonthRange, false);
+            TestIsValidMonthRange(DateTimeHelper.CreateDateTime(fromYear, fromMonth, fromDay), DateTimeHelper.CreateDateTime(toYear, toMonth, toDay), MaximumMonthRange, false);
         }
 
         [TestCase(2018, 2, 15, 2018, 7, 31)]
@@ -55,7 +55,7 @@
             const int MaximumMonthRange = 6;
 
             // Action & Assert
-            TestIsValidMonthRange(new DateTime(fromYear, fromMonth, fromDay), new DateTime(toYear, toMonth, toDay), MaximumMonthRange, true);
+            TestIsValidMonthRange(DateTimeHelper.CreateDateTime(fromYear, fromMonth, fromDay), DateTimeHelper.CreateDateTime(toYear, toMonth, toDay), MaximumMonthRange, true);
         }
 
         [TestCase("4/1/2023", DayOfWeek.Monday, "3/27/2023")]

@@ -6,10 +6,10 @@
 
 namespace Fanex.Athena.Excel.Report
 {
-    using System;
     using System.Linq;
     using Base;
     using Fanex.Athena.Excel.Base.Extension;
+    using Fanex.Athena.Extension.Helper;
     using Helpers;
     using Model.Core.DataDomain;
     using Model.Report.DTO;
@@ -92,7 +92,7 @@ namespace Fanex.Athena.Excel.Report
             var indexReport = 1;
             var currentRow = 3;
             var rowCount = _excelModel.DataList.Count();
-            var date = DateTime.MinValue.ToShortDateString();
+            var date = DateTimeHelper.MinValue.ToShortDateString();
             var endRowSpan = 2;
 
             for (int index = 0; index < rowCount; index++)

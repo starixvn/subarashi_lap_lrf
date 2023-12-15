@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
-    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
 
     using DataAccess.Core.Configuration.Interfaces;
 
     using Fanex.Athena.Api.Base.UnitTests;
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DTO.Configuration;
 
     using NSubstitute;
@@ -17,7 +17,11 @@
 
     public class ApiBetListBaseControllerHelperTest : BaseApiControllerHelperTest
     {
-        protected readonly BalanceUp DefaultBalanceUp = new BalanceUp { BalanceUpDay = new DateTime(2018, 1, 1), MoveBetsDay = new DateTime(2018, 1, 2) };
+        protected readonly BalanceUp DefaultBalanceUp = new BalanceUp
+        {
+            BalanceUpDay = DateTimeHelper.CreateDateTime(2018, 1, 1),
+            MoveBetsDay = DateTimeHelper.CreateDateTime(2018, 1, 2)
+        };
 
         protected IAuthorizationService AuthorizationService { get; private set; }
 

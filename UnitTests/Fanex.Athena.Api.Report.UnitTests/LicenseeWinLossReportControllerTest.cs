@@ -86,13 +86,13 @@
             // Arrange
             var model = new LicenseeWinLossMetaModel
             {
-                FromDate = new DateTime(2019, 2, 1),
-                ToDate = new DateTime(2019, 2, 28)
+                FromDate = DateTimeHelper.CreateDateTime(2019, 2, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2019, 2, 28)
             };
             var reportSetting = new ReportSetting
             {
-                MinDate = new DateTime(2019, 2, 15),
-                MaxDate = new DateTime(2019, 3, 30),
+                MinDate = DateTimeHelper.CreateDateTime(2019, 2, 15),
+                MaxDate = DateTimeHelper.CreateDateTime(2019, 3, 30),
             };
 
             _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, SessionLicenseeName).
@@ -117,14 +117,14 @@
         {
             // Arrange
             const int Level = 2;
-            var fromDate = new DateTime(2019, 2, 1);
-            var toDate = new DateTime(2019, 2, 28);
+            var fromDate = DateTimeHelper.CreateDateTime(2019, 2, 1);
+            var toDate = DateTimeHelper.CreateDateTime(2019, 2, 28);
 
             var model = new LicenseeWinLossMetaModel();
             var reportSetting = new ReportSetting
             {
-                MinDate = new DateTime(2019, 1, 1),
-                MaxDate = new DateTime(2019, 2, 15),
+                MinDate = DateTimeHelper.CreateDateTime(2019, 1, 1),
+                MaxDate = DateTimeHelper.CreateDateTime(2019, 2, 15),
             };
 
             _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, SessionLicenseeName).
@@ -362,8 +362,8 @@
                 CurrencyId = 1,
                 SortBy = sortBy,
                 SortOrder = sortOrder,
-                FromDate = new DateTime(2016, 1, 1),
-                ToDate = new DateTime(2017, 1, 1),
+                FromDate = DateTimeHelper.CreateDateTime(2016, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
                 ProductOptions = new List<ProductOption>
                 {
                     new ProductOption

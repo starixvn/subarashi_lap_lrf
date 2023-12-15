@@ -4,6 +4,7 @@
     using Core.Configuration;
     using Data;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Logging;
     using Model.Core.DTO.Configuration;
     using NSubstitute;
@@ -41,8 +42,8 @@
         public void GetBalanceUp_NoCache_ReturnDataFromDB()
         {
             // Arrange
-            var balanceUpDay = new DateTime(2017, 1, 1);
-            var moveBetsDay = new DateTime(2017, 2, 2);
+            var balanceUpDay = DateTimeHelper.CreateDateTime(2017, 1, 1);
+            var moveBetsDay = DateTimeHelper.CreateDateTime(2017, 2, 2);
             MapReaderData(new
             {
                 balanceupday = balanceUpDay.ToString("MM/dd/yyyy"),
@@ -94,8 +95,8 @@
             // Arrange
             var balanceUp = new BalanceUp
             {
-                BalanceUpDay = new DateTime(2017, 1, 1),
-                MoveBetsDay = new DateTime(2017, 2, 2)
+                BalanceUpDay = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                MoveBetsDay = DateTimeHelper.CreateDateTime(2017, 2, 2)
             };
             _cache.Get<BalanceUp>(Arg.Any<string>()).Returns(balanceUp);
 

@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.DataAccess.Report
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -16,6 +15,7 @@ namespace Fanex.Athena.DataAccess.Report
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Common;
@@ -186,7 +186,7 @@ namespace Fanex.Athena.DataAccess.Report
                     IsLive = isLive,
                     IsNeutral = hasIsNeutral && Converter.ToBool(reader["isNeutral"]),
                     SportType = reader.ToShort("sporttype"),
-                    KickOffTime = hasKickOffTime ? reader.ToDateTime("KickoffTime") : DateTime.MinValue
+                    KickOffTime = hasKickOffTime ? reader.ToDateTime("KickoffTime") : DateTimeHelper.MinValue
                 });
             }
 

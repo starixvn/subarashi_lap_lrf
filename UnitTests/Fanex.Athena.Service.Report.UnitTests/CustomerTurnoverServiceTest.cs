@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.Service.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -61,8 +60,8 @@
             // Arrange
             var metaModel = new CustomerTurnoverMetaModel
             {
-                FromDate = new DateTime(2017, 1, 1),
-                ToDate = new DateTime(2017, 2, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 2, 2),
                 SportProducts = new List<SportProductItem>
                 {
                     new SportProductItem { Checked = true }
@@ -89,8 +88,8 @@
             var metaModel = new CustomerTurnoverMetaModel
             {
                 ShowDraw = true,
-                FromDate = new DateTime(2017, 1, 1),
-                ToDate = new DateTime(2017, 2, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 2, 2),
                 SportProducts = new List<SportProductItem>
                 {
                     new SportProductItem { Checked = true }

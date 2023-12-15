@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
@@ -126,7 +127,7 @@
 
             var param = new LicenseeWinLossMetaModel
             {
-                FromDate = new DateTime(selectedDate.Year, selectedDate.Month, 1),
+                FromDate = DateTimeHelper.CreateDateTime(selectedDate.Year, selectedDate.Month, 1),
                 ToDate = selectedDate,
                 ReportBy = ReportByType.Daily,
                 ProductOptions = GetFakeProductOptions(productAccess.ProductList),

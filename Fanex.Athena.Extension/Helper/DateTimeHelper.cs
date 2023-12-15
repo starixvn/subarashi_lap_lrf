@@ -12,6 +12,13 @@
 
         public static DateTime Today => Now.Date;
 
+        public static DateTime MinValue => DateTimeOffset.MinValue.DateTime;
+
+        public static DateTime CreateDateTime(int year, int month, int day, int hour = 0, int minute = 0, int second = 0)
+            => new DateTimeOffset(year, month, day, hour, minute, second, TimeSpan.Zero).DateTime;
+
+        public static DateTime CreateDateTime() => MinValue;
+
         public static DateTime GetMaxDate(DateTime dateOne, DateTime dateTwo)
         {
             return dateOne > dateTwo ? dateOne : dateTwo;
@@ -64,7 +71,7 @@
 
         public static DateTime GetFirstDateOfMonth(DateTime datetime)
         {
-            return new DateTime(datetime.Year, datetime.Month, 1);
+            return CreateDateTime(datetime.Year, datetime.Month, 1);
         }
 
         public static DateTime DayOfPreviousWeek(this DateTime datetime, DayOfWeek dayOfWeek)

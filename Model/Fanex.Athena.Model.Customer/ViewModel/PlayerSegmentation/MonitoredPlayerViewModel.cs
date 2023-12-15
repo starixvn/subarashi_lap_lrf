@@ -7,13 +7,13 @@ namespace Fanex.Athena.Model.Customer.ViewModel
     public class MonitoredPlayerViewModel
     {
         private const int MaxDateLastMonths = 3;
-        private readonly DateTime LaunchDate = new DateTime(2022, 10, 12);
+        private readonly DateTime LaunchDate = DateTimeHelper.CreateDateTime(2022, 10, 12);
 
         public MonitoredPlayerViewModel()
         {
             var today = DateTimeHelper.Today;
             var minMonth = today.AddMonths(-MaxDateLastMonths);
-            var firstDayLastThreeMonth = new DateTime(minMonth.Year, minMonth.Month, 1);
+            var firstDayLastThreeMonth = DateTimeHelper.CreateDateTime(minMonth.Year, minMonth.Month, 1);
             FromReachedDate = today;
             ToReachedDate = today;
             MaxReachedDate = today;

@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Common
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -8,6 +7,7 @@
 
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Model.Core.DTO.Common;
 
@@ -28,8 +28,8 @@
 
         private readonly BalanceUp _balance = new BalanceUp
         {
-            MoveBetsDay = new DateTime(2016, 8, 10),
-            BalanceUpDay = new DateTime(2016, 8, 31)
+            MoveBetsDay = DateTimeHelper.CreateDateTime(2016, 8, 10),
+            BalanceUpDay = DateTimeHelper.CreateDateTime(2016, 8, 31)
         };
 
         protected override void SetUpDataAccess()
@@ -129,8 +129,8 @@
         {
             // Arrange
             var leagueId = 1;
-            var fromDate = new DateTime(2016, 8, 10);
-            var toDate = new DateTime(2016, 8, 11);
+            var fromDate = DateTimeHelper.CreateDateTime(2016, 8, 10);
+            var toDate = DateTimeHelper.CreateDateTime(2016, 8, 11);
 
             dynamic param = new { LeagueId = 0 };
             DataAccess.GetObjectDb(Arg.Is("Lrf_SelMatchByLeague")).Returns(ObjectDb);
@@ -153,8 +153,8 @@
         {
             // Arrange
             const int LeagueId = 1;
-            var fromDate = new DateTime(2016, 8, 10);
-            var toDate = new DateTime(2016, 8, 11);
+            var fromDate = DateTimeHelper.CreateDateTime(2016, 8, 10);
+            var toDate = DateTimeHelper.CreateDateTime(2016, 8, 11);
             var expectedMatch = GetFakeMatch();
 
             DataAccess.GetObjectDb(Arg.Is("Lrf_SelMatchByLeague")).Returns(ObjectDb);

@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DTO.Configuration;
     using Model.Core.MetaModel.Product;
     using Model.Report.MetaModel;
@@ -27,8 +26,8 @@
 
         private readonly BalanceUp _balance = new BalanceUp
         {
-            MoveBetsDay = new DateTime(2016, 8, 10),
-            BalanceUpDay = new DateTime(2016, 8, 31)
+            MoveBetsDay = DateTimeHelper.CreateDateTime(2016, 8, 10),
+            BalanceUpDay = DateTimeHelper.CreateDateTime(2016, 8, 31)
         };
 
         private readonly MatchWinLossMetaModel _metaModel = new MatchWinLossMetaModel
@@ -42,7 +41,7 @@
                     new ProductOption { Code = "BA", Status = true },
                 },
             AgentListXml = "<xml>",
-            Date = new DateTime(2017, 1, 1),
+            Date = DateTimeHelper.CreateDateTime(2017, 1, 1),
             PageSize = 100
         };
 
@@ -236,7 +235,7 @@
 
             var expected = new
             {
-                KickoffTime = new DateTime(2017, 1, 2)
+                KickoffTime = DateTimeHelper.CreateDateTime(2017, 1, 2)
             };
             MapReaderData(expected);
 

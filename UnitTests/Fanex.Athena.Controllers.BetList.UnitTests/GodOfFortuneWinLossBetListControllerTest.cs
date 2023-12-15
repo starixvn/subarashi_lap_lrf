@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.BetList.MetaModel;
     using Fanex.Athena.Resources;
     using NSubstitute;
@@ -39,9 +39,9 @@
                 // Arrange
                 var metaModel = new BetListExcelMetaModel
                 {
-                    FromDate = new DateTime(2021, 2, 10),
-                    ToDate = new DateTime(2021, 2, 20),
-                    Date = new DateTime(2021, 2, 15)
+                    FromDate = DateTimeHelper.CreateDateTime(2021, 2, 10),
+                    ToDate = DateTimeHelper.CreateDateTime(2021, 2, 20),
+                    Date = DateTimeHelper.CreateDateTime(2021, 2, 15)
                 };
 
                 // Action
@@ -73,8 +73,8 @@
                     CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
-                    FromDate = new DateTime(2021, 11, 1),
-                    ToDate = new DateTime(2021, 12, 2),
+                    FromDate = DateTimeHelper.CreateDateTime(2021, 11, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2021, 12, 2),
                     ExternalId = "External",
                     SystemId = "System",
                     ExcelFileName = fileName,

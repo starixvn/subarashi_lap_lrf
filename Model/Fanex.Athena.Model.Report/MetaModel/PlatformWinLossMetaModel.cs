@@ -34,12 +34,12 @@
 
         public new DateTime FromDate
         {
-            get { return new DateTime(Year, Month, FromDay); }
+            get { return DateTimeHelper.CreateDateTime(Year, Month, FromDay); }
         }
 
         public new DateTime ToDate
         {
-            get { return new DateTime(Year, Month, ToDay); }
+            get { return DateTimeHelper.CreateDateTime(Year, Month, ToDay); }
         }
 
         public int DrawFilter { get; set; }

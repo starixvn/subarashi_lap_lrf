@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -33,8 +32,8 @@
 
         private readonly BalanceUp _balance = new BalanceUp
         {
-            MoveBetsDay = new DateTime(2016, 8, 10),
-            BalanceUpDay = new DateTime(2016, 8, 31)
+            MoveBetsDay = DateTimeHelper.CreateDateTime(2016, 8, 10),
+            BalanceUpDay = DateTimeHelper.CreateDateTime(2016, 8, 31)
         };
 
         [OneTimeSetUp]

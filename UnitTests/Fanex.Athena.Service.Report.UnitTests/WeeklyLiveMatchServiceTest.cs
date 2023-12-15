@@ -1,11 +1,10 @@
 ﻿namespace Fanex.Athena.Service.Report.UnitTests
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Report.MetaModel;
 
     using NSubstitute;
@@ -66,8 +65,8 @@
         public void GetWeekHeaders_WhenCall_ReturnCorrectResult()
         {
             // Arrange
-            var fromDate = new DateTime(2018, 1, 9);
-            var toDate = new DateTime(2018, 1, 26);
+            var fromDate = DateTimeHelper.CreateDateTime(2018, 1, 9);
+            var toDate = DateTimeHelper.CreateDateTime(2018, 1, 26);
             const int NumberOfWeeks = 3;
 
             var expected = new[]

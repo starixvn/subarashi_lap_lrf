@@ -463,7 +463,7 @@
                 UserName = defaultMetaModel.UserName,
                 Language = defaultMetaModel.Language,
                 MaximumMonthRange = maximunMonthSuport,
-                FromDate = new DateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance),
+                FromDate = DateTimeHelper.CreateDateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance),
                 ToDate = today.AddDays(1).AddMilliseconds(-1),
             };
         }

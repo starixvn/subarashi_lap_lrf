@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
@@ -31,8 +30,8 @@
 
         private readonly BalanceUp _balance = new BalanceUp
         {
-            MoveBetsDay = new DateTime(2017, 8, 25),
-            BalanceUpDay = new DateTime(2017, 8, 31)
+            MoveBetsDay = DateTimeHelper.CreateDateTime(2017, 8, 25),
+            BalanceUpDay = DateTimeHelper.CreateDateTime(2017, 8, 31)
         };
 
         protected override void SetUpDataAccess()
@@ -161,7 +160,7 @@
             var baseData = FakeHelper.Create<LicenseeWinLossByTimeZone>();
             MapBaseCurrencyReaderData(baseData);
 
-            var expected = new DateTime(2017, 1, 1);
+            var expected = DateTimeHelper.CreateDateTime(2017, 1, 1);
 
             // Action
             var result = await DataAccess.GetData(metaModel, UserCurrencyList);
@@ -210,8 +209,8 @@
             return new LicenseeWinLossByTimeZoneMetaModel
             {
                 BaseCurrency = string.Empty,
-                FromDate = new DateTime(2017, 1, 1),
-                ToDate = new DateTime(2017, 2, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 2, 2),
                 ProductCodeList = "SB,BA",
                 AgentListXml = "<Param></Param>",
                 TimeZone = -4,

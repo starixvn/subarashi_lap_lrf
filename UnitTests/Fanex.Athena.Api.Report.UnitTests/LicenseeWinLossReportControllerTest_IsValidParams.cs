@@ -6,6 +6,7 @@
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -128,8 +129,8 @@
             _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
                             .Returns(new ReportSetting
                             {
-                                MinDate = new DateTime(2018, 1, 1),
-                                MaxDate = new DateTime(2018, 5, 5)
+                                MinDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                                MaxDate = DateTimeHelper.CreateDateTime(2018, 5, 5)
                             });
         }
     }

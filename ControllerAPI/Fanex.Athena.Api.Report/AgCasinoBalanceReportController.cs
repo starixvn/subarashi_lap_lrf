@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Api.Report
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.Http;
@@ -19,6 +18,7 @@ namespace Fanex.Athena.Api.Report
     using DataAccess.Report.Interfaces;
 
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -91,13 +91,13 @@ namespace Fanex.Athena.Api.Report
 
         private static void AssignRowSpan(IEnumerable<AgCasinoBalance> dataList)
         {
-            var date = new DateTime();
+            var date = DateTimeHelper.CreateDateTime();
             var index = 1;
             foreach (var item in dataList)
             {
                 if (date != item.Date)
                 {
-                    date = item.Date ?? new DateTime();
+                    date = item.Date ?? DateTimeHelper.CreateDateTime();
                     item.RowSpan = dataList.Count(x => x.Date == item.Date);
                     item.Index = index++;
                 }

@@ -26,7 +26,7 @@
         {
             get
             {
-                return new DateTime(Year, Month, FromDay);
+                return DateTimeHelper.CreateDateTime(Year, Month, FromDay);
             }
         }
 
@@ -34,7 +34,7 @@
         {
             get
             {
-                return new DateTime(Year, Month, ToDay);
+                return DateTimeHelper.CreateDateTime(Year, Month, ToDay);
             }
         }
 

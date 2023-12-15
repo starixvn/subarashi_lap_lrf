@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
@@ -34,7 +34,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var moveBetsDate = new DateTime(2017, 1, 1);
+                var moveBetsDate = DateTimeHelper.CreateDateTime(2017, 1, 1);
                 const string ViewName = "ABC";
                 _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
                 {

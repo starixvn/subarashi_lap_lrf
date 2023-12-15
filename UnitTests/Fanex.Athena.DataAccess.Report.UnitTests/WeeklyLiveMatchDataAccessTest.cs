@@ -1,11 +1,10 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Report.MetaModel;
 
     using NSubstitute;
@@ -31,8 +30,8 @@
             {
                 LicenseeId = 1,
                 UserId = 2,
-                FromDate = new DateTime(2017, 1, 1),
-                ToDate = new DateTime(2017, 2, 2)
+                FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 2, 2)
             };
             DataAccess.GetObjectDb(Arg.Is("Lrf_Rpt_LiveMatchWeekly")).Returns(ObjectDb);
 

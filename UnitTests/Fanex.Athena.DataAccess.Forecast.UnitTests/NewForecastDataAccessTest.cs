@@ -1,11 +1,10 @@
 ﻿namespace Fanex.Athena.DataAccess.Forecast.UnitTests
 {
-    using System;
     using System.Data;
     using System.Threading.Tasks;
 
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Forecast;
 
     using Model.Forecast.DTO.NewForecastHdpOu;
@@ -33,7 +32,7 @@
             var metaModel = new NewForecastHandicapOverUnderMetaModel();
             var matchInfo = new NewForecastHdpOuMatchInfo();
             ObjectDb.ExecuteDataSetAsync().Returns(new DataSet());
-            ObjectDb.GetParameterValue("MatchTime").Returns(new DateTime(2016, 8, 26));
+            ObjectDb.GetParameterValue("MatchTime").Returns(DateTimeHelper.CreateDateTime(2016, 8, 26));
             ObjectDb.GetParameterValue("HomeScore").Returns("HomeScoreTest");
             ObjectDb.GetParameterValue("AwayScore").Returns("AwayScoreTest");
 
@@ -64,7 +63,7 @@
             dataSet.Tables.Add(GetDetailTableForGetNewForecastDataMethod(detailItem));
 
             ObjectDb.ExecuteDataSetAsync().Returns(dataSet);
-            ObjectDb.GetParameterValue("MatchTime").Returns(new DateTime(2016, 8, 26, 1, 30, 0));
+            ObjectDb.GetParameterValue("MatchTime").Returns(DateTimeHelper.CreateDateTime(2016, 8, 26, 1, 30, 0));
             ObjectDb.GetParameterValue("HomeScore").Returns(5);
             ObjectDb.GetParameterValue("AwayScore").Returns(6);
 

@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Common
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -9,6 +8,7 @@
 
     using Extension.Utility;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Model.Core.MetaModel.Common;
 
@@ -49,11 +49,11 @@
             {
                 AgentListXml = "hello",
                 SportId = 4,
-                FromDate = new DateTime(2016, 8, 10),
-                ToDate = new DateTime(2016, 8, 11)
+                FromDate = DateTimeHelper.CreateDateTime(2016, 8, 10),
+                ToDate = DateTimeHelper.CreateDateTime(2016, 8, 11)
             };
 
-            var balanceUpDate = new DateTime(2018, 2, 3);
+            var balanceUpDate = DateTimeHelper.CreateDateTime(2018, 2, 3);
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
             {
                 BalanceUpDay = balanceUpDate
@@ -87,7 +87,7 @@
             });
             _cacheRef.GetLeagueName(LeagueId).Returns(LeagueName);
 
-            var balanceUpDate = new DateTime(2018, 2, 3);
+            var balanceUpDate = DateTimeHelper.CreateDateTime(2018, 2, 3);
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
             {
                 BalanceUpDay = balanceUpDate
@@ -115,7 +115,7 @@
             DataAccess.GetObjectDb(Arg.Is("Shard_Lrf_LeagueSelRunning")).Returns(ObjectDb);
             _appSettings.IsProduction.Returns(isProduction);
 
-            var balanceUpDate = new DateTime(2018, 2, 3);
+            var balanceUpDate = DateTimeHelper.CreateDateTime(2018, 2, 3);
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
             {
                 BalanceUpDay = balanceUpDate

@@ -6,7 +6,7 @@
 
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
@@ -22,7 +22,7 @@
     [TestFixture]
     public class CasinoTurnoverDataAccessTest : BaseDataAccessHelperTest<CasinoTurnoverDataAccess>
     {
-        private readonly DateTime _moveBetsDay = new DateTime(2018, 3, 5);
+        private readonly DateTime _moveBetsDay = DateTimeHelper.CreateDateTime(2018, 3, 5);
 
         private readonly CasinoTurnoverMetaModel _dummyMetaModel = new CasinoTurnoverMetaModel
         {
