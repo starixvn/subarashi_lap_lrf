@@ -34,7 +34,7 @@ namespace Fanex.Athena.Model.Core.Helper
             { PlatformType.NativeApp, ViewResources.NativeApp },
             { PlatformType.Tablet, ViewResources.Tablet },
             { PlatformType.DeepLink, ViewResources.DeepLink },
-            { PlatformType.WAP, ViewResources.Wap },
+            { PlatformType.WAP, ViewResources.WAP },
             { PlatformType.ChatRoom, ViewResources.ChatRoom },
             { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
         };

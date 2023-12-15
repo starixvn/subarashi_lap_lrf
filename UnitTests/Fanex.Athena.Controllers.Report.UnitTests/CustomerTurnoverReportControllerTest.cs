@@ -148,7 +148,11 @@
                 var excelParam = @"{""fromdate"":""11/01/2017"",""todate"":""11/30/2017"",""reportby"":" + reportBy + @",""showwin"":true,
                                 ""SportProducts"":[{""Checked"":true}],""bettypes"":""1""}";
                 MockCreatingExcel(controller);
-                var resultModel = new ReportResultModel<CustTurnover>();
+                var resultModel = new ReportResultModel<CustTurnover>
+                {
+                    DataList = Enumerable.Empty<CustTurnover>(),
+                    TotalDataList = Enumerable.Empty<CustTurnover>(),
+                };
                 _customerTurnoverService.GetDataList(
                     Arg.Any<CustomerTurnoverMetaModel>(),
                     UserCurrencyList,

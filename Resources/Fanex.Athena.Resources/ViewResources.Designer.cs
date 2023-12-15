@@ -9693,9 +9693,9 @@ namespace Fanex.Athena.Resources {
         /// <summary>
         ///   Looks up a localized string similar to WAP.
         /// </summary>
-        public static string Wap {
+        public static string WAP {
             get {
-                return ResourceManager.GetString("Wap", resourceCulture);
+                return ResourceManager.GetString("WAP", resourceCulture);
             }
         }
         
