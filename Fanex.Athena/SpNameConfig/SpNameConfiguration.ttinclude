@@ -47,7 +47,11 @@
 		new SiteInfo
         {
             SiteEnvironment = SiteEnvironment.AWSStatic
-        }
+        },
+        new SiteInfo
+        {
+            SiteEnvironment = SiteEnvironment.KLDR
+        },
     };
 #>
 <#+
@@ -62,7 +66,8 @@
 		Staging,
 		BACKUPMNL,
 		AWS,
-		AWSStatic
+		AWSStatic,
+		KLDR
     }
 
 	class SiteInfo
