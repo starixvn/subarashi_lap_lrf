@@ -9,7 +9,7 @@ namespace Fanex.Athena.Model.Core.Helper
     {
         public static IDictionary<int, string> GetPlatformList(int specialPlatform)
         {
-            if (specialPlatform == SpecialPlatform.Jollysports)
+            if (specialPlatform == SpecialPlatform.Jollysports || specialPlatform == SpecialPlatform.JollysportCV)
             {
                 return JollysportsPlatform;
             }

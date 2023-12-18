@@ -1,12 +1,12 @@
-﻿using Fanex.Athena.Extension.Utility;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Configuration;
 using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Core.Users.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Fanex.Athena.Service.Core.Common
 {
@@ -26,6 +26,7 @@ namespace Fanex.Athena.Service.Core.Common
         public IDictionary<int, string> GetBaseCurrencyList(bool supportOnceCurrencyToBase = false)
         {
             var licenseeName = _sessionService.LicenseeSession.LicenseeName;
+            var specialPlatform = _sessionService.LicenseeSession.SpecialPlatform;
             var userId = _sessionService.UserSession.UserId;
             var cacheKey = string.Format(CacheKey.MemorycacheBaseCurrencyListByLicensee, licenseeName, userId, supportOnceCurrencyToBase.ToString());
             var baseCurrencyList = _cache.Get<IDictionary<int, string>>(cacheKey);
@@ -36,7 +37,7 @@ namespace Fanex.Athena.Service.Core.Common
                 return baseCurrencyList;
             }
 
-            baseCurrencyList = GetByLicenseeSettings(licenseeName);
+            baseCurrencyList = GetByLicenseeSettings(licenseeName, specialPlatform);
 
             if (supportOnceCurrencyToBase && HasOneCurrencyAndNotBase(currencyList, baseCurrencyList))
             {
@@ -48,7 +49,7 @@ namespace Fanex.Athena.Service.Core.Common
             return baseCurrencyList;
         }
 
-        private IDictionary<int, string> GetByLicenseeSettings(string licenseeName)
+        private IDictionary<int, string> GetByLicenseeSettings(string licenseeName, int specialPlatform)
         {
             if (_appSettings.OfferCryptoCurrencyLicensees.Split(',').Contains(licenseeName, StringComparer.InvariantCultureIgnoreCase))
             {
@@ -57,6 +58,10 @@ namespace Fanex.Athena.Service.Core.Common
             else if (_appSettings.CryptoLicenseesSupportBaseEUR.Split(',').Contains(licenseeName, StringComparer.InvariantCultureIgnoreCase))
             {
                 return SystemConstants.CryptoSupportEURBaseCurrencyList.ToDictionary(_ => _.Key, _ => _.Value);
+            }
+            else if (specialPlatform == SpecialPlatform.Jollysports || specialPlatform == SpecialPlatform.JollysportCV)
+            {
+                return SystemConstants.JollysportsBaseCurrencyList.ToDictionary(_ => _.Key, _ => _.Value);
             }
             else
             {
