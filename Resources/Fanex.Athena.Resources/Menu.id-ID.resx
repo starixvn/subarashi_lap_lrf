@@ -136,7 +136,7 @@
     <value>Saldo AG Casino</value>
   </data>
   <data name="agcasinowinloss62" xml:space="preserve">
-    <value>AG Casino Menang Kalah</value>
+    <value>AG Casino Win Loss</value>
   </data>
   <data name="assignpermission49" xml:space="preserve">
     <value>Berikan Izin</value>
@@ -241,7 +241,7 @@
     <value>Kelola Akun</value>
   </data>
   <data name="matchwinloss31" xml:space="preserve">
-    <value>Kemenangan/Kerugian Pertandingan</value>
+    <value>Match Win Loss</value>
   </data>
   <data name="mixparlay12" xml:space="preserve">
     <value>Parlay</value>
@@ -274,7 +274,7 @@
     <value>Atur Ulang Kata Sandi</value>
   </data>
   <data name="resultamendment_recalculation75" xml:space="preserve">
-    <value>Penyelesaian Ulang</value>
+    <value>Menyelesaikan kembali</value>
   </data>
   <data name="results41" xml:space="preserve">
     <value>Hasil</value>

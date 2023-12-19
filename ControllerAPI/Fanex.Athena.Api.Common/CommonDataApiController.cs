@@ -9,19 +9,17 @@
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.MetaModel.Common;
-    using Newtonsoft.Json;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-    using Web.ActionFilter;
-    using ServiceStack;
     using ServiceStack.Text;
-    using Fanex.Athena.Model.Core;
-    using Fanex.Athena.Resources;
+    using Web.ActionFilter;
 
     [CLSCompliant(false)]
     [XFrameOptionApi]

@@ -235,13 +235,13 @@
     <value>แพ้ชนะตามเขตเวลา</value>
   </data>
   <data name="livereport38" xml:space="preserve">
-    <value>รายงานแทงบอลสด</value>
+    <value>รายงานสด</value>
   </data>
   <data name="manageaccount46" xml:space="preserve">
     <value>จัดการบัญชี</value>
   </data>
   <data name="matchwinloss31" xml:space="preserve">
-    <value>การแข่งขัน แพ้ชนะ</value>
+    <value>การแข่งขัน ชนะ แพ้</value>
   </data>
   <data name="mixparlay12" xml:space="preserve">
     <value>พาร์เลย์</value>

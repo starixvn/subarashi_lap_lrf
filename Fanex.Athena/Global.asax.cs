@@ -19,7 +19,6 @@
     using Fanex.Logging.Sentry.RavenClient;
     using Logging;
     using MessagePack.Resolvers;
-    using Microsoft.AspNet.WebApi.Extensions.Compression.Server;
     using ONEbook.UM;
     using ONEbook.UM.Configurations;
     using ONEbook.UM.Helpers;
@@ -27,7 +26,6 @@
     using RemotingRef;
     using SharpRaven;
 
-    using System.Net.Http.Extensions.Compression.Core.Compressors;
     public class MvcApplication : HttpApplication
     {
         private static readonly string[] RemovedHeaderKeys = { "Server", "X-AspNet-Version", "X-AspNetMvc-Version" };
