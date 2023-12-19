@@ -29,6 +29,7 @@
             { BaseCurrencyType.BDT,"BDT" },
             { BaseCurrencyType.INR,"INR" },
             { BaseCurrencyType.PHP,"PHP" },
+            { BaseCurrencyType.MP,"MP" },
 
             // crypto currency
             { BaseCurrencyType.USDT,"USDT" }

@@ -28,7 +28,7 @@ namespace Fanex.Athena.Service.Core.Common
             var licenseeName = _sessionService.LicenseeSession.LicenseeName;
             var specialPlatform = _sessionService.LicenseeSession.SpecialPlatform;
             var userId = _sessionService.UserSession.UserId;
-            var cacheKey = string.Format(CacheKey.MemorycacheBaseCurrencyListByLicensee, licenseeName, userId, supportOnceCurrencyToBase.ToString());
+            var cacheKey = string.Format(CacheKey.MemorycacheBaseCurrencyListByLicensee, licenseeName, specialPlatform, userId, supportOnceCurrencyToBase.ToString());
             var baseCurrencyList = _cache.Get<IDictionary<int, string>>(cacheKey);
             var currencyList = _sessionService.UserSession.CurrencyList;
 
