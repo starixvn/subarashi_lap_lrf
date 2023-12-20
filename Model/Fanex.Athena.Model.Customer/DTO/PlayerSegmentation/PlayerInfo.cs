@@ -30,8 +30,6 @@ namespace Fanex.Athena.Model.Customer.DTO.PlayerSegmentation
 
         public bool IsVip { get; set; }
 
-        public bool IsBA { get; set; }
-
         public string RiskLevelLastMarkDate { get; set; }
     }
 }

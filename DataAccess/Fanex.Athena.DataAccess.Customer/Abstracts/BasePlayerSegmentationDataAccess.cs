@@ -58,7 +58,6 @@ namespace Fanex.Athena.DataAccess.Customer
             player.SystemId = reader["username"] as string;
             player.AgentId = Convert.ToInt32(reader["AgentID"]);
             player.IsVip = Convert.ToBoolean(reader["isVIP"]);
-            player.IsBA = Convert.ToBoolean(reader["IsBA"]);
 
             var hasLastMarkDate = reader.HasColumn("LastMaskDate");
 
