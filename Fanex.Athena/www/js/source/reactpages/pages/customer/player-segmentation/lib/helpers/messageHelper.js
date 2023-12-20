@@ -16,10 +16,6 @@ export default class MessageHelper {
             content: 'msg-success',
             icon: 'icon-tick'
         },
-        [UpdateVIPStatusCode.NoChangeByBAStatus]: {
-            content: 'msg-success',
-            icon: 'icon-tick'
-        },
         [UpdateVIPStatusCode.Avoid]: {
             content: 'msg-error',
             icon: 'icon-warning'
@@ -39,8 +35,6 @@ export default class MessageHelper {
 
             [UpdateVIPStatusCode.NoChangeBySystemId]: (_, isUpdateVip) => (isUpdateVip ? LangHelper.getSingleResource('AlreadyUpdateVipStatusSingle') : LangHelper.getSingleResource('AlreadyUpdateNotVipStatusSingle')),
 
-            [UpdateVIPStatusCode.NoChangeByBAStatus]: () => LangHelper.getSingleResource('BAPlayerNoUpdateVIPSingle'),
-
             [UpdateVIPStatusCode.Avoid]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatusSingle')
                 .replace('{0}', data.ids)
         },
@@ -54,10 +48,6 @@ export default class MessageHelper {
 
             [UpdateVIPStatusCode.NoChangeBySystemId]: (data, isUpdateVip) => (isUpdateVip ? LangHelper.getSingleResource('AlreadyUpdateVipStatus') : LangHelper.getSingleResource('AlreadyUpdateNotVipStatus'))
                 .replace('{0}', data.numberOfPlayer),
-
-            [UpdateVIPStatusCode.NoChangeByBAStatus]: data => LangHelper.getSingleResource('BAPlayerNoUpdateVIP')
-                .replace('{0}', data.numberOfPlayer)
-                .replace('{1}', data.ids),
 
             [UpdateVIPStatusCode.Avoid]: data => LangHelper.getSingleResource('RetractedPlayerUpdateVipStatus')
                 .replace('{0}', data.numberOfPlayer)

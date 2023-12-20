@@ -4,8 +4,8 @@ import SelectionCell from './SelectionCell';
 import VipSwitcherCell from '../../../../components/VipSwitcherCell';
 
 export const PlayerRow = (props) => {
-    const { subsidiary, externalId, systemId, riskLevel, riskLevelLastMarkDate, isBA, index, custId, showSubsidiary, hasVipManagementEdit } = props;
-    const canEditVip = hasVipManagementEdit && !(isBA);
+    const { subsidiary, externalId, systemId, riskLevel, riskLevelLastMarkDate, index, custId, showSubsidiary, hasVipManagementEdit } = props;
+    const canEditVip = hasVipManagementEdit;
 
     return (<Row key={`player_row_${custId}`}>
         {canEditVip ? <SelectionCell rowIndex={index} /> : <Cell />}

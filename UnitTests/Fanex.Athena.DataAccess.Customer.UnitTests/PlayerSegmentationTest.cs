@@ -329,9 +329,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             Assert.AreEqual(expectedData["username2"], acutalData.ExternalId);
             Assert.AreEqual(expectedData["username"], acutalData.SystemId);
             Assert.AreEqual(expectedData["isVIP"], acutalData.IsVip);
-            Assert.AreEqual(expectedData["IsBA"], acutalData.IsBA);
             Assert.AreEqual(expectedData["AgentID"], acutalData.AgentId);
-            Assert.AreEqual(expectedData["IsBA"], acutalData.IsBA);
         };
     }
 }
