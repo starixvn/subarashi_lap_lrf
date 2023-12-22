@@ -10,5 +10,6 @@
     { value: -9, text: 'BDT' },
     { value: -10, text: 'INR'},
     { value: -11, text: 'PHP'},
+    { value: -12, text: 'MP'},
     { value: -99, text: 'USDT'}
 ]

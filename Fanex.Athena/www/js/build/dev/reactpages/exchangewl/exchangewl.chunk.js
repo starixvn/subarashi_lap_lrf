@@ -3164,6 +3164,9 @@ const BaseCurrency = [{
   value: -11,
   text: 'PHP'
 }, {
+  value: -12,
+  text: 'MP'
+}, {
   value: -99,
   text: 'USDT'
 }];

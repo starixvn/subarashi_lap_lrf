@@ -29,6 +29,7 @@
             { BaseCurrencyType.BDT,"BDT" },
             { BaseCurrencyType.INR,"INR" },
             { BaseCurrencyType.PHP,"PHP" },
+            { BaseCurrencyType.MP,"MP" },
 
             // crypto currency
             { BaseCurrencyType.USDT,"USDT" }
@@ -46,6 +47,20 @@
             { BaseCurrencyType.BDT,"BDT" },
             { BaseCurrencyType.INR,"INR" },
             { BaseCurrencyType.PHP,"PHP" },
+        };
+
+        public static readonly IReadOnlyDictionary<int, string> JollysportsBaseCurrencyList = new Dictionary<int, string> {
+            { BaseCurrencyType.Eur,"EUR" },
+            { BaseCurrencyType.Usd,"USD" },
+            { BaseCurrencyType.Gbp,"GBP" },
+            { BaseCurrencyType.MYR,"MYR" },
+            { BaseCurrencyType.CNY,"CNY" },
+            { BaseCurrencyType.THB,"THB" },
+            { BaseCurrencyType.IDR,"IDR" },
+            { BaseCurrencyType.INH,"INH" },
+            { BaseCurrencyType.BDT,"BDT" },
+            { BaseCurrencyType.INR,"INR" },
+            { BaseCurrencyType.MP,"MP" },
         };
 
         public static readonly IReadOnlyDictionary<int, string> CryptoBaseCurrencyList = new Dictionary<int, string> {
