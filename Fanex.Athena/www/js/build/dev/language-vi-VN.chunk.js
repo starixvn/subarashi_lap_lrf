@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/1/2023 11:18:47 AM
+﻿// Generated at: 12/7/2023 5:32:14 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -247,6 +247,7 @@ CashOutValue:"Giá trị vé cược được bán",
 CashOutWinLoss:"Thắng Thua Của Vé Cược Đã Bán",
 CashOutWL_SportNote:"Báo cáo này hỗ trợ bộ lọc theo Thể thao từ 01/01/2023",
 CasinoAPI_UpdateCommError:"Gặp lỗi khi gọi CasinoAPI để cập nhật hoa hồng khách hàng.",
+CasinoPromotion:"Casino Khuyến Mãi",
 CasinoTransfer:"Chuyển khoản Casino",
 CasinoTurnover:"Doanh Thu Casino",
 CategoriesSelection:"Lựa chọn danh mục",
@@ -906,6 +907,7 @@ Saturday:"Thứ Bảy",
 Save:"Lưu",
 SB:"Sportsbook",
 SBComm:"Hoa hồng SB",
+SBPromotion:"Sportsbook Khuyến Mãi",
 Score:"Điểm",
 Search:"Tìm kiếm",
 SearchAllPlayers:"Tìm kiếm Tất cả Người chơi",

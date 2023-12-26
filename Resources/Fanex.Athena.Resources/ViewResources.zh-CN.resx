@@ -3235,6 +3235,9 @@
   <data name="SBPromotion" xml:space="preserve">
     <value>体育促销活动</value>
   </data>
+  <data name="ProductWE" xml:space="preserve">
+    <value>WE世界娱乐</value>
+  </data>
   <data name="CasinoPromotion" xml:space="preserve">
     <value>真人娱乐促销活动</value>
   </data>

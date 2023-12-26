@@ -73,7 +73,8 @@
                 { Product.YB, nameof(ViewResources.ProductYB) },
                 { Product.MGRNG, nameof(ViewResources.ProductMGRNG) },
                 { Product.LG, nameof(ViewResources.ProductLG) },
-                { Product.SEA, nameof(ViewResources.ProductSEA) }
+                { Product.SEA, nameof(ViewResources.ProductSEA) },
+                { Product.WE, nameof(ViewResources.ProductWE) }
             };
 
         public static string GetProductCode(int productId)

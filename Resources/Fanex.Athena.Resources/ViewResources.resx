@@ -3629,6 +3629,9 @@
   <data name="SecurityQuestion" xml:space="preserve">
     <value>Security Question</value>
   </data>
+  <data name="ProductWE" xml:space="preserve">
+    <value>WE Live Casino</value>
+  </data>
   <data name="ProductSEA" xml:space="preserve">
     <value>SEAL Entertainment</value>
   </data>

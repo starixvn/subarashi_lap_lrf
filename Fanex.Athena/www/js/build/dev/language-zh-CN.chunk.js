@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/1/2023 11:18:47 AM
+﻿// Generated at: 12/7/2023 5:32:14 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -232,6 +232,7 @@ CashOutTimes:"即时兑现次数",
 CashOutValue:"会员卖出的实际投注额",
 CashOutWinLoss:"实时兑现输赢",
 CashOutWL_SportNote:"此报告支持从 01/01/2023 开始以运动类型筛选",
+CasinoPromotion:"真人娱乐促销活动",
 CasinoTransfer:"娱乐城的总转账额",
 CasinoTurnover:"电子游戏交易额",
 CategoriesSelection:"种类",
@@ -782,6 +783,7 @@ ProductVGA:"Vgaming",
 ProductVRG:"虚拟娱乐城",
 ProductVS:"虚拟运动",
 ProductVS2:"虚拟运动2",
+ProductWE:"WE世界娱乐",
 ProductWM:"完美真人",
 ProductYB:"亿博",
 Promotion:"促销活动",
@@ -839,6 +841,7 @@ Saturday:"星期日",
 Save:"保存",
 SB:"体育博彩",
 SBComm:"体育博彩佣金",
+SBPromotion:"体育促销活动",
 Score:"比分",
 Search:"搜寻",
 SearchByExactlyIp:"按实际 IP 搜寻",
