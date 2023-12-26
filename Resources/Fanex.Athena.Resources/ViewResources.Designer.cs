@@ -1987,6 +1987,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Address.
+        /// </summary>
+        public static string CurrentAddress {
+            get {
+                return ResourceManager.GetString("CurrentAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current Balance.
         /// </summary>
         public static string CurrentBalance {
@@ -2028,6 +2037,15 @@ namespace Fanex.Athena.Resources {
         public static string Customer {
             get {
                 return ResourceManager.GetString("Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data support up to 60 days (GMT+8).
+        /// </summary>
+        public static string CustomerAdministrationIvoryReportTitle {
+            get {
+                return ResourceManager.GetString("CustomerAdministrationIvoryReportTitle", resourceCulture);
             }
         }
         
@@ -2365,6 +2383,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date Of Birth.
+        /// </summary>
+        public static string DateOfBirth {
+            get {
+                return ResourceManager.GetString("DateOfBirth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date of Registration.
         /// </summary>
         public static string DateOfRegistration {
@@ -2586,6 +2613,15 @@ namespace Fanex.Athena.Resources {
         public static string Deposit {
             get {
                 return ResourceManager.GetString("Deposit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deposit &amp; Withdrawal.
+        /// </summary>
+        public static string DepositAndWithdrawal {
+            get {
+                return ResourceManager.GetString("DepositAndWithdrawal", resourceCulture);
             }
         }
         
@@ -5506,6 +5542,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nationality.
+        /// </summary>
+        public static string Nationality {
+            get {
+                return ResourceManager.GetString("Nationality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Native APP.
         /// </summary>
         public static string NativeApp {
@@ -5853,6 +5898,15 @@ namespace Fanex.Athena.Resources {
         public static string OANDANote {
             get {
                 return ResourceManager.GetString("OANDANote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Occupation.
+        /// </summary>
+        public static string Occupation {
+            get {
+                return ResourceManager.GetString("Occupation", resourceCulture);
             }
         }
         
@@ -6402,6 +6456,15 @@ namespace Fanex.Athena.Resources {
         public static string PlayerName {
             get {
                 return ResourceManager.GetString("PlayerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player Report.
+        /// </summary>
+        public static string PlayerReport {
+            get {
+                return ResourceManager.GetString("PlayerReport", resourceCulture);
             }
         }
         
@@ -7122,6 +7185,24 @@ namespace Fanex.Athena.Resources {
         public static string Refund {
             get {
                 return ResourceManager.GetString("Refund", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registered Name.
+        /// </summary>
+        public static string RegisteredName {
+            get {
+                return ResourceManager.GetString("RegisteredName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration IP.
+        /// </summary>
+        public static string RegistrationIP {
+            get {
+                return ResourceManager.GetString("RegistrationIP", resourceCulture);
             }
         }
         

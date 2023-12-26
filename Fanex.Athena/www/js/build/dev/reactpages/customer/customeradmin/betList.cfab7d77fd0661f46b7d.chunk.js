@@ -113,6 +113,56 @@ class NumberFormat {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/customer/customeradmin/lib/constants.js":
+/*!********************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/customeradmin/lib/constants.js ***!
+  \********************************************************************************/
+/*! exports provided: defaultPagingOption, tabKeys, tabMenuList, preLoadComponents */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultPagingOption", function() { return defaultPagingOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabKeys", function() { return tabKeys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabMenuList", function() { return tabMenuList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "preLoadComponents", function() { return preLoadComponents; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+
+
+const defaultPagingOption = {
+  PageIndex: 1,
+  PageSize: 20,
+  PageList: [20, 50, 100, 200, 500, 1000, 2000],
+  TotalItem: null
+};
+const tabKeys = {
+  PlayerInformation: 'PlayerInformation',
+  BetList: 'BetList',
+  DepositHistory: 'DepositHistory',
+  WithdrawalHistory: 'WithdrawalHistory'
+};
+const newTabs = [];
+const dynamicImports = {
+  [tabKeys.PlayerInformation]: () => __webpack_require__.e(/*! import() | customer/customeradmin/playerInformation */ "customer/customeradmin/playerInformation").then(__webpack_require__.bind(null, /*! ../tabs/PlayerInformation */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/PlayerInformation.jsx")),
+  [tabKeys.BetList]: () => __webpack_require__.e(/*! import() | customer/customeradmin/betList */ "customer/customeradmin/betList").then(__webpack_require__.bind(null, /*! ../tabs/BetList */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/BetList.jsx")),
+  [tabKeys.DepositHistory]: () => __webpack_require__.e(/*! import() | customer/customeradmin/depositHistory */ "customer/customeradmin/depositHistory").then(__webpack_require__.bind(null, /*! ../tabs/DepositHistory */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/DepositHistory.jsx")),
+  [tabKeys.WithdrawalHistory]: () => __webpack_require__.e(/*! import() | customer/customeradmin/withdrawalHistory */ "customer/customeradmin/withdrawalHistory").then(__webpack_require__.bind(null, /*! ../tabs/WithdrawalHistory */ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/WithdrawalHistory.jsx"))
+};
+const tabMenuList = Object.keys(tabKeys).map(_ => ({
+  key: _,
+  name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_),
+  component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
+  preLoad: dynamicImports[_],
+  isNew: newTabs.some(newTab => newTab === _)
+}));
+const preLoadComponents = lazyComponents => {
+  lazyComponents && setTimeout(() => lazyComponents.forEach(_ => _.preLoad && _.preLoad()), 0);
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/customer/customeradmin/tabs/BetList.jsx":
 /*!********************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/customeradmin/tabs/BetList.jsx ***!
@@ -179,8 +229,7 @@ const BetList = props => {
     const params = _objectSpread({
       CustId: custId,
       FromDate: fromDate,
-      ToDate: toDate,
-      BaseCurrency: currencyCode
+      ToDate: toDate
     }, pageOptions);
     props.toggleLoader(true);
     _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_6__["default"].postData(url, params).then(response => {
@@ -335,7 +384,292 @@ function mapStateToProps(state) {
 }
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_9__["connect"])(mapStateToProps, mapDispatchToProps)(BetList));
 
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/customer/customeradminivorybet/lib/constants.js":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/customeradminivorybet/lib/constants.js ***!
+  \****************************************************************************************/
+/*! exports provided: defaultPagingOption, tabKeys, tabMenuList, preLoadComponents, historyMode, depositAndWithdrawalUrl */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "defaultPagingOption", function() { return defaultPagingOption; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabKeys", function() { return tabKeys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabMenuList", function() { return tabMenuList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "preLoadComponents", function() { return preLoadComponents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "historyMode", function() { return historyMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "depositAndWithdrawalUrl", function() { return depositAndWithdrawalUrl; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+
+
+const defaultPagingOption = {
+  PageIndex: 1,
+  PageSize: 20,
+  PageList: [20, 50, 100, 200, 500, 1000, 2000],
+  TotalItem: null
+};
+const tabKeys = {
+  Profile: 'Profile',
+  DepositAndWithdrawal: 'DepositAndWithdrawal',
+  BetList: 'BetList'
+};
+const newTabs = [];
+const dynamicImports = {
+  [tabKeys.Profile]: () => __webpack_require__.e(/*! import() | customer/customeradmin/profile */ "customer/customeradmin/profile").then(__webpack_require__.bind(null, /*! ../tabs/Profile */ "./www/js/source/reactpages/pages/customer/customeradminivorybet/tabs/Profile.jsx")),
+  [tabKeys.DepositAndWithdrawal]: () => __webpack_require__.e(/*! import() | customer/customeradmin/depositWithdrawal */ "customer/customeradmin/depositWithdrawal").then(__webpack_require__.bind(null, /*! ../tabs/DepositAndWithdrawal */ "./www/js/source/reactpages/pages/customer/customeradminivorybet/tabs/DepositAndWithdrawal.jsx")),
+  [tabKeys.BetList]: () => __webpack_require__.e(/*! import() | customer/customeradmin/betList */ "customer/customeradmin/betList").then(__webpack_require__.bind(null, /*! ../tabs/BetList */ "./www/js/source/reactpages/pages/customer/customeradminivorybet/tabs/BetList.jsx"))
+};
+const tabMenuList = Object.keys(tabKeys).map(_ => ({
+  key: _,
+  name: _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_).replace(/&amp;/g, '&'),
+  component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
+  preLoad: dynamicImports[_],
+  isNew: newTabs.some(newTab => newTab === _),
+  isShowOption: _ === tabKeys.DepositAndWithdrawal
+}));
+const preLoadComponents = lazyComponents => {
+  lazyComponents && setTimeout(() => lazyComponents.forEach(_ => _.preLoad && _.preLoad()), 0);
+};
+const historyMode = {
+  Deposit: 1,
+  Withdrawal: 2
+};
+const depositAndWithdrawalUrl = {
+  [historyMode.Deposit]: "api/CustomerAdministration/GetDepositHistoryByCustId",
+  [historyMode.Withdrawal]: "api/CustomerAdministration/GetWithdrawHistoryByCustId"
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/customer/customeradminivorybet/tabs/BetList.jsx":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/customer/customeradminivorybet/tabs/BetList.jsx ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/customer/customeradminivorybet/lib/constants.js");
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+
+
+
+
+
+
+const BetList = props => {
+  const {
+    custId,
+    apiSiteId
+  } = props.userInfo;
+  const {
+    fromDate,
+    toDate
+  } = props.dateRange;
+  const [gridData, setGridData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const [pagingOption, setPagingOption] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  const getPagingOption = gridData => {
+    if (!gridData) {
+      return _lib_constants__WEBPACK_IMPORTED_MODULE_9__["defaultPagingOption"];
+    }
+    return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_9__["defaultPagingOption"]), {
+      PageIndex: gridData.pageIndex,
+      PageSize: gridData.pageSize,
+      TotalItem: gridData.totalItem
+    });
+  };
+  const fetchData = pageOption => {
+    if (!custId) return;
+    const url = "api/CustomerAdministration/GetBetListByCustId";
+    const pageOptions = getPagingOption(pageOption);
+    const params = _objectSpread({
+      CustId: custId,
+      FromDate: fromDate,
+      ToDate: toDate,
+      APISiteId: apiSiteId
+    }, pageOptions);
+    props.toggleLoader(true);
+    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_5__["default"].postData(url, params).then(response => {
+      const resultData = response.data;
+      setGridData(resultData.data);
+      setPagingOption(getPagingOption(resultData));
+      props.toggleLoader(false);
+    }).catch(error => {
+      alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ErrorProcessingMsg'));
+      console.error(error.message);
+      props.toggleLoader(false);
+    });
+  };
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    fetchData(pagingOption);
+  }, [custId]);
+  if (!gridData.length || !pagingOption) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+  }
+  const headerText = {
+    systemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('SystemId'),
+    currency: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Currency'),
+    refNo: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('RefNo'),
+    transTime: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('TransTime'),
+    product: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Product'),
+    betType: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('BetType'),
+    turnover: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Turnover'),
+    winloss: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('WinLoss'),
+    turnoverBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Turnover')} (USD)`,
+    winlossBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('WinLoss')} (USD)`,
+    status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Status'),
+    sport: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Sport')
+  };
+  const statusText = {
+    '-1': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Lose'),
+    '0': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Draw'),
+    '1': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Won')
+  };
+  const renderHeader = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderRow"], {
+      style: {
+        height: 32
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 40
+    }, "#"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 100
+    }, headerText.systemId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 50
+    }, headerText.currency), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 100
+    }, headerText.refNo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 100
+    }, headerText.transTime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 80
+    }, headerText.product), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 80
+    }, headerText.sport), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 150
+    }, headerText.betType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 80,
+      sortBy: 'turnover'
+    }, headerText.turnover), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 80,
+      sortBy: 'winLoss'
+    }, headerText.winloss), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 80,
+      sortBy: 'turnoverBased'
+    }, headerText.turnoverBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 80,
+      sortBy: 'winLossBased'
+    }, headerText.winlossBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
+      colWidth: 50
+    }, headerText.status));
+  };
+  const renderDataSection = () => {
+    const dataRows = [];
+    for (let i = 0; i < gridData.length; i++) {
+      dataRows.push(buildDataRow(gridData[i]));
+    }
+    return dataRows;
+  };
+  const buildDataRow = dataItem => {
+    const {
+      index,
+      systemId,
+      curencyCode,
+      refNo,
+      transTimeString,
+      productCode,
+      betType,
+      turnover,
+      winLoss,
+      turnoverBased,
+      winLossBased,
+      status,
+      sportName
+    } = dataItem;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Row"], {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "center-align"
+    }, index), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], null, systemId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "center-align"
+    }, curencyCode), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "center-align"
+    }, refNo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "center-align"
+    }, transTimeString), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Product' + productCode)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], null, sportName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], null, betType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].formatDecimal(turnover)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].formatDecimal(winLoss)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].formatDecimal(turnoverBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_1__["default"].formatDecimal(winLossBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+      className: "center-align"
+    }, statusText[status]));
+  };
+  const handleChangePaging = (pageIndex, pageSize) => {
+    const newPageOptions = _objectSpread(_objectSpread({}, pagingOption), {}, {
+      pageIndex,
+      pageSize
+    });
+    fetchData(newPageOptions);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Table"], {
+    minWidth: 650,
+    autoWidth: true,
+    autoHeight: true,
+    header: renderHeader(),
+    body: renderDataSection(),
+    containerPadding: 30
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Pager"], {
+    pageOption: pagingOption,
+    onPaging: handleChangePaging
+  }));
+};
+function mapDispatchToProps(dispatch) {
+  return Object(redux__WEBPACK_IMPORTED_MODULE_7__["bindActionCreators"])({
+    toggleLoader: _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__["toggleLoader"]
+  }, dispatch);
+}
+function mapStateToProps(state) {
+  const {
+    dateRange,
+    username,
+    userInfo
+  } = state;
+  return Object.assign({}, {
+    dateRange,
+    username,
+    userInfo
+  });
+}
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["connect"])(mapStateToProps, mapDispatchToProps)(BetList));
+
 /***/ })
 
 }]);
-//# sourceMappingURL=betList.524b545fe0ed2f17e0b4.chunk.js.map
+//# sourceMappingURL=betList.cfab7d77fd0661f46b7d.chunk.js.map

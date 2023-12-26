@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\CustomerAdmin\IvoryFinancialLog.cs" />
+    <Compile Include="DTO\CustomerAdmin\CustomerInfoIvory.cs" />
     <Compile Include="DTO\CustomerAdmin\CustomerWithdrawHistory.cs" />
     <Compile Include="DTO\CustomerAdmin\CustomerDepositHistory.cs" />
     <Compile Include="DTO\CustomerAdmin\CustomerBetList.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerCommand.cs" />
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
+    <Compile Include="Enum\FinancialType.cs" />
     <Compile Include="Enum\CustomerClassTabType.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MetaModel\CustomerAdmin\GetCustomerBetListMetaModel.cs" />

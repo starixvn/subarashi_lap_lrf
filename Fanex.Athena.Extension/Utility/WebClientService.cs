@@ -40,9 +40,16 @@
             }
         }
 
-        public string UploadString(Uri address, string parameters, IDictionary<HttpRequestHeader, string> headers)
+        public string UploadString(Uri address, string parameters, IDictionary<HttpRequestHeader, string> headers, string proxyUrl = null)
         {
-            using (WebClient webClient = new WebClient())
+            var proxy = !string.IsNullOrEmpty(proxyUrl) ? new WebProxy
+            {
+                Address = new Uri(proxyUrl),
+                UseDefaultCredentials = true,
+                BypassProxyOnLocal = false
+            } : null;
+
+            using (WebClient webClient = new WebClient { Proxy = proxy })
             {
                 if (headers != null)
                 {

@@ -22,6 +22,7 @@ var cssPaths = {
     exchangevoided: "./www/css/source/reactpages/pages/exchangevoided/index.scss",
     playersegmentation: "./www/css/source/reactpages/pages/customer/player-segmentation/index.scss",
     customeradmin: "./www/css/source/reactpages/pages/customer/customeradmin/index.scss",
+    customeradminivorybet: "./www/css/source/reactpages/pages/customer/customeradminivorybet/index.scss",
     customersupporttask: "./www/css/source/reactpages/pages/customer-support-task/index.scss",
     newcashoutwinloss: "./www/css/source/reactpages/pages/newcashoutwinloss/index.scss",
     winlossanalysis: "./www/css/source/reactpages/pages/winlossanalysis/index.scss",
@@ -58,6 +59,7 @@ var scriptPaths = {
     playersegmentation: "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/index.js",
     playersegmentation_betlist: "./www/js/source/reactpages/pages/customer/player-segmentation/betlist/index.js",
     customeradmin: "./www/js/source/reactpages/pages/customer/customeradmin/components/index.jsx",
+    customeradminivorybet: "./www/js/source/reactpages/pages/customer/customeradminivorybet/components/index.jsx",
     customersupporttask: "./www/js/source/reactpages/pages/customer-support-task/components/index.jsx",
     newcashoutwinloss: "./www/js/source/reactpages/pages/newcashoutwinloss/components/index.jsx",
 

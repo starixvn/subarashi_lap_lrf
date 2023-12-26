@@ -17,9 +17,23 @@ namespace Fanex.Athena.DataAccess.Customer
             const string spName = "Lrf_Rpt_Audit_AdminPlayerSearch";
             using (var db = GetObjectDb(spName))
             {
-                db.SetParameterValue("SearchName", metaModel.UserName);
+                AssignSearchPlayerParams(db, metaModel);
 
                 var result = await db.QueryAsync<CustomerInfo>().ConfigureAwait(false);
+
+                return result.FirstOrDefault();
+            }
+        }
+
+        public async Task<CustomerInfoIvory> GetCustomerInfoIvoryByUserNameAsync(GetCustomerInfoMetaModel metaModel)
+        {
+            const string spName = "Lrf_Rpt_Audit_AdminPlayerSearch_Site";
+            using (var db = GetObjectDb(spName))
+            {
+                AssignSearchPlayerParams(db, metaModel);
+                db.SetParameterValue("SiteName", metaModel.SiteName);
+
+                var result = await db.QueryAsync<CustomerInfoIvory>().ConfigureAwait(false);
 
                 return result.FirstOrDefault();
             }
@@ -77,6 +91,7 @@ namespace Fanex.Athena.DataAccess.Customer
             db.SetParameterValue("FromDate", metaModel.FromDate);
             db.SetParameterValue("ToDate", metaModel.ToDate);
             db.SetParameterValue("BUDate", metaModel.BUDate);
+            db.SetParameterValue("SiteName", metaModel.SiteName);
         }
 
         private static void AssignGetBetListParams(IObjectDb db, GetCustomerBetListMetaModel metaModel)
@@ -86,7 +101,17 @@ namespace Fanex.Athena.DataAccess.Customer
             db.SetParameterValue("ToDate", metaModel.ToDate);
             db.SetParameterValue("PageIndex", metaModel.PageIndex);
             db.SetParameterValue("PageSize", metaModel.PageSize);
-            db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
+            db.SetParameterValue("BaseCurrency", "USD");
+            db.SetParameterValue("SiteName", metaModel.SiteName);
+            if (!string.IsNullOrEmpty(metaModel.APISiteId))
+            {
+                db.SetParameterValue("API_SiteId", metaModel.APISiteId);
+            }
+        }
+
+        private static void AssignSearchPlayerParams(IObjectDb db, GetCustomerInfoMetaModel metaModel)
+        {
+            db.SetParameterValue("SearchName", metaModel.UserName);
         }
     }
 }

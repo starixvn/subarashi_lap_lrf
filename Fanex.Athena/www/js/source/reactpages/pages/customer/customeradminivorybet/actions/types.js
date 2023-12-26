@@ -1,0 +1,5 @@
+﻿export const SET_USERNAME = 'SET_USERNAME';
+export const SET_USERINFO = 'SET_USERINFO';
+export const SET_SELECTED_TAB = 'SET_SELECTED_TAB';
+export const SET_SUBMITTED = 'SET_SUBMITTED';
+export const SET_HISTORY_OPTION = 'SET_HISTORY_OPTION';

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "LAP - " + ViewResources.PlayerReport;
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@using Fanex.Athena.Model.Core.DataDomain
+
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/customer/customeradminivorybet/index.css")" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/customer/customeradminivorybet.chunk.js")"></script>
+}
+@section globaljscode{
+    window.initialState = {
+    isLoading: false,
+    dateRange: {
+    fromDate: '@DateTime.UtcNow.AddHours(8).AddDays(-60).ToString("MM/dd/yyyy")',
+    toDate: '@DateTime.UtcNow.AddHours(8).ToString("MM/dd/yyyy")'}
+    }
+
+    window._AppData = {
+    }
+}
+<div id="app-container">
+</div>

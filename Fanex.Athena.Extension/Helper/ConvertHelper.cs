@@ -1,26 +1,9 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ConvertHelper.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Extension.Helper
+﻿namespace Fanex.Athena.Extension.Helper
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class ConvertHelper
     {
-        /// <summary>
-        /// Convert to date time.
-        /// </summary>
-        /// <param name="date">Date value.</param>
-        /// <param name="isMonthly">
-        /// Return first date of month if this is true.
-        ///  value.</param>
-        /// <returns>The result value.</returns>
         public static DateTime ToDateTime(string date, bool isMonthly)
         {
             var year = Convert.ToInt32(date.Substring(0, 4));
@@ -28,6 +11,17 @@ namespace Fanex.Athena.Extension.Helper
             var day = isMonthly ? 1 : Convert.ToInt32(date.Substring(6, 2));
 
             return new DateTime(year, month, day);
+        }
+
+        public static string GetDateString(string date, string format, string defaultValue)
+        {
+            DateTime.TryParse(date, out DateTime tmpDate);
+            if (tmpDate != DateTime.MinValue)
+            {
+                return tmpDate.ToString(format);
+            }
+
+            return defaultValue;
         }
     }
 }

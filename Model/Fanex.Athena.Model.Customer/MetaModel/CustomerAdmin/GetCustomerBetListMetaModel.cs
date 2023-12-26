@@ -18,8 +18,6 @@
 
         public string ToDate { get; set; }
 
-        public string BaseCurrency { get; set; }
-
         public int PageIndex { get; set; }
 
         public int PageSize { get; set; }
@@ -27,5 +25,9 @@
         public byte OrderCol { get; set; }
 
         public byte SortType { get; set; }
+
+        public string SiteName { get; set; }
+
+        public string APISiteId { get; set; }
     }
 }

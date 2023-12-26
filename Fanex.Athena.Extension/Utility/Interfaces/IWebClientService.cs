@@ -17,7 +17,7 @@
             Justification = "Reviewed. Suppression is OK here.")]
         byte[] DownloadData(string url);
 
-        string UploadString(Uri address, string parameters, IDictionary<HttpRequestHeader, string> headers);
+        string UploadString(Uri address, string parameters, IDictionary<HttpRequestHeader, string> headers, string proxyUrl = null);
 
         Task<string> UploadStringAsync(Uri address, string parameters);
 

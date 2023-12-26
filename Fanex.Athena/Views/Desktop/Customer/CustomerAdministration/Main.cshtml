@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "LAP - " + ViewResources.Customer + " - " + ViewResources.PlayerSegmentation;
+    ViewBag.Title = "LAP - " + ViewResources.PlayerReport;
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @using Fanex.Athena.Model.Core.DataDomain
@@ -15,8 +15,8 @@
     window.initialState = {
     isLoading: false,
     dateRange: {
-        fromDate: '@DateTime.UtcNow.AddHours(8).AddDays(-60).ToString("MM/dd/yyyy")',
-        toDate: '@DateTime.UtcNow.AddHours(8).ToString("MM/dd/yyyy")'}
+    fromDate: '@DateTime.UtcNow.AddHours(8).AddDays(-60).ToString("MM/dd/yyyy")',
+    toDate: '@DateTime.UtcNow.AddHours(8).ToString("MM/dd/yyyy")'}
     }
 
     window._AppData = {
