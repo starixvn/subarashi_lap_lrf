@@ -26,6 +26,10 @@ namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
 
         public int Status { get; set; }
 
+        public string SystemId { get; set; }
+
+        public string CurencyCode { get; set; }
+
         public string TransTimeString => TransTime.ToString("yyyy-MM-dd hh:mm:ss tt");
     }
 }

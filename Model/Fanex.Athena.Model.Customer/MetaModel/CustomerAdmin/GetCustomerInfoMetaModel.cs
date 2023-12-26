@@ -11,5 +11,9 @@
         public string ToDate { get; set; }
 
         public string BUDate { get; set; }
+
+        public string SiteName { get; set; }
+
+        public string SabaId { get; set; } = string.Empty;
     }
 }

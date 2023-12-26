@@ -10,6 +10,8 @@ namespace Fanex.Athena.Service.Customer.Interfaces
     {
         Task<CustomerInfo> GetCustomerInfoByUserName(GetCustomerInfoMetaModel metaModel);
 
+        Task<CustomerInfoIvory> GetCustomerInfoIvoryByUserName(GetCustomerInfoMetaModel metaModel);
+
         Task<ApiPagingResult<CustomerBetList>> GetBetListByCustId(GetCustomerBetListMetaModel metaModel);
 
         Task<IEnumerable<CustomerDepositHistory>> GetDepositHistoryByCustId(GetCustomerInfoMetaModel metaModel);

@@ -3644,4 +3644,31 @@
   <data name="SBPromotion" xml:space="preserve">
     <value>Sportsbook Promotion</value>
   </data>
+  <data name="PlayerReport" xml:space="preserve">
+    <value>Player Report</value>
+  </data>
+  <data name="CurrentAddress" xml:space="preserve">
+    <value>Current Address</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Date Of Birth</value>
+  </data>
+  <data name="DepositAndWithdrawal" xml:space="preserve">
+    <value>Deposit &amp; Withdrawal</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="Occupation" xml:space="preserve">
+    <value>Occupation</value>
+  </data>
+  <data name="RegisteredName" xml:space="preserve">
+    <value>Registered Name</value>
+  </data>
+  <data name="RegistrationIP" xml:space="preserve">
+    <value>Registration IP</value>
+  </data>
+  <data name="CustomerAdministrationIvoryReportTitle" xml:space="preserve">
+    <value>Data support up to 60 days (GMT+8)</value>
+  </data>
 </root>

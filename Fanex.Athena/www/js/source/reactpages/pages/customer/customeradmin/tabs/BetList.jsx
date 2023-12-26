@@ -40,7 +40,6 @@ const BetList = (props) => {
             CustId: custId,
             FromDate: fromDate,
             ToDate: toDate,
-            BaseCurrency: currencyCode,
             ... pageOptions
         }
         props.toggleLoader(true);

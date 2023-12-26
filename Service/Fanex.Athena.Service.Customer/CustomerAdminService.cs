@@ -20,6 +20,9 @@ namespace Fanex.Athena.Service.Customer
         public Task<CustomerInfo> GetCustomerInfoByUserName(GetCustomerInfoMetaModel metaModel)
             => _customerAdminDataAccess.GetCustomerInfoByUserNameAsync(metaModel);
 
+        public Task<CustomerInfoIvory> GetCustomerInfoIvoryByUserName(GetCustomerInfoMetaModel metaModel)
+            => _customerAdminDataAccess.GetCustomerInfoIvoryByUserNameAsync(metaModel);
+
         public Task<ApiPagingResult<CustomerBetList>> GetBetListByCustId(GetCustomerBetListMetaModel metaModel)
             => _customerAdminDataAccess.GetBetListByCustIdAsync(metaModel);
 

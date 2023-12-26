@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/7/2023 5:32:14 PM
+// Generated at: 12/26/2023 1:07:30 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -308,11 +308,13 @@ window._language_en_US = {
   CSComm: "CS Comm",
   Currencies: "Currencies",
   Currency: "Currency",
+  CurrentAddress: "Current Address",
   CurrentBalance: "Current Balance",
   Currentmonth: "Current month",
   Currentweek: "Current week",
   CurrentWinningThreshold: "Current Winning Threshold",
   Customer: "Customer",
+  CustomerAdministrationIvoryReportTitle: "Data support up to 60 days (GMT+8)",
   CustomerAdministrationReportTitle: "{0}, GMT+8, Data support up to 60 days",
   CustomerAmount: "Customer Amount",
   CustomerBalance: "Customer Balance",
@@ -348,6 +350,7 @@ window._language_en_US = {
   Dangerous: "Dangerous",
   Data: "data",
   Date: "Date",
+  DateOfBirth: "Date Of Birth",
   DateOfRegistration: "Date of Registration",
   DateRange: "Date Range",
   DateRangeExceedMsg: "Date range exceeds {0} months. Please try again!",
@@ -373,6 +376,7 @@ window._language_en_US = {
   DeleteSuccess: "Delete successfully!",
   Department: "Department",
   Deposit: "Deposit",
+  DepositAndWithdrawal: "Deposit &amp; Withdrawal",
   Deposited: "Deposited",
   DepositHistory: "Deposit History",
   Desktop: "Desktop",
@@ -694,6 +698,7 @@ window._language_en_US = {
   MyPreferredOdds: "My Preferred Odds",
   N_A: "N/A",
   Name: "Name",
+  Nationality: "Nationality",
   NativeApp: "Native APP",
   NetTurnover: "Net Turnover",
   New: "New",
@@ -733,6 +738,7 @@ window._language_en_US = {
   November: "November",
   NumberGameNo: "Number Game No",
   OANDANote: "Please note that all conversions to base currency (EURO,USD) are for reference only.",
+  Occupation: "Occupation",
   Oct: "Oct",
   October: "October",
   Odd_Dec: "Dec",
@@ -794,6 +800,7 @@ window._language_en_US = {
   PlayerComm: "Player Comm",
   PlayerInformation: "Player Information",
   PlayerName: "Player Name",
+  PlayerReport: "Player Report",
   PlayerSegmentation: "Player Segmentation",
   PlayerStatementSupportMonths: "Support data up to 18 months",
   PlayerWL: "Player W/L",
@@ -874,6 +881,8 @@ window._language_en_US = {
   RefNo: "Ref No",
   Refresh: "Refresh",
   Refund: "Refund",
+  RegisteredName: "Registered Name",
+  RegistrationIP: "Registration IP",
   Reject: "Reject",
   Remark: "Remark",
   Remove: "Remove",

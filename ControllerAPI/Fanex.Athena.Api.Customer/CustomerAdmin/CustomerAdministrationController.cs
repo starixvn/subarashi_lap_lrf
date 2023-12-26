@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
@@ -19,6 +21,7 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
     {
         private readonly ICustomerAdminService _customerAdminService;
         private readonly ICustomerAdminAPIService _customerAdminAPIService;
+        private readonly IList<string> _ivorySites = new List<string> { "N8I", "N88" };
         public IBalanceUpDataAccess BalanceUpDataAccessInstance { get; set; }
 
         public CustomerAdministrationController(
@@ -40,8 +43,39 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         }
 
         [HttpPost]
+        public async Task<JsonResult<CustomerInfoIvory>> GetCustomerInfoIvoryByUserName(GetCustomerInfoMetaModel model)
+        {
+            model.SiteName = SessionService.LicenseeSession.LicenseeName;
+            var result = GetCustomerInfoFromBothN88Site(model)
+                ?? await _customerAdminService.GetCustomerInfoIvoryByUserName(model);
+
+            if (_ivorySites.Contains(result?.LicenseeName, StringComparer.InvariantCultureIgnoreCase))
+            {
+                model.SabaId = result.RegisteredUserName;
+                result = _customerAdminAPIService.GetCustomerInfoIvoryByUserName(model, result.LicenseeName) ?? result;
+            }
+
+            return JsonApi(result);
+        }
+
+        private CustomerInfoIvory GetCustomerInfoFromBothN88Site(GetCustomerInfoMetaModel model)
+        {
+            foreach (var siteName in _ivorySites)
+            {
+                var result = _customerAdminAPIService.GetCustomerInfoIvoryByUserName(model, siteName);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+        [HttpPost]
         public async Task<JsonResult<ApiPagingResult<CustomerBetList>>> GetBetListByCustId(GetCustomerBetListMetaModel model)
         {
+            model.SiteName = SessionService.LicenseeSession.LicenseeName;
             var result = await _customerAdminService.GetBetListByCustId(model);
 
             return JsonApi(result);
@@ -51,6 +85,20 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         public async Task<JsonResult<IEnumerable<CustomerDepositHistory>>> GetDepositHistoryByCustId(GetCustomerInfoMetaModel model)
         {
             UpdateMetaModel(model);
+
+            if (string.Equals(model.SiteName, "IvoryBet", StringComparison.InvariantCultureIgnoreCase))
+            {
+                foreach (var siteName in _ivorySites)
+                {
+                    var apiResult = _customerAdminAPIService.GetIvoryDepositHistoryByUserName(model, siteName);
+
+                    if (apiResult != null)
+                    {
+                        return JsonApi(apiResult);
+                    }
+                }
+            }
+
             var result = await _customerAdminService.GetDepositHistoryByCustId(model);
 
             return JsonApi(result);
@@ -60,6 +108,20 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         public async Task<JsonResult<IEnumerable<CustomerWithdrawHistory>>> GetWithdrawHistoryByCustId(GetCustomerInfoMetaModel model)
         {
             UpdateMetaModel(model);
+
+            if (string.Equals(model.SiteName, "IvoryBet", StringComparison.InvariantCultureIgnoreCase))
+            {
+                foreach (var siteName in _ivorySites)
+                {
+                    var apiResult = _customerAdminAPIService.GetIvoryWithdrawHistoryByUserName(model, siteName);
+
+                    if (apiResult != null)
+                    {
+                        return JsonApi(apiResult);
+                    }
+                }
+            }
+
             var result = await _customerAdminService.GetWithdrawHistoryByCustId(model);
 
             return JsonApi(result);
@@ -68,6 +130,7 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         private void UpdateMetaModel(GetCustomerInfoMetaModel metaModel)
         {
             metaModel.BUDate = BalanceUpDataAccessInstance.GetBalanceUp().BalanceUpDay.ToString("MM/dd/yyyy");
+            metaModel.SiteName = SessionService.LicenseeSession.LicenseeName;
         }
     }
 }

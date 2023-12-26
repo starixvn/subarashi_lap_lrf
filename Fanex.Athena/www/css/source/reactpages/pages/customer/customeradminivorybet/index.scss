@@ -1,0 +1,135 @@
+﻿@import '../../../abstracts/variables';
+@import '../../../components/forms/checkbox';
+@import '../../../components/date-range/styles';
+@import '../../../components/react-multiselect';
+@import '../../../components/autocomplete';
+@import '../../../components/popup';
+@import "../../../components/react-grid";
+@import "../../../components/paging";
+@import "../../../components/switch";
+@import "../../../components/alert/index";
+@import "../../../components/dropdown";
+@import "../../../components/dropdownlabel";
+@import "../../../components/forms/radio-buttons";
+@import './base/variables';
+
+#customer-admin {
+    .tab-menu {
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: $white;
+        }
+
+        li {
+            display: inline-block;
+            font-weight: bold;
+            cursor: pointer;
+
+            a {
+                display: block;
+                color: $text-default-color;
+                text-transform: uppercase;
+                text-align: center;
+                padding: 10px 30px;
+                text-decoration: none;
+                text-transform: uppercase;
+            }
+        }
+
+        .active {
+            border-bottom: 2px solid $orange-color;
+        }
+    }
+}
+
+.player-profile {
+    padding: 0 0 20px 30px;
+    color: $text-default-color;
+}
+
+.subtab {
+    .header-tab {
+        margin-top: 0;
+
+        .tabs .tab a {
+            font-size: 12px;
+
+            &.active {
+                color: #f05b1f;
+            }
+        }
+    }
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: #fff;
+}
+
+#app-container {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.account-info-container {
+    border: 1px solid #d6d6d6;
+    width: 100%;
+
+    &-content {
+        padding: 0 10px 10px 10px;
+    }
+
+    .table {
+        width: 100%;
+
+        thead tr th:first-child,
+        tbody tr td:first-child {
+            width: 30%;
+        }
+
+        tr {
+            height: 25px;
+        }
+
+        td {
+            border: none;
+        }
+    }
+
+    .user-info {
+        color: $user-info-color;
+    }
+}
+
+.search-option-container {
+    position: relative !important;
+    margin: 10px 10px 10px -20px;
+
+    .search-option.dropdown .dropdown-menu .dropdown-item {
+        padding: 0;
+    }
+
+    .search-option {
+        .selection-item {
+            margin-bottom: 0;
+            padding: 5px 10px;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            width: auto;
+            position: fixed;
+            z-index: 999;
+        }
+
+        .material-icons {
+            font-size: 12px;
+        }
+    }
+}
