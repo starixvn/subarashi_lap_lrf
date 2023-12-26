@@ -3686,4 +3686,13 @@
   <data name="Rule" xml:space="preserve">
     <value>Rule</value>
   </data>
+  <data name="Platform_3" xml:space="preserve">
+    <value>APP</value>
+  </data>
+  <data name="Platform_4" xml:space="preserve">
+    <value>Oddsfeed</value>
+  </data>
+  <data name="Platform_5" xml:space="preserve">
+    <value>DirectAPI</value>
+  </data>
 </root>

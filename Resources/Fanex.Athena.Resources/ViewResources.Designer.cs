@@ -6379,6 +6379,33 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to APP.
+        /// </summary>
+        public static string Platform_3 {
+            get {
+                return ResourceManager.GetString("Platform_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oddsfeed.
+        /// </summary>
+        public static string Platform_4 {
+            get {
+                return ResourceManager.GetString("Platform_4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DirectAPI.
+        /// </summary>
+        public static string Platform_5 {
+            get {
+                return ResourceManager.GetString("Platform_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Platform Win Loss.
         /// </summary>
         public static string PlatformWinLoss {
