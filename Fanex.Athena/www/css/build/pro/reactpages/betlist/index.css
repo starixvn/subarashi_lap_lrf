@@ -301,26 +301,8 @@
   .mobile-betlist-container .fixed-table-grant-total td:first-child {
     text-align: center; }
 
-.mobile-betlist-container .header-content, .mobile-betlist-container .footer-content, .mobile-betlist-container .page-wrapper-container {
-  display: block;
-  position: sticky;
-  position: -webkit-sticky;
-  z-index: 10; }
-
-.mobile-betlist-container .header-content {
-  top: 0px; }
-  .mobile-betlist-container .header-content tr th:first-child {
-    border-left: 0px; }
-
-.mobile-betlist-container .body-content {
-  overflow-x: initial;
-  overflow-y: initial; }
-
-.mobile-betlist-container .page-wrapper-container {
-  bottom: 0px; }
-
-.mobile-betlist-container .table-container {
-  overflow-x: visible; }
+.mobile-betlist-container tr.row-active.collapse-row td:first-child, .mobile-betlist-container tr.row-active.collapse-row:hover td:first-child {
+  background: #F6DFA1; }
 
 .mobile-betlist-container.betlist-container .bettype, .mobile-betlist-container.betlist-container .match {
   text-align: left; }
@@ -330,12 +312,6 @@
 
 .mobile-betlist-container .collapse-row td:first-child {
   background: #9EB4C3; }
-
-.mobile-betlist-container .row-active td {
-  background: #FCF4DF; }
-
-.mobile-betlist-container .row-active.collapse-row td:first-child {
-  background: #F6DFA1; }
 
 .mobile-betlist-container .table > tbody tr td.cell-collapse {
   padding-left: 0px;
@@ -349,11 +325,8 @@
 .mobile-betlist-container .table > tbody tr td.cell-winloss .underdog {
   word-break: break-all; }
 
-.mobile-betlist-container .table > tbody tr:hover td:hover td {
-  background: initial; }
-
-.mobile-betlist-container .table > tbody tr:hover td.row-active:hover td {
-  background: #FCF4DF; }
+.mobile-betlist-container .table > tbody tr.fixed-table-grant-total:hover td {
+  background-color: #b8c3c9; }
 
 .mobile-betlist-container .icon {
   color: #217A4A;
