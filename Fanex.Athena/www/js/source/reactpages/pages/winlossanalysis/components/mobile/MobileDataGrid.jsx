@@ -32,7 +32,7 @@ export const MobileDataGrid = () => {
     const ref = useRef(null);
     const [pagerRef, pagerSize] = useElementSize();
     const [id, setId] = useState(`${uuidv4()}`);
-    const [headerDisplayType, setHeaderDisplayType] = useState(MobileGroupByHeaderDisplayType.SystemId);
+    const [headerDisplayType, setHeaderDisplayType] = useState(MobileGroupByHeaderDisplayType.ExternalId);
     const { setRequestParam, toggleLoader, getReportData } = ActionCreators;
     const dispatch = useDispatch();
     const { width } = useWindowSize();
