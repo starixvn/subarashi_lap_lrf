@@ -4599,7 +4599,8 @@ function getBettypeList(productCode, hasItemAll = false) {
       return;
     }
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
-      productCode: productCode
+      productCode: productCode,
+      applyHideSaba: true
     }).then(response => {
       var data = response.data;
       _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_3__["default"].set(cacheKey, data);
@@ -4774,7 +4775,8 @@ function getLeagueList(sportId, date) {
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].getData(Url, {
       sportId: sportId,
       fromDate: dateString,
-      toDate: dateString
+      toDate: dateString,
+      applyHideSaba: true
     }).then(response => {
       var data = response.data;
       _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_4__["default"].set(cacheKey, data);
@@ -4935,7 +4937,8 @@ function getSportList(productCode, date) {
   return dispatch => {
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
       productCode: productCode,
-      includeSabaSport: productCode === 'SB'
+      includeSabaSport: productCode === 'SB',
+      applyHideSaba: true
     }).then(response => {
       let data = response.data;
       let itemAll = {

@@ -1177,6 +1177,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OU Time Machine.
+        /// </summary>
+        public static string BetType_228 {
+            get {
+                return ResourceManager.GetString("BetType_228", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HDP Time Machine.
+        /// </summary>
+        public static string BetType_229 {
+            get {
+                return ResourceManager.GetString("BetType_229", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Both/One/Neither Team To Score.
         /// </summary>
         public static string BONTeamToScore {
@@ -9444,6 +9462,15 @@ namespace Fanex.Athena.Resources {
         public static string VIPPlayerTooltipMsg {
             get {
                 return ResourceManager.GetString("VIPPlayerTooltipMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual .
+        /// </summary>
+        public static string Virtual {
+            get {
+                return ResourceManager.GetString("Virtual", resourceCulture);
             }
         }
         

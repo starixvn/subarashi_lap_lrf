@@ -56,7 +56,7 @@
         {
             // Arrange
             var expected = new CheckedItem { Checked = true, ID = 1, Name = "BettypeNameTest" };
-            _cacheRefAdapter.GetBettype(expected.ID).Returns(expected.Name);
+            _cacheRefAdapter.GetBetTypeName(expected.ID, LanguageCode).Returns(expected.Name);
             MapReaderData(new
             {
                 Bettype = expected.ID

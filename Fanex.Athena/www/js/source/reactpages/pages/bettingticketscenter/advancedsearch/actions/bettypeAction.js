@@ -48,7 +48,7 @@ export function getBettypeList(productCode, hasItemAll = false) {
             return;
         }
 
-        DataService.getData(Url, { productCode: productCode})
+        DataService.getData(Url, { productCode: productCode, applyHideSaba: true})
             .then(response => {
                 var data = response.data;
                 Cache.set(cacheKey, data);

@@ -41,7 +41,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
                     while (reader.Read())
                     {
                         var productPrefix = reader.ToString("ProductPrefix");
-                        var betTypeId = reader.ToInt("BetType"); 
+                        var betTypeId = reader.ToInt("BetType");
                         results.Add((productPrefix, betTypeId));
                     }
                 }
@@ -50,7 +50,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             return results;
         }
 
-        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode)
+        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba = false)
         {
             const string UspName = "Lrf_SelBetTypesByProduct";
 
@@ -77,7 +77,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
                     while (reader.Read())
                     {
                         var id = int.Parse(reader["Bettype"].ToString());
-                        var name = _cacheRefAdapter.GetBettype(id);
+                        var name = _cacheRefAdapter.GetBetTypeName(id, languageCode, isHideSaba);
                         if (MappingHelper.MapBettypeSportByProduct.ContainsKey(id))
                         {
                             var suffix = _cacheRefAdapter.GetSportName(MappingHelper.MapBettypeSportByProduct[id], languageCode);

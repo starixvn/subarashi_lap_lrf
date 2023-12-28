@@ -3,6 +3,7 @@
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DataDomain;
@@ -56,7 +57,7 @@
         public ActionResult Index(string resourceName)
         {
             var content = GetFileContent(resourceName);
-            content = content.Replace("{rooturl}", Url.Content("~"));        
+            content = content.Replace("{rooturl}", Url.Content("~"));
             if (NeedBindData(resourceName))
             {
                 var products = _productService.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
@@ -67,6 +68,7 @@
                 content = AddVS2Sport(content);
                 content = AddOpenBalanceInfo(content);
                 content = RemovePermissionSection(content, PermissionKeys.PlayerVIPManagement);
+                content = RemoveSabaText(content);
                 content = AddLicenseeSection(content, SessionServiceInstance.LicenseeSession.LicenseeName);
             }
 
@@ -146,6 +148,24 @@
             var closingTag = $"{{/{permission}-permission-section}}";
             var customContent = content;
             if (_authrizationService.HasPermissions(SessionServiceInstance.UserSession, permission))
+            {
+                customContent = customContent.Replace(openingTag, string.Empty);
+                customContent = customContent.Replace(closingTag, string.Empty);
+            }
+            else
+            {
+                var pattern = $"{openingTag}[\\s\\S]*{closingTag}";
+                customContent = new Regex(pattern).Replace(customContent, string.Empty);
+            }
+            return customContent;
+        }
+
+        private string RemoveSabaText(string content)
+        {
+            var openingTag = $"{{SABA-section}}";
+            var closingTag = $"{{/SABA-section}}";
+            var customContent = content;
+            if (!SabaHelper.IsHideSaba(SessionServiceInstance.LicenseeSession.SpecialPlatform))
             {
                 customContent = customContent.Replace(openingTag, string.Empty);
                 customContent = customContent.Replace(closingTag, string.Empty);

@@ -45,7 +45,7 @@ export function getLeagueList(sportId, date) {
             return;
         }
 
-        DataService.getData(Url, { sportId: sportId, fromDate: dateString, toDate: dateString})
+        DataService.getData(Url, { sportId: sportId, fromDate: dateString, toDate: dateString, applyHideSaba: true})
             .then(response => {
                 var data = response.data;
                 Cache.set(cacheKey, data);
