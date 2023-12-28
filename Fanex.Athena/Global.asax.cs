@@ -78,7 +78,6 @@
                 GlobalConfiguration.Configuration.EnableCors();
                 GlobalConfiguration.Configuration.Filters.Add(new CustomApiAuthorizeAttribute());
                 GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
-                GlobalConfiguration.Configuration.MessageHandlers.Insert(0, new ServerCompressionHandler(new GZipCompressor(), new DeflateCompressor()));
                 /*End Web API*/
 
                 AntiForgeryConfig.SuppressXFrameOptionsHeader = true;
