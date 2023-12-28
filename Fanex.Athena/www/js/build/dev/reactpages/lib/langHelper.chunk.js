@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/26/2023 1:07:30 PM
+// Generated at: 12/28/2023 4:00:32 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -218,6 +218,8 @@ window._language_en_US = {
   BetTradeCommission: "Bet Trade Commission",
   BetTradeNotOfferCurrency: "BetTrade is not offered for this currency.",
   BetType: "Bet type",
+  BetType_228: "OU Time Machine",
+  BetType_229: "HDP Time Machine",
   BONTeamToScore: "Both/One/Neither Team To Score",
   Bonus: "Bonus",
   BothGroupByAndBreakdownLevelOption: "Both Group By and Breakdown By levels",
@@ -789,6 +791,9 @@ window._language_en_US = {
   Platform: "Platform",
   Platform_1: "Desktop",
   Platform_2: "Mobile",
+  Platform_3: "APP",
+  Platform_4: "Oddsfeed",
+  Platform_5: "DirectAPI",
   PlatformWinLoss: "Platform Win Loss",
   PlatformWinLossNote: "Platform data is available from 27 Feb 2016.",
   PlatformWinLossTitle: "Platform Win Loss - {0} --&gt; {1} - {2} - {3} - {4}",
@@ -805,6 +810,7 @@ window._language_en_US = {
   PlayerStatementSupportMonths: "Support data up to 18 months",
   PlayerWL: "Player W/L",
   PleaseSelectOne: "Please select one",
+  Policy: "Policy",
   Position: "Position",
   PreferredUserName: "Preferred User Name",
   PreGame: "Pre Game",
@@ -910,6 +916,7 @@ window._language_en_US = {
   RiskLevelOddsGroup: "Risk Level Odds Group",
   RNGCasinoUpdateSettingUnAvailableMsg: "RNG Casino Database is not currently available. Please try again later.",
   Robot: "Robot",
+  Rule: "Rule",
   Running: "Running",
   Sa: "Sa",
   Saba: "Saba",
@@ -1131,6 +1138,7 @@ window._language_en_US = {
   VipPlayerManagement: "VIP Player Management",
   VIPPlayerOnly: "VIP Player Only",
   VIPPlayerTooltipMsg: "VIP Players are marked in Player Segmentation",
+  Virtual: "Virtual",
   VirtualBasketball: "Virtual Basketball",
   VirtualCycling: "Virtual Cycling",
   VirtualGreyhounds: "Virtual Greyhounds",
