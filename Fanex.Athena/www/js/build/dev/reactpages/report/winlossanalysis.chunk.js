@@ -5192,7 +5192,8 @@ const setSportList = list => {
 function getSportList(productCodes) {
   return async dispatch => {
     const response = await _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
-      productCodes: productCodes
+      productCodes: productCodes,
+      applyHideSaba: true
     });
     const data = response.data;
     const selectedSports = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].getSelectedItemFromTreeListItem(data);

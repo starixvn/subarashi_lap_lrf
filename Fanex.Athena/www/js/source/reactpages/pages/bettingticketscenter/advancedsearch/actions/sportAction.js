@@ -21,7 +21,7 @@ export const setSportList = (list) => {
 
 export function getSportList(productCode, date) {
     return (dispatch) => {
-        DataService.getData(Url, { productCode: productCode, includeSabaSport: productCode === 'SB'})
+        DataService.getData(Url, { productCode: productCode, includeSabaSport: productCode === 'SB', applyHideSaba: true})
             .then(response => {
                 let data = response.data;
                 

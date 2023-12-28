@@ -76,12 +76,12 @@ namespace Fanex.Athena.Service.StatelessCore
             };
         }
 
-        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode)
+        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba = false)
         {
-            return await _betTypeDataAccess.GetBettypesByProduct(licenseeId, productCode, languageCode).ConfigureAwait(false);
+            return await _betTypeDataAccess.GetBettypesByProduct(licenseeId, productCode, languageCode, isHideSaba).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes)
+        public async Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes, bool isHideSaba = false)
         {
             var betTypes = await _betTypeDataAccess.GetBetTypeForProducts(licenseeId, productCodes);
             var result = betTypes.GroupBy(_ => _.ProductCode,
@@ -90,7 +90,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     Checked = true,
                     Children = null,
                     ID = _.BetType,
-                    Name = GetBetTypeName(_.BetType, lang),
+                    Name = GetBetTypeName(_.BetType, lang, isHideSaba),
                     Value = _.BetType.ToString(),
                 },
                 (key, items) => new CheckedItem
@@ -125,10 +125,10 @@ namespace Fanex.Athena.Service.StatelessCore
             return sportsParameters;
         }
 
-        private string GetBetTypeName(int betType, string languageCode)
+        private string GetBetTypeName(int betType, string languageCode, bool isHideSaba = false)
         {
             string suffix = GetBettypeNameSuffix(betType);
-            return _cacheRefAdapter.GetBetTypeName(Convert.ToInt32(betType), languageCode) + suffix;
+            return _cacheRefAdapter.GetBetTypeName(Convert.ToInt32(betType), languageCode, isHideSaba) + suffix;
         }
 
         private string GetBettypeNameSuffix(int betType)

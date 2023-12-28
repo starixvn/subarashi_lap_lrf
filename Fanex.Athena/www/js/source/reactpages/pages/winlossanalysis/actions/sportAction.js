@@ -20,7 +20,7 @@ export const setSportList = (list) => {
 
 export function getSportList(productCodes) {
     return async (dispatch) => {
-        const response = await DataService.getData(Url, { productCodes: productCodes });
+        const response = await DataService.getData(Url, { productCodes: productCodes, applyHideSaba: true });
         const data = response.data;
         const selectedSports = Service.getSelectedItemFromTreeListItem(data);
         dispatch(setSportList(data));

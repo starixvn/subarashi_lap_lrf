@@ -9,6 +9,7 @@
 
     using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.MetaModel;
     using Resources;
@@ -44,7 +45,8 @@
         public async Task<dynamic> GetData(AdvancedSearchBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
-            var sabaSport = _sportService.GetSabaSport(metaModel.SportId);
+            var isHideSaba = SabaHelper.IsHideSaba(licenseeSession.SpecialPlatform);
+            var sabaSport = _sportService.GetSabaSport(metaModel.SportId, isHideSaba);
             if (sabaSport != null)
             {
                 metaModel.LeagueGroupIds = string.Join(",", sabaSport.LeagueGroupIds);

@@ -58,12 +58,12 @@ namespace Fanex.Athena.Service.StatelessCore
         public Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "")
             => _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes);
 
-        public async Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, string productCodes = "")
+        public async Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, string productCodes = "", bool isHideSaba = false)
         {
             var result = new List<SportProductItem>();
             result.AddRange(await GetSportsAndProducts(licenseeId, languageCode, productCodes));
 
-            result.AddRange(GetSabaSports().Select(t => new SportProductItem
+            result.AddRange(GetSabaSports(isHideSaba).Select(t => new SportProductItem
             {
                 Checked = true,
                 ID = t.Id,
@@ -74,19 +74,19 @@ namespace Fanex.Athena.Service.StatelessCore
             return result;
         }
 
-        public IEnumerable<SabaSport> GetSabaSports()
+        public IEnumerable<SabaSport> GetSabaSports(bool isHideSaba = false)
             => SabaVirtualSports.Select(t => new SabaSport
             {
                 Id = t.Id,
                 LeagueGroupIds = t.LeagueGroupIds,
-                Name = GetSabaName(t.Id, t.SportTypeId),
+                Name = GetSabaName(t.Id, t.SportTypeId, isHideSaba),
                 SportTypeId = t.SportTypeId
             });
 
-        public SabaSport GetSabaSport(int id)
-            => GetSabaSports().FirstOrDefault(t => t.Id == id);
+        public SabaSport GetSabaSport(int id, bool isHideSaba = false)
+            => GetSabaSports(isHideSaba).FirstOrDefault(t => t.Id == id);
 
-        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(int licenseeId, string languageCode, string productCodes = "")
+        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(int licenseeId, string languageCode, string productCodes = "", bool isHideSaba = false)
         {
             var cacheKey = CacheKey.MemorycacheSportListForTreeView + licenseeId + languageCode + productCodes;
             var sportList = _cache.Get<IEnumerable<CheckedItem>>(cacheKey);
@@ -97,12 +97,13 @@ namespace Fanex.Athena.Service.StatelessCore
             }
 
             var sportItems = await _sportTypeDataAccess.GetSportsForTreeView(licenseeId, productCodes);
-            return BuildSportList(sportItems);
+            return BuildSportList(sportItems, isHideSaba);
         }
 
-        private string GetSabaName(int id, int sportTypeId)
+        private string GetSabaName(int id, int sportTypeId, bool isHideSaba = false)
         {
             string sportName;
+            var prefixText = isHideSaba ? ViewResources.Virtual : ViewResources.Saba;
             switch (id)
             {
                 case (int)SportType.SabaSoccerPingoal:
@@ -125,13 +126,13 @@ namespace Fanex.Athena.Service.StatelessCore
                     sportName = _cacheRefAdapter.GetSportName(sportTypeId);
                     break;
             }
-            return $"{ViewResources.Saba}{sportName}";
+            return $"{prefixText}{sportName}";
         }
 
-        private ICollection<CheckedItem> BuildSportList(IEnumerable<SportForTreeViewItem> sportItems)
+        private ICollection<CheckedItem> BuildSportList(IEnumerable<SportForTreeViewItem> sportItems, bool isHideSaba = false)
         {
             var sportList = sportItems.GroupBy(_ => (_.ProductId, _.ProductCode),
-                _ => BuildSportCheckItem(_),
+                _ => BuildSportCheckItem(_, isHideSaba),
                 (key, elems) => new CheckedItem
                 {
                     ID = key.ProductId,
@@ -144,19 +145,22 @@ namespace Fanex.Athena.Service.StatelessCore
             return sportList;
         }
 
-        private CheckedItem BuildSportCheckItem(SportForTreeViewItem sport)
+        private CheckedItem BuildSportCheckItem(SportForTreeViewItem sport, bool isHideSaba = false)
             => new CheckedItem
             {
                 Checked = true,
                 Children = null,
                 ID = sport.SportType,
-                Name = GetSportNameForTreeView(sport.SportType),
+                Name = GetSportNameForTreeView(sport.SportType, isHideSaba),
                 Value = sport.SportType.ToString()
             };
 
 #pragma warning disable S1541 // Methods and properties should not be too complex
-        private string GetSportNameForTreeView(int sportType)
+
+        private string GetSportNameForTreeView(int sportType, bool isHideSaba = false)
         {
+            var prefixText = isHideSaba ? ViewResources.Virtual : ViewResources.Saba;
+
             if (sportType > 0)
             {
                 return _cacheRefAdapter.GetSportName(sportType);
@@ -204,8 +208,9 @@ namespace Fanex.Athena.Service.StatelessCore
                     _cacheRefAdapter.GetSportName(sportType);
                     break;
             }
-            return $"{ViewResources.Saba}{sportName}";
+            return $"{prefixText}{sportName}";
         }
+
 #pragma warning restore S1541 // Methods and properties should not be too complex
     }
 }

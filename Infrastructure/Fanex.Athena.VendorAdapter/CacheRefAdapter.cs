@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 
 using Fanex.Athena.Model.Core;
@@ -12,6 +13,12 @@ namespace Fanex.Athena.VendorAdapter
 {
     public class CacheRefAdapter : ICacheRefAdapter
     {
+        private static readonly string[] SabaBetTypeMap = new[]
+{
+            "228",
+            "229"
+        };
+
         private readonly Lazy<IRemotingRefService> _remotingRefService = new Lazy<IRemotingRefService>(() => new RemotingRefService());
 
         public static CacheRefAdapter Instance { get; } = new CacheRefAdapter();
@@ -90,11 +97,16 @@ namespace Fanex.Athena.VendorAdapter
             return RemotingRefService.GetLeagueName(leagueId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
         }
 
-        public string GetBetTypeName(object bettypeId, string languageCode)
+        public string GetBetTypeName(object bettypeId, string languageCode, bool isHideSaba = false)
         {
             if (!IsValidId(bettypeId))
             {
                 return string.Empty;
+            }
+
+            if (isHideSaba && SabaBetTypeMap.Contains(bettypeId.ToString()))
+            {
+                return ViewResources.ResourceManager.GetString($"BetType_{bettypeId}");
             }
 
             return RemotingRefService.GetBetTypeName(bettypeId.ToString(), languageCode);
@@ -141,6 +153,5 @@ namespace Fanex.Athena.VendorAdapter
         {
             return string.IsNullOrEmpty(languageCode) ? Thread.CurrentThread.CurrentUICulture.IetfLanguageTag : languageCode;
         }
-
     }
 }
