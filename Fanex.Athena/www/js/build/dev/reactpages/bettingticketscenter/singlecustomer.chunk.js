@@ -417,7 +417,7 @@ const setSelectedStatus = item => {
 /*!***************************************************!*\
   !*** ./www/js/source/reactpages/actions/types.js ***!
   \***************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_REASON_LIST, SET_SELECTED_VIP_OPTION, SET_SELECTED_CUSTOMERCLASS, SET_SELECTED_RISKLEVEL, SET_SELECTED_ODDGROUP */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_WHITELABEL_TREE_LIST, SET_REASON_LIST, SET_SELECTED_VIP_OPTION, SET_SELECTED_CUSTOMERCLASS, SET_SELECTED_RISKLEVEL, SET_SELECTED_ODDGROUP */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -444,6 +444,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_LIST", function() { return SET_SUBSIDIARY_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_SEARCH", function() { return SET_SUBSIDIARY_SEARCH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_WHITELABEL_TREE_LIST", function() { return SET_WHITELABEL_TREE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REASON_LIST", function() { return SET_REASON_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_VIP_OPTION", function() { return SET_SELECTED_VIP_OPTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CUSTOMERCLASS", function() { return SET_SELECTED_CUSTOMERCLASS; });
@@ -499,6 +500,7 @@ const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 /* Subsidiary Search  */
 const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
 const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
+const SET_WHITELABEL_TREE_LIST = 'SET_WHITELABEL_TREE_LIST';
 
 /*Reason list*/
 const SET_REASON_LIST = "SET_REASON_LIST";
@@ -3401,7 +3403,9 @@ const CollapseRow = props => {
     isFocus,
     className,
     onFocus,
-    index
+    index,
+    isUseCumtomCollapseRow,
+    children
   } = props;
   const [oldIsHover, setOldIsHover] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
@@ -3411,21 +3415,24 @@ const CollapseRow = props => {
     onFocus(index, isHover);
   }
   const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()(isFocus ? "row-active" : "", className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RefRow__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return isUseCumtomCollapseRow ? children : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RefRow__WEBPACK_IMPORTED_MODULE_3__["default"], {
     ref: ref,
     className: classes
-  }, props.children);
+  }, children);
 };
 const propTypes = {
   isFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
   onFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
   onBlur: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  index: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number
+  index: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  isUseCumtomCollapseRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
 };
 const defaultProps = {
   isFocus: false,
-  index: 0
+  index: 0,
+  isUseCumtomCollapseRow: false
 };
 CollapseRow.propTypes = propTypes;
 CollapseRow.defaultProps = defaultProps;
@@ -3466,14 +3473,30 @@ const CompositeRow = props => {
   const {
     isCollapsible,
     expandRows,
-    className
+    className,
+    isUseCustomCollapseCell,
+    children,
+    onCollapsed,
+    onExpanded,
+    refCollapseObject,
+    activeClassName,
+    isUseCumtomCollapseRow,
+    isUseCustomHoverRow,
+    hoverRowRef,
+    collapaseRowClass
   } = props;
   const [isCollapse, setIsCollapse] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
   const [childFocusTracker, setChildFocusTracker] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(expandRows.map(() => false));
-  const hoverRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const hoverRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(hoverRowRef === null || hoverRowRef === void 0 ? void 0 : hoverRowRef.current);
   const isHover = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_5__["useHover"])(hoverRef);
   const onClick = () => {
-    setIsCollapse(!isCollapse);
+    const nextState = !isCollapse;
+    setIsCollapse(nextState);
+    if (nextState) {
+      onCollapsed && onCollapsed();
+    } else {
+      onExpanded && onExpanded();
+    }
   };
   const iconClass = isCollapse ? 'icon icon-lap-plus' : 'icon icon-lap-minus';
   const onChildFocus = (index, isFocus) => {
@@ -3481,18 +3504,33 @@ const CompositeRow = props => {
     setChildFocusTracker([...childFocusTracker]);
   };
   const isFocus = isHover || childFocusTracker.indexOf(true) >= 0;
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()(isFocus ? "row-active" : "", className);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RefRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    ref: hoverRef,
-    className: classes
-  }, props.children, isCollapsible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()(isFocus ? activeClassName : "", className);
+  if (isUseCustomCollapseCell && isCollapsible && refCollapseObject) {
+    refCollapseObject.onclick = onClick;
+  }
+  const expandRowList = Array.isArray(expandRows) ? expandRows : expandRows.props.children;
+  const mainRow = isUseCustomHoverRow ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, children, !isUseCustomCollapseCell && isCollapsible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
     onClick: onClick,
     className: "center-align cell-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "icon-collapse"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: iconClass
-  }))), isCollapsible && !isCollapse && expandRows && expandRows.map((item, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CollapseRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RefRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    ref: hoverRef,
+    className: classes
+  }, children, !isUseCustomCollapseCell && isCollapsible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    onClick: onClick,
+    className: "center-align cell-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "icon-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: iconClass
+  }))));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, mainRow, isCollapsible && !isCollapse && (expandRowList === null || expandRowList === void 0 ? void 0 : expandRowList.length) > 0 && expandRows.map((item, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CollapseRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: `${index}`,
-    className: "collapse-row",
+    isUseCumtomCollapseRow: isUseCumtomCollapseRow,
+    className: `collapse-row ${collapaseRowClass}`,
     index: index,
     onFocus: onChildFocus,
     isFocus: isFocus
@@ -3500,23 +3538,34 @@ const CompositeRow = props => {
 };
 const propTypes = {
   isCollapsible: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
-  isFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
   isUseCustomCollapseCell: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isUseCustomHoverRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isUseCumtomCollapseRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  hoverRowRef: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  refCollapseObject: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
   collapsibleCellContent: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
   onExpanded: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  onCollapse: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
-  expandRows: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
-  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+  onCollapsed: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  expandRows: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object]),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any,
+  activeClassName: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  collapaseRowClass: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
 };
 const defaultProps = {
   isCollapsible: true,
   isUseCustomCollapseCell: false,
+  expandRows: [],
   isFocus: false,
-  expandRows: []
+  activeClassName: "row-active",
+  isUseCustomHoverRow: false,
+  hoverRowRef: null,
+  isUseCumtomCollapseRow: false,
+  collapaseRowClass: ''
 };
 CompositeRow.propTypes = propTypes;
 CompositeRow.defaultProps = defaultProps;
-/* harmony default export */ __webpack_exports__["default"] = (CompositeRow);
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(CompositeRow));
 
 /***/ }),
 
@@ -4520,7 +4569,7 @@ const BaseMobileDataGrid = props => {
   }
   const isShowPagingInfo = pagerSize.width > 400;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "mobile-betlist-container betlist-container result-content",
+    className: "mobile-betlist-container betlist-container result-content mobile-table",
     ref: ref
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_1__["default"], {
     content: reportTitle

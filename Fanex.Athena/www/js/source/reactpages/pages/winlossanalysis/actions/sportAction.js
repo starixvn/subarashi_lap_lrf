@@ -19,13 +19,11 @@ export const setSportList = (list) => {
 }
 
 export function getSportList(productCodes) {
-    return (dispatch) => {
-        DataService.getData(Url, { productCodes: productCodes})
-            .then(response => {
-                let data = response.data;    
-                let selectedSports = Service.getSelectedItemFromTreeListItem(data);          
-                dispatch(setSportList(data));
-                dispatch(setSelectedSport(selectedSports));
-            });
+    return async (dispatch) => {
+        const response = await DataService.getData(Url, { productCodes: productCodes });
+        const data = response.data;
+        const selectedSports = Service.getSelectedItemFromTreeListItem(data);
+        dispatch(setSportList(data));
+        dispatch(setSelectedSport(selectedSports));
     };
 }

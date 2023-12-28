@@ -475,6 +475,37 @@
   .page-container .page-last:before {
     content: "\EA22"; }
 
+.mobile-table .header-content, .mobile-table .footer-content, .mobile-table .page-wrapper-container {
+  display: block;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 10; }
+
+.mobile-table .header-content {
+  z-index: 11;
+  top: 0px; }
+  .mobile-table .header-content tr th:first-child {
+    border-left: 0px; }
+
+.mobile-table .body-content {
+  overflow-x: initial;
+  overflow-y: initial; }
+
+.mobile-table .page-wrapper-container {
+  bottom: 0px; }
+
+.mobile-table .table-container {
+  overflow-x: visible; }
+
+.mobile-table .row-active td {
+  background: #FCF4DF; }
+
+.mobile-table .table > tbody tr:hover td {
+  background-color: unset; }
+
+.mobile-table .table > tbody tr.row-active:hover td {
+  background: #FCF4DF; }
+
 .multiple-select-container {
   position: relative; }
 

@@ -524,6 +524,37 @@ input[type="checkbox"].checkbox {
   .page-container .page-last:before {
     content: "\EA22"; }
 
+.mobile-table .header-content, .mobile-table .footer-content, .mobile-table .page-wrapper-container {
+  display: block;
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 10; }
+
+.mobile-table .header-content {
+  z-index: 11;
+  top: 0px; }
+  .mobile-table .header-content tr th:first-child {
+    border-left: 0px; }
+
+.mobile-table .body-content {
+  overflow-x: initial;
+  overflow-y: initial; }
+
+.mobile-table .page-wrapper-container {
+  bottom: 0px; }
+
+.mobile-table .table-container {
+  overflow-x: visible; }
+
+.mobile-table .row-active td {
+  background: #FCF4DF; }
+
+.mobile-table .table > tbody tr:hover td {
+  background-color: unset; }
+
+.mobile-table .table > tbody tr.row-active:hover td {
+  background: #FCF4DF; }
+
 .multiple-select-container {
   position: relative; }
 
@@ -1098,9 +1129,19 @@ td span.arrow-icon:hover {
   display: flex; }
   .flex.flex-col {
     flex-direction: column; }
+  .flex.flex-center {
+    align-items: center; }
+  .flex.flex-wrap {
+    flex-wrap: wrap; }
 
 .w100 {
   width: 100%; }
+
+.border-l-0 {
+  border-left: 0px; }
+
+.border-r-0 {
+  border-right: 0px; }
 
 .drill-down-cell span.arrow-icon {
   margin-top: 5px;
@@ -1154,4 +1195,108 @@ input[type="checkbox"].checkbox:disabled + label {
   margin: 15px 0px; }
   .aggregate-filter .page-filter {
     margin: 0px; }
+
+.mobile-container .aggregate-filter {
+  box-shadow: 0px 2px 6px 2px rgba(129, 129, 129, 0.25); }
+
+.mobile-container .page-filter {
+  padding: 8px 8px; }
+
+.mobile-container .radio-list {
+  display: flex;
+  flex-wrap: wrap; }
+  .mobile-container .radio-list span.filter-radio-item {
+    flex-basis: 85px; }
+
+.mobile-table th.cell-dropdown {
+  overflow: visible; }
+  .mobile-table th.cell-dropdown .material-icons {
+    font-size: 12px; }
+  .mobile-table th.cell-dropdown .dropdown-menu {
+    z-index: 12; }
+
+.mobile-table .detail-content {
+  margin: 0px 4px; }
+
+.mobile-table .icon-collapse {
+  color: #217A4A;
+  font-size: 20px; }
+
+.mobile-table .cell-total {
+  display: flex;
+  justify-content: space-between; }
+  .mobile-table .cell-total div {
+    overflow-wrap: anywhere; }
+
+.mobile-table .cell-header-groupby {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .mobile-table .cell-header-groupby .dropdown-toggle {
+    padding: 0px 4px; }
+
+.mobile-table thead {
+  line-height: 24px; }
+
+.mobile-table .table > tbody tr td {
+  padding: 4px 4px; }
+  .mobile-table .table > tbody tr td.border-l-0 {
+    border-left: 0px; }
+  .mobile-table .table > tbody tr td.border-r-0 {
+    border-right: 0px; }
+
+.mobile-table .table > tbody tr.detail-row td {
+  background: #ECF7F9; }
+
+.mobile-table .table > tbody tr.detail-row.row-active.parent-row td {
+  background: #F6DFA1; }
+
+.mobile-table .table > tbody tr.detail-row.row-active td {
+  background: #FCF4DF; }
+
+.mobile-table .table > tbody tr.detail-row.parent-row td {
+  background: #DAEEF3; }
+
+.mobile-table .table > tbody .main-text {
+  color: #1C5FC3;
+  font-style: normal;
+  font-weight: 600; }
+
+.mobile-table .table > tbody tr.fixed-table-grant-total:hover td {
+  background-color: #b8c3c9; }
+
+.mobile-table .report-title-container {
+  padding: 8px 8px;
+  font-size: 13px; }
+
+.mobile-table .report-title {
+  line-height: 18px; }
+  .mobile-table .report-title .icon-lap-notification {
+    font-size: 16px;
+    margin: 0 10px; }
+  .mobile-table .report-title .overlay-title {
+    border-radius: 8px;
+    background: var(--text-3333, #333);
+    padding: 12px;
+    color: var(--white, var(--gray-white, #FFF));
+    left: 6px;
+    right: 6px;
+    position: absolute;
+    overflow-wrap: anywhere;
+    top: 35px;
+    z-index: 12; }
+
+.mobile-table .report-title-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%; }
+
+.mobile-table tbody {
+  line-height: 20px;
+  overflow-wrap: anywhere; }
+  .mobile-table tbody .cell-collapse {
+    padding: 0px 0px; }
+    .mobile-table tbody .cell-collapse .icon-collapse {
+      word-wrap: normal; }
 

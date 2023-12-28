@@ -77,7 +77,6 @@ namespace Fanex.Athena.Api.Base
                         httpResponseMessage.Content = new StringContent(sw.ToString(), Encoding);
                     }
                 }
-
                 MediaTypeHeaderValue mediaTypeHeaderValue = new MediaTypeHeaderValue("application/json");
                 mediaTypeHeaderValue.CharSet = _encoding.WebName;
                 httpResponseMessage.Content.Headers.ContentType = mediaTypeHeaderValue;

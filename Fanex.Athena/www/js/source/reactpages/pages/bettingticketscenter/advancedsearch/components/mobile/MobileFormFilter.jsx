@@ -62,7 +62,7 @@ export const FormFilter = () => {
 
 
     return (
-        <CollapsiblePanel CollapsiblePanel className="mobile-mode page-filter"
+        <CollapsiblePanel className="mobile-mode page-filter"
             onCollapse={onCollapse}
             onExpand={onExpand}
             isInitCollapsed={true}

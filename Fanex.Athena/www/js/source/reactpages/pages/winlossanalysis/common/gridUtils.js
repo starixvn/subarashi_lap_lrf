@@ -64,7 +64,7 @@ export const renderHeader = (option) => {
 
 export const renderDataSection = (dataList, option) => {
     let dataRows = [];
-    dataRows = dataList.map(item =>
+    dataRows = dataList?.map(item =>
         <TreeViewGridRowNode
             key={`row-groupby-${item.keyItem.rowIndex}-${item.keyItem.groupBy}`}
             data={item}
@@ -75,6 +75,10 @@ export const renderDataSection = (dataList, option) => {
 
 
 export const renderFooter = (dataItem, option) => {
+    if (!dataItem)
+    {
+        return null;
+    }
     const { isGroupByPlayerMode, isShowBAField, isBreakDownPlayerMode } = option;
     const { betCount, turnover, netTurnover, playerWinloss, playerComm, betEffective, licWinloss, licComm, amtDueToBA, margin } = dataItem;
     const totalCellColSpan = isGroupByPlayerMode || isBreakDownPlayerMode ? 3 : 2;

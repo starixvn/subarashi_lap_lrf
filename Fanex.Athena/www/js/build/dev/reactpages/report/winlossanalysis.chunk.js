@@ -466,13 +466,14 @@ const setSelectedStatus = item => {
 /*!**************************************************************!*\
   !*** ./www/js/source/reactpages/actions/subsidiaryAction.js ***!
   \**************************************************************/
-/*! exports provided: setSubsidiaryList, setSubsidiarySearch */
+/*! exports provided: setSubsidiaryList, setSubsidiarySearch, setWhiteLabelTreeList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiaryList", function() { return setSubsidiaryList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubsidiarySearch", function() { return setSubsidiarySearch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setWhiteLabelTreeList", function() { return setWhiteLabelTreeList; });
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
 
 const setSubsidiaryList = subsidiaryList => {
@@ -487,6 +488,12 @@ const setSubsidiarySearch = subsidiarySearch => {
     data: subsidiarySearch
   };
 };
+const setWhiteLabelTreeList = whiteLabelTreeList => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["SET_WHITELABEL_TREE_LIST"],
+    data: whiteLabelTreeList
+  };
+};
 
 /***/ }),
 
@@ -494,7 +501,7 @@ const setSubsidiarySearch = subsidiarySearch => {
 /*!***************************************************!*\
   !*** ./www/js/source/reactpages/actions/types.js ***!
   \***************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_REASON_LIST, SET_SELECTED_VIP_OPTION, SET_SELECTED_CUSTOMERCLASS, SET_SELECTED_RISKLEVEL, SET_SELECTED_ODDGROUP */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_WHITELABEL_TREE_LIST, SET_REASON_LIST, SET_SELECTED_VIP_OPTION, SET_SELECTED_CUSTOMERCLASS, SET_SELECTED_RISKLEVEL, SET_SELECTED_ODDGROUP */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -521,6 +528,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PAGING_OPTION", function() { return SET_PAGING_OPTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_LIST", function() { return SET_SUBSIDIARY_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SUBSIDIARY_SEARCH", function() { return SET_SUBSIDIARY_SEARCH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_WHITELABEL_TREE_LIST", function() { return SET_WHITELABEL_TREE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_REASON_LIST", function() { return SET_REASON_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_VIP_OPTION", function() { return SET_SELECTED_VIP_OPTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CUSTOMERCLASS", function() { return SET_SELECTED_CUSTOMERCLASS; });
@@ -576,6 +584,7 @@ const SET_PAGING_OPTION = 'SET_PAGING_OPTION';
 /* Subsidiary Search  */
 const SET_SUBSIDIARY_LIST = 'SET_SUBSIDIARY_LIST';
 const SET_SUBSIDIARY_SEARCH = 'SET_SUBSIDIARY_SEARCH';
+const SET_WHITELABEL_TREE_LIST = 'SET_WHITELABEL_TREE_LIST';
 
 /*Reason list*/
 const SET_REASON_LIST = "SET_REASON_LIST";
@@ -3433,6 +3442,65 @@ DropdownMenu.defaultProps = defaultProps;
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/components/dropdown/DropdownRadioItem.jsx":
+/*!****************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/dropdown/DropdownRadioItem.jsx ***!
+  \****************************************************************************/
+/*! exports provided: DropdownRadioItem, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DropdownRadioItem", function() { return DropdownRadioItem; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const DropdownRadioItem = props => {
+  const {
+    checked,
+    text,
+    value,
+    onChange,
+    id
+  } = props;
+  const _onClick = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    event.value = event.target.value = value;
+    onChange(event);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "selection-item",
+    onClick: _onClick
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    id: id,
+    name: id,
+    type: "radio",
+    value: value,
+    readOnly: true,
+    checked: checked
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: id,
+    dangerouslySetInnerHTML: {
+      __html: text
+    }
+  }));
+};
+const propTypes = {
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  text: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string.isRequired
+};
+DropdownRadioItem.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(DropdownRadioItem));
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/components/dropdown/DropdownToggle.jsx":
 /*!*************************************************************************!*\
   !*** ./www/js/source/reactpages/components/dropdown/DropdownToggle.jsx ***!
@@ -3488,32 +3556,338 @@ DropdownToggle.defaultProps = defaultProps;
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/components/dropdown/index.js":
-/*!***************************************************************!*\
-  !*** ./www/js/source/reactpages/components/dropdown/index.js ***!
-  \***************************************************************/
-/*! exports provided: DropdownToggle, DropdownMenu, DropdownItem, DropdownButton */
+/***/ "./www/js/source/reactpages/components/dropdown/DrowdownRadioList.jsx":
+/*!****************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/dropdown/DrowdownRadioList.jsx ***!
+  \****************************************************************************/
+/*! exports provided: DrowdownRadioList, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DropdownToggle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DropdownToggle */ "./www/js/source/reactpages/components/dropdown/DropdownToggle.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropdownToggle", function() { return _DropdownToggle__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownMenu */ "./www/js/source/reactpages/components/dropdown/DropdownMenu.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropdownMenu", function() { return _DropdownMenu__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DrowdownRadioList", function() { return DrowdownRadioList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _DropdownButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownButton */ "./www/js/source/reactpages/components/dropdown/DropdownButton.jsx");
 /* harmony import */ var _DropdownItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DropdownItem */ "./www/js/source/reactpages/components/dropdown/DropdownItem.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropdownItem", function() { return _DropdownItem__WEBPACK_IMPORTED_MODULE_2__["default"]; });
-
-/* harmony import */ var _DropdownButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DropdownButton */ "./www/js/source/reactpages/components/dropdown/DropdownButton.jsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DropdownButton", function() { return _DropdownButton__WEBPACK_IMPORTED_MODULE_3__["default"]; });
-
-
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+/* harmony import */ var _DropdownRadioItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DropdownRadioItem */ "./www/js/source/reactpages/components/dropdown/DropdownRadioItem.jsx");
 
 
 
 
+
+
+const DrowdownRadioList = props => {
+  const {
+    valueSelector,
+    onChange,
+    dataSource,
+    keySelector,
+    selectedValue,
+    iconClass,
+    className,
+    id
+  } = props;
+  const [isOpen, setIsOpen] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const _handleToggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+  const _handleClose = () => {
+    setIsOpen(false);
+  };
+  const toggleButton = {
+    className: 'toggle-outline toggle-outline-light'
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: className,
+    isOpen: isOpen,
+    toggleButton: toggleButton,
+    onToggle: _handleToggleDropdown,
+    buttonLabel: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      className: iconClass
+    }, "settings"),
+    onClose: _handleClose
+  }, dataSource.length > 0 && dataSource.map(item => {
+    const value = typeof keySelector == 'function' ? item[Object.keys(item).find(keySelector)] : item[keySelector];
+    const text = typeof valueSelector == 'function' ? item[Object.keys(item).find(valueSelector)] : item[valueSelector];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: `${id}-${value}`,
+      tag: "div"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DropdownRadioItem__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      id: `${id}-${value}`,
+      checked: selectedValue == value,
+      value: value,
+      text: text,
+      onChange: onChange
+    }));
+  }));
+};
+const propTypes = {
+  dataSource: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array,
+  keySelector: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func]),
+  valueSelector: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func]),
+  selectedValue: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.any,
+  iconClass: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  id: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string.isRequired
+};
+const defaultProps = {
+  dataSource: [],
+  keySelector: 'id',
+  valueSelector: 'value',
+  iconClass: 'material-icons',
+  className: '',
+  id: Object(uuid__WEBPACK_IMPORTED_MODULE_4__["v4"])()
+};
+DrowdownRadioList.propTypes = propTypes;
+DrowdownRadioList.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(DrowdownRadioList));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/mobile-component/CollapseRow.jsx":
+/*!******************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/mobile-component/CollapseRow.jsx ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _RefRow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RefRow */ "./www/js/source/reactpages/components/mobile-component/RefRow.jsx");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+
+
+
+
+
+const CollapseRow = props => {
+  const {
+    isFocus,
+    className,
+    onFocus,
+    index,
+    isUseCumtomCollapseRow,
+    children
+  } = props;
+  const [oldIsHover, setOldIsHover] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const isHover = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_4__["useHover"])(ref);
+  if (isHover != oldIsHover) {
+    setOldIsHover(isHover);
+    onFocus(index, isHover);
+  }
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()(isFocus ? "row-active" : "", className);
+  return isUseCumtomCollapseRow ? children : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RefRow__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    ref: ref,
+    className: classes
+  }, children);
+};
+const propTypes = {
+  isFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  onFocus: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onBlur: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  index: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number,
+  isUseCumtomCollapseRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any
+};
+const defaultProps = {
+  isFocus: false,
+  index: 0,
+  isUseCumtomCollapseRow: false
+};
+CollapseRow.propTypes = propTypes;
+CollapseRow.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (CollapseRow);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/mobile-component/CompositeRow.jsx":
+/*!*******************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/mobile-component/CompositeRow.jsx ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _CollapseRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CollapseRow */ "./www/js/source/reactpages/components/mobile-component/CollapseRow.jsx");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+/* harmony import */ var _RefRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RefRow */ "./www/js/source/reactpages/components/mobile-component/RefRow.jsx");
+
+
+
+
+
+
+
+
+
+const CompositeRow = props => {
+  const {
+    isCollapsible,
+    expandRows,
+    className,
+    isUseCustomCollapseCell,
+    children,
+    onCollapsed,
+    onExpanded,
+    refCollapseObject,
+    activeClassName,
+    isUseCumtomCollapseRow,
+    isUseCustomHoverRow,
+    hoverRowRef,
+    collapaseRowClass
+  } = props;
+  const [isCollapse, setIsCollapse] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
+  const [childFocusTracker, setChildFocusTracker] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(expandRows.map(() => false));
+  const hoverRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(hoverRowRef === null || hoverRowRef === void 0 ? void 0 : hoverRowRef.current);
+  const isHover = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_5__["useHover"])(hoverRef);
+  const onClick = () => {
+    const nextState = !isCollapse;
+    setIsCollapse(nextState);
+    if (nextState) {
+      onCollapsed && onCollapsed();
+    } else {
+      onExpanded && onExpanded();
+    }
+  };
+  const iconClass = isCollapse ? 'icon icon-lap-plus' : 'icon icon-lap-minus';
+  const onChildFocus = (index, isFocus) => {
+    childFocusTracker.splice(index, 1, isFocus);
+    setChildFocusTracker([...childFocusTracker]);
+  };
+  const isFocus = isHover || childFocusTracker.indexOf(true) >= 0;
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_2___default()(isFocus ? activeClassName : "", className);
+  if (isUseCustomCollapseCell && isCollapsible && refCollapseObject) {
+    refCollapseObject.onclick = onClick;
+  }
+  const expandRowList = Array.isArray(expandRows) ? expandRows : expandRows.props.children;
+  const mainRow = isUseCustomHoverRow ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, children, !isUseCustomCollapseCell && isCollapsible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    onClick: onClick,
+    className: "center-align cell-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "icon-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: iconClass
+  })))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_RefRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    ref: hoverRef,
+    className: classes
+  }, children, !isUseCustomCollapseCell && isCollapsible && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["Cell"], {
+    onClick: onClick,
+    className: "center-align cell-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "icon-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: iconClass
+  }))));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, mainRow, isCollapsible && !isCollapse && (expandRowList === null || expandRowList === void 0 ? void 0 : expandRowList.length) > 0 && expandRows.map((item, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CollapseRow__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    key: `${index}`,
+    isUseCumtomCollapseRow: isUseCumtomCollapseRow,
+    className: `collapse-row ${collapaseRowClass}`,
+    index: index,
+    onFocus: onChildFocus,
+    isFocus: isFocus
+  }, item)));
+};
+const propTypes = {
+  isCollapsible: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isUseCustomCollapseCell: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isUseCustomHoverRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  isUseCumtomCollapseRow: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
+  hoverRowRef: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  refCollapseObject: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  collapsibleCellContent: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.node,
+  onExpanded: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  onCollapsed: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.func,
+  expandRows: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object]),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.any,
+  activeClassName: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  collapaseRowClass: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+const defaultProps = {
+  isCollapsible: true,
+  isUseCustomCollapseCell: false,
+  expandRows: [],
+  isFocus: false,
+  activeClassName: "row-active",
+  isUseCustomHoverRow: false,
+  hoverRowRef: null,
+  isUseCumtomCollapseRow: false,
+  collapaseRowClass: ''
+};
+CompositeRow.propTypes = propTypes;
+CompositeRow.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(CompositeRow));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/mobile-component/RefPager.jsx":
+/*!***************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/mobile-component/RefPager.jsx ***!
+  \***************************************************************************/
+/*! exports provided: RefPager */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RefPager", function() { return RefPager; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+const RefPager = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(function RefPager(props, ref) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: ref,
+    className: "page-wrapper-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Pager"], props));
+});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/components/mobile-component/RefRow.jsx":
+/*!*************************************************************************!*\
+  !*** ./www/js/source/reactpages/components/mobile-component/RefRow.jsx ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+const RefRow = /*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])(function RefRow(props, ref) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", _extends({}, props, {
+    ref: ref
+  }), props.children);
+});
+/* harmony default export */ __webpack_exports__["default"] = (RefRow);
 
 /***/ }),
 
@@ -3868,6 +4242,147 @@ const TreeViewOption = {
   includeSelectedParentKey: false,
   useOriginalDataSource: false
 };
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx ***!
+  \****************************************************************************************/
+/*! exports provided: useBaseCurrencyForMultiSelectCurrency, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useBaseCurrencyForMultiSelectCurrency", function() { return useBaseCurrencyForMultiSelectCurrency; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+
+
+
+
+const useBaseCurrencyForMultiSelectCurrency = initSelectedBaseCurrency => {
+  const [originalBaseCurrencyList, originalCurrencyList] = [_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].baseCurrencyList, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].currencyList];
+  const defaultBaseCurrencyRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(initSelectedBaseCurrency);
+  const isFirstRender = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_3__["useIsFirstRender"])();
+  const [selectedCurrency, selectedBaseCurrency] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedCurrency, state.selectedBaseCurrency], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const [currentBaseCurrencyList, setCurrentBaseCurrencyList] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(originalBaseCurrencyList);
+  const [currentBaseCurrency, setCurrenctBaseCurrency] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(selectedBaseCurrency);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (currentBaseCurrency != selectedBaseCurrency) {
+      setCurrenctBaseCurrency(selectedBaseCurrency);
+    }
+  }, [selectedBaseCurrency]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const defaultBaseCurrency = defaultBaseCurrencyRef.current;
+    let newBaseCurrency = '';
+    let newBaseCurrencyList = currentBaseCurrencyList;
+    const _isSingleSelectedCurrency = () => selectedCurrency && selectedCurrency.indexOf(',') < 0;
+    if (_isSingleSelectedCurrency()) {
+      const currencyName = originalCurrencyList.find(x => x.id == selectedCurrency).value;
+      if (!currentBaseCurrencyList.find(x => x.label === currencyName)) {
+        newBaseCurrency = '';
+        newBaseCurrencyList = originalBaseCurrencyList.slice(0);
+        newBaseCurrencyList.push({
+          value: newBaseCurrency,
+          label: currencyName
+        });
+      } else {
+        newBaseCurrency = currencyName;
+        newBaseCurrencyList = currentBaseCurrencyList;
+      }
+    } else {
+      newBaseCurrencyList = originalBaseCurrencyList;
+      newBaseCurrency = newBaseCurrencyList.find(x => x.label === selectedBaseCurrency) ? selectedBaseCurrency : defaultBaseCurrency;
+    }
+    if (newBaseCurrencyList != currentBaseCurrencyList) {
+      setCurrentBaseCurrencyList(newBaseCurrencyList);
+    }
+    if (newBaseCurrency != currentBaseCurrency) {
+      setCurrenctBaseCurrency(newBaseCurrency);
+    }
+  }, [selectedCurrency]);
+  if (isFirstRender && !initSelectedBaseCurrency) {
+    defaultBaseCurrencyRef.current = selectedBaseCurrency;
+  }
+  return {
+    baseCurrencyList: currentBaseCurrencyList,
+    selectedBaseCurrency: currentBaseCurrency
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (useBaseCurrencyForMultiSelectCurrency);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/customHooks/useMobileVersion.jsx":
+/*!*******************************************************************!*\
+  !*** ./www/js/source/reactpages/customHooks/useMobileVersion.jsx ***!
+  \*******************************************************************/
+/*! exports provided: useMobileVersion, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useMobileVersion", function() { return useMobileVersion; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-device-detect */ "./node_modules/react-device-detect/dist/lib.js");
+/* harmony import */ var react_device_detect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_device_detect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+
+
+
+const useMobileVersion = () => {
+  const width = window.innerWidth;
+  const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(false);
+  const isFirstRender = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_2__["useIsFirstRender"])();
+  if (isFirstRender) {
+    if (react_device_detect__WEBPACK_IMPORTED_MODULE_1__["isDesktop"]) {
+      ref.current = false;
+    } else {
+      ref.current = width < 1024;
+    }
+  }
+  return ref.current;
+};
+/* harmony default export */ __webpack_exports__["default"] = (useMobileVersion);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx":
+/*!**********************************************************************!*\
+  !*** ./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx ***!
+  \**********************************************************************/
+/*! exports provided: useSubsidiarySearch, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useSubsidiarySearch", function() { return useSubsidiarySearch; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+
+
+
+const useSubsidiarySearch = () => {
+  const isSubsidiarySearch = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => state.subsidiarySearch);
+  const defaultSelectedSubsidiary = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryList.join(',');
+  const isShowSubsidiaryDropdown = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryViewType !== _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_2__["SubsidiaryViewType"].NOT_MANAGEMENT && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryList.length > 0;
+  const isShowSubsidiarySearchCheckBox = isShowSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_2__["SubsidiaryViewType"].MASTER_MANAGEMENT;
+  const isWhiteLabelView = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].subsidiaryViewType === _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_2__["SubsidiaryViewType"].MASTER_MANAGEMENT && !_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].isOneworksMaster;
+  return {
+    isSubsidiarySearch,
+    isShowSubsidiaryDropdown,
+    isShowSubsidiarySearchCheckBox,
+    isWhiteLabelView,
+    defaultSelectedSubsidiary
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (useSubsidiarySearch);
 
 /***/ }),
 
@@ -4409,7 +4924,7 @@ const BETTYPE_CACHE_KEY = "WINLOSSANALYSIS_BETTYPE_CACHE_KEY";
 const Url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/CommonDataApi/GetBetTypeInTreeList');
 let currentCancellationTokenSource = null;
 const dispatchBettypeList = (dispatch, data) => {
-  let selectedSports = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].getSelectedItemFromTreeListItem(data);
+  const selectedSports = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].getSelectedItemFromTreeListItem(data);
   dispatch(setBettypeList(data));
   dispatch(setSelectedBettype(selectedSports));
 };
@@ -4433,7 +4948,7 @@ const setOrginalBetTypeList = list => {
 };
 const getBetTypeList = productCodes => {
   const cacheKey = BETTYPE_CACHE_KEY + productCodes + _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].licenseeName;
-  return dispatch => {
+  return async dispatch => {
     var cacheData = _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_4__["default"].get(cacheKey);
     if (cacheData) {
       dispatchBettypeList(dispatch, cacheData);
@@ -4443,20 +4958,21 @@ const getBetTypeList = productCodes => {
       currentCancellationTokenSource.cancel('Operation canceled by the user.');
     }
     currentCancellationTokenSource = _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].genCancellationToken();
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
-      productCodes: productCodes
-    }, currentCancellationTokenSource).then(response => {
+    try {
+      const response = await _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
+        productCodes: productCodes
+      }, currentCancellationTokenSource);
       currentCancellationTokenSource = null;
-      let data = response.data;
+      const data = response.data;
       _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_4__["default"].set(cacheKey, data, 10);
       dispatchBettypeList(dispatch, data);
-    }).catch(function (thrown) {
-      if (_jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].isCancel(thrown)) {
+    } catch (e) {
+      if (_jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].isCancel(e)) {
         return;
       } else {
         // handle error
       }
-    });
+    }
   };
 };
 
@@ -4606,10 +5122,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/actions/dateRangeAction */ "./www/js/source/reactpages/actions/dateRangeAction.js");
 /* harmony import */ var _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/actions/requestParamAction */ "./www/js/source/reactpages/actions/requestParamAction.js");
 /* harmony import */ var _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/actions/reportTitleAction */ "./www/js/source/reactpages/actions/reportTitleAction.js");
-/* harmony import */ var _sportAction__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sportAction */ "./www/js/source/reactpages/pages/winlossanalysis/actions/sportAction.js");
-/* harmony import */ var _bettypeAction__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./bettypeAction */ "./www/js/source/reactpages/pages/winlossanalysis/actions/bettypeAction.js");
-/* harmony import */ var _filterAction__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./filterAction */ "./www/js/source/reactpages/pages/winlossanalysis/actions/filterAction.js");
-/* harmony import */ var _dataAction__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./dataAction */ "./www/js/source/reactpages/pages/winlossanalysis/actions/dataAction.js");
+/* harmony import */ var _sportAction_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./sportAction.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/sportAction.js");
+/* harmony import */ var _bettypeAction_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./bettypeAction.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/bettypeAction.js");
+/* harmony import */ var _filterAction_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./filterAction.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/filterAction.js");
+/* harmony import */ var _dataAction_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./dataAction.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/dataAction.js");
 /* harmony import */ var _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/actions/platformAction */ "./www/js/source/reactpages/actions/platformAction.js");
 /* harmony import */ var _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/actions/usernameAction */ "./www/js/source/reactpages/actions/usernameAction.js");
 /* harmony import */ var _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/actions/convertAllAction */ "./www/js/source/reactpages/actions/convertAllAction.js");
@@ -4636,7 +5152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_statusAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_liveStatusAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__, _sportAction__WEBPACK_IMPORTED_MODULE_10__, _bettypeAction__WEBPACK_IMPORTED_MODULE_11__, _filterAction__WEBPACK_IMPORTED_MODULE_12__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_15__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_16__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_17__, _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_18__, _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_14__, _jsroot_actions_customerclassAction__WEBPACK_IMPORTED_MODULE_19__, _dataAction__WEBPACK_IMPORTED_MODULE_13__);
+const ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_statusAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_liveStatusAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__, _sportAction_js__WEBPACK_IMPORTED_MODULE_10__, _bettypeAction_js__WEBPACK_IMPORTED_MODULE_11__, _filterAction_js__WEBPACK_IMPORTED_MODULE_12__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_15__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_16__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_17__, _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_18__, _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_14__, _jsroot_actions_customerclassAction__WEBPACK_IMPORTED_MODULE_19__, _dataAction_js__WEBPACK_IMPORTED_MODULE_13__);
 
 /***/ }),
 
@@ -4674,15 +5190,14 @@ const setSportList = list => {
   };
 };
 function getSportList(productCodes) {
-  return dispatch => {
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
+  return async dispatch => {
+    const response = await _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
       productCodes: productCodes
-    }).then(response => {
-      let data = response.data;
-      let selectedSports = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].getSelectedItemFromTreeListItem(data);
-      dispatch(setSportList(data));
-      dispatch(setSelectedSport(selectedSports));
     });
+    const data = response.data;
+    const selectedSports = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].getSelectedItemFromTreeListItem(data);
+    dispatch(setSportList(data));
+    dispatch(setSelectedSport(selectedSports));
   };
 }
 
@@ -4747,10 +5262,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
 /* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_5__);
 var _class;
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -4776,6 +5294,10 @@ class Service {
 _class = Service;
 _defineProperty(Service, "isOneTwoBetLicensee", () => {
   return _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].licenseeName.toLowerCase() === _constants__WEBPACK_IMPORTED_MODULE_3__["OneTwoBetLicenseeName"].toLowerCase();
+});
+_defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
+  var listSelectedProduct = selectedItemsKey.split(",");
+  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_3__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_3__["ProductCode"].BA) >= 0;
 });
 _defineProperty(Service, "buildGroupByOption", () => {
   return _class.isOneTwoBetLicensee() ? _constants__WEBPACK_IMPORTED_MODULE_3__["GroupByList"] : _constants__WEBPACK_IMPORTED_MODULE_3__["GroupByList"].filter(item => item.value !== _constants__WEBPACK_IMPORTED_MODULE_3__["GroupByMode"].Agent);
@@ -4831,7 +5353,7 @@ _defineProperty(Service, "getCurrencyCodes", (currencyListIds, currencyList) => 
     return _constants__WEBPACK_IMPORTED_MODULE_3__["ALL_SELECTED_TEXT"];
   }
   const currencyCodesText = currencyListIds.split(',').reduce((prev, cur, index) => {
-    var code = currencyList.find(c => c.id == cur).value;
+    let code = currencyList.find(c => c.id == cur).value;
     if (index === 0) {
       return code;
     }
@@ -4876,7 +5398,7 @@ _defineProperty(Service, "getFile", params => {
 /*!****************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/winlossanalysis/common/constants.js ***!
   \****************************************************************************/
-/*! exports provided: ApiUrl, HeaderText, OneTwoBetLicenseeName, GroupByMode, BreakdownByMode, ALL_SELECTED_TEXT, ProductCode, GroupByList, DisplayGroupBreakDownMapping, DefaultPagingOption, SortBy, SortOrder, SearchMode, ExportExcelMode */
+/*! exports provided: ApiUrl, HeaderText, OneTwoBetLicenseeName, GroupByMode, BreakdownByMode, ALL_SELECTED_TEXT, ProductCode, GroupByList, DisplayGroupBreakDownMapping, DefaultPagingOption, SortBy, SortOrder, SearchMode, ExportExcelMode, MobileGroupByHeaderDisplayType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4895,6 +5417,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SortOrder", function() { return SortOrder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchMode", function() { return SearchMode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExportExcelMode", function() { return ExportExcelMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileGroupByHeaderDisplayType", function() { return MobileGroupByHeaderDisplayType; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 
@@ -5080,6 +5603,10 @@ const ExportExcelMode = {
   All: 1,
   GroupByLevelOnly: 2
 };
+const MobileGroupByHeaderDisplayType = {
+  ExternalId: 1,
+  SystemId: 2
+};
 
 /***/ }),
 
@@ -5264,7 +5791,7 @@ const TreeViewGridRowNode = props => {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(amtDueToBA)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: `right-align ${margin < 0 ? "negative" : ""}`
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(margin * 100), "%")), isBreakdown && children && children.length > 0 && children.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BreakdownRow__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(margin * 100), "%")), isBreakdown && (children === null || children === void 0 ? void 0 : children.length) && children.length > 0 && children.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BreakdownRow__WEBPACK_IMPORTED_MODULE_3__["default"], {
     key: `break-down-row-${item.groupBy}-${item.breakBy}`,
     data: item,
     option: option
@@ -5403,7 +5930,7 @@ const renderHeader = option => {
 };
 const renderDataSection = (dataList, option) => {
   let dataRows = [];
-  dataRows = dataList.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_TreeViewGridRowNode__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  dataRows = dataList === null || dataList === void 0 ? void 0 : dataList.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_grid_TreeViewGridRowNode__WEBPACK_IMPORTED_MODULE_4__["default"], {
     key: `row-groupby-${item.keyItem.rowIndex}-${item.keyItem.groupBy}`,
     data: item,
     option: option
@@ -5411,6 +5938,9 @@ const renderDataSection = (dataList, option) => {
   return dataRows;
 };
 const renderFooter = (dataItem, option) => {
+  if (!dataItem) {
+    return null;
+  }
   const {
     isGroupByPlayerMode,
     isShowBAField,
@@ -5473,68 +6003,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _DataGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DataGrid */ "./www/js/source/reactpages/pages/winlossanalysis/components/DataGrid.jsx");
-/* harmony import */ var _FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormFilter */ "./www/js/source/reactpages/pages/winlossanalysis/components/FormFilter.jsx");
-/* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
-/* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
-
-
-
-
-
-
-class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_5__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      isLoading: this.props.isLoading
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
-  }
-}
-function mapStateToProps(state) {
-  return Object.assign({}, {
-    isLoading: state.isLoading
-  });
-}
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(AppContainer));
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/DataGrid.jsx":
-/*!********************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/DataGrid.jsx ***!
-  \********************************************************************************/
-/*! exports provided: DataGrid, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataGrid", function() { return DataGrid; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
-/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
-/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _common_gridUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/gridUtils */ "./www/js/source/reactpages/pages/winlossanalysis/common/gridUtils.js");
-/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
-/* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
-/* harmony import */ var _common_constants_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/constants.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
-/* harmony import */ var _common_Service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../common/Service */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
-/* harmony import */ var _ExcelPopUp_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ExcelPopUp.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/ExcelPopUp.jsx");
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-
-
-
-
-// import { Breadcrumb } from '@9softstudio/react-breadcrumb'
+/* harmony import */ var _desktop_DataGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./desktop/DataGrid */ "./www/js/source/reactpages/pages/winlossanalysis/components/desktop/DataGrid.jsx");
+/* harmony import */ var _desktop_FormFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./desktop/FormFilter */ "./www/js/source/reactpages/pages/winlossanalysis/components/desktop/FormFilter.jsx");
+/* harmony import */ var _mobile_MobileDataGrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mobile/MobileDataGrid */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileDataGrid.jsx");
+/* harmony import */ var _mobile_MobileFormFilter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./mobile/MobileFormFilter */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileFormFilter.jsx");
+/* harmony import */ var _jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/Loader */ "./www/js/source/reactpages/components/Loader.jsx");
+/* harmony import */ var _jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/layouts/AppLayout */ "./www/js/source/reactpages/layouts/AppLayout.jsx");
+/* harmony import */ var _jsroot_customHooks_useMobileVersion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/customHooks/useMobileVersion */ "./www/js/source/reactpages/customHooks/useMobileVersion.jsx");
 
 
 
@@ -5542,102 +6017,22 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
-const DataGrid = props => {
-  const {
-    data,
-    sumTotal,
-    totalRow
-  } = props.reportData;
-  if (!data) {
-    return null;
-  }
-  if (!data.length) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__["default"], null);
-  }
-  const {
-    requestParam
-  } = props;
-  const renderOption = {
-    isShowBAField: _common_Service__WEBPACK_IMPORTED_MODULE_9__["default"].isContainBAProduct(props.selectedProduct),
-    isGroupByPlayerMode: requestParam.GroupMode == _common_constants_js__WEBPACK_IMPORTED_MODULE_8__["GroupByMode"].Player,
-    isBreakDownPlayerMode: requestParam.BreakdownMode == _common_constants_js__WEBPACK_IMPORTED_MODULE_8__["BreakdownByMode"].Player
-  };
-  const header = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderHeader"])(renderOption), [requestParam]);
-  const body = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])(data, renderOption), [data]);
-  const footer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderFooter"])(sumTotal, renderOption), [sumTotal]);
-  var currenPagingOption = {
-    PageIndex: requestParam.PageIndex,
-    PageSize: requestParam.PageSize,
-    TotalItem: totalRow,
-    PageList: _common_constants_js__WEBPACK_IMPORTED_MODULE_8__["DefaultPagingOption"].PageList
-  };
-  const submitRequest = params => {
-    props.setRequestParam(params);
-    props.toggleLoader(true);
-    props.getReportData(params);
-  };
-  const onSort = (sortBy, sortOrder) => {
-    const requestSortOrder = sortOrder == "asc" ? _common_constants_js__WEBPACK_IMPORTED_MODULE_8__["SortOrder"].ASC : _common_constants_js__WEBPACK_IMPORTED_MODULE_8__["SortOrder"].DESC;
-    const params = _objectSpread(_objectSpread({}, requestParam), {}, {
-      SortBy: sortBy,
-      SortOrder: requestSortOrder
-    });
-    submitRequest(params);
-  };
-  const onPaging = (pageIndex, pageSize) => {
-    const params = _objectSpread(_objectSpread({}, requestParam), {}, {
-      PageSize: pageSize,
-      PageIndex: pageIndex
-    });
-    submitRequest(params);
-  };
-  const reportTitle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "flex-auto"
-  }, props.reportTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExcelPopUp_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], null));
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "result-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    content: reportTitle
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
-    key: `table-winloss-ananlysis-${requestParam.SubmitTime}`,
-    minWidth: 650,
-    autoWidth: true,
-    autoHeight: true,
-    header: header,
-    body: body,
-    footer: footer,
-    containerPadding: 30,
-    onSort: onSort,
-    isPaging: true,
-    pageOption: currenPagingOption,
-    shouldResetScrollPosition: props.reloadReport,
-    onPaging: onPaging
-  }));
+
+
+const AppContainer = () => {
+  const isLoading = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.isLoading);
+  const isUseMobileVer = Object(_jsroot_customHooks_useMobileVersion__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  const desktopLayout = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    isLoading: isLoading
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_desktop_FormFilter__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_desktop_DataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  const mobileLayout = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mobile-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Loader__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    isLoading: isLoading
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mobile_MobileFormFilter__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_mobile_MobileDataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+  return isUseMobileVer ? mobileLayout : desktopLayout;
 };
-function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"], dispatch);
-}
-function mapStateToProps(state) {
-  const {
-    requestParam,
-    pagingOption,
-    reportData,
-    reportTitle,
-    reloadReport,
-    isGroupInOriginalCurrency,
-    selectedProduct
-  } = state;
-  return Object.assign({}, {
-    requestParam,
-    pagingOption,
-    reportData,
-    reportTitle,
-    reloadReport,
-    isGroupInOriginalCurrency,
-    selectedProduct
-  });
-}
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(DataGrid));
+/* harmony default export */ __webpack_exports__["default"] = (AppContainer);
 
 /***/ }),
 
@@ -5654,15 +6049,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
-/* harmony import */ var _common_constants_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/constants.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
-/* harmony import */ var _common_Service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/Service */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
-/* harmony import */ var _jsroot_components_popup_Popup_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/popup/Popup.jsx */ "./www/js/source/reactpages/components/popup/Popup.jsx");
-/* harmony import */ var _jsroot_components_radio_RadioGroup_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/radio/RadioGroup.jsx */ "./www/js/source/reactpages/components/radio/RadioGroup.jsx");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common/constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+/* harmony import */ var _common_Service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../common/Service */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var _jsroot_components_popup_Popup_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/popup/Popup.jsx */ "./www/js/source/reactpages/components/popup/Popup.jsx");
+/* harmony import */ var _jsroot_components_radio_RadioGroup_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/radio/RadioGroup.jsx */ "./www/js/source/reactpages/components/radio/RadioGroup.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -5679,57 +6073,59 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
-const ExcelPopUp = props => {
+const ExcelPopUp = () => {
   const [isShow, setIsShow] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
-  const [exportExcelMode, setExportExcelMode] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_common_constants_js__WEBPACK_IMPORTED_MODULE_4__["ExportExcelMode"].All);
+  const requestParam = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.requestParam);
   const {
-    requestParam
-  } = props;
+    toggleLoader
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const [exportExcelMode, setExportExcelMode] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_common_constants__WEBPACK_IMPORTED_MODULE_3__["ExportExcelMode"].All);
   const options = [{
-    label: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_9__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("BothGroupByAndBreakdownLevelOption")),
-    value: _common_constants_js__WEBPACK_IMPORTED_MODULE_4__["ExportExcelMode"].All
+    label: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_8__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("BothGroupByAndBreakdownLevelOption")),
+    value: _common_constants__WEBPACK_IMPORTED_MODULE_3__["ExportExcelMode"].All
   }, {
-    label: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_9__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("GroupByLevelOnlyOption")),
-    value: _common_constants_js__WEBPACK_IMPORTED_MODULE_4__["ExportExcelMode"].GroupByLevelOnly
+    label: Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_8__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("GroupByLevelOnlyOption")),
+    value: _common_constants__WEBPACK_IMPORTED_MODULE_3__["ExportExcelMode"].GroupByLevelOnly
   }];
   const _onclickHandler = () => {
     setIsShow(true);
   };
   const _onCloseHandler = () => {
     setIsShow(false);
-    setExportExcelMode(_common_constants_js__WEBPACK_IMPORTED_MODULE_4__["ExportExcelMode"].All);
+    setExportExcelMode(_common_constants__WEBPACK_IMPORTED_MODULE_3__["ExportExcelMode"].All);
   };
   const _onChangeExcelModeHandler = value => {
     setExportExcelMode(value);
   };
-  const exportExcel = event => {
+  const _onExportExcelHandler = event => {
     event.preventDefault();
     const params = _objectSpread(_objectSpread({}, requestParam), {}, {
       ExportExcelMode: exportExcelMode,
       PageSize: 0,
       PageIndex: 0
     });
-    props.toggleLoader(true);
-    _common_Service__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(params).then(() => {
+    dispatch(toggleLoader(true));
+    _common_Service__WEBPACK_IMPORTED_MODULE_4__["default"].getFile(params).then(() => {
       _onCloseHandler();
-      props.toggleLoader(false);
+      dispatch(toggleLoader(false));
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "flex-initial icon icon-excel-white",
     onClick: _onclickHandler
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup_Popup_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     width: 400,
     height: 200,
     isShow: isShow,
-    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Confirmation"),
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Confirmation"),
     onClose: _onCloseHandler,
     isHtml: false
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "excel-popup-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_radio_RadioGroup_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    key: `${Object(uuid__WEBPACK_IMPORTED_MODULE_10__["v4"])()}`,
-    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("ChooseDataDisplayInExcelMsg"),
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_radio_RadioGroup_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    key: `${Object(uuid__WEBPACK_IMPORTED_MODULE_9__["v4"])()}`,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("ChooseDataDisplayInExcelMsg"),
     className: "excel-option",
     name: "excel-option",
     options: options,
@@ -5739,497 +6135,40 @@ const ExcelPopUp = props => {
     className: "button-group right-align"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-submit",
-    onClick: exportExcel
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("OK")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: _onExportExcelHandler
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("OK")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "btn btn-cancel",
     onClick: _onCloseHandler
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("Cancel"))))));
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("Cancel"))))));
 };
-function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"], dispatch);
-}
-function mapStateToProps(state) {
-  const {
-    requestParam
-  } = state;
-  return Object.assign({}, {
-    requestParam
-  });
-}
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ExcelPopUp));
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ExcelPopUp));
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/FormFilter.jsx":
-/*!**********************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/FormFilter.jsx ***!
-  \**********************************************************************************/
-/*! exports provided: FormFilter, default */
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/desktop/DataGrid.jsx":
+/*!****************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/desktop/DataGrid.jsx ***!
+  \****************************************************************************************/
+/*! exports provided: DataGrid, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormFilter", function() { return FormFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataGrid", function() { return DataGrid; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
-/* harmony import */ var _filter_MainFilter_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./filter/MainFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filter/MainFilter.jsx");
-/* harmony import */ var _filter_GroupByFilter_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./filter/GroupByFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filter/GroupByFilter.jsx");
-
-
-
-
-
-
-
-class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      className: "aggregate-filter"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_MainFilter_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filter_GroupByFilter_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null));
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_4__["ActionCreators"], dispatch);
-}
-function mapStateToProps(state) {
-  const {
-    requestParam,
-    dateRange,
-    selectedProduct,
-    sportList,
-    selectedSport,
-    selectedBettype,
-    bettypeList,
-    selectedPlatform,
-    platformList,
-    selectedVipOnly,
-    selectedCustomerClass,
-    selectedOddsGroup,
-    isExcludeTestData,
-    isGroupInOriginalCurrency,
-    isViewCashOutOnly,
-    selectedGroupByOption,
-    selectedBreakDownByOption,
-    searchMode,
-    selectedCurrency,
-    baseCurrencyList,
-    selectedBaseCurrency,
-    selectedStatus,
-    selectedLiveStatus,
-    username,
-    userGuideContent,
-    selectedSubsidiary,
-    subsidiarySearch,
-    appUuid
-  } = state;
-  return Object.assign({}, {
-    requestParam,
-    dateRange,
-    selectedProduct,
-    sportList,
-    selectedSport,
-    selectedBettype,
-    bettypeList,
-    selectedPlatform,
-    platformList,
-    selectedVipOnly,
-    selectedCustomerClass,
-    selectedOddsGroup,
-    isExcludeTestData,
-    isGroupInOriginalCurrency,
-    isViewCashOutOnly,
-    selectedGroupByOption,
-    selectedBreakDownByOption,
-    searchMode,
-    selectedCurrency,
-    baseCurrencyList,
-    selectedBaseCurrency,
-    selectedStatus,
-    selectedLiveStatus,
-    username,
-    userGuideContent,
-    selectedSubsidiary,
-    subsidiarySearch,
-    appUuid
-  });
-}
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(FormFilter));
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filter/GroupByFilter.jsx":
-/*!********************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filter/GroupByFilter.jsx ***!
-  \********************************************************************************************/
-/*! exports provided: GroupByFilter, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupByFilter", function() { return GroupByFilter; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/lib/index.js");
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _common_Service_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../common/Service.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
-/* harmony import */ var _jsroot_lib_stringHelper_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/stringHelper.js */ "./www/js/source/reactpages/lib/stringHelper.js");
-/* harmony import */ var _common_constants_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../common/constants.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
-
-
-
-
-
-
-
-
-
-
-
-
-
-const GroupByFilter = props => {
-  const groupByList = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].buildGroupByOption(), [_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"].licenseeName]);
-  const breakDownList = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].buildBreakDownOptionFromGroupByMode(props.selectedGroupByOption), [props.selectedGroupByOption]);
-  const isValidModel = () => {
-    return !!props.selectedProduct && !!props.selectedStatus && !!props.selectedLiveStatus && !!props.selectedCurrency && !!props.selectedBettype && !!props.selectedSport && !!props.selectedPlatform && !!props.selectedCustomerClass && !!props.selectedOddsGroup;
-  };
-  const buildTitle = params => {
-    const {
-      FromDate,
-      ToDate,
-      ProductCodes,
-      SearchUserName,
-      BaseCurrency,
-      CurrencyIdList
-    } = params;
-    const {
-      currencyList
-    } = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"];
-    const selectedCurrency = _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getCurrencyCodes(CurrencyIdList, currencyList);
-    const seletedCurrencyText = selectedCurrency == _common_constants_js__WEBPACK_IMPORTED_MODULE_11__["ALL_SELECTED_TEXT"] ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("All") : _jsroot_lib_stringHelper_js__WEBPACK_IMPORTED_MODULE_10__["default"].addSpaceAfterComma(selectedCurrency);
-    const dateRangeText = `, ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(FromDate)} → ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(ToDate)}`;
-    const currencyText = `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("Currency")}: ${seletedCurrencyText}, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("BaseCurrency")}: ${BaseCurrency}`;
-    const productText = `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("LicenseeW_L")} (${ProductCodes})`;
-    const userText = !!SearchUserName ? `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("Username")}: ${SearchUserName}` : "";
-    return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("WinlossAnalysis") + dateRangeText + currencyText + productText + userText;
-  };
-  const submit = event => {
-    event.preventDefault();
-    const params = _getParams();
-    if (!params) {
-      return;
-    }
-    react_toastify__WEBPACK_IMPORTED_MODULE_3__["toast"].dismiss();
-    const title = buildTitle(params);
-    props.setReportTitle(title);
-    props.setRequestParam(params);
-    props.toggleLoader(true);
-    props.getReportData(params);
-  };
-  const _getParams = () => {
-    if (!isValidModel()) {
-      return null;
-    }
-    const {
-      fromDate,
-      toDate
-    } = props.dateRange;
-    const {
-      PageSize
-    } = props.requestParam;
-    const {
-      oddsGroupList,
-      riskLevelList,
-      liveStatusList,
-      statusList,
-      platformList,
-      currencyList,
-      baseCurrencyList
-    } = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__["default"];
-    const baseCurrency = baseCurrencyList.find(x => x.value === props.selectedBaseCurrency);
-    const subsidiary = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].getLrfSubsidiary();
-    let {
-      SubsidiarySearch,
-      SubsidiaryList
-    } = subsidiary;
-    if (!subsidiary || Object.keys(subsidiary).length === 0) {
-      SubsidiarySearch = props.subsidiarySearch;
-      SubsidiaryList = props.selectedSubsidiary;
-    }
-    const selectedCurrency = _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getCurrencyCodes(props.selectedCurrency, currencyList);
-    const seletedCurrencyText = selectedCurrency == _common_constants_js__WEBPACK_IMPORTED_MODULE_11__["ALL_SELECTED_TEXT"] ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("All") : _jsroot_lib_stringHelper_js__WEBPACK_IMPORTED_MODULE_10__["default"].addSpaceAfterComma(selectedCurrency);
-    return {
-      PageSize: PageSize,
-      PageIndex: 1,
-      FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(fromDate),
-      ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].convertDateToString(toDate),
-      ProductCodes: props.selectedProduct,
-      SearchUserName: props.username,
-      SearchMode: props.searchMode,
-      CurrencyIdList: props.selectedCurrency,
-      CurrencyCodes: seletedCurrencyText,
-      BaseCurrency: props.selectedBaseCurrency,
-      StatusIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedStatus, statusList),
-      SportIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getNormalizedSelectedParamValueForTreeListFilter(props.selectedSport, props.sportList),
-      BetTypeIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getNormalizedSelectedParamValueForTreeListFilter(props.selectedBettype, props.bettypeList),
-      PlatformIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedPlatform, platformList),
-      LiveStatusIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedLiveStatus, liveStatusList),
-      IsVipOnly: props.selectedVipOnly,
-      CustomerClass: _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedCustomerClass, riskLevelList, r => r.customerClassList),
-      OddsGroup: _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(props.selectedOddsGroup, oddsGroupList),
-      IsShowInOrginalCurrency: props.isGroupInOriginalCurrency,
-      IsExcludedTestData: props.isExcludeTestData,
-      IsViewCashOutOnly: props.isViewCashOutOnly,
-      GroupMode: props.selectedGroupByOption,
-      BreakdownMode: props.selectedBreakDownByOption,
-      BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
-      SortBy: _common_constants_js__WEBPACK_IMPORTED_MODULE_11__["SortBy"].Default,
-      SortOrder: _common_constants_js__WEBPACK_IMPORTED_MODULE_11__["SortOrder"].ASC,
-      SubsidiaryList,
-      SubsidiarySearch,
-      SubmitTime: new Date().getTime()
-    };
-  };
-  const _renderGroupByOption = () => {
-    const {
-      selectedGroupByOption
-    } = props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group radio-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('GroupBy'), ":"), groupByList.map((option, i) => {
-      const key = 'GroupBy' + i;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        key: `GroupBy${key}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "radio",
-        value: option.value,
-        checked: selectedGroupByOption == option.value,
-        id: key,
-        onChange: onChangeGroupByOption
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: key
-      }, option.label));
-    }));
-  };
-  const onChangeGroupByOption = event => {
-    const groupMode = event.target.value;
-    const breakDownOption = _common_Service_js__WEBPACK_IMPORTED_MODULE_9__["default"].buildBreakDownOptionFromGroupByMode(groupMode);
-    const firstEnabledSelectBreakDown = breakDownOption.find(item => !item.isDisabled);
-    props.setSelectedGroupByOption(groupMode);
-    props.setSelectedBreakDownByOption(firstEnabledSelectBreakDown.value);
-    setValueForIsDisplayInOriginalCurrencyFilter(groupMode, firstEnabledSelectBreakDown.value);
-  };
-  const _renderBreakByOption = () => {
-    const {
-      selectedBreakDownByOption
-    } = props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group radio-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource('BreakdownBy'), ":"), breakDownList.map((option, i) => {
-      const key = 'BreakBy' + i;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        key: `BreakBy${key}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        disabled: option.isDisabled,
-        type: "radio",
-        value: option.value,
-        checked: selectedBreakDownByOption == option.value,
-        id: key,
-        onChange: onChangeBreakByOption
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: key
-      }, option.label));
-    }));
-  };
-  const onChangeBreakByOption = event => {
-    const mode = event.target.value;
-    props.setSelectedBreakDownByOption(mode);
-    setValueForIsDisplayInOriginalCurrencyFilter(props.selectedGroupByOption, mode);
-  };
-  const setValueForIsDisplayInOriginalCurrencyFilter = (groupByMode, breakdownByMode) => {
-    const currentMapping = _common_constants_js__WEBPACK_IMPORTED_MODULE_11__["DisplayGroupBreakDownMapping"].find(item => item.groupByMode == groupByMode && item.breakdownMode == breakdownByMode);
-    if (!currentMapping.isDisplayBreakDownInCurrency) {
-      props.setGroupInOriginalCurrency(currentMapping.isDisplayBreakDownInCurrency);
-    }
-  };
-  const onClickClearFilter = () => {
-    let defaultState = window.initialState;
-    props.setDateRange({
-      startDate: defaultState.dateRange.fromDate,
-      endDate: defaultState.dateRange.toDate
-    });
-    props.setSelectedProduct(defaultState.selectedProduct);
-    props.setSelectedCurrency(defaultState.selectedCurrency);
-    props.setSelectedPlatform(defaultState.selectedPlatform);
-    props.setSelectedStatus(defaultState.selectedStatus);
-    props.setSelectedLiveStatus(defaultState.selectedLiveStatus);
-    props.setSelectedBaseCurrency(defaultState.selectedBaseCurrency);
-    props.setSelectedVipOnly(defaultState.selectedVipOnly);
-    props.setSelectedCustomerClass(defaultState.selectedCustomerClass);
-    props.setSelectedOddsGroup(defaultState.selectedOddsGroup);
-    props.setUsername('');
-    props.setSearchMode(_common_constants_js__WEBPACK_IMPORTED_MODULE_11__["SearchMode"].MatchPrecise);
-    props.setGroupInOriginalCurrency(defaultState.isGroupInOriginalCurrency);
-    props.setViewCashOutOnly(defaultState.isViewCashOutOnly);
-    props.setExcludeTestData(defaultState.isExcludeTestData);
-    props.setSelectedGroupByOption(defaultState.selectedGroupByOption);
-    props.setSelectedBreakDownByOption(defaultState.selectedBreakDownByOption);
-    props.setSubsidiarySearch(false);
-    props.setSubsidiaryList("");
-    props.setAppUuid(`${Object(uuid__WEBPACK_IMPORTED_MODULE_12__["v4"])()}`);
-  };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: "page-filter",
-    isCollapseMode: false
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row flex w100"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_3__["ToastContainer"], {
-    autoClose: 10000,
-    pauseOnFocusLoss: false,
-    style: {
-      width: "500px"
-    },
-    transition: react_toastify__WEBPACK_IMPORTED_MODULE_3__["Flip"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-col"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-12 "
-  }, _renderGroupByOption()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-12"
-  }, _renderBreakByOption()))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "button-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    disabled: !isValidModel(),
-    className: "btn btn-submit",
-    onClick: submit
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("Submit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "button",
-    className: "btn btn-outline-secondary",
-    onClick: onClickClearFilter
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("ClearAllFilters")))))));
-};
-function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_5__["ActionCreators"], dispatch);
-}
-function mapStateToProps(state) {
-  const {
-    requestParam,
-    dateRange,
-    selectedProduct,
-    sportList,
-    selectedSport,
-    selectedBettype,
-    bettypeList,
-    selectedGroupByOption,
-    selectedBreakDownByOption,
-    selectedPlatform,
-    currencyList,
-    selectedCurrency,
-    baseCurrencyList,
-    selectedBaseCurrency,
-    selectedStatus,
-    selectedLiveStatus,
-    username,
-    isGroupInOriginalCurrency,
-    userGuideContent,
-    ip,
-    selectedSubsidiary,
-    selectedVipOnly,
-    selectedCustomerClass,
-    selectedOddsGroup,
-    isExcludeTestData,
-    isViewCashOutOnly,
-    subsidiarySearch,
-    searchMode
-  } = state;
-  return Object.assign({}, {
-    requestParam,
-    dateRange,
-    selectedProduct,
-    sportList,
-    selectedSport,
-    selectedBettype,
-    bettypeList,
-    selectedGroupByOption,
-    selectedBreakDownByOption,
-    selectedPlatform,
-    currencyList,
-    selectedCurrency,
-    baseCurrencyList,
-    selectedBaseCurrency,
-    selectedStatus,
-    selectedLiveStatus,
-    username,
-    isGroupInOriginalCurrency,
-    userGuideContent,
-    ip,
-    selectedSubsidiary,
-    selectedVipOnly,
-    selectedCustomerClass,
-    selectedOddsGroup,
-    isExcludeTestData,
-    isViewCashOutOnly,
-    subsidiarySearch,
-    searchMode
-  });
-}
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(GroupByFilter));
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filter/MainFilter.jsx":
-/*!*****************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filter/MainFilter.jsx ***!
-  \*****************************************************************************************/
-/*! exports provided: MainFilter, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainFilter", function() { return MainFilter; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/lib/index.js");
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
-/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
-/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _jsroot_components_date_range__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/date-range */ "./www/js/source/reactpages/components/date-range/index.js");
-/* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
-/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
-/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../common/constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
-/* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
-/* harmony import */ var _SearchOption_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./SearchOption.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filter/SearchOption.jsx");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
+/* harmony import */ var _legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @legion-lib/react-grid */ "./node_modules/@legion-lib/react-grid/dist/index.js");
+/* harmony import */ var _legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_gridUtils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/gridUtils */ "./www/js/source/reactpages/pages/winlossanalysis/common/gridUtils.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
+/* harmony import */ var _common_constants_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/constants.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+/* harmony import */ var _common_Service_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../common/Service.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var _ExcelPopUp_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../ExcelPopUp.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/ExcelPopUp.jsx");
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -6243,556 +6182,1208 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
-
-
-
-
-
-
-
-
-class MainFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(props) {
-    super(props);
-    _defineProperty(this, "defaultSelectedSubsidiary", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList.join(','));
-    _defineProperty(this, "showSubsidiaryDropdown", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType !== _constants_report__WEBPACK_IMPORTED_MODULE_15__["SubsidiaryViewType"].NOT_MANAGEMENT && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryList.length > 0);
-    _defineProperty(this, "showSubsidiarySearchCheckBox", this.showSubsidiaryDropdown && _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType === _constants_report__WEBPACK_IMPORTED_MODULE_15__["SubsidiaryViewType"].MASTER_MANAGEMENT);
-    _defineProperty(this, "whiteLabelView", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].subsidiaryViewType === _constants_report__WEBPACK_IMPORTED_MODULE_15__["SubsidiaryViewType"].MASTER_MANAGEMENT && !_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isOneworksMaster);
-    _defineProperty(this, "showUserGuide", () => {
-      const userGuideContent = this.props.userGuideContent;
-      if (!userGuideContent || userGuideContent.length === 0) {
-        this.props.getUserGuideContent('WinlossAnalysis');
-      }
+const DataGrid = () => {
+  const [requestParam, reportData, reportTitle, reloadReport, selectedProduct] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.requestParam, state.reportData, state.reportTitle, state.reloadReport, state.selectedProduct], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const {
+    setRequestParam,
+    toggleLoader,
+    getReportData
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    data,
+    sumTotal,
+    totalRow
+  } = reportData;
+  const renderOption = {
+    isShowBAField: _common_Service_js__WEBPACK_IMPORTED_MODULE_8__["default"].isContainBAProduct(selectedProduct),
+    isGroupByPlayerMode: requestParam.GroupMode == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["GroupByMode"].Player,
+    isBreakDownPlayerMode: requestParam.BreakdownMode == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["BreakdownByMode"].Player
+  };
+  const header = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_4__["renderHeader"])(renderOption), [requestParam]);
+  const body = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_4__["renderDataSection"])(data, renderOption), [data]);
+  const footer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_4__["renderFooter"])(sumTotal, renderOption), [sumTotal]);
+  const currenPagingOption = {
+    PageIndex: requestParam.PageIndex,
+    PageSize: requestParam.PageSize,
+    TotalItem: totalRow,
+    PageList: _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["DefaultPagingOption"].PageList
+  };
+  const submitRequest = params => {
+    dispatch(setRequestParam(params));
+    dispatch(toggleLoader(true));
+    dispatch(getReportData(params));
+  };
+  const onSort = (sortBy, sortOrder) => {
+    const requestSortOrder = sortOrder == "asc" ? _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["SortOrder"].ASC : _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["SortOrder"].DESC;
+    const params = _objectSpread(_objectSpread({}, requestParam), {}, {
+      SortBy: sortBy,
+      SortOrder: requestSortOrder
     });
-    _defineProperty(this, "_onChangeDateRange", (date, isValidMonthRange = true) => {
-      if (isValidMonthRange) {
-        this.props.setDateRange(date);
-      } else {
-        const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("DateRangeExceedMsg").replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].dateConstraint.limitedMonthRange);
-        alert(message);
-      }
+    submitRequest(params);
+  };
+  const onPaging = (pageIndex, pageSize) => {
+    const params = _objectSpread(_objectSpread({}, requestParam), {}, {
+      PageSize: pageSize,
+      PageIndex: pageIndex
     });
-    _defineProperty(this, "_onChangeProduct", (currentItem, selectedItemsKey) => {
-      this.props.setSelectedProduct(selectedItemsKey);
-      if (!this.isContainProductSportBookOrBa(selectedItemsKey)) {
-        this.props.setViewCashOutOnly(false);
-      }
-      this.props.getSportList(selectedItemsKey);
-      this.props.getBetTypeList(selectedItemsKey);
-    });
-    _defineProperty(this, "_onChangeCurrency", currencyIdList => {
-      let baseCurrency = "";
-      if (!currencyIdList || currencyIdList.indexOf(',') > 0) {
-        // none or multi currencies
-        this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].baseCurrencyList;
-        baseCurrency = this.baseCurrencyList.find(x => x.label === this.props.selectedBaseCurrency) ? this.props.selectedBaseCurrency : this.defaultBaseCurrency;
-      } else {
-        const currencyName = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].currencyList.find(x => x.id == currencyIdList).value;
-        baseCurrency = currencyName;
-        if (!this.baseCurrencyList.find(x => x.label === currencyName)) {
-          this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].baseCurrencyList.slice(0);
-          this.baseCurrencyList.push({
-            value: currencyName,
-            label: currencyName
-          });
-        }
-      }
-      this.props.setSelectedCurrency(currencyIdList);
-      this.props.setSelectedBaseCurrency(baseCurrency);
-    });
-    _defineProperty(this, "isContainProductSportBookOrBa", selectedItemsKey => {
-      var listSelectedProduct = selectedItemsKey.split(",");
-      return listSelectedProduct.indexOf(_common_constants__WEBPACK_IMPORTED_MODULE_14__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_common_constants__WEBPACK_IMPORTED_MODULE_14__["ProductCode"].BA) >= 0;
-    });
-    _defineProperty(this, "_handleChangeSearchMode", event => {
-      const {
-        value
-      } = event.target;
-      this.props.setSearchMode(value);
-    });
-    this.baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].baseCurrencyList;
-    this.defaultBaseCurrency = props.selectedBaseCurrency;
-    props.setSubsidiarySearch(this.showSubsidiaryDropdown && !this.showSubsidiarySearchCheckBox);
+    submitRequest(params);
+  };
+  const reportTitleContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "flex-auto"
+  }, reportTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExcelPopUp_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null));
+  if (!data) {
+    return null;
   }
-  componentDidMount() {
-    this._onChangeProduct(null, this.props.selectedProduct);
+  if (!data.length) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null);
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps.appUuid != this.props.appUuid) {
-      this._onChangeProduct(null, this.props.selectedProduct);
-    }
-  }
-  _renderUserGuide() {
-    const userGuideContent = this.props.userGuideContent;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("UserGuide"),
-      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("WinlossAnalysis"),
-      onClick: this.showUserGuide,
-      content: userGuideContent
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "result-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    content: reportTitleContent,
+    tag: "div"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_3__["Table"], {
+    key: `table-winloss-ananlysis-${requestParam.SubmitTime}`,
+    minWidth: 650,
+    autoWidth: true,
+    autoHeight: true,
+    header: header,
+    body: body,
+    footer: footer,
+    containerPadding: 30,
+    onSort: onSort,
+    isPaging: true,
+    pageOption: currenPagingOption,
+    shouldResetScrollPosition: reloadReport,
+    onPaging: onPaging
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(DataGrid));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/desktop/FormFilter.jsx":
+/*!******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/desktop/FormFilter.jsx ***!
+  \******************************************************************************************/
+/*! exports provided: FormFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormFilter", function() { return FormFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _MainFilter_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MainFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/desktop/MainFilter.jsx");
+/* harmony import */ var _GroupByFilter_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./GroupByFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/desktop/GroupByFilter.jsx");
+
+
+
+
+
+const FormFilter = () => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "aggregate-filter"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MainFilter_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_GroupByFilter_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(FormFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/desktop/GroupByFilter.jsx":
+/*!*********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/desktop/GroupByFilter.jsx ***!
+  \*********************************************************************************************/
+/*! exports provided: GroupByFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupByFilter", function() { return GroupByFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _hooks_useValidParam_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useValidParam.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useValidParam.jsx");
+/* harmony import */ var _hooks_useFilterAction_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFilterAction.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useFilterAction.jsx");
+/* harmony import */ var _filters_GroupByOptionsFilter_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../filters/GroupByOptionsFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/GroupByOptionsFilter.jsx");
+/* harmony import */ var _filters_BreakDownOptionFilter_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../filters/BreakDownOptionFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BreakDownOptionFilter.jsx");
+
+
+
+
+
+
+
+const GroupByFilter = () => {
+  const isValidModel = Object(_hooks_useValidParam_jsx__WEBPACK_IMPORTED_MODULE_3__["useValidParam"])();
+  const {
+    submit,
+    onClickClearFilter
+  } = Object(_hooks_useFilterAction_jsx__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "page-filter",
+    isCollapseMode: false
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row flex w100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: ""
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex flex-col"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-12 "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_GroupByOptionsFilter_jsx__WEBPACK_IMPORTED_MODULE_5__["GroupByOptionFilter"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-md-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BreakDownOptionFilter_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: ""
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "button-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    disabled: !isValidModel,
+    className: "btn btn-submit",
+    onClick: submit
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Submit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-outline-secondary",
+    onClick: onClickClearFilter
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("ClearAllFilters")))))));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(GroupByFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/desktop/MainFilter.jsx":
+/*!******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/desktop/MainFilter.jsx ***!
+  \******************************************************************************************/
+/*! exports provided: MainFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainFilter", function() { return MainFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/lib/index.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency */ "./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx");
+/* harmony import */ var _hooks_useFilterHandler_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hooks/useFilterHandler.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useFilterHandler.jsx");
+/* harmony import */ var _hooks_useIsDisabledGroupInOriginalCurrency__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../hooks/useIsDisabledGroupInOriginalCurrency */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useIsDisabledGroupInOriginalCurrency.jsx");
+/* harmony import */ var _filters_SubsidiaryDropDownFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/SubsidiaryDropDownFilter */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SubsidiaryDropDownFilter.jsx");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var _filters_DateRangeFilter_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../filters/DateRangeFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/DateRangeFilter.jsx");
+/* harmony import */ var _common_Service_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../common/Service.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var _filters_ProductFilter_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../filters/ProductFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ProductFilter.jsx");
+/* harmony import */ var _filters_SportFilter_jsx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../filters/SportFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SportFilter.jsx");
+/* harmony import */ var _filters_BetTypeFilter_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../filters/BetTypeFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BetTypeFilter.jsx");
+/* harmony import */ var _filters_PlatformFilter_jsx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../filters/PlatformFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/PlatformFilter.jsx");
+/* harmony import */ var _filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../filters/StatusFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/StatusFilter.jsx");
+/* harmony import */ var _filters_LiveStatusFilter_jsx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../filters/LiveStatusFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/LiveStatusFilter.jsx");
+/* harmony import */ var _filters_BaseCurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../filters/BaseCurrencyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BaseCurrencyFilter.jsx");
+/* harmony import */ var _filters_VipOnlyFilter_jsx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../filters/VipOnlyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/VipOnlyFilter.jsx");
+/* harmony import */ var _filters_RiskLevelFilter_jsx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../filters/RiskLevelFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/RiskLevelFilter.jsx");
+/* harmony import */ var _filters_OddsGroupFilter_jsx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../filters/OddsGroupFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/OddsGroupFilter.jsx");
+/* harmony import */ var _filters_UserNameFilter_jsx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../filters/UserNameFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/UserNameFilter.jsx");
+/* harmony import */ var _filters_GroupInOriginalCurrencyCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../filters/GroupInOriginalCurrencyCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/GroupInOriginalCurrencyCheckBoxFilter.jsx");
+/* harmony import */ var _filters_ExcludeTestDataCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../filters/ExcludeTestDataCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ExcludeTestDataCheckBoxFilter.jsx");
+/* harmony import */ var _filters_ViewCashOutOnlyFilter_jsx__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../filters/ViewCashOutOnlyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ViewCashOutOnlyFilter.jsx");
+/* harmony import */ var _filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../filters/SubsidiaryCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SubsidiaryCheckBoxFilter.jsx");
+/* harmony import */ var _filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../filters/StickyIcon.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/StickyIcon.jsx");
+/* harmony import */ var _filters_CurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../filters/CurrencyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/CurrencyFilter.jsx");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const MainFilter = () => {
+  const {
+    appUuid,
+    dateRange,
+    selectedProduct,
+    selectedSport,
+    sportList,
+    selectedBettype,
+    bettypeList,
+    selectedPlatform,
+    selectedStatus,
+    selectedLiveStatus,
+    selectedBaseCurrency,
+    selectedVipOnly,
+    selectedCustomerClass,
+    selectedOddsGroup,
+    searchMode,
+    isGroupInOriginalCurrency,
+    isExcludeTestData,
+    isViewCashOutOnly,
+    selectedCurrency
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state, react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const {
+    isShowSubsidiaryDropdown,
+    isSubsidiarySearch,
+    isShowSubsidiarySearchCheckBox
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_9__["default"])();
+  const {
+    baseCurrencyList,
+    selectedBaseCurrency: newBaseCurrency
+  } = Object(_jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_5__["default"])(selectedBaseCurrency);
+  const {
+    onSubsidiaryDropDownChangeHandler,
+    onDateRangeChangeHandler,
+    onProductChangeHandler,
+    onSportChangeHandler,
+    onBetTypeChangeHandler,
+    onPlatformChangeHandler,
+    onStatusChangeHandler,
+    onLiveStatusChangeHandler,
+    onBaseCurrencyChangeHandler,
+    onVipOnlyChangeHandler,
+    onRiskLevelChangeHandler,
+    onOddsGroupChangeHandler,
+    onSearchModeChangeHandler,
+    onUserNameInputHandler,
+    onGroupInOriginalCurrencyChangeHandler,
+    onExcludeTextDataChangeHandler,
+    onCashOutOnlyChangeHandler,
+    onSubsidiaryCheckBoxChangeHandler,
+    onCurrencyChangeHandler
+  } = Object(_hooks_useFilterHandler_jsx__WEBPACK_IMPORTED_MODULE_6__["useFilterHandler"])();
+  const {
+    isOfferCashOutProduct,
+    isHasPermissionViewVip
+  } = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"];
+  const isEnableCashOutFilter = _common_Service_js__WEBPACK_IMPORTED_MODULE_11__["default"].isContainProductSportBookOrBa(selectedProduct);
+  const isDisabledGroupInOriginalCurrency = Object(_hooks_useIsDisabledGroupInOriginalCurrency__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    onProductChangeHandler(null, selectedProduct);
+  }, [appUuid]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    onBaseCurrencyChangeHandler({
+      value: newBaseCurrency
     });
-  }
-  _renderDateRange() {
-    const dateRange = this.props.dateRange;
-    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].dateConstraint;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range__WEBPACK_IMPORTED_MODULE_6__["DateRange"], {
-      key: `date-${this.props.appUuid}`,
-      startDate: dateRange.fromDate,
-      endDate: dateRange.toDate,
-      minDate: dateConstraint.minDate,
-      maxDate: dateConstraint.maxDate,
-      today: dateConstraint.maxDate,
-      limitedMonthRange: dateConstraint.limitedMonthRange,
-      onChange: this._onChangeDateRange
+  }, [newBaseCurrency]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    onSubsidiaryCheckBoxChangeHandler(!isShowSubsidiarySearchCheckBox && isShowSubsidiaryDropdown);
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    className: "page-filter",
+    isCollapseMode: false,
+    stickyFooter: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_27__["default"], null)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_2__["ToastContainer"], {
+    autoClose: 10000,
+    pauseOnFocusLoss: false,
+    style: {
+      width: "500px"
+    },
+    transition: react_toastify__WEBPACK_IMPORTED_MODULE_2__["Flip"]
+  }), isShowSubsidiaryDropdown && isSubsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryDropDownFilter__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    key: `subsidiary-${appUuid}`,
+    onChange: onSubsidiaryDropDownChangeHandler
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_DateRangeFilter_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    key: `date-${appUuid}`,
+    onChange: onDateRangeChangeHandler,
+    dateRange: dateRange
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ProductFilter_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    key: `product-${appUuid}`,
+    onChange: onProductChangeHandler,
+    isValid: !!selectedProduct,
+    value: selectedProduct
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SportFilter_jsx__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    key: `sport-${appUuid}`,
+    onChange: onSportChangeHandler,
+    isValid: !!selectedSport,
+    dataSource: sportList
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BetTypeFilter_jsx__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    key: `bettype-${appUuid}`,
+    onChange: onBetTypeChangeHandler,
+    isValid: !!selectedBettype,
+    dataSource: bettypeList
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_PlatformFilter_jsx__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    key: `platform-${appUuid}`,
+    onChange: onPlatformChangeHandler,
+    isValid: !!selectedPlatform
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    key: `status-${appUuid}`,
+    onChange: onStatusChangeHandler,
+    isValid: !!selectedStatus
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_LiveStatusFilter_jsx__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    key: `live-status-${appUuid}`,
+    onChange: onLiveStatusChangeHandler,
+    isValid: !!selectedLiveStatus
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_CurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_28__["default"], {
+    key: `currency-${appUuid}`,
+    isValid: !!selectedCurrency,
+    onChange: onCurrencyChangeHandler
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BaseCurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    key: `base-currency-${appUuid}`,
+    onChange: onBaseCurrencyChangeHandler,
+    options: baseCurrencyList,
+    value: selectedBaseCurrency
+  })), isHasPermissionViewVip && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_VipOnlyFilter_jsx__WEBPACK_IMPORTED_MODULE_19__["default"], {
+    key: `vip-only-${appUuid}`,
+    onChange: onVipOnlyChangeHandler,
+    value: selectedVipOnly
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_RiskLevelFilter_jsx__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    key: `risk-level-${appUuid}`,
+    onChange: onRiskLevelChangeHandler,
+    isValid: !!selectedCustomerClass
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_OddsGroupFilter_jsx__WEBPACK_IMPORTED_MODULE_21__["default"], {
+    key: `odds-group-${appUuid}`,
+    onChange: onOddsGroupChangeHandler,
+    isValid: !!selectedOddsGroup
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter_jsx__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    key: `username-${appUuid}`,
+    onChangeSearchMode: onSearchModeChangeHandler,
+    onChangeUserName: onUserNameInputHandler,
+    searchMode: searchMode
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_GroupInOriginalCurrencyCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    disabled: isDisabledGroupInOriginalCurrency,
+    checked: isGroupInOriginalCurrency,
+    onChange: onGroupInOriginalCurrencyChangeHandler
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ExcludeTestDataCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    checked: isExcludeTestData,
+    onChange: onExcludeTextDataChangeHandler
+  })), isOfferCashOutProduct && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ViewCashOutOnlyFilter_jsx__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    onChange: onCashOutOnlyChangeHandler,
+    disabled: !isEnableCashOutFilter,
+    checked: isViewCashOutOnly
+  })), isShowSubsidiarySearchCheckBox && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    value: isSubsidiarySearch,
+    onChange: onSubsidiaryCheckBoxChangeHandler
+  }))));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MainFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BaseCurrencyFilter.jsx":
+/*!**************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/BaseCurrencyFilter.jsx ***!
+  \**************************************************************************************************/
+/*! exports provided: BaseCurrencyFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BaseCurrencyFilter", function() { return BaseCurrencyFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+const BaseCurrencyFilter = props => {
+  const {
+    onChange,
+    value,
+    options
+  } = props;
+  console.log('%c Render BaseCurrencyFilter', 'color: red');
+  const _renderBaseCurrencySelectList = () => {
+    const baseCurrencyList = options;
+    return (baseCurrencyList === null || baseCurrencyList === void 0 ? void 0 : baseCurrencyList.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      instanceId: "ddlBased",
+      value: value,
+      options: options,
+      onChange: onChange
     });
-  }
-  _renderProductSelectList() {
-    const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].productList;
-    return productList && productList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      key: `product-${this.props.appUuid}`,
-      id: "ProductList",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
-      value: this.props.selectedProduct,
-      hasSearchBox: true,
-      dataSource: productList,
-      valueField: "value",
-      keyField: "id",
-      statusField: "status",
-      onChange: this._onChangeProduct,
-      isValid: !!this.props.selectedProduct
-    });
-  }
-  _renderSportSelectList() {
-    const sportList = this.props.sportList;
-    if (!sportList || !sportList.length) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
-        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
-        id: "SportList",
-        dataSource: [],
-        keyField: "Value",
-        valueField: "Name",
-        statusField: "Checked",
-        texts: {
-          All: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("N_A")
-        },
-        isAllTextShown: true,
-        hasSearchBox: true,
-        treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_15__["TreeViewOption"],
-        isValid: !!this.props.selectedSport
-      });
-    }
-    return sportList && sportList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
-      key: `sport-${this.props.appUuid}`,
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
-      id: "SportList",
-      dataSource: sportList,
-      keyField: "Value",
-      valueField: "Name",
-      statusField: "Checked",
-      isAllTextShown: true,
-      hasSearchBox: true,
-      treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_15__["TreeViewOption"],
-      onChange: (currentItem, selectedItemsKey, treeViewList) => this.props.setSelectedSport(selectedItemsKey),
-      isValid: !!this.props.selectedSport
-    });
-  }
-  _renderBettypeSelectList() {
-    const bettypeList = this.props.bettypeList;
-    if (!bettypeList || !bettypeList.length) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
-        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("BaseCurrency")), _renderBaseCurrencySelectList());
+};
+const propTypes = {
+  value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  options: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array
+};
+BaseCurrencyFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BaseCurrencyFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BetTypeFilter.jsx":
+/*!*********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/BetTypeFilter.jsx ***!
+  \*********************************************************************************************/
+/*! exports provided: BetTypeFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BetTypeFilter", function() { return BetTypeFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const BetTypeFilter = props => {
+  const {
+    dataSource,
+    onChange,
+    isValid
+  } = props;
+  const _renderBettypeSelectList = () => {
+    if (!dataSource || !dataSource.length) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__["TreeViewSelect"], {
+        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].currentLanguage,
         id: "BetTypeList",
         dataSource: [],
         keyField: "Value",
         valueField: "Name",
         statusField: "Checked",
         texts: {
-          All: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("N_A")
+          All: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("N_A")
         },
         isAllTextShown: true,
         hasSearchBox: true,
-        treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_15__["TreeViewOption"],
-        isValid: !!this.props.selectedBettype
+        treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_1__["TreeViewOption"],
+        isValid: false
       });
     }
-    return bettypeList && bettypeList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
-      key: `bettype-${this.props.appUuid}`,
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_2__["TreeViewSelect"], {
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].currentLanguage,
       id: "BetTypeList",
-      dataSource: bettypeList,
+      dataSource: dataSource,
       keyField: "Value",
       valueField: "Name",
       statusField: "Checked",
       isAllTextShown: true,
       hasSearchBox: true,
-      treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_15__["TreeViewOption"],
-      onChange: (currentItem, selectedItemsKey, treeViewList) => this.props.setSelectedBettype(selectedItemsKey),
-      isValid: !!this.props.selectedBettype
+      treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_1__["TreeViewOption"],
+      onChange: onChange,
+      isValid: isValid
     });
-  }
-  _renderPlatformSelectList() {
-    const platformList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].platformList;
-    return platformList && platformList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      key: `platform-${this.props.appUuid}`,
-      id: "PlatformList",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
-      value: this.props.selectedPlatform,
-      dataSource: platformList,
-      valueField: "value",
-      keyField: "id",
-      statusField: "status",
-      onChange: (currentItem, selectedItemsKey) => this.props.setSelectedPlatform(selectedItemsKey),
-      isValid: !!this.props.selectedPlatform
-    });
-  }
-  _renderCurrencySelectList() {
-    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].currencyList;
-    return currencyList && currencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      key: `currency-${this.props.appUuid}`,
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("BetType")), _renderBettypeSelectList());
+};
+const propTypes = {
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  dataSource: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.array
+};
+const defaultProps = {
+  isValid: true,
+  dataSource: []
+};
+BetTypeFilter.propTypes = propTypes;
+BetTypeFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BetTypeFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BreakDownOptionFilter.jsx":
+/*!*****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/BreakDownOptionFilter.jsx ***!
+  \*****************************************************************************************************/
+/*! exports provided: BreakDownOptionFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BreakDownOptionFilter", function() { return BreakDownOptionFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _common_Service_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/Service.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _hooks_useGroupFilterHandler_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useGroupFilterHandler.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useGroupFilterHandler.jsx");
+
+
+
+
+
+const BreakDownOptionFilter = () => {
+  const [selectedGroupByOption, selectedBreakDownByOption] = Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["useSelector"])(state => [state.selectedGroupByOption, state.selectedBreakDownByOption], react_redux__WEBPACK_IMPORTED_MODULE_3__["shallowEqual"]);
+  const {
+    onChangeBreakByOption
+  } = Object(_hooks_useGroupFilterHandler_jsx__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  const breakDownList = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _common_Service_js__WEBPACK_IMPORTED_MODULE_2__["default"].buildBreakDownOptionFromGroupByMode(selectedGroupByOption), [selectedGroupByOption]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group radio-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BreakdownBy'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "radio-list"
+  }, breakDownList.map((option, i) => {
+    const key = 'BreakBy' + i;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: `BreakBy${key}`,
+      className: "filter-radio-item"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      disabled: option.isDisabled,
+      type: "radio",
+      value: option.value,
+      checked: selectedBreakDownByOption == option.value,
+      id: key,
+      onChange: onChangeBreakByOption
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: key
+    }, option.label));
+  })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BreakDownOptionFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/CurrencyFilter.jsx":
+/*!**********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/CurrencyFilter.jsx ***!
+  \**********************************************************************************************/
+/*! exports provided: CurrencyFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CurrencyFilter", function() { return CurrencyFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const CurrencyFilter = props => {
+  const {
+    onChange,
+    isValid
+  } = props;
+  const _renderCurrencySelectList = () => {
+    const currencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].currencyList;
+    return currencyList && currencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
       id: "ddlCurrency",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
       dataSource: currencyList,
       keyField: "id",
       valueField: "value",
       statusField: "status",
-      onChange: (currentItem, selectedItemsKey) => this._onChangeCurrency(selectedItemsKey),
-      isValid: !!this.props.selectedCurrency
+      onChange: onChange,
+      isValid: isValid
     });
-  }
-  _renderBaseCurrencySelectList() {
-    const baseCurrencyList = this.baseCurrencyList;
-    return baseCurrencyList && baseCurrencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      key: `base-currency-${this.props.appUuid}`,
-      instanceId: "ddlBased",
-      value: this.props.selectedBaseCurrency,
-      options: baseCurrencyList,
-      onChange: item => this.props.setSelectedBaseCurrency(item.value)
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Currency")), _renderCurrencySelectList());
+};
+const propTypes = {
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool
+};
+CurrencyFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(CurrencyFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/DateRangeFilter.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/DateRangeFilter.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: DateRangeFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DateRangeFilter", function() { return DateRangeFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_components_date_range_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/date-range/index */ "./www/js/source/reactpages/components/date-range/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+const DateRangeFilter = props => {
+  const {
+    onChange,
+    isMobile,
+    dateRange
+  } = props;
+  const _renderDateRange = () => {
+    const dateConstraint = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].dateConstraint;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_date_range_index__WEBPACK_IMPORTED_MODULE_3__["DateRange"], {
+      startDate: dateRange.fromDate,
+      endDate: dateRange.toDate,
+      minDate: dateConstraint.minDate,
+      maxDate: dateConstraint.maxDate,
+      today: dateConstraint.maxDate,
+      limitedMonthRange: dateConstraint.limitedMonthRange,
+      onChange: onChange,
+      isMobile: isMobile
     });
-  }
-  _renderVipOnlySelectedList() {
-    const vipOnlyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].vipOnlyList;
-    return vipOnlyList && vipOnlyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      key: `viponly-${this.props.appUuid}`,
-      instanceId: "IsVipOnly",
-      value: this.props.selectedVipOnly,
-      options: vipOnlyList,
-      onChange: item => this.props.setSelectedVipOnly(item.value)
-    });
-  }
-  _renderStatusSelectList() {
-    const statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].statusList;
-    return statusList && statusList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      key: `status-${this.props.appUuid}`,
-      id: "StatusList",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
-      dataSource: statusList,
-      keyField: "id",
-      valueField: "value",
-      statusField: "status",
-      onChange: (currentItem, selectedItemsKey) => this.props.setSelectedStatus(selectedItemsKey),
-      isValid: !!this.props.selectedStatus
-    });
-  }
-  _renderLiveStatusSelectList() {
-    const liveStatusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].liveStatusList;
-    return liveStatusList && liveStatusList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      key: `live-status-${this.props.appUuid}`,
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Date")), _renderDateRange());
+};
+const propTypes = {
+  isMobile: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  dateRange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.shape({
+    fromDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
+    toDate: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string
+  })
+};
+const defaultProps = {
+  isMobile: false
+};
+DateRangeFilter.propTypes = propTypes;
+DateRangeFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(DateRangeFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ExcludeTestDataCheckBoxFilter.jsx":
+/*!*************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/ExcludeTestDataCheckBoxFilter.jsx ***!
+  \*************************************************************************************************************/
+/*! exports provided: ExcludeTestDataCheckBoxFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExcludeTestDataCheckBoxFilter", function() { return ExcludeTestDataCheckBoxFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+const ExcludeTestDataCheckBoxFilter = props => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+    id: "IsExcludeTestData"
+  }, props, {
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("ExcludeTestData")
+  })));
+};
+const propTypes = {
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
+};
+ExcludeTestDataCheckBoxFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ExcludeTestDataCheckBoxFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/GroupByOptionsFilter.jsx":
+/*!****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/GroupByOptionsFilter.jsx ***!
+  \****************************************************************************************************/
+/*! exports provided: GroupByOptionFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupByOptionFilter", function() { return GroupByOptionFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _common_Service_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/Service.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _hooks_useGroupFilterHandler_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useGroupFilterHandler.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useGroupFilterHandler.jsx");
+
+
+
+
+
+
+const GroupByOptionFilter = () => {
+  const selectedGroupByOption = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useSelector"])(state => state.selectedGroupByOption);
+  const groupByList = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _common_Service_js__WEBPACK_IMPORTED_MODULE_2__["default"].buildGroupByOption(), [_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].licenseeName]);
+  const {
+    onChangeGroupByOption
+  } = Object(_hooks_useGroupFilterHandler_jsx__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group radio-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('GroupBy'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "radio-list"
+  }, groupByList.map((option, i) => {
+    const key = 'GroupBy' + i;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      key: `GroupBy${key}`,
+      className: "filter-radio-item"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      type: "radio",
+      value: option.value,
+      checked: selectedGroupByOption == option.value,
+      id: key,
+      onChange: onChangeGroupByOption
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+      htmlFor: key
+    }, option.label));
+  })));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(GroupByOptionFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/GroupInOriginalCurrencyCheckBoxFilter.jsx":
+/*!*********************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/GroupInOriginalCurrencyCheckBoxFilter.jsx ***!
+  \*********************************************************************************************************************/
+/*! exports provided: GroupInOriginalCurrencyCheckBoxFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GroupInOriginalCurrencyCheckBoxFilter", function() { return GroupInOriginalCurrencyCheckBoxFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+const GroupInOriginalCurrencyCheckBoxFilter = props => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+    id: "IsGroupInOriginalCurrency"
+  }, props, {
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("IsGroupInOriginalCurrency")
+  })));
+};
+const propTypes = {
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
+};
+GroupInOriginalCurrencyCheckBoxFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(GroupInOriginalCurrencyCheckBoxFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/LiveStatusFilter.jsx":
+/*!************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/LiveStatusFilter.jsx ***!
+  \************************************************************************************************/
+/*! exports provided: LiveStatusFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LiveStatusFilter", function() { return LiveStatusFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const LiveStatusFilter = props => {
+  const {
+    onChange,
+    isValid
+  } = props;
+  const _renderLiveStatusSelectList = () => {
+    const liveStatusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].liveStatusList;
+    return liveStatusList && liveStatusList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
       id: "LiveStatusList",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
       dataSource: liveStatusList,
       keyField: "id",
       valueField: "value",
       statusField: "status",
-      onChange: (currentItem, selectedItemsKey) => this.props.setSelectedLiveStatus(selectedItemsKey),
-      isValid: !!this.props.selectedLiveStatus
+      onChange: onChange,
+      isValid: isValid
     });
-  }
-  _renderRiskLevelSelectList() {
-    const riskLevelList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].riskLevelList;
-    return riskLevelList && riskLevelList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      key: `riskLevelList-${this.props.appUuid}`,
-      id: "ddlRiskLevel",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
-      dataSource: riskLevelList,
-      keyField: "id",
-      valueField: "value",
-      statusField: "status",
-      onChange: (_, selectedItemsKey) => {
-        this.props.setSelectedRiskLevel(selectedItemsKey);
-        var customerClassSelected = riskLevelList.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
-        this.props.setSelectedCustomerClass(customerClassSelected);
-      },
-      isValid: !!this.props.selectedCustomerClass
-    });
-  }
-  _renderOddsGroupSelectList() {
-    const oddsGroupList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].oddsGroupList;
-    return oddsGroupList && oddsGroupList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5___default.a, {
-      key: `odds-group-${this.props.appUuid}`,
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("LiveStatus")), _renderLiveStatusSelectList());
+};
+const propTypes = {
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+};
+const defaultProps = {
+  isValid: true
+};
+LiveStatusFilter.propTypes = propTypes;
+LiveStatusFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(LiveStatusFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/OddsGroupFilter.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/OddsGroupFilter.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: OddsGroupFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OddsGroupFilter", function() { return OddsGroupFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const OddsGroupFilter = props => {
+  const {
+    onChange,
+    isValid
+  } = props;
+  const _renderOddsGroupsSelectList = () => {
+    const oddsGroupList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].oddsGroupList;
+    return (oddsGroupList === null || oddsGroupList === void 0 ? void 0 : oddsGroupList.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
       id: "ddlOddGroup",
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
       dataSource: oddsGroupList,
       keyField: "id",
       valueField: "value",
       statusField: "status",
-      onChange: (_, selectedItemsKey) => this.props.setSelectedOddsGroup(selectedItemsKey),
-      isValid: !!this.props.selectedOddsGroup
+      onChange: onChange,
+      isValid: isValid
     });
-  }
-  _renderSubsidiaryTreeView() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_5__["TreeViewSelect"], {
-      key: `subsidiary-${this.props.appUuid}`,
-      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].currentLanguage,
-      id: "SubsidiaryTreeView",
-      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].whitelabelList,
-      keyField: "Value",
-      valueField: "Name",
-      statusField: "Checked",
-      isAllTextShown: false,
-      hasSearchBox: false,
-      treeViewOption: _constants_report__WEBPACK_IMPORTED_MODULE_15__["TreeViewOption"],
-      onChange: (currentItem, selectedItemsKey, treeViewList) => this.props.setSubsidiaryList(selectedItemsKey)
-    });
-  }
-  _renderUsernameAutoComplete() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      key: `username-${this.props.appUuid}`,
-      url: _common_constants__WEBPACK_IMPORTED_MODULE_14__["ApiUrl"].CUSTOMER_SEARCH_URL,
-      onSelect: value => this.props.setUsername(value),
-      onInput: value => this.props.setUsername(value),
-      htmlAttributes: {
-        placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ExternalIdOrSystemId")
-      }
-    });
-  }
-  render() {
-    const {
-      isOfferCashOutProduct,
-      isHasPermissionViewVip
-    } = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"];
-    const isEnableCashOutFilter = this.isContainProductSportBookOrBa(this.props.selectedProduct);
-    const currentMapping = _common_constants__WEBPACK_IMPORTED_MODULE_14__["DisplayGroupBreakDownMapping"].find(item => item.groupByMode == this.props.selectedGroupByOption && item.breakdownMode == this.props.selectedBreakDownByOption);
-    const isDisabledGroupInOriginalCurrency = !currentMapping.isDisplayBreakDownInCurrency;
-    const userGuideButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this._renderUserGuide());
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      className: "page-filter",
-      isCollapseMode: false,
-      stickyFooter: userGuideButton
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_3__["ToastContainer"], {
-      autoClose: 10000,
-      pauseOnFocusLoss: false,
-      style: {
-        width: "500px"
-      },
-      transition: react_toastify__WEBPACK_IMPORTED_MODULE_3__["Flip"]
-    }), this.showSubsidiaryDropdown && this.props.subsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, this.whiteLabelView ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Subsidiary")), this._renderSubsidiaryTreeView())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Date")), this._renderDateRange())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Product")), this._renderProductSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Sport")), this._renderSportSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("BetType")), this._renderBettypeSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Platform")), this._renderPlatformSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Status")), this._renderStatusSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("LiveStatus")), this._renderLiveStatusSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Currency")), this._renderCurrencySelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("BaseCurrency")), this._renderBaseCurrencySelectList())), isHasPermissionViewVip && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group",
-      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("VIPPlayerTooltipMsg")
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("VIPPlayerOnly")), this._renderVipOnlySelectedList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("RiskLevel")), this._renderRiskLevelSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("OddsGroup")), this._renderOddsGroupSelectList())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-      className: "label-text"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "search-option-container"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchOption_jsx__WEBPACK_IMPORTED_MODULE_16__["default"], {
-      value: this.props.searchMode,
-      onChange: this._handleChangeSearchMode
-    }))), this._renderUsernameAutoComplete())), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      id: "IsGroupInOriginalCurrency",
-      disabled: isDisabledGroupInOriginalCurrency,
-      checked: this.props.isGroupInOriginalCurrency,
-      onChange: checked => this.props.setGroupInOriginalCurrency(checked),
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("IsGroupInOriginalCurrency")
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      id: "IsExcludeTestData",
-      checked: this.props.isExcludeTestData,
-      onChange: checked => this.props.setExcludeTestData(checked),
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ExcludeTestData")
-    }))), isOfferCashOutProduct && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      id: "IsViewCashOutOnly",
-      checked: this.props.isViewCashOutOnly,
-      onChange: checked => this.props.setViewCashOutOnly(checked),
-      disabled: !isEnableCashOutFilter,
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("ViewCashOutOnly")
-    }))), this.showSubsidiarySearchCheckBox && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      className: "form-group"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      id: "SubsidiarySearch",
-      checked: this.props.subsidiarySearch,
-      onChange: checked => {
-        this.props.setSubsidiarySearch(checked);
-        checked && this.props.setSubsidiaryList(this.defaultSelectedSubsidiary);
-      },
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource("SubsidiarySearch")
-    })))));
-  }
-}
-function mapDispatchToProps(dispatch) {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_2__["bindActionCreators"])(_actions_index_js__WEBPACK_IMPORTED_MODULE_12__["ActionCreators"], dispatch);
-}
-function mapStateToProps(state) {
-  const {
-    requestParam,
-    dateRange,
-    selectedProduct,
-    sportList,
-    selectedSport,
-    selectedBettype,
-    bettypeList,
-    selectedPlatform,
-    platformList,
-    selectedVipOnly,
-    selectedCustomerClass,
-    selectedOddsGroup,
-    isExcludeTestData,
-    isGroupInOriginalCurrency,
-    isViewCashOutOnly,
-    selectedGroupByOption,
-    selectedBreakDownByOption,
-    searchMode,
-    selectedCurrency,
-    baseCurrencyList,
-    selectedBaseCurrency,
-    selectedStatus,
-    selectedLiveStatus,
-    username,
-    userGuideContent,
-    selectedSubsidiary,
-    subsidiarySearch,
-    appUuid
-  } = state;
-  return Object.assign({}, {
-    requestParam,
-    dateRange,
-    selectedProduct,
-    sportList,
-    selectedSport,
-    selectedBettype,
-    bettypeList,
-    selectedPlatform,
-    platformList,
-    selectedVipOnly,
-    selectedCustomerClass,
-    selectedOddsGroup,
-    isExcludeTestData,
-    isGroupInOriginalCurrency,
-    isViewCashOutOnly,
-    selectedGroupByOption,
-    selectedBreakDownByOption,
-    searchMode,
-    selectedCurrency,
-    baseCurrencyList,
-    selectedBaseCurrency,
-    selectedStatus,
-    selectedLiveStatus,
-    username,
-    userGuideContent,
-    selectedSubsidiary,
-    subsidiarySearch,
-    appUuid
-  });
-}
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(MainFilter));
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("OddsGroup")), _renderOddsGroupsSelectList());
+};
+const propTypes = {
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+};
+const defaultProps = {
+  isValid: true
+};
+OddsGroupFilter.propTypes = propTypes;
+OddsGroupFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(OddsGroupFilter));
 
 /***/ }),
 
-/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filter/SearchOption.jsx":
-/*!*******************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filter/SearchOption.jsx ***!
-  \*******************************************************************************************/
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/PlatformFilter.jsx":
+/*!**********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/PlatformFilter.jsx ***!
+  \**********************************************************************************************/
+/*! exports provided: PlatformFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlatformFilter", function() { return PlatformFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const PlatformFilter = props => {
+  const {
+    onChange,
+    isValid
+  } = props;
+  const _renderPlatformSelectList = () => {
+    const platformList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].platformList;
+    return platformList && platformList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      id: "PlatformList",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
+      dataSource: platformList,
+      valueField: "value",
+      keyField: "id",
+      statusField: "status",
+      onChange: onChange,
+      isValid: isValid
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Platform")), _renderPlatformSelectList());
+};
+const propTypes = {
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+};
+const defaultProps = {
+  isValid: true
+};
+PlatformFilter.propTypes = propTypes;
+PlatformFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(PlatformFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ProductFilter.jsx":
+/*!*********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/ProductFilter.jsx ***!
+  \*********************************************************************************************/
+/*! exports provided: ProductFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductFilter", function() { return ProductFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const ProductFilter = props => {
+  const {
+    value,
+    onChange,
+    isValid
+  } = props;
+  const _renderProductSelectList = () => {
+    const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].productList;
+    return productList && productList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      id: "ProductList",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
+      value: value,
+      hasSearchBox: true,
+      dataSource: productList,
+      valueField: "value",
+      keyField: "id",
+      statusField: "status",
+      onChange: onChange,
+      isValid: isValid
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Product")), _renderProductSelectList());
+};
+const propTypes = {
+  value: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool
+};
+const defaultProps = {
+  isValid: true
+};
+ProductFilter.propTypes = propTypes;
+ProductFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ProductFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/RiskLevelFilter.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/RiskLevelFilter.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: RiskLevelFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RiskLevelFilter", function() { return RiskLevelFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const RiskLevelFilter = props => {
+  const {
+    onChange,
+    isValid
+  } = props;
+  const _renderCustomerClassSelectList = () => {
+    const riskLevelList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].riskLevelList;
+    return (riskLevelList === null || riskLevelList === void 0 ? void 0 : riskLevelList.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      id: "ddlRiskLevel",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
+      dataSource: riskLevelList,
+      keyField: "id",
+      valueField: "value",
+      statusField: "status",
+      onChange: onChange,
+      isValid: isValid
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("RiskLevel")), _renderCustomerClassSelectList());
+};
+const propTypes = {
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool
+};
+const defaultProps = {
+  isValid: true
+};
+RiskLevelFilter.propTypes = propTypes;
+RiskLevelFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(RiskLevelFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SearchOption.jsx":
+/*!********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/SearchOption.jsx ***!
+  \********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -6800,9 +7391,12 @@ function mapStateToProps(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/dropdown */ "./www/js/source/reactpages/components/dropdown/index.js");
+/* harmony import */ var _jsroot_components_dropdown_DrowdownRadioList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/dropdown/DrowdownRadioList */ "./www/js/source/reactpages/components/dropdown/DrowdownRadioList.jsx");
 /* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -6812,72 +7406,971 @@ const SearchOption = props => {
     value,
     onChange
   } = props;
-  const [isOpen, setIsOpen] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
-  const handleToggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-  const toggleButton = {
-    className: 'toggle-outline toggle-outline-light'
-  };
-  const selectedValue = value || _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrecise;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownButton"], {
-    className: "search-option",
-    isOpen: isOpen,
-    toggleButton: toggleButton,
-    onToggle: handleToggleDropdown,
-    buttonLabel: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-      className: "material-icons"
-    }, "settings"),
-    onClose: handleClose
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
-    tag: "div"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "selection-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  const dataSource = [{
     id: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrecise,
-    type: "radio",
-    name: "searchOption",
-    value: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrecise,
-    checked: selectedValue == _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrecise,
-    onChange: onChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrecise
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrecise')))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
-    tag: "div"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "selection-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    text: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrecise')
+  }, {
     id: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrefix,
-    type: "radio",
-    name: "searchOption",
-    value: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrefix,
-    checked: selectedValue == _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrefix,
-    onChange: onChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchPrefix
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrefix'), " \"", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "keyword"
-  }, "test"), "\"ABCD"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown__WEBPACK_IMPORTED_MODULE_1__["DropdownItem"], {
-    tag: "div"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "selection-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    text: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchPrefix')} "<span class='keyword'>test</span>"ABCD`
+  }, {
     id: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchCase,
-    type: "radio",
-    name: "searchOption",
-    value: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchCase,
-    checked: selectedValue == _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchCase,
-    onChange: onChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    htmlFor: _common_constants__WEBPACK_IMPORTED_MODULE_2__["SearchMode"].MatchCase
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchCase'), " AB\"", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "keyword"
-  }, "test"), "\"CD"))));
+    text: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('MatchCase')} AB"<span class='keyword'>test</span>"CD`
+  }];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown_DrowdownRadioList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    id: "search-user-name",
+    dataSource: dataSource,
+    selectedValue: value,
+    onChange: onChange,
+    className: "search-option",
+    keySelector: "id",
+    valueSelector: "text"
+  });
 };
-/* harmony default export */ __webpack_exports__["default"] = (SearchOption);
+const propTypes = {
+  value: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]),
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+};
+SearchOption.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(SearchOption));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SportFilter.jsx":
+/*!*******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/SportFilter.jsx ***!
+  \*******************************************************************************************/
+/*! exports provided: SportFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SportFilter", function() { return SportFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+
+
+
+
+
+
+const SportFilter = props => {
+  const {
+    dataSource,
+    onChange,
+    isValid
+  } = props;
+  const _renderSportSelectList = () => {
+    if (!dataSource || !dataSource.length) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__["TreeViewSelect"], {
+        language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
+        id: "SportList",
+        dataSource: [],
+        keyField: "Value",
+        valueField: "Name",
+        statusField: "Checked",
+        texts: {
+          All: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("N_A")
+        },
+        isAllTextShown: true,
+        hasSearchBox: true,
+        treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__["TreeViewOption"],
+        isValid: false
+      });
+    }
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__["TreeViewSelect"], {
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
+      id: "SportList",
+      dataSource: dataSource,
+      keyField: "Value",
+      valueField: "Name",
+      statusField: "Checked",
+      isAllTextShown: true,
+      hasSearchBox: true,
+      treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_4__["TreeViewOption"],
+      onChange: onChange,
+      isValid: isValid
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Sport")), _renderSportSelectList());
+};
+const propTypes = {
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  dataSource: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.array
+};
+const defaultProps = {
+  isValid: true,
+  dataSource: []
+};
+SportFilter.propTypes = propTypes;
+SportFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(SportFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/StatusFilter.jsx":
+/*!********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/StatusFilter.jsx ***!
+  \********************************************************************************************/
+/*! exports provided: StatusFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatusFilter", function() { return StatusFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const StatusFilter = props => {
+  const {
+    onChange,
+    isValid
+  } = props;
+  const _renderStatusSelectList = () => {
+    const statusList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].statusList;
+    return statusList && statusList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      id: "StatusList",
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
+      dataSource: statusList,
+      keyField: "id",
+      valueField: "value",
+      statusField: "status",
+      onChange: onChange,
+      isValid: isValid
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Status")), _renderStatusSelectList());
+};
+const propTypes = {
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+};
+const defaultProps = {
+  isValid: true
+};
+StatusFilter.propTypes = propTypes;
+StatusFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(StatusFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/StickyIcon.jsx":
+/*!******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/StickyIcon.jsx ***!
+  \******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/UserGuide */ "./www/js/source/reactpages/components/UserGuide.jsx");
+
+
+
+
+
+
+const StickyIcon = () => {
+  const userGuideContent = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.userGuideContent);
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    getUserGuideContent
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const _showUserGuide = () => {
+    if (!userGuideContent || userGuideContent.length === 0) {
+      dispatch(getUserGuideContent('WinlossAnalysis'));
+    }
+  };
+  const _renderUserGuide = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_UserGuide__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("UserGuide"),
+      contentTitle: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("WinlossAnalysis"),
+      onClick: _showUserGuide,
+      content: userGuideContent
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _renderUserGuide());
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(StickyIcon));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SubsidiaryCheckBoxFilter.jsx":
+/*!********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/SubsidiaryCheckBoxFilter.jsx ***!
+  \********************************************************************************************************/
+/*! exports provided: SubsidiaryCheckBoxFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubsidiaryCheckBoxFilter", function() { return SubsidiaryCheckBoxFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+
+const SubsidiaryCheckBoxFilter = props => {
+  const {
+    value,
+    onChange
+  } = props;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "SubsidiarySearch",
+    checked: value,
+    onChange: onChange,
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("SubsidiarySearch")
+  }));
+};
+const propTypes = {
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
+};
+SubsidiaryCheckBoxFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(SubsidiaryCheckBoxFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SubsidiaryDropDownFilter.jsx":
+/*!********************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/SubsidiaryDropDownFilter.jsx ***!
+  \********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
+/* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+
+const SubsidiaryDropDownFilter = props => {
+  const {
+    onChange
+  } = props;
+  const {
+    isWhiteLabelView
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  const _renderSubsidiaryTreeView = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_4__["TreeViewSelect"], {
+      language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].currentLanguage,
+      id: "SubsidiaryTreeView",
+      dataSource: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].whitelabelList,
+      keyField: "Value",
+      valueField: "Name",
+      statusField: "Checked",
+      isAllTextShown: false,
+      hasSearchBox: false,
+      treeViewOption: _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_3__["TreeViewOption"],
+      onChange: onChange
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, isWhiteLabelView ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("WhiteLabel") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Subsidiary")), _renderSubsidiaryTreeView());
+};
+const propTypes = {
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_6___default.a.func
+};
+SubsidiaryDropDownFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(SubsidiaryDropDownFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/UserNameFilter.jsx":
+/*!**********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/UserNameFilter.jsx ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/auto-complete */ "./www/js/source/reactpages/components/auto-complete/index.jsx");
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../common/constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _SearchOption__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SearchOption */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SearchOption.jsx");
+
+
+
+
+
+
+
+const UserNameFilter = props => {
+  const {
+    onChangeSearchMode,
+    onChangeUserName,
+    searchMode
+  } = props;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Username")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "search-option-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchOption__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    value: searchMode,
+    onChange: onChangeSearchMode
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_auto_complete__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    url: _common_constants__WEBPACK_IMPORTED_MODULE_3__["ApiUrl"].CUSTOMER_SEARCH_URL,
+    onSelect: onChangeUserName,
+    onInput: onChangeUserName,
+    htmlAttributes: {
+      placeholder: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("ExternalIdOrSystemId")
+    }
+  }));
+};
+const propTypes = {
+  onChangeSearchMode: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  onChangeUserName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  searchMode: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string])
+};
+UserNameFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(UserNameFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ViewCashOutOnlyFilter.jsx":
+/*!*****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/ViewCashOutOnlyFilter.jsx ***!
+  \*****************************************************************************************************/
+/*! exports provided: ViewCashOutOnlyFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewCashOutOnlyFilter", function() { return ViewCashOutOnlyFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+const ViewCashOutOnlyFilter = props => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
+    id: "IsViewCashOutOnly"
+  }, props, {
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("ViewCashOutOnly")
+  })));
+};
+const propTypes = {
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  checked: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
+};
+ViewCashOutOnlyFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ViewCashOutOnlyFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/VipOnlyFilter.jsx":
+/*!*********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/VipOnlyFilter.jsx ***!
+  \*********************************************************************************************/
+/*! exports provided: VipOnlyFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VipOnlyFilter", function() { return VipOnlyFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+
+
+
+
+
+const VipOnlyFilter = props => {
+  const {
+    onChange,
+    value
+  } = props;
+  const _renderVipOnlySelectedList = () => {
+    const vipOnlyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].vipOnlyList;
+    return vipOnlyList && vipOnlyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      instanceId: "IsVipOnly",
+      value: value,
+      options: vipOnlyList,
+      onChange: onChange
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group",
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("VIPPlayerTooltipMsg")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "label-text"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("VIPPlayerOnly")), _renderVipOnlySelectedList());
+};
+const propTypes = {
+  value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number]),
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func
+};
+VipOnlyFilter.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(VipOnlyFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useFilterAction.jsx":
+/*!*********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useFilterAction.jsx ***!
+  \*********************************************************************************************/
+/*! exports provided: useFilterAction, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useFilterAction", function() { return useFilterAction; });
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency */ "./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var _common_Service_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../common/Service.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var _useValidParam__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./useValidParam */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useValidParam.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/lib/index.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _jsroot_lib_stringHelper_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/stringHelper.js */ "./www/js/source/reactpages/lib/stringHelper.js");
+/* harmony import */ var _common_constants_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../common/constants.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const useFilterAction = () => {
+  const isValidModel = Object(_useValidParam__WEBPACK_IMPORTED_MODULE_7__["useValidParam"])();
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["useDispatch"])();
+  const {
+    requestParam,
+    username,
+    selectedBaseCurrency,
+    selectedProduct,
+    selectedStatus,
+    dateRange,
+    selectedLiveStatus,
+    selectedPlatform,
+    selectedCurrency,
+    selectedSport,
+    selectedBettype,
+    selectedSubsidiary,
+    selectedOddsGroup,
+    selectedCustomerClass,
+    searchMode,
+    sportList,
+    bettypeList,
+    selectedVipOnly,
+    isGroupInOriginalCurrency,
+    isExcludeTestData,
+    isViewCashOutOnly,
+    selectedGroupByOption,
+    selectedBreakDownByOption
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["useSelector"])(state => state, react_redux__WEBPACK_IMPORTED_MODULE_8__["shallowEqual"]);
+  const {
+    baseCurrencyList
+  } = Object(_jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_4__["default"])(selectedBaseCurrency);
+  const {
+    isSubsidiarySearch
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  const {
+    setReportTitle,
+    setRequestParam,
+    toggleLoader,
+    getReportData,
+    setDateRange,
+    setSelectedProduct,
+    setSelectedCurrency,
+    setSelectedPlatform,
+    setSelectedStatus,
+    setSelectedLiveStatus,
+    setSelectedBaseCurrency,
+    setSelectedVipOnly,
+    setSelectedCustomerClass,
+    setSelectedOddsGroup,
+    setUsername,
+    setSearchMode,
+    setGroupInOriginalCurrency,
+    setViewCashOutOnly,
+    setExcludeTestData,
+    setSelectedGroupByOption,
+    setSelectedBreakDownByOption,
+    setSubsidiarySearch,
+    setSubsidiaryList,
+    setAppUuid
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_0__["ActionCreators"];
+  const _buildTitle = params => {
+    const {
+      FromDate,
+      ToDate,
+      ProductCodes,
+      SearchUserName,
+      CurrencyCodes,
+      BaseCurrencyName
+    } = params;
+    const dateRangeText = `, ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].convertDateToString(FromDate)} → ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].convertDateToString(ToDate)}`;
+    const currencyText = `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Currency")}: ${CurrencyCodes}, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("BaseCurrency")}: ${BaseCurrencyName}`;
+    const productText = `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("LicenseeW_L")} (${ProductCodes})`;
+    const userText = !!SearchUserName ? `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("Username")}: ${SearchUserName}` : "";
+    return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("WinlossAnalysis") + dateRangeText + currencyText + productText + userText;
+  };
+  const _getParams = () => {
+    if (!isValidModel) {
+      return null;
+    }
+    const {
+      fromDate,
+      toDate
+    } = dateRange;
+    const {
+      PageSize
+    } = requestParam;
+    const {
+      oddsGroupList,
+      riskLevelList,
+      liveStatusList,
+      statusList,
+      platformList,
+      currencyList
+    } = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"];
+    const baseCurrency = baseCurrencyList.find(x => x.value === selectedBaseCurrency);
+    const subsidiary = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].getLrfSubsidiary();
+    let {
+      SubsidiarySearch,
+      SubsidiaryList
+    } = subsidiary;
+    if (!subsidiary || Object.keys(subsidiary).length === 0) {
+      SubsidiarySearch = isSubsidiarySearch;
+      SubsidiaryList = selectedSubsidiary;
+    }
+    const selectedCurrencyCode = _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getCurrencyCodes(selectedCurrency, currencyList);
+    const seletedCurrencyText = selectedCurrencyCode == _common_constants_js__WEBPACK_IMPORTED_MODULE_11__["ALL_SELECTED_TEXT"] ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("All") : _jsroot_lib_stringHelper_js__WEBPACK_IMPORTED_MODULE_10__["default"].addSpaceAfterComma(selectedCurrencyCode);
+    return {
+      PageSize: PageSize,
+      PageIndex: 1,
+      FromDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].convertDateToString(fromDate),
+      ToDate: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].convertDateToString(toDate),
+      ProductCodes: selectedProduct,
+      SearchUserName: username,
+      SearchMode: searchMode,
+      CurrencyIdList: selectedCurrency,
+      CurrencyCodes: seletedCurrencyText,
+      BaseCurrency: selectedBaseCurrency,
+      StatusIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedStatus, statusList),
+      SportIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
+      BetTypeIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForTreeListFilter(selectedBettype, bettypeList),
+      PlatformIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedPlatform, platformList),
+      LiveStatusIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedLiveStatus, liveStatusList),
+      IsVipOnly: selectedVipOnly,
+      CustomerClass: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedCustomerClass, riskLevelList, r => r.customerClassList),
+      OddsGroup: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedOddsGroup, oddsGroupList),
+      IsShowInOrginalCurrency: isGroupInOriginalCurrency,
+      IsExcludedTestData: isExcludeTestData,
+      IsViewCashOutOnly: isViewCashOutOnly,
+      GroupMode: selectedGroupByOption,
+      BreakdownMode: selectedBreakDownByOption,
+      BaseCurrencyName: baseCurrency ? baseCurrency.label : '',
+      SortBy: _common_constants_js__WEBPACK_IMPORTED_MODULE_11__["SortBy"].Default,
+      SortOrder: _common_constants_js__WEBPACK_IMPORTED_MODULE_11__["SortOrder"].ASC,
+      SubsidiaryList,
+      SubsidiarySearch,
+      SubmitTime: new Date().getTime()
+    };
+  };
+  const submit = event => {
+    event.preventDefault();
+    const params = _getParams();
+    if (!params) {
+      return;
+    }
+    react_toastify__WEBPACK_IMPORTED_MODULE_9__["toast"].dismiss();
+    const title = _buildTitle(params);
+    Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["batch"])(() => {
+      dispatch(setReportTitle(title));
+      dispatch(setRequestParam(params));
+      dispatch(toggleLoader(true));
+      dispatch(getReportData(params));
+    });
+  };
+  const onClickClearFilter = Object(react__WEBPACK_IMPORTED_MODULE_12__["useCallback"])(() => {
+    let defaultState = window.initialState;
+    Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["batch"])(() => {
+      dispatch(setDateRange({
+        startDate: defaultState.dateRange.fromDate,
+        endDate: defaultState.dateRange.toDate
+      }));
+      dispatch(setSelectedProduct(defaultState.selectedProduct));
+      dispatch(setSelectedCurrency(defaultState.selectedCurrency));
+      dispatch(setSelectedPlatform(defaultState.selectedPlatform));
+      dispatch(setSelectedStatus(defaultState.selectedStatus));
+      dispatch(setSelectedLiveStatus(defaultState.selectedLiveStatus));
+      dispatch(setSelectedBaseCurrency(defaultState.selectedBaseCurrency));
+      dispatch(setSelectedVipOnly(defaultState.selectedVipOnly));
+      dispatch(setSelectedCustomerClass(defaultState.selectedCustomerClass));
+      dispatch(setSelectedOddsGroup(defaultState.selectedOddsGroup));
+      dispatch(setUsername(''));
+      dispatch(setSearchMode(_common_constants_js__WEBPACK_IMPORTED_MODULE_11__["SearchMode"].MatchPrecise));
+      dispatch(setGroupInOriginalCurrency(defaultState.isGroupInOriginalCurrency));
+      dispatch(setViewCashOutOnly(defaultState.isViewCashOutOnly));
+      dispatch(setExcludeTestData(defaultState.isExcludeTestData));
+      dispatch(setSelectedGroupByOption(defaultState.selectedGroupByOption));
+      dispatch(setSelectedBreakDownByOption(defaultState.selectedBreakDownByOption));
+      dispatch(setSubsidiarySearch(false));
+      dispatch(setSubsidiaryList(""));
+      dispatch(setAppUuid(`${Object(uuid__WEBPACK_IMPORTED_MODULE_13__["v4"])()}`));
+    });
+  });
+  return {
+    submit,
+    onClickClearFilter
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (useFilterAction);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useFilterHandler.jsx":
+/*!**********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useFilterHandler.jsx ***!
+  \**********************************************************************************************/
+/*! exports provided: useFilterHandler */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useFilterHandler", function() { return useFilterHandler; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var _common_Service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/Service */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+const useFilterHandler = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useDispatch"])();
+  const {
+    defaultSelectedSubsidiary
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  const {
+    setUsername,
+    setSubsidiaryList,
+    setSelectedStatus,
+    setSelectedProduct,
+    getSportList,
+    getBetTypeList,
+    setSelectedSport,
+    setSelectedBettype,
+    setDateRange,
+    setViewCashOutOnly,
+    setSelectedLiveStatus,
+    setSelectedCustomerClass,
+    setSelectedOddsGroup,
+    setSelectedPlatform,
+    setSelectedCurrency,
+    setSelectedBaseCurrency,
+    changeIsConvertAll,
+    setSubsidiarySearch,
+    setSelectedVipOnly,
+    setSearchMode,
+    setGroupInOriginalCurrency,
+    setExcludeTestData
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_1__["ActionCreators"];
+  const onUserNameInputHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(value => dispatch(setUsername(value)), []);
+  const onSubsidiaryDropDownChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSubsidiaryList(selectedItemsKey)), []);
+  const onDateRangeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((date, isValidMonthRange = true) => {
+    if (isValidMonthRange) {
+      dispatch(setDateRange(date));
+    } else {
+      const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("DateRangeExceedMsg").replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].dateConstraint.limitedMonthRange);
+      alert(message);
+    }
+  }, []);
+  const onStatusChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedStatus(selectedItemsKey)), []);
+  const onLiveStatusChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedLiveStatus(selectedItemsKey)), []);
+  const onProductChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => {
+    Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["batch"])(() => {
+      dispatch(setSelectedProduct(selectedItemsKey));
+      if (!_common_Service__WEBPACK_IMPORTED_MODULE_5__["default"].isContainProductSportBookOrBa(selectedItemsKey)) {
+        dispatch(setViewCashOutOnly(false));
+      }
+      dispatch(getSportList(selectedItemsKey));
+      dispatch(getBetTypeList(selectedItemsKey));
+    });
+  }, []);
+  const onSportChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedSport(selectedItemsKey)), []);
+  const onBetTypeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedBettype(selectedItemsKey)), []);
+  const onRiskLevelChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => {
+    const customerClass = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].riskLevelList.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
+    dispatch(setSelectedCustomerClass(customerClass));
+  }, []);
+  const onOddsGroupChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedOddsGroup(selectedItemsKey)), []);
+  const onPlatformChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedPlatform(selectedItemsKey)), []);
+  const onCurrencyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedCurrency(selectedItemsKey)), []);
+  const onBaseCurrencyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(item => dispatch(setSelectedBaseCurrency(item.value)), []);
+  const onConverAllChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(changeIsConvertAll(checked)), []);
+  const onVipOnlyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(item => dispatch(setSelectedVipOnly(item.value)), []);
+  const onGroupInOriginalCurrencyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(setGroupInOriginalCurrency(checked)), []);
+  const onExcludeTextDataChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(setExcludeTestData(checked)), []);
+  const onCashOutOnlyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(setViewCashOutOnly(checked)), []);
+  const onSearchModeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(event => {
+    const {
+      value
+    } = event.target;
+    dispatch(setSearchMode(value));
+  }, []);
+  const onSubsidiaryCheckBoxChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => {
+    dispatch(setSubsidiarySearch(checked));
+    checked && dispatch(setSubsidiaryList(defaultSelectedSubsidiary));
+  }, []);
+  return {
+    onUserNameInputHandler,
+    onSubsidiaryDropDownChangeHandler,
+    onStatusChangeHandler,
+    onProductChangeHandler,
+    onSportChangeHandler,
+    onBetTypeChangeHandler,
+    onLiveStatusChangeHandler,
+    onDateRangeChangeHandler,
+    onRiskLevelChangeHandler,
+    onOddsGroupChangeHandler,
+    onPlatformChangeHandler,
+    onVipOnlyChangeHandler,
+    onCurrencyChangeHandler,
+    onBaseCurrencyChangeHandler,
+    onConverAllChangeHandler,
+    onSubsidiaryCheckBoxChangeHandler,
+    onSearchModeChangeHandler,
+    onGroupInOriginalCurrencyChangeHandler,
+    onExcludeTextDataChangeHandler,
+    onCashOutOnlyChangeHandler
+  };
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useGroupFilterHandler.jsx":
+/*!***************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useGroupFilterHandler.jsx ***!
+  \***************************************************************************************************/
+/*! exports provided: useGroupFilterHandler, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useGroupFilterHandler", function() { return useGroupFilterHandler; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
+/* harmony import */ var _common_Service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/Service */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+
+
+
+
+
+const useGroupFilterHandler = () => {
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useDispatch"])();
+  const selectedGroupByOption = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => state.selectedGroupByOption);
+  const {
+    setSelectedGroupByOption,
+    setSelectedBreakDownByOption,
+    setGroupInOriginalCurrency
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_1__["ActionCreators"];
+  const _setValueForIsDisplayInOriginalCurrencyFilter = (groupByMode, breakdownByMode) => {
+    const currentMapping = _common_constants__WEBPACK_IMPORTED_MODULE_4__["DisplayGroupBreakDownMapping"].find(item => item.groupByMode == groupByMode && item.breakdownMode == breakdownByMode);
+    if (!currentMapping.isDisplayBreakDownInCurrency) {
+      dispatch(setGroupInOriginalCurrency(currentMapping.isDisplayBreakDownInCurrency));
+    }
+  };
+  const onChangeGroupByOption = Object(react__WEBPACK_IMPORTED_MODULE_3__["useCallback"])(event => {
+    const groupMode = event.target.value;
+    const breakDownOption = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].buildBreakDownOptionFromGroupByMode(groupMode);
+    const firstEnabledSelectBreakDown = breakDownOption.find(item => !item.isDisabled);
+    Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["batch"])(() => {
+      dispatch(setSelectedGroupByOption(groupMode));
+      dispatch(setSelectedBreakDownByOption(firstEnabledSelectBreakDown.value));
+    });
+    _setValueForIsDisplayInOriginalCurrencyFilter(groupMode, firstEnabledSelectBreakDown.value);
+  }, []);
+  const onChangeBreakByOption = Object(react__WEBPACK_IMPORTED_MODULE_3__["useCallback"])(event => {
+    const mode = event.target.value;
+    dispatch(setSelectedBreakDownByOption(mode));
+    _setValueForIsDisplayInOriginalCurrencyFilter(selectedGroupByOption, mode);
+  }, [selectedGroupByOption]);
+  return {
+    onChangeGroupByOption,
+    onChangeBreakByOption
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (useGroupFilterHandler);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useIsDisabledGroupInOriginalCurrency.jsx":
+/*!******************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useIsDisabledGroupInOriginalCurrency.jsx ***!
+  \******************************************************************************************************************/
+/*! exports provided: useIsDisabledGroupInOriginalCurrency, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useIsDisabledGroupInOriginalCurrency", function() { return useIsDisabledGroupInOriginalCurrency; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+
+
+const useIsDisabledGroupInOriginalCurrency = () => {
+  const [selectedGroupByOption, selectedBreakDownByOption] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedGroupByOption, state.selectedBreakDownByOption], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
+  const currentMapping = _common_constants__WEBPACK_IMPORTED_MODULE_1__["DisplayGroupBreakDownMapping"].find(item => item.groupByMode == selectedGroupByOption && item.breakdownMode == selectedBreakDownByOption);
+  return !currentMapping.isDisplayBreakDownInCurrency;
+};
+/* harmony default export */ __webpack_exports__["default"] = (useIsDisabledGroupInOriginalCurrency);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useRenderRowOption.jsx":
+/*!************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useRenderRowOption.jsx ***!
+  \************************************************************************************************/
+/*! exports provided: useRenderRowOption, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useRenderRowOption", function() { return useRenderRowOption; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _common_Service_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/Service.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var _common_constants_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/constants.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+
+
+
+const useRenderRowOption = () => {
+  const [requestParam, selectedProduct] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.requestParam, state.selectedProduct]);
+  const isShowBAField = _common_Service_js__WEBPACK_IMPORTED_MODULE_1__["default"].isContainBAProduct(selectedProduct);
+  const isGroupByPlayerMode = requestParam.GroupMode == _common_constants_js__WEBPACK_IMPORTED_MODULE_2__["GroupByMode"].Player;
+  const isShowBetEffectiveField = isGroupByPlayerMode;
+  const isBreakDownPlayerMode = requestParam.BreakdownMode == _common_constants_js__WEBPACK_IMPORTED_MODULE_2__["BreakdownByMode"].Player;
+  return {
+    isShowBAField,
+    isGroupByPlayerMode,
+    isBreakDownPlayerMode,
+    isShowBetEffectiveField
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (useRenderRowOption);
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useValidParam.jsx":
+/*!*******************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useValidParam.jsx ***!
+  \*******************************************************************************************/
+/*! exports provided: useValidParam */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useValidParam", function() { return useValidParam; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+const useValidParam = () => {
+  const [selectedProduct, selectedStatus, selectedPlatform, selectedLiveStatus, selectedCurrency, selectedCustomerClass, selectedOddsGroup, selectedBettype, selectedSport] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedProduct, state.selectedStatus, state.selectedPlatform, state.selectedLiveStatus, state.selectedCurrency, state.selectedCustomerClass, state.selectedOddsGroup, state.selectedBettype, state.selectedSport], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
+  return !!selectedProduct && !!selectedStatus && !!selectedLiveStatus && !!selectedCurrency && !!selectedBettype && !!selectedSport && !!selectedPlatform && !!selectedCustomerClass && !!selectedOddsGroup;
+};
 
 /***/ }),
 
@@ -6925,6 +8418,1101 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   }
 }
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('app-container'));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileBreakdownRow.jsx":
+/*!*************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileBreakdownRow.jsx ***!
+  \*************************************************************************************************/
+/*! exports provided: MobileBreakdownRow, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileBreakdownRow", function() { return MobileBreakdownRow; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MobileExpandRowContent */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileExpandRowContent.jsx");
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../common/constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _hooks_useRenderRowOption__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useRenderRowOption */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useRenderRowOption.jsx");
+/* harmony import */ var _jsroot_components_mobile_component_CompositeRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/mobile-component/CompositeRow */ "./www/js/source/reactpages/components/mobile-component/CompositeRow.jsx");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
+const MobileBreakdownRow = props => {
+  const {
+    data,
+    selectedDisplayTypeId
+  } = props;
+  const {
+    isShowBAField,
+    isShowBetEffectiveField,
+    isBreakDownPlayerMode
+  } = Object(_hooks_useRenderRowOption__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  const {
+    betCount,
+    turnover,
+    netTurnover,
+    playerWinloss,
+    playerComm,
+    betEffective,
+    licWinloss,
+    licComm,
+    amtDueToBA,
+    margin,
+    groupBy,
+    breakBy,
+    externalId,
+    systemId,
+    breakDownFieldText
+  } = data;
+  const expandRows = [];
+  expandRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].BetCount,
+    value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].format(betCount)
+  }));
+  expandRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].NetTurnOver,
+    value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(netTurnover)
+  }));
+  {
+    isShowBetEffectiveField && expandRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].EffectiveBettingValue,
+      value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(betEffective)
+    }));
+  }
+  expandRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].PlayerComm,
+    value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(playerComm)
+  }));
+  expandRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].LicenseeWL,
+    value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(licWinloss),
+    valueClass: licWinloss < 0 ? "negative" : ""
+  }));
+  expandRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].LicenseeComm,
+    value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(licComm)
+  }));
+  {
+    isShowBAField && expandRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].AmountDueToBA,
+      value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(amtDueToBA)
+    }));
+  }
+  expandRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].Margin,
+    value: `${_jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(margin * 100)}%`,
+    valueClass: margin < 0 ? "negative" : ""
+  }));
+  const idColumnText = selectedDisplayTypeId == _common_constants__WEBPACK_IMPORTED_MODULE_3__["MobileGroupByHeaderDisplayType"].ExternalId ? externalId : systemId;
+  const displayColumnName = isBreakDownPlayerMode ? idColumnText : breakDownFieldText;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_mobile_component_CompositeRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    key: `breakdown-row-${groupBy}-${breakBy}`,
+    expandRows: expandRows,
+    className: "detail-row parent-row",
+    collapaseRowClass: "detail-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__["Cell"], null, displayColumnName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__["Cell"], {
+    className: "right-align"
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(turnover)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__["Cell"], {
+    className: "right-align"
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(playerWinloss)));
+};
+const propTypes = {
+  data: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
+  selectedDisplayTypeId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string])
+};
+const defaultProps = {
+  data: []
+};
+MobileBreakdownRow.propTypes = propTypes;
+MobileBreakdownRow.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileBreakdownRow));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileDataGrid.jsx":
+/*!*********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileDataGrid.jsx ***!
+  \*********************************************************************************************/
+/*! exports provided: MobileDataGrid, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileDataGrid", function() { return MobileDataGrid; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/index.js");
+/* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/ReportTitle */ "./www/js/source/reactpages/components/ReportTitle.jsx");
+/* harmony import */ var _common_constants_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/constants.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+/* harmony import */ var _jsroot_components_mobile_component_RefPager__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/mobile-component/RefPager */ "./www/js/source/reactpages/components/mobile-component/RefPager.jsx");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+/* harmony import */ var _legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @legion-lib/react-grid */ "./node_modules/@legion-lib/react-grid/dist/index.js");
+/* harmony import */ var _legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _jsroot_components_dropdown_DrowdownRadioList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/components/dropdown/DrowdownRadioList */ "./www/js/source/reactpages/components/dropdown/DrowdownRadioList.jsx");
+/* harmony import */ var _MobileGroupByRowList__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./MobileGroupByRowList */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByRowList.jsx");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _hooks_useRenderRowOption_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../hooks/useRenderRowOption.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useRenderRowOption.jsx");
+/* harmony import */ var _ReportTitleContent_jsx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ReportTitleContent.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/ReportTitleContent.jsx");
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const VerySmallColumnWidths = [32, 32, 32, 13];
+const SmallColumnWidths = [125, 105, 110, 26];
+const LargeColumnWidths = ['31%', '31%', '31%', '7%'];
+const MobileDataGrid = () => {
+  const [requestParam, reportData, reloadReport] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.requestParam, state.reportData, state.reportTitle, state.reloadReport, state.selectedProduct], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const ref = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const [pagerRef, pagerSize] = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_7__["useElementSize"])();
+  const [id, setId] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(`${Object(uuid__WEBPACK_IMPORTED_MODULE_8__["v4"])()}`);
+  const [headerDisplayType, setHeaderDisplayType] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(_common_constants_js__WEBPACK_IMPORTED_MODULE_5__["MobileGroupByHeaderDisplayType"].ExternalId);
+  const {
+    setRequestParam,
+    toggleLoader,
+    getReportData
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    width
+  } = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_7__["useWindowSize"])();
+  const {
+    data,
+    sumTotal,
+    totalRow
+  } = reportData;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    dispatch(toggleLoader(false));
+    setId(`${Object(uuid__WEBPACK_IMPORTED_MODULE_8__["v4"])()}`);
+  }, [reportData]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    var _ref$current;
+    const style = `bottom: ${pagerSize.height - 1}px`;
+    (_ref$current = ref.current) === null || _ref$current === void 0 || (_ref$current = _ref$current.getElementsByClassName('footer-content')[0]) === null || _ref$current === void 0 || _ref$current.setAttribute('style', style);
+  }, [pagerSize === null || pagerSize === void 0 ? void 0 : pagerSize.height, id]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    var _ref$current2;
+    (_ref$current2 = ref.current) === null || _ref$current2 === void 0 || _ref$current2.scrollIntoView();
+  }, [id]);
+  const {
+    isBreakDownPlayerMode,
+    isGroupByPlayerMode
+  } = Object(_hooks_useRenderRowOption_jsx__WEBPACK_IMPORTED_MODULE_14__["default"])();
+  const isDisplayHeaderDropdownOption = isBreakDownPlayerMode || isGroupByPlayerMode;
+  const dataSource = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => [{
+    id: _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["MobileGroupByHeaderDisplayType"].ExternalId,
+    text: _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["HeaderText"].ExternalId
+  }, {
+    id: _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["MobileGroupByHeaderDisplayType"].SystemId,
+    text: _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["HeaderText"].SystemId
+  }], []);
+  const onChangeIdDisplayType = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(event => {
+    const {
+      value
+    } = event.target;
+    setHeaderDisplayType(value);
+  }, [setHeaderDisplayType]);
+  const collumnWidths = width > 500 ? LargeColumnWidths : width > 370 ? SmallColumnWidths : VerySmallColumnWidths;
+  const _renderHeader = () => {
+    const className = isDisplayHeaderDropdownOption ? 'cell-dropdown' : '';
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["HeaderRow"], {
+      key: id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["HeaderCell"], {
+      colWidth: collumnWidths[0],
+      className: className
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "w100 cell-header-groupby"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["HeaderText"].GroupBy), isDisplayHeaderDropdownOption && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_dropdown_DrowdownRadioList__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      id: "dropdown-header",
+      key: "dropdown-header",
+      className: "search-option",
+      dataSource: dataSource,
+      selectedValue: headerDisplayType,
+      onChange: onChangeIdDisplayType,
+      keySelector: "id",
+      valueSelector: "text"
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["HeaderCell"], {
+      colWidth: collumnWidths[1],
+      sortBy: _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["SortBy"].Turnover
+    }, _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["HeaderText"].TurnOver), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["HeaderCell"], {
+      colWidth: collumnWidths[2],
+      sortBy: _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["SortBy"].MemWinloss
+    }, _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["HeaderText"].PlayerWL), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["HeaderCell"], {
+      colWidth: collumnWidths[3]
+    }));
+  };
+  const _renderFooter = () => {
+    if (!sumTotal) {
+      return;
+    }
+    const {
+      turnover,
+      playerWinloss
+    } = sumTotal;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["Row"], {
+      className: "fixed-table-grant-total"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["Cell"], {
+      colSpan: "2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "cell-total"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "total-text flex-initial"
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_13__["default"].getSingleResource('Total')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "flex-auto right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_12__["default"].formatDecimal(turnover)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["Cell"], {
+      className: "right-align cell-total-winloss border-r-0"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_12__["default"].formatDecimal(playerWinloss)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["Cell"], {
+      className: "border-l-0"
+    }));
+  };
+  const header = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _renderHeader(), [isDisplayHeaderDropdownOption, headerDisplayType, onChangeIdDisplayType, id]);
+  const body = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileGroupByRowList__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    key: id,
+    dataList: data,
+    selectedDisplayTypeId: headerDisplayType
+  }), [data, headerDisplayType, id]);
+  const footer = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _renderFooter(), [sumTotal]);
+  const currenPagingOption = {
+    PageIndex: requestParam.PageIndex,
+    PageSize: requestParam.PageSize,
+    TotalItem: totalRow,
+    PageList: _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["DefaultPagingOption"].PageList
+  };
+  const submitRequest = params => {
+    dispatch(setRequestParam(params));
+    dispatch(toggleLoader(true));
+    dispatch(getReportData(params));
+  };
+  const onSort = (sortBy, sortOrder) => {
+    const requestSortOrder = sortOrder == "asc" ? _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["SortOrder"].ASC : _common_constants_js__WEBPACK_IMPORTED_MODULE_5__["SortOrder"].DESC;
+    const params = _objectSpread(_objectSpread({}, requestParam), {}, {
+      SortBy: sortBy,
+      SortOrder: requestSortOrder
+    });
+    submitRequest(params);
+  };
+  const onPaging = (pageIndex, pageSize) => {
+    const params = _objectSpread(_objectSpread({}, requestParam), {}, {
+      PageSize: pageSize,
+      PageIndex: pageIndex
+    });
+    submitRequest(params);
+  };
+  if (!data) {
+    return null;
+  }
+  if (!data.length) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_3__["default"], null);
+  }
+  const isShowPagingInfo = pagerSize.width > 400;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mobile-table result-content",
+    ref: ref
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReportTitleContent_jsx__WEBPACK_IMPORTED_MODULE_15__["default"], null),
+    tag: "div"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_grid__WEBPACK_IMPORTED_MODULE_9__["Table"], {
+    key: `table-winloss-analysis-${requestParam.SubmitTime}`,
+    autoWidth: true,
+    autoHeight: false,
+    header: header,
+    body: body,
+    footer: footer,
+    isPaging: false,
+    pageOption: currenPagingOption,
+    shouldResetScrollPosition: reloadReport,
+    bodyHeight: "100%",
+    containerPadding: 2,
+    isIncludeScrollWidth: false,
+    onSort: onSort
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_mobile_component_RefPager__WEBPACK_IMPORTED_MODULE_6__["RefPager"], {
+    ref: pagerRef,
+    onPaging: onPaging,
+    pageOption: currenPagingOption,
+    isShowPagingInfo: isShowPagingInfo
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileDataGrid));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileExpandRowContent.jsx":
+/*!*****************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileExpandRowContent.jsx ***!
+  \*****************************************************************************************************/
+/*! exports provided: MobileExpandRowContent, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileExpandRowContent", function() { return MobileExpandRowContent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+const MobileExpandRowContent = props => {
+  const {
+    text,
+    value,
+    className,
+    valueClass
+  } = props;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_2__["Cell"], {
+    className: className,
+    colSpan: 4
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex detail-content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "text w100"
+  }, text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: `w100 right-align ${valueClass}`
+  }, value)));
+};
+const propTypes = {
+  text: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  value: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string]),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  valueClass: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string
+};
+const defaultProps = {
+  className: '',
+  valueClass: ''
+};
+MobileExpandRowContent.propTypes = propTypes;
+MobileExpandRowContent.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileExpandRowContent));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileFormFilter.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileFormFilter.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: MobileFormFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileFormFilter", function() { return MobileFormFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _MobileMainFilter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MobileMainFilter */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileMainFilter.jsx");
+/* harmony import */ var _MobileGroupByFilter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MobileGroupByFilter */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByFilter.jsx");
+
+
+
+
+const MobileFormFilter = () => {
+  const [isCollapsed, setIsCollapsed] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
+  const onCollapse = () => {
+    setIsCollapsed(true);
+  };
+  const onExpand = () => {
+    setIsCollapsed(false);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "mobile-mode aggregate-filter",
+    onCollapse: onCollapse,
+    onExpand: onExpand,
+    isInitCollapsed: true,
+    isCustomCollapse: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileMainFilter__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    isCollapsed: isCollapsed
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileGroupByFilter__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    isCollapsed: isCollapsed
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileFormFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByFilter.jsx":
+/*!**************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByFilter.jsx ***!
+  \**************************************************************************************************/
+/*! exports provided: MobileGroupByFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileGroupByFilter", function() { return MobileGroupByFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _hooks_useValidParam__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useValidParam */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useValidParam.jsx");
+/* harmony import */ var _hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFilterAction */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useFilterAction.jsx");
+/* harmony import */ var _filters_GroupByOptionsFilter_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../filters/GroupByOptionsFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/GroupByOptionsFilter.jsx");
+/* harmony import */ var _filters_BreakDownOptionFilter_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../filters/BreakDownOptionFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BreakDownOptionFilter.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/StickyIcon.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/StickyIcon.jsx");
+
+
+
+
+
+
+
+
+
+const MobileGroupByFilter = props => {
+  const {
+    isCollapsed
+  } = props;
+  const isValidModel = Object(_hooks_useValidParam__WEBPACK_IMPORTED_MODULE_3__["useValidParam"])();
+  const {
+    submit,
+    onClickClearFilter
+  } = Object(_hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  const collapsedStyle = isCollapsed ? {
+    display: "none"
+  } : {};
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: "page-filter",
+    isCollapseMode: false
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row flex w100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w100",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex flex-col"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 "
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_GroupByOptionsFilter_jsx__WEBPACK_IMPORTED_MODULE_5__["GroupByOptionFilter"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BreakDownOptionFilter_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex flex-center w100 flex-wrap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group flex-auto"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "button-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    disabled: !isValidModel,
+    className: "btn btn-submit",
+    onClick: submit
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Submit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "btn btn-outline-secondary",
+    onClick: onClickClearFilter
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("ClearAllFilters")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex flex-initial"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null)))));
+};
+const propTypes = {
+  isCollapsed: prop_types__WEBPACK_IMPORTED_MODULE_7___default.a.bool
+};
+const defaultProps = {
+  isCollapsed: true
+};
+MobileGroupByFilter.propTypes = propTypes;
+MobileGroupByFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileGroupByFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByRow.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByRow.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: MobileGroupByRow, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileGroupByRow", function() { return MobileGroupByRow; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MobileExpandRowContent */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileExpandRowContent.jsx");
+/* harmony import */ var _common_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../common/constants */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _hooks_useRenderRowOption__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useRenderRowOption */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useRenderRowOption.jsx");
+/* harmony import */ var _components_mobile_component_CompositeRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../components/mobile-component/CompositeRow */ "./www/js/source/reactpages/components/mobile-component/CompositeRow.jsx");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @9softstudio/react-grid */ "./node_modules/@9softstudio/react-grid/dist/index.js");
+/* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _MobileBreakdownRow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./MobileBreakdownRow */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileBreakdownRow.jsx");
+
+
+
+
+
+
+
+
+
+const MobileGroupByRow = props => {
+  const {
+    data,
+    selectedDisplayTypeId
+  } = props;
+  const {
+    isShowBAField,
+    isShowBetEffectiveField,
+    isGroupByPlayerMode
+  } = Object(_hooks_useRenderRowOption__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  const [isBreakdown, setIsBreakdown] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const [collapseRef, setCollapseRef] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+  const parentData = data.keyItem;
+  const children = data.children;
+  const {
+    groupByFieldText,
+    betCount,
+    turnover,
+    netTurnover,
+    playerWinloss,
+    playerComm,
+    betEffective,
+    licWinloss,
+    licComm,
+    amtDueToBA,
+    margin,
+    externalId,
+    systemId
+  } = parentData;
+  const _onCollapsed = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
+    setIsBreakdown(false);
+  }, []);
+  const _onExpanded = Object(react__WEBPACK_IMPORTED_MODULE_0__["useCallback"])(() => {
+    setIsBreakdown(true);
+  }, []);
+  const _getDetailRows = () => {
+    const detailRows = [];
+    detailRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].BetCount,
+      value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].format(betCount)
+    }));
+    detailRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].NetTurnOver,
+      value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(netTurnover)
+    }));
+    {
+      isShowBetEffectiveField && detailRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].EffectiveBettingValue,
+        value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(betEffective)
+      }));
+    }
+    detailRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].PlayerComm,
+      value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(playerComm)
+    }));
+    detailRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].LicenseeWL,
+      value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(licWinloss),
+      valueClass: licWinloss < 0 ? "negative" : ""
+    }));
+    detailRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].LicenseeComm,
+      value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(licComm)
+    }));
+    {
+      isShowBAField && detailRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].AmountDueToBA,
+        value: _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(amtDueToBA)
+      }));
+    }
+    detailRows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileExpandRowContent__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      text: _common_constants__WEBPACK_IMPORTED_MODULE_3__["HeaderText"].Margin,
+      value: `${_jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(margin * 100)}%`,
+      valueClass: margin < 0 ? "negative" : ""
+    }));
+    return detailRows;
+  };
+  const detailRows = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => _getDetailRows(), [parentData, isShowBetEffectiveField, isShowBAField]);
+  const breakDownRowList = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(() => children.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileBreakdownRow__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    key: `${item.groupBy}-${item.breakBy}`,
+    data: item,
+    selectedDisplayTypeId: selectedDisplayTypeId
+  })), [children, selectedDisplayTypeId]);
+  const idColumnText = selectedDisplayTypeId == _common_constants__WEBPACK_IMPORTED_MODULE_3__["MobileGroupByHeaderDisplayType"].ExternalId ? externalId : systemId;
+  const displayColumnName = isGroupByPlayerMode ? idColumnText : groupByFieldText;
+  const arrowClass = isBreakdown ? 'down-arrow' : 'right-arrow';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_mobile_component_CompositeRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    expandRows: breakDownRowList,
+    isUseCustomHoverRow: true,
+    isUseCustomCollapseCell: true,
+    refCollapseObject: collapseRef,
+    isUseCumtomCollapseRow: true,
+    onCollapsed: _onCollapsed,
+    onExpanded: _onExpanded
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_mobile_component_CompositeRow__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    expandRows: detailRows,
+    collapaseRowClass: "main-collapse-row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__["Cell"], {
+    className: "left-align"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    ref: setCollapseRef,
+    className: "flex w100 flex-center",
+    style: {
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "w100 main-text",
+    title: displayColumnName
+  }, displayColumnName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: `arrow-icon ${arrowClass}`
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__["Cell"], {
+    className: "right-align"
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(turnover)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_7__["Cell"], {
+    className: "right-align"
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_4__["default"].formatDecimal(playerWinloss))));
+};
+const propTypes = {
+  data: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.object,
+  groupByFieldName: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
+  selectedDisplayTypeId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string])
+};
+const defaultProps = {
+  groupByFieldName: 'breakDownFieldText'
+};
+MobileGroupByRow.propTypes = propTypes;
+MobileGroupByRow.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileGroupByRow));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByRowList.jsx":
+/*!***************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByRowList.jsx ***!
+  \***************************************************************************************************/
+/*! exports provided: MobileGroupByRowList, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileGroupByRowList", function() { return MobileGroupByRowList; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _MobileGroupByRow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MobileGroupByRow */ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileGroupByRow.jsx");
+
+
+
+const MobileGroupByRowList = props => {
+  const {
+    dataList,
+    selectedDisplayTypeId
+  } = props;
+  return dataList.map(item => {
+    const parentData = item.keyItem;
+    const {
+      rowIndex,
+      groupBy
+    } = parentData;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MobileGroupByRow__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      key: `row-${rowIndex}-${groupBy}`,
+      data: item,
+      selectedDisplayTypeId: selectedDisplayTypeId
+    });
+  });
+};
+const propTypes = {
+  dataList: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.array,
+  selectedDisplayTypeId: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.number])
+};
+MobileGroupByRowList.propTypes = propTypes;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileGroupByRowList));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileMainFilter.jsx":
+/*!***********************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/MobileMainFilter.jsx ***!
+  \***********************************************************************************************/
+/*! exports provided: MobileMainFilter, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MobileMainFilter", function() { return MobileMainFilter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/lib/index.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency */ "./www/js/source/reactpages/customHooks/useBaseCurrencyForMultiSelectCurrency.jsx");
+/* harmony import */ var _hooks_useFilterHandler_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hooks/useFilterHandler.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useFilterHandler.jsx");
+/* harmony import */ var _hooks_useIsDisabledGroupInOriginalCurrency_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../hooks/useIsDisabledGroupInOriginalCurrency.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/hooks/useIsDisabledGroupInOriginalCurrency.jsx");
+/* harmony import */ var _filters_SubsidiaryDropDownFilter_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/SubsidiaryDropDownFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SubsidiaryDropDownFilter.jsx");
+/* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var _filters_DateRangeFilter_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../filters/DateRangeFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/DateRangeFilter.jsx");
+/* harmony import */ var _common_Service_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../common/Service.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
+/* harmony import */ var _filters_ProductFilter_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../filters/ProductFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ProductFilter.jsx");
+/* harmony import */ var _filters_SportFilter_jsx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../filters/SportFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SportFilter.jsx");
+/* harmony import */ var _filters_BetTypeFilter_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../filters/BetTypeFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BetTypeFilter.jsx");
+/* harmony import */ var _filters_PlatformFilter_jsx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../filters/PlatformFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/PlatformFilter.jsx");
+/* harmony import */ var _filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../filters/StatusFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/StatusFilter.jsx");
+/* harmony import */ var _filters_LiveStatusFilter_jsx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../filters/LiveStatusFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/LiveStatusFilter.jsx");
+/* harmony import */ var _filters_BaseCurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../filters/BaseCurrencyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/BaseCurrencyFilter.jsx");
+/* harmony import */ var _filters_VipOnlyFilter_jsx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../filters/VipOnlyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/VipOnlyFilter.jsx");
+/* harmony import */ var _filters_RiskLevelFilter_jsx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../filters/RiskLevelFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/RiskLevelFilter.jsx");
+/* harmony import */ var _filters_OddsGroupFilter_jsx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../filters/OddsGroupFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/OddsGroupFilter.jsx");
+/* harmony import */ var _filters_UserNameFilter_jsx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../filters/UserNameFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/UserNameFilter.jsx");
+/* harmony import */ var _filters_GroupInOriginalCurrencyCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../filters/GroupInOriginalCurrencyCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/GroupInOriginalCurrencyCheckBoxFilter.jsx");
+/* harmony import */ var _filters_ExcludeTestDataCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../filters/ExcludeTestDataCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ExcludeTestDataCheckBoxFilter.jsx");
+/* harmony import */ var _filters_ViewCashOutOnlyFilter_jsx__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../filters/ViewCashOutOnlyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ViewCashOutOnlyFilter.jsx");
+/* harmony import */ var _filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../filters/SubsidiaryCheckBoxFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/SubsidiaryCheckBoxFilter.jsx");
+/* harmony import */ var _filters_CurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../filters/CurrencyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/CurrencyFilter.jsx");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_28__);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const MobileMainFilter = props => {
+  const {
+    isCollapsed
+  } = props;
+  const {
+    appUuid,
+    dateRange,
+    selectedProduct,
+    selectedSport,
+    sportList,
+    selectedBettype,
+    bettypeList,
+    selectedPlatform,
+    selectedStatus,
+    selectedLiveStatus,
+    selectedBaseCurrency,
+    selectedVipOnly,
+    selectedCustomerClass,
+    selectedOddsGroup,
+    searchMode,
+    isGroupInOriginalCurrency,
+    isExcludeTestData,
+    isViewCashOutOnly,
+    selectedCurrency
+  } = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state, react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const {
+    isShowSubsidiaryDropdown,
+    isSubsidiarySearch,
+    isShowSubsidiarySearchCheckBox
+  } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_9__["default"])();
+  const {
+    baseCurrencyList,
+    selectedBaseCurrency: newBaseCurrency
+  } = Object(_jsroot_customHooks_useBaseCurrencyForMultiSelectCurrency__WEBPACK_IMPORTED_MODULE_5__["default"])(selectedBaseCurrency);
+  const {
+    onSubsidiaryDropDownChangeHandler,
+    onDateRangeChangeHandler,
+    onProductChangeHandler,
+    onSportChangeHandler,
+    onBetTypeChangeHandler,
+    onPlatformChangeHandler,
+    onStatusChangeHandler,
+    onLiveStatusChangeHandler,
+    onBaseCurrencyChangeHandler,
+    onVipOnlyChangeHandler,
+    onRiskLevelChangeHandler,
+    onOddsGroupChangeHandler,
+    onSearchModeChangeHandler,
+    onUserNameInputHandler,
+    onGroupInOriginalCurrencyChangeHandler,
+    onExcludeTextDataChangeHandler,
+    onCashOutOnlyChangeHandler,
+    onSubsidiaryCheckBoxChangeHandler,
+    onCurrencyChangeHandler
+  } = Object(_hooks_useFilterHandler_jsx__WEBPACK_IMPORTED_MODULE_6__["useFilterHandler"])();
+  const {
+    isOfferCashOutProduct,
+    isHasPermissionViewVip
+  } = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"];
+  const isEnableCashOutFilter = _common_Service_js__WEBPACK_IMPORTED_MODULE_11__["default"].isContainProductSportBookOrBa(selectedProduct);
+  const isDisabledGroupInOriginalCurrency = Object(_hooks_useIsDisabledGroupInOriginalCurrency_jsx__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    onProductChangeHandler(null, selectedProduct);
+  }, [appUuid]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    onBaseCurrencyChangeHandler({
+      value: newBaseCurrency
+    });
+  }, [newBaseCurrency]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    onSubsidiaryCheckBoxChangeHandler(!isShowSubsidiarySearchCheckBox && isShowSubsidiaryDropdown);
+  }, []);
+  const collapsedStyle = isCollapsed ? {
+    display: "none"
+  } : {};
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    className: "page-filter",
+    isCollapseMode: false
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_2__["ToastContainer"], {
+    autoClose: 10000,
+    pauseOnFocusLoss: false,
+    style: {
+      width: "500px"
+    },
+    transition: react_toastify__WEBPACK_IMPORTED_MODULE_2__["Flip"]
+  }), isShowSubsidiaryDropdown && isSubsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryDropDownFilter_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    key: `subsidiary-${appUuid}`,
+    onChange: onSubsidiaryDropDownChangeHandler
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_DateRangeFilter_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    key: `date-${appUuid}`,
+    onChange: onDateRangeChangeHandler,
+    dateRange: dateRange,
+    isMobile: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ProductFilter_jsx__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    key: `product-${appUuid}`,
+    onChange: onProductChangeHandler,
+    isValid: !!selectedProduct,
+    value: selectedProduct
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SportFilter_jsx__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    key: `sport-${appUuid}`,
+    onChange: onSportChangeHandler,
+    isValid: !!selectedSport,
+    dataSource: sportList
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BetTypeFilter_jsx__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    key: `bettype-${appUuid}`,
+    onChange: onBetTypeChangeHandler,
+    isValid: !!selectedBettype,
+    dataSource: bettypeList
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_PlatformFilter_jsx__WEBPACK_IMPORTED_MODULE_15__["default"], {
+    key: `platform-${appUuid}`,
+    onChange: onPlatformChangeHandler,
+    isValid: !!selectedPlatform
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StatusFilter_jsx__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    key: `status-${appUuid}`,
+    onChange: onStatusChangeHandler,
+    isValid: !!selectedStatus
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_LiveStatusFilter_jsx__WEBPACK_IMPORTED_MODULE_17__["default"], {
+    key: `live-status-${appUuid}`,
+    onChange: onLiveStatusChangeHandler,
+    isValid: !!selectedLiveStatus
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_CurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_27__["default"], {
+    key: `currency-${appUuid}`,
+    isValid: !!selectedCurrency,
+    onChange: onCurrencyChangeHandler
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BaseCurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    key: `base-currency-${appUuid}`,
+    onChange: onBaseCurrencyChangeHandler,
+    options: baseCurrencyList,
+    value: selectedBaseCurrency
+  })), isHasPermissionViewVip && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_VipOnlyFilter_jsx__WEBPACK_IMPORTED_MODULE_19__["default"], {
+    key: `vip-only-${appUuid}`,
+    onChange: onVipOnlyChangeHandler,
+    value: selectedVipOnly
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_RiskLevelFilter_jsx__WEBPACK_IMPORTED_MODULE_20__["default"], {
+    key: `risk-level-${appUuid}`,
+    onChange: onRiskLevelChangeHandler,
+    isValid: !!selectedCustomerClass
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_OddsGroupFilter_jsx__WEBPACK_IMPORTED_MODULE_21__["default"], {
+    key: `odds-group-${appUuid}`,
+    onChange: onOddsGroupChangeHandler,
+    isValid: !!selectedOddsGroup
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter_jsx__WEBPACK_IMPORTED_MODULE_22__["default"], {
+    key: `username-${appUuid}`,
+    onChangeSearchMode: onSearchModeChangeHandler,
+    onChangeUserName: onUserNameInputHandler,
+    searchMode: searchMode
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-12 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_GroupInOriginalCurrencyCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    disabled: isDisabledGroupInOriginalCurrency,
+    checked: isGroupInOriginalCurrency,
+    onChange: onGroupInOriginalCurrencyChangeHandler
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ExcludeTestDataCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_24__["default"], {
+    checked: isExcludeTestData,
+    onChange: onExcludeTextDataChangeHandler
+  })), isOfferCashOutProduct && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ViewCashOutOnlyFilter_jsx__WEBPACK_IMPORTED_MODULE_25__["default"], {
+    onChange: onCashOutOnlyChangeHandler,
+    disabled: !isEnableCashOutFilter,
+    checked: isViewCashOutOnly
+  })), isShowSubsidiarySearchCheckBox && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6 col-md-3",
+    style: collapsedStyle
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_26__["default"], {
+    value: isSubsidiarySearch,
+    onChange: onSubsidiaryCheckBoxChangeHandler
+  }))));
+};
+const propTypes = {
+  isCollapsed: prop_types__WEBPACK_IMPORTED_MODULE_28___default.a.bool
+};
+const defaultProps = {
+  isCollapsed: true
+};
+MobileMainFilter.propTypes = propTypes;
+MobileMainFilter.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MobileMainFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/mobile/ReportTitleContent.jsx":
+/*!*************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/mobile/ReportTitleContent.jsx ***!
+  \*************************************************************************************************/
+/*! exports provided: ReportTitleContent, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportTitleContent", function() { return ReportTitleContent; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _ExcelPopUp_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ExcelPopUp.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/ExcelPopUp.jsx");
+/* harmony import */ var usehooks_ts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! usehooks-ts */ "./node_modules/usehooks-ts/dist/esm/index.js");
+/* harmony import */ var _jsroot_components_Overlay_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/components/Overlay.jsx */ "./www/js/source/reactpages/components/Overlay.jsx");
+
+
+
+
+
+const ReportTitleContent = () => {
+  const reportTitle = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.reportTitle);
+  const [isShowTooltipIcon, setIsShowTooltipIcon] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const [isShowTooltip, setIsShowTooltip] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const [setRef, {
+    width
+  }] = Object(usehooks_ts__WEBPACK_IMPORTED_MODULE_3__["useElementSize"])();
+  const titleRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    var _titleRef$current;
+    if (width < ((_titleRef$current = titleRef.current) === null || _titleRef$current === void 0 ? void 0 : _titleRef$current.scrollWidth)) {
+      setIsShowTooltipIcon(true);
+    } else {
+      setIsShowTooltipIcon(false);
+    }
+  }, [width]);
+  const _onClick = () => {
+    setIsShowTooltip(!isShowTooltip);
+  };
+  const _setRef = elem => {
+    titleRef.current = elem;
+    setRef(elem);
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex w100 flex-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    ref: _setRef,
+    className: "flex-auto report-title-text"
+  }, reportTitle), isShowTooltipIcon && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "icon icon-lap-notification flex-initial",
+    onClick: _onClick
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_Overlay_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    isOpening: isShowTooltip
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "overlay-title"
+  }, reportTitle))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ExcelPopUp_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+};
+/* harmony default export */ __webpack_exports__["default"] = (ReportTitleContent);
 
 /***/ }),
 

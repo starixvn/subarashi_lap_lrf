@@ -122,3 +122,8 @@ export const ExportExcelMode = {
     All: 1,
     GroupByLevelOnly: 2
 }
+
+export const MobileGroupByHeaderDisplayType = {
+    ExternalId: 1,
+    SystemId: 2
+}

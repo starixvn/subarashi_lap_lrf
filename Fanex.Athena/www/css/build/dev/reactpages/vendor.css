@@ -359,6 +359,12 @@ template {
 .icon-lap-plus:before {
   content: "\E901"; }
 
+.icon-lap-notification:before {
+  content: "\EA08"; }
+
+.icon-lap-info:before {
+  content: "\EA0C"; }
+
 /* z-index */
 /* Table */
 /* Label Text */

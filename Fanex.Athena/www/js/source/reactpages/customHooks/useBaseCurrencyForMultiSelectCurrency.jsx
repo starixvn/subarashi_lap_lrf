@@ -12,10 +12,12 @@ export const useBaseCurrencyForMultiSelectCurrency = (initSelectedBaseCurrency) 
     const [currentBaseCurrency, setCurrenctBaseCurrency] = useState(selectedBaseCurrency);
 
     useEffect(() => {
-        if (currentBaseCurrency != selectedBaseCurrency) {
+        if (currentBaseCurrency != selectedBaseCurrency)
+        {
             setCurrenctBaseCurrency(selectedBaseCurrency);
         }
     }, [selectedBaseCurrency])
+
 
     useEffect(() => {
         const defaultBaseCurrency = defaultBaseCurrencyRef.current;
@@ -25,7 +27,7 @@ export const useBaseCurrencyForMultiSelectCurrency = (initSelectedBaseCurrency) 
         const _isSingleSelectedCurrency = () => selectedCurrency && selectedCurrency.indexOf(',') < 0
 
         if (_isSingleSelectedCurrency()) {
-            const currencyName = originalCurrencyList.find(x => x.Id == selectedCurrency).Value;
+            const currencyName = originalCurrencyList.find(x => x.id == selectedCurrency).value;
             if (!currentBaseCurrencyList.find(x => x.label === currencyName)) {
                 newBaseCurrency = '';
                 newBaseCurrencyList = originalBaseCurrencyList.slice(0);
@@ -43,11 +45,10 @@ export const useBaseCurrencyForMultiSelectCurrency = (initSelectedBaseCurrency) 
                 defaultBaseCurrency;
         }
 
-
-        if (newBaseCurrencyList != currentBaseCurrencyList) {
+        if (newBaseCurrencyList != currentBaseCurrencyList){
             setCurrentBaseCurrencyList(newBaseCurrencyList);
         }
-        if (newBaseCurrency != currentBaseCurrency) {
+        if (newBaseCurrency != currentBaseCurrency){
             setCurrenctBaseCurrency(newBaseCurrency);
         }
     }, [selectedCurrency])

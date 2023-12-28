@@ -167,6 +167,7 @@
     </Compile>
     <Compile Include="Attributes\ApiUMFilterAttribute.cs" />
     <Compile Include="Attributes\ApiValidateAntiForgeryAttribute.cs" />
+    <Compile Include="Attributes\CompressAttribute.cs" />
     <Compile Include="Attributes\CustomApiAuthorizeAttribute.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
