@@ -2275,7 +2275,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Customer Turnover     .
+        ///   Looks up a localized string similar to Customer Turnover.
         /// </summary>
         public static string CustomerTurnover {
             get {

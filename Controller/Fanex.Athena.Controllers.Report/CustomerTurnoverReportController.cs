@@ -250,7 +250,7 @@
                             : "- " + ViewResources.Username + ": " + metaModel.Username;
             var reportTitle = string.Format(
                 "{0}, {1} --> {2} - {3}: {4} - {5}: {6} {7}",
-                                            ViewResources.Customer + " " + ViewResources.Turnover,
+                                            ViewResources.CustomerTurnover,
                                             metaModel.FromDate.ToString("MM/dd/yyyy"),
                                             metaModel.ToDate.ToString("MM/dd/yyyy"),
                                             ViewResources.Currency,
