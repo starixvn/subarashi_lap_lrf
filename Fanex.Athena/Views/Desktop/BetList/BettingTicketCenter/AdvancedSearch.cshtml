@@ -73,7 +73,7 @@
     subsidiaryViewType: @Model.SubsidiaryViewType,
     isOneworksMaster: '@Model.IsOneworksMaster' === 'True',
     whitelabelList: @Html.Raw(whitelabelList.ToJsonWithServiceStack()),
-    subsidiaryList: @Html.Raw(subsidiaryList.ToJson()),
+    subsidiaryList: @Html.Raw(subsidiaryList.ToJsonWithServiceStack()),
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
