@@ -8,8 +8,8 @@
     using Fanex.Athena.Excel.Base;
     using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Excel.Customer.CustomerClass;
-    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;

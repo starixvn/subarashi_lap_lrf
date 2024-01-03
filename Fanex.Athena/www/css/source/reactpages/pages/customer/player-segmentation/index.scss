@@ -150,6 +150,16 @@
                 font-size: 12px;
             }
         }
+
+        .last-mark-date {
+            max-width: fit-content !important;
+            min-width: 16.66667%;
+        }
+
+        .subsidiary-checkbox {
+            max-width: fit-content !important;
+            min-width: 9%;
+        }
     }
 
     .monitored-player {
@@ -234,8 +244,9 @@
 .page-filter {
     padding-bottom: 30px;
 }
-.button-group{
-    button{
+
+.button-group {
+    button {
         margin-right: 20px
     }
 }

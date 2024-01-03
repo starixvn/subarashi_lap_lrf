@@ -188,7 +188,7 @@ export class FormFilter extends PureComponent {
                             {this._renderSubsidiaryTreeView()}
                         </div>
                     </div>)}
-                    {AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2">
+                    {AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2 subsidiary-checkbox">
                         <div className="form-group">
                             <CheckBox id="SubsidiarySearch"
                                 checked={this.props.subsidiarySearch}
@@ -223,7 +223,7 @@ export class FormFilter extends PureComponent {
                             {this._renderRiskLevelSelectList()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-3 last-mark-date">
                         <div className="form-group">
                             <label className="label-text">
                                 {LangHelper.getSingleResource("RiskLevelLastMarkDate").replace("&apos;","'")}

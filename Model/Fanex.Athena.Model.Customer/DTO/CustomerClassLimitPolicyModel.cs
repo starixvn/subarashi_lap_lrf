@@ -21,7 +21,6 @@ namespace Fanex.Athena.Model.Customer.DTO
 
         public IEnumerable<LeagueGroup> LeagueGroups { get; set; }
 
-
         public string BetDelay { get; set; }
 
         public string BetInterval { get; set; }
