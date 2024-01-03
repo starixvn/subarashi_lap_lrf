@@ -2797,7 +2797,7 @@
     <value>Hôm nay</value>
   </data>
   <data name="ToDowloadTemplate" xml:space="preserve">
-    <value>để tải mẫu</value>
+    <value> để tải mẫu</value>
   </data>
   <data name="TokenIsInValid" xml:space="preserve">
     <value>Token không hợp lệ</value>

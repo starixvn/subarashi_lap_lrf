@@ -162,6 +162,13 @@
         }
     }
 
+    .saba-virtual-setting {
+        .get-all-date {
+            min-width: 8.33333%;
+            max-width: fit-content !important;
+        }
+    }
+
     .monitored-player {
         .form-add {
             padding: 15px;
@@ -197,6 +204,11 @@
                     right: 0;
                 }
             }
+        }
+
+        .get-all-date {
+            min-width: 8.33333%;
+            max-width: fit-content !important;
         }
     }
 

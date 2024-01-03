@@ -2755,7 +2755,7 @@
     <value>Hari Ini</value>
   </data>
   <data name="ToDowloadTemplate" xml:space="preserve">
-    <value>untuk mengunduh template</value>
+    <value> untuk mengunduh template</value>
   </data>
   <data name="TokenIsInValid" xml:space="preserve">
     <value>Token tidak valid</value>

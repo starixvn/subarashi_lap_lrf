@@ -147,7 +147,7 @@ export class FormFilter extends PureComponent {
             keyField="Value"
             valueField="Name"
             statusField="Checked"
-            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            texts={{ SelectOptions: "Please select"}}
             isAllTextShown={false}
             hasSearchBox={false}
             treeViewOption={TreeViewOption}

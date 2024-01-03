@@ -2443,10 +2443,10 @@
     <value>คุณแน่ใจหรือไม่ว่าต้องการนำลูกค้าเหล่านี้ออกจากกลุ่ม?</value>
   </data>
   <data name="RemoveTheseCustomersFromGroupMsg" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการนำลูกค้าเหล่านี้ออกจากกลุ่ม</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการนำลูกค้าเหล่านี้ออกจากกลุ่ม?</value>
   </data>
   <data name="RemoveThisCustomerFromGroupMsg" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการนำลูกค้ารายนี้ออกจากกลุ่ม</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการนำลูกค้ารายนี้ออกจากกลุ่ม?</value>
   </data>
   <data name="RepeatedBets" xml:space="preserve">
     <value>เดิมพันซ้ำ</value>
@@ -2758,10 +2758,10 @@
     <value>ผู้ได้รับอนุญาตไม่มีหมวดหมู่ที่ได้รับมอบหมาย โปรดติดต่อผู้ดูแลระบบเพื่อกำหนดอย่างน้อยหนึ่งหมวดหมู่ก่อนสร้างผู้ติดต่อ</value>
   </data>
   <data name="ThereIsNoSelectedItem" xml:space="preserve">
-    <value>ไม่มีรายการที่เลือก</value>
+    <value>ไม่มีรายการที่เลือก.</value>
   </data>
   <data name="TheSettledAndResettledDataNote" xml:space="preserve">
-    <value>ข้อมูลอาจมีความล่าช้าประมาณ 20 นาทีสำหรับตั๋วที่ได้รับการตั้งค่าแล้วและ 65 นาทีสำหรับตั๋วที่ได้รับการตั้งค่าใหม่</value>
+    <value>ข้อมูลอาจมีความล่าช้าประมาณ 20 นาทีสำหรับตั๋วที่ได้รับการตั้งค่าแล้วและ 65 นาทีสำหรับตั๋วที่ได้รับการตั้งค่าใหม่.</value>
   </data>
   <data name="TheSettledAndResettledDateNote" xml:space="preserve">
     <value>โหมด 'วันที่ตั้งค่าและตั้งค่าใหม่' จะแสดงข้อมูลตามวันที่ตั้งค่าและวันที่ตั้งค่าใหม่ตามช่วงวันที่ที่เลือก.</value>
@@ -2959,7 +2959,7 @@
     <value>อัปเดตบัญชีสำเร็จแล้ว!</value>
   </data>
   <data name="UpdateAgCasinoBetSettings" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการอัปเดตการตั้งค่าการเดิมพัน AGคาสิโน ทั้งหมด</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการอัปเดตการตั้งค่าการเดิมพัน AGคาสิโน ทั้งหมด?</value>
   </data>
   <data name="UpdateAgCasinoBetSettingSuccessMsg" xml:space="preserve">
     <value>อัปเดตการตั้งค่าเดิมพัน Agคาสิโน ของ {0} เรียบร้อยแล้ว</value>
@@ -2971,7 +2971,7 @@
     <value>อัปเดตวงเงินเดิมพัน</value>
   </data>
   <data name="UpdateCommGroup_Warning" xml:space="preserve">
-    <value>โปรดทราบ: ลูกค้าจะถูกลบออกจากกลุ่มเนื่องจากมูลค่าส่วนลดที่แตกต่างกัน</value>
+    <value>โปรดทราบ: ลูกค้าจะถูกลบออกจากกลุ่มเนื่องจากมูลค่าส่วนลดที่แตกต่างกัน.</value>
   </data>
   <data name="UpdateCommission" xml:space="preserve">
     <value>อัปเดตค่าคอมมิชชั่น</value>
@@ -2992,7 +2992,7 @@
     <value>การอัปเดตฟังก์ชันสำเร็จ</value>
   </data>
   <data name="UpdateKenoBetSettings" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการอัปเดตการตั้งค่าเดิมพัน RNG Game Keno ทั้งหมด</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการอัปเดตการตั้งค่าเดิมพัน RNG Game Keno ทั้งหมด?</value>
   </data>
   <data name="UpdateKenoBetSettingSuccessMsg" xml:space="preserve">
     <value>อัปเดตการตั้งค่าเดิมพัน RNG เกมคีโนของ {0} สำเร็จแล้ว</value>
@@ -3013,7 +3013,7 @@
     <value>อัปเดตการตั้งค่าการเดิมพัน {0} ของ {1} เรียบร้อยแล้ว</value>
   </data>
   <data name="UpdateProductStatus" xml:space="preserve">
-    <value>คุณแน่ใจหรือไม่ว่าต้องการอัปเดตสถานะ {0}</value>
+    <value>คุณแน่ใจหรือไม่ว่าต้องการอัปเดตสถานะ {0}?</value>
   </data>
   <data name="UpdateRNGCasinoBetSettingFailMsg" xml:space="preserve">
     <value>การตั้งค่าการเดิมพัน RNG เกมคาสิโนของ {0} อัปเดตล้มเหลว</value>
@@ -3028,7 +3028,7 @@
     <value>อัพเดทระดับพิเศษ</value>
   </data>
   <data name="UpdateSpecialLevelMsg" xml:space="preserve">
-    <value>พารามิเตอร์ไม่ถูกต้อง รหัสลูกค้าไม่ถูกต้อง</value>
+    <value>พารามิเตอร์ไม่ถูกต้อง รหัสลูกค้าไม่ถูกต้อง.</value>
   </data>
   <data name="UpdateSportsbookBetSettings" xml:space="preserve">
     <value>คุณแน่ใจหรือไม่ว่าต้องการอัปเดตการตั้งค่าการเดิมพัน สปอร์ตบุ๊ค ทั้งหมด?</value>
@@ -3205,7 +3205,7 @@
     <value>WAP</value>
   </data>
   <data name="WarningToActiveMsg" xml:space="preserve">
-    <value>คำเตือน ผู้เล่นรายนี้สามารถเข้าสู่ระบบและเดิมพันได้</value>
+    <value>คำเตือน ผู้เล่นรายนี้สามารถเข้าสู่ระบบและเดิมพันได้.</value>
   </data>
   <data name="WarningToClosedMsg" xml:space="preserve">
     <value>คำเตือน ผู้เล่นรายนี้ไม่สามารถกู้คืนได้อย่างถาวร!</value>
@@ -3265,7 +3265,7 @@
     <value>ชนะ</value>
   </data>
   <data name="WrongUserNamePassword" xml:space="preserve">
-    <value>ชื่อผู้ใช้หรือรหัสผ่านผิด</value>
+    <value>ชื่อผู้ใช้หรือรหัสผ่านผิด.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>ใช่</value>
@@ -3274,13 +3274,13 @@
     <value>เมื่อวาน</value>
   </data>
   <data name="YouAreNotAllowToAccessThisPage" xml:space="preserve">
-    <value>คุณไม่ได้รับอนุญาตให้เข้าถึงหน้านี้ โปรดติดต่อผู้ดูแลระบบของคุณ</value>
+    <value>คุณไม่ได้รับอนุญาตให้เข้าถึงหน้านี้ โปรดติดต่อผู้ดูแลระบบของคุณ.</value>
   </data>
   <data name="YouNotChooseAnyCustomerMsg" xml:space="preserve">
-    <value>คุณไม่ได้เลือกลูกค้า</value>
+    <value>คุณไม่ได้เลือกลูกค้า.</value>
   </data>
   <data name="TheSettledDateOnlyNote" xml:space="preserve">
-    <value>"Settled Date" จะแสดงเฉพาะข้อมูลของตั๋วที่ได้รับการชำระเงินครั้งแรกตามช่วงวันที่ที่เลือก</value>
+    <value>"Settled Date" จะแสดงเฉพาะข้อมูลของตั๋วที่ได้รับการชำระเงินครั้งแรกตามช่วงวันที่ที่เลือก.</value>
   </data>
   <data name="ViewResettledTicketOnlyNote" xml:space="preserve">
     <value>"ดูตั๋วที่ถูกตั้งค่าใหม่เท่านั้น" ข้อมูลสามารถใช้ได้ตั้งแต่วันที่ 1 กันยายน.</value>

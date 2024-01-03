@@ -114,7 +114,7 @@ export class FormFilter extends PureComponent {
             keyField="Value"
             valueField="Name"
             statusField="Checked"
-            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            texts={{ SelectOptions: "Please select"}}
             isAllTextShown={false}
             hasSearchBox={false}
             treeViewOption={TreeViewOption}
@@ -148,7 +148,7 @@ export class FormFilter extends PureComponent {
                             {this._renderDateRange()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-1 col-sm-2 col-lg-1 col-xl-1">
+                    <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2 get-all-date">
                         <div className="form-group">
                             <CheckBox id="IsGetAll"
                                 checked={this.props.isGetAll}
@@ -171,7 +171,7 @@ export class FormFilter extends PureComponent {
                             {this._renderCurrencySelectList()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-6 col-sm-8 col-lg-4 col-xl-3">
+                    <div className="col-12 col-md-6 col-sm-8 col-lg-4 col-xl-2">
                         <div className="form-group">
                             <div className="button-group">
                                 <button type="button" className="btn btn-submit" disabled={isDisabledSubmit} onClick={this._submit}>{LangHelper.getSingleResource("Submit")}</button>
