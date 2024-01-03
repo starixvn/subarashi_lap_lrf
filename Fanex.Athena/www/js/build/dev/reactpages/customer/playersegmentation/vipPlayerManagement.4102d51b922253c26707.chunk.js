@@ -15692,9 +15692,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
       valueField: "Name",
       statusField: "Checked",
       texts: {
-        SelectOptions: "Please select",
-        All: "All",
-        SelectedItemCount: "# selected"
+        SelectOptions: "Please select"
       },
       isAllTextShown: false,
       hasSearchBox: false,
@@ -16530,4 +16528,4 @@ const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["defa
 /***/ })
 
 }]);
-//# sourceMappingURL=vipPlayerManagement.ed344722b21a6cc8df7e.chunk.js.map
+//# sourceMappingURL=vipPlayerManagement.4102d51b922253c26707.chunk.js.map

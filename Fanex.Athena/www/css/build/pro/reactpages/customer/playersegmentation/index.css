@@ -1569,6 +1569,10 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     max-width: fit-content !important;
     min-width: 9%; }
 
+#player-segmentation .saba-virtual-setting .get-all-date {
+  min-width: 8.33333%;
+  max-width: fit-content !important; }
+
 #player-segmentation .monitored-player .form-add {
   padding: 15px;
   overflow: auto; }
@@ -1591,6 +1595,10 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     #player-segmentation .monitored-player .form-reached-history .caption .caret-block {
       bottom: 5px;
       right: 0; }
+
+#player-segmentation .monitored-player .get-all-date {
+  min-width: 8.33333%;
+  max-width: fit-content !important; }
 
 #player-segmentation .required {
   top: 0;
