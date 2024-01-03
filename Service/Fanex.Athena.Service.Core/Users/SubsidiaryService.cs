@@ -13,6 +13,7 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Resources;
+    using Fanex.Logging;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
@@ -172,13 +173,13 @@
         {
             var cacheKey = string.Format(CacheKey.MemorycacheGroupSubsidiaryListByLicensee, licenseeName);
             var groupSubsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetGroupSubsidiaries(licenseeName), CacheTimeoutSeconds);
-            var operators = this.GetUserSubsidiaries(user.CurrencyAgentList, licenseeName);
+            var operators = GetUserSubsidiaries(user.CurrencyAgentList, licenseeName).Select(o => o.OperatorId.ToLower()).Distinct();
+            var hashSetOperator = new HashSet<string>(operators);
             var whiteLabelId = user.WhiteLabelID;
-
             return groupSubsidiaryList
                 .Where(x =>
                     (!whiteLabelId.HasValue || x.WhiteLabelID == whiteLabelId)
-                    && operators.Any(o => o.OperatorId.Equals(x.OperatorId, StringComparison.OrdinalIgnoreCase)))
+                    && hashSetOperator.Contains(x.OperatorId.ToLower()))
                 .ToList();
         }
 

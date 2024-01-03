@@ -52,7 +52,7 @@
     subsidiaryViewType: @Model.SubsidiaryViewType,
     isOneworksMaster: '@Model.IsOneworksMaster' === 'True',
     whitelabelList: @Html.Raw(whitelabelList.ToJsonWithServiceStack()),
-    subsidiaryList: @Html.Raw(subsidiaryList.ToJson()),
+    subsidiaryList: @Html.Raw(subsidiaryList.ToJsonWithServiceStack()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
     tabList: @Html.Raw(Model.TabList.ToJson())
     };

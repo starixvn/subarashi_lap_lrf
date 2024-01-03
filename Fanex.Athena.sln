@@ -199,6 +199,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Module.License
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.Athena.Api.Customer.UnitTest", "UnitTests\Fanex.Athena.Api.Customer.UnitTest\Fanex.Athena.Api.Customer.UnitTest.csproj", "{B4F72F27-B5D1-41E9-ADE7-2598831256D7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PerformanceTests", "PerformanceTests", "{3F066601-1D14-421F-8146-E5D78A4258F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonSerializeBenchmarkTests", "PerformanceTests\JsonSerializeBenchmarkTests\JsonSerializeBenchmarkTests.csproj", "{FA3F79AD-96E2-46D5-9F2A-C345021F9148}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1123,6 +1127,18 @@ Global
 		{B4F72F27-B5D1-41E9-ADE7-2598831256D7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B4F72F27-B5D1-41E9-ADE7-2598831256D7}.Release|x86.ActiveCfg = Release|Any CPU
 		{B4F72F27-B5D1-41E9-ADE7-2598831256D7}.Release|x86.Build.0 = Release|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Debug|x86.Build.0 = Debug|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1214,10 +1230,11 @@ Global
 		{FD83BD01-4FA6-4167-818D-D878133A853C} = {4F0025D0-B5BA-46E4-B615-B8C6B0F5D064}
 		{50BB0320-2C39-47E3-BC6B-2C54834103DE} = {FD83BD01-4FA6-4167-818D-D878133A853C}
 		{B4F72F27-B5D1-41E9-ADE7-2598831256D7} = {8124F11D-CD42-4473-AE75-80290172BE0A}
+		{FA3F79AD-96E2-46D5-9F2A-C345021F9148} = {3F066601-1D14-421F-8146-E5D78A4258F9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
-		RESX_ShowErrorsInErrorList = False
 		SolutionGuid = {AF850210-126B-4E21-BADB-F5C02AD2CCEE}
+		RESX_ShowErrorsInErrorList = False
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal
