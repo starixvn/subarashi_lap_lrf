@@ -7063,7 +7063,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     align: 'center',
                     title: Site.getSingleResource('Product' + key),
                     class: `col-${key} ${selectedProducts.indexOf(key) != -1 ? "" : "hide"}`,
-                    width: key.includes("Parlay") ? 150 : 115,
+                    width: ["Parlay", "CC", "KN"].some(x => key.includes(x)) ? 150 : 115,
                     formatter: function (val) {
                         var n = formatter.formatNumber(val * 100, { format: '#,##0.00' });
                         return `${n}%`;

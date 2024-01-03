@@ -1903,8 +1903,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/exchangevoided/actions/index.js");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @9softstudio/react-datepicker */ "./node_modules/@9softstudio/react-datepicker/dist/index.js");
-/* harmony import */ var _9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _legion_lib_react_daterangepicker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @legion-lib/react-daterangepicker */ "./node_modules/@legion-lib/react-daterangepicker/dist/index.js");
+/* harmony import */ var _legion_lib_react_daterangepicker__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_daterangepicker__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Note__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Note */ "./www/js/source/reactpages/pages/exchangevoided/components/Note.jsx");
 /* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
@@ -2017,11 +2017,12 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0___default.a.PureCompon
       className: "form-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       className: "label-text"
-    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Date')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_5__["DatePicker"], {
+    }, _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Date')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_daterangepicker__WEBPACK_IMPORTED_MODULE_5__["DatePicker"], {
       minDate: dateConstraint.minDate,
       maxDate: dateConstraint.maxDate,
       date: selectedDate,
-      onChange: this.handleChangeDate
+      onChange: this.handleChangeDate,
+      langHandler: key => key === "May" ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("May2") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource(key)
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "col-12 col-sm-7 col-md-3 col-xl-2"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

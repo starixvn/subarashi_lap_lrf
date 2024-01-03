@@ -4221,6 +4221,12 @@ select:disabled {
 .flag-icon-vi-VN {
   background-image: url(../fonts/flags/flags/vn.svg); }
 
+.flag-icon-id-ID {
+  background-image: url(../fonts/flags/flags/id.svg); }
+
+.flag-icon-th-TH {
+  background-image: url(../fonts/flags/flags/th.svg); }
+
 /* z-index */
 @font-face {
   font-family: 'Roboto';

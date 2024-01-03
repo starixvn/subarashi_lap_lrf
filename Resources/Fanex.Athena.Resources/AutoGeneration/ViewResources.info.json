@@ -1,6 +1,18 @@
 {
   "FilesToGenerate": [
     {
+      "Filename": "ViewResources.id-ID.js",
+      "Project": "Fanex.Athena",
+      "Path": "www\\js\\source\\common\\languages",
+      "Properties": {}
+    },
+    {
+      "Filename": "ViewResources.id-ID.js",
+      "Project": "Fanex.Athena",
+      "Path": "Scripts\\Languages",
+      "Properties": {}
+    },
+    {
       "Filename": "ViewResources.js",
       "Project": "Fanex.Athena",
       "Path": "www\\js\\source\\common\\languages",
@@ -8,6 +20,18 @@
     },
     {
       "Filename": "ViewResources.js",
+      "Project": "Fanex.Athena",
+      "Path": "Scripts\\Languages",
+      "Properties": {}
+    },
+    {
+      "Filename": "ViewResources.th-TH.js",
+      "Project": "Fanex.Athena",
+      "Path": "www\\js\\source\\common\\languages",
+      "Properties": {}
+    },
+    {
+      "Filename": "ViewResources.th-TH.js",
       "Project": "Fanex.Athena",
       "Path": "Scripts\\Languages",
       "Properties": {}
