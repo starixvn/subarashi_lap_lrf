@@ -1,37 +1,36 @@
-﻿using Fanex.Athena.Excel.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Extension;
 using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Resources;
 using NPOI.SS.UserModel;
 using NPOI.SS.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Excel.Customer.CustomerClass
 {
     public class CustomerClassSettingPolicyExcel : ReportBase
     {
-
         private const int ColumnTemplateCount = 13;
         private const int RowContentTemplate = 2;
 
         private const int CustomerClassColumn = 0;
         private const int CategoryColumn = 1;
         private const int SportTypeColumn = 2;
-        private const int LivePreMatchColumn = 3;
-        private const int CurrencyColumn = 4;
-        private const int DisableParlay = 5;
-        private const int PlatformColumn = 6;
-        private const int LeagueGroupColumn = 7;
-        private const int BetIntervalColumn = 8;
-        private const int AgentBetIntervalColumn = 9;
-        private const int MinBetColumn = 10;
-        private const int MaxPerBetColumn = 11;
-        private const int MaxPerMatchColumn = 12;
-        private const int RepeatedBetColumn = 13;
+        private const int PolicyColumn = 3;
+        private const int RuleColumn = 4;
+        private const int LivePreMatchColumn = 5;
+        private const int CurrencyColumn = 6;
+        private const int DisableParlay = 7;
+        private const int PlatformColumn = 8;
+        private const int LeagueGroupColumn = 9;
+        private const int BetIntervalColumn = 10;
+        private const int AgentBetIntervalColumn = 11;
+        private const int MinBetColumn = 12;
+        private const int MaxPerBetColumn = 13;
+        private const int MaxPerMatchColumn = 14;
+        private const int RepeatedBetColumn = 15;
+        private const int BetDeplayColumn = 16;
 
         private const string CURRENCY = "MYR";
         private const string DEFAULT_VALUE = "-";
@@ -44,17 +43,20 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         private readonly IDictionary<int, string> _gridCommonColumNames = new Dictionary<int, string>
         {
             { SportTypeColumn, "SportTypeName" },
-            { LivePreMatchColumn, "LiveType" },
+            { PolicyColumn, "PlolicyTitle" },
+            { RuleColumn, "RuleTitle" },
+            { LivePreMatchColumn, "LiveTypeText" },
             { CurrencyColumn, "Currency" },
             { DisableParlay, "DisableParlay" },
             { PlatformColumn, "Platform" },
-            { LeagueGroupColumn, "LicLeagueGroupName" },
+            { LeagueGroupColumn, "LeagueGroups" },
             { BetIntervalColumn, "BetInterval" },
             { AgentBetIntervalColumn, "AgentBetInterval" },
             { MinBetColumn, "MinBet" },
             { MaxPerBetColumn, "MaxBet" },
             { MaxPerMatchColumn, "MaxPerMatch" },
-            { RepeatedBetColumn, "RepeatedBets" }
+            { RepeatedBetColumn, "RepeatedBets" },
+            { BetDeplayColumn, "BetDelay" }
         };
 
         public CustomerClassSettingPolicyExcel(string templatePath, string reportTitle, IEnumerable<CustomerClassModel> data)
@@ -67,6 +69,8 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 ViewResources.CustomerClass,
                 ViewResources.Category,
                 ViewResources.SportType,
+                ViewResources.Policy,
+                ViewResources.Rule,
                 ViewResources.Live2 + "/" + ViewResources.PreMatch,
                 ViewResources.Currency,
                 ViewResources.DisableParlay,
@@ -77,7 +81,8 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 ViewResources.MinBet + $" ({CURRENCY})",
                 ViewResources.MaxPerBet + $" ({CURRENCY})",
                 ViewResources.MaxPerMatch2 + $" ({CURRENCY})",
-                ViewResources.RepeatedBets
+                ViewResources.RepeatedBets,
+                ViewResources.BetDelay,
             };
         }
 
@@ -113,7 +118,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                 foreach (var policy in item.Policies)
                 {
                     var row = sheet.CopyRow(TemplateSheet, RowContentTemplate, rowIndex);
-                    if(isFirstItemRow)
+                    if (isFirstItemRow)
                     {
                         AssignMergeColumns(item, row);
                         isFirstItemRow = false;
@@ -121,7 +126,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
                     AssignCommonColumns(policy, row);
                     rowIndex++;
                 }
-                MergeRow(sheet, startIndex, rowIndex-1);
+                MergeRow(sheet, startIndex, rowIndex - 1);
             }
         }
 
@@ -137,14 +142,14 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
             foreach (var columnName in _gridCommonColumNames)
             {
                 var cellValue = itemType.GetProperty(columnName.Value).GetValue(item, null);
-                if (columnName.Value.Equals("LiveType"))
-                {
-                    var text = item.LiveType == 1 ? ViewResources.Live2 : ViewResources.PreMatch;
-                    row.Cells[columnName.Key].SetCellValue(text);
-                }
-                else if (columnName.Value.Equals("DisableParlay"))
+                if (columnName.Value.Equals("DisableParlay"))
                 {
                     var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
+                    row.Cells[columnName.Key].SetCellValue(text);
+                }
+                else if (columnName.Value.Equals("LeagueGroups"))
+                {
+                    var text = string.Join(", ", item.LeagueGroups.Select(x => x.LeagueGroupName).ToList());
                     row.Cells[columnName.Key].SetCellValue(text);
                 }
                 else

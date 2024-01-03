@@ -519,13 +519,13 @@ ul.ui-multiselect-checkboxes {
   padding: 2px 5px; }
 
 .customer-class-policy-setting .tab, .customer-class-info-spread-setting .tab {
-  min-width: 1400px; }
+  min-width: 1800px; }
 
 .customer-class-policy-setting .card-panel, .customer-class-info-spread-setting .card-panel {
-  min-width: 1400px; }
+  min-width: 1800px; }
 
 .customer-class-policy-setting table, .customer-class-info-spread-setting table {
-  min-width: 1400px;
+  min-width: 1800px;
   border-collapse: separate; }
 
 .customer-class-policy-setting thead, .customer-class-info-spread-setting thead {
@@ -546,27 +546,42 @@ ul.ui-multiselect-checkboxes {
 .customer-class-policy-setting .view-leagues, .customer-class-info-spread-setting .view-leagues {
   float: right; }
 
+.customer-class-policy-setting .league-group-name, .customer-class-info-spread-setting .league-group-name {
+  float: left;
+  white-space: nowrap;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 .customer-class-policy-setting .list-leagues, .customer-class-info-spread-setting .list-leagues {
   position: absolute;
   width: 350px;
+  max-height: 350px;
   z-index: 999;
   background: #F2F2F2;
   top: 10px;
   border: 1px solid #DADADA;
   padding: 5px 5px;
-  text-align: left; }
+  text-align: left;
+  overflow: auto; }
   .customer-class-policy-setting .list-leagues .icon-close, .customer-class-info-spread-setting .list-leagues .icon-close {
-    font-size: 14px; }
-  .customer-class-policy-setting .list-leagues .list-leagues-header .block-close, .customer-class-info-spread-setting .list-leagues .list-leagues-header .block-close {
+    font-size: 14px;
     float: right;
-    color: #2c2c2c; }
-  .customer-class-policy-setting .list-leagues .list-leagues-header .icon-close, .customer-class-info-spread-setting .list-leagues .list-leagues-header .icon-close {
-    font-size: 14px; }
+    color: #2c2c2c;
+    position: -webkit-sticky;
+    top: 0;
+    position: sticky; }
+  .customer-class-policy-setting .list-leagues .list-leagues-header, .customer-class-info-spread-setting .list-leagues .list-leagues-header {
+    padding: 10px 0 10px 0;
+    font-weight: bold; }
+    .customer-class-policy-setting .list-leagues .list-leagues-header .block-close, .customer-class-info-spread-setting .list-leagues .list-leagues-header .block-close {
+      float: right;
+      color: #2c2c2c; }
+    .customer-class-policy-setting .list-leagues .list-leagues-header .icon-close, .customer-class-info-spread-setting .list-leagues .list-leagues-header .icon-close {
+      font-size: 14px; }
   .customer-class-policy-setting .list-leagues .list-leagues-content, .customer-class-info-spread-setting .list-leagues .list-leagues-content {
-    max-height: 200px;
-    min-height: 200px;
-    overflow: auto;
-    width: 100%; }
+    width: 100%;
+    padding-bottom: 10px; }
     .customer-class-policy-setting .list-leagues .list-leagues-content ul li, .customer-class-info-spread-setting .list-leagues .list-leagues-content ul li {
       margin-left: 15px;
       list-style-type: disc; }

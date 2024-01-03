@@ -1,15 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Excel.Base;
     using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Excel.Customer.CustomerClass;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.Enum;
     using Fanex.Athena.Model.Customer.MetaModel;
@@ -45,7 +44,6 @@
         [CustomValidateAntiForgery]
         public async Task<PartialViewResult> GetCustomerSettingPolicy(byte tabKey = 1, IEnumerable<string> customerClassIds = null)
         {
-
             var metaModel = new GetCustomerClassInformationMetaModel
             {
                 SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
@@ -87,13 +85,13 @@
 
             if (dataSource.Any())
             {
-                var templatePath = tabKey == 1 
+                var templatePath = tabKey == 1
                     ? Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/CustomerClassSettingPolicy.xls")
                     : Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/CustomerClassSpreadSettingPolicy.xls");
-                var fileName = tabKey == 1 
+                var fileName = tabKey == 1
                     ? "CustomerClassSettingPolicy_" + DateTime.Now.ToString("MM-dd-yyyy")
                     : "CustomerClassSpreadSettingPolicy_" + DateTime.Now.ToString("MM-dd-yyyy");
-                var reportTitle = tabKey == 1 
+                var reportTitle = tabKey == 1
                     ? ViewResources.CustomerClassSettingPolicy
                     : ViewResources.CustomerClassSpreadSettingPolicy;
 
@@ -111,10 +109,22 @@
         [CustomValidateAntiForgery]
         public async Task<JsonResult> GetLimitLeagues(GetLimitLeaguesMetaModel metaModel)
         {
-            var result = await _portalApiService.GetLimitLeaguesAsync(
+            var result = new List<LeagueGroup>();
+
+            foreach (var leagueGroup in metaModel.LeagueGroups)
+            {
+                var limitLeagues = await _portalApiService.GetLimitLeaguesAsync(
                 SessionServiceInstance.LicenseeSession.LicenseeName,
-                metaModel.SportType, metaModel.LeagueGroupId,
+                metaModel.SportType, leagueGroup.LeagueGroupId,
                 SessionServiceInstance.UserSession.Language);
+
+                result.Add(new LeagueGroup
+                {
+                    LeagueGroupId = leagueGroup.LeagueGroupId,
+                    LeagueGroupName = leagueGroup.LeagueGroupName,
+                    LimitLeagues = limitLeagues,
+                });
+            }
 
             return Json(result);
         }
@@ -143,8 +153,10 @@
             {
                 case (byte)CustomerClassTabType.SettingPolicy:
                     return await _service.GetSettingPolicy(metaModel);
+
                 case (byte)CustomerClassTabType.SpreadSettingPolicy:
                     return await _service.GetSpreadSettingPolicy(metaModel);
+
                 case (byte)CustomerClassTabType.AllCustomerClass:
                     {
                         var result = await _service.GetAllCustomerClass(metaModel.Language);

@@ -17,6 +17,13 @@
   .risk-level-info-spread-setting tbody tr td[rowspan]:first-child, .risk-level-policy-setting tbody tr td[rowspan]:first-child {
     border-left: 1px solid #d1dae1; }
 
+.league-group-name {
+  float: left;
+  white-space: nowrap;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
 .risk-level-info-spread-setting {
   max-width: 300px; }
   .risk-level-info-spread-setting .main-content {
@@ -35,23 +42,30 @@
   .risk-level-policy-setting .list-leagues {
     position: absolute;
     width: 350px;
+    max-height: 350px;
     z-index: 999;
     background: #F2F2F2;
     top: 10px;
     border: 1px solid #DADADA;
     padding: 5px 5px;
-    text-align: left; }
+    text-align: left;
+    overflow: auto; }
     .risk-level-policy-setting .list-leagues .icon-close {
-      font-size: 14px; }
-    .risk-level-policy-setting .list-leagues .list-leagues-header .block-close {
+      font-size: 14px;
       float: right;
-      color: #2c2c2c; }
-    .risk-level-policy-setting .list-leagues .list-leagues-header .icon-close {
-      font-size: 14px; }
+      color: #2c2c2c;
+      position: -webkit-sticky;
+      top: 0;
+      position: sticky; }
+    .risk-level-policy-setting .list-leagues .list-leagues-header {
+      padding: 10px 0 10px 0;
+      font-weight: bold; }
+      .risk-level-policy-setting .list-leagues .list-leagues-header .block-close {
+        float: right;
+        color: #2c2c2c; }
+      .risk-level-policy-setting .list-leagues .list-leagues-header .icon-close {
+        font-size: 14px; }
     .risk-level-policy-setting .list-leagues .list-leagues-content {
-      max-height: 200px;
-      min-height: 200px;
-      overflow: auto;
       width: 100%; }
       .risk-level-policy-setting .list-leagues .list-leagues-content ul li {
         margin-left: 15px;

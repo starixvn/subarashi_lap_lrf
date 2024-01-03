@@ -33,6 +33,14 @@
     }
 }
 
+.league-group-name{
+    float: left;
+    white-space: nowrap;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .risk-level-info-spread-setting {
     max-width: 300px;
 
@@ -61,18 +69,28 @@
     .list-leagues {
         position: absolute;
         width: 350px;
+        max-height: 350px;
         z-index: 999;
         background: #F2F2F2;
         top: 10px;
         border: 1px solid #DADADA;
         padding: 5px 5px;
         text-align: left;
+        overflow: auto;
 
         .icon-close {
             font-size: 14px;
+            float:right;
+            color: $black;
+            position: -webkit-sticky;
+            top: 0;
+            position: sticky;
         }
 
         .list-leagues-header {
+            padding: 10px 0 10px 0;
+            font-weight: bold;
+
             .block-close {
                 float: right;
                 color: $black;
@@ -84,9 +102,6 @@
         }
 
         .list-leagues-content {
-            max-height: 200px;
-            min-height: 200px;
-            overflow: auto;
             width: 100%;
 
             ul {

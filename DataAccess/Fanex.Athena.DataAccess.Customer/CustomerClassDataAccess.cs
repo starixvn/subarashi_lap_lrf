@@ -38,30 +38,38 @@
                     {
                         var id = Convert.ToString(reader[CustomerClass]);
                         var betDelay = reader.ToNullableDecimal("BetDelay");
-                        var leagueGroupId = reader.ToInt("LeagueGroupId");
+                        var leagueGroupId = Convert.ToString(reader["LeagueGroupId"]);
                         var platform = reader.ToNullableInt("Platform");
                         var sportType = Convert.ToString(reader["SportType"]);
+                        var liveType = Convert.ToInt16(reader["Liveindicator"]);
+                        var currencyId = reader.ToNullableInt("CurrencyId") ?? 0;
 
                         var policy = new CustomerClassLimitPolicyModel
                         {
                             Id = id,
-                            LiveType = Convert.ToInt16(reader["Liveindicator"]),
+                            LiveType = liveType,
+                            LiveTypeText = GetLiveTypeText(liveType),
                             SportType = sportType,
                             SportTypeName = _cacheRefAdapter.GetSportName(sportType),
                             LeagueGroupId = leagueGroupId,
-                            BetDelay = FormatNumber(betDelay.HasValue ? betDelay * 100 : null, "{0:#,##0.##}%"),
+                            BetDelay = FormatNumber(betDelay.HasValue ? betDelay : null, "{0:#,##0.##}%"),
                             BetInterval = FormatNumber(reader.ToNullableDecimal("NextBetInterval"), NumberStyle),
                             MaxBet = FormatNumber(reader.ToNullableDecimal("MaxBet"), NumberStyle),
                             MaxPerMatch = FormatNumber(reader.ToNullableDecimal("MaxPerMatch"), NumberStyle),
                             RepeatedBets = FormatNumber(reader.ToNullableInt("RepeatedBets"), NumberStyle),
                             MinBet = FormatNumber(reader.ToNullableDecimal("MinBet"), "{0:#,##0}"),
-                            Platform = platform == null ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
+                            Platform = platform == 0 ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
                             AgentBetInterval = FormatNumber(reader.ToNullableDecimal("AgentBetInterval"), NumberStyle),
-                            CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0,
-                            DisableParlay = reader.ToBool("DisableParlay")
+                            CurrencyId = currencyId,
+                            DisableParlay = reader.ToBool("DisableParlay"),
+                            RuleTitle = Convert.ToString(reader["RuleTitle"]),
+                            PlolicyTitle = Convert.ToString(reader["PolicyTitle"]),
                         };
 
-                        result.Add(policy);
+                        if (metaModel.CurrencyList.ContainsKey(currencyId) || currencyId == 0)
+                        {
+                            result.Add(policy);
+                        }
                     }
                 }
             }
@@ -127,6 +135,21 @@
             }
 
             return result;
+        }
+
+        private string GetLiveTypeText(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    return ViewResources.PreMatch;
+
+                case 1:
+                    return ViewResources.Live2;
+
+                default:
+                    return ViewResources.All;
+            }
         }
     }
 }

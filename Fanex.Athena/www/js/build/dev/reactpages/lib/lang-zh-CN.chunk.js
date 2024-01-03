@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/26/2023 1:07:30 PM
+// Generated at: 12/28/2023 4:00:32 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -1024,6 +1024,7 @@ window._language_zh_CN = {
   VipPlayerManagement: "VIP玩家管理",
   VIPPlayerOnly: "只显示VIP玩家",
   VIPPlayerTooltipMsg: "被標示在玩家管理報告中的VIP玩家",
+  Virtual: "虚拟",
   VirtualCycling: "Virtual Cycling",
   VirtualHorseRacing: "Virtual Horse Racing",
   VirtualSoccer: "Virtual Soccer",
