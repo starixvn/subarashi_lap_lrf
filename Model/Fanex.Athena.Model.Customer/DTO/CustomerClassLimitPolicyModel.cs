@@ -45,6 +45,6 @@ namespace Fanex.Athena.Model.Customer.DTO
 
         public string RuleTitle { get; set; }
 
-        public string PlolicyTitle { get; set; }
+        public string PolicyTitle { get; set; }
     }
 }
