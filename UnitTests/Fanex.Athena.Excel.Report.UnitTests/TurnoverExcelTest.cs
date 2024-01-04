@@ -72,7 +72,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             var headerTextList = new[]
             {
                 "#",
-                ViewResources.Day,
+                ViewResources.Date,
                 ViewResources.OpeningBalance,
                 ViewResources.Deposit,
                 ViewResources.Withdrawal,
