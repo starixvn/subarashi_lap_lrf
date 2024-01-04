@@ -4,8 +4,6 @@
 
     using Core.Common;
 
-    using Model.Core.DTO.Common;
-
     using NSubstitute;
 
     using NUnit.Framework;

@@ -3,6 +3,7 @@
     public interface ISubsidiaryInfo
     {
         int AgentId { get; set; }
+
         string Subsidiary { get; set; }
     }
 }

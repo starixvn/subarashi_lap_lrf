@@ -29,7 +29,7 @@ export class FormFilter extends PureComponent {
     _submit = (event) => {
         event.preventDefault();
         var isCheckAll = !this.props.searchingDateRangeOption || this.props.searchingDateRangeOption == SearchingDateRangeOptions.AllDate;
-        
+
         const params = ParamHelper.ToAPIParams(this.props, isCheckAll);
         if (!params) {
             return;
@@ -128,7 +128,7 @@ export class FormFilter extends PureComponent {
             keyField="Value"
             valueField="Name"
             statusField="Checked"
-            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            texts={{ SelectOptions: "Please select" }}
             isAllTextShown={false}
             hasSearchBox={false}
             treeViewOption={TreeViewOption}
@@ -152,7 +152,7 @@ export class FormFilter extends PureComponent {
                     this.props.setSelectedRiskLevel(selectedItemsKey);
                     var customerClassSelected = riskLevelList.filter(r => selectedItemsKey.includes(r.key)).map(r => r.customerClassList).join(',');
                     this.props.setSelectedCustomerClass(customerClassSelected);
-                }} 
+                }}
             />
         );
     }
@@ -161,14 +161,14 @@ export class FormFilter extends PureComponent {
         const dateRange = this.props.dateRange;
         const dateConstraint = AppData[tabKeys.vipPlayerManagement].dateConstraint;
         const isDisabled = !this.props.searchingDateRangeOption || this.props.searchingDateRangeOption == SearchingDateRangeOptions.AllDate;
-        const className = !this.props.subsidiarySearch ? { dateRange:"rdr-DateRange rdr-DateRange-index rdr-DateRange-right-align" } : null;
+        const className = !this.props.subsidiarySearch ? { dateRange: "rdr-DateRange rdr-DateRange-index rdr-DateRange-right-align" } : null;
 
         return (
             <div className={isDisabled ? 'datepicker-disabled' : ''}>
                 <DateRange startDate={dateRange.fromDate} endDate={dateRange.toDate}
                     minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
                     today={dateRange.toDate} limitedMonthRange={dateConstraint.limitedMonthRange}
-                    onChange={this.props.setDateRange} classNames={className}/>
+                    onChange={this.props.setDateRange} classNames={className} />
             </div>
         )
     }
@@ -188,7 +188,7 @@ export class FormFilter extends PureComponent {
                             {this._renderSubsidiaryTreeView()}
                         </div>
                     </div>)}
-                    {AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2">
+                    {AppData.viewType !== SubsidiaryViewType.NOT_MANAGEMENT && <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2 subsidiary-checkbox">
                         <div className="form-group">
                             <CheckBox id="SubsidiarySearch"
                                 checked={this.props.subsidiarySearch}
@@ -223,10 +223,10 @@ export class FormFilter extends PureComponent {
                             {this._renderRiskLevelSelectList()}
                         </div>
                     </div>
-                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-3 last-mark-date">
                         <div className="form-group">
                             <label className="label-text">
-                                {LangHelper.getSingleResource("RiskLevelLastMarkDate").replace("&apos;","'")}
+                                {LangHelper.getSingleResource("RiskLevelLastMarkDate").replace("&apos;", "'")}
                                 <SearchingDateRangeOption
                                     value={this.props.searchingDateRangeOption}
                                     onChange={(event) => {
@@ -256,7 +256,7 @@ function mapDispatchToProps(dispatch) {
         setDateRange, setSelectedVipOption, setUsername, setSelectedCurrency,
         setSelectedParams, searchPlayer, setPagingOption, setSubsidiaryList,
         getUserGuideContent, setSubsidiarySearch, setSelectedCustomerClass,
-        setSelectedRiskLevel, setSearchingDateRangeOption 
+        setSelectedRiskLevel, setSearchingDateRangeOption
     } = ActionCreators;
 
     return bindActionCreators(Object.assign({}, {
@@ -272,7 +272,7 @@ function mapStateToProps(state) {
         dateRange, selectedVipOption, selectedCurrency, selectedParams,
         username, pagingOption, selectedTabKey, userGuideContent,
         selectedSubsidiary, subsidiarySearch, selectedCustomerClass,
-        selectedRiskLevel, searchingDateRangeOption 
+        selectedRiskLevel, searchingDateRangeOption
     } = state;
 
     return Object.assign({}, {

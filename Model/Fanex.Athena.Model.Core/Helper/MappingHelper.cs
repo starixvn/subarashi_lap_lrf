@@ -1,5 +1,5 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Core.DataDomain;
 
 namespace Fanex.Athena.Model.Core.Helper
 {

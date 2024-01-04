@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Service.Core.UnitTests.Users
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
     using Core.Users.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Extension.Utility;
@@ -12,11 +17,6 @@
     using Fanex.Athena.Service.Core.Users;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web;
     using UnitTest.Common.Helpers;
 
     [TestFixture]
@@ -288,7 +288,6 @@
             oauthInfo.RefreshToken.Returns(FakeHelper.Create<string>());
             oauthInfo.AccessTokenLifeTime.Returns(FakeHelper.Create<DateTime>());
             oauthInfo.LapFunctionList.Returns(FakeHelper.CreateMany<PortalFunction>(5).ToArray());
-
 
             return oauthInfo;
         }

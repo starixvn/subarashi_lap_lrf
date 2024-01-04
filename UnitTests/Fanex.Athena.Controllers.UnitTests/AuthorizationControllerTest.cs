@@ -1,15 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Web;
     using System.Web.Mvc;
 
     using Base.UnitTests;
-
-    using Extension.Utility.Interfaces;
-    using Fanex.Athena.Service.Core.OAuth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
 
     using Model.Core.DataDomain;
@@ -46,7 +41,6 @@
             _userService = null;
             _authService = null;
         }
-
 
         [SetUp]
         public void Setup()

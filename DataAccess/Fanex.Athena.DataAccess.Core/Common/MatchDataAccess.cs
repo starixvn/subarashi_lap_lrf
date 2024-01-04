@@ -6,16 +6,15 @@
 
 namespace Fanex.Athena.DataAccess.Core.Common
 {
-    using Extension.Utility;
-    using Fanex.Athena.DataAccess.Core;
-    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Common.Extensions;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Extension.Utility;
+    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Common.Extensions;
     using VendorAdapter.Interfaces;
 
     public class MatchDataAccess : BaseDataAccess, IMatchDataAccess

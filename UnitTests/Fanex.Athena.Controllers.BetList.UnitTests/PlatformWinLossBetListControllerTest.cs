@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Model.BetList.MetaModel;
     using Model.Core.DataDomain;
     using NSubstitute;
@@ -40,9 +40,9 @@
                 // Arrange
                 var metaModel = new BetListExcelMetaModel
                 {
-                    FromDate = new DateTime(2018, 2, 1),
-                    ToDate = new DateTime(2018, 2, 10),
-                    Date = new DateTime(2018, 2, 5)
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 2, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 2, 10),
+                    Date = DateTimeHelper.CreateDateTime(2018, 2, 5)
                 };
 
                 // Action
@@ -57,9 +57,10 @@
         [TestCase(1, "USD", "eur", "EUR", false, PlatformType.MobileStandard, nameof(PlatformType.MobileStandard))]
         [TestCase(1, "USD", "usd", "USD", true, PlatformType.DesktopChina, nameof(PlatformType.DesktopChina))]
         [TestCase(1, "USD", "gbp", "GBP", true, PlatformType.DesktopOthers, nameof(PlatformType.DesktopOthers))]
-        [TestCase(1, "USD", null, "USD", true, PlatformType.WAP, nameof(PlatformType.WAP))]
+        [TestCase(1, "USD", null, "USD", true, PlatformType.ChatRoom, nameof(PlatformType.ChatRoom))]
         [TestCase(1, "USD", null, "USD", true, PlatformType.MobileOthers, nameof(PlatformType.MobileOthers))]
         [TestCase(1, "USD", null, "USD", true, PlatformType.Tablet, nameof(PlatformType.Tablet))]
+        [TestCase(1, "USD", null, "USD", true, PlatformType.WAP, nameof(PlatformType.WAP))]
         [TestCase(0, "", null, "EUR", true, PlatformType.DesktopNewAsia, nameof(PlatformType.DesktopNewAsia))]
         [TestCase(0, "", null, "EUR", true, PlatformType.DeepLink, nameof(PlatformType.DeepLink))]
         [TestCase(0, "", null, "EUR", true, PlatformType.NativeApp, nameof(PlatformType.NativeApp))]
@@ -87,8 +88,8 @@
                     CurrencyId = currencyId,
                     CurrencyName = currency,
                     BaseCurrency = baseCurrency,
-                    FromDate = new DateTime(2018, 1, 1),
-                    ToDate = new DateTime(2018, 2, 2),
+                    FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                    ToDate = DateTimeHelper.CreateDateTime(2018, 2, 2),
                     ExternalId = "External",
                     SystemId = "System",
                     PlatformType = platform

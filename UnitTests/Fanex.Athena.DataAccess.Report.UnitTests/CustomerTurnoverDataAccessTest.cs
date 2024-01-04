@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -24,8 +23,8 @@
 
         private readonly BalanceUp _balance = new BalanceUp
         {
-            MoveBetsDay = new DateTime(2016, 8, 10),
-            BalanceUpDay = new DateTime(2016, 8, 31)
+            MoveBetsDay = DateTimeHelper.CreateDateTime(2016, 8, 10),
+            BalanceUpDay = DateTimeHelper.CreateDateTime(2016, 8, 31)
         };
 
         private readonly CustomerTurnoverMetaModel _metaModel = new CustomerTurnoverMetaModel
@@ -139,7 +138,7 @@
                 SystemId = "UserNameTest",
                 Bettype = "BettypeTest",
                 SportId = 1,
-                ReportBy = new DateTime(2016, 8, 31)
+                ReportBy = DateTimeHelper.CreateDateTime(2016, 8, 31)
             };
             const int ExpectedTotalRow = 100;
 

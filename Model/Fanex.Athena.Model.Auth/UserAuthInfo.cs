@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Model.Auth
 {
-    using Fanex.Athena.Model.Auth.Enum;
     using System;
     using System.Collections.Generic;
+    using Fanex.Athena.Model.Auth.Enum;
 
     [Serializable]
     public class UserAuthInfo

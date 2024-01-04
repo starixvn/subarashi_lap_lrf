@@ -1,5 +1,10 @@
 ﻿namespace Fanex.Athena.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -8,11 +13,6 @@
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text.RegularExpressions;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
     using Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]

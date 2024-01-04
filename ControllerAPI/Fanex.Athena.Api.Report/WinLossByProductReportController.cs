@@ -65,7 +65,6 @@ namespace Fanex.Athena.Api.Report
         [HttpPost]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
         [ApiAutoBindMetaModel(BindProductOptions = true)]
-#pragma warning disable S107 // Methods should not have too many parameters
         public Task<dynamic> Index(
            WinLossByProductMetaModel metaModel,
             DateTime? fdate,

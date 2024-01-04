@@ -8,6 +8,7 @@
     public class LicenseeWinLossExcelModel
     {
         public ConvertingOption ConvertingOption { get; set; }
+
         public LicenseeWinLossMetaModel MetaModel { get; set; }
 
         public IEnumerable<LicenseeWinLoss> DataList { get; set; }

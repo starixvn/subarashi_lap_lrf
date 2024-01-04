@@ -1,10 +1,9 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer.UnitTests
 {
-    using System;
     using System.Threading.Tasks;
 
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Customer.DTO.CustomerLog;
 
     using NSubstitute;
@@ -46,8 +45,8 @@
             var expectedResult = new LogInLog
             {
                 UserName = "a",
-                CreatedDate = new DateTime(2011, 1, 1),
-                LastTxn = new DateTime(2011, 2, 2)
+                CreatedDate = DateTimeHelper.CreateDateTime(2011, 1, 1),
+                LastTxn = DateTimeHelper.CreateDateTime(2011, 2, 2)
             };
             DataAccess.GetObjectDb(Arg.Is(UspName)).Returns(ObjectDb);
             MapReaderData(new

@@ -8,7 +8,7 @@
     using Base.UnitTests;
 
     using Excel.Report;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.Report.Interfaces;
 
     using Model.Report.DTO;
@@ -87,7 +87,7 @@
         {
             // Arrange
             const int NumberOfWeek = 3;
-            var fromDate = new DateTime(2017, 1, 1);
+            var fromDate = DateTimeHelper.CreateDateTime(2017, 1, 1);
             var model = new WeeklyLiveMatchMetaModel
             {
                 CurrencyId = -1,

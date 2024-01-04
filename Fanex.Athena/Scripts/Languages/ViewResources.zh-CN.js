@@ -1,4 +1,4 @@
-﻿// Generated at: 12/28/2023 4:00:32 PM
+﻿// Generated at: 1/3/2024 4:34:13 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -944,7 +944,7 @@ VirtualSports:"虚拟运动",
 VirtualTennis:"Virtual Tennis",
 Void:"作废",
 Volume:"投注量",
-Wap:"WAP",
+WAP:"WAP",
 WarningToActiveMsg:"警告，此玩家将允许登入和下注!",
 WarningToClosedMsg:"警告，此玩家将无法再复原!",
 WarningToLockedMsg:"警告，此玩家无法登入!",

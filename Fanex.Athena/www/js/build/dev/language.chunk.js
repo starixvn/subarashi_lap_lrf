@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/28/2023 4:00:32 PM
+﻿// Generated at: 1/3/2024 4:34:13 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -426,6 +426,7 @@ Event:"Event",
 EventDate:"Event Date",
 EventType:"Event Type",
 ExcelExceedRowsMsg:"This file exceeded 65535 entries. Please contact administrator for more details.",
+Exchange:"Exchange",
 ExchangeUnderMaintenanceMsg:"Exchange&apos;s services are Under Maintenance. Data may be delayed during this period.&lt;br&gt;We sincerely apologize for any inconvenience caused.",
 ExchangeWinLoss:"Exchange Win Loss",
 ExcludeTestData:"Exclude Test Data",
@@ -1157,7 +1158,7 @@ VirtualSports:"Virtual Sports",
 VirtualTennis:"Virtual Tennis",
 Void:"Void",
 Volume:"Volume",
-Wap:"WAP",
+WAP:"WAP",
 WarningToActiveMsg:"Warning, this player will be able to log in and bet.",
 WarningToClosedMsg:"Warning, this player cannot be restored forever!",
 WarningToLockedMsg:"Warning, this player cannot login and transfer!",

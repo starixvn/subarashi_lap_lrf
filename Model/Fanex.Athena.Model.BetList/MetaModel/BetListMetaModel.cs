@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Web.Script.Serialization;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
@@ -9,9 +10,9 @@ namespace Fanex.Athena.Model.BetList.MetaModel
     {
         public BetListMetaModel()
         {
-            FromDate = DateTime.Today;
-            Date = DateTime.Today;
-            ToDate = DateTime.Today;
+            FromDate = DateTimeHelper.Today;
+            Date = DateTimeHelper.Today;
+            ToDate = DateTimeHelper.Today;
             PageIndex = 1;
             PageSize = int.MaxValue - 1;
         }
@@ -22,6 +23,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public string UspKey { get; set; }
 
         public string ProductCodeList { get; set; }
+
         public string OriginalProductCodeList { get; set; }
 
         public string ExcelFileName { get; set; }
@@ -133,7 +135,9 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public bool IsShowIp { get; set; }
 
         public bool IsEnableSingleWallet { get; set; }
+
         public string SubsidiaryList { get; set; }
+
         public bool SubsidiarySearch { get; set; }
     }
 }

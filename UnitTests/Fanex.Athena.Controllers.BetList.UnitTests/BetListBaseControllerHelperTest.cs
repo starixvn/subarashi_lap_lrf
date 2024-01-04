@@ -1,29 +1,23 @@
 ﻿namespace Fanex.Athena.Controllers.BetList.UnitTests
 {
     using Base.UnitTests;
-
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.BetList.MetaModel;
     using Model.Core.DTO.Configuration;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
-    using System;
-
     using VendorAdapter.Interfaces;
 
     public class BetListBaseControllerHelperTest : CultureBaseControllerHelperTest
     {
         protected static readonly BalanceUp BalanceUp = new BalanceUp
         {
-            BalanceUpDay = new DateTime(2018, 1, 1),
-            MoveBetsDay = new DateTime(2018, 1, 1)
+            BalanceUpDay = DateTimeHelper.CreateDateTime(2018, 1, 1),
+            MoveBetsDay = DateTimeHelper.CreateDateTime(2018, 1, 1)
         };
 
         protected IBalanceUpDataAccess BalanceUpDataAccess { get; private set; }

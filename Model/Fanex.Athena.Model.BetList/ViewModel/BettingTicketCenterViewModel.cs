@@ -1,17 +1,18 @@
 ﻿namespace Fanex.Athena.Model.BetList.ViewModel
 {
-    using Core.DTO.Common;
-    using Core.MetaModel.Product;
-    using Fanex.Athena.Model.Customer.DTO;
     using System;
     using System.Collections.Generic;
+    using Core.DTO.Common;
+    using Core.MetaModel.Product;
+    using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Customer.DTO;
 
     [Serializable]
     public class BettingTicketCenterViewModel
     {
         public BettingTicketCenterViewModel()
         {
-            var today = DateTime.Today;
+            var today = DateTimeHelper.Today;
             FromDate = today;
             ToDate = today;
             MaxDate = today;

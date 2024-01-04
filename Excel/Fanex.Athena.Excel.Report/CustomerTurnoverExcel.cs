@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Excel.Report
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Base;
@@ -88,8 +87,8 @@ namespace Fanex.Athena.Excel.Report
                 ViewResources.EffectiveBettingValue,
                 ViewResources.TotalTransaction,
                 ViewResources.Turnover,
-                ViewResources.Total + " " + ViewResources.Turnover,
-                ViewResources.WinLoss,
+                ViewResources.TotalTurnover,
+                ViewResources.CustomerW_L,
             };
             SetTextRowHeader(row, headerTextList);
 

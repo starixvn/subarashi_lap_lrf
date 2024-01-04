@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Auth.DataDomain;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
@@ -30,7 +31,7 @@ namespace Fanex.Athena.Controllers.Report
             var userSession = SessionServiceInstance.UserSession;
             var licenseeSetting = LicenseeSettingServiceInstance.GetFakeLicenseeSetting(SessionServiceInstance.LicenseeSession.LicenseeName);
             var today = licenseeSetting != null && licenseeSetting.TimeZone.HasValue ?
-                DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value) : DateTime.Now;
+                DateTimeHelper.UtcNow.AddHours(licenseeSetting.TimeZone.Value) : DateTimeHelper.Now;
 
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 SessionServiceInstance.LicenseeSession.LicenseeId,

@@ -1,16 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.Customer.UnitTests
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using System.Web.Mvc;
     using AutoFixture;
     using Base.UnitTests;
-    using CustomerLog;
-    using Fanex.Athena.Excel.Customer.CustomerClass;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
 

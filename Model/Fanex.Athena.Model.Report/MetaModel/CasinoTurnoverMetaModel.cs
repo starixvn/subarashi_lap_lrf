@@ -19,7 +19,9 @@
         public string BaseCurrency { get; set; }
 
         public bool IsConvertAll { get; set; }
+
         public string ProductCodeList { get; set; }
+
         public string OriginalProductCodeList { get; set; }
 
         public string UserName { get; set; }

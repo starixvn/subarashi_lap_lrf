@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ActionCreators } from '../actions';
 import { bindActionCreators } from 'redux';
 import LangHelper from '../../../lib/langHelper';
-import { DatePicker } from '@9softstudio/react-datepicker';
+import { DatePicker } from '@legion-lib/react-daterangepicker';
 import Note from './Note';
 import CollapsiblePanel from '@jsroot/components/collapsible-panel';
 import Select from 'react-select'
@@ -52,10 +52,10 @@ export class FormFilter extends React.PureComponent {
     }
 
     handleCollapse = (isCollapse) => {
-        this.setState({isFilterCollapsing: isCollapse});
+        this.setState({ isFilterCollapsing: isCollapse });
     }
 
-    _renderSelectedTimeZone = () =>{
+    _renderSelectedTimeZone = () => {
         const timeZoneList = AppData.timeZoneList;
 
         return timeZoneList && timeZoneList.length && (
@@ -66,7 +66,7 @@ export class FormFilter extends React.PureComponent {
         );
     }
 
-    _onChangeTimeZone = (value) =>{
+    _onChangeTimeZone = (value) => {
         this.props.setSelectedTimeZone(value);
     }
 
@@ -88,7 +88,8 @@ export class FormFilter extends React.PureComponent {
                             <label className="label-text">{LangHelper.getSingleResource('Date')}</label>
                             <DatePicker
                                 minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate} date={selectedDate}
-                                onChange={this.handleChangeDate} />
+                                onChange={this.handleChangeDate}
+                                langHandler={(key) => key === "May" ? LangHelper.getSingleResource("May2") : LangHelper.getSingleResource(key)} />
                         </div>
                     </div>
 
@@ -140,7 +141,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { requestParam, dateConstraint, gridData , selectedTimeZone} = state;
+    const { requestParam, dateConstraint, gridData, selectedTimeZone } = state;
     return Object.assign({}, { requestParam, dateConstraint, gridData, selectedTimeZone });
 }
 

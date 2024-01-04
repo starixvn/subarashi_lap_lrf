@@ -1,7 +1,4 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using System.Collections.Generic;
-
-namespace Fanex.Athena.Model.Core.Constants
+﻿namespace Fanex.Athena.Model.Core.Constants
 {
     public static class TimeZoneType
     {

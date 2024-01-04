@@ -1,4 +1,7 @@
-﻿using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Core.Constants;
@@ -8,9 +11,6 @@ using Fanex.Athena.Model.Core.DTO.Configuration;
 using Fanex.Athena.Resources;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.VendorAdapter.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Service.StatelessCore
 {

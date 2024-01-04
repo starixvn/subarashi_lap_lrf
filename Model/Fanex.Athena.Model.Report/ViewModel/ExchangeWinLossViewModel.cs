@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Core.DataDomain;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.Constants;
 
@@ -10,14 +11,15 @@
     {
         public ExchangeWinLossViewModel()
         {
-            FromDate = DateTime.Today;
-            ToDate = DateTime.Today;
+            FromDate = DateTimeHelper.Today;
+            ToDate = DateTimeHelper.Today;
             ReportBy = ReportByType.Daily;
             DateOptionType = ViewInTypes.SettledAndResettledReport;
             ExcludeTestData = true;
         }
 
         public SubsidiaryViewType ViewType { get; set; }
+
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
 
         public DateTime FromDate { get; set; }

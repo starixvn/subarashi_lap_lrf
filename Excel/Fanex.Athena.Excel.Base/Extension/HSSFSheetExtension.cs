@@ -5,10 +5,10 @@
 
 namespace Fanex.Athena.Excel.Base.Extension
 {
-    using NPOI.SS.UserModel;
-    using NPOI.SS.Util;
     using System.Collections.Generic;
     using System.Linq;
+    using NPOI.SS.UserModel;
+    using NPOI.SS.Util;
 
     public static class HSSFSheetExtension
     {

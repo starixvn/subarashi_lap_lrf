@@ -7,6 +7,7 @@
     public interface ISubsidiaryDataAccess
     {
         IEnumerable<Subsidiary> GetSubsidiaryList(string licenseeName);
+
         IEnumerable<GroupSubsidiary> GetGroupSubsidiaries(string licenseeName);
     }
 }

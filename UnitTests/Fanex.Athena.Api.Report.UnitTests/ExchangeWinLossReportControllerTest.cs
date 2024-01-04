@@ -6,7 +6,7 @@
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -21,8 +21,8 @@
 
     public class ExchangeWinLossReportControllerTest : BaseApiControllerHelperTest
     {
-        private readonly DateTime _minDate = new DateTime(2018, 2, 3);
-        private readonly DateTime _maxDate = new DateTime(2018, 8, 7);
+        private readonly DateTime _minDate = DateTimeHelper.CreateDateTime(2018, 2, 3);
+        private readonly DateTime _maxDate = DateTimeHelper.CreateDateTime(2018, 8, 7);
 
         private IReportSettingService _reportSettingService;
         private IExchangeWinLossDataAccess _dataAccess;
@@ -75,8 +75,8 @@
             // Arrange
             var model = new ExchangeWinLossMetaModel
             {
-                FromDate = DateTime.Now,
-                ToDate = DateTime.Now.AddDays(-1),
+                FromDate = DateTimeHelper.Now,
+                ToDate = DateTimeHelper.Now.AddDays(-1),
                 CurrencyId = -100
             };
 

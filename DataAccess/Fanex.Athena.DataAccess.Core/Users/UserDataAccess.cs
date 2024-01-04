@@ -9,7 +9,6 @@ namespace Fanex.Athena.DataAccess.Core.Users
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;

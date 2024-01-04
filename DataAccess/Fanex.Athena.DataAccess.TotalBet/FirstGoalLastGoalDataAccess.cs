@@ -12,7 +12,6 @@ namespace Fanex.Athena.DataAccess.TotalBet
     using Core;
     using Core.Extensions;
     using DataAccess.TotalBet.Interfaces;
-    using Extension.Helper;
     using Fanex.Common.Extensions;
     using Model.Core.ResultModel;
     using Model.TotalBet.DTO;

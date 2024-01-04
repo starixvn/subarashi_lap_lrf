@@ -1,9 +1,9 @@
-﻿using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.DataDomain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.DataDomain;
 
 namespace Fanex.Athena.Service.StatelessCore.Utility
 {

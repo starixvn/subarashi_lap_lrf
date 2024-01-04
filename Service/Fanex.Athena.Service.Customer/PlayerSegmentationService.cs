@@ -4,6 +4,10 @@ using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
 
 namespace Fanex.Athena.Service.Customer
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
@@ -15,10 +19,6 @@ namespace Fanex.Athena.Service.Customer
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
     using Newtonsoft.Json;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class PlayerSegmentationService : IPlayerSegmentationService
     {
@@ -206,8 +206,9 @@ namespace Fanex.Athena.Service.Customer
 
         private static void BindRiskLevelName(IEnumerable<PlayerInfo> players, IEnumerable<RiskLevel> riskLevels)
         {
-            players.ToList().ForEach(player => {
-                player.RiskLevel = riskLevels.FirstOrDefault(_=>_.CustomerClassList.Contains(player.CustomerClass))?.Name;
+            players.ToList().ForEach(player =>
+            {
+                player.RiskLevel = riskLevels.FirstOrDefault(_ => _.CustomerClassList.Contains(player.CustomerClass))?.Name;
             });
         }
 

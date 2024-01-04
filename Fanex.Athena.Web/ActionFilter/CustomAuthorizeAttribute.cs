@@ -1,13 +1,13 @@
 ﻿namespace Fanex.Athena.Web.ActionFilter
 {
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Service.Core.Users;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using System;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.Core.Users;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     [AttributeUsage(AttributeTargets.All)]
     public sealed class CustomAuthorizeAttribute : AuthorizeAttribute

@@ -1,25 +1,25 @@
-﻿using Fanex.Athena.Excel.Base;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using NPOI.SS.UserModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Fanex.Athena.Excel.Base.Extension;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Model.Customer.MetaModel;
 using System.Web.Hosting;
+using Fanex.Athena.Excel.Base;
+using Fanex.Athena.Excel.Base.Extension;
+using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
+using Fanex.Athena.Model.Customer.MetaModel;
+using Fanex.Athena.Resources;
+using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Customer
 {
     public class MonitoredPlayerReachedHistoryExcel : ReportBase
     {
-        const string ExcelTemplatePath = "~/App_Data/Template/Customers/PlayerSegmentation/MonitoredPlayerReachedHistory.xls";
+        private const string ExcelTemplatePath = "~/App_Data/Template/Customers/PlayerSegmentation/MonitoredPlayerReachedHistory.xls";
 
-        const int ColumnDate = 0;
-        const int ColumnWinningThreshold = 1;
-        const int ColumnWinningAmount = 2;
+        private const int ColumnDate = 0;
+        private const int ColumnWinningThreshold = 1;
+        private const int ColumnWinningAmount = 2;
 
-        const int ColumnTemplateCount = 3;
-        const int RowContentTemplate = 2;
+        private const int ColumnTemplateCount = 3;
+        private const int RowContentTemplate = 2;
 
         private readonly IEnumerable<MonitoredPlayerReachedHistory> _data;
         private readonly MonitoredPlayerReachedHistoryMetaModel _metaModel;

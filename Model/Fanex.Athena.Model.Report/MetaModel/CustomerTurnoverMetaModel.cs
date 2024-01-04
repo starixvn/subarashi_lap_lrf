@@ -6,9 +6,9 @@
 
 namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.MetaModel;
@@ -17,8 +17,8 @@ namespace Fanex.Athena.Model.Report.MetaModel
     {
         public CustomerTurnoverMetaModel()
         {
-            FromDate = DateTime.Today;
-            ToDate = DateTime.Today;
+            FromDate = DateTimeHelper.Today;
+            ToDate = DateTimeHelper.Today;
             ReportBy = ReportByType.Daily;
             ShowWin = true;
             ShowLoss = true;

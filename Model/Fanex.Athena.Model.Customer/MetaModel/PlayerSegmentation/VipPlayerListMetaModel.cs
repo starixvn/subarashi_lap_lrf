@@ -19,6 +19,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel
             {
                 return _fromDate;
             }
+
             set
             {
                 _fromDate = DateTimeHelper.ToBeginOfTheDay(value);
@@ -33,6 +34,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel
             {
                 return _toDate;
             }
+
             set
             {
                 _toDate = DateTimeHelper.ToEndOfTheDay(value);
@@ -40,6 +42,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel
         }
 
 #pragma warning disable S1067 // Expressions should not be too complex
+
         public override bool IsValid => base.IsValid && (VipOption >= 0 && VipOption <= NumberOfVIPOptions) && (IsCheckAll != 0 || FromDate <= ToDate);
 #pragma warning restore S1067 // Expressions should not be too complex
     }

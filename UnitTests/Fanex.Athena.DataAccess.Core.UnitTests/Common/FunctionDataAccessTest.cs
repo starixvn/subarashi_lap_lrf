@@ -7,7 +7,6 @@
 
     using Extension.Utility;
     using Fanex.Athena.Model.Auth;
-    using Model.Core.DTO.Common;
 
     using NSubstitute;
 

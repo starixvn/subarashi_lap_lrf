@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
@@ -19,7 +20,7 @@
     [TestFixture]
     public partial class ResultReportControllerTest : CultureBaseControllerHelperTest
     {
-        private static readonly DateTime BalanceUpDate = new DateTime(2017, 3, 4);
+        private static readonly DateTime BalanceUpDate = DateTimeHelper.CreateDateTime(2017, 3, 4);
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
         private IBetListApiClient _betListApiClient;
@@ -41,7 +42,6 @@
             });
             _portalApiService.GetSpecialLeaguesAsync(DefaultLicenseeSession.LicenseeName)
                 .Returns(Task.FromResult(Enumerable.Empty<int>()));
-
 
             SetUpDefaultFakeData();
         }
@@ -91,7 +91,7 @@
                     _betListApiClient.Received(1).PostStringAsync(
                         Url,
                         Arg.Is<object>(
-                            (System.Linq.Expressions.Expression<Predicate<object>>)(                            x => (int)x.GetValue("matchId") == MatchId &&
+                            (System.Linq.Expressions.Expression<Predicate<object>>)(x => (int)x.GetValue("matchId") == MatchId &&
                                 (int)x.GetValue("sportType") == SportId &&
                                 (string)x.GetValue("languageCode") == SessionService.UserSession.Language)), (string)SessionService.UserSession.Language);
                     Assert.That(result.ViewBag.Data, Is.EqualTo(ExpectedData));

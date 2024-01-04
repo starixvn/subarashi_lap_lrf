@@ -1,17 +1,15 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using NSubstitute;
 using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Utility.Interfaces;
-using Fanex.Athena.VendorAdapter.Interfaces;
-using Fanex.Athena.Service.StatelessCore;
-using Fanex.Athena.Model.Core.DTO.Configuration;
 using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Core.DTO.Configuration;
+using Fanex.Athena.Service.StatelessCore;
+using Fanex.Athena.VendorAdapter.Interfaces;
+using NSubstitute;
 using NSubstitute.ReturnsExtensions;
+using NUnit.Framework;
 
 namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
@@ -97,7 +95,7 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             const string lang = "VN";
             const string productCode = "Sport";
             var service = CreateService();
-            var expectedResult = new List<SportProductItem> ();
+            var expectedResult = new List<SportProductItem>();
             _sportTypeDataAccess.GetSportsAndProducts(licenseeId, lang, productCode).Returns(expectedResult);
 
             //Action
@@ -132,6 +130,5 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 
         private SportService CreateService()
             => new SportService(_sportTypeDataAccess, _cacheRefAdapter, _cacheService);
-
     }
 }

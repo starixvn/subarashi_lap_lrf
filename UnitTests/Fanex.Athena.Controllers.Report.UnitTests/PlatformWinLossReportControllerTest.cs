@@ -1,13 +1,8 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
-    using Fanex.Athena.Model.Core.MetaModel.Product;
-    using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -19,7 +14,6 @@
     [TestFixture]
     public class PlatformWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
-
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {

@@ -1,14 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers.Base.UnitTests
 {
     using System;
+    using System.Text;
+    using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
-
+    using Fanex.Athena.Controllers.Base;
     using NSubstitute;
     using NUnit.Framework;
-    using Fanex.Athena.Controllers.Base;
-    using System.Web;
-    using System.Text;
 
     public class JsonNetResultTest
     {

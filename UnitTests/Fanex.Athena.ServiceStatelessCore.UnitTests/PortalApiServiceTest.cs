@@ -1,14 +1,14 @@
-﻿using Fanex.Athena.Extension.Utility.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Fanex.Athena.Extension.Utility.Interfaces;
 using Fanex.Athena.Model.Core.DTO.External;
 using Fanex.Athena.Service.StatelessCore;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Logging;
 using NSubstitute;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {

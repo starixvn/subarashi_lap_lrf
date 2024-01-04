@@ -81,7 +81,6 @@
                 ControllerContext = ControllerContext,
                 LangService = LangService,
                 SessionServiceInstance = SessionService
-
             };
         }
 

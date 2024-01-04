@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -99,7 +100,7 @@ namespace Fanex.Athena.Web.UnitTests.ActionFilter
             // Arrange
             var filterContext = CreateFilterContext(false);
             _sessionStorage.LicenseeSession.Returns(new LicenseeAuthInfo());
-            _sessionStorage.UserSession.Returns(new UserAuthInfo { AccessTokenLifeTime = DateTime.Now.AddDays(1) });
+            _sessionStorage.UserSession.Returns(new UserAuthInfo { AccessTokenLifeTime = DateTimeHelper.Now.AddDays(1) });
 
             // Action
             _attribute.OnAuthorization(filterContext);

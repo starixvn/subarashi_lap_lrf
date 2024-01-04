@@ -127,7 +127,7 @@ export const FormFilter = (props) => {
             keyField="Value"
             valueField="Name"
             statusField="Checked"
-            texts={{ SelectOptions: "Please select", All: "All", SelectedItemCount: "# selected" }}
+            texts={{ SelectOptions: "Please select"}}
             isAllTextShown={false}
             hasSearchBox={false}
             treeViewOption={TreeViewOption}
@@ -180,7 +180,7 @@ export const FormFilter = (props) => {
                         {_renderDateRange()}
                     </div>
                 </div>
-                <div className="col-12 col-md-1 col-sm-2 col-lg-1 col-xl-1">
+                <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-2 get-all-date">
                     <div className="form-group">
                         <CheckBox id="IsGetAll"
                             checked={props.isGetAll}

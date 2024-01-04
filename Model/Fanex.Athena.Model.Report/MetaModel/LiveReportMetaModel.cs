@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
-    using Fanex.Athena.Model.Core.DataDomain;
     using System;
     using System.Linq;
+    using Fanex.Athena.Model.Core.DataDomain;
 
     [Serializable]
     public class LiveReportMetaModel : BaseReportMetaModel

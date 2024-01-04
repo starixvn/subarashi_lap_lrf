@@ -1258,7 +1258,7 @@
     <value>Tên nhóm này đã tồn tại, vui lòng thử tên khác!</value>
   </data>
   <data name="GroupNameNotEmptyMsg" xml:space="preserve">
-    <value>Tên Nhóm không được trống</value>
+    <value>Tên Nhóm không được trống.</value>
   </data>
   <data name="GroupNameNotExceed100CharactersMsg" xml:space="preserve">
     <value>Tên Nhóm không được vượt quá 100 kí tự.</value>
@@ -2797,7 +2797,7 @@
     <value>Hôm nay</value>
   </data>
   <data name="ToDowloadTemplate" xml:space="preserve">
-    <value>để tải mẫu</value>
+    <value> để tải mẫu</value>
   </data>
   <data name="TokenIsInValid" xml:space="preserve">
     <value>Token không hợp lệ</value>
@@ -3183,7 +3183,7 @@
   <data name="Volume" xml:space="preserve">
     <value>Tổng Giao Dịch</value>
   </data>
-  <data name="Wap" xml:space="preserve">
+  <data name="WAP" xml:space="preserve">
     <value>WAP</value>
   </data>
   <data name="WarningToActiveMsg" xml:space="preserve">

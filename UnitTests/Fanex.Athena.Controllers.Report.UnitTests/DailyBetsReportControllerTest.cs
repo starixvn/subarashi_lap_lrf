@@ -1,13 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Controllers.Base;
     using Fanex.Athena.Controllers.Base.UnitTests;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
@@ -19,7 +17,6 @@
     public class DailyBetsReportControllerTest : CultureBaseControllerHelperTest
     {
         private const int DefaultLimitedMonthRange = 6;
-
 
         private ILicenseeSettingService _licenseeSettingService;
 
@@ -76,11 +73,11 @@
                 // Arrange
                 var licenseeSetting = new FakeLicenseeSetting { TimeZone = 1, LimitRecentMonths = 1 };
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
-                var expectedTodatGtm8 = DateTime.UtcNow.AddHours(licenseeSetting.TimeZone.Value);
+                var expectedTodatGtm8 = DateTimeHelper.UtcNow.AddHours(licenseeSetting.TimeZone.Value);
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
-                var result = ( (await controller.Index()) as ViewResult).Model as DailyBetsViewModel;
+                var result = ((await controller.Index()) as ViewResult).Model as DailyBetsViewModel;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -99,7 +96,7 @@
                 // Arrange
                 FakeLicenseeSetting licenseeSetting = null;
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
-                var expectedTodatGtm8 = DateTime.Now;
+                var expectedTodatGtm8 = DateTimeHelper.Now;
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-DefaultLimitedMonthRange);
 
                 // Action
@@ -122,11 +119,11 @@
                 // Arrange
                 var licenseeSetting = new FakeLicenseeSetting() { LimitRecentMonths = 1 };
                 _licenseeSettingService.GetFakeLicenseeSetting(DefaultLicenseeSession.LicenseeName).Returns(licenseeSetting);
-                var expectedTodatGtm8 = DateTime.Now;
+                var expectedTodatGtm8 = DateTimeHelper.Now;
                 var expectedMinDate = expectedTodatGtm8.AddMonths(-licenseeSetting.LimitRecentMonths);
 
                 // Action
-                var result = ( (await controller.Index())  as ViewResult).Model as DailyBetsViewModel;
+                var result = ((await controller.Index()) as ViewResult).Model as DailyBetsViewModel;
 
                 // Assert
                 Assert.Multiple(() =>
@@ -137,7 +134,6 @@
             }
         }
 
-      
         private DailyBetsReportController CreateController(IList<Product> productList = null)
         {
             var productService = Substitute.For<IProductService>();
@@ -146,7 +142,8 @@
                 DefaultUserSession.Language,
                 FunctionNames.DailyBets).ReturnsForAnyArgs(new ProductAccess(productList ?? new List<Product>()));
 
-            return new DailyBetsReportController(_sportService)            {
+            return new DailyBetsReportController(_sportService)
+            {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
                 ProductServiceInstance = productService,

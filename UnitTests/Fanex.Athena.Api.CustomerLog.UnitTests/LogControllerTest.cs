@@ -11,6 +11,7 @@
 
     using Extension.Utility;
     using Extension.Utility.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Customer.DTO.CustomerLog;
     using Model.Customer.MetaModel.CustomerLog;
@@ -85,7 +86,7 @@
             {
                 new CustomerLog { LogId = 2, ActionId = 1, TrackingValue = "<doc <GroupName=\"Group\"/> />", TrackingValueOld = "<doc <GroupName=\"OldGroup\"/> />" },
                 new CustomerLog { LogId = 4, ActionId = 2, TrackingValue = "<doc <GroupColor=\"Red\"/> />", TrackingValueOld = "<doc <GroupColor=\"Green\"/> />" },
-                new CustomerLog { LogId = 3, ActionId = 2401, TrackingValue = string.Empty, TrackingValueOld = string.Empty, LogDate = DateTime.Today, EditedBy = "User" },
+                new CustomerLog { LogId = 3, ActionId = 2401, TrackingValue = string.Empty, TrackingValueOld = string.Empty, LogDate = DateTimeHelper.Today, EditedBy = "User" },
                 new CustomerLog { LogId = 1, ActionId = 2403, TrackingValue = string.Empty, TrackingValueOld = string.Empty, ActionName = "Action", DetailsOld = string.Empty }
             };
 

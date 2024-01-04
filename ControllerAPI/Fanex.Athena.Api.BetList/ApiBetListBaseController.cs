@@ -1,5 +1,7 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
+    using System;
+    using System.Threading.Tasks;
     using Base;
     using DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
@@ -7,8 +9,6 @@
     using Model.Core.DTO.Configuration;
     using Service.Core.Common.Interfaces;
     using Service.StatelessCore.Interfaces;
-    using System;
-    using System.Threading.Tasks;
 
     public class ApiBetListBaseController : BaseApiController
     {

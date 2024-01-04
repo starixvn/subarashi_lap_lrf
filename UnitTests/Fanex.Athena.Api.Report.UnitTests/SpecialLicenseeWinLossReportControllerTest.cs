@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,10 +7,9 @@
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.Core.DTO.Common;
@@ -44,7 +42,7 @@
             MockSessionData();
 
             _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>())
-               .Returns(new ReportSetting { MinDate = new DateTime(2018, 1, 1), MaxDate = new DateTime(2023, 12, 31), BaseCurrencies = "USD" });
+               .Returns(new ReportSetting { MinDate = DateTimeHelper.CreateDateTime(2018, 1, 1), MaxDate = DateTimeHelper.CreateDateTime(2023, 12, 31), BaseCurrencies = "USD" });
         }
 
         private void CreateController()
@@ -74,8 +72,8 @@
             // Arrange
             var model = new SpecialLicenseeWinLossMetaModel
             {
-                FromDate = new DateTime(2018, 1, 30),
-                ToDate = new DateTime(2018, 3, 1)
+                FromDate = DateTimeHelper.CreateDateTime(2018, 1, 30),
+                ToDate = DateTimeHelper.CreateDateTime(2018, 3, 1)
             };
 
             // Action
@@ -97,8 +95,8 @@
             var model = new SpecialLicenseeWinLossMetaModel
             {
                 ProductCodeList = null,
-                FromDate = new DateTime(2018, 1, 1),
-                ToDate = new DateTime(2018, 1, 31)
+                FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2018, 1, 31)
             };
 
             // Action
@@ -129,8 +127,8 @@
             var model = new SpecialLicenseeWinLossMetaModel
             {
                 ProductCodeList = new[] { "P1", "P2", "Invalid" },
-                FromDate = new DateTime(2018, 1, 1),
-                ToDate = new DateTime(2018, 1, 31)
+                FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2018, 1, 31)
             };
 
             // Action
@@ -163,8 +161,8 @@
             {
                 ProductCodeList = new[] { "P1" },
                 CurrencyId = 0,
-                FromDate = new DateTime(2018, 1, 1),
-                ToDate = new DateTime(2018, 1, 31)
+                FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2018, 1, 31)
             };
 
             _dataAccess.GetData(model, Arg.Any<IDictionary<int, string>>(), Arg.Any<IEnumerable<AuditCurrency>>())
@@ -202,8 +200,8 @@
             {
                 ProductCodeList = new[] { "P1" },
                 CurrencyId = 1,
-                FromDate = new DateTime(2018, 1, 1),
-                ToDate = new DateTime(2018, 1, 31)
+                FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2018, 1, 31)
             };
 
             var data = CreateResultModel();

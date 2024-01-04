@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Service.Core.Users.Interfaces
 {
+    using System.Collections.Generic;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Report.DTO;
-    using System.Collections.Generic;
 
     public interface ISubsidiaryService
     {

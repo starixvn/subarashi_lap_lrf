@@ -11,6 +11,7 @@
         public bool IgnoreSharding { get; set; }
 
         public bool IsHistory { get; set; }
+
         public IList<LicenseeWinLoss> MainResult { get; set; }
 
         public IDictionary<string, LicenseeWinLoss> SummaryTotal { get; set; }
@@ -18,6 +19,5 @@
         public LicenseeWinLossMetaModel Param { get; set; }
 
         public ReportSetting ReportSetting { get; set; }
-
     }
 }

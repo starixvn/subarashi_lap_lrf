@@ -1,17 +1,13 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Service.StatelessCore;
-using Fanex.Athena.Service.StatelessCore.Abstraction;
+﻿using System;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.CustomException;
 using Fanex.Athena.ServiceStatelessCore.UnitTests.MockHelper;
 using NSubstitute;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Abstraction
 {
@@ -21,7 +17,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Abstraction
         private const string Language = "en-US";
         private const string ApiUrl = "/api/Report/Action";
         private readonly Uri BaseAddress = new Uri("http://localhost:80");
-
 
         [TestCase(MediaType.Json, "application/json")]
         [TestCase(MediaType.MsgPack, "application/x-msgpack")]
@@ -60,8 +55,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Abstraction
             Assert.That(passedRequest.Content, Is.Not.Null);
         }
 
-
-
         [Test]
         public void HandleAsync_UnSuccessful_ThrowException()
         {
@@ -91,7 +84,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Abstraction
         {
             // Arrange
 
-
             // Action
 
             // Assert
@@ -101,7 +93,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests.Abstraction
         public void HandleAsync_WhenCall_NotDisposeResponse()
         {
             // Arrange
-
 
             // Action
 

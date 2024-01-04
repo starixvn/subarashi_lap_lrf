@@ -1,10 +1,10 @@
 ﻿namespace Fanex.Athena.Service.Core.Users
 {
+    using System.Web;
+    using System.Web.SessionState;
     using Fanex.Athena.Extension;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
-    using System.Web;
-    using System.Web.SessionState;
 
     public class SessionService : ISessionService
     {

@@ -1,15 +1,14 @@
 ﻿namespace Fanex.Athena.Service.StatelessCore
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DTO.External;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Logging;
-    using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     [CLSCompliant(false)]
     public class PortalApiService : IPortalApiService

@@ -1,5 +1,5 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Core.DTO.Common;
 
 namespace Fanex.Athena.Model.Core.Helper
 {

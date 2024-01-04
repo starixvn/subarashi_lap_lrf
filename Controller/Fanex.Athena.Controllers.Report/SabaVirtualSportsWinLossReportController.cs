@@ -1,6 +1,12 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.MetaModel.Common;
@@ -10,12 +16,6 @@
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using Model.Core.DTO.Common;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using System.Web.UI.WebControls;
 
     [FunctionAuthorization(PermissionKeys.ReportSabaVirtualSportsWinLoss)]
     public class SabaVirtualSportsWinLossReportController : ReportBaseController
@@ -56,7 +56,7 @@
             var userSession = SessionServiceInstance.UserSession;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportSabaVirtualSportsWinLoss,
                 licenseeSession.LicenseeName);
-            var date = DateTime.Today;
+            var date = DateTimeHelper.Today;
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                licenseeSession.LicenseeId,
                userSession.Language,

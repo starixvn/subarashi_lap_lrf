@@ -6,16 +6,15 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
     using Fanex.Athena.Web.ActionFilter;
-
     using Model.Core.DataDomain;
-
-    using System;
-    using System.Linq;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportAGCasinoBalance)]
     public class AgCasinoBalanceReportController : ReportBaseController
@@ -25,11 +24,11 @@ namespace Fanex.Athena.Controllers.Report
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
-            var toDate = DateTime.Now.AddDays(-2);
+            var toDate = DateTimeHelper.Now.AddDays(-2);
 
             var metaModel = new ThirdPartyWinLossMetaModel
             {
-                FromDate = new DateTime(toDate.Year, toDate.Month, 1),
+                FromDate = DateTimeHelper.CreateDateTime(toDate.Year, toDate.Month, 1),
                 ToDate = toDate,
                 LicenseeId = licenseeSession.LicenseeId,
                 IsExcludedTestData = true,

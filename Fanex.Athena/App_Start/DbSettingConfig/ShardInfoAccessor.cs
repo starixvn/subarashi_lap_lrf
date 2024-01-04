@@ -1,5 +1,5 @@
-﻿using Fanex.Athena.Service.Core.Users.Interfaces;
-using System;
+﻿using System;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 
 namespace Fanex.Athena
 {
@@ -12,11 +12,11 @@ namespace Fanex.Athena
 
     public class ShardInfoAccessor : IShardInfoAccessor
     {
-        const string PrefixShardingDefault = "shard_";
+        private const string PrefixShardingDefault = "shard_";
 
-        readonly string _prefixSharding;
+        private readonly string _prefixSharding;
 
-        private readonly ISessionService _sessionService; 
+        private readonly ISessionService _sessionService;
 
         public ShardInfoAccessor(ISessionService sessionService, string prefixSharding = PrefixShardingDefault)
         {
@@ -24,10 +24,9 @@ namespace Fanex.Athena
             _prefixSharding = prefixSharding;
         }
 
-
         public bool TryUseShardDB(string key, out string dbServer)
         {
-           if (IsSharding(key) && !ForceIgnoreSharding && !string.IsNullOrEmpty(SiteDBServer))
+            if (IsSharding(key) && !ForceIgnoreSharding && !string.IsNullOrEmpty(SiteDBServer))
             {
                 dbServer = SiteDBServer;
                 return true;

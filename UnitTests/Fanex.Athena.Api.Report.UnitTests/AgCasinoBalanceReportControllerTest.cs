@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -11,7 +10,7 @@
     using Excel.Report;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
 
     using Model.Core.ResultModel;
@@ -120,7 +119,7 @@
                 IsExcludedTestData = IsExcludedTestData
             };
 
-            var today = DateTime.Today;
+            var today = DateTimeHelper.Today;
             var resultModel = new SortableReportResultModel<AgCasinoBalance>
             {
                 DataList = new SortableList<AgCasinoBalance>
@@ -223,8 +222,8 @@
             // Arrange
             _currencyValidation.IsValidCurrency(Arg.Any<int>()).Returns(true);
 
-            var fromDate = new DateTime(2017, 4, 1);
-            var toDate = new DateTime(2017, 4, 18);
+            var fromDate = DateTimeHelper.CreateDateTime(2017, 4, 1);
+            var toDate = DateTimeHelper.CreateDateTime(2017, 4, 18);
             var metaModel = new ThirdPartyWinLossMetaModel
             {
                 CurrencyId = currencyId,

@@ -50,7 +50,7 @@
         {
             return DateTimeHelper.GetMinDate(
                 reportSetting.MaxDate,
-                reportSetting.TimeZone.HasValue ? DateTime.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTime.Now);
+                reportSetting.TimeZone.HasValue ? DateTimeHelper.UtcNow.AddHours(reportSetting.TimeZone.Value) : DateTimeHelper.Now);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Fanex.Athena.Excel.Base;
@@ -7,6 +6,7 @@ using Fanex.Athena.Excel.Base.Entities;
 using Fanex.Athena.Excel.Report.Helpers;
 using Fanex.Athena.Excel.Report.Models;
 using Fanex.Athena.Excel.Report.UnitTests.TestableClasses;
+using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.MetaModel.Product;
 using Fanex.Athena.Model.Report.DTO;
@@ -266,8 +266,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             {
                 BaseCurrency = string.Empty,
                 CurrencyName = "INH",
-                FromDate = new DateTime(2018, 1, 1),
-                ToDate = new DateTime(2018, 2, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2018, 2, 2),
                 CurrencyId = 1,
                 DrillDownLevel = level,
                 ProductOptions = (productCodes ?? new string[] { }).Select(x => new ProductOption

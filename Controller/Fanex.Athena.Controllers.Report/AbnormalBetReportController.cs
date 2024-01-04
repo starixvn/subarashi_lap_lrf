@@ -1,22 +1,14 @@
-﻿using Fanex.Athena.Extension.Helper;
-using Fanex.Athena.Extension.Utility.Internal;
-using Fanex.Athena.Model.Auth.DataDomain;
-using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using Fanex.Athena.Model.Report.MetaModel;
-using Fanex.Athena.Model.Report.ViewModel;
-using Fanex.Athena.Resources;
-using Fanex.Athena.Service.Customer.Interfaces;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.VendorAdapter.Interfaces;
-using Fanex.Athena.Web.ActionFilter;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Report.ViewModel;
+using Fanex.Athena.Resources;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Athena.Web.ActionFilter;
 
 namespace Fanex.Athena.Controllers.Report
 {
@@ -25,19 +17,15 @@ namespace Fanex.Athena.Controllers.Report
     {
         private readonly IReportSettingService _reportSettingService;
         private readonly ISportService _sportService;
-        private readonly IPlayerSegmentationService _playerService;
         private readonly IBetTypeService _betTypeService;
 
         public AbnormalBetReportController(
             IReportSettingService reportSettingService,
             ISportService sportService,
-            IPlayerSegmentationService playerService,
-            IBetTypeService betTypeService
-            )
+            IBetTypeService betTypeService)
         {
             _reportSettingService = reportSettingService;
             _sportService = sportService;
-            _playerService = playerService;
             _betTypeService = betTypeService;
         }
 

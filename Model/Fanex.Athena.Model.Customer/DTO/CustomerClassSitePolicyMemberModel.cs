@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Fanex.Athena.Model.Customer.DTO
+﻿namespace Fanex.Athena.Model.Customer.DTO
 {
     public class CustomerClassSitePolicyMemberModel
     {

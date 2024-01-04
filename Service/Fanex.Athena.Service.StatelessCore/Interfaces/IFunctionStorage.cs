@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Model.Core.DTO.Common;
 
     public interface IFunctionStorage
     {

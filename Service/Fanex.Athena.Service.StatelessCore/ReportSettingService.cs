@@ -58,7 +58,7 @@
 
         private static DateTime GetNowByTimeZone(int? timeZone)
         {
-            return timeZone.HasValue ? DateTime.UtcNow.AddHours(timeZone.Value) : DateTime.Now;
+            return timeZone.HasValue ? DateTimeHelper.UtcNow.AddHours(timeZone.Value) : DateTimeHelper.Now;
         }
 
         private static DateTime ConvertToDate(string datetime, int? timeZone, DateTime? defaultDate)
@@ -94,7 +94,7 @@
             if (reportSetting.LimitRecentMonths > 0)
             {
                 var limitedMinDate = GetNowByTimeZone(reportSetting.TimeZone).Date.AddMonths(-reportSetting.LimitRecentMonths + 1);
-                limitedMinDate = new DateTime(limitedMinDate.Year, limitedMinDate.Month, 1);
+                limitedMinDate = DateTimeHelper.CreateDateTime(limitedMinDate.Year, limitedMinDate.Month, 1);
                 reportSetting.MinDate = DateTimeHelper.GetMaxDate(reportSetting.MinDate, limitedMinDate);
             }
 

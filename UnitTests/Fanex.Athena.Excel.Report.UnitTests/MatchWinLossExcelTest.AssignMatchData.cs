@@ -12,7 +12,6 @@ using NUnit.Framework;
 namespace Fanex.Athena.Excel.Report.UnitTests
 {
     [TestFixture]
-#pragma warning disable S3881 // "IDisposable" should be implemented correctly
     public partial class MatchWinLossExcelTest
 #pragma warning restore S3881 // "IDisposable" should be implemented correctly
     {

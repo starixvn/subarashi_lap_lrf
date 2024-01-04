@@ -1,18 +1,12 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
-    using System.Web.Script.Serialization;
     using Base.UnitTests;
-    using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Model.Core.ResultModel;
-    using Fanex.Athena.Model.Report.DTO;
-    using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Report.ViewModel;
     using NSubstitute;
@@ -64,13 +58,12 @@
             }
         }
 
-        
         private GodOfFortuneWinLossReportController CreateController()
         {
             var reportSetting = new ReportSetting
             {
-                MinDate = new DateTime(2021, 2, 15),
-                MaxDate = new DateTime(2021, 3, 30),
+                MinDate = DateTimeHelper.CreateDateTime(2021, 2, 15),
+                MaxDate = DateTimeHelper.CreateDateTime(2021, 3, 30),
             };
 
             _reportSettingService.GetSetting(PermissionKeys.ReportGodOfFortuneWinLoss, SessionService.LicenseeSession.LicenseeName).

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Core.Users.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
 
@@ -10,7 +9,6 @@
     {
         public Tuple<int, int> IsCustomerBelonging(int custId, long transid)
         {
-
             using (var db = this.GetObjectDb("Lrf_CheckBelonging_GetAgentInfo"))
             {
                 db.SetParameterValue("transid", transid);

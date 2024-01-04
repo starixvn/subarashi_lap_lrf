@@ -84,7 +84,7 @@ namespace Fanex.Athena.Excel.Report
             var headerTextList = new[]
             {
                 "#",
-                ViewResources.Day,
+                ViewResources.Date,
                 ViewResources.OpeningBalance,
                 ViewResources.Deposit,
                 ViewResources.Withdrawal,

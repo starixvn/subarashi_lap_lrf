@@ -1,11 +1,10 @@
 ﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
-    using System;
     using System.Collections.Generic;
 
     using Extension.Utility;
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.StatelessCore;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -193,8 +192,8 @@
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(result.MinDate, Is.EqualTo(DateTime.Today.AddDays(-1)));
-                Assert.That(result.MaxDate, Is.EqualTo(DateTime.Today));
+                Assert.That(result.MinDate, Is.EqualTo(DateTimeHelper.Today.AddDays(-1)));
+                Assert.That(result.MaxDate, Is.EqualTo(DateTimeHelper.Today));
             });
         }
 
@@ -213,13 +212,13 @@
             var fakeLicenseeSetting = new FakeLicenseeSetting
             {
                 SiteName = "123",
-                MinDate = DateTime.Today.AddMonths(-limitRecentMonths - 1).ToString("yyyy/M/d"),
+                MinDate = DateTimeHelper.Today.AddMonths(-limitRecentMonths - 1).ToString("yyyy/M/d"),
                 LimitRecentMonths = limitRecentMonths
             };
             _cache.Get<IEnumerable<ReportSetting>>(string.Empty).ReturnsForAnyArgs(fakeData);
             _fakeLicenseeSettingService.GetFakeLicenseeSetting(Arg.Any<string>()).Returns(fakeLicenseeSetting);
 
-            var expectedMinDate = DateTime.Today.AddMonths(-limitRecentMonths + 1).ToString("yyyy/M/1");
+            var expectedMinDate = DateTimeHelper.Today.AddMonths(-limitRecentMonths + 1).ToString("yyyy/M/1");
 
             // Action
             var result = _reportSettingService.GetSetting(reportKey, LicenseeName);

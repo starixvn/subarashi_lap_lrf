@@ -8,7 +8,7 @@
     using Core.UnitTests.TestHelpers;
 
     using Data;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
@@ -45,7 +45,7 @@
             var balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             _balance = new BalanceUp
             {
-                MoveBetsDay = new DateTime(2017, 2, 2)
+                MoveBetsDay = DateTimeHelper.CreateDateTime(2017, 2, 2)
             };
             balanceUpDataAccess.GetBalanceUp().Returns(_balance);
 
@@ -62,8 +62,8 @@
                 BaseCurrency = "UUS",
                 LicenseeId = 2,
                 AgentListXml = "3",
-                FromDate = new DateTime(2017, 1, 1),
-                ToDate = new DateTime(2017, 2, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 2, 2),
                 LiveIndicator = 1
             };
         }
@@ -314,8 +314,8 @@
             {
                 ProductCodeList = "BA,SB,NG",
                 AgentListXml = "3",
-                FromDate = new DateTime(2017, 1, 1),
-                ToDate = new DateTime(2017, 2, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 2, 2),
                 LiveIndicator = 1,
                 SportId = 3
             };

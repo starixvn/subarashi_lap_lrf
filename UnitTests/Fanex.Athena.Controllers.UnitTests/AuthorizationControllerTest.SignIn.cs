@@ -5,8 +5,6 @@
 
     using Fanex.Athena.Model.Auth.MetaModel;
     using Fanex.Athena.Service.Core.OAuth;
-    using Model.Core.DTO.Common;
-    using Model.Core.DTO.Users;
 
     using NSubstitute;
 
@@ -266,7 +264,7 @@
                     UserName = "xxx",
                     PassWord = "xxx"
                 };
-               
+
                 _authService.RequestOAuthInfoAsync(loginMetaModel)
                     .Returns(oauthInfo);
 

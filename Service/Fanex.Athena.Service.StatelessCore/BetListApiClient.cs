@@ -13,7 +13,7 @@
 
     public class BetListApiClient : BaseApiClient, IBetListApiClient
     {
-        const string IgnoreShardingHeader = "X-IgnoreSharding";
+        private const string IgnoreShardingHeader = "X-IgnoreSharding";
 
         public BetListApiClient(HttpClient httpClient) : base(httpClient)
         {

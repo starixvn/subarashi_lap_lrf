@@ -6,9 +6,7 @@
     using System.Web.Security;
 
     using Base.UnitTests;
-    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.OAuth;
     using Model.Core.DataDomain;
 
     using NSubstitute;
@@ -49,7 +47,7 @@
         {
             using (var controller = CreateController())
             {
-                // Action     
+                // Action
                 _maintenanceService.IsUnderMaintenance().Returns(false);
                 var result = controller.SessionIsAlive("user1") as JsonResult;
                 var data = result.Data as dynamic;

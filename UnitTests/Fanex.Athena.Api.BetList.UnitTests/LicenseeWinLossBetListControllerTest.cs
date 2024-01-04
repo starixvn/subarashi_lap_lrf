@@ -1,10 +1,9 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -46,7 +45,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var metaModel = new BetListMetaModel { FromDate = new DateTime(2018, 1, 1) };
+                var metaModel = new BetListMetaModel { FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1) };
 
                 StubUserSessionData(new UserAuthInfo
                 {
@@ -56,8 +55,8 @@
 
                 _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss, Arg.Any<string>()).Returns(new ReportSetting
                 {
-                    MinDate = new DateTime(2018, 2, 2),
-                    MaxDate = new DateTime(2018, 3, 3)
+                    MinDate = DateTimeHelper.CreateDateTime(2018, 2, 2),
+                    MaxDate = DateTimeHelper.CreateDateTime(2018, 3, 3)
                 });
 
                 // Action

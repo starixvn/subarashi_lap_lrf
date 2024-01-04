@@ -8,6 +8,7 @@
     using Fanex.Athena.Excel.Base;
     using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Excel.Customer.CustomerClass;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.Enum;
@@ -89,8 +90,8 @@
                     ? Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/CustomerClassSettingPolicy.xls")
                     : Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/CustomerClassSpreadSettingPolicy.xls");
                 var fileName = tabKey == 1
-                    ? "CustomerClassSettingPolicy_" + DateTime.Now.ToString("MM-dd-yyyy")
-                    : "CustomerClassSpreadSettingPolicy_" + DateTime.Now.ToString("MM-dd-yyyy");
+                    ? "CustomerClassSettingPolicy_" + DateTimeHelper.Now.ToString("MM-dd-yyyy")
+                    : "CustomerClassSpreadSettingPolicy_" + DateTimeHelper.Now.ToString("MM-dd-yyyy");
                 var reportTitle = tabKey == 1
                     ? ViewResources.CustomerClassSettingPolicy
                     : ViewResources.CustomerClassSpreadSettingPolicy;

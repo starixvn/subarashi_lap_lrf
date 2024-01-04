@@ -8,7 +8,7 @@ namespace Fanex.Athena.Web.ResultExtension
 {
     using System.Web.Mvc;
     using NPOI.SS.UserModel;
-    using System;
+
     /// <summary>
     /// Excel Result.
     /// </summary>

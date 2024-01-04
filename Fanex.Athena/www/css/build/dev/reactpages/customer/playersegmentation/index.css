@@ -142,7 +142,7 @@ input[type="checkbox"].checkbox {
 
 .rdr-MonthAndYearSelect {
   height: 25px;
-  width: 75px; }
+  width: 83px; }
 
 .rdr-WeekDay {
   font-size: 12px;
@@ -1562,6 +1562,16 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     cursor: pointer; }
   #player-segmentation .vip-player-management .search-option .material-icons {
     font-size: 12px; }
+  #player-segmentation .vip-player-management .last-mark-date {
+    max-width: fit-content !important;
+    min-width: 16.66667%; }
+  #player-segmentation .vip-player-management .subsidiary-checkbox {
+    max-width: fit-content !important;
+    min-width: 9%; }
+
+#player-segmentation .saba-virtual-setting .get-all-date {
+  min-width: 8.33333%;
+  max-width: fit-content !important; }
 
 #player-segmentation .monitored-player .form-add {
   padding: 15px;
@@ -1585,6 +1595,10 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     #player-segmentation .monitored-player .form-reached-history .caption .caret-block {
       bottom: 5px;
       right: 0; }
+
+#player-segmentation .monitored-player .get-all-date {
+  min-width: 8.33333%;
+  max-width: fit-content !important; }
 
 #player-segmentation .required {
   top: 0;

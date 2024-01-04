@@ -6,26 +6,18 @@
 
 namespace Fanex.Athena.Controllers.Account
 {
-    using DataAccess.Core.Common.Interfaces;
-
-    using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-
-    using Model.Core.DataDomain;
-    using Model.Core.DTO.Common;
-    using Model.Core.MetaModel.Account;
-
-    using Resources;
-
-    using Service.Core.Users.Interfaces;
-
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Text;
     using System.Web.Mvc;
-
+    using DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Model.Core.DTO.Common;
+    using Model.Core.MetaModel.Account;
+    using Resources;
+    using Service.Core.Users.Interfaces;
     using Web.ActionFilter;
 
     public class AccountPermissionController : AccountBaseController

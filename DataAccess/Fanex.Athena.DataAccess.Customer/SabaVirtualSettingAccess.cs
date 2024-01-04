@@ -7,7 +7,6 @@
     using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Resources;
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Fanex.Common.Extensions;
 

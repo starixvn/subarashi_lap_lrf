@@ -1,7 +1,5 @@
 ﻿namespace Fanex.Athena.Service.Core.Proxy
 {
-    using Fanex.Athena.Service.Core.Users;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
     using System;
     using System.Collections.Generic;
     using System.Configuration;
@@ -9,6 +7,8 @@
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
     using System.Web;
+    using Fanex.Athena.Service.Core.Users;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
 
     public class ProxyOptions : IProxyOptions
     {
@@ -26,10 +26,8 @@
 
         private static readonly ISessionService SessionService = new SessionService();
 
-
         public ProxyOptions(int requestTimeout)
         {
-            
             PrepareRequest = (originalRequest, message) =>
             {
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", SessionService.UserSession.AccessToken);

@@ -7,7 +7,7 @@
 
     using Core.Configuration.Interfaces;
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
@@ -27,8 +27,8 @@
         {
             _balance = new BalanceUp
             {
-                MoveBetsDay = new DateTime(2017, 8, 25),
-                BalanceUpDay = new DateTime(2017, 8, 31)
+                MoveBetsDay = DateTimeHelper.CreateDateTime(2017, 8, 25),
+                BalanceUpDay = DateTimeHelper.CreateDateTime(2017, 8, 31)
             };
 
             var balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
@@ -261,8 +261,8 @@
             {
                 BaseCurrency = "EUR",
                 ConvertAll = true,
-                FromDate = new DateTime(2017, 8, 25),
-                ToDate = new DateTime(2017, 8, 31),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 8, 25),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 8, 31),
                 ProductCodeList = "SB,BA",
                 AgentListXml = "<Param></Param>"
             };

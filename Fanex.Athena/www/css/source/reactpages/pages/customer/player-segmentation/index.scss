@@ -150,6 +150,23 @@
                 font-size: 12px;
             }
         }
+
+        .last-mark-date {
+            max-width: fit-content !important;
+            min-width: 16.66667%;
+        }
+
+        .subsidiary-checkbox {
+            max-width: fit-content !important;
+            min-width: 9%;
+        }
+    }
+
+    .saba-virtual-setting {
+        .get-all-date {
+            min-width: 8.33333%;
+            max-width: fit-content !important;
+        }
     }
 
     .monitored-player {
@@ -187,6 +204,11 @@
                     right: 0;
                 }
             }
+        }
+
+        .get-all-date {
+            min-width: 8.33333%;
+            max-width: fit-content !important;
         }
     }
 
@@ -234,8 +256,9 @@
 .page-filter {
     padding-bottom: 30px;
 }
-.button-group{
-    button{
+
+.button-group {
+    button {
         margin-right: 20px
     }
 }

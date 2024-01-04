@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Api.Customer
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
     using Fanex.Athena.Api.Base;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Http;
 
     public partial class PlayerSegmentationController : BaseApiController
     {

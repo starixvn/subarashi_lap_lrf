@@ -6,13 +6,12 @@
 
 namespace Fanex.Athena.Controllers.Report
 {
+    using System.Web.Mvc;
+    using System.Web.SessionState;
     using DataAccess.Core.Configuration.Interfaces;
-
     using Fanex.Athena.Model.Report.ViewModel.Note;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [UMFilter]

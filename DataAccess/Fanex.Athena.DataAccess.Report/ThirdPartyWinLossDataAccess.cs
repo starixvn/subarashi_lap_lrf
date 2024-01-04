@@ -8,6 +8,7 @@
     using Core;
     using Fanex.Athena.DataAccess.Core.Extensions;
     using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -66,7 +67,7 @@
 
         private static void AddRowSpan(IEnumerable<T> dataList)
         {
-            DateTime? date = new DateTime();
+            DateTime? date = DateTimeHelper.CreateDateTime();
             var index = 1;
             var i = 0;
             var total = dataList.Count();

@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using Base.UnitTests;
 
     using DataAccess.Report.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
@@ -90,8 +90,8 @@
         {
             return new LicenseeWinLossByTimeZoneMetaModel
             {
-                FromDate = new DateTime(2017, 1, 1),
-                ToDate = new DateTime(2017, 1, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2017, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2017, 1, 2),
                 ProductCodeList = "SB",
                 BaseCurrency = "EUR",
             };

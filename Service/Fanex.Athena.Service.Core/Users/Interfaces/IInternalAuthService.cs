@@ -1,7 +1,7 @@
-﻿using Fanex.Athena.Model.Auth.MetaModel;
-using Fanex.Athena.Service.Core.OAuth;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web;
+using Fanex.Athena.Model.Auth.MetaModel;
+using Fanex.Athena.Service.Core.OAuth;
 
 namespace Fanex.Athena.Service.Core.Users.Interfaces
 {

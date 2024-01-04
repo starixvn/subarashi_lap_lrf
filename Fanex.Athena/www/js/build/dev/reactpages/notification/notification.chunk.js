@@ -2426,14 +2426,11 @@ const defaultTheme = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-
+/* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  months: [_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Jan'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Feb'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Mar'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Apr'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('May2'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Jun'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Jul'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Aug'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Sep'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Oct'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Nov'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Dec')],
-  weekdays: [_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Su'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Mo'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Tu'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('We'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Th'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Fr'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Sa')]
+  months: [_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Jan'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Feb'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Mar'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Apr'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('May2'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Jun'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Jul'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Aug'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Sep'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Oct'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Nov'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Dec')],
+  weekdays: [_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Su'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Mo'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Tu'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('We'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Th'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Fr'), _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Sa')]
 });
 
 /***/ }),
@@ -3011,6 +3008,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
+
 
 
 
@@ -3050,11 +3049,16 @@ const setSelectedViewEvent = data => ({
 });
 function getGridData(params) {
   return dispatch => {
+    dispatch(Object(_actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__["toggleLoader"])(true));
     fetchData(params).then(response => {
       dispatch(setGridData({
         Data: response.data.DataList,
         Total: response.data.TotalRows
       }));
+      dispatch(Object(_actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__["toggleLoader"])(false));
+    }).catch(error => {
+      console.log(error);
+      dispatch(Object(_actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__["toggleLoader"])(false));
     });
   };
 }
@@ -3066,6 +3070,7 @@ function setGridData(data) {
 }
 function markItemAsRead(params) {
   return dispatch => {
+    dispatch(Object(_actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__["toggleLoader"])(true));
     markNotification({
       id: params.Id,
       type: params.Type,
@@ -3077,7 +3082,11 @@ function markItemAsRead(params) {
           Data: params.Data,
           Total: params.Total
         }));
+        dispatch(Object(_actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__["toggleLoader"])(false));
       }
+    }).catch(error => {
+      console.log(error);
+      dispatch(Object(_actions_loaderAction__WEBPACK_IMPORTED_MODULE_3__["toggleLoader"])(false));
     });
   };
 }
@@ -3298,7 +3307,6 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       const params = {
         data: paramData
       };
-      this.props.toggleLoader(true);
       this.props.getGridData(params);
       this.props.setParam(paramData);
     });
@@ -3526,7 +3534,6 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         return;
       }
       this.props.setParam(params.data);
-      this.props.toggleLoader(true);
       this.props.getGridData(params);
     });
     _defineProperty(this, "applyDateRangeHandler", (date, isValidMonthRange = true) => {

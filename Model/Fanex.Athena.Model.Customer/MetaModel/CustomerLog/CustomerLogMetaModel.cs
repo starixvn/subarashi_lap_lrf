@@ -8,6 +8,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel.CustomerLog
 {
     using System;
     using Core.MetaModel;
+    using Fanex.Athena.Extension.Helper;
 
     /// <summary>
     /// CustomerLogMetaModel class.
@@ -16,10 +17,10 @@ namespace Fanex.Athena.Model.Customer.MetaModel.CustomerLog
     {
         public CustomerLogMetaModel()
         {
-            Year = DateTime.Today.Year;
-            Month = DateTime.Today.Month;
+            Year = DateTimeHelper.Today.Year;
+            Month = DateTimeHelper.Today.Month;
             FromDay = 1;
-            ToDay = DateTime.Today.Day;
+            ToDay = DateTimeHelper.Today.Day;
             IsShowOldValue = false;
 
             // Default is view by all
@@ -40,7 +41,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel.CustomerLog
         {
             get
             {
-                return new DateTime(Year, Month, FromDay);
+                return DateTimeHelper.CreateDateTime(Year, Month, FromDay);
             }
         }
 
@@ -48,7 +49,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel.CustomerLog
         {
             get
             {
-                return new DateTime(Year, Month, ToDay);
+                return DateTimeHelper.CreateDateTime(Year, Month, ToDay);
             }
         }
 

@@ -2,16 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.Athena.Extension.Helper;
 
     public class ProblemPlayerViewModel
     {
         public ProblemPlayerViewModel()
         {
-            var today = DateTime.Today;
+            var today = DateTimeHelper.Today;
             FromDate = today;
             ToDate = today;
             MaxDate = today;
-            MinDate = new DateTime(2012, 1, 1); // 01/01/2012
+            MinDate = DateTimeHelper.CreateDateTime(2012, 1, 1); // 01/01/2012
             IsGetAll = true;
         }
 
@@ -30,6 +31,5 @@
         public IDictionary<int, string> ReasonList { get; set; }
 
         public IEnumerable<string> CustomerClass { get; set; }
-
     }
 }

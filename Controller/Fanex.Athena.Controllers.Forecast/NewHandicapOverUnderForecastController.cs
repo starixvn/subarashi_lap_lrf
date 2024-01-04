@@ -6,29 +6,23 @@
 
 namespace Fanex.Athena.Controllers.Forecast
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
-
     using Fanex.Athena.Extension.Helpers;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Logging;
-
     using Model.Forecast.DTO.NewForecastHdpOu;
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-
     using VendorAdapter.Interfaces;
-
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.ForecastHandicapOverUnderLive)]
@@ -45,7 +39,6 @@ namespace Fanex.Athena.Controllers.Forecast
         private readonly INewForecastDataAccess _forecastDataAccess;
 
         private readonly IPortalApiService _portalApiService;
-
 
         public NewHandicapOverUnderForecastController(
             INewForecastDataAccess forecastDataAccess,

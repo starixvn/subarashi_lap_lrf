@@ -14,7 +14,6 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Resources;
     using Fanex.Common.Extensions;
     using VendorAdapter.Interfaces;
 
@@ -110,7 +109,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
             using (var db = this.GetObjectDb(UspName))
             {
-                return await db.QueryAsync<SportForTreeViewItem>(new {licenseeId, productCodes});
+                return await db.QueryAsync<SportForTreeViewItem>(new { licenseeId, productCodes });
             }
         }
     }

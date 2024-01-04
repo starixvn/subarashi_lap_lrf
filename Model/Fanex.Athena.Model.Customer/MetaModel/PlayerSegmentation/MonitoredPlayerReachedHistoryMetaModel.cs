@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.Model.Customer.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
+    using Fanex.Athena.Model.Core.MetaModel;
 
     public class MonitoredPlayerReachedHistoryMetaModel : IMetaModelValidation, IMetalModelCustomerIdentity
     {
@@ -18,6 +18,7 @@
         public DateTime ToDate { get; set; }
 
         public byte OrderCol { get; set; }
+
         public byte SortType { get; set; }
 
         public bool IsValid => FromDate <= ToDate;

@@ -5,7 +5,7 @@
         public string CurrencyName { get; set; }
 
         public string Product { get; set; }
-        
+
         public int BetCount { get; set; }
 
         public decimal Turnover { get; set; }

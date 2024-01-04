@@ -41,7 +41,7 @@
         public async Task<dynamic> BetTypeWinLoss(
             int page,
             int rows,
-            [FromUri]BetListMetaModel metaModel)
+            [FromUri] BetListMetaModel metaModel)
         {
             var balanceUp = GetBalanceUp();
             string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? STR_SP_BETLIST_MATCHWL_OLD : "Lrf_BetList_SelWinLossByBetType";
@@ -54,7 +54,7 @@
         public async Task<dynamic> MatchBetType(
             int page,
             int rows,
-            [FromUri]BetListMetaModel metaModel)
+            [FromUri] BetListMetaModel metaModel)
         {
             var balanceUp = GetBalanceUp();
             string UspKey = metaModel.FromDate < balanceUp.BalanceUpDay ? STR_SP_BETLIST_MATCHWL_OLD : "Lrf_BetList_MatchWL_Bettype";
@@ -79,7 +79,6 @@
         }
 
         [HttpGet]
-#pragma warning disable S107 // Methods should not have too many parameters
         public async Task<dynamic> MixParlay(
             int page,
             int rows,

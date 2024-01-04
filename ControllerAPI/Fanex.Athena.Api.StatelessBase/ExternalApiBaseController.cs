@@ -1,7 +1,7 @@
-﻿using Fanex.Athena.Model.Auth;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Fanex.Athena.Model.Auth;
 
 namespace Fanex.Athena.Api.StatelessBase
 {

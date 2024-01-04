@@ -2275,7 +2275,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Customer Turnover     .
+        ///   Looks up a localized string similar to Customer Turnover.
         /// </summary>
         public static string CustomerTurnover {
             get {
@@ -3063,6 +3063,15 @@ namespace Fanex.Athena.Resources {
         public static string ExcelExceedRowsMsg {
             get {
                 return ResourceManager.GetString("ExcelExceedRowsMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange.
+        /// </summary>
+        public static string Exchange {
+            get {
+                return ResourceManager.GetString("Exchange", resourceCulture);
             }
         }
         
@@ -9684,9 +9693,9 @@ namespace Fanex.Athena.Resources {
         /// <summary>
         ///   Looks up a localized string similar to WAP.
         /// </summary>
-        public static string Wap {
+        public static string WAP {
             get {
-                return ResourceManager.GetString("Wap", resourceCulture);
+                return ResourceManager.GetString("WAP", resourceCulture);
             }
         }
         

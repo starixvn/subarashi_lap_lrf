@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Controllers.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
 
@@ -9,7 +8,7 @@
     using DataAccess.Core.Configuration.Interfaces;
 
     using Extension.Utility.Interfaces;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DataDomain;
@@ -50,7 +49,7 @@
             _fileSystem = Substitute.For<IFileSystem>();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
-            _authrizationService= Substitute.For<IAuthorizationService>();
+            _authrizationService = Substitute.For<IAuthorizationService>();
         }
 
         [TearDown]
@@ -180,7 +179,7 @@
             using (var controller = CreateController())
             {
                 // Arrange
-                var balanceUpDate = new DateTime(2018, 2, 3);
+                var balanceUpDate = DateTimeHelper.CreateDateTime(2018, 2, 3);
                 _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
                 {
                     BalanceUpDay = balanceUpDate

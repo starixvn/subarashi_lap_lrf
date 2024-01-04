@@ -1,10 +1,9 @@
-﻿using Fanex.Athena.Model.Core.Enum;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.Service.StatelessCore.Utility;
-using System;
-using System.Net;
+﻿using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Fanex.Athena.Model.Core.Enum;
+using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Athena.Service.StatelessCore.Utility;
 
 namespace Fanex.Athena.Web.ActionFilter
 {

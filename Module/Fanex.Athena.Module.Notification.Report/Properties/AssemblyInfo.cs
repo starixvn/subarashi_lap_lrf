@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+
 [assembly: InternalsVisibleTo("Fanex.Athena.Module.Notification.Report.UnitTests")]
 
 // General Information about an assembly is controlled through the following

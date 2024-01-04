@@ -6,8 +6,8 @@
 
 namespace Fanex.Athena.Extension.Utility
 {
-    using System;
     using System.Web;
+    using Fanex.Athena.Extension.Helper;
 
     /// <summary>
     /// TODO: Update summary.
@@ -37,23 +37,23 @@ namespace Fanex.Athena.Extension.Utility
 
             var cache = HttpContext.Current.Response.Cache;
             cache.SetNoStore();
-            cache.SetExpires(DateTime.Now.AddMinutes(-1));
+            cache.SetExpires(DateTimeHelper.Now.AddMinutes(-1));
             cache.SetCacheability(HttpCacheability.NoCache);
             HttpContext.Current.Response.Cookies.Remove(name);
             HttpContext.Current.Response.SetCookie(cookie);
         }
 
-        public static  void ClearCookies(HttpResponseBase response, string[] cookies)
+        public static void ClearCookies(HttpResponseBase response, string[] cookies)
         {
             var cache = response.Cache;
             cache.SetNoStore();
-            cache.SetExpires(DateTime.Now.AddMinutes(-1));
+            cache.SetExpires(DateTimeHelper.Now.AddMinutes(-1));
             cache.SetCacheability(HttpCacheability.NoCache);
             foreach (string cookie in cookies)
             {
                 var item = new HttpCookie(cookie)
                 {
-                    Expires = DateTime.Now.AddDays(-1),
+                    Expires = DateTimeHelper.Now.AddDays(-1),
                     HttpOnly = true
                 };
                 response.Cookies.Add(item);

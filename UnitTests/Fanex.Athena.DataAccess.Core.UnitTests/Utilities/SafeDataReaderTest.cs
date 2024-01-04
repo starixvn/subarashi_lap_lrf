@@ -5,7 +5,7 @@
     using System.Data;
 
     using Core.Utilities;
-
+    using Fanex.Athena.Extension.Helper;
     using NSubstitute;
 
     using NUnit.Framework;
@@ -250,7 +250,7 @@
         {
             // Arrange
             const string Column = "Column3";
-            var expected = new DateTime(2017, 1, 2);
+            var expected = DateTimeHelper.CreateDateTime(2017, 1, 2);
 
             // Action
             var reader = new SafeDataReader(_dataReader, _columns);
@@ -265,7 +265,7 @@
         {
             // Arrange
             const string Column = "Column1";
-            var expected = new DateTime(2017, 1, 5);
+            var expected = DateTimeHelper.CreateDateTime(2017, 1, 5);
 
             _dataReader[Column].Returns(expected);
 

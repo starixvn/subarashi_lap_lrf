@@ -10,7 +10,7 @@
             var month = Convert.ToInt32(date.Substring(4, 2));
             var day = isMonthly ? 1 : Convert.ToInt32(date.Substring(6, 2));
 
-            return new DateTime(year, month, day);
+            return DateTimeHelper.CreateDateTime(year, month, day);
         }
 
         public static string GetDateString(string date, string format, string defaultValue)

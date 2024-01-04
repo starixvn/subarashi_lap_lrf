@@ -23,6 +23,7 @@ namespace Fanex.Athena.Api.StatelessBase.Attributes
     public sealed class ApiOneAuthorizationAttribute : FilterAttribute, IAuthorizationFilter
     {
         private const string KeyName = "X-Auth-Token";
+
         public string AllowFunctionKeys { get; set; }
 
         public Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(

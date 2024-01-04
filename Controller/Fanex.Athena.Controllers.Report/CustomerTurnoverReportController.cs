@@ -1,8 +1,13 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Hosting;
+    using System.Web.Mvc;
     using DataAccess.Core.Common.Interfaces;
-
-    using Fanex.Athena.Excel.Base.Entities;
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
@@ -11,28 +16,16 @@
     using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Report.Common.Services;
-    using Fanex.Athena.Service.Core.Common;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Fanex.Athena.Web.ResultExtension;
-
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using Model.Report.DTO;
-
     using Newtonsoft.Json;
     using Resources;
-
     using Service.Report.Interfaces;
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ReportCustomerTurnover)]
     public class CustomerTurnoverReportController : ReportBaseController
@@ -147,7 +140,7 @@
                 excel.Export();
                 return new ExcelResult(excel.Workbook, FileName);
             }
-            
+
             var listExcel = new List<ZipEntry>();
             var pageIndex = 0;
             foreach (var item in pageDatas)
@@ -176,7 +169,7 @@
             };
         }
 
-        private byte[] WriteExcelToByte(CustomerTurnoverExcel excel)
+        private static byte[] WriteExcelToByte(CustomerTurnoverExcel excel)
         {
             var workbook = excel.Workbook;
             try
@@ -257,7 +250,7 @@
                             : "- " + ViewResources.Username + ": " + metaModel.Username;
             var reportTitle = string.Format(
                 "{0}, {1} --> {2} - {3}: {4} - {5}: {6} {7}",
-                                            ViewResources.Customer + " " + ViewResources.Turnover,
+                                            ViewResources.CustomerTurnover,
                                             metaModel.FromDate.ToString("MM/dd/yyyy"),
                                             metaModel.ToDate.ToString("MM/dd/yyyy"),
                                             ViewResources.Currency,

@@ -1,17 +1,17 @@
 ﻿namespace Fanex.Athena.Controllers.Base.UnitTests
 {
+    using System;
+    using System.Runtime.InteropServices;
     using Microsoft.Win32.SafeHandles;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Runtime.InteropServices;
     using UnitTest.Common.Helpers;
 
     [TestFixture]
     public class CultureBaseControllerTest : CultureBaseControllerHelperTest, IDisposable
     {
         private FakeCultureBaseController _controller;
-        bool disposed = false;
+        private bool disposed = false;
         private readonly SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
 
         [SetUp]
@@ -61,7 +61,6 @@
                 {
                     _controller.Dispose();
                 }
-
             }
 
             disposed = true;

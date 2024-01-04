@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -9,6 +8,7 @@
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
     using Fanex.Athena.Excel.Report;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
@@ -32,8 +32,8 @@
 
         private readonly BalanceUp _balance = new BalanceUp
         {
-            MoveBetsDay = new DateTime(2016, 8, 10),
-            BalanceUpDay = new DateTime(2016, 8, 31)
+            MoveBetsDay = DateTimeHelper.CreateDateTime(2016, 8, 10),
+            BalanceUpDay = DateTimeHelper.CreateDateTime(2016, 8, 31)
         };
 
         [OneTimeSetUp]
@@ -200,7 +200,7 @@
             var expectedData = SetUpForGettingData(1);
 
             // Action
-            var result = await _controller.Index(model, DateTime.Now, DateTime.Now.AddDays(1), Level);
+            var result = await _controller.Index(model, DateTimeHelper.Now, DateTimeHelper.Now.AddDays(1), Level);
 
             // Assert
             Assert.Multiple(() =>
@@ -225,7 +225,7 @@
             var expectedData = SetUpForGettingData(2);
 
             // Action
-            var result = await _controller.Index(model, DateTime.Now, DateTime.Now.AddDays(1), Level);
+            var result = await _controller.Index(model, DateTimeHelper.Now, DateTimeHelper.Now.AddDays(1), Level);
 
             // Assert
             Assert.Multiple(() =>
@@ -252,8 +252,8 @@
                 CurrencyId = 0,
                 IsExportExcel = true,
                 DrillDownCurrencyId = 1,
-                FromDate = DateTime.Now,
-                ToDate = DateTime.Now.AddDays(1)
+                FromDate = DateTimeHelper.Now,
+                ToDate = DateTimeHelper.Now.AddDays(1)
             };
 
             var expectedFileName = $"AGWinLoss_{model.FromDate:ddMMMyyyy}_All.xls";
@@ -290,12 +290,12 @@
             {
                 CurrencyId = 1,
                 IsExportExcel = true,
-                FromDate = DateTime.Now.AddDays(-2),
-                ToDate = DateTime.Now.AddDays(-1)
+                FromDate = DateTimeHelper.Now.AddDays(-2),
+                ToDate = DateTimeHelper.Now.AddDays(-1)
             };
 
-            var fdate = DateTime.Now;
-            var tdate = DateTime.Now.AddDays(1);
+            var fdate = DateTimeHelper.Now;
+            var tdate = DateTimeHelper.Now.AddDays(1);
             var custId = 4;
 
             var expectedFileName = $"AGWinLoss_{fdate:ddMMMyyyy}_CurrencyName2.xls";

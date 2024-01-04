@@ -1,11 +1,10 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Core.UnitTests.TestHelpers;
-
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DataDomain;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
@@ -202,7 +201,7 @@
 
             var readerDataMapping = new
             {
-                winlostdate = new DateTime(2017, 1, 2)
+                winlostdate = DateTimeHelper.CreateDateTime(2017, 1, 2)
             };
             MapReaderData(readerDataMapping);
 

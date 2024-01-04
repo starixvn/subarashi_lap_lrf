@@ -6,20 +6,17 @@
 
 namespace Fanex.Athena.Controllers.Forecast
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using DataAccess.Core.Common.Interfaces;
     using DataAccess.Forecast.Interfaces;
-
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
-
     using Model.Forecast.MetaModel;
     using Model.Forecast.ViewModel;
-
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
 
     [FunctionAuthorization(PermissionKeys.ForecastHandicapOverUnderLive)]
     public class HandicapOverUnderForecastController : ForecastBaseController

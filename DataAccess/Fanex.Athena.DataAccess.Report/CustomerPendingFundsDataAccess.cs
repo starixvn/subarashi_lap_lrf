@@ -72,7 +72,7 @@ namespace Fanex.Athena.DataAccess.Report
             db.SetParameterValue("IsAscSort", metaModel.IsAscSort);
             db.SetParameterValue("BaseCurrency", metaModel.BaseCurrency);
             db.SetParameterValue("AgentList", metaModel.AgentListXml);
-            if(productBA != null)
+            if (productBA != null)
             {
                 db.SetParameterValue("ShowBA", productBA.Status);
                 metaModel.ProductOptions.Remove(productBA);

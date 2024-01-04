@@ -5,7 +5,7 @@
 
     public static class HttpContextExtension
     {
-        const string IgnoreShardingHeader = "X-IgnoreSharding";
+        private const string IgnoreShardingHeader = "X-IgnoreSharding";
 
         public static void AddIgnoreSharding(this HttpContext context)
             => context.Request.Headers.Add(IgnoreShardingHeader, bool.TrueString);

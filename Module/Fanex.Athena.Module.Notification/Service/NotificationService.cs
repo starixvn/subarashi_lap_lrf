@@ -1,6 +1,13 @@
 ﻿namespace Fanex.Athena.Module.Notification.Service
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -14,12 +21,6 @@
     using Fanex.Logging;
     using Interfaces;
     using Newtonsoft.Json.Linq;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class NotificationService : INotificationService
     {
@@ -79,7 +80,8 @@
             if (messageTypes.Contains(MessageType.ResettlementNotification))
             {
                 // Amendment Notification from OIC API
-                var amendmentResult = GetResultAmendment(metaModel);
+                var resultAmendmentModel = CreateNotificationMetaModel(metaModel, 6);
+                var amendmentResult = GetResultAmendment(resultAmendmentModel);
                 result.DataList = result.DataList.Concat(amendmentResult.DataList.Select(x => new NotificationMessage
                 {
                     Id = x.Id,
@@ -92,11 +94,12 @@
             }
 
             // Notification from LRF/LAP
-            UpdateMetaModel(metaModel);
+            var internalNotificationModel = CreateNotificationMetaModel(metaModel, 2);
+            UpdateMetaModel(internalNotificationModel);
 
-            if (!string.IsNullOrEmpty(metaModel.MessageTypes))
+            if (!string.IsNullOrEmpty(internalNotificationModel.MessageTypes))
             {
-                var messagesResult = await GetInternalNotification(metaModel);
+                var messagesResult = await GetInternalNotification(internalNotificationModel);
                 result.DataList = result.DataList.Concat(messagesResult.DataList).OrderByDescending(x => x.DateTime);
                 result.TotalRows += messagesResult.TotalRows;
             }
@@ -400,7 +403,7 @@
             {
                 return eventDate;
             }
-            return DateTime.Now;
+            return DateTimeHelper.Now;
         }
 
         private static int ReadMessageId(IDataReader reader)
@@ -442,9 +445,27 @@
             }
             else
             {
-
                 metaModel.MessageTypes = string.Empty;
             }
+        }
+
+        private static NotificationMetaModel CreateNotificationMetaModel(NotificationMetaModel defaultMetaModel, int maximunMonthSuport)
+        {
+            var today = DateTimeHelper.Today;
+            var maximumMonthDistance = maximunMonthSuport - 1;
+            return new NotificationMetaModel
+            {
+                PageIndex = defaultMetaModel.PageIndex,
+                PageSize = defaultMetaModel.PageSize,
+                IsOnlyUnread = defaultMetaModel.IsOnlyUnread,
+                LicenseeName = defaultMetaModel.LicenseeName,
+                MessageTypes = defaultMetaModel.MessageTypes,
+                UserName = defaultMetaModel.UserName,
+                Language = defaultMetaModel.Language,
+                MaximumMonthRange = maximunMonthSuport,
+                FromDate = DateTimeHelper.CreateDateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance),
+                ToDate = today.AddDays(1).AddMilliseconds(-1),
+            };
         }
     }
 }

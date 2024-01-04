@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Service.Core.Proxy
 {
-    using Fanex.Athena.Service.StatelessCore.CustomException;
     using System;
     using System.Net;
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web;
+    using Fanex.Athena.Service.StatelessCore.CustomException;
 
     public class ProxyService : IProxyService, IDisposable
     {

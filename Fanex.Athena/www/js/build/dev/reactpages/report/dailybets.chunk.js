@@ -1210,8 +1210,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions */ "./www/js/source/reactpages/pages/dailybets/actions/index.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var _9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @9softstudio/react-datepicker */ "./node_modules/@9softstudio/react-datepicker/dist/index.js");
-/* harmony import */ var _9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _legion_lib_react_daterangepicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @legion-lib/react-daterangepicker */ "./node_modules/@legion-lib/react-daterangepicker/dist/index.js");
+/* harmony import */ var _legion_lib_react_daterangepicker__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_daterangepicker__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _lib_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/utils */ "./www/js/source/reactpages/pages/dailybets/lib/utils.js");
 /* harmony import */ var _lib_formFilterUtils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../lib/formFilterUtils */ "./www/js/source/reactpages/pages/dailybets/lib/formFilterUtils.js");
 
@@ -1294,12 +1294,13 @@ const FormFilter = props => {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Date")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_datepicker__WEBPACK_IMPORTED_MODULE_6__["DatePicker"], {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("Date")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_daterangepicker__WEBPACK_IMPORTED_MODULE_6__["DatePicker"], {
     format: "DD/MM/YYYY",
     minDate: dateConstraint.minDate,
     maxDate: dateConstraint.maxDate,
     date: dateString,
-    onChange: momentDate => setSelectedDate(momentDate.format("MM/DD/YYYY"))
+    onChange: momentDate => setSelectedDate(momentDate.format("MM/DD/YYYY")),
+    langHandler: key => key === "May" ? _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource("May2") : _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource(key)
   }))), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].isAllowRefNo && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

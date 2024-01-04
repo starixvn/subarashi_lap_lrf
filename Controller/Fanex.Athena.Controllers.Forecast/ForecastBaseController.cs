@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.Forecast
 {
-    using Fanex.Athena.Web.ActionFilter;
-    using Model.Core.DTO.Common;
-
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.SessionState;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.Core.DTO.Common;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
     [UMFilter]

@@ -1,8 +1,6 @@
 ﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using DataAccess.Core.Common.Interfaces;
@@ -73,7 +71,7 @@
             var languageCode = FakeHelper.Create<string>();
 
             // Action
-            _betTypeService.GetBettypes( sports, languageCode);
+            _betTypeService.GetBettypes(sports, languageCode);
 
             // Assert
             _betTypeDataAccess.Received().GetBettypes(expectedSportXmlString);
@@ -123,7 +121,7 @@
             IList<SportProductItem> sports = new List<SportProductItem>();
 
             // Action
-            var result = await _betTypeService.GetBettypes( sports, languageCode);
+            var result = await _betTypeService.GetBettypes(sports, languageCode);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(0));

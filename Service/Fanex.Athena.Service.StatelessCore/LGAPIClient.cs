@@ -10,6 +10,7 @@ namespace Fanex.Athena.Service.StatelessCore
         public LGAPIClient(HttpClient httpClient) : base(httpClient)
         {
         }
+
         protected override string ApiName => "LG API";
     }
 }

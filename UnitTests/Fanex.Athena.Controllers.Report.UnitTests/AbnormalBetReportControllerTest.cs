@@ -1,18 +1,14 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Report.ViewModel;
     using NSubstitute;
@@ -23,7 +19,6 @@
     {
         private IReportSettingService _reportSettingService;
         private ISportService _sportService;
-        private IPlayerSegmentationService _playerService;
         private IBetTypeService _betTypeService;
 
         [OneTimeSetUp]
@@ -32,7 +27,6 @@
             base.FixtureSetUp();
             _reportSettingService = Substitute.For<IReportSettingService>();
             _sportService = Substitute.For<ISportService>();
-            _playerService = Substitute.For<IPlayerSegmentationService>();
             _betTypeService = Substitute.For<IBetTypeService>();
             SetUpDefaultFakeData();
             StubUserSessionData(new UserAuthInfo { CurrencyAgentList = new Dictionary<int, int[]>(), CurrencyList = new Dictionary<int, string>() });
@@ -54,7 +48,6 @@
                     Assert.That(viewResult.ViewName, Is.EqualTo("~/Views/Desktop/Report/AbnormalBet/Main.cshtml"));
                     Assert.That(viewModel.CurrencyList, Is.EqualTo(SessionService.UserSession.CurrencyList));
                     Assert.That(viewModel.IsAllowedCustomerCommission, Is.EqualTo(SessionService.LicenseeSession.IsAllowedCustomerComm));
-
                 });
             }
         }
@@ -63,15 +56,15 @@
         {
             var reportSetting = new ReportSetting
             {
-                MinDate = new DateTime(2021, 2, 15),
-                MaxDate = new DateTime(2021, 3, 30),
+                MinDate = DateTimeHelper.CreateDateTime(2021, 2, 15),
+                MaxDate = DateTimeHelper.CreateDateTime(2021, 3, 30),
             };
 
             _reportSettingService.GetSetting(PermissionKeys.ReportAbnormalBet, SessionService.LicenseeSession.LicenseeName).
                 Returns(reportSetting);
             _sportService.GetSportAndProductAndSabaSport(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language, Product.SB).Returns(new List<SportProductItem>());
 
-            return new AbnormalBetReportController(_reportSettingService, _sportService, _playerService, _betTypeService)
+            return new AbnormalBetReportController(_reportSettingService, _sportService, _betTypeService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService

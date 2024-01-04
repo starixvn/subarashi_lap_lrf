@@ -1,9 +1,7 @@
 ﻿namespace Fanex.Athena.Excel.Base.UnitTests.Extension
 {
-    using System;
-
     using Excel.Base.Extension;
-
+    using Fanex.Athena.Extension.Helper;
     using NPOI.SS.UserModel;
 
     using NSubstitute;
@@ -17,7 +15,7 @@
         {
             true,
             "string",
-            new DateTime(2018, 2, 3),
+            DateTimeHelper.CreateDateTime(2018, 2, 3),
             10.2,
             10,
             1000M,

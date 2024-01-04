@@ -144,6 +144,7 @@ namespace Fanex.Athena.Service.Core.UnitTests.Proxy
             private readonly HttpStatusCode _statusCode;
 
             public string Input { get; private set; }
+
             public int NumberOfCalls { get; private set; }
 
             public MockHttpMessageHandler(string response, HttpStatusCode statusCode)

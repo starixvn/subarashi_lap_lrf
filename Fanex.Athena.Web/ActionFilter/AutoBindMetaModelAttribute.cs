@@ -1,17 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
-using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Extension;
 using Fanex.Athena.Extension.Helper;
+using Fanex.Athena.Model.Auth;
+using Fanex.Athena.Model.Core.Helper;
+using Fanex.Athena.Model.Core.MetaModel;
+using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
-using System.Collections.Generic;
-using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Service.Core.Users;
-using Fanex.Athena.Model.Core.Helper;
-using System.Web;
-using Fanex.Athena.Extension;
 
 namespace Fanex.Athena.Web.ActionFilter
 {
@@ -100,7 +100,7 @@ namespace Fanex.Athena.Web.ActionFilter
                 AutoBindMetaModelService.MapProductOptions(actionArgument, _sessionService.LicenseeSession.OfferedSubProductList, ProductService);
             }
 
-            if(IgnoreSharding)
+            if (IgnoreSharding)
             {
                 HttpContext.Current.AddIgnoreSharding();
             }

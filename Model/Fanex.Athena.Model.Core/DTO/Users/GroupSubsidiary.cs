@@ -1,7 +1,5 @@
 ﻿namespace Fanex.Athena.Model.Core.DTO.Users
 {
-    using System.Collections.Generic;
-
     public class GroupSubsidiary
     {
         public int? WhiteLabelID { get; set; }

@@ -1,12 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.Base.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
     using Extension.Utility;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
@@ -33,7 +32,7 @@
             DefaultBaseCurrency = "EUR",
             CurrencyAgentList = new Dictionary<int, int[]>(),
             AccessToken = "token",
-            AccessTokenLifeTime = DateTime.Now.AddHours(1)
+            AccessTokenLifeTime = DateTimeHelper.Now.AddHours(1)
         };
 
         protected static readonly LicenseeAuthInfo DefaultLicenseeSession = new LicenseeAuthInfo
@@ -43,7 +42,6 @@
             OfferedSubProductList = Enumerable.Empty<string>(),
             OfferedOddsGroupsList = Enumerable.Empty<string>(),
             SiteDBServer = string.Empty
-
         };
 
         protected UrlHelper Url { get; set; }

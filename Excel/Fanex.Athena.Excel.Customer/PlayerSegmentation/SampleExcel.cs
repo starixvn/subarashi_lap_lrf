@@ -1,8 +1,7 @@
-﻿using Fanex.Athena.Excel.Base;
+﻿using System.Collections.Generic;
+using Fanex.Athena.Excel.Base;
 using Fanex.Athena.Excel.Base.Extension;
-using Fanex.Athena.Resources;
 using NPOI.SS.UserModel;
-using System.Collections.Generic;
 
 namespace Fanex.Athena.Excel.Customer.PlayerSegmentation
 {
@@ -14,7 +13,7 @@ namespace Fanex.Athena.Excel.Customer.PlayerSegmentation
         private readonly IEnumerable<string> _headerNames;
 
         public SampleExcel(string templatePath, IEnumerable<string> headerNames)
-            :base(templatePath, DEFAULT_TOTAL_ROW) 
+            : base(templatePath, DEFAULT_TOTAL_ROW)
         {
             _headerNames = headerNames;
         }

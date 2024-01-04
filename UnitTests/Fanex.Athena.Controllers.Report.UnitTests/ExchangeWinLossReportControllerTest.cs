@@ -2,27 +2,24 @@
 
 namespace Fanex.Athena.Controllers.Report.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
     using Base.UnitTests;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.Core.DTO.Configuration;
     using Model.Report.ViewModel;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
-    using System;
-    using System.Collections.Generic;
-    using System.Web.Mvc;
 
     public class ExchangeWinLossReportControllerTest : CultureBaseControllerHelperTest
     {
-        private readonly DateTime _minDate = new DateTime(2017, 1, 1);
-        private readonly DateTime _maxDate = new DateTime(2018, 1, 3);
+        private readonly DateTime _minDate = DateTimeHelper.CreateDateTime(2017, 1, 1);
+        private readonly DateTime _maxDate = DateTimeHelper.CreateDateTime(2018, 1, 3);
 
         [OneTimeSetUp]
         public override void FixtureSetUp()

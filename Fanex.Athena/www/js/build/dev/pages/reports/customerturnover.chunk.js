@@ -8116,8 +8116,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         }
 
         function setReportTitle(currencyName, userName, fromDate, toDate, odds) {
-            const titlePattern = Site.getSingleResource('Customer') + ' '
-                + Site.getSingleResource('Turnover') + ', {0} → {1} - '
+            const titlePattern = Site.getSingleResource('CustomerTurnover') + ', {0} → {1} - '
                 + Site.getSingleResource('Currency') + ': {2} - '
                 + Site.getSingleResource('MinimumOdds') + ': {3}{4}';
 

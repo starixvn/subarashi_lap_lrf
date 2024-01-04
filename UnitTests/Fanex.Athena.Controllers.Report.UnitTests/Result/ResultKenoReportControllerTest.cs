@@ -1,11 +1,11 @@
 ﻿namespace Fanex.Athena.Controllers.Report.UnitTests.Result
 {
+    using System.Web.Mvc;
     using Base.UnitTests;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using NSubstitute;
     using NUnit.Framework;
     using Report.Result;
-    using System.Web.Mvc;
 
     [TestFixture]
     public class ResultKenoReportControllerTest : CultureBaseControllerHelperTest

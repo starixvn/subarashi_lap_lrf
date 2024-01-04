@@ -1,4 +1,6 @@
-﻿using Fanex.Athena.DataAccess.Customer.Interfaces;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Fanex.Athena.DataAccess.Customer.Interfaces;
 using Fanex.Athena.Model.Auth;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
@@ -12,8 +14,6 @@ using Fanex.Logging;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Fanex.Athena.Service.Customer.UnitTests
 {

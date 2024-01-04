@@ -1,18 +1,15 @@
 ﻿namespace Fanex.Athena.Module.Notification.Api
 {
-    using Fanex.Athena.Api.StatelessBase;
-    using Fanex.Athena.Api.StatelessBase.Attributes;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Module.Notification.MetaModel;
-    using Fanex.Athena.Module.Notification.Service.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using Fanex.Athena.Api.StatelessBase;
+    using Fanex.Athena.Api.StatelessBase.Attributes;
+    using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Module.Notification.MetaModel;
+    using Fanex.Athena.Module.Notification.Service.Interfaces;
 
     /// <summary>
     /// Used by LAP container
@@ -22,10 +19,7 @@
     {
         private const int DefaultPageSize = 10;
 
-        private readonly ILicenseeSettingService _licenseeSettingService;
-
         private readonly INotificationService _notificationService;
-        private readonly IAppSettings _appSettings;
 
         private readonly IDictionary<string, int> _notificationType = new Dictionary<string, int>
         {
@@ -33,25 +27,15 @@
             { PermissionKeys.ReportAbnormalBet , 2 }
         };
 
-        public NotificationApiController(
-            INotificationService notificationService,
-            IAppSettings appSettings,
-            ILicenseeSettingService licenseeSettingService)
+        public NotificationApiController(INotificationService notificationService)
         {
             _notificationService = notificationService;
-            _appSettings = appSettings;
-            _licenseeSettingService = licenseeSettingService;
         }
 
         [HttpGet]
         public async Task<dynamic> GetNotificationMessages([FromUri] NotificationMetaModel metaModel)
         {
-            var maximumMonthDistance = NotificationMetaModel.MaximumMonthRange - 1;
-
-            var today = DateTime.Today;
             metaModel.IsOnlyUnread = true;
-            metaModel.FromDate = new DateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance);
-            metaModel.ToDate = today.AddDays(1).AddMilliseconds(-1);
             metaModel.PageSize = DefaultPageSize;
             metaModel.PageIndex = 1;
             metaModel.UserName = UserName;

@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.DataAccess.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,6 +7,7 @@
     using Core.UnitTests.TestHelpers;
 
     using Data;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Model.Report.MetaModel;
 
@@ -30,8 +30,8 @@
             _metaModel = new SpecialLicenseeWinLossMetaModel
             {
                 CurrencyId = 1,
-                FromDate = new DateTime(2018, 1, 1),
-                ToDate = new DateTime(2018, 2, 2),
+                FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2018, 2, 2),
                 ProductCodeList = new[] { "SB", "invalid" },
                 BaseCurrency = "USD",
                 ReportBy = 1,
@@ -155,8 +155,8 @@
             };
             MapReaderData(readerDataMapping);
             _metaModel.ReportBy = 3;
-            _metaModel.FromDate = new DateTime(2023, 3, 26);
-            _metaModel.ToDate = new DateTime(2023, 5, 6);
+            _metaModel.FromDate = DateTimeHelper.CreateDateTime(2023, 3, 26);
+            _metaModel.ToDate = DateTimeHelper.CreateDateTime(2023, 5, 6);
             var auditCurrencyList = new List<AuditCurrency>();
 
             // Action
@@ -171,7 +171,7 @@
                 Assert.That(firstItem.LicenseeWL["SB"], Is.EqualTo(10));
                 Assert.That(firstItem.TurnOver["SB"], Is.EqualTo(50));
                 Assert.That(firstItem.DateString, Is.EqualTo("Week 2 (04/02/2023 - 04/08/2023)"));
-                Assert.That(firstItem.Date, Is.EqualTo(new DateTime(2023, 4, 4)));
+                Assert.That(firstItem.Date, Is.EqualTo(DateTimeHelper.CreateDateTime(2023, 4, 4)));
 
                 Assert.That(firstTotalItem.CurrencyName, Is.EqualTo(CurrencyName));
                 Assert.That(firstTotalItem.LicenseeWL["SB"], Is.EqualTo(10));

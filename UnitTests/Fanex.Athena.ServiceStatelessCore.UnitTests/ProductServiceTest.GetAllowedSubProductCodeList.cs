@@ -1,7 +1,5 @@
-﻿using Fanex.Athena.Model.Core.DTO.Common;
+﻿using System.Linq;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {

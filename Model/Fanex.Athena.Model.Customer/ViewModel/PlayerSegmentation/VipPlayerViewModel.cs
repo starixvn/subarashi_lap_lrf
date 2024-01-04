@@ -2,19 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Customer.DTO;
 
     public class VipPlayerViewModel
     {
         public VipPlayerViewModel()
         {
-            var today = DateTime.Today;
-            var firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
+            var today = DateTimeHelper.Today;
+            var firstDayOfMonth = DateTimeHelper.CreateDateTime(today.Year, today.Month, 1);
 
             FromReachedDate = firstDayOfMonth;
             ToReachedDate = today;
             MaxReachedDate = today;
-            MinReachedDate = new DateTime(2012, 1, 1); // 01/01/2012
+            MinReachedDate = DateTimeHelper.CreateDateTime(2012, 1, 1); // 01/01/2012
         }
 
         public IDictionary<int, string> VipOptions { get; set; }

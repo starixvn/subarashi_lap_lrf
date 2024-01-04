@@ -29,7 +29,7 @@
         public bool HasPermissions(UserAuthInfo userAuthInfo, params string[] permissionKeys)
             => userAuthInfo.ApplicationMode == AppMode.Parasitic ?
             userAuthInfo.IsSuperAdmin || userAuthInfo.PortalFunctionList.Any(i => permissionKeys.Contains(i.FunctionKey,
-                    StringComparer.InvariantCultureIgnoreCase)) 
+                    StringComparer.InvariantCultureIgnoreCase))
             : userAuthInfo.FunctionList.Any(x => permissionKeys.Contains(x.FunctionKey, StringComparer.InvariantCultureIgnoreCase));
 
         public bool IsAllowedEditCommission(UserAuthInfo userAuthInfo)
@@ -61,7 +61,6 @@
 
             return currencyAgents.Any(i => i.CurrencyId == item.Item1 && i.AgentId.Contains(item.Item2));
         }
-
 
         public List<int> GetBelongingCustIds(IDictionary<int, int[]> currencyAgents, string custIds)
         {

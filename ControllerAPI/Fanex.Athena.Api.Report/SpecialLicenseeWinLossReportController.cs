@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.Report
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -25,7 +24,7 @@
 
     using Service.Core.Common.Interfaces;
 
-    [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.AuditLicenseeWinLoss,  PermissionKeys.ReportGrossGamingRevenue)]
+    [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.AuditLicenseeWinLoss, PermissionKeys.ReportGrossGamingRevenue)]
     public class SpecialLicenseeWinLossReportController : ApiReportBaseController
     {
         private readonly IReportSettingService _reportSettingService;

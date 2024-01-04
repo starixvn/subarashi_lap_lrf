@@ -20,7 +20,7 @@
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
-        public async Task<ActionResult> Live(BetListExcelMetaModel metaModel) 
+        public async Task<ActionResult> Live(BetListExcelMetaModel metaModel)
             => await Action(metaModel).ConfigureAwait(false);
 
         private Task<ActionResult> Action(BetListExcelMetaModel metaModel)

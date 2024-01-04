@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Model.TotalBet.DTO
 {
-    using Model.Core.Helper;
     using VendorAdapter;
 
     /// <summary>

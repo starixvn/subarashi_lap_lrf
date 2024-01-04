@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Model.Report.MetaModel
 {
     using System;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
     using DataDomain = Core.DataDomain;
     using Helper = Core.Helper;
@@ -10,7 +11,7 @@
         public PlatformWinLossMetaModel()
         {
             LicenseeId = 0;
-            var today = DateTime.Now;
+            var today = DateTimeHelper.Now;
             Year = today.Year;
             Month = today.Month;
             FromDay = 1;
@@ -33,12 +34,12 @@
 
         public new DateTime FromDate
         {
-            get { return new DateTime(Year, Month, FromDay); }
+            get { return DateTimeHelper.CreateDateTime(Year, Month, FromDay); }
         }
 
         public new DateTime ToDate
         {
-            get { return new DateTime(Year, Month, ToDay); }
+            get { return DateTimeHelper.CreateDateTime(Year, Month, ToDay); }
         }
 
         public int DrawFilter { get; set; }
@@ -58,7 +59,9 @@
         }
 
         public bool HasComm { get; set; }
+
         public string SubsidiaryList { get; set; }
+
         public bool SubsidiarySearch { get; set; }
     }
 }

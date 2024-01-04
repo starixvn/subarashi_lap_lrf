@@ -32,7 +32,6 @@
         }
 
         [HttpGet]
-#pragma warning disable S107 // Methods should not have too many parameters
         public async Task<dynamic> Index(
             int page,
             int rows,

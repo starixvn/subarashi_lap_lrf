@@ -25,6 +25,7 @@ namespace Fanex.Athena.Web.ActionFilter
         public bool IsSingleWallet { get; set; }
 
         public string FunctionConfig { get; set; }
+
         public bool HandlingAjaxRequestWithJsonResult { get; set; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)

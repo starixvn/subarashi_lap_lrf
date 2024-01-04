@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Excel.Report.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using Base;
     using Base.Entities;
     using Base.Extension;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Model.Report.DTO.LiveReports;
     using Model.Report.MetaModel;
@@ -498,8 +498,8 @@
             _excelModel.Param = new LiveReportMetaModel
             {
                 LiveIndicator = liveIndicator,
-                FromDate = new DateTime(2018, 1, 1),
-                ToDate = new DateTime(2018, 2, 2)
+                FromDate = DateTimeHelper.CreateDateTime(2018, 1, 1),
+                ToDate = DateTimeHelper.CreateDateTime(2018, 2, 2)
             };
 
             var excel = CreateExcel();

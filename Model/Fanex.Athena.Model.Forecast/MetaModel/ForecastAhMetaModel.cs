@@ -6,7 +6,6 @@
 
 namespace Fanex.Athena.Model.Forecast.MetaModel
 {
-    using Fanex.Athena.Model.Core.MetaModel;
     using System;
 
     /// <summary>

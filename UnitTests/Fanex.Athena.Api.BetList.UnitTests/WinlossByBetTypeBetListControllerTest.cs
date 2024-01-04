@@ -1,10 +1,9 @@
 ﻿namespace Fanex.Athena.Api.BetList.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
 
@@ -49,7 +48,7 @@
                 StubUserSessionData(new UserAuthInfo { CurrencyList = new Dictionary<int, string>() });
 
                 // Action
-                var result = await controller.Index(1, 50, CurrencyId, string.Empty, string.Empty, DateTime.Today, DateTime.Today, 1);
+                var result = await controller.Index(1, 50, CurrencyId, string.Empty, string.Empty, DateTimeHelper.Today, DateTimeHelper.Today, 1);
 
                 // Assert
                 Assert.That(result, Is.Null);
@@ -67,8 +66,8 @@
                 const int Page = 2;
                 const int Rows = 50;
                 const string CurrencyName = "USD";
-                var fromDate = new DateTime(2018, 1, 1);
-                var toDate = new DateTime(2018, 1, 2);
+                var fromDate = DateTimeHelper.CreateDateTime(2018, 1, 1);
+                var toDate = DateTimeHelper.CreateDateTime(2018, 1, 2);
                 const int BetType = 1;
                 const string SortBy = "Index";
                 const string SortOrder = "asc";

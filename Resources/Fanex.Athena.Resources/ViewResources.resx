@@ -1006,7 +1006,7 @@
     <value>Virtual Sports</value>
     <comment>#49196</comment>
   </data>
-  <data name="Wap" xml:space="preserve">
+  <data name="WAP" xml:space="preserve">
     <value>WAP</value>
   </data>
   <data name="Welcome" xml:space="preserve">
@@ -1604,7 +1604,7 @@
     <value>MY</value>
   </data>
   <data name="CustomerTurnover" xml:space="preserve">
-    <value>Customer Turnover     </value>
+    <value>Customer Turnover</value>
   </data>
   <data name="TotalTurnover" xml:space="preserve">
     <value>Total Turnover</value>
@@ -3670,6 +3670,9 @@
   </data>
   <data name="CustomerAdministrationIvoryReportTitle" xml:space="preserve">
     <value>Data support up to 60 days (GMT+8)</value>
+  </data>
+  <data name="Exchange" xml:space="preserve">
+    <value>Exchange</value>
   </data>
   <data name="Virtual" xml:space="preserve">
     <value>Virtual </value>

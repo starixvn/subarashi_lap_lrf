@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/28/2023 4:00:32 PM
+// Generated at: 1/3/2024 4:34:13 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -481,7 +481,7 @@ window._language_vi_VN = {
   GroupManagement: "Quản lý nhóm",
   GroupName: "Tên Nhóm",
   GroupNameExistedMsg: "Tên nhóm này đã tồn tại, vui lòng thử tên khác!",
-  GroupNameNotEmptyMsg: "Tên Nhóm không được trống",
+  GroupNameNotEmptyMsg: "Tên Nhóm không được trống.",
   GroupNameNotExceed100CharactersMsg: "Tên Nhóm không được vượt quá 100 kí tự.",
   GroupNameOnlyContainCharactersAndNumberMsg: "Tên nhóm chỉ được chứa các ký tự và số.",
   GroupNotExists: "Nhóm không tồn tại",
@@ -1130,7 +1130,7 @@ window._language_vi_VN = {
   VirtualTennis: "Quần vợt ảo",
   Void: "Hủy",
   Volume: "Tổng Giao Dịch",
-  Wap: "WAP",
+  WAP: "WAP",
   WarningToActiveMsg: "Cảnh báo, người chơi này đã có thể đăng nhập và đặt cược.",
   WarningToClosedMsg: "Cảnh báo, người chơi vĩnh viễn không được khôi phục!",
   WarningToLockedMsg: "Cảnh báo, người chơi này không thể đăng nhập và chuyển khoản!",

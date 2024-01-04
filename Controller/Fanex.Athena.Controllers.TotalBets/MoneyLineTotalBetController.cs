@@ -6,18 +6,15 @@
 
 namespace Fanex.Athena.Controllers.TotalBets
 {
-    using DataAccess.TotalBet.Interfaces;
-
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-    using Fanex.Athena.Web.ActionFilter;
-
-    using Model.TotalBet.MetaModel;
-    using Model.TotalBet.ViewModel;
-
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using DataAccess.TotalBet.Interfaces;
+    using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Fanex.Athena.Web.ActionFilter;
+    using Model.TotalBet.MetaModel;
+    using Model.TotalBet.ViewModel;
 
     [FunctionAuthorization(PermissionKeys.TotalBetMoneyLine)]
     public class MoneyLineTotalBetController : TotalBetBaseController

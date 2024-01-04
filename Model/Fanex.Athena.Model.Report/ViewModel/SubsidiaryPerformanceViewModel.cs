@@ -4,13 +4,14 @@
     using System.Collections.Generic;
     using Core.DTO.Common;
     using Core.MetaModel.Product;
+    using Fanex.Athena.Extension.Helper;
 
     public class SubsidiaryPerformanceViewModel
     {
         public SubsidiaryPerformanceViewModel()
         {
-            FromDate = DateTime.Today;
-            ToDate = DateTime.Today;
+            FromDate = DateTimeHelper.Today;
+            ToDate = DateTimeHelper.Today;
         }
 
         public IEnumerable<CheckedItem> GroupSubsidiaryList { get; set; }
