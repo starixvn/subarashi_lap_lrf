@@ -49,7 +49,7 @@ export const useFilterAction = () => {
     const { setReportTitle, setRequestParam, toggleLoader, getReportData, setDateRange, setSelectedProduct, setSelectedCurrency,
         setSelectedPlatform, setSelectedStatus, setSelectedLiveStatus, setSelectedBaseCurrency, setSelectedVipOnly, setSelectedCustomerClass, setSelectedOddsGroup,
         setUsername, setSearchMode, setGroupInOriginalCurrency, setViewCashOutOnly, setExcludeTestData, setSelectedGroupByOption, setSelectedBreakDownByOption,
-        setSubsidiarySearch, setSubsidiaryList, setAppUuid } = ActionCreators;
+        setSubsidiarySearch, setSubsidiaryList, setAppUuid, setProductList } = ActionCreators;
 
     const _buildTitle = (params) => {
         const { FromDate, ToDate, ProductCodes, SearchUserName, CurrencyCodes, BaseCurrencyName } = params;
@@ -133,6 +133,7 @@ export const useFilterAction = () => {
         let defaultState = window.initialState;
         batch(() => {
             dispatch(setDateRange({ startDate: defaultState.dateRange.fromDate, endDate: defaultState.dateRange.toDate }));
+            dispatch(setProductList(AppData.productList));
             dispatch(setSelectedProduct(defaultState.selectedProduct));
             dispatch(setSelectedCurrency(defaultState.selectedCurrency));
             dispatch(setSelectedPlatform(defaultState.selectedPlatform));

@@ -19,6 +19,7 @@ import * as platformReducer from '@jsroot/reducers/platformReducer';
 import * as customerClassReducer from '@jsroot/reducers/customerClassReducer';
 import * as filterReducer from './filterReducer';
 import * as dataReducer from './dataReducer';
+import * as appDataReducer from './appDataReducer';
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -40,5 +41,6 @@ export default combineReducers(Object.assign(
     platformReducer,
     filterReducer,
     customerClassReducer,
-    dataReducer
+    dataReducer,
+    appDataReducer
 ));

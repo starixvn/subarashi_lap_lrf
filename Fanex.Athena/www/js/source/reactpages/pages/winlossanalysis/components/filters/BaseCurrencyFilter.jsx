@@ -6,7 +6,6 @@ import { memo } from 'react';
 
 export const BaseCurrencyFilter = (props) => {
     const {onChange, value , options} = props;
-    console.log('%c Render BaseCurrencyFilter', 'color: red')
     const _renderBaseCurrencySelectList = () => {
         const baseCurrencyList = options;
         return baseCurrencyList?.length && (

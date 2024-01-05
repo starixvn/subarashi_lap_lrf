@@ -12,6 +12,7 @@ import * as sportAction from './sportAction.js'
 import * as bettypeAction from './bettypeAction.js'
 import * as filterAction from './filterAction.js'
 import * as dataAction from './dataAction.js'
+import * as appDataAction from './appDataAction.js'
 import * as platformAction from '@jsroot/actions/platformAction'
 import * as usernameAction from '@jsroot/actions/usernameAction'
 import * as convertAllAction from '@jsroot/actions/convertAllAction'
@@ -39,5 +40,6 @@ export const ActionCreators = Object.assign({},
     subsidiaryAction,
     platformAction,
     customerClassAction,
-    dataAction
+    dataAction,
+    appDataAction
 );

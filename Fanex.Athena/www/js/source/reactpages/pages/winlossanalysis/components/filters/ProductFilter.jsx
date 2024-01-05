@@ -1,16 +1,15 @@
 import React from 'react'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
-import AppData from '@jsroot/lib/AppData'
 import PropTypes from 'prop-types';
 import { memo } from 'react';
+import { useSelector } from 'react-redux';
 
 export const ProductFilter = (props) => {
-    const {value, onChange, isValid} = props;
+    const {value, onChange, isValid, disabled} = props;
+    const productList = useSelector(state => state.productList);
 
     const _renderProductSelectList = () => {
-        const productList = AppData.productList;
-
         return productList && productList.length && (
             <MultipleSelect
                 id="ProductList"
@@ -22,7 +21,8 @@ export const ProductFilter = (props) => {
                 keyField={"id"}
                 statusField={"status"}
                 onChange= {onChange}
-                isValid= {isValid} />
+                isValid= {isValid}
+                disabled={disabled} />
         );
     }
 
@@ -36,11 +36,13 @@ export const ProductFilter = (props) => {
 const propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
-    isValid: PropTypes.bool
+    isValid: PropTypes.bool,
+    disabled: PropTypes.bool
 };
 
 const defaultProps = {
-    isValid: true
+    isValid: true,
+    disabled: false
 };
 
 ProductFilter.propTypes = propTypes;
