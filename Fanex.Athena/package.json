@@ -93,7 +93,7 @@
     "@9softstudio/react-grid": "^1.0.10",
     "@9softstudio/react-simple-tab": "^1.0.0",
     "@legion-lib/react-grid": "^1.0.0",
-    "@legion-lib/react-multiselect": "^2.0.1",
+    "@legion-lib/react-multiselect": "^2.1.0",
     "@react-hook/media-query": "^1.1.1",
     "axios": "^0.19.2",
     "chart.js": "^2.9.4",

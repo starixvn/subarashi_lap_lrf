@@ -2,19 +2,20 @@ import { batch, useDispatch } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import AppData from '@jsroot/lib/AppData'
 import LangHelper from '@jsroot/lib/langHelper'
-import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
+import useSubsidiarySearch from '@jsroot/customHooks/useSubsidiarySearch'
 import Service from '../../common/Service'
 import { useCallback } from 'react'
+import { ProductCode } from '../../common/constants.js'
 
-export const useFilterHandler = () =>{
+export const useFilterHandler = () => {
     const dispatch = useDispatch();
-    const {defaultSelectedSubsidiary} = useSubsidiarySearch();
+    const { defaultSelectedSubsidiary } = useSubsidiarySearch();
 
-    const {setUsername, setSubsidiaryList, setSelectedStatus, setSelectedProduct, getSportList, 
+    const { setUsername, setSubsidiaryList, setSelectedStatus, setSelectedProduct, getSportList,
         getBetTypeList, setSelectedSport, setSelectedBettype, setDateRange, setViewCashOutOnly,
         setSelectedLiveStatus, setSelectedCustomerClass, setSelectedOddsGroup, setSelectedPlatform,
         setSelectedCurrency, setSelectedBaseCurrency, changeIsConvertAll, setSubsidiarySearch,
-        setSelectedVipOnly, setSearchMode, setGroupInOriginalCurrency, setExcludeTestData} 
+        setSelectedVipOnly, setSearchMode, setGroupInOriginalCurrency, setExcludeTestData, setProductList }
         = ActionCreators;
 
     const onUserNameInputHandler = useCallback((value) => dispatch(setUsername(value)), []);
@@ -30,15 +31,15 @@ export const useFilterHandler = () =>{
             alert(message);
         }
     }, [])
-   
+
     const onStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedStatus(selectedItemsKey)), []);
-   
+
     const onLiveStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedLiveStatus(selectedItemsKey)), []);
-    
+
     const onProductChangeHandler = useCallback((currentItem, selectedItemsKey) => {
         batch(() => {
             dispatch(setSelectedProduct(selectedItemsKey));
-            if (!Service.isContainProductSportBookOrBa(selectedItemsKey)){
+            if (!Service.isContainProductSportBookOrBa(selectedItemsKey)) {
                 dispatch(setViewCashOutOnly(false));
             }
             dispatch(getSportList(selectedItemsKey));
@@ -46,47 +47,60 @@ export const useFilterHandler = () =>{
         })
 
     }, [])
-    
+
     const onSportChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedSport(selectedItemsKey)), [])
 
-    const onBetTypeChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedBettype(selectedItemsKey)),[]);
-    
+    const onBetTypeChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedBettype(selectedItemsKey)), []);
+
     const onRiskLevelChangeHandler = useCallback((currentItem, selectedItemsKey) => {
-        const customerClass = AppData.riskLevelList.filter( r => selectedItemsKey.includes(r.id)).map( r => r.customerClassList).join(',');
+        const customerClass = AppData.riskLevelList.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
         dispatch(setSelectedCustomerClass(customerClass));
-    },[])
+    }, [])
 
-    const onOddsGroupChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedOddsGroup(selectedItemsKey)),[]);
-    
-    const onPlatformChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedPlatform(selectedItemsKey)),[]);
-    
-    const onCurrencyChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedCurrency(selectedItemsKey)),[]);
-    
-    const onBaseCurrencyChangeHandler = useCallback((item) => dispatch(setSelectedBaseCurrency(item.value)),[]);
-    
-    const onConverAllChangeHandler = useCallback((checked) => dispatch(changeIsConvertAll(checked)),[]);
+    const onOddsGroupChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedOddsGroup(selectedItemsKey)), []);
 
-    const onVipOnlyChangeHandler = useCallback((item) => dispatch(setSelectedVipOnly(item.value)),[])
+    const onPlatformChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedPlatform(selectedItemsKey)), []);
 
-    const onGroupInOriginalCurrencyChangeHandler = useCallback(checked => dispatch(setGroupInOriginalCurrency(checked)),[]);
+    const onCurrencyChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedCurrency(selectedItemsKey)), []);
 
-    const onExcludeTextDataChangeHandler = useCallback((checked) => dispatch(setExcludeTestData(checked)),[])
+    const onBaseCurrencyChangeHandler = useCallback((item) => dispatch(setSelectedBaseCurrency(item.value)), []);
 
-    const onCashOutOnlyChangeHandler = useCallback((checked) => dispatch(setViewCashOutOnly(checked)),[])
+    const onConverAllChangeHandler = useCallback((checked) => dispatch(changeIsConvertAll(checked)), []);
+
+    const onVipOnlyChangeHandler = useCallback((item) => dispatch(setSelectedVipOnly(item.value)), [])
+
+    const onGroupInOriginalCurrencyChangeHandler = useCallback(checked => dispatch(setGroupInOriginalCurrency(checked)), []);
+
+    const onExcludeTextDataChangeHandler = useCallback((checked) => dispatch(setExcludeTestData(checked)), [])
+
+    const onCashOutOnlyChangeHandler = useCallback((checked) => {
+        if (checked) {
+            const seletctProduct = AppData.productList.filter(item => item.id == ProductCode.BA || item.id == ProductCode.SportsBook)
+                .map(item => item.id)
+                .join(',');
+            const productList = AppData.productList.map(item => item.id == ProductCode.SportsBook || item.id == ProductCode.BA ? item : {...item, status: false});
+            onProductChangeHandler(null, seletctProduct);
+            dispatch(setProductList(productList));               
+
+        }
+        dispatch(setViewCashOutOnly(checked));
+    }, [])
 
     const onSearchModeChangeHandler = useCallback((event) => {
         const { value } = event.target;
         dispatch(setSearchMode(value));
-    },[])
-    
-    const onSubsidiaryCheckBoxChangeHandler = useCallback(checked => { 
-        dispatch(setSubsidiarySearch(checked)); 
-        checked && dispatch(setSubsidiaryList(defaultSelectedSubsidiary))
-    },[])
+    }, [])
 
-    return {onUserNameInputHandler, onSubsidiaryDropDownChangeHandler, onStatusChangeHandler, onProductChangeHandler,
+    const onSubsidiaryCheckBoxChangeHandler = useCallback(checked => {
+        dispatch(setSubsidiarySearch(checked));
+        checked && dispatch(setSubsidiaryList(defaultSelectedSubsidiary))
+    }, [])
+
+    return {
+        onUserNameInputHandler, onSubsidiaryDropDownChangeHandler, onStatusChangeHandler, onProductChangeHandler,
         onSportChangeHandler, onBetTypeChangeHandler, onLiveStatusChangeHandler, onDateRangeChangeHandler,
         onRiskLevelChangeHandler, onOddsGroupChangeHandler, onPlatformChangeHandler, onVipOnlyChangeHandler,
         onCurrencyChangeHandler, onBaseCurrencyChangeHandler, onConverAllChangeHandler, onSubsidiaryCheckBoxChangeHandler,
-        onSearchModeChangeHandler, onGroupInOriginalCurrencyChangeHandler, onExcludeTextDataChangeHandler, onCashOutOnlyChangeHandler}
+        onSearchModeChangeHandler, onGroupInOriginalCurrencyChangeHandler, onExcludeTextDataChangeHandler, onCashOutOnlyChangeHandler
+    }
 }

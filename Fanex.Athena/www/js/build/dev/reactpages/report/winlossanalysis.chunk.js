@@ -4892,6 +4892,27 @@ _defineProperty(StringHelper, "addSpaceAfterComma", str => {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/actions/appDataAction.js":
+/*!*********************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/actions/appDataAction.js ***!
+  \*********************************************************************************/
+/*! exports provided: setProductList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setProductList", function() { return setProductList; });
+/* harmony import */ var _types_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/types.js");
+
+const setProductList = data => {
+  return {
+    type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_PRODUCT_LIST"],
+    data: data
+  };
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/winlossanalysis/actions/bettypeAction.js":
 /*!*********************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/winlossanalysis/actions/bettypeAction.js ***!
@@ -5123,12 +5144,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bettypeAction_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./bettypeAction.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/bettypeAction.js");
 /* harmony import */ var _filterAction_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./filterAction.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/filterAction.js");
 /* harmony import */ var _dataAction_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./dataAction.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/dataAction.js");
-/* harmony import */ var _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/actions/platformAction */ "./www/js/source/reactpages/actions/platformAction.js");
-/* harmony import */ var _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/actions/usernameAction */ "./www/js/source/reactpages/actions/usernameAction.js");
-/* harmony import */ var _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/actions/convertAllAction */ "./www/js/source/reactpages/actions/convertAllAction.js");
-/* harmony import */ var _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @jsroot/actions/userGuideAction */ "./www/js/source/reactpages/actions/userGuideAction.js");
-/* harmony import */ var _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @jsroot/actions/subsidiaryAction */ "./www/js/source/reactpages/actions/subsidiaryAction.js");
-/* harmony import */ var _jsroot_actions_customerclassAction__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @jsroot/actions/customerclassAction */ "./www/js/source/reactpages/actions/customerclassAction.js");
+/* harmony import */ var _appDataAction_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./appDataAction.js */ "./www/js/source/reactpages/pages/winlossanalysis/actions/appDataAction.js");
+/* harmony import */ var _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/actions/platformAction */ "./www/js/source/reactpages/actions/platformAction.js");
+/* harmony import */ var _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/actions/usernameAction */ "./www/js/source/reactpages/actions/usernameAction.js");
+/* harmony import */ var _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @jsroot/actions/convertAllAction */ "./www/js/source/reactpages/actions/convertAllAction.js");
+/* harmony import */ var _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @jsroot/actions/userGuideAction */ "./www/js/source/reactpages/actions/userGuideAction.js");
+/* harmony import */ var _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @jsroot/actions/subsidiaryAction */ "./www/js/source/reactpages/actions/subsidiaryAction.js");
+/* harmony import */ var _jsroot_actions_customerclassAction__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @jsroot/actions/customerclassAction */ "./www/js/source/reactpages/actions/customerclassAction.js");
 
 
 
@@ -5149,7 +5171,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_statusAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_liveStatusAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__, _sportAction_js__WEBPACK_IMPORTED_MODULE_10__, _bettypeAction_js__WEBPACK_IMPORTED_MODULE_11__, _filterAction_js__WEBPACK_IMPORTED_MODULE_12__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_15__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_16__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_17__, _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_18__, _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_14__, _jsroot_actions_customerclassAction__WEBPACK_IMPORTED_MODULE_19__, _dataAction_js__WEBPACK_IMPORTED_MODULE_13__);
+
+const ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_productAction__WEBPACK_IMPORTED_MODULE_1__, _jsroot_actions_currencyAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_statusAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_liveStatusAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_dateRangeAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_9__, _sportAction_js__WEBPACK_IMPORTED_MODULE_10__, _bettypeAction_js__WEBPACK_IMPORTED_MODULE_11__, _filterAction_js__WEBPACK_IMPORTED_MODULE_12__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_16__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_17__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_18__, _jsroot_actions_subsidiaryAction__WEBPACK_IMPORTED_MODULE_19__, _jsroot_actions_platformAction__WEBPACK_IMPORTED_MODULE_15__, _jsroot_actions_customerclassAction__WEBPACK_IMPORTED_MODULE_20__, _dataAction_js__WEBPACK_IMPORTED_MODULE_13__, _appDataAction_js__WEBPACK_IMPORTED_MODULE_14__);
 
 /***/ }),
 
@@ -5205,7 +5228,7 @@ function getSportList(productCodes) {
 /*!*************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/winlossanalysis/actions/types.js ***!
   \*************************************************************************/
-/*! exports provided: SET_SELECTED_SPORT, SET_SPORT_LIST, SET_SELECTED_BETTYPE, SET_BETTYPE_LIST, SET_ORIGINAL_BETTYPE_LIST, SET_SELECTED_VIPONLY, SET_GROUP_IN_ORIGINAL_CURRENCY, SET_EXCLUDE_TEST_DATA, SET_VIEW_CASH_OUNT_ONLY, SET_SELECTED_GROUPBYOPTION, SET_SELECTED_BREAKBYOPTION, SET_REPORT_DATA, SET_RELOAD_REPORT, SET_SELECTED_ODDSGROUP, SET_APP_UUID, SET_SEARCH_MODE */
+/*! exports provided: SET_SELECTED_SPORT, SET_SPORT_LIST, SET_SELECTED_BETTYPE, SET_BETTYPE_LIST, SET_ORIGINAL_BETTYPE_LIST, SET_PRODUCT_LIST, SET_SELECTED_VIPONLY, SET_GROUP_IN_ORIGINAL_CURRENCY, SET_EXCLUDE_TEST_DATA, SET_VIEW_CASH_OUNT_ONLY, SET_SELECTED_GROUPBYOPTION, SET_SELECTED_BREAKBYOPTION, SET_REPORT_DATA, SET_RELOAD_REPORT, SET_SELECTED_ODDSGROUP, SET_APP_UUID, SET_SEARCH_MODE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5215,6 +5238,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_BETTYPE", function() { return SET_SELECTED_BETTYPE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_BETTYPE_LIST", function() { return SET_BETTYPE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ORIGINAL_BETTYPE_LIST", function() { return SET_ORIGINAL_BETTYPE_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PRODUCT_LIST", function() { return SET_PRODUCT_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_VIPONLY", function() { return SET_SELECTED_VIPONLY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_GROUP_IN_ORIGINAL_CURRENCY", function() { return SET_GROUP_IN_ORIGINAL_CURRENCY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_EXCLUDE_TEST_DATA", function() { return SET_EXCLUDE_TEST_DATA; });
@@ -5231,6 +5255,7 @@ const SET_SPORT_LIST = "SET_SPORT_LIST";
 const SET_SELECTED_BETTYPE = "SET_SELECTED_BETTYPE";
 const SET_BETTYPE_LIST = "SET_BETTYPE_LIST";
 const SET_ORIGINAL_BETTYPE_LIST = "SET_ORIGINAL_BETTYPE_LIST";
+const SET_PRODUCT_LIST = "SET_PRODUCTLIST";
 const SET_SELECTED_VIPONLY = "SET_SELECTED_VIPONLY";
 const SET_GROUP_IN_ORIGINAL_CURRENCY = "SET_GROUP_IN_ORIGINAL_CURRENCY";
 const SET_EXCLUDE_TEST_DATA = "SET_EXCLUDE_TEST_DATA";
@@ -6650,7 +6675,6 @@ const BaseCurrencyFilter = props => {
     value,
     options
   } = props;
-  console.log('%c Render BaseCurrencyFilter', 'color: red');
   const _renderBaseCurrencySelectList = () => {
     const baseCurrencyList = options;
     return (baseCurrencyList === null || baseCurrencyList === void 0 ? void 0 : baseCurrencyList.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -7267,9 +7291,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @legion-lib/react-multiselect */ "./node_modules/@legion-lib/react-multiselect/dist/index.js");
 /* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 
 
 
@@ -7280,10 +7304,11 @@ const ProductFilter = props => {
   const {
     value,
     onChange,
-    isValid
+    isValid,
+    disabled
   } = props;
+  const productList = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useSelector"])(state => state.productList);
   const _renderProductSelectList = () => {
-    const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].productList;
     return productList && productList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a, {
       id: "ProductList",
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].currentLanguage,
@@ -7294,7 +7319,8 @@ const ProductFilter = props => {
       keyField: "id",
       statusField: "status",
       onChange: onChange,
-      isValid: isValid
+      isValid: isValid,
+      disabled: disabled
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -7304,12 +7330,14 @@ const ProductFilter = props => {
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Product")), _renderProductSelectList());
 };
 const propTypes = {
-  value: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
-  onChange: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
-  isValid: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool
+  value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
+  onChange: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+  isValid: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool,
+  disabled: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.bool
 };
 const defaultProps = {
-  isValid: true
+  isValid: true,
+  disabled: false
 };
 ProductFilter.propTypes = propTypes;
 ProductFilter.defaultProps = defaultProps;
@@ -7979,7 +8007,8 @@ const useFilterAction = () => {
     setSelectedBreakDownByOption,
     setSubsidiarySearch,
     setSubsidiaryList,
-    setAppUuid
+    setAppUuid,
+    setProductList
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_0__["ActionCreators"];
   const _buildTitle = params => {
     const {
@@ -8081,6 +8110,7 @@ const useFilterAction = () => {
         startDate: defaultState.dateRange.fromDate,
         endDate: defaultState.dateRange.toDate
       }));
+      dispatch(setProductList(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].productList));
       dispatch(setSelectedProduct(defaultState.selectedProduct));
       dispatch(setSelectedCurrency(defaultState.selectedCurrency));
       dispatch(setSelectedPlatform(defaultState.selectedPlatform));
@@ -8129,6 +8159,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_Service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../common/Service */ "./www/js/source/reactpages/pages/winlossanalysis/common/Service.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _common_constants_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common/constants.js */ "./www/js/source/reactpages/pages/winlossanalysis/common/constants.js");
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -8163,7 +8200,8 @@ const useFilterHandler = () => {
     setSelectedVipOnly,
     setSearchMode,
     setGroupInOriginalCurrency,
-    setExcludeTestData
+    setExcludeTestData,
+    setProductList
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_1__["ActionCreators"];
   const onUserNameInputHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(value => dispatch(setUsername(value)), []);
   const onSubsidiaryDropDownChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSubsidiaryList(selectedItemsKey)), []);
@@ -8201,7 +8239,17 @@ const useFilterHandler = () => {
   const onVipOnlyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(item => dispatch(setSelectedVipOnly(item.value)), []);
   const onGroupInOriginalCurrencyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(setGroupInOriginalCurrency(checked)), []);
   const onExcludeTextDataChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(setExcludeTestData(checked)), []);
-  const onCashOutOnlyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(setViewCashOutOnly(checked)), []);
+  const onCashOutOnlyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => {
+    if (checked) {
+      const seletctProduct = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].productList.filter(item => item.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].BA || item.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].SportsBook).map(item => item.id).join(',');
+      const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].productList.map(item => item.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].SportsBook || item.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].BA ? item : _objectSpread(_objectSpread({}, item), {}, {
+        status: false
+      }));
+      onProductChangeHandler(null, seletctProduct);
+      dispatch(setProductList(productList));
+    }
+    dispatch(setViewCashOutOnly(checked));
+  }, []);
   const onSearchModeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(event => {
     const {
       value
@@ -9514,6 +9562,30 @@ const ReportTitleContent = () => {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/reducers/appDataReducer.js":
+/*!***********************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/reducers/appDataReducer.js ***!
+  \***********************************************************************************/
+/*! exports provided: productList */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productList", function() { return productList; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/winlossanalysis/actions/types.js");
+/* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+
+
+const productList = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].productList, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_PRODUCT_LIST"]](state, action) {
+    return action.data;
+  }
+});
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/winlossanalysis/reducers/bettypeReducer.js":
 /*!***********************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/winlossanalysis/reducers/bettypeReducer.js ***!
@@ -9678,6 +9750,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_reducers_customerClassReducer__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @jsroot/reducers/customerClassReducer */ "./www/js/source/reactpages/reducers/customerClassReducer.js");
 /* harmony import */ var _filterReducer__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./filterReducer */ "./www/js/source/reactpages/pages/winlossanalysis/reducers/filterReducer.js");
 /* harmony import */ var _dataReducer__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./dataReducer */ "./www/js/source/reactpages/pages/winlossanalysis/reducers/dataReducer.js");
+/* harmony import */ var _appDataReducer__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./appDataReducer */ "./www/js/source/reactpages/pages/winlossanalysis/reducers/appDataReducer.js");
 
 
 
@@ -9699,7 +9772,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_gridDataReducer_js__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_productReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_statusReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_liveStatusReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_9__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_10__, _sportReducer__WEBPACK_IMPORTED_MODULE_11__, _bettypeReducer__WEBPACK_IMPORTED_MODULE_12__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_13__, _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_14__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_15__, _jsroot_reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_16__, _jsroot_reducers_platformReducer__WEBPACK_IMPORTED_MODULE_17__, _filterReducer__WEBPACK_IMPORTED_MODULE_19__, _jsroot_reducers_customerClassReducer__WEBPACK_IMPORTED_MODULE_18__, _dataReducer__WEBPACK_IMPORTED_MODULE_20__)));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_gridDataReducer_js__WEBPACK_IMPORTED_MODULE_1__, _jsroot_reducers_productReducer__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_currencyReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_statusReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_liveStatusReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_dateRangeReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_9__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_10__, _sportReducer__WEBPACK_IMPORTED_MODULE_11__, _bettypeReducer__WEBPACK_IMPORTED_MODULE_12__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_13__, _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_14__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_15__, _jsroot_reducers_subsidiaryReducer__WEBPACK_IMPORTED_MODULE_16__, _jsroot_reducers_platformReducer__WEBPACK_IMPORTED_MODULE_17__, _filterReducer__WEBPACK_IMPORTED_MODULE_19__, _jsroot_reducers_customerClassReducer__WEBPACK_IMPORTED_MODULE_18__, _dataReducer__WEBPACK_IMPORTED_MODULE_20__, _appDataReducer__WEBPACK_IMPORTED_MODULE_21__)));
 
 /***/ }),
 
