@@ -214,7 +214,7 @@ export const DataGrid = (props) => {
             onPaging={(pageIndex, pageSize) => _handePaging(pageSize, pageIndex, index)} />
              {
                 requestParam.DrillDownLevel === ReportLevel.CUSTOMER && showBetList &&
-                <Popup isShow={showBetList} title={LangHelper.getSingleResource("PromotionDetails")} width={1050} height={600} onClose={closeBetListPopup}>
+                <Popup isShow={showBetList} title={LangHelper.getSingleResource("PromotionDetails")} width={1100} height={600} onClose={closeBetListPopup}>
                     <Detail data={betListData} title={betlistTitle} param={detailParams}/>
                 </Popup>
             }

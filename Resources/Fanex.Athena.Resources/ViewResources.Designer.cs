@@ -3148,6 +3148,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data is available only for Sportsbook Promotion - Saba Reward Risk-free Rebate.
+        /// </summary>
+        public static string ExtraPayoutBetIDTooltip {
+            get {
+                return ResourceManager.GetString("ExtraPayoutBetIDTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fail.
         /// </summary>
         public static string Fail {

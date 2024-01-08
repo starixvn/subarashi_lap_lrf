@@ -3697,6 +3697,7 @@ const ApiUrl = {
 const headerText = {
   date: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Date'),
   refno: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('RefNo'),
+  betID: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BetID'),
   externalId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExternalId'),
   systemId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('SystemId'),
   currency: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Currency'),
@@ -3912,6 +3913,9 @@ const renderDetailHeader = () => {
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 230
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].refno), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    colWidth: 230,
+    title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('ExtraPayoutBetIDTooltip')
+  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].betID, "[i]"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 220
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].product), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 290
@@ -3939,7 +3943,8 @@ const buildDetailDataRow = (dataItem, index) => {
     sharingAmount,
     refno,
     promotionName,
-    productCode
+    productCode,
+    betID
   } = dataItem;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
     key: `row-${Object(uuid__WEBPACK_IMPORTED_MODULE_5__["v4"])()}`
@@ -3950,6 +3955,8 @@ const buildDetailDataRow = (dataItem, index) => {
   }, dateString), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "center-align"
   }, refno), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+    className: "center-align"
+  }, betID), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "left-align"
   }, productName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "left-align"
@@ -3963,7 +3970,7 @@ const buildDetailDataRow = (dataItem, index) => {
 };
 const renderDetailFooter = data => {
   const dataSummary = data.totalSummary;
-  const summaryColSpan = 5;
+  const summaryColSpan = 6;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
     key: `tr-grandtotal`,
     className: "fixed-table-total"
@@ -4286,7 +4293,7 @@ const DataGrid = props => {
   }), requestParam.DrillDownLevel === _common_constants__WEBPACK_IMPORTED_MODULE_9__["ReportLevel"].CUSTOMER && showBetList && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_8__["default"], {
     isShow: showBetList,
     title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_11__["default"].getSingleResource("PromotionDetails"),
-    width: 1050,
+    width: 1100,
     height: 600,
     onClose: closeBetListPopup
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Detail__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -4419,7 +4426,7 @@ const Detail = props => {
   }, data && data.data.length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Table"], {
     autoWidth: false,
     autoHeight: false,
-    width: 980,
+    width: 1080,
     bodyHeight: 430,
     header: Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_7__["renderDetailHeader"])(),
     body: Object(_common_gridUtils__WEBPACK_IMPORTED_MODULE_7__["renderDetailDataSection"])(data.data),
