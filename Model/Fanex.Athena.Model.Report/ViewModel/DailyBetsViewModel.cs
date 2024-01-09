@@ -18,5 +18,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public DateTime MinDate { get; set; }
 
         public bool IsAllowRefNo { get; set; }
+
+        public bool IsShowPayout { get; set; }
     }
 }

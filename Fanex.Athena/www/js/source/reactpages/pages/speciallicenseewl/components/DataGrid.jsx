@@ -9,6 +9,7 @@ import NoDataTitle from '../../../components/NoDataTitle'
 import Report from '../../../lib/report'
 import { ReportBy } from '../../../constants/report'
 import { Service, HeaderText, Url, TotalText } from '../lib/service'
+import AppData from '@jsroot/lib/AppData';
 
 export class DataGrid extends Component {
     constructor(props) {
@@ -85,10 +86,11 @@ export class DataGrid extends Component {
         this.props.toggleLoader(false);
     }
 
-    _buildHeader(selectedProductList) {
+    _buildHeader(selectedProductList, dataOptions) {
         const productsCount = selectedProductList.length;
         const { expandLicensee, expandTurnover } = this.state;
         const rowSpan = productsCount > 1 && (expandLicensee || expandTurnover) ? 2 : 1;
+        const { isShowPayout } = dataOptions;
 
         let rows = [
             <HeaderRow key='header1' style={{ height: 32 }}>
@@ -115,6 +117,9 @@ export class DataGrid extends Component {
                 <HeaderCell colWidth={130} rowSpan={rowSpan} sortBy={'TotalTransaction'}>
                     {HeaderText.totalTransaction}
                 </HeaderCell>
+                {isShowPayout && <HeaderCell colWidth={200} rowSpan={rowSpan} sortBy={'TotalPayout'}>
+                    {HeaderText.payout}
+                </HeaderCell>}
                 <HeaderCell colWidth={200} rowSpan={rowSpan} sortBy={'CustomerWinLoss'}>
                     {HeaderText.customer}
                 </HeaderCell>
@@ -180,7 +185,7 @@ export class DataGrid extends Component {
         return rows;
     }
 
-    _buildBody(reportBy, selectedProductList) {
+    _buildBody(reportBy, selectedProductList, dataOptions) {
         const data = this.state.gridData.Data,
             formatDate = reportBy === ReportBy.DAILY.toString() ? 'MM/DD/YYYY' : 'MM/YYYY';
 
@@ -194,7 +199,7 @@ export class DataGrid extends Component {
                     <Cell title={i + 1} className='center-align'>{i + 1}</Cell>
                     <Cell title={reportBy} className='center-align'>{reportBy}</Cell>
                     <Cell title={item.CurrencyName} className='center-align'>{item.CurrencyName}</Cell>
-                    {this._buildCell(item, selectedProductList)}
+                    {this._buildCell(item, selectedProductList, dataOptions)}
                 </Row>
             );
         }
@@ -202,7 +207,7 @@ export class DataGrid extends Component {
         return rows;
     }
 
-    _buildFooter(selectedProductList) {
+    _buildFooter(selectedProductList, dataOptions) {
         let totalRows = [];
 
         const total = this.state.gridData.Total,
@@ -215,7 +220,7 @@ export class DataGrid extends Component {
                 <Row key={item.CurrencyName} className='fixed-table-total'>
                     {i === 0 && <Cell title={TotalText.total} className='center-align' rowSpan={rowSpan} colSpan={colSpan}>{TotalText.total}</Cell>}
                     <Cell title={item.CurrencyName} className='center-align'>{item.CurrencyName}</Cell>
-                    {this._buildCell(item, selectedProductList)}
+                    {this._buildCell(item, selectedProductList, dataOptions)}
                 </Row>
             );
         }
@@ -230,7 +235,7 @@ export class DataGrid extends Component {
             totalRows.push(
                 <Row key={`tr-grandtotal${i}`} className='fixed-table-grant-total'>
                     <Cell title={`${TotalText.totalIn} ${currency}`} className='center-align' colSpan={colSummarySpan}>{`${TotalText.totalIn} ${currency}`}</Cell>
-                    {this._buildCell(item, selectedProductList)}
+                    {this._buildCell(item, selectedProductList, dataOptions)}
                 </Row>
             );
         }
@@ -238,20 +243,30 @@ export class DataGrid extends Component {
         return totalRows;
     }
 
-    _buildCell(item, selectedProductList) {
+    _buildCell(item, selectedProductList, dataOptions) {
         const turnover = NumberFormat.formatDecimal(item.TotalTurnOver),
+            totalPayout = NumberFormat.formatDecimal(item.TotalPayout),
             customerWl = NumberFormat.formatDecimal(item.CustomerWinLoss),
             licenseeWL = NumberFormat.formatDecimal(item.TotalLicenseeWL),
             totalTransaction = NumberFormat.format(item.TotalTransaction, 0);
+
+        const { isShowPayout } = dataOptions;
 
         const productsCount = selectedProductList.length;
         if (productsCount === 1) {
             const rows = [
                 <Cell key='turnover' title={turnover} className='right-align'>{turnover}</Cell>,
-                <Cell key='totalTransaction' title={totalTransaction} className='right-align'>{totalTransaction}</Cell>,
+                <Cell key='totalTransaction' title={totalTransaction} className='right-align'>{totalTransaction}</Cell>
+            ];
+
+            if (isShowPayout) {
+                rows.push(<Cell key='totalPayout' title={totalPayout} className='right-align'>{totalPayout}</Cell>)
+            }
+
+            rows.push(
                 <Cell key='customerWl' title={customerWl} className='right-align'>{customerWl}</Cell>,
                 <Cell key='licenseeWL' title={licenseeWL} className={`right-align ${item.TotalLicenseeWL < 0 ? 'negative' : ''}`}>{licenseeWL}</Cell>
-            ];
+            );
 
             return rows;
         }
@@ -268,9 +283,14 @@ export class DataGrid extends Component {
 
         rows.push(
             <Cell key='turnover' title={turnover} className='right-align'>{turnover}</Cell>,
-            <Cell key='totalTransaction' title={totalTransaction} className='right-align'>{totalTransaction}</Cell>,
-            <Cell key='customerWl' title={customerWl} className='right-align'>{customerWl}</Cell>
+            <Cell key='totalTransaction' title={totalTransaction} className='right-align'>{totalTransaction}</Cell>
         );
+
+        if (isShowPayout) {
+            rows.push(<Cell key='totalPayout' title={totalPayout} className='right-align'>{totalPayout}</Cell>)
+        }
+
+        rows.push(<Cell key='customerWl' title={customerWl} className='right-align'>{customerWl}</Cell>)
 
         if (this.state.expandLicensee) {
             for (let i = 0; i < productsCount; i++) {
@@ -297,14 +317,18 @@ export class DataGrid extends Component {
             return <NoDataTitle />;
         }
 
+        const dataOptions = {
+            isShowPayout: AppData.isShowPayout
+        };
+
         return (
             <Table
                 minWidth={800}
                 autoWidth={true}
                 bodyHeight={300}
-                header={this._buildHeader(params.ProductCodeList)}
-                body={this._buildBody(params.ReportBy, params.ProductCodeList)}
-                footer={this._buildFooter(params.ProductCodeList)}
+                header={this._buildHeader(params.ProductCodeList, dataOptions)}
+                body={this._buildBody(params.ReportBy, params.ProductCodeList, dataOptions)}
+                footer={this._buildFooter(params.ProductCodeList, dataOptions)}
                 onSort={this._sort}
             />
         );

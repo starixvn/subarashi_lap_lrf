@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ActionCreators } from '../actions';
-
 import { Table } from '@9softstudio/react-grid';
 import { renderHeader, renderDataSection } from '../lib/gridUtils';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
+import AppData from '@jsroot/lib/AppData';
 
 export const DataGrid = (props) => {
     const isFirstRun = useRef(true);
@@ -32,14 +32,17 @@ export const DataGrid = (props) => {
     }
 
     const { pagingOption, requestParam } = props;
+    const dataOptions = {
+        isShowPayout: AppData.isShowPayout
+    };
 
     return (
         <Table minWidth={650}
             autoWidth={true}
             autoHeight={true}
-            header={renderHeader()}
-            body={renderDataSection(dataList)}
-            footer={renderDataSection([total], true)}
+            header={renderHeader(dataOptions)}
+            body={renderDataSection(dataList, false, dataOptions)}
+            footer={renderDataSection([total], true, dataOptions)}
             containerPadding={30}
             onSort={(sortBy, sortOrder) => props.setRequestParam({ ...requestParam, sortBy, sortOrder })}
             isPaging={true}

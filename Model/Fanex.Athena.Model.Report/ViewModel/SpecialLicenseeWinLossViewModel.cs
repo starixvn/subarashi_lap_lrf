@@ -13,5 +13,7 @@
         public LicenseeWinLossMetaModel Param { get; set; }
 
         public IDictionary<int, string> CurrencyList { get; set; }
+
+        public bool IsShowPayout { get; set; }
     }
 }

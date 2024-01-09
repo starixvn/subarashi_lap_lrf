@@ -2009,9 +2009,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_report__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../lib/report */ "./www/js/source/reactpages/lib/report.js");
 /* harmony import */ var _constants_report__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../constants/report */ "./www/js/source/reactpages/constants/report.js");
 /* harmony import */ var _lib_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../lib/service */ "./www/js/source/reactpages/pages/speciallicenseewl/lib/service.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -2096,13 +2098,16 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       expandLicensee: !prevState.expandLicensee
     }));
   }
-  _buildHeader(selectedProductList) {
+  _buildHeader(selectedProductList, dataOptions) {
     const productsCount = selectedProductList.length;
     const {
       expandLicensee,
       expandTurnover
     } = this.state;
     const rowSpan = productsCount > 1 && (expandLicensee || expandTurnover) ? 2 : 1;
+    const {
+      isShowPayout
+    } = dataOptions;
     let rows = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["HeaderRow"], {
       key: "header1",
       style: {
@@ -2137,7 +2142,11 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       colWidth: 130,
       rowSpan: rowSpan,
       sortBy: 'TotalTransaction'
-    }, _lib_service__WEBPACK_IMPORTED_MODULE_10__["HeaderText"].totalTransaction), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["HeaderCell"], {
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_10__["HeaderText"].totalTransaction), isShowPayout && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["HeaderCell"], {
+      colWidth: 200,
+      rowSpan: rowSpan,
+      sortBy: 'TotalPayout'
+    }, _lib_service__WEBPACK_IMPORTED_MODULE_10__["HeaderText"].payout), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["HeaderCell"], {
       colWidth: 200,
       rowSpan: rowSpan,
       sortBy: 'CustomerWinLoss'
@@ -2199,7 +2208,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
     }
     return rows;
   }
-  _buildBody(reportBy, selectedProductList) {
+  _buildBody(reportBy, selectedProductList, dataOptions) {
     const data = this.state.gridData.Data,
       formatDate = reportBy === _constants_report__WEBPACK_IMPORTED_MODULE_9__["ReportBy"].DAILY.toString() ? 'MM/DD/YYYY' : 'MM/YYYY';
     let rows = [];
@@ -2217,11 +2226,11 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       }, reportBy), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
         title: item.CurrencyName,
         className: "center-align"
-      }, item.CurrencyName), this._buildCell(item, selectedProductList)));
+      }, item.CurrencyName), this._buildCell(item, selectedProductList, dataOptions)));
     }
     return rows;
   }
-  _buildFooter(selectedProductList) {
+  _buildFooter(selectedProductList, dataOptions) {
     let totalRows = [];
     const total = this.state.gridData.Total,
       colSpan = 2,
@@ -2239,7 +2248,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       }, _lib_service__WEBPACK_IMPORTED_MODULE_10__["TotalText"].total), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
         title: item.CurrencyName,
         className: "center-align"
-      }, item.CurrencyName), this._buildCell(item, selectedProductList)));
+      }, item.CurrencyName), this._buildCell(item, selectedProductList, dataOptions)));
     }
     const dataSummary = this.state.gridData.SummaryTotal,
       baseCurrencyList = Object.keys(dataSummary),
@@ -2254,15 +2263,19 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
         title: `${_lib_service__WEBPACK_IMPORTED_MODULE_10__["TotalText"].totalIn} ${currency}`,
         className: "center-align",
         colSpan: colSummarySpan
-      }, `${_lib_service__WEBPACK_IMPORTED_MODULE_10__["TotalText"].totalIn} ${currency}`), this._buildCell(item, selectedProductList)));
+      }, `${_lib_service__WEBPACK_IMPORTED_MODULE_10__["TotalText"].totalIn} ${currency}`), this._buildCell(item, selectedProductList, dataOptions)));
     }
     return totalRows;
   }
-  _buildCell(item, selectedProductList) {
+  _buildCell(item, selectedProductList, dataOptions) {
     const turnover = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(item.TotalTurnOver),
+      totalPayout = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(item.TotalPayout),
       customerWl = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(item.CustomerWinLoss),
       licenseeWL = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].formatDecimal(item.TotalLicenseeWL),
       totalTransaction = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_6__["default"].format(item.TotalTransaction, 0);
+    const {
+      isShowPayout
+    } = dataOptions;
     const productsCount = selectedProductList.length;
     if (productsCount === 1) {
       const rows = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
@@ -2273,7 +2286,15 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
         key: "totalTransaction",
         title: totalTransaction,
         className: "right-align"
-      }, totalTransaction), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+      }, totalTransaction)];
+      if (isShowPayout) {
+        rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+          key: "totalPayout",
+          title: totalPayout,
+          className: "right-align"
+        }, totalPayout));
+      }
+      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
         key: "customerWl",
         title: customerWl,
         className: "right-align"
@@ -2281,7 +2302,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
         key: "licenseeWL",
         title: licenseeWL,
         className: `right-align ${item.TotalLicenseeWL < 0 ? 'negative' : ''}`
-      }, licenseeWL)];
+      }, licenseeWL));
       return rows;
     }
     let rows = [];
@@ -2304,7 +2325,15 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
       key: "totalTransaction",
       title: totalTransaction,
       className: "right-align"
-    }, totalTransaction), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+    }, totalTransaction));
+    if (isShowPayout) {
+      rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
+        key: "totalPayout",
+        title: totalPayout,
+        className: "right-align"
+      }, totalPayout));
+    }
+    rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Cell"], {
       key: "customerWl",
       title: customerWl,
       className: "right-align"
@@ -2336,13 +2365,16 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
     if (!data.length) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null);
     }
+    const dataOptions = {
+      isShowPayout: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isShowPayout
+    };
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_5__["Table"], {
       minWidth: 800,
       autoWidth: true,
       bodyHeight: 300,
-      header: this._buildHeader(params.ProductCodeList),
-      body: this._buildBody(params.ReportBy, params.ProductCodeList),
-      footer: this._buildFooter(params.ProductCodeList),
+      header: this._buildHeader(params.ProductCodeList, dataOptions),
+      body: this._buildBody(params.ReportBy, params.ProductCodeList, dataOptions),
+      footer: this._buildFooter(params.ProductCodeList, dataOptions),
       onSort: this._sort
     });
   }
@@ -2459,7 +2491,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       _lib_service__WEBPACK_IMPORTED_MODULE_9__["Service"].sort(gridData.Data, params.SortBy, params.SortOrder);
     }
     const title = _lib_service__WEBPACK_IMPORTED_MODULE_9__["Service"].getReportTitle(params.FromDate, params.ToDate, params.CurrencyId, params.CurrencyName, params.BaseCurrency);
-    const excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_10__["default"](gridData, title, parseInt(params.ReportBy, 10), params.ProductCodeList);
+    const excel = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_10__["default"](gridData, title, parseInt(params.ReportBy, 10), params.ProductCodeList, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_12__["default"].isShowPayout);
     excel.export(() => {
       this.props.toggleLoader(false);
     });
@@ -2700,7 +2732,7 @@ const TOTAL_SECTION = 'total';
 const SUMMARYTOTAL_SECTION = 'summary';
 const HEADER_SECTION = 'header';
 class ReportExcel {
-  constructor(gridData = {}, title, reportBy, productCodes) {
+  constructor(gridData = {}, title, reportBy, productCodes, isShowPayout) {
     this.worksheet = {};
     this.title = title;
     this.fileName = "LicenseeWinLoss";
@@ -2710,6 +2742,7 @@ class ReportExcel {
     this.productCount = productCodes.length;
     this.currentRowIndex = HEADER_ROW_INDEX + (this.productCount > 1 ? 2 : 1);
     this.totalColumn = MIN_COLUMN + this.productCount * 2;
+    this.isShowPayout = isShowPayout;
     this.configColumn = this._getConfigColumn(reportBy);
     this.colSpanConfig = this._getColSpanConfig();
     this.mergeConfig = [];
@@ -2826,7 +2859,33 @@ class ReportExcel {
         isShow: true,
         style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].number
       }
-    }, {
+    });
+    if (this.isShowPayout) {
+      rows.push({
+        field: 'TotalPayout',
+        type: 'n',
+        [HEADER_SECTION]: {
+          title: 'payout',
+          isShow: true,
+          rowSpan: rowSpan,
+          index_r: HEADER_ROW_INDEX
+        },
+        [MAIN_SECTION]: {
+          isShow: true,
+          style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["bodyCellStyle"].decimal,
+          width: 200
+        },
+        [TOTAL_SECTION]: {
+          isShow: true,
+          style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["totalCellStyle"].decimal
+        },
+        [SUMMARYTOTAL_SECTION]: {
+          isShow: true,
+          style: _constants_excelStyle__WEBPACK_IMPORTED_MODULE_3__["grandTotalCellStyle"].decimal
+        }
+      });
+    }
+    rows.push({
       field: 'CustomerWinLoss',
       type: 'n',
       [HEADER_SECTION]: {
@@ -3164,6 +3223,7 @@ const HeaderText = {
   currency: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Currency'),
   turnover: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Turnover'),
   totalTransaction: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('TotalTransaction'),
+  payout: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Payout'),
   customer: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('CustomerW_L'),
   licenseeWL: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('LicenseeW_L'),
   total: _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Total'),

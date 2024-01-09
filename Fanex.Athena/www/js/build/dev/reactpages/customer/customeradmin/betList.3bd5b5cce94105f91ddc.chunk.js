@@ -255,8 +255,10 @@ const BetList = props => {
     product: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Product'),
     betType: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('BetType'),
     turnover: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Turnover'),
+    payout: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Payout'),
     winloss: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('WinLoss'),
     turnoverBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Turnover')} (USD)`,
+    payoutBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Payout')} (USD)`,
     winlossBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('WinLoss')} (USD)`,
     status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Status'),
     sport: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Sport')
@@ -284,17 +286,17 @@ const BetList = props => {
     }, headerText.sport), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 150
     }, headerText.betType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'turnover'
+      colWidth: 80
     }, headerText.turnover), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'winLoss'
+      colWidth: 80
+    }, headerText.payout), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+      colWidth: 80
     }, headerText.winloss), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'turnoverBased'
+      colWidth: 80
     }, headerText.turnoverBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'winLossBased'
+      colWidth: 80
+    }, headerText.payoutBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
+      colWidth: 80
     }, headerText.winlossBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["HeaderCell"], {
       colWidth: 50
     }, headerText.status));
@@ -318,7 +320,9 @@ const BetList = props => {
       turnoverBased,
       winLossBased,
       status,
-      sportName
+      sportName,
+      payout,
+      payoutBased
     } = dataItem;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Row"], {
       key: index
@@ -332,9 +336,13 @@ const BetList = props => {
       className: "right-align"
     }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(turnover)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       className: "right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(payout)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      className: "right-align"
     }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(winLoss)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       className: "right-align"
     }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(turnoverBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
+      className: "right-align"
+    }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(payoutBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       className: "right-align"
     }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_2__["default"].formatDecimal(winLossBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Cell"], {
       className: "center-align"
@@ -571,17 +579,13 @@ const BetList = props => {
     }, headerText.sport), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 150
     }, headerText.betType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'turnover'
+      colWidth: 80
     }, headerText.turnover), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'winLoss'
+      colWidth: 80
     }, headerText.winloss), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'turnoverBased'
+      colWidth: 80
     }, headerText.turnoverBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
-      colWidth: 80,
-      sortBy: 'winLossBased'
+      colWidth: 80
     }, headerText.winlossBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_3__["HeaderCell"], {
       colWidth: 50
     }, headerText.status));
@@ -672,4 +676,4 @@ function mapStateToProps(state) {
 /***/ })
 
 }]);
-//# sourceMappingURL=betList.cfab7d77fd0661f46b7d.chunk.js.map
+//# sourceMappingURL=betList.3bd5b5cce94105f91ddc.chunk.js.map

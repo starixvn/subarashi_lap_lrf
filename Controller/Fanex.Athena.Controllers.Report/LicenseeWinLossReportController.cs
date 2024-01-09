@@ -139,7 +139,9 @@
                 Param = param,
                 CurrencyList = BuildCurrencyList(),
                 ReportSetting = reportSetting,
-                BaseCurrencyList = baseCurrencyList
+                BaseCurrencyList = baseCurrencyList,
+                IsShowPayout = string.Equals(SessionServiceInstance.LicenseeSession.LicenseeName
+                    , "12B", StringComparison.InvariantCultureIgnoreCase)
             };
 
             return View("~/Views/Desktop/Report/SpecialLicenseeWinLoss/Main.cshtml", model);

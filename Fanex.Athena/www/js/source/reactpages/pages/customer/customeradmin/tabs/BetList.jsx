@@ -72,8 +72,10 @@ const BetList = (props) => {
         product: LangHelper.getSingleResource('Product'),
         betType: LangHelper.getSingleResource('BetType'),
         turnover: LangHelper.getSingleResource('Turnover'),
+        payout: LangHelper.getSingleResource('Payout'),
         winloss: LangHelper.getSingleResource('WinLoss'),
         turnoverBased: `${LangHelper.getSingleResource('Turnover')} (USD)`,
+        payoutBased: `${LangHelper.getSingleResource('Payout')} (USD)`,
         winlossBased: `${LangHelper.getSingleResource('WinLoss')} (USD)`,
         status: LangHelper.getSingleResource('Status'),
         sport: LangHelper.getSingleResource('Sport')
@@ -94,10 +96,12 @@ const BetList = (props) => {
                 <HeaderCell colWidth={80}>{headerText.product}</HeaderCell>
                 <HeaderCell colWidth={80}>{headerText.sport}</HeaderCell>
                 <HeaderCell colWidth={150}>{headerText.betType}</HeaderCell>
-                <HeaderCell colWidth={80} sortBy={'turnover'}>{headerText.turnover}</HeaderCell>
-                <HeaderCell colWidth={80} sortBy={'winLoss'}>{headerText.winloss}</HeaderCell>
-                <HeaderCell colWidth={80} sortBy={'turnoverBased'}>{headerText.turnoverBased}</HeaderCell>
-                <HeaderCell colWidth={80} sortBy={'winLossBased'}>{headerText.winlossBased}</HeaderCell>
+                <HeaderCell colWidth={80}>{headerText.turnover}</HeaderCell>
+                <HeaderCell colWidth={80}>{headerText.payout}</HeaderCell>
+                <HeaderCell colWidth={80}>{headerText.winloss}</HeaderCell>
+                <HeaderCell colWidth={80}>{headerText.turnoverBased}</HeaderCell>
+                <HeaderCell colWidth={80}>{headerText.payoutBased}</HeaderCell>
+                <HeaderCell colWidth={80}>{headerText.winlossBased}</HeaderCell>
                 <HeaderCell colWidth={50}>{headerText.status}</HeaderCell>
             </HeaderRow>
         )
@@ -113,7 +117,8 @@ const BetList = (props) => {
     }
 
     const buildDataRow = (dataItem) => {
-        const { index, refNo, transTimeString, productCode, betType, turnover, winLoss, turnoverBased, winLossBased, status, sportName } = dataItem;
+        const { index, refNo, transTimeString, productCode, betType, turnover, winLoss, turnoverBased,
+            winLossBased, status, sportName, payout, payoutBased } = dataItem;
         
         return (
             <Row key={index}>
@@ -124,8 +129,10 @@ const BetList = (props) => {
                 <Cell>{sportName}</Cell>
                 <Cell>{betType}</Cell>
                 <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
+                <Cell className="right-align">{NumberFormat.formatDecimal(payout)}</Cell>
                 <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
                 <Cell className="right-align">{NumberFormat.formatDecimal(turnoverBased)}</Cell>
+                <Cell className="right-align">{NumberFormat.formatDecimal(payoutBased)}</Cell>
                 <Cell className="right-align">{NumberFormat.formatDecimal(winLossBased)}</Cell>
                 <Cell className="center-align">{statusText[status]}</Cell>
             </Row>

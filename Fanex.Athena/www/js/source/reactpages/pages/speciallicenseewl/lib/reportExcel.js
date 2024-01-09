@@ -14,7 +14,7 @@ const SUMMARYTOTAL_SECTION = 'summary';
 const HEADER_SECTION = 'header';
 
 export default class ReportExcel {
-    constructor (gridData = {}, title, reportBy, productCodes) {      
+    constructor (gridData = {}, title, reportBy, productCodes, isShowPayout) {      
         this.worksheet = {};
         this.title = title;
         this.fileName = "LicenseeWinLoss";
@@ -23,7 +23,8 @@ export default class ReportExcel {
         this.productCodes = productCodes;
         this.productCount = productCodes.length;
         this.currentRowIndex = HEADER_ROW_INDEX + (this.productCount > 1 ? 2 : 1);
-        this.totalColumn = MIN_COLUMN + this.productCount*2;
+        this.totalColumn = MIN_COLUMN + this.productCount*2;    
+        this.isShowPayout = isShowPayout;
         this.configColumn = this._getConfigColumn(reportBy);
         this.colSpanConfig = this._getColSpanConfig();
         this.mergeConfig = [];
@@ -96,7 +97,21 @@ export default class ReportExcel {
             [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.number, width: 130 },
             [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.number },
             [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.number }
-        }, {
+        });
+
+        if(this.isShowPayout) {
+            rows.push(
+                {
+                    field: 'TotalPayout',
+                    type: 'n',
+                    [HEADER_SECTION]: { title: 'payout', isShow: true, rowSpan: rowSpan, index_r: HEADER_ROW_INDEX },
+                    [MAIN_SECTION]: { isShow : true, style: bodyCellStyle.decimal, width: 200 },
+                    [TOTAL_SECTION]: { isShow : true, style: totalCellStyle.decimal },
+                    [SUMMARYTOTAL_SECTION]: { isShow : true, style: grandTotalCellStyle.decimal }
+                });
+        }
+
+        rows.push({
             field: 'CustomerWinLoss',
             type: 'n',
             [HEADER_SECTION]: { title: 'customer', isShow: true, rowSpan: rowSpan, index_r: HEADER_ROW_INDEX },
