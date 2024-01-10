@@ -107,7 +107,8 @@
                     var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode);
                     var leagueGroupIdList = policy.LeagueGroupId.Split(',');
                     var leagueGroupListByPolicy = (isAllLeagueGroup ? leagueGroups : leagueGroups.Where(_ => leagueGroupIdList.Contains(_.InHouseLeagueGroupID.ToString())))
-                        .Select(x => new LeagueGroup { LeagueGroupId = x.LicLeagueGroupID, LeagueGroupName = x.LicGroupName }).ToList();
+                        .Select(x => new LeagueGroup { LeagueGroupId = x.LicLeagueGroupID, LeagueGroupName = x.LicGroupName })
+                        .GroupBy(elem => elem.LeagueGroupId).Select(group => group.First()).ToList(); //get distinct by LeagueGroupId
 
                     policy.LeagueGroups = leagueGroupListByPolicy.Any() ? leagueGroupListByPolicy : defaultLeagueGroups;
                 }
