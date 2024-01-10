@@ -43,7 +43,7 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
         private readonly IDictionary<int, string> _gridCommonColumNames = new Dictionary<int, string>
         {
             { SportTypeColumn, "SportTypeName" },
-            { PolicyColumn, "PlolicyTitle" },
+            { PolicyColumn, "PolicyTitle" },
             { RuleColumn, "RuleTitle" },
             { LivePreMatchColumn, "LiveTypeText" },
             { CurrencyColumn, "Currency" },

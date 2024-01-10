@@ -63,7 +63,7 @@
                             CurrencyId = currencyId,
                             DisableParlay = reader.ToBool("DisableParlay"),
                             RuleTitle = Convert.ToString(reader["RuleTitle"]),
-                            PlolicyTitle = Convert.ToString(reader["PolicyTitle"]),
+                            PolicyTitle = Convert.ToString(reader["PolicyTitle"]),
                         };
 
                         if (metaModel.CurrencyList.ContainsKey(currencyId) || currencyId == 0)
