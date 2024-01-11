@@ -2685,7 +2685,7 @@
     <value>免费投注</value>
   </data>
   <data name="PromotionType" xml:space="preserve">
-    <value>基础货币</value>
+    <value>活动类型</value>
   </data>
   <data name="AddContact" xml:space="preserve">
     <value>新增联络人</value>

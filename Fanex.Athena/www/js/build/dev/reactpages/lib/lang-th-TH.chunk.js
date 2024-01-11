@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 1/8/2024 2:37:06 PM
+// Generated at: 1/11/2024 3:15:43 PM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
