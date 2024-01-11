@@ -68,7 +68,6 @@
     <Compile Include="Constants\HardCodeSportType.cs" />
     <Compile Include="DataDomain\BaseCurrencyType.cs" />
     <Compile Include="DataDomain\MessageType.cs" />
-    <Compile Include="DataDomain\ExtraPayoutMapType.cs" />
     <Compile Include="DataDomain\LogActionDetailId.cs" />
     <Compile Include="DataDomain\LogActionId.cs" />
     <Compile Include="DataDomain\LogText.cs" />

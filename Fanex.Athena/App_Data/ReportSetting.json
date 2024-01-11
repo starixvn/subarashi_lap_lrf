@@ -38,11 +38,6 @@
     "MaxDateString": ""
   },
   {
-    "ReportKey": "ExtraPayout",
-    "MinDateString": "",
-    "MaxDateString": "today"
-  },
-  {
     "ReportKey": "NewCashOutWinLoss",
     "MinDateString": "",
     "MaxDateString": "today",
