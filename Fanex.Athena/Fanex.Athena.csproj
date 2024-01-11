@@ -367,9 +367,6 @@
     <Content Include="App_Data\UserGuide\ExchangeWinLoss\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\ExchangeWinLoss\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\ExchangeWinLoss\en-US.htm" />
-    <Content Include="App_Data\UserGuide\ExtraPayout\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\ExtraPayout\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\ExtraPayout\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\Forecast1x2\id-ID.htm" />
     <Content Include="App_Data\UserGuide\Forecast1x2\th-TH.htm" />
     <Content Include="App_Data\UserGuide\Forecast1x2\vi-VN.htm" />
@@ -485,8 +482,6 @@
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\GodOfFortuneWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\GodOfFortuneWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\ExtraPayout\en-US.htm" />
-    <Content Include="App_Data\UserGuide\ExtraPayout\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\en-US.htm" />
@@ -702,14 +697,12 @@
     <Content Include="Views\Desktop\Report\LeagueWinLoss\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\BitCoin.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Index.cshtml" />
-    <Content Include="Views\Desktop\Report\ExtraPayout\Main.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\SportsLottery.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSettingPolicy.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSpreadSettingPolicy.xls" />
     <Content Include="App_Data\Template\Notification\Resettlement\TicketListing.xls" />
     <Content Include="Views\Desktop\Report\NewCashOutWinLoss\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\ExtraPayout\Detail.cshtml" />
     <Content Include="Views\Desktop\Module\LicenseeContact\Index.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\VirtualSports3.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Popup\Main.cshtml" />
