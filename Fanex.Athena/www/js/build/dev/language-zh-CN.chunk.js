@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/3/2024 4:34:13 PM
+﻿// Generated at: 1/11/2024 3:15:43 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -789,7 +789,7 @@ ProductYB:"亿博",
 Promotion:"促销活动",
 PromotionDetails:"活动详情",
 PromotionPrize:"活动奖金",
-PromotionType:"基础货币",
+PromotionType:"活动类型",
 RB:"赛马",
 ReachedDate:"到达警示值日期",
 RealName:"真实姓名",
