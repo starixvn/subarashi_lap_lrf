@@ -141,7 +141,6 @@
     <Compile Include="ExchangeWinLossReportController.cs" />
     <Compile Include="AbnormalBetReportController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="ExtraPayoutReportController.cs" />
     <Compile Include="GrossGamingRevenueReportController.cs" />
     <Compile Include="NewCashOutWinLossReportController.cs" />
     <Compile Include="LeagueWinLossReportController.cs" />
