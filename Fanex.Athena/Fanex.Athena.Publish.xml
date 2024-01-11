@@ -148,7 +148,6 @@
     <file relUrl="img/Slot/bak/Line18.png" publishTime="01/14/2015 16:16:51" />
     <file relUrl="Scripts/Report/customerturnover.option.js" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot8/Slot8/S8003/B_01.jpg" publishTime="01/14/2015 16:16:51" />
-    <file relUrl="Views/Report/SettledMatchCount/ContentData.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0023/Line12.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/Slot/S0031/Line_bak/Line23.png" publishTime="01/14/2015 16:16:51" />
     <file relUrl="img/Slot/S0016/03.jpg" publishTime="01/14/2015 14:45:45" />
@@ -248,7 +247,6 @@
     <file relUrl="img/Slot/S0010/Line11.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/Slot/S0005/D3.jpg" publishTime="01/14/2015 14:45:44" />
     <file relUrl="img/Slot/S0010/03.jpg" publishTime="01/14/2015 14:45:44" />
-    <file relUrl="Views/Report/CustomerBalance/Content.Data.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot8/S8005/06.jpg" publishTime="01/14/2015 14:45:46" />
     <file relUrl="Content/Global/Images/shadow.png" publishTime="12/31/2014 10:55:23" />
     <file relUrl="Content/Report/racingcommission.css" publishTime="12/31/2014 10:55:23" />
@@ -386,7 +384,6 @@
     <file relUrl="img/Slot/S0019/W1.jpg" publishTime="01/14/2015 14:45:46" />
     <file relUrl="Content/Global/Images/expand.png" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot/S0005/C5.jpg" publishTime="01/14/2015 14:45:44" />
-    <file relUrl="Views/Report/CustomerBalance/Content.Total.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="Content/Themes/12Bet/Site.css" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot/S0022/Line21.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Content/Themes/12Bet/Images/toggler_icon.jpg" publishTime="12/31/2014 10:55:23" />
@@ -523,7 +520,6 @@
     <file relUrl="img/Slot/S0022/Line20.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Content/Layout/images/Firefox.png" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot/S0018/Line2.png" publishTime="01/14/2015 16:16:50" />
-    <file relUrl="App_Data/UserGuide/CustomerBalance/en-US.htm" publishTime="01/14/2015 16:12:17" />
     <file relUrl="img/Slot/S0012/W1.jpg" publishTime="01/14/2015 14:45:45" />
     <file relUrl="img/Slot/S0019/01.jpg" publishTime="01/14/2015 14:45:45" />
     <file relUrl="img/Slot/S0008/Line2.png" publishTime="01/14/2015 16:16:50" />
@@ -1152,7 +1148,6 @@
     <file relUrl="Content/Themes/12Bet/Images/btn_logout.png" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot/S0025/Line21.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="bin/NetUtility.dll" publishTime="01/14/2015 16:12:26" />
-    <file relUrl="App_Data/UserGuide/SettledMatchCount/en-US.htm" publishTime="01/14/2015 16:12:17" />
     <file relUrl="img/Poker2/C1.jpg" publishTime="01/14/2015 16:16:49" />
     <file relUrl="Views/TotalBets/FirstGoalLastGoal/ContentHeader.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Bingo/Ball/26.jpg" publishTime="01/14/2015 14:45:39" />
@@ -1216,7 +1211,6 @@
     <file relUrl="img/Live/B0001/14.jpg" publishTime="01/14/2015 14:45:40" />
     <file relUrl="App_Data/UserGuide/RacingCommission/zh-TW.htm" publishTime="01/14/2015 16:12:17" />
     <file relUrl="img/Slot/bak/Taizen_J.jpg" publishTime="01/14/2015 16:16:51" />
-    <file relUrl="Views/Shared/_ReportLayout.SettledMatchCount.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="Content/Library/start/images/ui-bg_inset-hard_100_fcfdfd_1x100.png" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot/S0023/Line11.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/PokerWheel/H7.jpg" publishTime="01/14/2015 14:45:43" />
@@ -1578,7 +1572,6 @@
     <file relUrl="img/Slot/S0012/F.jpg" publishTime="01/14/2015 14:45:45" />
     <file relUrl="img/Slot/S0016/F1.jpg" publishTime="01/14/2015 14:45:45" />
     <file relUrl="img/Slot8/Slot8/S8005/TattooArt_03.jpg" publishTime="01/14/2015 16:16:51" />
-    <file relUrl="Views/Report/CustomerBalance/Content.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="bin/RSACryptoPad.dll" publishTime="12/31/2014 10:55:38" />
     <file relUrl="Views/Report/DailyRacingWinLoss/12Bet/Content.GrandTotal.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0023/06.jpg" publishTime="01/14/2015 16:16:50" />
@@ -1779,7 +1772,6 @@
     <file relUrl="img/Poker/GR.jpg" publishTime="01/14/2015 14:45:43" />
     <file relUrl="img/Slot/S0004/Line4.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/Slot/S0022/Line3.png" publishTime="01/14/2015 16:16:50" />
-    <file relUrl="Views/Note/CustomerBalance.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0017/Line8.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/Slot/S0017/Line20.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Views/Note/Warehouse.cshtml" publishTime="12/31/2014 10:55:24" />
@@ -1907,7 +1899,6 @@
     <file relUrl="img/Slot8/S8005/TattooArt_01.jpg" publishTime="01/14/2015 14:45:46" />
     <file relUrl="img/Bingo/Ball/10.jpg" publishTime="01/14/2015 14:45:39" />
     <file relUrl="img/Scratch/RH012/30.jpg" publishTime="01/14/2015 14:45:43" />
-    <file relUrl="Views/Report/SettledMatchCount/Main.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0009/Line12.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Content/Themes/12Bet/images/icon_search.png" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot/S0015/Line9.png" publishTime="01/14/2015 16:16:50" />
@@ -2019,7 +2010,6 @@
     <file relUrl="bin/CasinoSetting.dll" publishTime="01/14/2015 16:16:48" />
     <file relUrl="img/Slot/Taizen_H.jpg" publishTime="01/14/2015 14:45:46" />
     <file relUrl="App_Data/UserGuide/CommissionGroupList/en-US.htm" publishTime="01/14/2015 16:12:17" />
-    <file relUrl="Content/Report/settledmatchcount.css" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Poker2/H5.jpg" publishTime="01/14/2015 16:16:49" />
     <file relUrl="Views/Report/CustomerTurnover/Main.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="App_Data/UserGuide/TotalBetsHomeDrawAwayNoBet/en-US.htm" publishTime="01/14/2015 16:12:17" />
@@ -2036,7 +2026,6 @@
     <file relUrl="img/MultiWheelRoulette/7.jpg" publishTime="01/14/2015 16:16:49" />
     <file relUrl="img/Slot/S0005/Fruit_01_05.jpg" publishTime="01/14/2015 14:45:44" />
     <file relUrl="img/Scratch/RH001/50.jpg" publishTime="01/14/2015 14:45:43" />
-    <file relUrl="Views/Note/SettledMatchCount.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0024/08.jpg" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Scripts/Plugin/MultiSelect/jquery.multiselect.nlevel.js" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0002/35.jpg" publishTime="01/14/2015 14:45:44" />
@@ -2044,7 +2033,6 @@
     <file relUrl="img/Slot/Taizen_B.jpg" publishTime="01/14/2015 14:45:46" />
     <file relUrl="App_Data/Template/CustomerReports/CustomerTurnover.xls" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot/S0023/Line9.png" publishTime="01/14/2015 16:16:50" />
-    <file relUrl="Views/Report/SettledMatchCount/ContentHeader.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="App_Data/SpNameConfig/FanexSpName.xml1.txt" publishTime="01/14/2015 16:12:17" />
     <file relUrl="Views/Customer/CustomerLog/Action/2609.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0010/Line17.png" publishTime="01/14/2015 16:16:50" />
@@ -2361,7 +2349,6 @@
     <file relUrl="img/Slot/S0002/0.jpg" publishTime="01/14/2015 14:45:44" />
     <file relUrl="img/Slot/S0012/Line23.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/Slot/S0009/Winter_G.jpg" publishTime="01/14/2015 14:45:44" />
-    <file relUrl="Views/Report/CustomerBalance/Content.Header.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0007/old image backup/40x40/FiveFox_01.jpg" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/Live/B0001/73.jpg" publishTime="01/14/2015 14:45:41" />
     <file relUrl="img/Slot/S0016/05.jpg" publishTime="01/14/2015 14:45:45" />
@@ -2544,7 +2531,6 @@
     <file relUrl="img/Scratch/RH010/30.jpg" publishTime="01/14/2015 14:45:43" />
     <file relUrl="App_Code/SplitingProductHelper.cshtml" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Poker2/DQ.jpg" publishTime="01/14/2015 16:16:49" />
-    <file relUrl="Scripts/Report/customerbalance.js" publishTime="12/31/2014 10:55:24" />
     <file relUrl="App_Data/UserGuide/MobileWL/zh-TW.htm" publishTime="01/14/2015 16:12:17" />
     <file relUrl="img/Slot/S0016/C.jpg" publishTime="01/14/2015 14:45:45" />
     <file relUrl="Views/Customer/CustomerLog/Menu.cshtml" publishTime="01/14/2015 16:12:17" />
@@ -2557,7 +2543,6 @@
     <file relUrl="Views/UserGuide/Index.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0011/04.jpg" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Content/Global/Images/ui-icons-over.png" publishTime="12/31/2014 10:55:23" />
-    <file relUrl="App_Data/UserGuide/SettledMatchCount/zh-CN.htm" publishTime="12/31/2014 10:55:23" />
     <file relUrl="SiteConfig/Web.config.txt" publishTime="01/14/2015 15:23:27" />
     <file relUrl="Content/Customer/customerlist.css" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Bingo/Ball/35.jpg" publishTime="01/14/2015 14:45:39" />
@@ -2602,7 +2587,6 @@
     <file relUrl="img/Slot/S0014/Line14.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Views/_ViewStart.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/S0008/Line1.png" publishTime="01/14/2015 16:16:50" />
-    <file relUrl="App_Data/UserGuide/SettledMatchCount/zh-TW.htm" publishTime="12/31/2014 10:55:23" />
     <file relUrl="Content/Customer/images/viewcustomerlist.png" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot/S0006/Classic_B_03.jpg" publishTime="01/14/2015 14:45:44" />
     <file relUrl="Content/Utility/images/index_fotbg.gif" publishTime="12/31/2014 10:55:23" />
@@ -2721,7 +2705,6 @@
     <file relUrl="Scripts/Customer/CustomerComm/updategroup.js" publishTime="12/31/2014 10:55:23" />
     <file relUrl="Content/Plugin/MonthPickr/monpickr.css" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Slot8/Slot8/S8006/01.jpg" publishTime="01/14/2015 16:16:51" />
-    <file relUrl="App_Data/UserGuide/CustomerBalance/zh-CN.htm" publishTime="01/14/2015 16:12:17" />
     <file relUrl="Content/Themes/12Bet/images/new_icon.gif" publishTime="12/31/2014 10:55:23" />
     <file relUrl="App_Data/UserGuide/TotalBetsRacing/en-US.htm" publishTime="01/14/2015 16:12:17" />
     <file relUrl="img/Slot3/S0013/Champions_08.jpg" publishTime="01/14/2015 14:45:46" />
@@ -2874,7 +2857,6 @@
     <file relUrl="img/Live/B0001/25.jpg" publishTime="01/14/2015 14:45:40" />
     <file relUrl="img/Slot/S0026/Line2.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Content/Plugin/MultiSelect/images/sprites.png" publishTime="12/31/2014 10:55:23" />
-    <file relUrl="Views/Report/CustomerBalance/Filter.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Wheel/C50.jpg" publishTime="01/14/2015 14:45:47" />
     <file relUrl="img/Slot/S0002/22.jpg" publishTime="01/14/2015 14:45:44" />
     <file relUrl="img/Slot/S0008/JourneyWest_02.jpg" publishTime="01/14/2015 14:45:44" />
@@ -2913,7 +2895,6 @@
     <file relUrl="img/Slot/S0007/Line25.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/Live/B0001/36.jpg" publishTime="01/14/2015 14:45:41" />
     <file relUrl="img/Slot/S0008/blank.jpg" publishTime="01/14/2015 14:45:44" />
-    <file relUrl="Views/Report/CustomerBalance/Main.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="Scripts/Plugin/Calendar/lang/jp.js" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Live/B0001/38.jpg" publishTime="01/14/2015 14:45:41" />
     <file relUrl="Content/Utility/images/emsg_3_3.gif" publishTime="12/31/2014 10:55:23" />
@@ -3235,7 +3216,6 @@
     <file relUrl="img/Slot/S0002/S8.jpg" publishTime="01/14/2015 14:45:44" />
     <file relUrl="img/Slot/S0005/H9.jpg" publishTime="01/14/2015 14:45:44" />
     <file relUrl="img/Slot/S0016/Line22.png" publishTime="01/14/2015 16:16:50" />
-    <file relUrl="App_Data/UserGuide/CustomerBalance/zh-TW.htm" publishTime="01/14/2015 16:12:17" />
     <file relUrl="img/Slot/S0031/Line11.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="Views/Customer/CustomerLog/Action/2201.cshtml" publishTime="12/31/2014 10:55:24" />
     <file relUrl="img/Slot/bak/Line19.png" publishTime="01/14/2015 16:16:51" />
@@ -3345,7 +3325,6 @@
     <file relUrl="img/Slot/S0016/Line8.png" publishTime="01/14/2015 16:16:50" />
     <file relUrl="img/PokerWheel/C7.jpg" publishTime="01/14/2015 14:45:43" />
     <file relUrl="img/Slot/S0007/FiveFox_05.jpg" publishTime="01/14/2015 16:16:50" />
-    <file relUrl="App_Data/Template/CustomerReports/CustomerBalance.xls" publishTime="12/31/2014 10:55:23" />
     <file relUrl="img/Bingo/Ball/07.jpg" publishTime="01/14/2015 14:45:39" />
     <file relUrl="bin/Enyim.Caching.dll" publishTime="12/31/2014 10:55:37" />
     <file relUrl="img/Slot/S0014/blank.jpg" publishTime="01/14/2015 14:45:45" />

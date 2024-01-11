@@ -3040,15 +3040,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entered.
-        /// </summary>
-        public static string Entered {
-            get {
-                return ResourceManager.GetString("Entered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
@@ -3567,33 +3558,6 @@ namespace Fanex.Athena.Resources {
         public static string GetAll {
             get {
                 return ResourceManager.GetString("GetAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Only show customers having closing balance &gt; 0.
-        /// </summary>
-        public static string GetAllCustomersHavingPositiveClosingBalance {
-            get {
-                return ResourceManager.GetString("GetAllCustomersHavingPositiveClosingBalance", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Get all customers having running tickets.
-        /// </summary>
-        public static string GetAllCustomersHavingRunningTickets {
-            get {
-                return ResourceManager.GetString("GetAllCustomersHavingRunningTickets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Get all running tickets.
-        /// </summary>
-        public static string GetAllRunningTickets {
-            get {
-                return ResourceManager.GetString("GetAllRunningTickets", resourceCulture);
             }
         }
         
@@ -5893,15 +5857,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non-Entered.
-        /// </summary>
-        public static string NonEntered {
-            get {
-                return ResourceManager.GetString("NonEntered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No. of Customer.
         /// </summary>
         public static string NoOfCustmer {
@@ -8071,15 +8026,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settled Match Count.
-        /// </summary>
-        public static string SettledMatchCount {
-            get {
-                return ResourceManager.GetString("SettledMatchCount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Settled Report.
         /// </summary>
         public static string SettledOnlyReport {
@@ -8409,15 +8355,6 @@ namespace Fanex.Athena.Resources {
         public static string Sunday {
             get {
                 return ResourceManager.GetString("Sunday", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Support Task.
-        /// </summary>
-        public static string SupportTask {
-            get {
-                return ResourceManager.GetString("SupportTask", resourceCulture);
             }
         }
         
@@ -9975,15 +9912,6 @@ namespace Fanex.Athena.Resources {
         public static string Weekly {
             get {
                 return ResourceManager.GetString("Weekly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Weekly Live Matches.
-        /// </summary>
-        public static string WeeklyLiveMatches {
-            get {
-                return ResourceManager.GetString("WeeklyLiveMatches", resourceCulture);
             }
         }
         

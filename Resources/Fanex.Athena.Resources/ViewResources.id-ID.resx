@@ -1029,9 +1029,7 @@
   <data name="EndDate" xml:space="preserve">
     <value>Tanggal Berakhir</value>
   </data>
-  <data name="Entered" xml:space="preserve">
-    <value>Masuk</value>
-  </data>
+
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -1199,15 +1197,6 @@
   </data>
   <data name="GetAll" xml:space="preserve">
     <value>Dapatkan Semua</value>
-  </data>
-  <data name="GetAllCustomersHavingPositiveClosingBalance" xml:space="preserve">
-    <value>Hanya tampilkan pelanggan dengan saldo penutupan &gt; 0</value>
-  </data>
-  <data name="GetAllCustomersHavingRunningTickets" xml:space="preserve">
-    <value>Dapatkan semua pelanggan yang memiliki tiket berjalan</value>
-  </data>
-  <data name="GetAllRunningTickets" xml:space="preserve">
-    <value>Dapatkan semua tiket yang sedang berjalan</value>
   </data>
   <data name="GodOfFortuneWinLoss" xml:space="preserve">
     <value>Kemenangan dan Kerugian Dewa Keberuntungan</value>
@@ -1935,9 +1924,6 @@
   <data name="NoneLive" xml:space="preserve">
     <value>Non-Live</value>
   </data>
-  <data name="NonEntered" xml:space="preserve">
-    <value>Belum Dimasukkan</value>
-  </data>
   <data name="NoOfCustmer" xml:space="preserve">
     <value>Jumlah Pelanggan</value>
   </data>
@@ -2559,9 +2545,6 @@
   <data name="SettledDateOnly" xml:space="preserve">
     <value>Tanggal Diselesaikan</value>
   </data>
-  <data name="SettledMatchCount" xml:space="preserve">
-    <value>Jumlah Pertandingan yang Diselesaikan</value>
-  </data>
   <data name="SettledOnlyReport" xml:space="preserve">
     <value>Laporan Diselesaikan</value>
   </data>
@@ -2666,9 +2649,6 @@
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>Minggu</value>
-  </data>
-  <data name="SupportTask" xml:space="preserve">
-    <value>Tugas Dukungan</value>
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>Ditangguhkan</value>
@@ -3164,9 +3144,6 @@
   </data>
   <data name="Weekly" xml:space="preserve">
     <value>Mingguan</value>
-  </data>
-  <data name="WeeklyLiveMatches" xml:space="preserve">
-    <value>Pertandingan Langsung Mingguan</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Selamat Datang</value>

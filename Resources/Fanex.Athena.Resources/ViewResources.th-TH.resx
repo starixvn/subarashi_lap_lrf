@@ -1050,9 +1050,6 @@
   <data name="EndDate" xml:space="preserve">
     <value>วันที่สิ้นสุด</value>
   </data>
-  <data name="Entered" xml:space="preserve">
-    <value>ป้อน</value>
-  </data>
   <data name="Error" xml:space="preserve">
     <value>ข้อผิดพลาด</value>
   </data>
@@ -1220,15 +1217,6 @@
   </data>
   <data name="GetAll" xml:space="preserve">
     <value>รับทั้งหมด</value>
-  </data>
-  <data name="GetAllCustomersHavingPositiveClosingBalance" xml:space="preserve">
-    <value>แสดงเฉพาะลูกค้าที่มียอดปิด &gt; 0</value>
-  </data>
-  <data name="GetAllCustomersHavingRunningTickets" xml:space="preserve">
-    <value>รับตั๋วแข่งขันทั้งหมดของลูกค้า</value>
-  </data>
-  <data name="GetAllRunningTickets" xml:space="preserve">
-    <value>รับตั๋วแข่งขันทั้งหมด</value>
   </data>
   <data name="Go" xml:space="preserve">
     <value>ไป</value>
@@ -1971,9 +1959,6 @@
   <data name="NoneLive" xml:space="preserve">
     <value>ไม่แทงบอลสด</value>
   </data>
-  <data name="NonEntered" xml:space="preserve">
-    <value>ไม่ป้อน</value>
-  </data>
   <data name="NoOfCustmer" xml:space="preserve">
     <value>จำนวนลูกค้า</value>
   </data>
@@ -2616,9 +2601,6 @@
   <data name="SettledDateOnly" xml:space="preserve">
     <value>วันที่ตั้งต้น</value>
   </data>
-  <data name="SettledMatchCount" xml:space="preserve">
-    <value>นับการตัดสินการแข่งขัน</value>
-  </data>
   <data name="SettledOnlyReport" xml:space="preserve">
     <value>รายงานการตัดสิน</value>
   </data>
@@ -2723,9 +2705,6 @@
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>วันอาทิตย์</value>
-  </data>
-  <data name="SupportTask" xml:space="preserve">
-    <value>งานสนับสนุน</value>
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>ถูกระงับ</value>
@@ -3221,9 +3200,6 @@
   </data>
   <data name="Weekly" xml:space="preserve">
     <value>สัปดาห์ละครั้ง</value>
-  </data>
-  <data name="WeeklyLiveMatches" xml:space="preserve">
-    <value>การแข่งขันแทงบอลสดประจำสัปดาห์</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>ยินดีต้อนรับ</value>

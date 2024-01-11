@@ -68,7 +68,6 @@ function generateConfig(environment) {
             [`${jsPath}/pages/customer/sabavirtualsettinginformation`]: [pathConfig.scriptPaths.sabavirtualsettinginformation],
 
             [`${jsPath}/pages/reports/agcasinowinloss`]: [pathConfig.scriptPaths.agcasinowinloss],
-            [`${jsPath}/pages/reports/customerbalance`]: [pathConfig.scriptPaths.customerbalance],
             [`${jsPath}/pages/reports/customerpendingfunds`]: [pathConfig.scriptPaths.customerpendingfunds],
             [`${jsPath}/pages/reports/customerturnover`]: [pathConfig.scriptPaths.customerturnover],
             [`${jsPath}/pages/reports/customerwinloss`]: [pathConfig.scriptPaths.customerwinloss],
@@ -107,7 +106,6 @@ function generateConfig(environment) {
             [`${cssPath}/pages/customer/customerlog`]: pathConfig.cssPaths.customerlog,
             [`${cssPath}/pages/utility/licenseelist`]: pathConfig.cssPaths.licenseelist,
             [`${cssPath}/pages/reports/agcasinowinloss`]: pathConfig.cssPaths.agcasinowinloss,
-            [`${cssPath}/pages/reports/customerbalance`]: pathConfig.cssPaths.customerbalance,
             [`${cssPath}/pages/reports/customerpendingfunds`]: pathConfig.cssPaths.customerpendingfunds,
             [`${cssPath}/pages/reports/customerturnover`]: pathConfig.cssPaths.customerturnover,
             [`${cssPath}/pages/reports/customerwinloss`]: pathConfig.cssPaths.customerwinloss,

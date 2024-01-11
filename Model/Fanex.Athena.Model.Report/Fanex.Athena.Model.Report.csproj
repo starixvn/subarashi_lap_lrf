@@ -163,7 +163,6 @@
     <Compile Include="MetaModel\LiveReportMatchListMetalModel.cs" />
     <Compile Include="MetaModel\ResultPopupMetalModel.cs" />
     <Compile Include="MetaModel\WinLossByProductMetaModel.cs" />
-    <Compile Include="MetaModel\CustomerBalanceMetaModel.cs" />
     <Compile Include="MetaModel\CustomerPendingFundsMetaModel.cs" />
     <Compile Include="MetaModel\CustomerTurnoverMetaModel.cs" />
     <Compile Include="MetaModel\CustomerWinlossMetaModel.cs" />
@@ -201,7 +200,6 @@
     <Compile Include="ViewModel\LicenseeWinLossGridViewModel.cs" />
     <Compile Include="ViewModel\WinlossAnalysisReportViewModel.cs" />
     <Compile Include="ViewModel\WinLossByProductViewModel.cs" />
-    <Compile Include="ViewModel\CustomerBalanceViewModel.cs" />
     <Compile Include="ViewModel\CustomerPendingFundsViewModel.cs" />
     <Compile Include="ViewModel\CustomerTurnoverViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossViewModel.cs" />

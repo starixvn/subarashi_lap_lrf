@@ -45,7 +45,6 @@ var cssPaths = {
     customerlog: ["./www/css/source/pages/customer/customerlog.scss"],
     licenseelist: ["./www/css/source/pages/utility/licenseelist.scss"],
     agcasinowinloss: ["./www/css/source/pages/report/agcasinowinloss.scss"],
-    customerbalance: ["./www/css/source/pages/report/customerbalance.scss"],
     customerpendingfunds: ["./www/css/source/pages/report/customerpendingfunds.scss"],
     customerturnover: ["./www/css/source/pages/report/customerturnover.scss"],
     customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"],
@@ -109,7 +108,6 @@ var scriptPaths = {
     sabavirtualsettinginformation: "./www/js/source/pages/customer/sabavirtualsettinginformation/main.js",
 
     agcasinowinloss: "./www/js/source/pages/report/agcasinowinloss/main.js",
-    customerbalance: "./www/js/source/pages/report/customerbalance/main.js",
     customerpendingfunds: "./www/js/source/pages/report/customerpendingfunds/main.js",
     customerturnover: "./www/js/source/pages/report/customerturnover/main.js",
     customerwinloss: "./www/js/source/pages/report/customerwinloss/main.js"
