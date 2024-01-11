@@ -59,6 +59,18 @@
                    routeTemplate: "WeeklyLiveMatchReport/{*url}",
                    new { Controller = "Proxy", Action = "ReportViews", report = "WeeklyLiveMatch", url = "Index" });
             weeklyLiveMatchReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var customerBalanceReportRoute = routes.MapHttpRoute(
+                name: "customerBalanceReportRoute",
+                routeTemplate: "customerBalanceReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerBalance", url = "Index" });
+            customerBalanceReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var customerSupportTaskReportRoute = routes.MapHttpRoute(
+                name: "customerSupportTaskReportRoute",
+                routeTemplate: "CustomerSupportTaskReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerSupportTask", url = "Index" });
+            customerSupportTaskReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
     }
 }
