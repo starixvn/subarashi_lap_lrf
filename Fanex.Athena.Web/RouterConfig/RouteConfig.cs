@@ -71,6 +71,14 @@
                 routeTemplate: "CustomerSupportTaskReport/{*url}",
                 new { Controller = "Proxy", Action = "ReportViews", report = "CustomerSupportTask", url = "Index" });
             customerSupportTaskReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var extraPayoutReportRoute = routes.MapHttpRoute(
+                name: "extraPayoutReportRoute",
+                routeTemplate: "ExtraPayoutReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "ExtraPayout", url = "Index" });
+            extraPayoutReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+
         }
     }
 }
