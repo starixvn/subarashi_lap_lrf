@@ -114,6 +114,7 @@ export const renderDetailHeader = () => {
             <HeaderCell colWidth={60}>#</HeaderCell>
             <HeaderCell colWidth={140}>{headerText.date}</HeaderCell>
             <HeaderCell colWidth={230}>{headerText.refno}</HeaderCell>
+            <HeaderCell colWidth={230} title={LangHelper.getSingleResource('ExtraPayoutBetIDTooltip')}>{headerText.betID}[i]</HeaderCell>
             <HeaderCell colWidth={220}>{headerText.product}</HeaderCell>
             <HeaderCell colWidth={290}>{headerText.promotionType}</HeaderCell>
             <HeaderCell colWidth={170}>{headerText.turnover}</HeaderCell>
@@ -133,13 +134,14 @@ export const renderDetailDataSection = (dataList) => {
 }
 
 const buildDetailDataRow = (dataItem, index) => {
-    const { dateString, productName, turnover, amount, sharingAmount, refno, promotionName, productCode} = dataItem;
+    const { dateString, productName, turnover, amount, sharingAmount, refno, promotionName, productCode, betID} = dataItem;
 
     return (
         <Row key={`row-${uuidv4()}`}>
             <Cell className="center-align">{++index}</Cell>            
             <Cell className="center-align">{dateString}</Cell>
             <Cell className="center-align">{refno}</Cell>
+            <Cell className="center-align">{betID}</Cell>
             <Cell className="left-align">{productName}</Cell>
             <Cell className="left-align">{promotionName}</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>        
@@ -151,7 +153,7 @@ const buildDetailDataRow = (dataItem, index) => {
 
 export const renderDetailFooter = (data) => {
     const dataSummary = data.totalSummary;
-    const summaryColSpan = 5;
+    const summaryColSpan = 6;
 
     return (
         <Row key={`tr-grandtotal`} className='fixed-table-total'>

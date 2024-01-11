@@ -3698,4 +3698,7 @@
   <data name="Platform_5" xml:space="preserve">
     <value>DirectAPI</value>
   </data>
+  <data name="ExtraPayoutBetIDTooltip" xml:space="preserve">
+    <value>Data is available only for Sportsbook Promotion - Saba Reward Risk-free Rebate</value>
+  </data>
 </root>

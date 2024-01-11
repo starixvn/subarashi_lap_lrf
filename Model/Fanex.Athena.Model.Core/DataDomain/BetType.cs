@@ -317,6 +317,8 @@
 
         VirtualSportCorrectScoreTennis = 1235,
 
-        SabaCasinoRoyaleTournamentPrize = 17006
+        SabaCasinoRoyaleTournamentPrize = 17006,
+
+        SabaRewardRiskFreeRebate = 17007
     }
 }

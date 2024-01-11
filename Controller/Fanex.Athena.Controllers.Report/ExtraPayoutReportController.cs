@@ -190,6 +190,8 @@ namespace Fanex.Athena.Controllers.Report
                         Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int)BetType.SabaLuckySpin)}", Checked = true },
                     new CheckedItem { ID = ExtraPayoutMapType.SabaLoyaltyPointsExchange,
                         Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int)BetType.SabaLoyaltyPointsExchange)}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.SabaRewardRiskFreeRebate,
+                        Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.SabaRewardRiskFreeRebate)}", Checked = true },
                     new CheckedItem { ID = ExtraPayoutMapType.SabaRedEnvelope,
                         Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.SabaRedEnvelope)}", Checked = true },
                     new CheckedItem { ID = ExtraPayoutMapType.SabaCasinoRoyaleTournamentPrize,
