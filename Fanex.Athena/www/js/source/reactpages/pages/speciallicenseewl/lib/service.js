@@ -8,6 +8,7 @@ export const HeaderText = {
     currency: LangHelper.getSingleResource('Currency'),
     turnover: LangHelper.getSingleResource('Turnover'),
     totalTransaction: LangHelper.getSingleResource('TotalTransaction'),
+    payout: LangHelper.getSingleResource('Payout'),
     customer: LangHelper.getSingleResource('CustomerW_L'),
     licenseeWL: LangHelper.getSingleResource('LicenseeW_L'),
     total: LangHelper.getSingleResource('Total'),

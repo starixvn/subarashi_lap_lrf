@@ -58,7 +58,8 @@ namespace Fanex.Athena.Controllers.Report
                 }).ToList(),
                 TodayByGmt8 = today,
                 MinDate = minDate,
-                IsAllowRefNo = string.Equals(siteName, "IvoryBet", StringComparison.InvariantCultureIgnoreCase)
+                IsAllowRefNo = string.Equals(siteName, "IvoryBet", StringComparison.InvariantCultureIgnoreCase),
+                IsShowPayout = string.Equals(siteName, "12B", StringComparison.InvariantCultureIgnoreCase)
             };
 
             return View("~/Views/Desktop/Report/DailyBets/Index.cshtml", viewModel);

@@ -31,5 +31,9 @@ namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
         public string CurencyCode { get; set; }
 
         public string TransTimeString => TransTime.ToString("yyyy-MM-dd hh:mm:ss tt");
+
+        public decimal Payout => Turnover + WinLoss;
+
+        public decimal PayoutBased => TurnoverBased + WinLossBased;
     }
 }

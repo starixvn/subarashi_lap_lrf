@@ -1104,11 +1104,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/gridUtils */ "./www/js/source/reactpages/pages/dailybets/lib/gridUtils.js");
 /* harmony import */ var _jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/components/NoDataTitle */ "./www/js/source/reactpages/components/NoDataTitle.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -1146,13 +1148,16 @@ const DataGrid = props => {
     pagingOption,
     requestParam
   } = props;
+  const dataOptions = {
+    isShowPayout: _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_7__["default"].isShowPayout
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
     minWidth: 650,
     autoWidth: true,
     autoHeight: true,
-    header: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderHeader"])(),
-    body: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])(dataList),
-    footer: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])([total], true),
+    header: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderHeader"])(dataOptions),
+    body: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])(dataList, false, dataOptions),
+    footer: Object(_lib_gridUtils__WEBPACK_IMPORTED_MODULE_5__["renderDataSection"])([total], true, dataOptions),
     containerPadding: 30,
     onSort: (sortBy, sortOrder) => props.setRequestParam(_objectSpread(_objectSpread({}, requestParam), {}, {
       sortBy,
@@ -1556,8 +1561,10 @@ const headerText = {
   product: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Product'),
   betType: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('BetType'),
   turnover: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Turnover'),
+  payout: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Payout'),
   winloss: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('WinLoss'),
   turnoverBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Turnover')} (USD)`,
+  payoutBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Payout')} (USD)`,
   winlossBased: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('WinLoss')} (USD)`,
   status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Status'),
   sport: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Sport')
@@ -1642,7 +1649,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const renderHeader = () => {
+const renderHeader = dataOptions => {
+  const {
+    isShowPayout
+  } = dataOptions;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderRow"], {
     style: {
       height: 32
@@ -1666,30 +1676,36 @@ const renderHeader = () => {
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].betType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 80,
     sortBy: 'turnover'
-  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].turnover), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].turnover), isShowPayout && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    colWidth: 80,
+    sortBy: 'payout'
+  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].payout), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 80,
     sortBy: 'winLoss'
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].winloss), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 80,
     sortBy: 'turnoverBased'
-  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].turnoverBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].turnoverBased), isShowPayout && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
+    colWidth: 80,
+    sortBy: 'payoutBased'
+  }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].payoutBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 80,
     sortBy: 'winLossBased'
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].winlossBased), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["HeaderCell"], {
     colWidth: 50
   }, _constants__WEBPACK_IMPORTED_MODULE_2__["headerText"].status));
 };
-const renderDataSection = (dataList, isTotalRow) => {
+const renderDataSection = (dataList, isTotalRow, dataOptions) => {
   if (isTotalRow) {
-    return buildTotalRow(dataList[0]);
+    return buildTotalRow(dataList[0], dataOptions);
   }
   const dataRows = [];
   for (let i = 0; i < dataList.length; i++) {
-    dataRows.push(buildDataRow(dataList[i]));
+    dataRows.push(buildDataRow(dataList[i], dataOptions));
   }
   return dataRows;
 };
-const buildDataRow = dataItem => {
+const buildDataRow = (dataItem, dataOptions) => {
   const {
     index,
     playerName,
@@ -1703,8 +1719,13 @@ const buildDataRow = dataItem => {
     turnoverBased,
     winLossBased,
     status,
-    sportName
+    sportName,
+    payout,
+    payoutBased
   } = dataItem;
+  const {
+    isShowPayout
+  } = dataOptions;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
     key: index
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
@@ -1717,29 +1738,39 @@ const buildDataRow = dataItem => {
     className: "center-align"
   }, transTimeString), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], null, productName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], null, sportName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], null, betType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(turnover)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(turnover)), isShowPayout && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+    className: "right-align"
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(payout)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(winLoss)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(turnoverBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(turnoverBased)), isShowPayout && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+    className: "right-align"
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(payoutBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(winLossBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "center-align"
   }, status));
 };
-const buildTotalRow = dataItem => {
+const buildTotalRow = (dataItem, dataOptions) => {
   const {
     turnoverBased,
+    payoutBased,
     winLossBased
   } = dataItem;
+  const {
+    isShowPayout
+  } = dataOptions;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Row"], {
     key: "totalRowUSD"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align",
-    colSpan: "10"
+    colSpan: "11"
   }, "Total In USD"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
-  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(turnoverBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(turnoverBased)), isShowPayout && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
+    className: "right-align"
+  }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(payoutBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], {
     className: "right-align"
   }, _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_3__["default"].formatDecimal(winLossBased)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], null));
 };
