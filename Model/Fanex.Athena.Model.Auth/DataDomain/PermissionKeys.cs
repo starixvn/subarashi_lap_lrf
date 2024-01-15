@@ -105,8 +105,9 @@
         /*Contacts*/
         public const string LicenseeContacts = "LicenseeContacts";
 
-        /*Report's Data Control( Impact Turnover report only)*/
+        /*Report's Data Control*/
         public const string HidePlayerWL_WL_Comm_Total = "HidePlayerWL_WL_Comm_Total";
+        public const string DisplayPlayerTips_ExtraPayoutReportOnly = "DisplayPlayerTips_ExtraPayoutReportOnly";
 
         /*Customer Administration*/
         public const string PlayerReport = "PlayerReport";

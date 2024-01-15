@@ -8,6 +8,7 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Configuration;
+    using Fanex.Athena.Service.Core.Users;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.VendorAdapter.Interfaces;
@@ -22,6 +23,7 @@
         private IReportSettingService _reportSettingService;
         private ICacheRefAdapter _cacheRefAdapter;
         private ISubsidiaryService _subsidiaryService;
+        private IAuthorizationService _authService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -30,6 +32,7 @@
             _reportSettingService = Substitute.For<IReportSettingService>();
             _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
+            _authService = Substitute.For<IAuthorizationService>();
             SetUpDefaultFakeData();
             StubUserSessionData(new UserAuthInfo { CurrencyAgentList = new Dictionary<int, int[]>(), CurrencyList = new Dictionary<int, string>() });
         }
@@ -109,10 +112,10 @@
 
             _reportSettingService.GetSetting(PermissionKeys.ReportExtraPayout, SessionService.LicenseeSession.LicenseeName).
                 Returns(reportSetting);
-
+            _authService.HasPermissions(SessionService.UserSession, PermissionKeys.DisplayPlayerTips_ExtraPayoutReportOnly).Returns(true);
             _cacheRefAdapter.GetBettype(Arg.Any<string>()).Returns("");
 
-            return new ExtraPayoutReportController(_reportSettingService, _cacheRefAdapter, _subsidiaryService)
+            return new ExtraPayoutReportController(_reportSettingService, _cacheRefAdapter, _subsidiaryService, _authService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService,
