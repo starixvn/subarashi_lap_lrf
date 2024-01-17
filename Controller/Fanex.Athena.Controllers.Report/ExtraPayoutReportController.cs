@@ -22,16 +22,19 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IReportSettingService _reportSettingService;
         private readonly ICacheRefAdapter _cacheRefAdapter;
         private readonly ISubsidiaryService _subsidiaryService;
+        private readonly IAuthorizationService _authService;
 
         public ExtraPayoutReportController(
             IReportSettingService reportSettingService,
             ICacheRefAdapter cacheRefAdapter,
-            ISubsidiaryService subsidiaryService
+            ISubsidiaryService subsidiaryService,
+            IAuthorizationService authService
             )
         {
             _reportSettingService = reportSettingService;
             _cacheRefAdapter = cacheRefAdapter;
             _subsidiaryService = subsidiaryService;
+            _authService = authService;
         }
 
         public ActionResult Index()
@@ -46,11 +49,13 @@ namespace Fanex.Athena.Controllers.Report
                FunctionNames.ExtraPayout);
             var subsidiaryList = _subsidiaryService.GetWhiteLabelTree(userSession, licenseeSession.LicenseeName);
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
+            var hasPlayerTipsPermission = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.DisplayPlayerTips_ExtraPayoutReportOnly);
+            var productOptions = ToProductOptions(productAccess.ProductList);
 
             var param = new ExtraPayoutMetaModel
             {
                 LicenseeId = licenseeSession.LicenseeId,
-                ProductOptions = AddPlayerTipsProDuct(ToProductOptions(productAccess.ProductList)),
+                ProductOptions = hasPlayerTipsPermission ? AddPlayerTipsProduct(productOptions) : productOptions,
                 IsExcludedTestData = true,
                 ReportBy = ReportByType.Daily
             };
@@ -234,7 +239,7 @@ namespace Fanex.Athena.Controllers.Report
             }
         }
 
-        private IList<ProductOption> AddPlayerTipsProDuct(IList<ProductOption> productList)
+        private IList<ProductOption> AddPlayerTipsProduct(IList<ProductOption> productList)
         {
             var originalProductList = ProductServiceInstance.GetProductList(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
 
