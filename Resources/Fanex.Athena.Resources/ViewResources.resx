@@ -3701,4 +3701,7 @@
   <data name="ExtraPayoutBetIDTooltip" xml:space="preserve">
     <value>Data is available only for Sportsbook Promotion - Saba Reward Risk-free Rebate</value>
   </data>
+  <data name="ProductL22" xml:space="preserve">
+    <value>Live22</value>
+  </data>
 </root>

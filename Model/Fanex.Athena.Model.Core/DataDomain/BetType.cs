@@ -319,6 +319,8 @@
 
         SabaCasinoRoyaleTournamentPrize = 17006,
 
-        SabaRewardRiskFreeRebate = 17007
+        SabaRewardRiskFreeRebate = 17007,
+        
+        Live22Promotion = 7698
     }
 }
