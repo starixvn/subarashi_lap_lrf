@@ -6,7 +6,7 @@
 
 var Site = (function ($) {
     var UNBLOCKUI_TIMEOUT = 30000;
-    var BASE_CURRENCY = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10' };
+    var BASE_CURRENCY = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10', 'php': '-11', 'mp': '-12', 'npr': '-14', 'try': '-15', 'usdt': '-99' };
     var REQUEST_VERIFICATION_TOKEN;
     var _historyDate = null;
     var _licenseeId = null;
@@ -77,7 +77,7 @@ var Site = (function ($) {
         getUsernamePlaceholderText: function () {
             return Site.isFakeLicensee() ? Site.getSingleResource('ExternalId') : Site.getSingleResource('ExternalIdOrSystemId');
         },
-        setProductCodeListParam: function(url, productCodeList){
+        setProductCodeListParam: function (url, productCodeList) {
             return QueryString.setParam(url, "ProductCodeList", productCodeList);
         },
         reload: function () {
@@ -322,7 +322,7 @@ var Site = (function ($) {
                     productCodeList.push(productCode.toUpperCase());
                 }
             });
-            
+
             if (typeof (urlOrParams) === "string") {
                 return QueryString.setParam(urlOrParams, "ProductCodeList", productCodeList);
             }
@@ -475,8 +475,8 @@ var Site = (function ($) {
             if (userAgent === undefined) { userAgent = navigator.userAgent; }
             userAgent = userAgent.toLowerCase();
             var match = /(chrome)[ \/]([\w.]+)/.exec(userAgent) || /(webkit)[ \/]([\w.]+)/.exec(userAgent) ||
-                    /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(userAgent) || /(msie) ([\w.]+)/.exec(userAgent) ||
-                     userAgent.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(userAgent) || [];
+                /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(userAgent) || /(msie) ([\w.]+)/.exec(userAgent) ||
+                userAgent.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(userAgent) || [];
 
             return {
                 browser: match[1] || "",

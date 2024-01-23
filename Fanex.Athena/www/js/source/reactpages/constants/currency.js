@@ -10,6 +10,8 @@
     { value: -9, text: 'BDT' },
     { value: -10, text: 'INR'},
     { value: -11, text: 'PHP'},
-    { value: -12, text: 'MP'},
+    { value: -12, text: 'MP' },
+    { value: -14, text: 'NPR' },
+    { value: -15, text: 'TRY' },
     { value: -99, text: 'USDT'}
 ]
