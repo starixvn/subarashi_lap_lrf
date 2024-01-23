@@ -108,6 +108,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string WE = "WE";
 
+        public const string L22 = "L22";
+
         #endregion Field
 
         #region Constructor

@@ -53,5 +53,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int SabaCasinoRoyaleTournamentPrize = 3706;
 
         public const int SabaRewardRiskFreeRebate = 3707;
+        
+        public const int Live22Promotion = 7901;
     }
 }
