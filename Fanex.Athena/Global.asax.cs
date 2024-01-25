@@ -86,7 +86,7 @@
                 .FromApplication("Fanex.LAP");
 
                 DIConfig.Register();
-                CompositeResolver.RegisterAndSetAsDefault(
+                CompositeResolver.Create(
                        // resolver custom types first
                        NativeDateTimeResolver.Instance,
                        // finally use standard resolver
