@@ -71,9 +71,11 @@ const buildDataRow = (dataItem, dataOptions) => {
 const buildTotalRow = (dataItem, dataOptions) => {
     const { turnoverBased, payoutBased, winLossBased } = dataItem;
     const { isShowPayout } = dataOptions;
+    const colSpan = isShowPayout ? 11 : 10;
+
     return (
         <Row key="totalRowUSD">
-            <Cell className="right-align" colSpan="11">Total In USD</Cell>
+            <Cell className="right-align" colSpan={colSpan}>Total In USD</Cell>
             <Cell className="right-align">{NumberFormat.formatDecimal(turnoverBased)}</Cell>
             {isShowPayout && <Cell className="right-align">{NumberFormat.formatDecimal(payoutBased)}</Cell>}
             <Cell className="right-align">{NumberFormat.formatDecimal(winLossBased)}</Cell>
