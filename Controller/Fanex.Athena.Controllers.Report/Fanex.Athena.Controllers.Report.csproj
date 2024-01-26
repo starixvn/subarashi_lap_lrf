@@ -132,6 +132,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DailyBetDetailsReportController.cs" />
     <Compile Include="WinlossAnalysisReportController.cs" />
     <Compile Include="CasinoTurnoverController.cs" />
     <Compile Include="CustomerSupportTaskReportController.cs" />

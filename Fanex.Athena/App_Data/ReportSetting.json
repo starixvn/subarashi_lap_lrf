@@ -57,5 +57,11 @@
     "ReportKey": "GrossGamingRevenue",
     "MinDateString": "",
     "MaxDateString": ""
+  },
+  {
+    "ReportKey": "DailyBetDetails",
+    "MinDateString": "06/01/2023",
+    "MaxDateString": "today",
+    "LimitRecentMonths": 6
   }
 ]

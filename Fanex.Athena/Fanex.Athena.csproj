@@ -1169,6 +1169,7 @@
     <Content Include="Views\Desktop\Report\Result\Content.cshtml" />
     <Content Include="www\webpackconfig\build\webpack.react.pro.conf.js" />
     <Content Include="Views\Desktop\Customer\CustomerAdministration\MainIvoryBet.cshtml" />
+    <Content Include="Views\Desktop\Report\DailyBetDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

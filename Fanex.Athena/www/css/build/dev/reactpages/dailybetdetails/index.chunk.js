@@ -91,9 +91,9 @@
   !*** ./www/css/source/reactpages/pages/dailybetdetails/index.scss ***!
   \********************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\nError: ENOENT: no such file or directory, open 'D:\\LAP\\lap\\Fanex.Athena\\www\\css\\source\\reactpages\\pages\\dailybetdetails\\index.scss'\n    at D:\\LAP\\lap\\Fanex.Athena\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at D:\\LAP\\lap\\Fanex.Athena\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at D:\\LAP\\lap\\Fanex.Athena\\node_modules\\loader-runner\\lib\\LoaderRunner.js:203:19\n    at D:\\LAP\\lap\\Fanex.Athena\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:85:15\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)");
+// extracted by mini-css-extract-plugin
 
 /***/ })
 
