@@ -78,7 +78,11 @@
                 new { Controller = "Proxy", Action = "ReportViews", report = "ExtraPayout", url = "Index" });
             extraPayoutReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
-
+            var leagueWinLossReportRoute = routes.MapHttpRoute(
+                name: "leagueWinLossReportRoute",
+                routeTemplate: "LeagueWinLossReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "LeagueWinLoss", url = "Index" });
+            leagueWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
     }
 }
