@@ -8,7 +8,6 @@
     using DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
@@ -18,11 +17,9 @@
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
     using ServiceStack.Text;
-    using Web.ActionFilter;
 
     [CLSCompliant(false)]
     [XFrameOptionApi]
-    [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     [ApiUMFilter]
     public class CommonDataApiController : BaseApiController
     {
