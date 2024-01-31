@@ -83,6 +83,12 @@
                 routeTemplate: "LeagueWinLossReport/{*url}",
                 new { Controller = "Proxy", Action = "ReportViews", report = "LeagueWinLoss", url = "Index" });
             leagueWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+            
+            var winlossAnalysisReportRoute = routes.MapHttpRoute(
+                name: "winlossAnalysisReportRoute",
+                routeTemplate: "WinlossAnalysisReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "WinLossAnalysis", url = "Index" });
+            winlossAnalysisReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
     }
 }
