@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/18/2024 11:35:18 AM
+﻿// Generated at: 1/24/2024 3:18:57 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -345,6 +345,7 @@ CustomerWinLossTitle:"Customer Win/Loss, {0} --&gt; {1} - {2}",
 CustomerWinnings:"Customer&apos;s Winnings",
 DA:"DA",
 Daily:"Daily",
+DailyBetDetails:"Daily Bet Details",
 DailyBets:"Daily Bets",
 DailyStatement:"Daily Statement",
 DailyStatementMsg:"Support data up to 4 months only",

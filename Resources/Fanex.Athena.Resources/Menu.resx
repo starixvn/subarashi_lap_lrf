@@ -344,4 +344,7 @@
   <data name="playerreport" xml:space="preserve">
     <value>Player Report</value>
   </data>
+  <data name="dailybetdetails" xml:space="preserve">
+    <value>Daily Bet Details</value>
+  </data>
 </root>

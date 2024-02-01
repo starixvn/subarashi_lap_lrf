@@ -19,6 +19,7 @@ var cssPaths = {
     betlist: "./www/css/source/reactpages/pages/betlist/index.scss",
     casinoturnover: "./www/css/source/reactpages/pages/casinoturnover/index.scss",
     dailybets: "./www/css/source/reactpages/pages/dailybets/index.scss",
+    dailybetdetails: "./www/css/source/reactpages/pages/dailybetdetails/index.scss",
     exchangevoided: "./www/css/source/reactpages/pages/exchangevoided/index.scss",
     playersegmentation: "./www/css/source/reactpages/pages/customer/player-segmentation/index.scss",
     customeradmin: "./www/css/source/reactpages/pages/customer/customeradmin/index.scss",
@@ -56,6 +57,7 @@ var scriptPaths = {
     casinoturnover: "./www/js/source/reactpages/pages/casinoturnover/components/index.jsx",
 
     dailybets: "./www/js/source/reactpages/pages/dailybets/components/index.jsx",
+    dailybetdetails: "./www/js/source/reactpages/pages/dailybetdetails/components/index.jsx",
     exchangevoided: "./www/js/source/reactpages/pages/exchangevoided/components/index.jsx",
 
     playersegmentation: "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/index.js",

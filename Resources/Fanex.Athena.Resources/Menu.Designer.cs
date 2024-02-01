@@ -268,6 +268,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily Bet Details.
+        /// </summary>
+        public static string dailybetdetails {
+            get {
+                return ResourceManager.GetString("dailybetdetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily Bets.
         /// </summary>
         public static string dailybets81 {

@@ -67,6 +67,7 @@
         public const string ReportAbnormalBet = "AbnormalBet";
         public const string ReportGrossGamingRevenue = "GrossGamingRevenue";
         public const string ReportWinlossAnalysis = "WinlossAnalysis";
+        public const string ReportDailyBetDetails = "DailyBetDetails";
 
         /* Customer Info. */
 
