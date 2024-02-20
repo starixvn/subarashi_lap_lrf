@@ -1509,9 +1509,6 @@
   <data name="LeagueName" xml:space="preserve">
     <value>Tên Giải đấu</value>
   </data>
-  <data name="LeagueWinLoss" xml:space="preserve">
-    <value>Thắng Thua Theo Giải Đấu</value>
-  </data>
   <data name="Level" xml:space="preserve">
     <value>Cấp độ</value>
   </data>

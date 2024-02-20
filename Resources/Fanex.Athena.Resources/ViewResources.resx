@@ -2960,9 +2960,6 @@
   <data name="LeagueName" xml:space="preserve">
     <value>League name</value>
   </data>
-  <data name="LeagueWinLoss" xml:space="preserve">
-    <value>Win Loss By League</value>
-  </data>
   <data name="Saba" xml:space="preserve">
     <value>Saba </value>
   </data>

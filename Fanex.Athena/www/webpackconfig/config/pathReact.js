@@ -7,7 +7,6 @@ var cssPaths = {
     layout: "./www/css/source/reactpages/main.scss",
     subsidiaryperformance: "./www/css/source/reactpages/pages/subsidiaryperformance/index.scss",
     licenseewlbytimezone: "./www/css/source/reactpages/pages/licenseewl-by-timezone/index.scss",
-    leaguewinloss: "./www/css/source/reactpages/pages/leaguewinloss/index.scss",
     abnormalbet: "./www/css/source/reactpages/pages/abnormalbet/index.scss",
     notification: "./www/css/source/reactpages/pages/notification/index.scss",
     licenseecontact: "./www/css/source/reactpages/pages/licenseecontact/index.scss",
@@ -42,7 +41,6 @@ var scriptPaths = {
     /*React page*/
     subsidiaryperformance: "./www/js/source/reactpages/pages/subsidiaryperformance/components/index.jsx",
     licenseewlbytimezone: "./www/js/source/reactpages/pages/licenseewl-by-timezone/components/index.jsx",
-    leaguewinloss: "./www/js/source/reactpages/pages/leaguewinloss/components/index.jsx",
     abnormalbet: "./www/js/source/reactpages/pages/abnormalbet/components/index.jsx",
     notification: "./www/js/source/reactpages/pages/notification/components/resultAmendment/index.jsx",
     licenseecontact: "./www/js/source/reactpages/pages/licenseecontact/components/index.jsx",
