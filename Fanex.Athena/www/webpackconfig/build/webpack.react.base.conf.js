@@ -44,7 +44,6 @@ function generateConfig(environment) {
             [`${jsPath}/customer/customeradmin`]: pathConfig.scriptPaths.customeradmin,
             [`${jsPath}/customer/customeradminivorybet`]: pathConfig.scriptPaths.customeradminivorybet,
             [`${jsPath}/report/newcashoutwinloss`]: pathConfig.scriptPaths.newcashoutwinloss,
-            [`${jsPath}/report/winlossanalysis`]: pathConfig.scriptPaths.winlossanalysis,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
@@ -67,7 +66,6 @@ function generateConfig(environment) {
             [`${cssPath}/customer/customeradmin/index`]: pathConfig.cssPaths.customeradmin,
             [`${cssPath}/customer/customeradminivorybet/index`]: pathConfig.cssPaths.customeradminivorybet,
             [`${cssPath}/newcashoutwinloss/index`]: pathConfig.cssPaths.newcashoutwinloss,
-            [`${cssPath}/winlossanalysis/index`]: pathConfig.cssPaths.winlossanalysis,
         },
         output: {
             path: pathConfig.projectRoot,

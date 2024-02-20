@@ -21,7 +21,6 @@
 		<Function Name="CasinoTurnover" Product="CS,VB,AB,SXG,SAG,PP,PGS,SBC,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG"></Function>
 		<Function Name="DailyBets" Product="SB,NG,CS,LC"></Function>
 		<Function Name="GrossGamingRevenue" Product="SB,NG,CS,LC"></Function>
-		<Function Name="WinlossAnalysis" Product="SB,BA,NG,VS,CS,KN,VB,AB,LT,SG,PP,CC,VRG,TG,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG,SEA,WE,L22,UUSL,FS,FAC"></Function>
 	</Group>
 
 	<Group Name="BetList">
