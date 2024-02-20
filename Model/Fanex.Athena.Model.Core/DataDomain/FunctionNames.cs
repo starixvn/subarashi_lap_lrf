@@ -38,8 +38,6 @@
 
         public const string DailyBets = "DailyBets";
 
-        public const string LeagueWinLoss = "LeagueWinLoss";
-
         public const string ExtraPayout = "ExtraPayout";
 
         public const string NewCashOutWinLoss = "NewCashOutWinLoss";

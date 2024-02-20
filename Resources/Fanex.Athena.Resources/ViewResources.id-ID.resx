@@ -1500,9 +1500,6 @@
   <data name="LeagueName" xml:space="preserve">
     <value>Nama Liga</value>
   </data>
-  <data name="LeagueWinLoss" xml:space="preserve">
-    <value>Keuntungan/Kerugian Berdasarkan Liga</value>
-  </data>
   <data name="Level" xml:space="preserve">
     <value>Level</value>
   </data>

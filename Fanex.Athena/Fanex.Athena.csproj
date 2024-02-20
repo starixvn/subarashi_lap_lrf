@@ -690,7 +690,6 @@
     <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\GodOfFortuneWl\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\LeagueWinLoss\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\BitCoin.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Index.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.cshtml" />

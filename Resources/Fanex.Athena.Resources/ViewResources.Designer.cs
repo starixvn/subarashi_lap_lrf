@@ -4579,15 +4579,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Win Loss By League.
-        /// </summary>
-        public static string LeagueWinLoss {
-            get {
-                return ResourceManager.GetString("LeagueWinLoss", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Level.
         /// </summary>
         public static string Level {

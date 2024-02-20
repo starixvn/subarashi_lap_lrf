@@ -1536,9 +1536,6 @@
   <data name="LeagueName" xml:space="preserve">
     <value>ชื่อลีก</value>
   </data>
-  <data name="LeagueWinLoss" xml:space="preserve">
-    <value>แพ้ชนะตามลีก</value>
-  </data>
   <data name="Level" xml:space="preserve">
     <value>ระดับ</value>
   </data>

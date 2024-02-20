@@ -57,7 +57,6 @@
         public const string ReportExchangeWinLoss = "ExchangeWinloss77";
         public const string ReportCasinoTurnover = "CasinoTurnover80";
         public const string ReportDailyBets = "DailyBets81";
-        public const string ReportLeagueWinLoss = "LeagueWinLoss";
         public const string ReportExtraPayout = "ExtraPayout";
         public const string ReportNewCashOutWinLoss = "NewCashOutWinLoss";
         public const string ReportAbnormalBet = "AbnormalBet";
