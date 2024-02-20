@@ -143,7 +143,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GrossGamingRevenueReportController.cs" />
     <Compile Include="NewCashOutWinLossReportController.cs" />
-    <Compile Include="LeagueWinLossReportController.cs" />
     <Compile Include="Result\SportsLotteryResultReportController.cs" />
     <Compile Include="Result\ResultPopup\Happy5LinkedGamesResultPopupController.cs" />
     <Compile Include="GodOfFortuneWinLossReportController.cs" />
