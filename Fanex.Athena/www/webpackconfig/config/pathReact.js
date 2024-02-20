@@ -25,7 +25,6 @@ var cssPaths = {
     customeradminivorybet: "./www/css/source/reactpages/pages/customer/customeradminivorybet/index.scss",
     oddsgrouplicenseesetting: "./www/css/source/reactpages/pages/customer/oddsgrouplicenseesetting/index.scss",
     newcashoutwinloss: "./www/css/source/reactpages/pages/newcashoutwinloss/index.scss",
-    winlossanalysis: "./www/css/source/reactpages/pages/winlossanalysis/index.scss",
 };
 
 var scriptPaths = {
@@ -65,8 +64,6 @@ var scriptPaths = {
     customeradminivorybet: "./www/js/source/reactpages/pages/customer/customeradminivorybet/components/index.jsx",
     oddsgrouplicenseesetting: "./www/js/source/reactpages/pages/customer/oddsgrouplicenseesetting/tabs/index.js",
     newcashoutwinloss: "./www/js/source/reactpages/pages/newcashoutwinloss/components/index.jsx",
-
-    winlossanalysis: "./www/js/source/reactpages/pages/winlossanalysis/components/index.jsx",
 };
 module.exports = {
     projectRoot: projectRoot,

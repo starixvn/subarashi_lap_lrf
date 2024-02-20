@@ -463,11 +463,6 @@
     <Content Include="App_Data\UserGuide\Turnover\id-ID.htm" />
     <Content Include="App_Data\UserGuide\Turnover\th-TH.htm" />
     <Content Include="App_Data\UserGuide\Turnover\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\WinlossAnalysis\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\WinlossAnalysis\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\WinlossAnalysis\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\WinlossAnalysis\en-US.htm" />
-    <Content Include="App_Data\UserGuide\WinlossAnalysis\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterAdvancedSearch\en-US.htm" />
@@ -725,7 +720,6 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\SabaVirtualSettingInformation.xls" />
     <Content Include="Views\Desktop\Report\GrossGamingRevenue\Main.cshtml" />
     <Content Include="Views\Desktop\Customer\RiskLevel\Information.cshtml" />
-    <Content Include="Views\Desktop\Report\WinlossAnalysis\Index.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\RiskLevelInformation.xls" />
     <Content Include="Views\Desktop\Customer\CustomerAdministration\Main.cshtml" />
     <Content Include="Content\Plugin\Toast\toast.scss" />
