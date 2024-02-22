@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.Api.Base.UnitTests;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.MetaModel;
     using NSubstitute;
@@ -16,6 +17,7 @@
         private const string ApiPath = "/BettingTicketCenterAdvancedSearch/GetData";
 
         private IBetListApiClient _betListApiClient;
+        private ICustomerClassService _customerClassService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -23,6 +25,7 @@
             base.FixtureSetUp();
 
             _betListApiClient = Substitute.For<IBetListApiClient>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
 
             MockSessionData();
         }
@@ -142,7 +145,7 @@
 
         private BettingTicketCenterAdvancedSearchController CreateController()
         {
-            return new BettingTicketCenterAdvancedSearchController(LangService, AppSetting, _betListApiClient, SportService)
+            return new BettingTicketCenterAdvancedSearchController(LangService, AppSetting, _betListApiClient, SportService, _customerClassService)
             {
                 SessionService = SessionService,
                 ProductService = ProductService
