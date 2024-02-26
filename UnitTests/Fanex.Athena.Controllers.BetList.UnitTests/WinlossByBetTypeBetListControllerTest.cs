@@ -90,7 +90,7 @@
                 // Assert
                 await controller.Received().ProcessExportExcel(
                     Arg.Is<BetListExcelMetaModel>(x => x.Title == expectedTitle
-                        && x.UspKey == "Lrf_BetList_SelWinLossByBetType"
+                        && x.UspKey == "Lrf_BetList_MatchWL"
                         && string.Join(",", x.HiddenColumns) == "8"
                         && x.LicenseeId == DefaultLicenseeSession.LicenseeId
                         && !x.IsShowSumStake

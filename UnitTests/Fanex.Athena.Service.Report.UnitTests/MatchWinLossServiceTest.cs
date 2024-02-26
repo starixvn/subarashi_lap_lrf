@@ -46,7 +46,6 @@
             var dataList = new List<MatchWinLoss>
             {
                 new MatchWinLoss { ProductName = Product.SB, IsNeutral = true },
-                new MatchWinLoss { ProductName = Product.VS2 },
                 new MatchWinLoss { ProductName = Product.VS, SportType = (int)SportType.VirtualCycling },
                 new MatchWinLoss { ProductName = Product.NG }
             };

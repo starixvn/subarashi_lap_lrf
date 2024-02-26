@@ -8152,7 +8152,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             param.showdraw = Site.asBool(data.ShowDraw);
             param.odds = data.Odds;
             param.SportProducts = _checkedSports;
-            param.bettypes = _checkedBettypes.map(x=>x.ID).join(',');
+            param.bettypes = getSelectedBettypeXML();
             param.username = data.Username;
             param.currencyid = data.CurrencyId;
             param.isexportexcel = data.IsExportExcel;
@@ -8165,6 +8165,35 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             }
 
             return param;
+        }
+
+        function getSelectedBettypeXML() {
+            var xmlDoc = document.implementation.createDocument(null, "ROOT", null);
+            const parents = Enumerable.From(_checkedBettypes).Select(function (bettype) { return bettype.ProductPrefix; }).Distinct("$").ToArray();
+
+            parents.forEach((parent) => {
+
+                const childrenList = _checkedBettypes.filter((item) => item.ProductPrefix === parent && item.Checked);
+                if (!childrenList.length) {
+                    return;
+                }
+
+                var productCode = parent;
+                var bettypeList = childrenList.reduce((accum, elem) => accum.concat(elem), []).map(elem => elem.ID).join(",");
+
+                buildBettypeElement(xmlDoc, productCode, bettypeList);
+            });
+
+            return new XMLSerializer().serializeToString(xmlDoc);
+        }
+
+        function buildBettypeElement(xmlDoc, productCode, bettypeList) {
+            var bettypeElem = xmlDoc.createElement("Bettype");
+
+            bettypeElem.setAttribute("pc", productCode);
+            bettypeElem.setAttribute("bt", bettypeList);
+
+            xmlDoc.documentElement.appendChild(bettypeElem);
         }
 
         function onGridComplete(grid, gridOption, response) {
@@ -8331,27 +8360,52 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             _ajaxRequestGetBettype = $.ajax(option);
         }
 
-        function renderBetTypeTree() {
-            const dataList = [];
-            $.each(_bettypes, function (index, value) {
-                const item = {
-                    Id: 'BetType-' + value.ID,
-                    Value: value.ID,
-                    Text: value.Name,
-                    Checked: value.Checked,
+        function groupBettypeList() {
+            const groupData = [];
+            const parents = Enumerable.From(_bettypes).Select(function (bettype) { return bettype.ProductPrefix; }).Distinct("$").ToArray();
+            $.each(parents, function (index, value) {
+                const parent = {
+                    Id: value,
+                    Value: '-1-' + index,
+                    Text: Site.getSingleResource('Product' + value),
+                    Checked: true,
+                    ParrentId: -1,
                     Enable: true,
                     Css: '',
                     CssClass: ''
                 };
-                dataList.push(item);
+                let cindex = 0;
+                parent.Items = Enumerable.From(_bettypes).Where(function (child) {
+                    return child.ProductPrefix === value;
+                }).Select(function (child) {
+                    return {
+                        Id: value + '-' + cindex++,
+                        Value: value + '-' + child.ID,
+                        Text: child.Name,
+                        ParrentId: index,
+                        Checked: child.Checked,
+                        Enable: true,
+                        Css: '',
+                        CssClass: '',
+                        GroupName: value
+                    };
+                }).ToArray();
+
+                groupData.push(parent);
             });
+
+            return groupData;
+        }
+
+        function renderBetTypeTree() {
+            const groupData = groupBettypeList();
             _me.checkValidFilter();
 
             $(_selector.BetTypeMultiSelect).multiSelect({
                 minWidth: 200,
                 maxHeight: 400,
-                listData: dataList,
-                hasOptGroup: false,
+                listData: groupData,
+                hasOptGroup: true,
                 onCheck: function () {
                     const checkedItems = $(_selector.BetTypeMultiSelect).multiSelect('getCheckedItems');
                     const numberOfCheckedItems = checkedItems.length;
@@ -8360,6 +8414,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     for (let i = 0; i < numberOfCheckedItems; i++) {
                         addCheckedBettype(checkedItems[i]);
                     }
+
                     _me.checkValidFilter();
                 },
                 isUsedCustomCheckAllText: true,
@@ -8384,8 +8439,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         function addCheckedBettype(checkedValue) {
             const modelItem = Enumerable.From(_bettypes).FirstOrDefault(null, function (item) {
-                return item.ID.toString() === checkedValue.toString();
+                return (item.ProductPrefix + '-' + item.ID) === checkedValue;
             });
+
             if (modelItem !== null) {
                 modelItem.Checked = true;
                 _checkedBettypes.push(modelItem);

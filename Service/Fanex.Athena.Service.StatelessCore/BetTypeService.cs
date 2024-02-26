@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BetTypeService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.StatelessCore
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
     using System;
     using System.Collections.Generic;
@@ -20,9 +14,6 @@ namespace Fanex.Athena.Service.StatelessCore
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.VendorAdapter.Interfaces;
 
-    /// <summary>
-    ///     TODO: Update summary.
-    /// </summary>
     public class BetTypeService : IBetTypeService
     {
         private readonly IBetTypeDataAccess _betTypeDataAccess;
@@ -34,14 +25,7 @@ namespace Fanex.Athena.Service.StatelessCore
             _cacheRefAdapter = cacheRefAdapter;
         }
 
-        /// <summary>
-        /// Get bet type.
-        /// </summary>
-        /// <param name="licenseeId">The licensee id.</param>
-        /// <param name="sports">The sports.</param>
-        /// <param name="languageCode">The language code.</param>
-        /// <returns>The bet type list.</returns>
-        public async Task<IList<CheckedItem>> GetBettypes(IList<SportProductItem> sports, string languageCode)
+        public async Task<IList<BettypeProductItem>> GetBettypes(IList<SportProductItem> sports, string languageCode)
         {
             if (sports != null && sports.Count > 0)
             {
@@ -50,10 +34,10 @@ namespace Fanex.Athena.Service.StatelessCore
                 return betypes.Select(bettype => BuildBetTypeCheckItem(bettype, languageCode)).ToList();
             }
 
-            return new List<CheckedItem>();
+            return new List<BettypeProductItem>();
         }
 
-        private CheckedItem BuildBetTypeCheckItem((string ProductPrefix, int BetTypeId) betType, string languageCode)
+        private BettypeProductItem BuildBetTypeCheckItem((string ProductPrefix, int BetTypeId) betType, string languageCode)
         {
             var betTypeId = betType.BetTypeId;
             var bettypeName = _cacheRefAdapter.GetBetTypeName(betTypeId, languageCode);
@@ -62,17 +46,14 @@ namespace Fanex.Athena.Service.StatelessCore
                 var suffix = _cacheRefAdapter.GetSportName(MappingHelper.MapBettypeSportBySport[betTypeId], languageCode);
                 bettypeName += " (" + suffix + ")";
             }
-            if (!string.IsNullOrWhiteSpace(betType.ProductPrefix))
-            {
-                bettypeName = $"{ProductHelper.GetProductName(betType.ProductPrefix)}-{bettypeName}";
-            }
 
-            return new CheckedItem
+            return new BettypeProductItem
             {
                 Checked = true,
                 ID = betTypeId,
                 Name = bettypeName,
-                Value = bettypeName
+                Value = bettypeName,
+                ProductPrefix = string.IsNullOrEmpty(betType.ProductPrefix) ? Product.SB : betType.ProductPrefix
             };
         }
 
@@ -91,7 +72,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     Children = null,
                     ID = _.BetType,
                     Name = GetBetTypeName(_.BetType, lang, isHideSaba),
-                    Value = _.BetType.ToString(),
+                    Value = $"{_.BetType}_{_.ProductCode}",
                 },
                 (key, items) => new CheckedItem
                 {

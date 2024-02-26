@@ -2457,9 +2457,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 if (isProductOriginalChecked('VS')) {
                     productCodeList.push('VS');
                 }
-                if (isProductOriginalChecked('VS2')) {
-                    productCodeList.push('VS2');
-                }
                 if (isProductOriginalChecked('NG')) {
                     productCodeList.push('NG');
                 }
@@ -2470,7 +2467,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             },
 
             getProductCodeList: function (productCode) {
-                const codeList = ['NG', 'LC', 'VS', 'VS2'];
+                const codeList = ['NG', 'LC', 'VS'];
                 const productCodeList = [];
                 if ((productCode === 'SB' || productCode === 'BA') && isProductOriginalChecked('SB')) {
                     productCodeList.push('SB');
@@ -2492,7 +2489,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
 
 /***/ }),
 

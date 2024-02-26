@@ -67,7 +67,7 @@
                 SortOrder = sortOrder
             };
 
-            const string UspKey = "Lrf_BetList_SelWinLossByBetType";
+            const string UspKey = "Lrf_BetList_MatchWL";
             return await GetPagingBetListResult(metaModel, UspKey, page, rows).ConfigureAwait(false);
         }
     }

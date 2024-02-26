@@ -24,7 +24,7 @@ namespace Fanex.Athena.Controllers.Report
         {
             if (sports == null || sports.Count == 0)
             {
-                return Json(new List<SportProductItem>());
+                return Json(new List<BettypeProductItem>());
             }
 
             var data = await _betTypeService.GetBettypes(sports, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);

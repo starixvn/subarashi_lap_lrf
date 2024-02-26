@@ -363,9 +363,9 @@
                 var dataRow = exportData[i];
                 var betTypeRow = sheet.CopyRow(TemplateSheet, RowSpecialBetTypeTemplate, currentRowIndex);
                 var betType = Converter.ToInt(dataRow[BetTypeColumn]);
-                var betTypeName = betType == (int)BetType.VirtualSports2MixParlay ?
-                    _cacheRefAdapter.GetBettypeWithProductName(betType) :
-                    _cacheRefAdapter.GetBettype(betType, false);
+                var productCode = Converter.ToString2(dataRow["ProductCode"]);
+
+                var betTypeName = _cacheRefAdapter.GetBettypeWithProductName(betType, productCode);
 
                 betTypeRow.Cells[0].SetCellValue(betTypeName);
                 ExcelHelper.AssignRowContent(betTypeRow, dataRow, _commonColumnNameList, ColumnNumbericDataStartIndex);

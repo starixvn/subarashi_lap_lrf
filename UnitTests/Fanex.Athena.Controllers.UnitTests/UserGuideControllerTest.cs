@@ -22,15 +22,11 @@
     [TestFixture]
     public partial class UserGuideControllerTest : CultureBaseControllerHelperTest
     {
-        private const string DefaultLanguage = "en-US";
-
         private IProductService _productService;
 
         private IFileSystem _fileSystem;
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
-
-        private ICacheRefAdapter _cacheRefAdapter;
 
         private IAuthorizationService _authrizationService;
 
@@ -48,7 +44,6 @@
             _productService = Substitute.For<IProductService>();
             _fileSystem = Substitute.For<IFileSystem>();
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
-            _cacheRefAdapter = Substitute.For<ICacheRefAdapter>();
             _authrizationService = Substitute.For<IAuthorizationService>();
         }
 
@@ -254,72 +249,12 @@
             }
         }
 
-        [TestCase]
-        public void Index_ProductListHaveVirtualProduct_ReturnCorrectContent()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                const string ResourceName = "LicenseeWL";
-                const string Content = "{VS-productlist-section}content VS{/VS-productlist-section}"
-                                       + "{VS2-productlist-section} content VS2{/VS2-productlist-section} other content";
-                const string ExpectedContent = "content VS content VS2 other content";
-
-                _productService.GetProductList(Arg.Any<int>(), Arg.Any<string>()).ReturnsForAnyArgs(new List<Product>
-            {
-                new Product { ProductID = ProductTypes.VirtualSports },
-                new Product { ProductID = ProductTypes.VirtualSports2 }
-            });
-
-                controller.Url = Url;
-
-                _fileSystem.Exists(Arg.Any<string>()).Returns(false);
-                _fileSystem.ReadFile(Arg.Any<string>()).Returns(Content);
-
-                // Action
-                var result = controller.Index(ResourceName) as ViewResult;
-
-                // Assert
-                Assert.That(result.Model, Is.EqualTo(ExpectedContent));
-            }
-        }
-
-        [TestCase]
-        public void Index_ProductListNotHaveVirtualProduct_ReturnCorrectContent()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                const string ResourceName = "LicenseeWL";
-                const string Content = "{VS-productlist-section}content VS{/VS-productlist-section}"
-                                       + "{VS2-productlist-section} content VS2{/VS2-productlist-section} other content";
-                const string ExpectedContent = " other content";
-
-                _productService.GetProductList(Arg.Any<int>(), Arg.Any<string>()).ReturnsForAnyArgs(new List<Product>
-            {
-                new Product { ProductID = ProductTypes.Sportsbook }
-            });
-
-                controller.Url = Url;
-
-                _fileSystem.Exists(Arg.Any<string>()).Returns(false);
-                _fileSystem.ReadFile(Arg.Any<string>()).Returns(Content);
-
-                // Action
-                var result = controller.Index(ResourceName) as ViewResult;
-
-                // Assert
-                Assert.That(result.Model, Is.EqualTo(ExpectedContent));
-            }
-        }
-
         private UserGuideController CreateController()
         {
             var controller = new UserGuideController(
                 _fileSystem,
                 _productService,
                 _balanceUpDataAccess,
-                _cacheRefAdapter,
                 _authrizationService)
             {
                 ControllerContext = ControllerContext,

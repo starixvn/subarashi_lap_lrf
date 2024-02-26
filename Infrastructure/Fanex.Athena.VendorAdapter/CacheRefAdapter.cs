@@ -5,6 +5,7 @@ using System.Threading;
 
 using Fanex.Athena.Model.Core;
 using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Resources;
 using Fanex.Athena.VendorAdapter.Interfaces;
 using Fanex.RemotingRef;
@@ -113,13 +114,13 @@ namespace Fanex.Athena.VendorAdapter
             return RemotingRefService.GetBetTypeName(bettypeId.ToString(), languageCode);
         }
 
-        public string GetBettypeWithProductName(int betType, bool liveIndicator = false)
+        public string GetBettypeWithProductName(int betType, string productCode = "", bool liveIndicator = false)
         {
             var betTypeName = GetBettype(betType, liveIndicator);
 
-            if (BetTypeHelper.IsVirtualSports2(betType))
+            if (productCode == Product.VS2)
             {
-                return betTypeName + " (" + ViewResources.ProductVS2 + ")";
+                return betTypeName + " (" + ViewResources.ProductVS + ")";
             }
 
             return betTypeName;

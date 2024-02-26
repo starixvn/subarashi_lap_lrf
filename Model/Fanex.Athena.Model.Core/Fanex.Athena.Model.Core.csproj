@@ -116,6 +116,7 @@
     <Compile Include="DTO\Common\SportForTreeViewItem.cs" />
     <Compile Include="DTO\Common\SportGame.cs" />
     <Compile Include="DTO\Common\SabaSport.cs" />
+    <Compile Include="DTO\Common\BettypeProductItem.cs" />
     <Compile Include="DTO\Configuration\FakeLicenseeSetting.cs" />
     <Compile Include="DTO\Configuration\FunctionUMSetting.cs" />
     <Compile Include="DTO\Configuration\ReportSetting.cs" />

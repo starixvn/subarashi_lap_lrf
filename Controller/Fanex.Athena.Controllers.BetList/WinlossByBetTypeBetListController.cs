@@ -22,7 +22,7 @@
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
 
-            return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/WinlossByBetType/Main.cshtml", "Lrf_BetList_SelWinLossByBetType").ConfigureAwait(false);
+            return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/WinlossByBetType/Main.cshtml", "Lrf_BetList_MatchWL").ConfigureAwait(false);
         }
 
         protected override bool IsValidExportExcel(BetListMetaModel model)

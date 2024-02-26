@@ -141,6 +141,7 @@ namespace Fanex.Athena.DataAccess.Report
                 dataList.Add(new MatchWinLoss
                 {
                     BetType = reader.ToInt("bettype"),
+                    ProductCode = reader.ToString("ProductCode"),
                     Turnover = reader.ToDecimal("Turnover"),
                     TotalTransaction = reader.ToInt("betcount"),
                     CustomerWL = reader.ToDecimal("WinLost"),

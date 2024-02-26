@@ -30,6 +30,8 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public string ProductName { get; set; }
 
+        public string ProductCode { get; set; }
+
         public bool IsLive { get; set; }
 
         public int HomeId { get; set; }

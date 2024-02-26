@@ -25,7 +25,7 @@
         [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> BetTypeWinLoss(BetListExcelMetaModel metaModel)
         {
-            return ProcessRequest(metaModel, "Lrf_BetList_SelWinLossByBetType", "~/Views/Desktop/BetList/MatchWl/BetTypeWinLoss.cshtml");
+            return ProcessRequest(metaModel, "Lrf_BetList_MatchWL", "~/Views/Desktop/BetList/MatchWl/BetTypeWinLoss.cshtml");
         }
 
         [HttpGet]
@@ -39,14 +39,14 @@
         [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> MixParlay(BetListExcelMetaModel metaModel)
         {
-            return ProcessRequest(metaModel, "Lrf_BetList_MatchWL_Parlay", "~/Views/Desktop/BetList/MatchWl/MixParlay.cshtml");
+            return ProcessRequest(metaModel, "Lrf_BetList_MatchWL", "~/Views/Desktop/BetList/MatchWl/MixParlay.cshtml");
         }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> Outright(BetListExcelMetaModel metaModel)
         {
-            return ProcessRequest(metaModel, "Lrf_BetList_MatchWL_Outright", "~/Views/Desktop/BetList/MatchWl/Outright.cshtml");
+            return ProcessRequest(metaModel, "Lrf_BetList_MatchWL", "~/Views/Desktop/BetList/MatchWl/Outright.cshtml");
         }
 
         private async Task<ActionResult> ProcessRequest(BetListExcelMetaModel metaModel, string uspKey, string viewPath)
@@ -66,7 +66,7 @@
 
             if (string.IsNullOrEmpty(metaModel.UspKey))
             {
-                metaModel.UspKey = metaModel.FromDate < metaModel.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL_Bettype";
+                metaModel.UspKey = metaModel.FromDate < metaModel.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : "Lrf_BetList_MatchWL";
             }
 
             metaModel.ShowingOption = new ShowingOption

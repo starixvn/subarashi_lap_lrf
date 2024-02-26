@@ -10,7 +10,6 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Web.ActionFilter;
@@ -20,11 +19,6 @@
     public class UserGuideController : CultureBaseController
     {
         private const string LICENSEE_SUFFIX_SECTION = "licensee-section";
-
-        private static readonly int[] VS2Sports = new[]
-        {
-            190, 191, 192, 194, 196, 193, 197
-        };
 
         private static readonly IReadOnlyDictionary<string, bool> ListResourceNoBindData = new Dictionary<string, bool>
         {
@@ -36,20 +30,17 @@
         private readonly IProductService _productService;
         private readonly IFileSystem _fileSystem;
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
-        private readonly ICacheRefAdapter _cacheRefAdapter;
         private readonly IAuthorizationService _authrizationService;
 
         public UserGuideController(
             IFileSystem fileSystem,
             IProductService productService,
             IBalanceUpDataAccess balanceUpDataAccess,
-            ICacheRefAdapter cacheRefAdapter,
             IAuthorizationService authorizationService)
         {
             _productService = productService;
             _fileSystem = fileSystem;
             _balanceUpDataAccess = balanceUpDataAccess;
-            _cacheRefAdapter = cacheRefAdapter;
             _authrizationService = authorizationService;
         }
 
@@ -65,7 +56,6 @@
                 content = AddSpecialProducts(content, products);
                 content = AddBalanceUpDate(content);
                 content = AddMoveBetDateFrom(content);
-                content = AddVS2Sport(content);
                 content = AddOpenBalanceInfo(content);
                 content = RemovePermissionSection(content, PermissionKeys.PlayerVIPManagement);
                 content = RemoveSabaText(content);
@@ -90,30 +80,9 @@
         private static string AddSpecialProducts(string content, IEnumerable<Product> products)
         {
             var customcontent = AddCasinoProducts(content, products);
-            customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports, "VS");
-            customcontent = RemoveProductSection(customcontent, products, ProductTypes.VirtualSports2, "VS2");
-            customcontent = RemoveProductSection(customcontent, products, ProductTypes.VS3, Product.VS3);
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.BA, Product.BA);
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.CashOut, Product.CO);
             return customcontent;
-        }
-
-        private string AddVS2Sport(string content)
-        {
-            const string VS2SportTag = "{VS2-sportList}";
-            var customContent = content;
-
-            if (content.Contains(VS2SportTag))
-            {
-                var language = SessionServiceInstance.UserSession.Language;
-                var VS2SportNames = VS2Sports.Select(_ => _cacheRefAdapter.GetSportName(_, language));
-
-                customContent = customContent.Replace(VS2SportTag, string.Join<string>(", ", VS2SportNames));
-                customContent = customContent.Replace(VS2SportTag, string.Empty);
-                customContent = customContent.Replace(VS2SportTag, string.Empty);
-            }
-
-            return customContent;
         }
 
         private string AddOpenBalanceInfo(string content)
