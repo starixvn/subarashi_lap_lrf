@@ -94,8 +94,6 @@
 
         public decimal VSComm { get; set; }
 
-        public decimal VS2Comm { get; set; }
-
         public decimal VRGComm { get; set; }
 
         public decimal CCComm { get; set; }
@@ -121,8 +119,6 @@
         public decimal APComm { get; set; }
 
         public decimal APMComm { get; set; }
-
-        public decimal LGComm { get; set; }
 
         public decimal FGGLComm { get; set; }
 
@@ -151,7 +147,6 @@
                 { Product.LT, LTComm },
                 { Product.TG, TGComm },
                 { Product.VS, VSComm },
-                { Product.VS2, VS2Comm },
 
                 { Product.VRG, VRGComm },
                 { Product.CC, CCComm },
@@ -175,9 +170,7 @@
                 { Product.JIG, JIGComm },
 
                 { Product.YB, YBComm },
-                { Product.MGRNG, MgRNGComm },
-
-                { Product.LG, LGComm }
+                { Product.MGRNG, MgRNGComm }
             };
         }
 

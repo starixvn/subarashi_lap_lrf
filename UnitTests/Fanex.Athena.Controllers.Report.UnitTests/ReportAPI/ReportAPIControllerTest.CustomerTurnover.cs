@@ -57,7 +57,7 @@
             {
                 // Action
                 var result = await controller.GetBettypesBySport(new List<SportProductItem>()) as JsonResult;
-                var resultData = result.Data as IEnumerable<SportProductItem>;
+                var resultData = result.Data as IEnumerable<BettypeProductItem>;
 
                 // Assert
                 Assert.That(resultData, Is.Empty);
@@ -74,9 +74,9 @@
                 {
                     new SportProductItem()
                 };
-                var dataList = new List<CheckedItem>
+                var dataList = new List<BettypeProductItem>
                 {
-                    new CheckedItem()
+                    new BettypeProductItem()
                 };
 
                 _betTypeService.GetBettypes(
@@ -85,7 +85,7 @@
 
                 // Action
                 var result = await controller.GetBettypesBySport(sports) as JsonResult;
-                var resultData = result.Data as IEnumerable<CheckedItem>;
+                var resultData = result.Data as IEnumerable<BettypeProductItem>;
 
                 // Assert
                 Assert.That(resultData, Is.EqualTo(dataList));

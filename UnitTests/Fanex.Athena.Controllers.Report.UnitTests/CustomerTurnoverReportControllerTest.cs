@@ -79,7 +79,7 @@
                 };
                 var subProductCodes = $"{Product.SB},{Product.NG},{Product.VS}";
 
-                StubGetAllowedSubProductCodeList($"{Product.SB},{Product.NG},{Product.VS},{Product.VS2},{Product.VS3},{Product.LG}", subProductCodes);
+                StubGetAllowedSubProductCodeList($"{Product.SB},{Product.NG},{Product.VS}", subProductCodes);
 
                 _sportTypeDataAccess.GetSportsAndProducts(
                     SessionService.LicenseeSession.LicenseeId,

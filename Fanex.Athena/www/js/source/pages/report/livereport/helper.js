@@ -17,19 +17,12 @@
         const newSportId = Number(sportId);
         let productOptions = [];
         if (newSportId > 0) {
-            if (newSportId === 180 || newSportId === 186) {
+            if (newSportId === 180 || newSportId === 186 || newSportId === 231 || newSportId === 104 ||
+                (newSportId >= 190 && newSportId <= 197) || newSportId === 178 || newSportId === 179) {
                 productOptions.push('VS');
-            }
-            else if (newSportId === 231) {
-                productOptions.push('VS3');
             }
             else if (newSportId === 162) {
                 productOptions.push('LC');
-            }
-            else if (newSportId === 104 || (newSportId >= 190 && newSportId <= 197)) {
-                productOptions.push('VS2');
-            } else if (newSportId === 178 || newSportId === 179) {
-                productOptions.push('LG');
             }
             else {
                 if (productCode === 'SB' || productCode === 'ALL') {
@@ -42,7 +35,7 @@
         }
         else {
             if (productCode === 'ALL') {
-                productOptions = ['SB', 'BA', 'NG', 'LC', 'VS', 'CS', 'VS2', 'VS3'];
+                productOptions = ['SB', 'BA', 'NG', 'LC', 'VS', 'CS'];
             }
             else {
                 productOptions.push(productCode);

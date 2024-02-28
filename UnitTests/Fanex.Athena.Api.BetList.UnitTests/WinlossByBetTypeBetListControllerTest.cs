@@ -15,7 +15,7 @@
 
     public class WinlossByBetTypeBetListControllerTest : ApiBetListBaseControllerHelperTest
     {
-        private const string UspKey = "Lrf_BetList_SelWinLossByBetType";
+        private const string UspKey = "Lrf_BetList_MatchWL";
 
         private const string ApiPath = "/BetList/GetBetListPaging";
         private ICurrencyValidation _currencyValidation;

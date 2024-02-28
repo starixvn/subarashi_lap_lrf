@@ -24,11 +24,11 @@
 
         private const int Rows = 50;
 
-        private const string MatchBetTypeUspKey = "Lrf_BetList_MatchWL_Bettype";
+        private const string MatchBetTypeUspKey = "Lrf_BetList_MatchWL";
 
-        private const string OutrightUspKey = "Lrf_BetList_MatchWL_Outright";
+        private const string OutrightUspKey = "Lrf_BetList_MatchWL";
 
-        private const string MixParlayUspKey = "Lrf_BetList_MatchWL_Parlay";
+        private const string MixParlayUspKey = "Lrf_BetList_MatchWL";
 
         private const string ApiPath = "/BetList/GetBetList";
 

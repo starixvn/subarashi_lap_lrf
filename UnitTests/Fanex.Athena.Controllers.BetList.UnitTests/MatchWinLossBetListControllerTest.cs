@@ -101,7 +101,7 @@
             }
         }
 
-        [TestCase(1, "Lrf_BetList_MatchWL_Bettype")]
+        [TestCase(1, "Lrf_BetList_MatchWL")]
         public async Task MatchBetType_ExportExcel_PassCorrectParam(int betTypeId, string uspKey)
         {
             using (var controller = CreateController())
@@ -171,7 +171,7 @@
                 await controller.MixParlay(metaModel);
 
                 // Assert
-                await AssertExcelParameters(expectedTitle, "Lrf_BetList_MatchWL_Parlay", controller);
+                await AssertExcelParameters(expectedTitle, "Lrf_BetList_MatchWL", controller);
             }
         }
 
@@ -200,7 +200,7 @@
                 await controller.Outright(metaModel);
 
                 // Assert
-                await AssertExcelParameters(expectedTitle, "Lrf_BetList_MatchWL_Outright", controller);
+                await AssertExcelParameters(expectedTitle, "Lrf_BetList_MatchWL", controller);
             }
         }
 

@@ -97,7 +97,6 @@
         }
 
         [TestCase(1201, " (Virtual Sports)")]
-        [TestCase(2700, " (Virtual Sports 2)")]
         public async Task GetDataList_WhenCall_ReturnCorrectBetTypeName(int bettype, string expectedBetTypeName)
         {
             // Arrange

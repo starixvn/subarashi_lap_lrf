@@ -197,6 +197,7 @@ namespace Fanex.Athena.DataAccess.Report
             switch (sportId)
             {
                 case MixParlaySportType:
+                case VirtualSports2MixParlaySportType:
                     return _cacheRefAdapter.GetBettype((int)BetType.MixParlay);
 
                 case CombinationMixParlaySportType:
@@ -204,9 +205,6 @@ namespace Fanex.Athena.DataAccess.Report
 
                 case OutrightSportType:
                     return _cacheRefAdapter.GetBettype((int)BetType.Outright);
-
-                case VirtualSports2MixParlaySportType:
-                    return _cacheRefAdapter.GetBettypeWithProductName((int)BetType.VirtualSports2MixParlay);
 
                 default:
                     return _cacheRefAdapter.GetSportName(sportType);

@@ -63,11 +63,6 @@ namespace Fanex.Athena.DataAccess.Report
                 return " (" + ViewResources.ProductVS + ")";
             }
 
-            if (BetTypeHelper.IsVirtualSports2(bettype))
-            {
-                return " (" + ViewResources.ProductVS2 + ")";
-            }
-
             if (bettype == (int)BetType.NumberGameHappy5OddEven)
             {
                 return " (" + ViewResources.Happy5 + ")";

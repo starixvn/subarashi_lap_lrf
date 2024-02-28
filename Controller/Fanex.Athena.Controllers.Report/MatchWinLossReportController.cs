@@ -106,7 +106,7 @@
             var reportData = await _matchWinLossService.GetDataList(metaModel).ConfigureAwait(false);
             IList<MatchWinLoss> reportDataOutrightParlay = new List<MatchWinLoss>();
 
-            var outrightParlayProducts = new List<string> { Product.BA, Product.SB, Product.VS2, Product.NG };
+            var outrightParlayProducts = new List<string> { Product.BA, Product.SB, Product.NG, Product.VS };
             if (metaModel.ProductOptions.Any(i => i.Status && outrightParlayProducts.Any(s => i.Code == s)))
             {
                 reportDataOutrightParlay = await _matchWinLossService.GetOutrightParlayList(metaModel).ConfigureAwait(false);

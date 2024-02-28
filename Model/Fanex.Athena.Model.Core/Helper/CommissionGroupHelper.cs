@@ -42,7 +42,6 @@ namespace Fanex.Athena.Model.Core.Helper
             [Product.CG] = "CG",
             [Product.AP] = "Advant",
             [Product.APM] = "AdvantMini",
-            [Product.LG] = "VS3",
             [Product.FGGL] = "FGG",
             [Product.MXG] = "MaxGame",
             [Product.JIG] = "Jili",

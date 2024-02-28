@@ -168,7 +168,6 @@
             });
         }
 
-        [TestCase("101", BetType.MixParlay)]
         [TestCase("102", BetType.CombinationMixParlay)]
         [TestCase("103", BetType.Outright)]
         public void GetProductNameBySport_WhenCall_CallCorrectCacheRefMethod(string sportType, BetType bettype)
@@ -190,7 +189,7 @@
             DataAccess.GetProductNameBySport(Bettype);
 
             // Assert
-            _cacheRefAdapter.Received(1).GetBettypeWithProductName((int)BetType.VirtualSports2MixParlay);
+            _cacheRefAdapter.Received(1).GetBettype((int)BetType.MixParlay);
         }
 
         [Test]

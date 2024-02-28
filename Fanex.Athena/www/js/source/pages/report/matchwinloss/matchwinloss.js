@@ -191,9 +191,6 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
                 if (isProductOriginalChecked('VS')) {
                     productCodeList.push('VS');
                 }
-                if (isProductOriginalChecked('VS2')) {
-                    productCodeList.push('VS2');
-                }
                 if (isProductOriginalChecked('NG')) {
                     productCodeList.push('NG');
                 }
@@ -204,7 +201,7 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
             },
 
             getProductCodeList: function (productCode) {
-                const codeList = ['NG', 'LC', 'VS', 'VS2'];
+                const codeList = ['NG', 'LC', 'VS'];
                 const productCodeList = [];
                 if ((productCode === 'SB' || productCode === 'BA') && isProductOriginalChecked('SB')) {
                     productCodeList.push('SB');

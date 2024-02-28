@@ -39,7 +39,7 @@
             </td>
 
             @if (Model.ProductAccess.IsAllowBA)
-                {
+            {
                 <td class="right-align text-bold">
                     @DesktopRazorHelper.NegativeFormat(dataTotal.BACommission)
                 </td>
@@ -57,7 +57,7 @@
         <tr>
             <td colspan="2" class="text-bold">
                 <a href="javascript:;" class="outright-link" data-bettype="@itemOutRight.BetType">
-                    @_cacheRefAdapter.GetBettypeWithProductName(itemOutRight.BetType)
+                    @_cacheRefAdapter.GetBettypeWithProductName(itemOutRight.BetType, itemOutRight.ProductCode)
                 </a>
             </td>
             <td class="right-align text-bold">
