@@ -15,6 +15,9 @@ const PlayerInformation = (props) => {
         securityQuestion,
         securityCode,
         preferredUserName,
+        address,
+        occupation,
+        sourceOfFunds
     } = props.userInfo;
 
     return (
@@ -54,6 +57,18 @@ const PlayerInformation = (props) => {
                         <tr>
                             <td>{LangHelper.getSingleResource("Mobile")}</td>
                             <td>{mobile}</td>
+                        </tr>
+                        <tr>
+                            <td>{LangHelper.getSingleResource("Address")}</td>
+                            <td>{address}</td>
+                        </tr>
+                        <tr>
+                            <td>{LangHelper.getSingleResource("Occupation")}</td>
+                            <td>{occupation}</td>
+                        </tr>
+                        <tr>
+                            <td>{LangHelper.getSingleResource("SourceOfFunds")}</td>
+                            <td>{sourceOfFunds}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("Active")}</td>

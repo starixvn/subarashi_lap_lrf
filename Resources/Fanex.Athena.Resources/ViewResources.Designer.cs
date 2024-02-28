@@ -8035,6 +8035,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Source of Funds.
+        /// </summary>
+        public static string SourceOfFunds {
+            get {
+                return ResourceManager.GetString("SourceOfFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Special Level.
         /// </summary>
         public static string SpecialLevel {

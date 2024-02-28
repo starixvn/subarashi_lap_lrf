@@ -1,4 +1,4 @@
-﻿// Generated at: 1/24/2024 3:18:57 PM
+﻿// Generated at: 2/28/2024 10:47:44 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -886,6 +886,7 @@ Soccer:"Soccer",
 SoccerParlay:"Soccer Parlay",
 SoccerPinGoal:"Soccer PinGoal",
 SolutionForRestriction:"1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限",
+SourceOfFunds:"Source of Funds",
 SpecialLevel:"Special Level",
 SpecificDate:"Specific Date",
 Sport:"Sport",
