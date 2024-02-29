@@ -11,9 +11,9 @@ const Url = Site.resolveClientUrl('api/CommonDataApi/GetBetTypeInTreeList');
 let currentCancellationTokenSource = null;
 
 const dispatchBettypeList = (dispatch, data) => {
-        const selectedXMLSports = Service.getInitSelectedBettypeXML(data);
+        const selectedSports = Service.getSelectedItemFromTreeListItem(data);
         dispatch(setBettypeList(data));
-        dispatch(setSelectedBettype(selectedXMLSports));
+        dispatch(setSelectedBettype(selectedSports));
 }
 
 export const setSelectedBettype = (betTypeIds) => {

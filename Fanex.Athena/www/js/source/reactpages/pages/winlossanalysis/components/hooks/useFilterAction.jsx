@@ -92,7 +92,7 @@ export const useFilterAction = () => {
             BaseCurrency: selectedBaseCurrency,
             StatusIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(selectedStatus, statusList),
             SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
-            BetTypeIds: Service.getNormalizedSelectedParamValueForTreeListFilter(selectedBettype, bettypeList),
+            BetTypeIds: Service.getSelectedBettypeXML(selectedBettype),
             PlatformIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(selectedPlatform, platformList),
             LiveStatusIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(selectedLiveStatus, liveStatusList),
             IsVipOnly: selectedVipOnly,

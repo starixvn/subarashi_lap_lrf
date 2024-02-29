@@ -4942,9 +4942,9 @@ const BETTYPE_CACHE_KEY = "WINLOSSANALYSIS_BETTYPE_CACHE_KEY";
 const Url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/CommonDataApi/GetBetTypeInTreeList');
 let currentCancellationTokenSource = null;
 const dispatchBettypeList = (dispatch, data) => {
-  const selectedXMLSports = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].getInitSelectedBettypeXML(data);
+  const selectedSports = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].getSelectedItemFromTreeListItem(data);
   dispatch(setBettypeList(data));
-  dispatch(setSelectedBettype(selectedXMLSports));
+  dispatch(setSelectedBettype(selectedSports));
 };
 const setSelectedBettype = betTypeIds => {
   return {
@@ -5303,18 +5303,6 @@ class Service {
   static getSelectedItemFromTreeListItem(items) {
     return items.reduce((accum, elem) => accum.concat(elem.Children), []).map(elem => elem.Value).join(",");
   }
-  static getInitSelectedBettypeXML(items) {
-    var xmlDoc = document.implementation.createDocument(null, "ROOT", null);
-    items.forEach(item => {
-      if (!item.Children || !item.Children.length) {
-        return;
-      }
-      var productCode = item.Value;
-      var bettypeList = item.Children.reduce((accum, elem) => accum.concat(elem), []).map(elem => elem.Value.substring(0, elem.Value.indexOf("_"))).join(",");
-      Service.buildBettypeElement(xmlDoc, productCode, bettypeList);
-    });
-    return new XMLSerializer().serializeToString(xmlDoc);
-  }
   static getNormalizedSelectedParamValueForMultiSelectFilter(selectedValue, dataList, selectedIdFunc) {
     const allSelected = selectedIdFunc instanceof Function ? dataList.map(selectedIdFunc).join(",") : dataList.map(item => item.id).join(",");
     const listAllSelectId = allSelected.split(",");
@@ -5334,25 +5322,24 @@ _defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
   var listSelectedProduct = selectedItemsKey.split(",");
   return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_3__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_3__["ProductCode"].BA) >= 0;
 });
-_defineProperty(Service, "getSelectedBettypeXML", items => {
+_defineProperty(Service, "getSelectedBettypeXML", seletedBetTypeIds => {
+  var bettypeList = seletedBetTypeIds.split(",").map(elem => ({
+    parent: elem.substring(elem.indexOf("_") + 1),
+    value: elem.substring(0, elem.indexOf("_"))
+  }));
+  var bettypeListBaseOnProduct = bettypeList.reduce((r, a) => {
+    r[a.parent] = r[a.parent] || "";
+    r[a.parent] = r[a.parent] !== "" ? r[a.parent] + `,${a.value}` : a.value;
+    return r;
+  }, {});
   var xmlDoc = document.implementation.createDocument(null, "ROOT", null);
-  const parents = items.filter(item => item.parentKey === null);
-  parents.forEach(parent => {
-    const childrenList = items.filter(item => item.parentKey === parent.key && item.checked);
-    if (!childrenList.length) {
-      return;
-    }
-    var productCode = parent.key;
-    var bettypeList = childrenList.reduce((accum, elem) => accum.concat(elem), []).map(elem => elem.key.substring(0, elem.key.indexOf("_"))).join(",");
-    _class.buildBettypeElement(xmlDoc, productCode, bettypeList);
-  });
+  for (const product in bettypeListBaseOnProduct) {
+    _class.buildBettypeElement(xmlDoc, product, bettypeListBaseOnProduct[product]);
+  }
   return new XMLSerializer().serializeToString(xmlDoc);
 });
 _defineProperty(Service, "buildBettypeElement", (xmlDoc, productCode, bettypeList) => {
   var bettypeElem = xmlDoc.createElement("Bettype");
-  if (productCode === "SB,BA" || productCode === "BA") {
-    productCode = "SB";
-  }
   bettypeElem.setAttribute("pc", productCode);
   bettypeElem.setAttribute("bt", bettypeList);
   xmlDoc.documentElement.appendChild(bettypeElem);
@@ -8104,7 +8091,7 @@ const useFilterAction = () => {
       BaseCurrency: selectedBaseCurrency,
       StatusIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedStatus, statusList),
       SportIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
-      BetTypeIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForTreeListFilter(selectedBettype, bettypeList),
+      BetTypeIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getSelectedBettypeXML(selectedBettype),
       PlatformIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedPlatform, platformList),
       LiveStatusIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedLiveStatus, liveStatusList),
       IsVipOnly: selectedVipOnly,
@@ -8261,10 +8248,7 @@ const useFilterHandler = () => {
     });
   }, []);
   const onSportChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedSport(selectedItemsKey)), []);
-  const onBetTypeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey, dataSource) => {
-    var selectedBettypeByXML = _common_Service__WEBPACK_IMPORTED_MODULE_5__["default"].getSelectedBettypeXML(dataSource);
-    dispatch(setSelectedBettype(selectedBettypeByXML));
-  }, []);
+  const onBetTypeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedBettype(selectedItemsKey)), []);
   const onRiskLevelChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => {
     const customerClass = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].riskLevelList.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
     dispatch(setSelectedCustomerClass(customerClass));

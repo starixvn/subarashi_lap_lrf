@@ -21,53 +21,29 @@ export default class Service {
         return items.reduce((accum, elem) => accum.concat(elem.Children), []).map(elem => elem.Value).join(",");
     }
 
-    static getInitSelectedBettypeXML(items){
+    static getSelectedBettypeXML = (seletedBetTypeIds) => {
+        var bettypeList = seletedBetTypeIds.split(",").map((elem) => ({
+            parent: elem.substring(elem.indexOf("_") + 1),
+            value: elem.substring(0, elem.indexOf("_"))
+        }));
+
+        var bettypeListBaseOnProduct = bettypeList.reduce((r, a) => {
+            r[a.parent] = r[a.parent] || ""
+            r[a.parent] = r[a.parent] !== "" ? r[a.parent] + `,${a.value}` : a.value;
+            return r;
+        }, {});
+
         var xmlDoc = document.implementation.createDocument(null, "ROOT", null);
 
-        items.forEach((item) => {
-            if(!item.Children || !item.Children.length)
-            {
-                return;
-            }
-
-            var productCode = item.Value;
-            var bettypeList = item.Children.reduce((accum, elem) => accum.concat(elem), []).map(elem => elem.Value.substring(0, elem.Value.indexOf("_"))).join(",");
-
-            Service.buildBettypeElement(xmlDoc, productCode, bettypeList);
-        });
-
-        return new XMLSerializer().serializeToString(xmlDoc);
-    }
-
-    static getSelectedBettypeXML = (items) => {
-        var xmlDoc = document.implementation.createDocument(null, "ROOT", null);
-
-        const parents = items.filter((item) => item.parentKey === null);
-
-        parents.forEach((parent) => {
-
-            const childrenList = items.filter((item) => item.parentKey === parent.key && item.checked);
-            if(!childrenList.length)
-            {
-                return;
-            }
-
-            var productCode = parent.key;
-            var bettypeList = childrenList.reduce((accum, elem) => accum.concat(elem), []).map(elem => elem.key.substring(0, elem.key.indexOf("_"))).join(",");
-
-            Service.buildBettypeElement(xmlDoc, productCode, bettypeList);
-        });
+        for (const product in bettypeListBaseOnProduct) {
+            Service.buildBettypeElement(xmlDoc, product, bettypeListBaseOnProduct[product]);
+        }
 
         return new XMLSerializer().serializeToString(xmlDoc);
     }
 
     static buildBettypeElement = (xmlDoc, productCode, bettypeList) => {
         var bettypeElem = xmlDoc.createElement("Bettype");
-
-        if(productCode === "SB,BA" || productCode === "BA")
-        {
-            productCode = "SB";
-        }
 
         bettypeElem.setAttribute("pc", productCode);
         bettypeElem.setAttribute("bt", bettypeList);

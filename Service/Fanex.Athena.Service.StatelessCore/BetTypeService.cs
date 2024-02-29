@@ -72,7 +72,7 @@
                     Children = null,
                     ID = _.BetType,
                     Name = GetBetTypeName(_.BetType, lang, isHideSaba),
-                    Value = $"{_.BetType}_{_.ProductCode}",
+                    Value = $"{_.BetType}_{MapBAProductCode(_.ProductCode)}",
                 },
                 (key, items) => new CheckedItem
                 {
@@ -111,6 +111,9 @@
             string suffix = GetBettypeNameSuffix(betType);
             return _cacheRefAdapter.GetBetTypeName(Convert.ToInt32(betType), languageCode, isHideSaba) + suffix;
         }
+
+        private string MapBAProductCode(string productCode)
+            => (productCode == Product.BA || productCode == $"{Product.SB},{Product.BA}") ? Product.SB : productCode;
 
         private string GetBettypeNameSuffix(int betType)
         {

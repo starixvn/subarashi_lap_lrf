@@ -50,10 +50,7 @@ export const useFilterHandler = () => {
 
     const onSportChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedSport(selectedItemsKey)), [])
 
-    const onBetTypeChangeHandler = useCallback((currentItem, selectedItemsKey, dataSource) => {
-        var selectedBettypeByXML = Service.getSelectedBettypeXML(dataSource);
-        dispatch(setSelectedBettype(selectedBettypeByXML));
-    }, []);
+    const onBetTypeChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedBettype(selectedItemsKey)), []);
 
     const onRiskLevelChangeHandler = useCallback((currentItem, selectedItemsKey) => {
         const customerClass = AppData.riskLevelList.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
