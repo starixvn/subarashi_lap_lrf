@@ -5,6 +5,8 @@ namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
 {
     public class CustomerInfo
     {
+        private const string DefaultValue = "-";
+
         public CustomerInfo()
         { }
 
@@ -25,6 +27,9 @@ namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
             RegisteredDate = token["DateOfRegistration"].Value<DateTime>();
             SecurityQuestion = token["SecurityQuestion"].Value<string>();
             UserName = token["UserName"].Value<string>();
+            Address = token["Address"].Value<string>();
+            Occupation = token["Occupation"].Value<string>();
+            SourceOfFunds = token["SourceOfFunds"].Value<string>();
             SecurityCode = "*****";
         }
 
@@ -59,6 +64,12 @@ namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
         public string SecurityQuestion { get; set; }
 
         public string SecurityCode { get; set; }
+
+        public string Address { get; set; } = DefaultValue;
+
+        public string Occupation { get; set; } = DefaultValue;
+
+        public string SourceOfFunds { get; set; } = DefaultValue;
 
         public string RegisteredDateString => RegisteredDate.ToString("MM/dd/yyyy");
     }

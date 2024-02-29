@@ -51,7 +51,7 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
 
             if (_ivorySites.Contains(result?.LicenseeName, StringComparer.InvariantCultureIgnoreCase))
             {
-                model.SabaId = result.RegisteredUserName;
+                model.SabaId = result?.RegisteredUserName;
                 result = _customerAdminAPIService.GetCustomerInfoIvoryByUserName(model, result.LicenseeName) ?? result;
             }
 

@@ -2,6 +2,7 @@ import React from "react";
 import LangHelper from "@jsroot/lib/langHelper";
 import ReportTitle from "@jsroot/components/ReportTitle";
 import { connect } from "react-redux";
+import { ShowTextWithDefaultValue } from '../lib/service'
 
 const PlayerInformation = (props) => {
     const {
@@ -15,6 +16,9 @@ const PlayerInformation = (props) => {
         securityQuestion,
         securityCode,
         preferredUserName,
+        address,
+        occupation,
+        sourceOfFunds
     } = props.userInfo;
 
     return (
@@ -33,45 +37,57 @@ const PlayerInformation = (props) => {
                     <tbody>
                         <tr>
                             <td className='first-cell'>{LangHelper.getSingleResource("FirstName")}</td>
-                            <td>{firstName}</td>
+                            <td>{ShowTextWithDefaultValue(firstName)}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("LastName")}</td>
-                            <td>{lastName}</td>
+                            <td>{ShowTextWithDefaultValue(lastName)}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("PreferredUserName")}</td>
-                            <td>{preferredUserName}</td>
+                            <td>{ShowTextWithDefaultValue(preferredUserName)}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("Gender")}</td>
-                            <td>{gender}</td>
+                            <td>{ShowTextWithDefaultValue(gender)}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("Email")}</td>
-                            <td>{email}</td>
+                            <td>{ShowTextWithDefaultValue(email)}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("Mobile")}</td>
-                            <td>{mobile}</td>
+                            <td>{ShowTextWithDefaultValue(mobile)}</td>
+                        </tr>
+                        <tr>
+                            <td>{LangHelper.getSingleResource("Address")}</td>
+                            <td>{ShowTextWithDefaultValue(address)}</td>
+                        </tr>
+                        <tr>
+                            <td>{LangHelper.getSingleResource("Occupation")}</td>
+                            <td>{ShowTextWithDefaultValue(occupation)}</td>
+                        </tr>
+                        <tr>
+                            <td>{LangHelper.getSingleResource("SourceOfFunds")}</td>
+                            <td>{ShowTextWithDefaultValue(sourceOfFunds)}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("Active")}</td>
-                            <td>{active}</td>
+                            <td>{ShowTextWithDefaultValue(active)}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("Locked")}</td>
-                            <td>{locked}</td>
+                            <td>{ShowTextWithDefaultValue(locked)}</td>
                         </tr>
                         <tr>
                             <td>{LangHelper.getSingleResource("SecurityQuestion")}</td>
-                            <td>{securityQuestion}</td>
+                            <td>{ShowTextWithDefaultValue(securityQuestion)}</td>
                         </tr>
                         <tr>
                             <td>
                                 {LangHelper.getSingleResource("SecurityCode")}
                             </td>
-                            <td>{securityCode}</td>
+                            <td>{ShowTextWithDefaultValue(securityCode)}</td>
                         </tr>
                     </tbody>
                 </table>

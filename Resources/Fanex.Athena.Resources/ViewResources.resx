@@ -3707,4 +3707,7 @@
   <data name="DailyBetDetails" xml:space="preserve">
     <value>Daily Bet Details</value>
   </data>
+  <data name="SourceOfFunds" xml:space="preserve">
+    <value>Source of Funds</value>
+  </data>
 </root>

@@ -1,0 +1,1 @@
+export const ShowTextWithDefaultValue = (value) => !value ? "-" : value;
