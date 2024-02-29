@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/9/2024 3:37:23 PM
+// Generated at: 5/21/2024 11:14:17 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -392,7 +392,6 @@ window._language_zh_CN = {
   EnableCashOut: "开启即时兑现",
   EnableRNGCasino: "Enable RNG Casino",
   EndDate: "结束日期",
-  Entered: "成绩已输入场数",
   Error: "误差",
   ErrorCurrencyMsg: "你尚未设置任何币别权限",
   ErrorProcessingMsg: "对不起, 处理您的请求时有错误发生。",
@@ -679,7 +678,6 @@ window._language_zh_CN = {
   NoneCurrency: "None currency",
   NoneLevel: "None level",
   NoneLive: "非滚球(不含混合)",
-  NonEntered: "成绩还没输入场数",
   NoOfCustmer: "会员数",
   NoOfReached: "到达上限次数",
   NoProductFound: "No product found",
@@ -882,7 +880,6 @@ window._language_zh_CN = {
   SettledAndResettledDate: "结算与已重新结算日",
   SettledAndResettledReport: "已结算与已重新结算报告",
   SettledDateOnly: "结算日",
-  SettledMatchCount: "已结算赛事计数",
   SettledOnlyReport: "已结算报告",
   Show: "显示",
   ShowAllLeagues: "显示所有联赛",

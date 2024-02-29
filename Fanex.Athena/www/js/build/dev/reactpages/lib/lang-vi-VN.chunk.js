@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/9/2024 3:37:23 PM
+// Generated at: 5/21/2024 11:14:17 AM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -414,7 +414,6 @@ window._language_vi_VN = {
   Email: "Email",
   EnableRNGCasino: "Kích hoạt RNG Casino",
   EndDate: "Ngày cuối",
-  Entered: "Đã kết thúc",
   Error: "Lỗi",
   ErrorNotification: "Bạn ở đây vì một trong những lý do sau: &lt;br/&gt;遭遇问题了!",
   ErrorProcessingMsg: "Xin lỗi, đã xảy ra lỗi trong quá trình thực hiện yêu cầu của bạn.",
@@ -470,9 +469,6 @@ window._language_vi_VN = {
   General: "Chung",
   GeneralInformation: "Thông tin chung",
   GetAll: "Xem tất cả",
-  GetAllCustomersHavingPositiveClosingBalance: "Chỉ hiển thị khách hàng có số dư cuối kỳ &gt; 0",
-  GetAllCustomersHavingRunningTickets: "Xem tất cả các khách hàng có vé cược đang diễn ra",
-  GetAllRunningTickets: "Xem tất cả các vé đang diễn ra",
   GGR: "GGR",
   Go: "Số bàn thắng",
   GodOfFortuneWinLoss: "Thần Tài Thắng Thua",
@@ -724,7 +720,6 @@ window._language_vi_VN = {
   NoneCurrency: "Không có đơn vị tiền tệ",
   NoneLevel: "Không có cấp độ",
   NoneLive: "Không Trực tiếp",
-  NonEntered: "Chưa có kết quả",
   NoOfCustmer: "Số Khách hàng",
   NoOfReached: "Số lượng đã đạt được",
   NoProductFound: "Không tìm thấy sản phẩm",
@@ -949,7 +944,6 @@ window._language_vi_VN = {
   SettledAndResettledDate: "Ngày Tất Toán và Tất Toán Lại",
   SettledAndResettledReport: "Báo cáo Tất Toán và Tất Toán Lại",
   SettledDateOnly: "Ngày Tất Toán",
-  SettledMatchCount: "Số Lượng Trận Đấu Đã Hoàn Tất",
   SettledOnlyReport: "Báo Cáo Tất Toán",
   Show: "Hiển thị",
   ShowAllLeagues: "Hiển thị Tất cả Giải đấu",
@@ -986,7 +980,6 @@ window._language_vi_VN = {
   SuccessUpdateVipStatusSingle: "Cập nhật thành công",
   Summary: "Tóm tắt",
   Sunday: "Chủ Nhật",
-  SupportTask: "Nhiệm vụ hỗ trợ",
   Suspended: "Đình chỉ",
   Suspicious: "Đáng ngờ",
   SystemId: "ID hệ thống",
@@ -1157,7 +1150,6 @@ window._language_vi_VN = {
   Wednesday: "Thứ Tư",
   Week2: "Tuần {0}",
   Weekly: "Hàng tuần",
-  WeeklyLiveMatches: "Trận Đấu Trực Tiếp Hàng Tuần",
   Welcome: "Chào mừng",
   WhiteLabel: "Nhóm Chi Nhánh",
   WinLoss: "Thắng Thua",

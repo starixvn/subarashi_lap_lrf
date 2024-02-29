@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/9/2024 3:37:23 PM
+// Generated at: 5/21/2024 11:14:17 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -423,7 +423,6 @@ window._language_en_US = {
   Email: "Email",
   EnableRNGCasino: "Enable RNG Casino",
   EndDate: "End Date",
-  Entered: "Entered",
   Error: "Error",
   ErrorNotification: "You&apos;re here because of one of those reasons: &lt;br/&gt;遭遇问题了!",
   ErrorProcessingMsg: "Sorry, an error occurred while processing your request.",
@@ -481,9 +480,6 @@ window._language_en_US = {
   General: "General",
   GeneralInformation: "General Information",
   GetAll: "Get All",
-  GetAllCustomersHavingPositiveClosingBalance: "Only show customers having closing balance &gt; 0",
-  GetAllCustomersHavingRunningTickets: "Get all customers having running tickets",
-  GetAllRunningTickets: "Get all running tickets",
   GGR: "GGR",
   Go: "Go",
   GodOfFortuneWinLoss: "God of Fortune Win Loss",
@@ -737,7 +733,6 @@ window._language_en_US = {
   NoneCurrency: "None currency",
   NoneLevel: "None level",
   NoneLive: "Non-Live",
-  NonEntered: "Non-Entered",
   NoOfCustmer: "No. of Customer",
   NoOfReached: "No. of Reached",
   NoProductFound: "No product found",
@@ -979,7 +974,6 @@ window._language_en_US = {
   SettledAndResettledDate: "Settled and Resettled Date",
   SettledAndResettledReport: "Settled and Resettled Report",
   SettledDateOnly: "Settled Date",
-  SettledMatchCount: "Settled Match Count",
   SettledOnlyReport: "Settled Report",
   Show: "Show",
   ShowAllLeagues: "Show All Leagues",
@@ -1017,7 +1011,6 @@ window._language_en_US = {
   SuccessUpdateVipStatusSingle: "Successfully update",
   Summary: "Summary",
   Sunday: "Sunday",
-  SupportTask: "Support Task",
   Suspended: "Suspended",
   Suspicious: "Suspicious",
   SystemId: "System ID",
@@ -1190,7 +1183,6 @@ window._language_en_US = {
   Wednesday: "Wednesday",
   Week2: "Week {0}",
   Weekly: "Weekly",
-  WeeklyLiveMatches: "Weekly Live Matches",
   Welcome: "Welcome",
   WhiteLabel: "Whitelabel",
   WinLoss: "Win Loss",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/9/2024 3:37:23 PM
+// Generated at: 5/21/2024 11:14:17 AM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -416,7 +416,6 @@ window._language_th_TH = {
   Email: "อีเมล",
   EnableRNGCasino: "เปิดใช้งาน RNG เกมคีโน",
   EndDate: "วันที่สิ้นสุด",
-  Entered: "ป้อน",
   Error: "ข้อผิดพลาด",
   ErrorNotification: "คุณมาที่นี่เพราะหนึ่งในเหตุผลเหล่านี้: &lt;br/&gt;",
   ErrorProcessingMsg: "ขออภัย เกิดข้อผิดพลาดขณะดำเนินการตามคำขอของคุณ",
@@ -474,9 +473,6 @@ window._language_th_TH = {
   General: "ทั่วไป",
   GeneralInformation: "ข้อมูลทั่วไป",
   GetAll: "รับทั้งหมด",
-  GetAllCustomersHavingPositiveClosingBalance: "แสดงเฉพาะลูกค้าที่มียอดปิด &gt; 0",
-  GetAllCustomersHavingRunningTickets: "รับตั๋วแข่งขันทั้งหมดของลูกค้า",
-  GetAllRunningTickets: "รับตั๋วแข่งขันทั้งหมด",
   Go: "ไป",
   GodOfFortuneWinLoss: "God ของ Fortune แพ้ชนะ",
   GotoCustomerList: "ไปที่รายชื่อลูกค้า",
@@ -727,7 +723,6 @@ window._language_th_TH = {
   NoneCurrency: "ไม่มีสกุลเงิน",
   NoneLevel: "ไม่มีระดับ",
   NoneLive: "ไม่แทงบอลสด",
-  NonEntered: "ไม่ป้อน",
   NoOfCustmer: "จำนวนลูกค้า",
   NoOfReached: "จำนวนของการเข้าถึง",
   NoProductFound: "ไม่พบสินค้า",
@@ -947,7 +942,6 @@ window._language_th_TH = {
   SettledAndResettledDate: "วันที่ตั้งถิ่นฐานและวันที่ย้ายถิ่นฐาน",
   SettledAndResettledReport: "ชำระและตั้งรายงานใหม่",
   SettledDateOnly: "วันที่ตั้งต้น",
-  SettledMatchCount: "นับการตัดสินการแข่งขัน",
   SettledOnlyReport: "รายงานการตัดสิน",
   Show: "แสดง",
   ShowAllLeagues: "แสดงลีกทั้งหมด",
@@ -984,7 +978,6 @@ window._language_th_TH = {
   SuccessUpdateVipStatusSingle: "อัปเดตสำเร็จ",
   Summary: "สรุป",
   Sunday: "วันอาทิตย์",
-  SupportTask: "งานสนับสนุน",
   Suspended: "ถูกระงับ",
   Suspicious: "น่าสงสัย",
   SystemId: "รหัสระบบ",
@@ -1155,7 +1148,6 @@ window._language_th_TH = {
   Wednesday: "วันพุธ",
   Week2: "สัปดาห์ {0}",
   Weekly: "สัปดาห์ละครั้ง",
-  WeeklyLiveMatches: "การแข่งขันแทงบอลสดประจำสัปดาห์",
   Welcome: "ยินดีต้อนรับ",
   WhiteLabel: "ป้ายขาว",
   WinLoss: "แพ้ชนะ",
