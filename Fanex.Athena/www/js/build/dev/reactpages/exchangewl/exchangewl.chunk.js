@@ -3173,6 +3173,12 @@ const BaseCurrency = [{
   value: -12,
   text: 'MP'
 }, {
+  value: -14,
+  text: 'NPR'
+}, {
+  value: -15,
+  text: 'TRY'
+}, {
   value: -99,
   text: 'USDT'
 }];

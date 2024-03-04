@@ -21570,7 +21570,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿///
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _language_en_US*/
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"), __webpack_require__(/*! helpers/htmlHelper */ "./www/js/source/helpers/htmlHelper.js"), __webpack_require__(/*! extensions/prototype */ "./www/js/source/extensions/prototype.js"), __webpack_require__(/*! components/selectlist */ "./www/js/source/components/selectlist.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, QueryString, Popup, HtmlHelper) {// jshint ignore:line
         'use strict';
-        const BASE_CURRENCY_LIST = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10', 'php': '-11', 'mp':'-12', 'usdt': '-99' };
+        const BASE_CURRENCY_LIST = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10', 'php': '-11', 'mp': '-12', 'npr': '-14', 'try': '-15', 'usdt': '-99' };
         var BASE_CURRENCY = {};
 
         function initBaseCurrency() {
@@ -21610,7 +21610,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             return resolveClientUrl(betlistProxyUrl);
         }
 
-
         function setProductCodeListParam(url, productCodeList) {
             return QueryString.setParam(url, 'ProductCodeList', productCodeList);
         }
@@ -21622,7 +21621,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
         function resolveClientUrl(relativeUrl) {
             return _rootUrl + relativeUrl;
         }
-
 
         function ignoreSharding() {
             return asBool($('#IgnoreSharding').val())
@@ -21764,8 +21762,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             });
         }
 
-        function addUpComingClosurePopup(options){
-            if(getCookie(options.key)){
+        function addUpComingClosurePopup(options) {
+            if (getCookie(options.key)) {
                 return;
             }
             const defaultOptions = {
@@ -21774,7 +21772,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
                 width: 650,
                 height: 200,
                 padding: 10,
-                onOpen: function(){
+                onOpen: function () {
                     setCookie(options.key, true);
                 }
             };
@@ -22117,25 +22115,24 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
         function setCookie(cname, cvalue, exdays) {
             const d = new Date();
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            let expires = "expires="+d.toUTCString();
+            let expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-          }
-          
-          function getCookie(cname) {
+        }
+
+        function getCookie(cname) {
             let name = cname + "=";
             let ca = document.cookie.split(';');
-            for(let i = 0; i < ca.length; i++) {
-              let c = ca[i];
-              while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-              }
-              if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-              }
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
             }
             return "";
-          }
-          
+        }
 
         return {
             initialize: initialize,

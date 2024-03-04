@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/24/2024 3:18:57 PM
+﻿// Generated at: 3/1/2024 9:25:05 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -975,6 +975,7 @@ Soccer:"Soccer",
 SoccerParlay:"Soccer Parlay",
 SoccerPinGoal:"Soccer PinGoal",
 SolutionForRestriction:"1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限",
+SourceOfFunds:"Source of Funds",
 SpecialLevel:"Special Level",
 SpecificDate:"Specific Date",
 Sport:"Sport",

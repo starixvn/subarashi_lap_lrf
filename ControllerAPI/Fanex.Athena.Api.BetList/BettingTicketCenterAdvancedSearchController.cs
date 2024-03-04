@@ -10,6 +10,7 @@
     using Extension.Utility;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.BetList.MetaModel;
     using Resources;
@@ -26,16 +27,20 @@
 
         private readonly ISportService _sportService;
 
+        private readonly ICustomerClassService _customerClassService;
+
         public BettingTicketCenterAdvancedSearchController(
             ILanguageService langService,
             IAppSettings appSettings,
             IBetListApiClient betListApiClient,
-            ISportService sportService)
+            ISportService sportService,
+            ICustomerClassService customerClassService)
             : base(langService)
         {
             _appSettings = appSettings;
             _betListApiClient = betListApiClient;
             _sportService = sportService;
+            _customerClassService = customerClassService;
         }
 
         [HttpPost]
@@ -66,6 +71,8 @@
 
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
+            metaModel.FullCustomerClass = string.Join(",", await _customerClassService.GetAllCustomerClassId());
+
             var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
             return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetData",
                 metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);
