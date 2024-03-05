@@ -3710,6 +3710,9 @@
   <data name="SourceOfFunds" xml:space="preserve">
     <value>Source of Funds</value>
   </data>
+  <data name="ParlayBoost" xml:space="preserve">
+    <value>Parlay Boost</value>
+  </data>
   <data name="AGCasinoCutOffDateNote" xml:space="preserve">
     <value>Promotion, Contribution, and Jackpot Prize Data are available from 01/03/2024.</value>
   </data>

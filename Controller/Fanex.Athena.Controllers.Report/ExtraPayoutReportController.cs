@@ -93,6 +93,14 @@ namespace Fanex.Athena.Controllers.Report
             const string productResource = "Product";
             var productCodeList = productCode?.Split(',');
 
+            if (productCodeList.IsPresent(_ => _ == Product.SB))
+            {
+                promotionTypeList.AddRange(new List<CheckedItem>
+                {
+                    new CheckedItem { ID = ExtraPayoutMapType.SBParlayBoost, Name =  ViewResources.ParlayBoost, Checked = true }
+                });
+            }
+
             AddPromotionTypesForProductPP(promotionTypeList, productCodeList, productResource);
             AddPromotionTypesForProductSPR(promotionTypeList, productCodeList);
 
