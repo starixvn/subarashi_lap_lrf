@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Fanex.Athena.Extension.Helper;
+using Fanex.Athena.Model.Customer.DTO;
 
 namespace Fanex.Athena.Model.Customer.MetaModel
 {
@@ -40,6 +42,8 @@ namespace Fanex.Athena.Model.Customer.MetaModel
                 _toDate = DateTimeHelper.ToEndOfTheDay(value);
             }
         }
+
+        public IEnumerable<RiskLevel> RiskLevels { get; set; }
 
 #pragma warning disable S1067 // Expressions should not be too complex
 

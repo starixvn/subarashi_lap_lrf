@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 import StringHelper from '@jsroot/lib/stringHelper.js';
 import { ALL_SELECTED_TEXT, SortBy, SortOrder, SearchMode } from '../../common/constants.js'
 import { useCallback } from 'react';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
@@ -40,7 +40,7 @@ export const useFilterAction = () => {
         isViewCashOutOnly,
         selectedGroupByOption,
         selectedBreakDownByOption,
-         }
+    }
         = useSelector(state => state, shallowEqual);
 
     const { baseCurrencyList } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
@@ -54,7 +54,7 @@ export const useFilterAction = () => {
     const _buildTitle = (params) => {
         const { FromDate, ToDate, ProductCodes, SearchUserName, CurrencyCodes, BaseCurrencyName } = params;
         const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
-        const currencyText =  `, ${LangHelper.getSingleResource("Currency")}: ${CurrencyCodes}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrencyName}`;
+        const currencyText = `, ${LangHelper.getSingleResource("Currency")}: ${CurrencyCodes}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrencyName}`;
         const productText = `, ${LangHelper.getSingleResource("LicenseeW_L")} (${ProductCodes})`;
         const userText = !!SearchUserName ? `, ${LangHelper.getSingleResource("Username")}: ${SearchUserName}` : "";
 
@@ -71,7 +71,7 @@ export const useFilterAction = () => {
         const baseCurrency = baseCurrencyList.find(x => x.value === selectedBaseCurrency);
         const subsidiary = Site.getLrfSubsidiary();
         let { SubsidiarySearch, SubsidiaryList } = subsidiary;
-        if (!subsidiary || Object.keys(subsidiary).length === 0){
+        if (!subsidiary || Object.keys(subsidiary).length === 0) {
             SubsidiarySearch = isSubsidiarySearch;
             SubsidiaryList = selectedSubsidiary;
         }
@@ -97,6 +97,7 @@ export const useFilterAction = () => {
             LiveStatusIds: Service.getNormalizedSelectedParamValueForMultiSelectFilter(selectedLiveStatus, liveStatusList),
             IsVipOnly: selectedVipOnly,
             CustomerClass: Service.getNormalizedSelectedParamValueForMultiSelectFilter(selectedCustomerClass, riskLevelList, r => r.customerClassList),
+            FullCustomerClass: riskLevelList && riskLevelList.map(r => r.customerClassList).join(","),
             OddsGroup: Service.getNormalizedSelectedParamValueForMultiSelectFilter(selectedOddsGroup, oddsGroupList),
             IsShowInOrginalCurrency: isGroupInOriginalCurrency,
             IsExcludedTestData: isExcludeTestData,
@@ -129,7 +130,7 @@ export const useFilterAction = () => {
         })
     }
 
-    const onClickClearFilter = useCallback(() =>  {
+    const onClickClearFilter = useCallback(() => {
         let defaultState = window.initialState;
         batch(() => {
             dispatch(setDateRange({ startDate: defaultState.dateRange.fromDate, endDate: defaultState.dateRange.toDate }));
