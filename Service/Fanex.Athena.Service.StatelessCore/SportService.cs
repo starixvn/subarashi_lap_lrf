@@ -27,6 +27,7 @@ namespace Fanex.Athena.Service.StatelessCore
             ((int)SportType.SabaCricket, (int)SportType.Cricket, new [] { 42 }),
             ((int)SportType.SabaFutsal, (int)SportType.Soccer, new [] { 108 }),
             ((int)SportType.SabaTennis, (int)SportType.Tennis, new [] { 42 }),
+            ((int)SportType.SabaIceHockey, (int)SportType.IceHockey, new [] { 42 }),
             ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, new [] { 113 }),
             ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new [] { 122 }),
             ((int)SportType.SabaESportsPinGoal, (int)SportType.Esports, new [] { 151 })
@@ -202,6 +203,10 @@ namespace Fanex.Athena.Service.StatelessCore
 
                 case HardCodeSportType.SabaTennis:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Tennis);
+                    break;
+
+                case HardCodeSportType.SabaIceHockey:
+                    sportName = _cacheRefAdapter.GetSportName((int)SportType.IceHockey);
                     break;
 
                 default:
