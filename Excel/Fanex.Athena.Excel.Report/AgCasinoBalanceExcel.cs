@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="AgCasinoBalanceExcel.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Excel.Report
+﻿namespace Fanex.Athena.Excel.Report
 {
     using System;
     using System.Collections.Generic;
@@ -21,7 +15,7 @@ namespace Fanex.Athena.Excel.Report
 
     public class AgCasinoBalanceExcel : ReportBase
     {
-        private const int ColumnTemplateCount = 13;
+        private const int ColumnTemplateCount = 12;
 
         private const int ColumnDate = 1;
         private const int ColumnExternalId = 2;
@@ -33,8 +27,7 @@ namespace Fanex.Athena.Excel.Report
         private const int ColumnTurnover = 8;
         private const int ColumnTotalTransaction = 9;
         private const int ColumnCustomerWl = 10;
-        private const int ColumnLicenseeWl = 11;
-        private const int ColumnClosingBalance = 12;
+        private const int ColumnClosingBalance = 11;
 
         private const int RowContentTemplate = 2;
         private const int RowTotalNoSolidBorder = 4;
@@ -78,8 +71,7 @@ namespace Fanex.Athena.Excel.Report
             row.Cells[ColumnTransferOut].SetCellValue(ViewResources.TransferOut);
             row.Cells[ColumnTurnover].SetCellValue(ViewResources.Turnover);
             row.Cells[ColumnTotalTransaction].SetCellValue(ViewResources.TotalTransaction);
-            row.Cells[ColumnCustomerWl].SetCellValue(ViewResources.CustomerW_L);
-            row.Cells[ColumnLicenseeWl].SetCellValue(ViewResources.LicenseeW_L);
+            row.Cells[ColumnCustomerWl].SetCellValue(ViewResources.PlayerWL);
             row.Cells[ColumnClosingBalance].SetCellValue(ViewResources.ClosingBalance);
         }
 
@@ -88,12 +80,6 @@ namespace Fanex.Athena.Excel.Report
             sheet.SetTextRowValue(TemplateSheet, RowNoInfoTemplate, RowContentTemplate, ColumnTemplateCount, ViewResources.NoInfo);
         }
 
-        /// <summary>
-        /// Assign data to excel sheet.
-        /// </summary>
-        /// <param name="sheet">Excel sheet.</param>
-        /// <param name="pageIndex">Page index.</param>
-        /// <returns>The row index.</returns>
         protected override void AssignSheetData(ISheet sheet, int pageIndex)
         {
             int rowCount = Math.Min(_casinoList.Count, checked((pageIndex + 1) * PageSize));
@@ -143,10 +129,6 @@ namespace Fanex.Athena.Excel.Report
             ClearTemplate(sheet, RowContentTemplate);
         }
 
-        /// <summary>
-        /// Process UI, hide redundant row and column.
-        /// </summary>
-        /// <param name="sheet">Excel sheet.</param>
         protected override void ProcessUI(ISheet sheet)
         {
             switch (_metaModel.DrillDownLevel)
@@ -172,7 +154,6 @@ namespace Fanex.Athena.Excel.Report
             row.Cells[ColumnTurnover].SetCellValue(data.TurnOver);
             row.Cells[ColumnTotalTransaction].SetCellValue(data.TotalTransaction);
             row.Cells[ColumnCustomerWl].SetCellValue(data.CustomerWinLoss);
-            row.Cells[ColumnLicenseeWl].SetCellValue(data.LicenseeWL);
 
             if (isTotalData)
             {
@@ -186,12 +167,6 @@ namespace Fanex.Athena.Excel.Report
             }
         }
 
-        /// <summary>
-        /// Assign grand total data of EUR.
-        /// </summary>
-        /// <param name="sheet">Excel sheet.</param>
-        /// <param name="rowIndex">The starting row index.</param>
-        /// <returns>The last row index after assign data.</returns>
         protected internal virtual int AssignGrandTotalData(ISheet sheet, int rowIndex)
         {
             var currencyList = _summaryTotal.Keys.ToList();
@@ -212,12 +187,6 @@ namespace Fanex.Athena.Excel.Report
             return rowIndex;
         }
 
-        /// <summary>
-        /// Assign grand total data.
-        /// </summary>
-        /// <param name="sheet">Excel sheet.</param>
-        /// <param name="rowIndex">The starting row index.</param>
-        /// <returns>The last row index after assign data.</returns>
         protected internal virtual int AssignTotalData(ISheet sheet, int rowIndex)
         {
             var beginTotalRow = rowIndex;
@@ -247,11 +216,6 @@ namespace Fanex.Athena.Excel.Report
             return rowIndex;
         }
 
-        /// <summary>
-        /// Get total currency data.
-        /// </summary>
-        /// <param name="dataList">Report data.</param>
-        /// <returns>List of AgCasinoBalance entity.</returns>
         private static IEnumerable<AgCasinoBalance> GetTotalCurrency(IEnumerable<AgCasinoBalance> dataList)
         {
             var listTotalCurrency = dataList.GroupBy(x => new { x.CurrencyName })

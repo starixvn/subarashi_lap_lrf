@@ -116,6 +116,10 @@
                 item.TotalTransaction += reader.ToInt("totaltrans");
                 item.LicenseeWL += reader.ToDecimal("licenseewinlost" + suffixColumn);
                 item.TurnOver += reader.ToDecimal("turnover" + suffixColumn);
+                item.ContributionWL += reader.ToDecimal("ContributionWinlost" + suffixColumn);
+                item.PromotionWL += reader.ToDecimal("PromotionWinlost" + suffixColumn);
+                item.JackpotWL += reader.ToDecimal("JackpotWinlost" + suffixColumn);
+                item.TotalWL += reader.ToDecimal("TotalLicenseeWinlost" + suffixColumn);
             }
         }
 
@@ -144,6 +148,10 @@
                 item.CustomerWinLoss = reader.ToDecimal("winlost");
                 item.LicenseeWL = reader.ToDecimal("licenseewinlost");
                 item.TurnOver = reader.ToDecimal("turnover");
+                item.ContributionWL = reader.ToDecimal("ContributionWinlost");
+                item.PromotionWL = reader.ToDecimal("PromotionWinlost");
+                item.JackpotWL = reader.ToDecimal("JackpotWinlost");
+                item.TotalWL = reader.ToDecimal("TotalLicenseeWinlost");
                 item.TotalTransaction = reader.ToInt("totaltrans");
                 item.Date = hasWinlostDate ? (DateTime?)reader.ToDateTime("winlostdate") : metaModel.DrillDownFromDate;
                 item.RowSpan = rowSpan;
@@ -181,6 +189,10 @@
                 item.TotalTransaction = g.Sum(p => p.TotalTransaction);
                 item.CustomerWinLoss = g.Sum(p => p.CustomerWinLoss);
                 item.LicenseeWL = g.Sum(p => p.LicenseeWL);
+                item.ContributionWL = g.Sum(p => p.ContributionWL);
+                item.PromotionWL = g.Sum(p => p.PromotionWL);
+                item.JackpotWL = g.Sum(p => p.JackpotWL);
+                item.TotalWL = g.Sum(p => p.TotalWL);
                 return item;
             }).ToList();
         }

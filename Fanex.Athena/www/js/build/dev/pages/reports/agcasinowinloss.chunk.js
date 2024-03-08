@@ -4005,8 +4005,8 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*! bignumber.js v2.4.0 https://github.com/Mik
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! ./agcasinowinloss.option */ "./www/js/source/pages/report/agcasinowinloss/agcasinowinloss.option.js"), __webpack_require__(/*! ../report */ "./www/js/source/pages/report/report.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"),
-        __webpack_require__(/*! components/pluginhelper/daterangepicker */ "./www/js/source/components/pluginhelper/daterangepicker.js"), __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"), __webpack_require__(/*! helpers/daterange */ "./www/js/source/helpers/daterange.js"),
-        __webpack_require__(/*! extensions/jquery.extension */ "./www/js/source/extensions/jquery.extension.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.en */ "./www/js/source/lib/jqgrid/jquery.jqGrid.en.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.min */ "./www/js/source/lib/jqgrid/jquery.jqGrid.min.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, AgCasinoWinLossOption, Report, jqGridAdditional, DatePicker, moment, DateHelper) {
+    __webpack_require__(/*! components/pluginhelper/daterangepicker */ "./www/js/source/components/pluginhelper/daterangepicker.js"), __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"), __webpack_require__(/*! helpers/daterange */ "./www/js/source/helpers/daterange.js"),
+    __webpack_require__(/*! extensions/jquery.extension */ "./www/js/source/extensions/jquery.extension.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.en */ "./www/js/source/lib/jqgrid/jquery.jqGrid.en.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqGrid.min */ "./www/js/source/lib/jqgrid/jquery.jqGrid.min.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, AgCasinoWinLossOption, Report, jqGridAdditional, DatePicker, moment, DateHelper) {
         const cacheData = {};
         let ajaxRequest = null;
         let _level = 0;
@@ -4060,7 +4060,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     $(window).off('resize');
                 });
             },
-            resizeGrid: function(){  
+            resizeGrid: function () {
                 const reportGrid = $('#ReportGrid');
                 jqGridAdditional.updateGridHeight();
                 jqGridAdditional.updateGridWidth(reportGrid);
@@ -4070,8 +4070,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 let temp = 'api/AgCasinoWinLossReport/Index';
                 if (level > 0) {
                     temp += '?level=' + level + '&currencyId='
-                    + currencyId + '&custId=' + custId + '&fdate=' + moment(fdate).format('MM/DD/YYYY')
-                    + '&tdate=' + moment(tdate).format('MM/DD/YYYY');
+                        + currencyId + '&custId=' + custId + '&fdate=' + moment(fdate).format('MM/DD/YYYY')
+                        + '&tdate=' + moment(tdate).format('MM/DD/YYYY');
                 }
 
                 AgCasinoWinLossOption.urlExcelData = temp;
@@ -4145,7 +4145,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             },
 
             drillDown: function (data) {
-
                 data.level = Number(data.level);
 
                 if (_level !== data.level) {
@@ -4183,7 +4182,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                         tdate = _me.lastDateOfMonth(year, month);
                     }
                 }
-                
+
                 const option = {
                     type: 'POST',
                     data: JSON.stringify(param),
@@ -4264,7 +4263,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 gridOption.rowTotal = numOfRow;
 
                 gridOption.gridComplete = function () {
-                    
                     jqGridAdditional.gridComplete();
                     $('#pg_ppdata').hide();
 
@@ -4277,6 +4275,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                 // Show the grid
                 reportGrid.jqGrid(gridOption);
+
+                AgCasinoWinLossOption.setLicenseeWLGroupHeaderColumns(reportGrid);
             }
             //#end
         };
@@ -4284,7 +4284,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
 
 /***/ }),
 
@@ -4434,6 +4433,58 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         formatter: jqGridAdditional.formatLicenseeWl
     };
 
+    const contributionColumn =
+    {
+        name: 'ContributionWL',
+        index: 'ContributionWL',
+        width: 100,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        hidden: false,
+        title: true,
+        formatter: jqGridAdditional.formatDecimal
+    };
+
+    const promotionColumn =
+    {
+        name: 'PromotionWL',
+        index: 'PromotionWL',
+        width: 100,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        hidden: false,
+        title: true,
+        formatter: jqGridAdditional.formatDecimal
+    };
+
+    const jackpotPrizeColumn =
+    {
+        name: 'JackpotWL',
+        index: 'JackpotWL',
+        width: 100,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        hidden: false,
+        title: true,
+        formatter: jqGridAdditional.formatDecimal
+    };
+
+    const licenseeTotalColumn =
+    {
+        name: 'TotalWL',
+        index: 'TotalWL',
+        width: 100,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        hidden: false,
+        title: true,
+        formatter: jqGridAdditional.formatLicenseeWl
+    };
+
     const currencyIdColumn =
     {
         name: 'CurrencyId',
@@ -4458,12 +4509,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
     //#endregion
 
-    const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency',
-        'Turnover', 'TotalTransaction', 'CustomerW_L', 'LicenseeW_L', 'CurrencyId', 'CustomerId'];
+    const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency', 'Turnover', 'TotalTransaction', 'PlayerWL',
+        'W_L', 'Contribution', 'Promotion', 'JackpotPrize', 'Total', 'CurrencyId', 'CustomerId'];
 
-    const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn,
-        turnoverColumn, totalTransColumn, customerWlColumn, licenseeWlColumn,
-        currencyIdColumn, customerIdColumn];
+    const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn, turnoverColumn, totalTransColumn, customerWlColumn,
+        licenseeWlColumn, contributionColumn, promotionColumn, jackpotPrizeColumn, licenseeTotalColumn, currencyIdColumn, customerIdColumn];
 
     const _me =
     {
@@ -4507,9 +4557,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
         dateColumn.hidden = levelNumber > 0;
         dateColumn.formatoptions =
-            {
-                newformat: $('#reportbydaily').is(':checked') ? 'm/d/Y' : 'm/Y'
-            };
+        {
+            newformat: $('#reportbydaily').is(':checked') ? 'm/d/Y' : 'm/Y'
+        };
         externalIdColumn.hidden = levelNumber < 2;
         systemIdColumn.hidden = levelNumber === 0;
 
@@ -4537,10 +4587,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         return colModel;
     };
 
+    _me.setLicenseeWLGroupHeaderColumns = function (grid) {
+        grid.jqGrid('setGroupHeaders',
+            {
+                useColSpanStyle: true,
+                groupHeaders: [{
+                    startColumnName: 'LicenseeWL',
+                    numberOfColumns: 5,
+                    titleText: Site.getSingleResource('Licensee')
+                }]
+            });
+    }
+
     return _me;
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
 
 /***/ }),
 

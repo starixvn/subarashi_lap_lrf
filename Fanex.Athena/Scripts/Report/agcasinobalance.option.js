@@ -7,7 +7,7 @@ var AgCasinoBalanceOption = (function () {
 
     var setDrillDownLink = function (level, currencyId, custId, datetime, cellvalue) {
         return '<a class="drilldown" href="javascript:;" onclick="return AgCasinoBalance.drillDown(' + level + ',' +
-         currencyId + ',' + custId + ',\'' + datetime + '\');">' + cellvalue + '</a>';
+            currencyId + ',' + custId + ',\'' + datetime + '\');">' + cellvalue + '</a>';
     };
 
     var currencyFormatter = function (cellvalue, options, rowObject) {
@@ -162,20 +162,6 @@ var AgCasinoBalanceOption = (function () {
         formatter: jqGridAdditional.formatDecimal
     };
 
-    var licenseeWlColumn =
-    {
-        name: 'LicenseeWL',
-        classes: 'highlight',
-        index: 'LicenseeWL',
-        width: 100,
-        align: 'right',
-        sortable: false,
-        resizable: false,
-        hidden: false,
-        title: true,
-        formatter: jqGridAdditional.formatLicenseeWl
-    };
-
     var closingBalanceColumn =
     {
         name: 'ClosingBalance',
@@ -214,10 +200,10 @@ var AgCasinoBalanceOption = (function () {
     //#endregion
 
     var colNameList = ['#', 'Date', 'ExternalId', "SystemId", "Currency", 'AGOpeningBalance', 'TransferIn', 'TransferOut',
-      'Turnover', 'TotalTransaction', 'CustomerW_L', 'LicenseeW_L', 'AGClosingBalance', 'CurrencyId', 'CustomerId'];
+        'Turnover', 'TotalTransaction', 'PlayerWL', 'AGClosingBalance', 'CurrencyId', 'CustomerId'];
 
     var colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn, openingBalanceColumn, transferInColumn, transferOutColumn,
-        turnoverColumn, totalTransColumn, customerWlColumn, licenseeWlColumn, closingBalanceColumn, currencyIdColumn, customerIdColumn];
+        turnoverColumn, totalTransColumn, customerWlColumn, closingBalanceColumn, currencyIdColumn, customerIdColumn];
 
     var me =
     {

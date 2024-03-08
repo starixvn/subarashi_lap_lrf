@@ -1,16 +1,7 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ThirdPartyWinLoss.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Model.Report.DTO
+﻿namespace Fanex.Athena.Model.Report.DTO
 {
     using System;
 
-    /// <summary>
-    /// ThirdPartyWinLoss Entity Class.
-    /// </summary>
     public class ThirdPartyWinLoss
     {
         public int RowSpan { get; set; }
@@ -37,6 +28,12 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public decimal LicenseeWL { get; set; }
 
-        public decimal CustomerCommission { get; set; }
+        public decimal ContributionWL { get; set; }
+
+        public decimal PromotionWL { get; set; }
+
+        public decimal JackpotWL { get; set; }
+
+        public decimal TotalWL { get; set; }
     }
 }

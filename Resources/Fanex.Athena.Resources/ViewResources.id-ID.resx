@@ -3237,4 +3237,16 @@
   <data name="ProductVS3" xml:space="preserve">
     <value>Olahraga Virtual 3 (old)</value>
   </data>
+  <data name="AGCasinoCutOffDateNote" xml:space="preserve">
+    <value>Kontrol Data Laporan 01/03/2024.</value>
+  </data>
+  <data name="Contribution" xml:space="preserve">
+    <value>Kontribusi</value>
+  </data>
+  <data name="JackpotPrize" xml:space="preserve">
+    <value>Hadiah Jackpot</value>
+  </data>
+  <data name="W_L" xml:space="preserve">
+    <value>W/L</value>
+  </data>
 </root>
