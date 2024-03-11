@@ -14,6 +14,7 @@ namespace Fanex.Athena.Service.Customer
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -70,8 +71,10 @@ namespace Fanex.Athena.Service.Customer
 
         public async Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel)
         {
-            var result = await _playerDataAccess.GetVipPlayerListAsync(metaModel);
             var riskLevels = await _customerClassService.GetAllRiskLevel();
+            metaModel.RiskLevels = riskLevels;
+
+            var result = await _playerDataAccess.GetVipPlayerListAsync(metaModel);
             BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
             BindRiskLevelName(result.Data, riskLevels);
 
@@ -208,7 +211,7 @@ namespace Fanex.Athena.Service.Customer
         {
             players.ToList().ForEach(player =>
             {
-                player.RiskLevel = riskLevels.FirstOrDefault(_ => _.CustomerClassList.Contains(player.CustomerClass))?.Name;
+                player.RiskLevel = riskLevels.FirstOrDefault(_ => _.CustomerClassList.Contains(player.CustomerClass))?.Name ?? ViewResources.Uncategorized;
             });
         }
 

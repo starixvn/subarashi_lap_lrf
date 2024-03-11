@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Extension.Helper;
@@ -393,6 +394,7 @@
 
         private static void AddVipPlayerListParams(IObjectDb objectDb, VipPlayerListMetaModel metaModel)
         {
+            objectDb.SetParameterValue("FullCustomerClass", string.Join(",", metaModel.RiskLevels.Select(_ => string.Join(",", _.CustomerClassList))));
             objectDb.SetParameterValue("VipOption", metaModel.VipOption);
             objectDb.SetParameterValue("IsCheckAll", metaModel.IsCheckAll);
             objectDb.SetParameterValue(FromDateColumn, metaModel.FromDate);

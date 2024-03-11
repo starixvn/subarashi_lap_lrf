@@ -8096,6 +8096,7 @@ const useFilterAction = () => {
       LiveStatusIds: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedLiveStatus, liveStatusList),
       IsVipOnly: selectedVipOnly,
       CustomerClass: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedCustomerClass, riskLevelList, r => r.customerClassList),
+      FullCustomerClass: riskLevelList && riskLevelList.map(r => r.customerClassList).join(","),
       OddsGroup: _common_Service_js__WEBPACK_IMPORTED_MODULE_6__["default"].getNormalizedSelectedParamValueForMultiSelectFilter(selectedOddsGroup, oddsGroupList),
       IsShowInOrginalCurrency: isGroupInOriginalCurrency,
       IsExcludedTestData: isExcludeTestData,
