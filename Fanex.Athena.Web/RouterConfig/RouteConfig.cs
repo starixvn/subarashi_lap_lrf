@@ -89,6 +89,18 @@
                 routeTemplate: "WinlossAnalysisReport/{*url}",
                 new { Controller = "Proxy", Action = "ReportViews", report = "WinLossAnalysis", url = "Index" });
             winlossAnalysisReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var matchWinLossReportRoute = routes.MapHttpRoute(
+                name: "matchWinLossReportRoute",
+                routeTemplate: "MatchWinLossReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "MatchWinLoss", url = "Index" });
+            matchWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var betListReportRoute = routes.MapHttpRoute(
+                name: "betListReportRoute",
+                routeTemplate: "BetList/Report/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "BetList", url = "Index" });
+            betListReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
     }
 }
