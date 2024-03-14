@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/1/2024 9:25:05 AM
+// Generated at: 3/11/2024 4:37:53 PM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -749,7 +749,7 @@ window._language_id_ID = {
   OtherSport: "Olahraga Lainnya",
   Outright: "Pemenang Keseluruhan",
   OutstandingBalance: "Saldo Tertunda",
-  Over: "Lebih",
+  Over: "Besar",
   OverUnder: "Besar/Kecil",
   Page: "Halaman",
   Parlay: "Parlay",
@@ -802,7 +802,7 @@ window._language_id_ID = {
   ProductBTC: "Bitcoin",
   ProductBX: "Pertukaran",
   ProductCC: "Permainan Arcadia",
-  ProductCO: "Penarikan Tunai",
+  ProductCO: "Penukaran Instan",
   ProductCS: "Casino Saba",
   ProductHB: "Habanero",
   ProductI4D: "Togel 4D",
@@ -1019,7 +1019,7 @@ window._language_id_ID = {
   Type: "Jenis",
   Uncategorized: "Belum dikategorikan",
   UncheckAll: "Hapus centang semua",
-  Under: "Di bawah",
+  Under: "Kecil",
   UnderMaintenance: "Sedang dalam Pemeliharaan",
   UndermaintenanceMsg: "Kami sedang melakukan pemeliharaan server, situs web akan tidak tersedia dari {0} hingga {1}. Maaf atas ketidaknyamanan yang ditimbulkan!",
   UnderSettlement: "Dalam Penyelesaian",
@@ -1120,7 +1120,7 @@ window._language_id_ID = {
   WeeklyLiveMatches: "Pertandingan Langsung Mingguan",
   Welcome: "Selamat Datang",
   WhiteLabel: "Whitelabel",
-  WinLoss: "Menang atau kalah",
+  WinLoss: "Menang-Kalah",
   WinlossAnalysis: "Analisis Menang Kalah",
   WinLossByBetType: "Kemenangan/Kekalahan Berdasarkan Jenis Taruhan",
   WinLossByBetTypeTitle: "Keuntungan/Kerugian Berdasarkan Jenis Taruhan, {0} --&gt; {1} - {2}",
