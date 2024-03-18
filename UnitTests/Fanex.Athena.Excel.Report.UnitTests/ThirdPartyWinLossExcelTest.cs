@@ -30,10 +30,14 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         private const int ColumnTotalTransaction = 6;
         private const int ColumnCustomerWl = 7;
         private const int ColumnLicenseeWl = 8;
+        private const int ColumnContributionWl = 9;
+        private const int ColumnPromotionWl = 10;
+        private const int ColumnJackpotPrizeWl = 11;
+        private const int ColumnTotalWl = 12;
 
-        private const int RowContentTemplate = 2;
+        private const int RowContentTemplate = 3;
 
-        private const int ColumnCount = 9;
+        private const int ColumnCount = 13;
 
         private static readonly ThirdPartyWinLoss DataItem = FakeHelper.Create<ThirdPartyWinLoss>();
 
@@ -73,6 +77,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, ReportBase.RowHeaderTemplate);
+            var row2 = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, ReportBase.RowHeaderTemplate + 1);
             var excel = CreateExcel();
 
             // Action
@@ -89,8 +94,15 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 row.Cells[ColumnCurrency].Received(1).SetCellValue(ViewResources.Currency);
                 row.Cells[ColumnTurnover].Received(1).SetCellValue(ViewResources.Turnover);
                 row.Cells[ColumnTotalTransaction].Received(1).SetCellValue(ViewResources.TotalTransaction);
-                row.Cells[ColumnCustomerWl].Received(1).SetCellValue(ViewResources.CustomerW_L);
-                row.Cells[ColumnLicenseeWl].Received(1).SetCellValue(ViewResources.LicenseeW_L);
+                row.Cells[ColumnCustomerWl].Received(1).SetCellValue(ViewResources.PlayerWL);
+                row.Cells[ColumnLicenseeWl].Received(1).SetCellValue(ViewResources.Licensee);
+
+                FakeSheet.Received().CopyRow(excel.TemplateSheet, ReportBase.RowHeaderTemplate, ReportBase.RowHeaderTemplate + 1);
+                row2.Cells[ColumnLicenseeWl].Received(1).SetCellValue(ViewResources.W_L);
+                row2.Cells[ColumnContributionWl].Received(1).SetCellValue(ViewResources.Contribution);
+                row2.Cells[ColumnPromotionWl].Received(1).SetCellValue(ViewResources.Promotion);
+                row2.Cells[ColumnJackpotPrizeWl].Received(1).SetCellValue(ViewResources.JackpotPrize);
+                row2.Cells[ColumnTotalWl].Received(1).SetCellValue(ViewResources.Total);
             });
         }
 
@@ -114,7 +126,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             MetaModel.ReportBy = reportBy;
-            var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, 2);
+            var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnCount, 3);
             var excel = CreateExcel();
             excel.When(x => x.AssignTotalData(Arg.Any<ISheet>(), Arg.Any<int>())).DoNotCallBase();
             excel.When(x => x.AssignGrandTotalInEurData(Arg.Any<ISheet>(), Arg.Any<int>())).DoNotCallBase();
@@ -151,7 +163,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             Assert.Multiple(() =>
             {
                 row.Cells[0].Received(1).SetCellValue(expectedTitle);
-                FakeSheet.Received(1).CreateFreezePane(0, 2);
+                FakeSheet.Received(1).CreateFreezePane(0, 3);
                 FakeSheet.ReceivedWithAnyArgs().DeleteRow(0);
             });
         }
