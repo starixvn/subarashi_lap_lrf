@@ -65,7 +65,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 "#", ViewResources.Date, ViewResources.ExternalId, ViewResources.SystemId,
                 ViewResources.Currency, ViewResources.OpeningBalance, ViewResources.TransferIn,
                 ViewResources.TransferOut, ViewResources.Turnover, ViewResources.TotalTransaction,
-                ViewResources.CustomerW_L, ViewResources.LicenseeW_L, ViewResources.ClosingBalance
+                ViewResources.PlayerWL, ViewResources.ClosingBalance
             };
 
             // Action
@@ -100,8 +100,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 row.Cells[8].Received(1).SetCellValue(DataItem.TurnOver);
                 row.Cells[9].Received(1).SetCellValue(DataItem.TotalTransaction);
                 row.Cells[10].Received(1).SetCellValue(DataItem.CustomerWinLoss);
-                row.Cells[11].Received(1).SetCellValue(DataItem.LicenseeWL);
-                row.Cells[12].Received(1).SetCellValue(DataItem.ClosingBalance);
+                row.Cells[11].Received(1).SetCellValue(DataItem.ClosingBalance);
 
                 excel.Received(1).AssignTotalData(Arg.Any<ISheet>(), Arg.Any<int>());
                 excel.Received(1).AssignGrandTotalData(Arg.Any<ISheet>(), Arg.Any<int>());

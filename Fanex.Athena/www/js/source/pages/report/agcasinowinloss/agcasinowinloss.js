@@ -1,7 +1,7 @@
 ﻿'use strict';
 define(['jquery', 'common/site', './agcasinowinloss.option', '../report', 'lib/jqgrid/jquery.jqgrid.additional',
-        'components/pluginhelper/daterangepicker', 'moment', 'helpers/daterange',
-        'extensions/jquery.extension', 'lib/jqgrid/jquery.jqGrid.en', 'lib/jqgrid/jquery.jqGrid.min'],
+    'components/pluginhelper/daterangepicker', 'moment', 'helpers/daterange',
+    'extensions/jquery.extension', 'lib/jqgrid/jquery.jqGrid.en', 'lib/jqgrid/jquery.jqGrid.min'],
     function ($, Site, AgCasinoWinLossOption, Report, jqGridAdditional, DatePicker, moment, DateHelper) {
         const cacheData = {};
         let ajaxRequest = null;
@@ -56,7 +56,7 @@ define(['jquery', 'common/site', './agcasinowinloss.option', '../report', 'lib/j
                     $(window).off('resize');
                 });
             },
-            resizeGrid: function(){  
+            resizeGrid: function () {
                 const reportGrid = $('#ReportGrid');
                 jqGridAdditional.updateGridHeight();
                 jqGridAdditional.updateGridWidth(reportGrid);
@@ -66,8 +66,8 @@ define(['jquery', 'common/site', './agcasinowinloss.option', '../report', 'lib/j
                 let temp = 'api/AgCasinoWinLossReport/Index';
                 if (level > 0) {
                     temp += '?level=' + level + '&currencyId='
-                    + currencyId + '&custId=' + custId + '&fdate=' + moment(fdate).format('MM/DD/YYYY')
-                    + '&tdate=' + moment(tdate).format('MM/DD/YYYY');
+                        + currencyId + '&custId=' + custId + '&fdate=' + moment(fdate).format('MM/DD/YYYY')
+                        + '&tdate=' + moment(tdate).format('MM/DD/YYYY');
                 }
 
                 AgCasinoWinLossOption.urlExcelData = temp;
@@ -141,7 +141,6 @@ define(['jquery', 'common/site', './agcasinowinloss.option', '../report', 'lib/j
             },
 
             drillDown: function (data) {
-
                 data.level = Number(data.level);
 
                 if (_level !== data.level) {
@@ -179,7 +178,7 @@ define(['jquery', 'common/site', './agcasinowinloss.option', '../report', 'lib/j
                         tdate = _me.lastDateOfMonth(year, month);
                     }
                 }
-                
+
                 const option = {
                     type: 'POST',
                     data: JSON.stringify(param),
@@ -260,7 +259,6 @@ define(['jquery', 'common/site', './agcasinowinloss.option', '../report', 'lib/j
                 gridOption.rowTotal = numOfRow;
 
                 gridOption.gridComplete = function () {
-                    
                     jqGridAdditional.gridComplete();
                     $('#pg_ppdata').hide();
 
@@ -273,6 +271,8 @@ define(['jquery', 'common/site', './agcasinowinloss.option', '../report', 'lib/j
 
                 // Show the grid
                 reportGrid.jqGrid(gridOption);
+
+                AgCasinoWinLossOption.setLicenseeWLGroupHeaderColumns(reportGrid);
             }
             //#end
         };

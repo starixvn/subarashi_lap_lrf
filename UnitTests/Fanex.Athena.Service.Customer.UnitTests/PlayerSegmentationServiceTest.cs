@@ -142,12 +142,14 @@ namespace Fanex.Athena.Service.Customer.UnitTests
                     new PlayerInfo
                     {
                         AgentId = 1,
-                        Subsidiary = "Sub1"
+                        Subsidiary = "Sub1",
+                        RiskLevel = "Uncategorized"
                     },
                     new PlayerInfo
                     {
                         AgentId = 2,
-                        Subsidiary = "Sub2"
+                        Subsidiary = "Sub2",
+                        RiskLevel = "Uncategorized"
                     }
                 }
             };

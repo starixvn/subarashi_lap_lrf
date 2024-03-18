@@ -268,6 +268,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Promotion, Contribution, and Jackpot Prize Data are available from 01/03/2024..
+        /// </summary>
+        public static string AGCasinoCutOffDateNote {
+            get {
+                return ResourceManager.GetString("AGCasinoCutOffDateNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AG Casino is not offered for this currency..
         /// </summary>
         public static string AGCasinoNotOfferCurrency {
@@ -1893,6 +1902,15 @@ namespace Fanex.Athena.Resources {
         public static string Content {
             get {
                 return ResourceManager.GetString("Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contribution.
+        /// </summary>
+        public static string Contribution {
+            get {
+                return ResourceManager.GetString("Contribution", resourceCulture);
             }
         }
         
@@ -4179,6 +4197,15 @@ namespace Fanex.Athena.Resources {
         public static string IsNeutral {
             get {
                 return ResourceManager.GetString("IsNeutral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jackpot Prize.
+        /// </summary>
+        public static string JackpotPrize {
+            get {
+                return ResourceManager.GetString("JackpotPrize", resourceCulture);
             }
         }
         
@@ -9723,6 +9750,15 @@ namespace Fanex.Athena.Resources {
         public static string Volume {
             get {
                 return ResourceManager.GetString("Volume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to W/L.
+        /// </summary>
+        public static string W_L {
+            get {
+                return ResourceManager.GetString("W_L", resourceCulture);
             }
         }
         

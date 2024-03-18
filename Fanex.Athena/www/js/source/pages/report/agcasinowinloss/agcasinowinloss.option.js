@@ -136,6 +136,58 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'], functio
         formatter: jqGridAdditional.formatLicenseeWl
     };
 
+    const contributionColumn =
+    {
+        name: 'ContributionWL',
+        index: 'ContributionWL',
+        width: 100,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        hidden: false,
+        title: true,
+        formatter: jqGridAdditional.formatDecimal
+    };
+
+    const promotionColumn =
+    {
+        name: 'PromotionWL',
+        index: 'PromotionWL',
+        width: 100,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        hidden: false,
+        title: true,
+        formatter: jqGridAdditional.formatDecimal
+    };
+
+    const jackpotPrizeColumn =
+    {
+        name: 'JackpotWL',
+        index: 'JackpotWL',
+        width: 100,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        hidden: false,
+        title: true,
+        formatter: jqGridAdditional.formatDecimal
+    };
+
+    const licenseeTotalColumn =
+    {
+        name: 'TotalWL',
+        index: 'TotalWL',
+        width: 100,
+        align: 'right',
+        sortable: false,
+        resizable: false,
+        hidden: false,
+        title: true,
+        formatter: jqGridAdditional.formatLicenseeWl
+    };
+
     const currencyIdColumn =
     {
         name: 'CurrencyId',
@@ -160,12 +212,11 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'], functio
 
     //#endregion
 
-    const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency',
-        'Turnover', 'TotalTransaction', 'CustomerW_L', 'LicenseeW_L', 'CurrencyId', 'CustomerId'];
+    const colNameList = ['#', 'Date', 'ExternalId', 'SystemId', 'Currency', 'Turnover', 'TotalTransaction', 'PlayerWL',
+        'W_L', 'Contribution', 'Promotion', 'JackpotPrize', 'Total', 'CurrencyId', 'CustomerId'];
 
-    const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn,
-        turnoverColumn, totalTransColumn, customerWlColumn, licenseeWlColumn,
-        currencyIdColumn, customerIdColumn];
+    const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn, turnoverColumn, totalTransColumn, customerWlColumn,
+        licenseeWlColumn, contributionColumn, promotionColumn, jackpotPrizeColumn, licenseeTotalColumn, currencyIdColumn, customerIdColumn];
 
     const _me =
     {
@@ -209,9 +260,9 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'], functio
 
         dateColumn.hidden = levelNumber > 0;
         dateColumn.formatoptions =
-            {
-                newformat: $('#reportbydaily').is(':checked') ? 'm/d/Y' : 'm/Y'
-            };
+        {
+            newformat: $('#reportbydaily').is(':checked') ? 'm/d/Y' : 'm/Y'
+        };
         externalIdColumn.hidden = levelNumber < 2;
         systemIdColumn.hidden = levelNumber === 0;
 
@@ -238,6 +289,18 @@ define(['jquery', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional'], functio
 
         return colModel;
     };
+
+    _me.setLicenseeWLGroupHeaderColumns = function (grid) {
+        grid.jqGrid('setGroupHeaders',
+            {
+                useColSpanStyle: true,
+                groupHeaders: [{
+                    startColumnName: 'LicenseeWL',
+                    numberOfColumns: 5,
+                    titleText: Site.getSingleResource('Licensee')
+                }]
+            });
+    }
 
     return _me;
 });

@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ThirdPartyWinLossExcel.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Excel.Report
+﻿namespace Fanex.Athena.Excel.Report
 {
     using System.Linq;
     using Base;
@@ -18,7 +12,7 @@ namespace Fanex.Athena.Excel.Report
 
     public class ThirdPartyWinLossExcel<T> : ReportBase where T : ThirdPartyWinLoss
     {
-        private const int ColumnTemplateCount = 8;
+        private const int ColumnTemplateCount = 12;
 
         private const int ColumnDate = 1;
         private const int ColumnExternalId = 2;
@@ -27,13 +21,17 @@ namespace Fanex.Athena.Excel.Report
         private const int ColumnTurnover = 5;
         private const int ColumnTotalTransaction = 6;
         private const int ColumnCustomerWl = 7;
-
         private const int ColumnLicenseeWl = 8;
-        private const int RowContentTemplate = 2;
-        private const int RowTotalNoSolidBorder = 4;
-        private const int RowTotalSolidBorder = 3;
-        private const int RowGrantTotal = 5;
-        private const int RowNoInfoTemplate = 6;
+        private const int ColumnContributionWl = 9;
+        private const int ColumnPromotionWl = 10;
+        private const int ColumnJackpotPrizeWl = 11;
+        private const int ColumnTotalWl = 12;
+
+        private const int RowContentTemplate = 3;
+        private const int RowTotalSolidBorder = 4;
+        private const int RowTotalNoSolidBorder = 5;
+        private const int RowGrantTotal = 6;
+        private const int RowNoInfoTemplate = 7;
 
         private readonly ThirdPartyWinLossMetaModel _metaModel;
         private readonly ReportResultModel<T> _resultData;
@@ -58,8 +56,16 @@ namespace Fanex.Athena.Excel.Report
             row.Cells[ColumnCurrency].SetCellValue(ViewResources.Currency);
             row.Cells[ColumnTurnover].SetCellValue(ViewResources.Turnover);
             row.Cells[ColumnTotalTransaction].SetCellValue(ViewResources.TotalTransaction);
-            row.Cells[ColumnCustomerWl].SetCellValue(ViewResources.CustomerW_L);
-            row.Cells[ColumnLicenseeWl].SetCellValue(ViewResources.LicenseeW_L);
+            row.Cells[ColumnCustomerWl].SetCellValue(ViewResources.PlayerWL);
+            row.Cells[ColumnLicenseeWl].SetCellValue(ViewResources.Licensee);
+
+            var row2 = sheet.CopyRow(TemplateSheet, RowHeaderTemplate + 1);
+            row2.Cells[ColumnLicenseeWl].SetCellValue(ViewResources.W_L);
+            row2.Cells[ColumnContributionWl].SetCellValue(ViewResources.Contribution);
+            row2.Cells[ColumnPromotionWl].SetCellValue(ViewResources.Promotion);
+            row2.Cells[ColumnJackpotPrizeWl].SetCellValue(ViewResources.JackpotPrize);
+            row2.Cells[ColumnTotalWl].SetCellValue(ViewResources.Total);
+
             PostAssignHeader(row);
         }
 
@@ -149,6 +155,10 @@ namespace Fanex.Athena.Excel.Report
             row.Cells[ColumnTotalTransaction].SetCellValue(data.TotalTransaction);
             row.Cells[ColumnCustomerWl].SetCellValue(data.CustomerWinLoss);
             row.Cells[ColumnLicenseeWl].SetCellValue(data.LicenseeWL);
+            row.Cells[ColumnContributionWl].SetCellValue(data.ContributionWL);
+            row.Cells[ColumnPromotionWl].SetCellValue(data.PromotionWL);
+            row.Cells[ColumnJackpotPrizeWl].SetCellValue(data.JackpotWL);
+            row.Cells[ColumnTotalWl].SetCellValue(data.TotalWL);
         }
 
         protected internal virtual void AssignGrandTotalInEurData(ISheet sheet, int rowIndex)
@@ -169,12 +179,6 @@ namespace Fanex.Athena.Excel.Report
             }
         }
 
-        /// <summary>
-        /// Assign grand total data.
-        /// </summary>
-        /// <param name="sheet">Excel sheet.</param>
-        /// <param name="rowIndex">The starting row index.</param>
-        /// <returns>The last row index after assign data.</returns>
         protected internal virtual int AssignTotalData(ISheet sheet, int rowIndex)
         {
             var beginTotalRow = rowIndex;
