@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/11/2024 4:37:53 PM
+// Generated at: 3/19/2024 2:39:33 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -118,6 +118,7 @@ window._language_en_US = {
   AfterBalance: "After Balance",
   AGCasino: "AG Casino",
   AGCasinoBalance: "AG Casino Balance",
+  AGCasinoCutOffDateNote: "Promotion, Contribution, and Jackpot Prize Data are available from 01/03/2024.",
   AGCasinoNotOfferCurrency: "AG Casino is not offered for this currency.",
   AGCasinoWinLoss: "AG Casino Win Loss",
   AGClosingBalance: "AG Closing Balance",
@@ -298,6 +299,7 @@ window._language_en_US = {
   ConfirmUpdateMonitoredPlayer: "Are you sure you want to update Daily Winning Threshold ({0}) = {1}?",
   ContactType: "Contact Type",
   Content: "Content",
+  Contribution: "Contribution",
   ConvertAllFiguresToBaseCurrency: "Convert all figures to Base Currency",
   CopyBetSettingFromSoccer: "Copy All Bet Setting from Soccer",
   CorrectScore: "Correct Score",
@@ -549,6 +551,7 @@ window._language_en_US = {
   IpSummary: "IP Summary",
   IsGroupInOriginalCurrency: "Display group breakdown in original currency",
   IsNeutral: "(N)",
+  JackpotPrize: "Jackpot Prize",
   JackpotWonDetails: "Jackpot Won Details",
   Jan: "Jan",
   January: "January",
@@ -619,7 +622,7 @@ window._language_en_US = {
   Login: "Login",
   LogInfo: "Log Info",
   Logout: "Logout",
-  Lose: "Lose",
+  Lost: "Lost",
   LrfNotification: "LRF-Notification",
   MacauNotOfferCurrency: "Macau is not offered for this currency.",
   Main: "Main",
@@ -1162,6 +1165,7 @@ window._language_en_US = {
   VirtualTennis: "Virtual Tennis",
   Void: "Void",
   Volume: "Volume",
+  W_L: "W/L",
   WAP: "WAP",
   WarningToActiveMsg: "Warning, this player will be able to log in and bet.",
   WarningToClosedMsg: "Warning, this player cannot be restored forever!",

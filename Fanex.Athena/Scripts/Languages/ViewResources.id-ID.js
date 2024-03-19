@@ -1,4 +1,4 @@
-﻿// Generated at: 3/14/2024 4:10:06 PM
+﻿// Generated at: 3/19/2024 2:39:33 PM
 var _language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -509,7 +509,7 @@ LogID:"ID Log",
 Login:"Masuk",
 LogInfo:"Info Log",
 Logout:"Keluar",
-Lose:"Kalah",
+Lost:"Kalah",
 LrfNotification:"Pemberitahuan LRF",
 MacauNotOfferCurrency:"Mata uang ini tidak ditawarkan untuk Macau.",
 Main:"Utama",

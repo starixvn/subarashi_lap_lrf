@@ -1,4 +1,4 @@
-﻿// Generated at: 3/14/2024 4:10:06 PM
+﻿// Generated at: 3/19/2024 2:39:33 PM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -521,7 +521,7 @@ LogID:"บันทึกรหัส",
 Login:"เข้าสู่ระบบ",
 LogInfo:"ข้อมูลเข้าสู่ระบบ",
 Logout:"ออกจากระบบ",
-Lose:"เสีย",
+Lost:"เสีย",
 LrfNotification:"LRF-การแจ้งเตือน",
 MacauNotOfferCurrency:"Macauไม่มีบริการของสกุลเงินนี้",
 Main:"หลัก",

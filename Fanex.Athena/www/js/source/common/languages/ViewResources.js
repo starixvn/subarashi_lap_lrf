@@ -1,4 +1,4 @@
-﻿// Generated at: 3/14/2024 4:10:06 PM
+﻿// Generated at: 3/19/2024 2:39:33 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -527,7 +527,7 @@ LogID:"Log ID",
 Login:"Login",
 LogInfo:"Log Info",
 Logout:"Logout",
-Lose:"Lose",
+Lost:"Lost",
 LrfNotification:"LRF-Notification",
 MacauNotOfferCurrency:"Macau is not offered for this currency.",
 Main:"Main",

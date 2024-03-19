@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/11/2024 4:37:53 PM
+// Generated at: 3/19/2024 2:39:33 PM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -116,6 +116,7 @@ window._language_id_ID = {
   AfterBalance: "Setelah Saldo",
   AGCasino: "AG Casino",
   AGCasinoBalance: "Saldo AG Casino",
+  AGCasinoCutOffDateNote: "Kontrol Data Laporan 01/03/2024.",
   AGCasinoNotOfferCurrency: "AG Casino tidak ditawarkan untuk mata uang ini.",
   AGCasinoWinLoss: "AG Casino Win Loss",
   AGClosingBalance: "Saldo Penutupan AG",
@@ -294,6 +295,7 @@ window._language_id_ID = {
   ConfirmUpdateMonitoredPlayer: "Apakah Anda yakin ingin memperbarui Batas Kemenangan Harian ({0}) = {1}?",
   ContactType: "Tipe Kontak",
   Content: "Konten",
+  Contribution: "Kontribusi",
   ConvertAllFiguresToBaseCurrency: "Konversi semua angka ke Mata Uang Dasar",
   CopyBetSettingFromSoccer: "Salin Semua Pengaturan Taruhan dari Sepak Bola",
   CorrectScore: "Skor yang Benar",
@@ -529,6 +531,7 @@ window._language_id_ID = {
   IpSummary: "Ringkasan IP",
   IsGroupInOriginalCurrency: "Tampilkan pembagian grup dalam mata uang asli",
   IsNeutral: "(N)",
+  JackpotPrize: "Hadiah Jackpot",
   JackpotWonDetails: "Rincian Jackpot yang Dimenangkan",
   Jan: "Januari",
   January: "Januari",
@@ -601,7 +604,7 @@ window._language_id_ID = {
   Login: "Masuk",
   LogInfo: "Info Log",
   Logout: "Keluar",
-  Lose: "Kalah",
+  Lost: "Kalah",
   LrfNotification: "Pemberitahuan LRF",
   MacauNotOfferCurrency: "Mata uang ini tidak ditawarkan untuk Macau.",
   Main: "Utama",
@@ -1110,6 +1113,7 @@ window._language_id_ID = {
   VirtualTennis: "Tenis Virtual",
   Void: "Void",
   Volume: "Jumlah Taruhan",
+  W_L: "W/L",
   WarningToActiveMsg: "Peringatan, pemain ini akan dapat login dan melakukan taruhan.",
   WarningToClosedMsg: "Peringatan, pemain ini tidak dapat dikembalikan selamanya!",
   WarningToLockedMsg: "Peringatan, pemain ini tidak dapat login dan transfer!",

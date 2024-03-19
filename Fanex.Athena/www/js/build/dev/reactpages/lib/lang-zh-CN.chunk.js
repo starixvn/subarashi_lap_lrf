@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/11/2024 4:37:53 PM
+// Generated at: 3/19/2024 2:39:33 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -114,6 +114,7 @@ window._language_zh_CN = {
   AfterBalance: "后期余额",
   AGCasino: "AG Casino",
   AGCasinoBalance: "AG Casino Balance",
+  AGCasinoCutOffDateNote: "可取得从2023 年 1 月 3 日起促销活动、贡献金和积宝奖金资料。",
   AGCasinoNotOfferCurrency: "AG Casino is not offered for this currency.",
   Agent: "代理",
   AgentBetInterval: "代理投注间隔(秒)",
@@ -279,6 +280,7 @@ window._language_zh_CN = {
   ConfirmUpdateMonitoredPlayer: "确定要更新每日赢额临界值({0}) = {1}？",
   ContactType: "种类",
   Content: "内容",
+  Contribution: "贡献金",
   ConvertAllFiguresToBaseCurrency: "将所有数据转换为基础货币",
   CopyBetSettingFromSoccer: "从足球复制所有投注设定",
   CorrectScore: "波胆",
@@ -501,6 +503,7 @@ window._language_zh_CN = {
   IpSummary: "IP摘要",
   IsGroupInOriginalCurrency: "以原始货币显示",
   IsNeutral: "(中)",
+  JackpotPrize: "积宝奖金",
   JackpotWonDetails: "积宝头奖详情",
   Jan: "一月",
   January: "一月",
@@ -568,7 +571,7 @@ window._language_zh_CN = {
   Login: "登入",
   LogInfo: "登入信息",
   Logout: "注销",
-  Lose: "输",
+  Lost: "输",
   LrfNotification: "LRF-通知",
   Main: "主",
   ManageAccount: "账号管理",
@@ -1033,6 +1036,7 @@ window._language_zh_CN = {
   VirtualTennis: "Virtual Tennis",
   Void: "作废",
   Volume: "投注量",
+  W_L: "输赢",
   WAP: "WAP",
   WarningToActiveMsg: "警告，此玩家将允许登入和下注!",
   WarningToClosedMsg: "警告，此玩家将无法再复原!",

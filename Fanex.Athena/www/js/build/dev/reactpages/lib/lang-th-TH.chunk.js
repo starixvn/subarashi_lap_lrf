@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/11/2024 4:37:53 PM
+// Generated at: 3/19/2024 2:39:33 PM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -118,6 +118,7 @@ window._language_th_TH = {
   AfterBalance: "หลังยอดคงเหลือ",
   AGCasino: "AGคาสิโน",
   AGCasinoBalance: "ยอดคงเหลือ AGคาสิโน",
+  AGCasinoCutOffDateNote: "ควบคุมข้อมูลของรายงาน 01/03/2024.",
   AGCasinoNotOfferCurrency: "AGคาสิโน ไม่มีให้บริการของสกุลเงินนี้",
   AGCasinoWinLoss: "AGคาสิโน แพ้ชนะ",
   AGClosingBalance: "ยอดปิดบัญชี AG",
@@ -297,6 +298,7 @@ window._language_th_TH = {
   ConfirmUpdateMonitoredPlayer: "คุณแน่ใจหรือไม่ว่าต้องการอัปเดตเกณฑ์การชนะรายวัน ({0}) = {1}",
   ContactType: "ประเภทการติดต่อ",
   Content: "เนื้อหา",
+  Contribution: "ส่วนร่วม",
   ConvertAllFiguresToBaseCurrency: "แปลงตัวเลขทั้งหมดเป็นสกุลเงินหลัก",
   CopyBetSettingFromSoccer: "คัดลอกการตั้งค่าเดิมพันทั้งหมดจากฟุตบอล",
   CorrectScore: "คะแนนที่ถูกต้อง",
@@ -541,6 +543,7 @@ window._language_th_TH = {
   IpSummary: "สรุปIP",
   IsGroupInOriginalCurrency: "แสดงการแบ่งกลุ่มในสกุลเงินเดิม",
   IsNeutral: "สนามกลาง",
+  JackpotPrize: "เงินรางวัลแจ็คพอต",
   JackpotWonDetails: "รายละเอียดแจ็คพอตที่ชนะ",
   Jan: "มกราคม",
   January: "มกราคม",
@@ -613,7 +616,7 @@ window._language_th_TH = {
   Login: "เข้าสู่ระบบ",
   LogInfo: "ข้อมูลเข้าสู่ระบบ",
   Logout: "ออกจากระบบ",
-  Lose: "เสีย",
+  Lost: "เสีย",
   LrfNotification: "LRF-การแจ้งเตือน",
   MacauNotOfferCurrency: "Macauไม่มีบริการของสกุลเงินนี้",
   Main: "หลัก",
@@ -1128,6 +1131,7 @@ window._language_th_TH = {
   VirtualTennis: "เทนนิสเสมือนจริง",
   Void: "โมฆะ",
   Volume: "ปริมาณ",
+  W_L: "W/L",
   WAP: "WAP",
   WarningToActiveMsg: "คำเตือน ผู้เล่นรายนี้สามารถเข้าสู่ระบบและเดิมพันได้.",
   WarningToClosedMsg: "คำเตือน ผู้เล่นรายนี้ไม่สามารถกู้คืนได้อย่างถาวร!",
