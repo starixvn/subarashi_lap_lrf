@@ -21,15 +21,15 @@ export const setSportList = (list) => {
 
 export function getSportList(productCode, date) {
     return (dispatch) => {
-        DataService.getData(Url, { productCode: productCode, includeSabaSport: productCode === 'SB', applyHideSaba: true})
+        DataService.getData(Url, { productCode: productCode, includeSabaSport: productCode === 'SB' })
             .then(response => {
                 let data = response.data;
-                
+
                 let itemAll = { value: 0, label: LangHelper.getSingleResource('All') };
                 data.unshift(itemAll);
                 dispatch(setSportList(data));
                 dispatch(setSelectedSport(itemAll.value));
-                if(date){
+                if (date) {
                     dispatch(getLeagueList(0, date));
                 }
             });

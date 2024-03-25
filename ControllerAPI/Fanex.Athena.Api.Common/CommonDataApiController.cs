@@ -77,7 +77,7 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<object>> GetSports(string productCode, bool includeSabaSport = false, bool applyHideSaba = false)
+        public async Task<IEnumerable<object>> GetSports(string productCode, bool includeSabaSport = false)
         {
             productCode = _productService.GetAllowedSubProductCodeList(
                 _sessionService.LicenseeSession.OfferedSubProductList,
@@ -85,7 +85,7 @@
 
             var licenseeId = _sessionService.LicenseeSession.LicenseeId;
             var lang = _sessionService.UserSession.Language;
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform) && applyHideSaba;
+            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
 
             var sports = includeSabaSport
                 ? await _sportService.GetSportAndProductAndSabaSport(licenseeId, lang, productCode, isHideSaba)
@@ -105,24 +105,24 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(string productCodes, bool applyHideSaba = false)
+        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(string productCodes)
         {
             if (String.IsNullOrWhiteSpace(productCodes))
             {
                 return new List<CheckedItem>();
             }
 
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform) && applyHideSaba;
+            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
             return await _sportService.GetSportsForTreeView(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, isHideSaba);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<object>> GetBetTypes(string productCode, bool applyHideSaba = false)
+        public async Task<IEnumerable<object>> GetBetTypes(string productCode)
         {
             productCode = _productService.GetAllowedSubProductCodeList(
                 _sessionService.LicenseeSession.OfferedSubProductList,
                 productCode);
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform) && applyHideSaba;
+            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
 
             var bettypes = await _betTypeService.GetBettypesByProduct(
                 _sessionService.LicenseeSession.LicenseeId,
@@ -158,7 +158,7 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<object>> GetLeagues(DateTime fromDate, DateTime toDate, int sportId = 0, bool applyHideSaba = false)
+        public async Task<IEnumerable<object>> GetLeagues(DateTime fromDate, DateTime toDate, int sportId = 0)
         {
             var isSabaSport = sportId < 0;
             var sabaSports = _sportService.GetSabaSports();
@@ -183,7 +183,7 @@
 
             var leagueList = (isSabaSport ? GetSabaSportLeagueList(leagues, selectedSabaSport) : GetLeagueListExcludeSabaSport(leagues, excludeSabaSport));
 
-            if (isHideSaba && applyHideSaba)
+            if (isHideSaba)
             {
                 foreach (var league in leagueList)
                 {

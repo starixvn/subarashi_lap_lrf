@@ -12,13 +12,12 @@ function dispatchBettypeList(dispatch, data, hasItemAll) {
     data.length && data[0].value == 0 && data.shift();
     const itemAll = { value: 0, label: LangHelper.getSingleResource('All') };
 
-    if(hasItemAll) {
+    if (hasItemAll) {
         data.unshift(itemAll);
     }
 
     dispatch(setBettypeList(data));
-    if(data.length > 0)
-    {
+    if (data.length > 0) {
         const bettype = hasItemAll ? itemAll.value : data[0].value;
         dispatch(setSelectedBettype(bettype || data[0].value));
     }
@@ -42,13 +41,12 @@ export function getBettypeList(productCode, hasItemAll = false) {
     const cacheKey = BETTYPE_CACHE_KEY + productCode;
     return (dispatch) => {
         var cacheData = Cache.get(cacheKey);
-        if(cacheData)
-        {
+        if (cacheData) {
             dispatchBettypeList(dispatch, cacheData, hasItemAll);
             return;
         }
 
-        DataService.getData(Url, { productCode: productCode, applyHideSaba: true})
+        DataService.getData(Url, { productCode: productCode })
             .then(response => {
                 var data = response.data;
                 Cache.set(cacheKey, data);
