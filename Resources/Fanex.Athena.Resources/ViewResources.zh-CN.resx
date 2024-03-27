@@ -1541,7 +1541,7 @@
     <value>Columns</value>
     <comment>#7730</comment>
   </data>
-  <data name="Lose" xml:space="preserve">
+  <data name="Lost" xml:space="preserve">
     <value>输</value>
   </data>
   <data name="VirtualHorseRacing" xml:space="preserve">

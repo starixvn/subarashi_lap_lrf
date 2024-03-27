@@ -264,7 +264,7 @@ const BetList = props => {
     sport: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Sport')
   };
   const statusText = {
-    '-1': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Lose'),
+    '-1': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Lost'),
     '0': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Draw'),
     '1': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource('Won')
   };
@@ -553,7 +553,7 @@ const BetList = props => {
     sport: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Sport')
   };
   const statusText = {
-    '-1': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Lose'),
+    '-1': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Lost'),
     '0': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Draw'),
     '1': _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Won')
   };
@@ -676,4 +676,4 @@ function mapStateToProps(state) {
 /***/ })
 
 }]);
-//# sourceMappingURL=betList.3bd5b5cce94105f91ddc.chunk.js.map
+//# sourceMappingURL=betList.8001bc000c9952bbdb98.chunk.js.map

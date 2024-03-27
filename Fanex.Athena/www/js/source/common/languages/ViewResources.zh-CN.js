@@ -1,4 +1,4 @@
-﻿// Generated at: 3/14/2024 4:10:06 PM
+﻿// Generated at: 3/19/2024 2:39:33 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -476,7 +476,7 @@ LogID:"登入识别",
 Login:"登入",
 LogInfo:"登入信息",
 Logout:"注销",
-Lose:"输",
+Lost:"输",
 LrfNotification:"LRF-通知",
 Main:"主",
 ManageAccount:"账号管理",

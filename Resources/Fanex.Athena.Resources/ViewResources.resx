@@ -1495,8 +1495,8 @@
   <data name="UpdateUnSuccess" xml:space="preserve">
     <value>Update unsuccessfully!</value>
   </data>
-  <data name="Lose" xml:space="preserve">
-    <value>Lose</value>
+  <data name="Lost" xml:space="preserve">
+    <value>Lost</value>
   </data>
   <data name="VirtualHorseRacing" xml:space="preserve">
     <value>Virtual Horse Racing</value>

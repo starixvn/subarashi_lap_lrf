@@ -1,4 +1,4 @@
-﻿// Generated at: 3/14/2024 4:10:06 PM
+﻿// Generated at: 3/19/2024 2:39:33 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -517,7 +517,7 @@ LogID:"ID Nhật ký",
 Login:"Đăng nhập",
 LogInfo:"Thông tin đăng nhập",
 Logout:"Đăng xuất",
-Lose:"Thua",
+Lost:"Thua",
 LrfNotification:"Thông báo LRF",
 MacauNotOfferCurrency:"Macau không hỗ trợ đơn vị tiền tệ này.",
 Main:"Chính",

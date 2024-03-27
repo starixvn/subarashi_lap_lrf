@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 3/11/2024 4:37:53 PM
+// Generated at: 3/19/2024 2:39:33 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -117,6 +117,7 @@ window._language_vi_VN = {
   AfterBalance: "Số dư còn lại",
   AGCasino: "AG Casino",
   AGCasinoBalance: "Số Dư AG Casino",
+  AGCasinoCutOffDateNote: "Khuyến Mãi, Tích Lũy, và Dữ Liệu Giải Thưởng Jackpot có hiệu lực từ 01/03/2024.",
   AGCasinoNotOfferCurrency: "AG Casino không hỗ trợ đơn vị tiền tệ này.",
   AGCasinoWinLoss: "Thắng Thua AG Casino",
   AGClosingBalance: "Số dư cuối kỳ AG",
@@ -296,6 +297,7 @@ window._language_vi_VN = {
   ConfirmUpdateMonitoredPlayer: "Bạn có muốn thay đổi Hạn Mức Thắng Mỗi ngày từ ({0}) thành {1}?",
   ContactType: "Loại liên hệ",
   Content: "Nội dung",
+  Contribution: "Tích Lũy",
   ConvertAllFiguresToBaseCurrency: "Chuyển đổi tất cả số liệu theo tiền tệ cơ sở",
   CopyBetSettingFromSoccer: "Sao chép tất cả giới hạn cược của Bóng Đá",
   CorrectScore: "Số điểm Chính xác",
@@ -537,6 +539,7 @@ window._language_vi_VN = {
   IpSummary: "Tóm tắt IP",
   IsGroupInOriginalCurrency: "Nhóm theo đơn vị tiền tệ gốc",
   IsNeutral: "(N)",
+  JackpotPrize: "Giải Thưởng Jackpot",
   JackpotWonDetails: "Chi tiết Thắng Jackpot",
   Jan: "Tháng 1",
   January: "Tháng Một",
@@ -609,7 +612,7 @@ window._language_vi_VN = {
   Login: "Đăng nhập",
   LogInfo: "Thông tin đăng nhập",
   Logout: "Đăng xuất",
-  Lose: "Thua",
+  Lost: "Thua",
   LrfNotification: "Thông báo LRF",
   MacauNotOfferCurrency: "Macau không hỗ trợ đơn vị tiền tệ này.",
   Main: "Chính",
@@ -1130,6 +1133,7 @@ window._language_vi_VN = {
   VirtualTennis: "Quần vợt ảo",
   Void: "Hủy",
   Volume: "Tổng Giao Dịch",
+  W_L: "Thắng Thua",
   WAP: "WAP",
   WarningToActiveMsg: "Cảnh báo, người chơi này đã có thể đăng nhập và đặt cược.",
   WarningToClosedMsg: "Cảnh báo, người chơi vĩnh viễn không được khôi phục!",

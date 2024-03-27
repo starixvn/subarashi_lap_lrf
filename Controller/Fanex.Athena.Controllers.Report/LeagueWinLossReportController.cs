@@ -56,7 +56,7 @@ namespace Fanex.Athena.Controllers.Report
             return new List<CheckedItem>
             {
                 new CheckedItem { ID = StatusTypes.Won, Name = ViewResources.Won, Checked = true },
-                new CheckedItem { ID = StatusTypes.Lose, Name = ViewResources.Lose, Checked = true },
+                new CheckedItem { ID = StatusTypes.Lose, Name = ViewResources.Lost, Checked = true },
                 new CheckedItem { ID = StatusTypes.Draw, Name = ViewResources.Draw, Checked = true }
             };
         }

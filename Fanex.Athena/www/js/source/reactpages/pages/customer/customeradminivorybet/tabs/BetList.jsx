@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import NumberFormat from '@jsroot/lib/numberFormat';
 import NoDataTitle from '@jsroot/components/NoDataTitle';
 import { Table, Row, Cell, HeaderRow, HeaderCell, Pager } from '@9softstudio/react-grid';
@@ -10,8 +10,8 @@ import { connect } from 'react-redux';
 import { defaultPagingOption } from "../lib/constants";
 
 const BetList = (props) => {
-    const {custId, apiSiteId} = props.userInfo;
-    const {fromDate, toDate} = props.dateRange;
+    const { custId, apiSiteId } = props.userInfo;
+    const { fromDate, toDate } = props.dateRange;
     const [gridData, setGridData] = useState([]);
     const [pagingOption, setPagingOption] = useState(null);
 
@@ -35,12 +35,12 @@ const BetList = (props) => {
         const url = "api/CustomerAdministration/GetBetListByCustId";
         const pageOptions = getPagingOption(pageOption);
 
-        const params ={
+        const params = {
             CustId: custId,
             FromDate: fromDate,
             ToDate: toDate,
             APISiteId: apiSiteId,
-            ... pageOptions
+            ...pageOptions
         }
         props.toggleLoader(true);
 
@@ -82,9 +82,9 @@ const BetList = (props) => {
     }
 
     const statusText = {
-        '-1': LangHelper.getSingleResource('Lose'),
-        '0' : LangHelper.getSingleResource('Draw'),
-        '1' : LangHelper.getSingleResource('Won'),
+        '-1': LangHelper.getSingleResource('Lost'),
+        '0': LangHelper.getSingleResource('Draw'),
+        '1': LangHelper.getSingleResource('Won'),
     }
 
     const renderHeader = () => {
@@ -106,37 +106,37 @@ const BetList = (props) => {
             </HeaderRow>
         )
     }
-    
+
     const renderDataSection = () => {
         const dataRows = [];
         for (let i = 0; i < gridData.length; i++) {
             dataRows.push(buildDataRow(gridData[i]));
         }
-    
+
         return dataRows;
     }
 
     const buildDataRow = (dataItem) => {
         const { index, systemId, curencyCode, refNo, transTimeString, productCode,
             betType, turnover, winLoss, turnoverBased, winLossBased, status, sportName } = dataItem;
-   
-       return (
-           <Row key={index}>
-               <Cell className="center-align">{index}</Cell>
-               <Cell>{systemId}</Cell>
-               <Cell className="center-align">{curencyCode}</Cell>
-               <Cell className="center-align">{refNo}</Cell>
-               <Cell className="center-align">{transTimeString}</Cell>
-               <Cell>{LangHelper.getSingleResource('Product' + productCode)}</Cell>
-               <Cell>{sportName}</Cell>
-               <Cell>{betType}</Cell>
-               <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
-               <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
-               <Cell className="right-align">{NumberFormat.formatDecimal(turnoverBased)}</Cell>
-               <Cell className="right-align">{NumberFormat.formatDecimal(winLossBased)}</Cell>
-               <Cell className="center-align">{statusText[status]}</Cell>
-           </Row>
-       )
+
+        return (
+            <Row key={index}>
+                <Cell className="center-align">{index}</Cell>
+                <Cell>{systemId}</Cell>
+                <Cell className="center-align">{curencyCode}</Cell>
+                <Cell className="center-align">{refNo}</Cell>
+                <Cell className="center-align">{transTimeString}</Cell>
+                <Cell>{LangHelper.getSingleResource('Product' + productCode)}</Cell>
+                <Cell>{sportName}</Cell>
+                <Cell>{betType}</Cell>
+                <Cell className="right-align">{NumberFormat.formatDecimal(turnover)}</Cell>
+                <Cell className="right-align">{NumberFormat.formatDecimal(winLoss)}</Cell>
+                <Cell className="right-align">{NumberFormat.formatDecimal(turnoverBased)}</Cell>
+                <Cell className="right-align">{NumberFormat.formatDecimal(winLossBased)}</Cell>
+                <Cell className="center-align">{statusText[status]}</Cell>
+            </Row>
+        )
     }
 
     const handleChangePaging = (pageIndex, pageSize) => {
@@ -162,7 +162,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-    const { dateRange, username, userInfo} = state;
+    const { dateRange, username, userInfo } = state;
     return Object.assign({}, { dateRange, username, userInfo });
 }
 
