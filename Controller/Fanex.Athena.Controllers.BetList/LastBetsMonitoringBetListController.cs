@@ -8,6 +8,7 @@
     using System.Web.Mvc;
     using System.Web.SessionState;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
@@ -60,6 +61,8 @@
 
         private async Task<IEnumerable<SelectListItem>> GetSports()
         {
+            var isHideSaba = SabaHelper.IsHideSaba(SessionServiceInstance.LicenseeSession.SpecialPlatform);
+
             var ParlayId = ((int)SportType.Parlay).ToString();
             const int ProductType = -1;
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
@@ -68,7 +71,7 @@
                SessionServiceInstance.LicenseeSession.OfferedSubProductList,
                Product.SB);
 
-            var sports = await _sportService.GetSportAndProductAndSabaSport(licenseeId, languageCode, productCode).ConfigureAwait(false);
+            var sports = await _sportService.GetSportAndProductAndSabaSport(licenseeId, languageCode, isHideSaba, productCode).ConfigureAwait(false);
             var sportListItems = sports.Where(item => item.ParentId != ProductType).Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.Name }).ToList();
             sportListItems.Add(new SelectListItem { Value = ParlayId, Text = ViewResources.Parlay });
 

@@ -9,8 +9,10 @@
     using Base;
     using Base.Attributes;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -53,6 +55,8 @@
         [HttpGet]
         public async Task<dynamic> GetRunningMatchList(int sportId)
         {
+            var isHideSaba = SabaHelper.IsHideSaba(SessionService.LicenseeSession.SpecialPlatform);
+
             var filterMatches = await GetMatchList(sportId);
 
             var leagueListNormal = filterMatches.Where(i => !i.IsOutRight).Select(m => m.LeagueId).Distinct()
@@ -74,6 +78,16 @@
                                       }).ToList();
 
             var leagueList = leagueListNormal.Union(leagueListOutRight);
+            if (isHideSaba)
+            {
+                foreach (var league in leagueList)
+                {
+                    league.LeagueName = System.Text.RegularExpressions.Regex.Replace(
+                        league.LeagueName, ViewResources.Saba
+                        , string.Empty
+                        , System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                }
+            }
 
             return new
             {

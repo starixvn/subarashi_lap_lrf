@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Core;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Report.ViewModel;
@@ -35,8 +36,9 @@ namespace Fanex.Athena.Controllers.Report
             var userSession = SessionServiceInstance.UserSession;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportAbnormalBet,
                 licenseeSession.LicenseeName);
+            var isHideSaba = SabaHelper.IsHideSaba(licenseeSession.SpecialPlatform);
 
-            var sports = (await _sportService.GetSportAndProductAndSabaSport(licenseeSession.LicenseeId, userSession.Language, Product.SB).ConfigureAwait(true))
+            var sports = (await _sportService.GetSportAndProductAndSabaSport(licenseeSession.LicenseeId, userSession.Language, isHideSaba, Product.SB).ConfigureAwait(true))
                     .Where(x => x.ParentId >= 0);
             var bettypes = await _betTypeService.GetBettypesByProduct(licenseeSession.LicenseeId, Product.SB, userSession.Language).ConfigureAwait(true);
 

@@ -88,7 +88,7 @@
             var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
 
             var sports = includeSabaSport
-                ? await _sportService.GetSportAndProductAndSabaSport(licenseeId, lang, productCode, isHideSaba)
+                ? await _sportService.GetSportAndProductAndSabaSport(licenseeId, lang, isHideSaba, productCode)
                 : await _sportService.GetSportsAndProducts(licenseeId, lang, productCode);
 
             return sports.Where(x => x.ParentId > -1).Select(x => new { value = x.ID, label = x.Name, status = true });

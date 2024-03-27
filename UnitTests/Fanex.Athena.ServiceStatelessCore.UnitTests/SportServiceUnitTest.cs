@@ -112,13 +112,14 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             const int licenseeId = 1;
             const string lang = "VN";
             const string productCode = "Sport";
+            const bool isHideSaba = false;
             var service = CreateService();
             var sabaSports = service.GetSabaSports();
             var expectedResult = new List<SportProductItem>();
             _sportTypeDataAccess.GetSportsAndProducts(licenseeId, lang, productCode).Returns(expectedResult);
 
             //Action
-            var result = await service.GetSportAndProductAndSabaSport(licenseeId, lang, productCode);
+            var result = await service.GetSportAndProductAndSabaSport(licenseeId, lang, isHideSaba, productCode);
 
             //Assert
             Assert.Multiple(() =>
