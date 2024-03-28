@@ -36,10 +36,8 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
@@ -1029,7 +1027,6 @@
     <Content Include="Views\Desktop\Report\LiveReport\Content.Data.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\Content.Header.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\HistoryFilter.cshtml" />
     <Content Include="Views\Desktop\Report\LiveReport\Main.cshtml" />
     <Content Include="Views\Desktop\Shared\_ReportLayout.cshtml" />
     <Content Include="Views\Desktop\Shared\_Layout.cshtml" />

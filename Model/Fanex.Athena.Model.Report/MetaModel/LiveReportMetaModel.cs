@@ -3,12 +3,11 @@
     using System;
     using System.Linq;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.MetaModel;
 
     [Serializable]
-    public class LiveReportMetaModel : BaseReportMetaModel
+    public class LiveReportMetaModel : BaseReportMetaModel, IMetaModelSubsidiarySearch
     {
-        public bool IsViewedHistory { get; set; }
-
         public int LiveIndicator { get; set; }
 
         public override bool IsValid
@@ -20,5 +19,9 @@
                    .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
             }
         }
+
+        public string SubsidiaryList { get; set; }
+
+        public bool SubsidiarySearch { get; set; }
     }
 }

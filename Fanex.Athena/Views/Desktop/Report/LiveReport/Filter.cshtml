@@ -1,14 +1,22 @@
 ﻿@model Fanex.Athena.Model.Report.ViewModel.LiveReports.LiveReportViewModel
+@using Fanex.Athena.Model.Core.DataDomain;
+
 @{
-    var minDate = DateTime.Today.AddMonths(-3).AddDays(1 - DateTime.Today.Day);
+    var minDate = DateTime.Today.AddYears(-3);
     var appSettings = new AppSettings();
     var maxDate = appSettings.MaxDate;
+    var isShowSubsidiaryDropdown = Model.SubsidiaryViewType != (byte)SubsidiaryViewType.NotManagement && Model.SubsidiaryList.Count() > 0;
+    var isShowSubsidiarySearchCheckBox = isShowSubsidiaryDropdown && Model.SubsidiaryViewType == (byte)SubsidiaryViewType.MasterManagement;
 }
 
 <div class="page-form">
-    <form id="livereport" name="livereport" method="post" action="@Url.Content("~/LiveReport?isViewedHistory=false")">
+    <form id="LiveReportForm" name="LiveReportForm" method="post" action="@Url.Content("~/LiveReport")">
         @Html.AntiForgeryToken()
         <div class="row">
+            @if (isShowSubsidiaryDropdown)
+            {
+                @DesktopRazorHelper.SusidiaryDropdown(Model.SubsidiaryViewType, Model.IsOneworksMaster, Model.SubsidiaryList, 2, 2)
+            }
             <div class="input-field input col l3 m3 s12 calendar date-range">
                 @DesktopRazorHelper.DateRangePicker(Model.Param.FromDate, Model.Param.ToDate, minDate, maxDate)
             </div>
@@ -24,30 +32,36 @@
                 @DesktopLiveReportRazorHelper.LiveStatus(Model.Param.LiveIndicator)
                 <label>@ViewResources.LiveStatus</label>
             </div>
-            <div class="col l2 m2 s12 button-block">
-                <a id="btnSubmit" class="waves-effect waves-light btn btn-primary">@ViewResources.Submit</a>
+            <div class="col l3 m3 s12">
+                <div class="row">
+                    @if (isShowSubsidiarySearchCheckBox)
+                    {
+                        <div class="form-group col l6 m6 s12">
+                            <div class="checkbox-group">
+                                <input type="checkbox" class="checkbox" id="SubsidiarySearchCheckbox" autocomplete='off'/>
+                                <label for="SubsidiarySearchCheckbox">@ViewResources.SubsidiarySearch</label>
+                            </div>
+                        </div>
+                    }
+                    <div class="col l6 m6 s12 button-block">
+                        <button type="button" id="SubmitButton" class="btn btn-primary">@ViewResources.Submit</button>
+                    </div>
+                </div>
             </div>
+
             <div class="col right icon-block">
                 @if (!Model.IsFakeLicensee)
                 {
-                <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
+                    <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
                 }
-                <i class="icon-excel right" title="@ViewResources.ExportToExcel" id="exporttoexcel" name="exporttoexcel"></i>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <span class="circle"></span>
-                <span>
-                    @string.Format(ViewResources.HistoricalReportDateRangeNote, minDate),
-                    <a data-history-mode="False" id="switchreport" href="javascript:;">
-                        @ViewResources.ToViewHistoryRptMsg
-                    </a>
-                </span>
+                <i class="icon-excel right" title="@ViewResources.ExportToExcel" id="ExportToExcel" name="ExportToExcel"></i>
             </div>
         </div>
 
+
         <input type="hidden" name="ProductCode" id="ProductCode" />
+        <input type="hidden" name="SubsidiaryList" id="SubsidiaryList" />
+        <input type="hidden" name="SubsidiarySearch" id="SubsidiarySearch" value="@(Model.SubsidiarySearch ? "true" : "false")"/>
         <input type="hidden" name="IsExportExcel" id="IsExportExcel" value="false" />
     </form>
 </div>

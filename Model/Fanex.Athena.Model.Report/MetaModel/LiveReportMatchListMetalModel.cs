@@ -16,7 +16,7 @@ namespace Fanex.Athena.Model.Report.MetaModel
     /// LiveReportMatchListMetalModel class.
     /// </summary>
     [Serializable]
-    public class LiveReportMatchListMetalModel : BaseReportMetaModel, IMetaModelValidation
+    public class LiveReportMatchListMetalModel : BaseReportMetaModel, IMetaModelValidation, IMetaModelSubsidiarySearch
     {
         [Required]
         public int SportId { get; set; }
@@ -38,5 +38,9 @@ namespace Fanex.Athena.Model.Report.MetaModel
            .Any(x => x.Value.Equals(BaseCurrency, StringComparison.OrdinalIgnoreCase)));
             }
         }
+
+        public string SubsidiaryList { get; set; }
+
+        public bool SubsidiarySearch { get; set; }
     }
 }
