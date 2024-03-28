@@ -72,26 +72,12 @@
             initialize: function () {
                 Site.initialize();
 
-                if (_me.isMatchWLBetList() === true) {
-                    _me.updateSortColumn();
-                }
-
                 _isShowSumStake = $('#IsShowSumStake').val() === '1';
 
                 _sortColumnName = _sortColumnName || $('#SortBy').val();
                 _sortOrder = _sortOrder || $('#SortOrder').val();
 
                 _me.registerBetListGlobalFunctions();
-            },
-
-            updateSortColumn: function () {
-                BetListOption.columnModel[1].sortable = true; // externalId
-                BetListOption.columnModel[2].sortable = true; // systemId
-            },
-
-            isMatchWLBetList: function () {
-                const regex = /MatchWinLossBetList/i;
-                return regex.test($('#ApiUrl').val());
             },
 
             gridComplete: function (grid) {

@@ -162,7 +162,6 @@
     <Compile Include="CustomerPendingFundsReportController.cs" />
     <Compile Include="CustomerTurnoverReportController.cs" />
     <Compile Include="CustomerWinLossReportController.cs" />
-    <Compile Include="MatchWinLossReportController.cs" />
     <Compile Include="PlatformWinLossReportController.cs" />
     <Compile Include="Result\ResultKenoReportController.cs" />
     <Compile Include="Result\ResultReportController.cs" />

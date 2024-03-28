@@ -12,8 +12,6 @@
 
         public const string LicenseeWinLoss = "LicenseeWinLoss";
 
-        public const string MatchWinLoss = "MatchWinLoss";
-
         public const string PlatformWinloss = "PlatformWinloss";
 
         public const string Turnover = "Turnover";
