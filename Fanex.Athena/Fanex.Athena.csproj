@@ -394,9 +394,6 @@
     <Content Include="App_Data\UserGuide\ManageAccount\id-ID.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\th-TH.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\MatchWL\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\MatchWL\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\MatchWL\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\id-ID.htm" />
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\th-TH.htm" />
     <Content Include="App_Data\UserGuide\NewCashOutWinLoss\vi-VN.htm" />
@@ -573,7 +570,6 @@
     <Content Include="App_Data\UserGuide\CustomerWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\LiveReport\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\MatchWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\LiveReport\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\zh-CN.htm" />
@@ -605,7 +601,6 @@
     <Content Include="App_Data\UserGuide\Turnover\en-US.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\MatchWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\en-US.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\en-US.htm" />
@@ -670,7 +665,6 @@
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Main.cshtml" />
     <Content Include="App_Data\Template\Reports\SabaVirtualSportsWinLoss.xls" />
     <Content Include="Views\Desktop\BetList\SabaVirtualSportsWl\Main.cshtml" />
-    <Content Include="Views\Desktop\BetList\MatchWl\BetTypeWinLoss.cshtml" />
     <Content Include="SiteConfig\WebConfigTransforms\AWS.config" />
     <Content Include="SiteConfig\WebConfigTransforms\AWSStatic.config" />
     <Content Include="SiteConfig\Web.AppSettings.AWSStatic.config" />
@@ -816,20 +810,9 @@
     <Content Include="Views\Desktop\Report\WinLossByProduct\Main.cshtml" />
     <Content Include="Views\Desktop\Report\WinLossByProduct\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\WinLossByProduct\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\MatchWinLoss\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\MatchWinLoss\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\MatchWinLoss\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\MatchWinLoss\Content.Header.cshtml" />
-    <Content Include="Views\Desktop\Report\MatchWinLoss\Content.Data.cshtml" />
-    <Content Include="Views\Desktop\Report\MatchWinLoss\Content.Data.Detail.cshtml" />
-    <Content Include="Views\Desktop\Report\MatchWinLoss\Content.GrandTotal.cshtml" />
-    <Content Include="Views\Desktop\Report\MatchWinLoss\Content.Total.cshtml" />
     <Content Include="Views\Desktop\Report\PlatformWinLoss\Main.cshtml" />
     <Content Include="Views\Desktop\Report\PlatformWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\PlatformWinLoss\Filter.cshtml" />
-    <Content Include="Views\Desktop\BetList\MatchWl\MatchBetType.cshtml" />
-    <Content Include="Views\Desktop\BetList\MatchWl\MixParlay.cshtml" />
-    <Content Include="Views\Desktop\BetList\MatchWl\Outright.cshtml" />
     <Content Include="Views\Desktop\Report\WinLossByBetType\Main.cshtml" />
     <Content Include="Views\Desktop\Report\WinLossByBetType\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\WinLossByBetType\Content.cshtml" />
@@ -4007,7 +3990,6 @@
     <Content Include="App_Data\Template\CustomerReports\CustomerWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\LicenseeWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\LiveReport.xls" />
-    <Content Include="App_Data\Template\Reports\MatchWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\Turnover.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByBetType.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByProducts.xls" />

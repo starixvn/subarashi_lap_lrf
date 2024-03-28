@@ -100,8 +100,6 @@
     <Compile Include="AbnormalBetReportControllerTest.cs" />
     <Compile Include="NewCashOutWinLossReportControllerTest.cs" />
     <Compile Include="SabaVirtualSportsWinLossReportControllerTest.cs" />
-    <Compile Include="MatchWinLossReportControllerTest_AssignLeagueName.cs" />
-    <Compile Include="MatchWinLossReportControllerTest_AssignMatchName.cs" />
     <Compile Include="Result\ResultKenoReportControllerTest.cs" />
     <Compile Include="Result\ResultReportControllerTest.cs" />
     <Compile Include="Result\ResultReportControllerTest.GetSports.cs" />
@@ -110,8 +108,6 @@
     <Compile Include="SubsidiaryPerformanceReportControllerTest.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportControllerTest.cs" />
     <Compile Include="ExchangeWinLossReportControllerTest.cs" />
-    <Compile Include="MatchWinLossReportControllerTest.Excel.cs" />
-    <Compile Include="MatchWinLossReportControllerTest.Index.cs" />
     <Compile Include="NoteControllerTest.cs" />
     <Compile Include="GodOfFortuneWinLossReportControllerTest.cs" />
     <Compile Include="WinLossByProductReportControllerTest.cs" />
@@ -120,7 +116,6 @@
     <Compile Include="WinLossByBetTypeReportControllerTest.cs" />
     <Compile Include="TurnoverReportControllerTest.cs" />
     <Compile Include="PlatformWinLossReportControllerTest.cs" />
-    <Compile Include="MatchWinLossReportControllerTest.cs" />
     <Compile Include="LiveReportControllerTest.cs" />
     <Compile Include="CustomerWinLossReportControllerTest.cs" />
     <Compile Include="CustomerTurnoverReportControllerTest.cs" />

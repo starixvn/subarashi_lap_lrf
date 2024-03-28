@@ -46,10 +46,6 @@
 		<Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss_Ag" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss_Ag" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_PlatformWinloss" SpName="Lrf_Rpt_PlatformWinloss" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_PlatformWinlossDetail" SpName="Lrf_Rpt_PlatformWinlossDetail" DbName="DBEXT.bodb02.wsv_lap" />
-		<Setting Key="Lrf_Rpt_MatchWinLossDetail" SpName="Lrf_Rpt_MatchWinLossDetail" DbName="DBEXT.bodb02.wsv_lap" />
-		<Setting Key="Lrf_Rpt_MatchWinLoss" SpName="Lrf_Rpt_MatchWinLoss" DbName="DBEXT.bodb02.wsv_lap" />
-		<Setting Key="Lrf_Rpt_MatchWinLossByBettype" SpName="Lrf_Rpt_MatchWinLossByBettype" DbName="DBEXT.bodb02.wsv_lap" />
-		<Setting Key="Lrf_Rpt_MatchWinLossByOutrightParlay" SpName="Lrf_Rpt_MatchWinLossByOutrightParlay" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Shard_Lrf_Rpt_LicWinloss" SpName="Lrf_Rpt_LicWinloss" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_LicWinloss_FromAPI" SpName="Lrf_Rpt_LicWinloss_FromAPI" DbName="DBPLO.bodb02.wsv_lap" />
 		<Setting Key="Shard_Lrf_Rpt_LicWinlossDetail" SpName="Lrf_Rpt_LicWinlossDetail" DbName="DBEXT.bodb02.wsv_lap" />
