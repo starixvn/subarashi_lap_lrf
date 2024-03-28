@@ -51,9 +51,10 @@
             var expectedSportXmlString = $"<products><product ID=\"{parentSport.ID}\" Sport=\"{childSport1.ID},{childSport2.ID}\"> </product></products>";
 
             var languageCode = FakeHelper.Create<string>();
+            var isHideSaba = false;
 
             // Action
-            _betTypeService.GetBettypes(sports, languageCode);
+            _betTypeService.GetBettypes(sports, languageCode, isHideSaba);
 
             // Assert
             _betTypeDataAccess.Received().GetBettypes(expectedSportXmlString);
@@ -69,9 +70,10 @@
             var expectedSportXmlString = $"<products><product ID=\"{parentSport.ID}\" Sport=\"{parentSport.ID}\"> </product></products>";
 
             var languageCode = FakeHelper.Create<string>();
+            var isHideSaba = false;
 
             // Action
-            _betTypeService.GetBettypes(sports, languageCode);
+            _betTypeService.GetBettypes(sports, languageCode, isHideSaba);
 
             // Assert
             _betTypeDataAccess.Received().GetBettypes(expectedSportXmlString);
@@ -89,9 +91,10 @@
 
             var languageCode = FakeHelper.Create<string>();
             _betTypeDataAccess.GetBettypes(Arg.Any<string>()).Returns(expectedResult);
+            var isHideSaba = false;
 
             // Action
-            var result = await _betTypeService.GetBettypes(sports, languageCode);
+            var result = await _betTypeService.GetBettypes(sports, languageCode, isHideSaba);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(expectedResult.Count));
@@ -104,9 +107,10 @@
             var languageCode = FakeHelper.Create<string>();
 
             IList<SportProductItem> sports = null;
+            var isHideSaba = false;
 
             // Action
-            var result = await _betTypeService.GetBettypes(sports, languageCode);
+            var result = await _betTypeService.GetBettypes(sports, languageCode, isHideSaba);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(0));
@@ -119,9 +123,10 @@
             var languageCode = FakeHelper.Create<string>();
 
             IList<SportProductItem> sports = new List<SportProductItem>();
+            var isHideSaba = false;
 
             // Action
-            var result = await _betTypeService.GetBettypes(sports, languageCode);
+            var result = await _betTypeService.GetBettypes(sports, languageCode, isHideSaba);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(0));

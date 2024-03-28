@@ -53,6 +53,8 @@
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
+
             metaModel.IsServerPaging = true;
             uspKey = metaModel.FromDate < metaModel.BalanceUpDay ? "Lrf_BetList_MatchWL_Old" : uspKey;
 

@@ -112,11 +112,13 @@
                 // arrange
                 var productCode = FakeHelper.Create<string>();
                 var item = new CheckedItem { ID = FakeHelper.Create<int>(), Name = FakeHelper.Create<string>() };
+                var isHideSaba = false;
 
                 _betTypeService.GetBettypesByProduct(
                  _sessionService.LicenseeSession.LicenseeId,
                  productCode,
-                 _sessionService.UserSession.Language)
+                 _sessionService.UserSession.Language,
+                 isHideSaba)
                  .Returns(new List<CheckedItem> { item });
 
                 _productService.GetAllowedSubProductCodeList(

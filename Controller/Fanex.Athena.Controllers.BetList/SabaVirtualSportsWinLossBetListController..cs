@@ -21,6 +21,7 @@
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
 
             return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/SabaVirtualSportsWl/Main.cshtml", "Lrf_BetList_SabaVirtualSports_Mem").ConfigureAwait(false);
         }

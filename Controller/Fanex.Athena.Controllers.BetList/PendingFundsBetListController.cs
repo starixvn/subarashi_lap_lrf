@@ -33,6 +33,8 @@ namespace Fanex.Athena.Controllers.BetList
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
+
             metaModel.FromDate = DateTimeHelper.Today.AddYears(-ExpandedYears);
             metaModel.ToDate = DateTimeHelper.Today.AddYears(ExpandedYears);
 
@@ -53,6 +55,8 @@ namespace Fanex.Athena.Controllers.BetList
                 metaModel.IsFakeLicensee ? string.Empty : $"({metaModel.SystemId})",
                 GetViewInCurrency(metaModel));
             metaModel.HiddenColumns = HiddenColList;
+            metaModel.SpecialPlatform = SessionServiceInstance.LicenseeSession.SpecialPlatform;
+
             return await ProcessExportExcel(metaModel, "CustomerPendingFundsBetList").ConfigureAwait(false);
         }
     }

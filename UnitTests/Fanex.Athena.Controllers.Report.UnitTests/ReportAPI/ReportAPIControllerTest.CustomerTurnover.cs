@@ -78,10 +78,12 @@
                 {
                     new BettypeProductItem()
                 };
+                var isHideSaba = false;
 
                 _betTypeService.GetBettypes(
                     sports,
-                    SessionService.UserSession.Language).Returns(dataList);
+                    SessionService.UserSession.Language,
+                    isHideSaba).Returns(dataList);
 
                 // Action
                 var result = await controller.GetBettypesBySport(sports) as JsonResult;

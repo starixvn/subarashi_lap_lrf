@@ -27,7 +27,7 @@ namespace Fanex.Athena.Controllers.Report
                 return Json(new List<BettypeProductItem>());
             }
 
-            var data = await _betTypeService.GetBettypes(sports, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
+            var data = await _betTypeService.GetBettypes(sports, SessionServiceInstance.UserSession.Language, IsHideSaba).ConfigureAwait(false);
 
             return Json(data);
         }

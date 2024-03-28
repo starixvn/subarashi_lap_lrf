@@ -54,6 +54,7 @@
 
             var balanceUp = GetBalanceUp();
             var userSession = SessionService.UserSession;
+            var licenseeSession = SessionService.LicenseeSession;
             metaModel.PageIndex = 1;
             metaModel.PageSize = int.MaxValue - 1;
             metaModel.LicenseeId = LicenseeSession.LicenseeId;
@@ -64,6 +65,8 @@
             metaModel.UspKey = uspKey;
             metaModel.IsShowIpvn = userSession.IsShowIpvn;
             metaModel.IsShowIp = userSession.IsShowIp;
+            metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
+
             AutoBindMetaModelService.BindProductCodeList(metaModel, SessionService.LicenseeSession.OfferedSubProductList, ProductService);
 
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetList", metaModel, userSession.Language).ConfigureAwait(false);
@@ -91,6 +94,8 @@
             metaModel.UspKey = uspKey;
             metaModel.IsShowIpvn = UserSession.IsShowIpvn;
             metaModel.IsShowIp = UserSession.IsShowIp;
+            metaModel.SpecialPlatform = LicenseeSession.SpecialPlatform;
+
             AutoBindMetaModelService.BindProductCodeList(metaModel, SessionService.LicenseeSession.OfferedSubProductList, ProductService);
 
             return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetListPaging",

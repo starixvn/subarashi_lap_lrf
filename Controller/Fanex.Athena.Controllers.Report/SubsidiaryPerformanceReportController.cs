@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.MetaModel.Product;
@@ -38,7 +39,8 @@
                     Status = true
                 }).ToList(),
                 GroupSubsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName),
-                ViewType = userSession.SubsidiaryViewType
+                ViewType = userSession.SubsidiaryViewType,
+                IsHideSaba = SabaHelper.IsHideSaba(licenseeSession.SpecialPlatform)
             };
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
             return View("~/Views/Desktop/Report/SubsidiaryPerformance/Main.cshtml", model);

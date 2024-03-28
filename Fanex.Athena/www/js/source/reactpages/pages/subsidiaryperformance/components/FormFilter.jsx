@@ -275,7 +275,7 @@ export class FormFilter extends Component {
                         </div>
                     </div>
 
-                    {separateSabaWinLoss}
+                    {!AppData.isHideSaba && separateSabaWinLoss}
 
                     <div className="col-12 col-md-2 col-sm-4 col-lg-2 col-xl-2">
                         <div className="button-group btn-submit-container">

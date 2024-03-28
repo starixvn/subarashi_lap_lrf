@@ -6,7 +6,13 @@ using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class BetListMetaModel : BaseMetaModel, IMetaModelValidation, IMetaModelProductCodeList, IMetaModelShowBetFromIP, IMetaModelSubsidiarySearch
+    public class BetListMetaModel :
+        BaseMetaModel,
+        IMetaModelValidation,
+        IMetaModelProductCodeList,
+        IMetaModelShowBetFromIP,
+        IMetaModelSubsidiarySearch,
+        IMetaModelSpecialPlatform
     {
         public BetListMetaModel()
         {
@@ -139,5 +145,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public string SubsidiaryList { get; set; }
 
         public bool SubsidiarySearch { get; set; }
+
+        public int SpecialPlatform { get; set; }
     }
 }

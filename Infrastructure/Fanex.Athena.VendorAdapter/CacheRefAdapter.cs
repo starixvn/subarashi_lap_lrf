@@ -99,7 +99,7 @@ namespace Fanex.Athena.VendorAdapter
             return RemotingRefService.GetLeagueName(leagueId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
         }
 
-        public string GetBetTypeName(object bettypeId, string languageCode, bool isHideSaba = false)
+        public string GetBetTypeName(object bettypeId, string languageCode, bool isHideSaba)
         {
             if (!IsValidId(bettypeId))
             {
