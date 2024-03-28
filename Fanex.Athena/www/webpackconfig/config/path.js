@@ -36,7 +36,6 @@ var cssPaths = {
     cashouthistory: ["./www/css/source/pages/betlist/cashouthistory.main.scss", "./www/css/source/extensions/popup-ex.scss"],
 
     winlossbyproduct: ["./www/css/source/pages/report/winlossbyproduct.scss"],
-    matchwinloss: ["./www/css/source/pages/report/matchwinloss.scss"],
     platformwinloss: ["./www/css/source/pages/report/platformwinloss.scss"],
     winlossbybettype: ["./www/css/source/pages/report/winlossbybettype.scss"],
     lastbetmonitoring: ["./www/css/source/pages/betlist/lastbetmonitoring.scss"],
@@ -93,7 +92,6 @@ var scriptPaths = {
     result: "./www/js/source/pages/report/result/main-result.js",
 
     winlossbyproduct: "./www/js/source/pages/report/winlossbyproduct/main-winlossbyproduct.js",
-    matchwinloss: "./www/js/source/pages/report/matchwinloss/main.js",
     platformwinloss: "./www/js/source/pages/report/platformwinloss/main-platformwinloss.js",
     winlossbybettype: "./www/js/source/pages/report/winlossbybettype/main.js",
     lastbetmonitoring: "./www/js/source/pages/betlist/lastbetmonitoring/main.js",

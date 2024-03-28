@@ -127,7 +127,6 @@
     <Compile Include="CustomerPendingFundsExcel.cs" />
     <Compile Include="CustomerTurnoverExcel.cs" />
     <Compile Include="LicenseeWinLossExcel.cs" />
-    <Compile Include="MatchWinLossExcel.cs" />
     <Compile Include="LiveReportExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TurnoverExcel.cs" />

@@ -139,7 +139,6 @@
     <Compile Include="DTO\LiveReports\LiveReport.cs" />
     <Compile Include="DTO\LiveReports\LiveReportByBetType.cs" />
     <Compile Include="DTO\LiveReports\LiveReportWinLossByMatch.cs" />
-    <Compile Include="DTO\MatchWinLoss.cs" />
     <Compile Include="DTO\WinLossByBetType.cs" />
     <Compile Include="DTO\TurnoverDTO.cs" />
     <Compile Include="DTO\WinLossByProduct.cs" />
@@ -165,7 +164,6 @@
     <Compile Include="MetaModel\CustomerWinlossMetaModel.cs" />
     <Compile Include="MetaModel\LicenseeWinLossMetaModel.cs" />
     <Compile Include="MetaModel\LiveReportMetaModel.cs" />
-    <Compile Include="MetaModel\MatchWinLossMetaModel.cs" />
     <Compile Include="MetaModel\PlatformWinLossMetaModel.cs" />
     <Compile Include="MetaModel\TurnoverMetaModel.cs" />
     <Compile Include="MetaModel\WinLossByBetTypeMetaModel.cs" />
@@ -201,7 +199,6 @@
     <Compile Include="ViewModel\LiveReports\LiveReportDetailViewModel.cs" />
     <Compile Include="ViewModel\LiveReports\LiveReportMatchListViewModel.cs" />
     <Compile Include="ViewModel\LiveReports\LiveReportViewModel.cs" />
-    <Compile Include="ViewModel\MatchWinLossViewModel.cs" />
     <Compile Include="ViewModel\PlatformWinLossViewModel.cs" />
     <Compile Include="ViewModel\WinLossByBetTypeViewModel.cs" />
     <Compile Include="ViewModel\TurnoverViewModel.cs" />
