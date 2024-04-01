@@ -1,4 +1,4 @@
-﻿// Generated at: 3/19/2024 2:39:33 PM
+﻿// Generated at: 4/1/2024 9:35:56 AM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -412,6 +412,7 @@ HTFT:"Hiệp 1/Toàn trận",
 HttpError_403:"Truy cập bị từ chối",
 HttpError_404:"Không tìm thấy trang, vui lòng kiểm tra lại địa chỉ",
 HttpError_Default:"Xin lỗi... Hiện tại hệ thống đang gặp sự cố, vui lòng thông báo cho các quản trị viên.",
+IceHockey:"Khúc côn cầu trên băng",
 IncludeDrawData:"Bao gồm dữ liệu Hòa",
 IncorrectMaxBet:"Cược tối đa không hợp lệ",
 IncorrectMaxBetPerDraw:"Cược Tối Đa Mỗi Lượt không hợp lệ",

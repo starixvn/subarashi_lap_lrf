@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 3/19/2024 2:39:33 PM
+﻿// Generated at: 4/1/2024 9:35:56 AM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -510,6 +510,7 @@ HTFT:"ที่1/เต็มเวลา",
 HttpError_403:"ปฏิเสธการเข้าใช้",
 HttpError_404:"ไม่พบ กรุณาตรวจสอบที่อยู่",
 HttpError_Default:"โอ๊ะ... คุณมาที่นี่เพราะระบบผิดพลาด โปรดแจ้งผู้ดูแลระบบ",
+IceHockey:"ฮ๊อกกี้น้ำแข็ง",
 IncludeDrawData:"รวมข้อมูลเสมอ",
 IncorrectMaxBet:"เดิมพันสูงสุดไม่ถูกต้อง",
 IncorrectMaxBetPerDraw:"เดิมพันสูงสุดต่อการเสมอไม่ถูกต้อง",
