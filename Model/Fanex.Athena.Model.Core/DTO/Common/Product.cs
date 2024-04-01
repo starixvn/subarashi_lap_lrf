@@ -110,6 +110,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string L22 = "L22";
 
+        public const string UUSL = "UUSL";
+
         #endregion Field
 
         #region Constructor

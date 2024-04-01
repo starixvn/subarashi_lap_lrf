@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/1/2024 9:35:56 AM
+﻿// Generated at: 4/2/2024 1:45:18 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -782,6 +782,7 @@ ProductSLT:"体育时时彩",
 ProductSXG:"AE性感真人",
 ProductTG:"桌面游戏",
 ProductTIP:"玩家打赏",
+ProductUUSL:"UU 老虎機",
 ProductVB:"澳门电子娱乐城",
 ProductVGA:"Vgaming",
 ProductVRG:"虚拟娱乐城",

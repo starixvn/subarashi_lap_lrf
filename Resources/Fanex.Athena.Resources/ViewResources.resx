@@ -3725,4 +3725,7 @@
   <data name="W_L" xml:space="preserve">
     <value>W/L</value>
   </data>
+  <data name="ProductUUSL" xml:space="preserve">
+    <value>UU Slots</value>
+  </data>
 </root>
