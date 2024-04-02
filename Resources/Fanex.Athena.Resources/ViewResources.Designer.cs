@@ -3904,6 +3904,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ice Hockey.
+        /// </summary>
+        public static string IceHockey {
+            get {
+                return ResourceManager.GetString("IceHockey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Include Draw data.
         /// </summary>
         public static string IncludeDrawData {

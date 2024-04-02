@@ -3244,6 +3244,9 @@
   <data name="Virtual" xml:space="preserve">
     <value>虚拟</value>
   </data>
+  <data name="IceHockey" xml:space="preserve">
+    <value>冰上曲棍球</value>
+  </data>
   <data name="AGCasinoCutOffDateNote" xml:space="preserve">
     <value>可取得从2023 年 1 月 3 日起促销活动、贡献金和积宝奖金资料。</value>
   </data>

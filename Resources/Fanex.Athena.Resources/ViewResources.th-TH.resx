@@ -3297,6 +3297,9 @@
   <data name="ProductVS3" xml:space="preserve">
     <value>กีฬาเสมือนจริง 3 (old)</value>
   </data>
+  <data name="IceHockey" xml:space="preserve">
+    <value>ฮ๊อกกี้น้ำแข็ง</value>
+  </data>
   <data name="AGCasinoCutOffDateNote" xml:space="preserve">
     <value>ควบคุมข้อมูลของรายงาน 01/03/2024.</value>
   </data>

@@ -3249,4 +3249,7 @@
   <data name="W_L" xml:space="preserve">
     <value>W/L</value>
   </data>
+  <data name="IceHockey" xml:space="preserve">
+    <value>Hoki Es</value>
+  </data>
 </root>

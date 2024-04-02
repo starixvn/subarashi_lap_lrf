@@ -1,4 +1,4 @@
-﻿// Generated at: 3/19/2024 2:39:33 PM
+﻿// Generated at: 4/1/2024 9:35:56 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -383,6 +383,7 @@ HTFT:"半场/全场",
 HttpError_403:"访问被拒绝",
 HttpError_404:"页面不存在, 请检查地址",
 HttpError_Default:"Oops… 您在此处基于系统错误, 请通知管理员",
+IceHockey:"冰上曲棍球",
 IncludeDrawData:"包含和局资料",
 IncorrectMaxBet:"不正确的最大投注",
 IncorrectMaxBetPerDraw:"错误的每局最大下注额",

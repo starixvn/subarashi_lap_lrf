@@ -3303,6 +3303,9 @@
   <data name="CasinoPromotion" xml:space="preserve">
     <value>Casino Khuyến Mãi</value>
   </data>
+  <data name="IceHockey" xml:space="preserve">
+    <value>Khúc côn cầu trên băng</value>
+  </data>
   <data name="AGCasinoCutOffDateNote" xml:space="preserve">
     <value>Khuyến Mãi, Tích Lũy, và Dữ Liệu Giải Thưởng Jackpot có hiệu lực từ 01/03/2024.</value>
   </data>

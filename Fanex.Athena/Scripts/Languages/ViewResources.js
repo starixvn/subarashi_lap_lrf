@@ -1,4 +1,4 @@
-﻿// Generated at: 3/19/2024 2:39:33 PM
+﻿// Generated at: 4/1/2024 9:35:56 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -427,6 +427,7 @@ HTFT:"HT/FT",
 HttpError_403:"Access denied",
 HttpError_404:"Page not found, please check the address",
 HttpError_Default:"Oops... you are here because of a system error, please notify the administrators",
+IceHockey:"Ice Hockey",
 IncludeDrawData:"Include Draw data",
 IncorrectMaxBet:"Incorrect Max Bet",
 IncorrectMaxBetPerDraw:"Incorrect Max Bet Per Draw",

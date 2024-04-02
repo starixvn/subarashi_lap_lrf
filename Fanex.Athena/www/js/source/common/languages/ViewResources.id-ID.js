@@ -1,4 +1,4 @@
-﻿// Generated at: 3/19/2024 2:39:33 PM
+﻿// Generated at: 4/1/2024 9:35:56 AM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -404,6 +404,7 @@ HTFT:"Pertama/Waktu Penuh",
 HttpError_403:"Akses ditolak",
 HttpError_404:"Halaman tidak ditemukan, harap periksa alamat",
 HttpError_Default:"Oops... Anda berada di sini karena adanya kesalahan sistem, harap beri tahu administrator",
+IceHockey:"Hoki Es",
 IncludeDrawData:"Sertakan data Undian",
 IncorrectMaxBet:"Maksimum Taruhan Salah",
 IncorrectMaxBetPerDraw:"Maksimum Taruhan yang Salah Per Undian",
