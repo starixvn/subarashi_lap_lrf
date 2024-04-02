@@ -1955,7 +1955,7 @@
     <value>多个会员</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>全部联赛与全部赛事仅支援单日搜寻</value>
+    <value>投注类型，联赛与赛事选单仅支援单日搜寻</value>
   </data>
   <data name="BTCExportExcelMsg1" xml:space="preserve">
     <value>您的搜寻结果超过系统设定的范围.</value>
