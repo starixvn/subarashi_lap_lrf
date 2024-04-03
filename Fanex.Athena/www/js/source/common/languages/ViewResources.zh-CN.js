@@ -1,4 +1,4 @@
-﻿// Generated at: 4/1/2024 9:35:56 AM
+﻿// Generated at: 4/2/2024 5:36:15 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -102,7 +102,7 @@ BetTaken:"匹配时间",
 BettingLimit:"投注限额",
 BettingStatement:"投注详情",
 BettingTicketCenter:"注单中心",
-BettingTicketCenter_AdvancedSearchTabNote1:"全部联赛与全部赛事仅支援单日搜寻",
+BettingTicketCenter_AdvancedSearchTabNote1:"投注类型，联赛与赛事选单仅支援单日搜寻",
 BettingTicketCenter_AdvancedSearchTabNote2:"仅支援{0}以后的注单",
 BettingTicketCenter_Exchange_Note_1:"支援仅搜寻被取消注单。",
 BettingTicketCenter_Exchange_Note_2:"输入玩家名可更快返回结果。",
