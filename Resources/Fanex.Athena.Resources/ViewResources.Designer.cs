@@ -7090,7 +7090,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UU Slots.
+        ///   Looks up a localized string similar to UU SLOTS.
         /// </summary>
         public static string ProductUUSL {
             get {

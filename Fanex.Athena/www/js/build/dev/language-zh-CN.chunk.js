@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/2/2024 1:45:18 PM
+﻿// Generated at: 4/9/2024 1:22:10 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -197,7 +197,7 @@ BetTaken:"匹配时间",
 BettingLimit:"投注限额",
 BettingStatement:"投注详情",
 BettingTicketCenter:"注单中心",
-BettingTicketCenter_AdvancedSearchTabNote1:"全部联赛与全部赛事仅支援单日搜寻",
+BettingTicketCenter_AdvancedSearchTabNote1:"投注类型，联赛与赛事选单仅支援单日搜寻",
 BettingTicketCenter_AdvancedSearchTabNote2:"仅支援{0}以后的注单",
 BettingTicketCenter_Exchange_Note_1:"支援仅搜寻被取消注单。",
 BettingTicketCenter_Exchange_Note_2:"输入玩家名可更快返回结果。",
@@ -782,7 +782,7 @@ ProductSLT:"体育时时彩",
 ProductSXG:"AE性感真人",
 ProductTG:"桌面游戏",
 ProductTIP:"玩家打赏",
-ProductUUSL:"UU 老虎機",
+ProductUUSL:"UU 老虎机",
 ProductVB:"澳门电子娱乐城",
 ProductVGA:"Vgaming",
 ProductVRG:"虚拟娱乐城",
