@@ -3312,4 +3312,7 @@
   <data name="W_L" xml:space="preserve">
     <value>W/L</value>
   </data>
+  <data name="ServiceMaintenanceMsg" xml:space="preserve">
+    <value>ระบบกำลังยุ่ง กรุณาลองใหม่อีกครั้งหลังจากผ่านไปสักครู่</value>
+  </data>
 </root>

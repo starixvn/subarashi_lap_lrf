@@ -29,6 +29,8 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
 
         protected virtual string ApiName => "Base API Client";
 
+        protected virtual string BaseAddress => _client.BaseAddress.ToString();
+
         protected BaseApiClient(HttpClient client)
         {
             _client = client;
@@ -112,6 +114,50 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                         {
                             await HandleUnSucessReponseAsync(response);
                         }
+
+                        return await codeBlock(response).ConfigureAwait(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!disposeHttpResponse)
+                        {
+                            response?.Dispose();
+                        }
+
+                        throw new ServiceException(ex.Message, ApiName, ex);
+                    }
+                    finally
+                    {
+                        if (disposeHttpResponse && response != null)
+                        {
+                            response.Dispose();
+                        }
+                    }
+                }
+            }
+        }
+
+        protected virtual async Task<T> HealthCheckAsync<T>(string path, Func<HttpResponseMessage, Task<T>> codeBlock,
+            bool disposeHttpResponse = true, int timeOut = 100)
+        {
+            if (codeBlock == null)
+            {
+                return await Task.FromResult(default(T));
+            }
+            using (var cancelToken = new CancellationTokenSource(new TimeSpan(0, 0, timeOut)))
+            {
+                using (var httpRequest = new HttpRequestMessage(HttpMethod.Get, new Uri(_client.BaseAddress + path)))
+                {
+                    await PrepareHeaders(httpRequest.Headers).ConfigureAwait(false);
+
+                    HttpResponseMessage response = null;
+                    try
+                    {
+                        httpRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(JsonContentType));
+
+                        response = await _client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancelToken.Token).ConfigureAwait(false);
+
+                        response.EnsureSuccessStatusCode();
 
                         return await codeBlock(response).ConfigureAwait(false);
                     }

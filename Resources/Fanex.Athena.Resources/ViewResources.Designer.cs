@@ -7909,6 +7909,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to System is busy. Please try again after a few minutes..
+        /// </summary>
+        public static string ServiceMaintenanceMsg {
+            get {
+                return ResourceManager.GetString("ServiceMaintenanceMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have logged in from another session or your login session has expired.
         /// </summary>
         public static string SessionLoggedMsg {

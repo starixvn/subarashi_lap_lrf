@@ -4,7 +4,8 @@ import LangHelper from './langHelper';
 export const predefinedIcons = {
     error: 'error',
     warning: 'warning',
-    success: 'success'
+    success: 'success',
+    info: 'info',
 }
 
 export const defaultSubmitButton = {

@@ -3728,4 +3728,7 @@
   <data name="ProductUUSL" xml:space="preserve">
     <value>UU SLOTS</value>
   </data>
+  <data name="ServiceMaintenanceMsg" xml:space="preserve">
+    <value>System is busy. Please try again after a few minutes.</value>
+  </data>
 </root>

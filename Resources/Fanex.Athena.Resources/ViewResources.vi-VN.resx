@@ -3318,4 +3318,7 @@
   <data name="JackpotPrize" xml:space="preserve">
     <value>Giải Thưởng Jackpot</value>
   </data>
+  <data name="ServiceMaintenanceMsg" xml:space="preserve">
+    <value>Hệ thống đang bận. Vui lòng thử lại sau ít phút.</value>
+  </data>
 </root>
