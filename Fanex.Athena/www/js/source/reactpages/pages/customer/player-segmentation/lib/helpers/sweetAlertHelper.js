@@ -23,7 +23,7 @@ export const UpdateVipStatusAlertOption = {
 
             if (response.errorCode === errorCode.serviceMaintenance) {
                 message = LangHelper.getSingleResource('ServiceMaintenanceMsg');
-                icon = predefinedIcons.info;
+                icon = predefinedIcons.warning;
             }
 
             alertOpt = generateDefaultAlertOption(message, () => setSweetAlertOption(null), null, icon);
