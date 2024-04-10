@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/1/2024 9:35:56 AM
+﻿// Generated at: 4/9/2024 1:22:10 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -870,6 +870,7 @@ ProductSPR:"Saba Promotion",
 ProductSXG:"AE Sexy",
 ProductTG:"Table Game",
 ProductTIP:"Player Tips",
+ProductUUSL:"UU SLOTS",
 ProductVB:"Macau Games",
 ProductVG:"Macau",
 ProductVGA:"Vgaming",

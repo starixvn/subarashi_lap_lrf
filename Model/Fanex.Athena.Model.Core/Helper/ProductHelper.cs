@@ -75,7 +75,8 @@
                 { Product.LG, nameof(ViewResources.ProductLG) },
                 { Product.SEA, nameof(ViewResources.ProductSEA) },
                 { Product.WE, nameof(ViewResources.ProductWE) },
-                { Product.L22, nameof(ViewResources.ProductL22) }
+                { Product.L22, nameof(ViewResources.ProductL22) },
+                { Product.UUSL, nameof(ViewResources.ProductUUSL) }
             };
 
         public static string GetProductCode(int productId)
