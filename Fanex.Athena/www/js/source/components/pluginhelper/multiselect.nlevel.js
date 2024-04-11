@@ -51,8 +51,9 @@ define(['jquery', 'common/site', 'lib/jquery.multiselect.nlevel'], function ($, 
             });
 
             const checkedItems = $(selector).multiSelect('getCheckedItems');
+            const isShowSubsidiaryDropdown = $('#IsShowSubsidiaryDropdown').val() == "true" && $('#IsShowSubsidiarySearchCheckBox').val() == "false";
             $('#SubsidiaryList').val(checkedItems.join(','));
-            $('#SubsidiaryDropdown').toggle($('#SubsidiarySearch').val() == "true");
+            $('#SubsidiaryDropdown').toggle($(isShowSubsidiaryDropdown || '#SubsidiarySearch').val() == "true");
             $('#SubsidiarySearchCheckbox').prop('checked', $('#SubsidiarySearch').val() == "true");
         }
     };

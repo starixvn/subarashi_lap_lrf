@@ -7,6 +7,7 @@
     var maxDate = appSettings.MaxDate;
     var isShowSubsidiaryDropdown = Model.SubsidiaryViewType != (byte)SubsidiaryViewType.NotManagement && Model.SubsidiaryList.Count() > 0;
     var isShowSubsidiarySearchCheckBox = isShowSubsidiaryDropdown && Model.SubsidiaryViewType == (byte)SubsidiaryViewType.MasterManagement;
+    var isSubsidiarySearch = Model.SubsidiarySearch || (!isShowSubsidiarySearchCheckBox && isShowSubsidiaryDropdown);
 }
 
 <div class="page-form">
@@ -38,7 +39,7 @@
                     {
                         <div class="form-group col l6 m6 s12">
                             <div class="checkbox-group">
-                                <input type="checkbox" class="checkbox" id="SubsidiarySearchCheckbox" autocomplete='off'/>
+                                <input type="checkbox" class="checkbox" id="SubsidiarySearchCheckbox" autocomplete='off' />
                                 <label for="SubsidiarySearchCheckbox">@ViewResources.SubsidiarySearch</label>
                             </div>
                         </div>
@@ -61,7 +62,9 @@
 
         <input type="hidden" name="ProductCode" id="ProductCode" />
         <input type="hidden" name="SubsidiaryList" id="SubsidiaryList" />
-        <input type="hidden" name="SubsidiarySearch" id="SubsidiarySearch" value="@(Model.SubsidiarySearch ? "true" : "false")"/>
+        <input type="hidden" name="SubsidiarySearch" id="SubsidiarySearch" value="@(isSubsidiarySearch ? "true" : "false")" />
         <input type="hidden" name="IsExportExcel" id="IsExportExcel" value="false" />
+        <input type="hidden" name="IsShowSubsidiaryDropdown" id="IsShowSubsidiaryDropdown" value="@(isShowSubsidiaryDropdown ? "true" : "false")" />
+        <input type="hidden" name="IsShowSubsidiarySearchCheckBox" id="IsShowSubsidiarySearchCheckBox" value="@(isShowSubsidiarySearchCheckBox ? "true" : "false")" />
     </form>
 </div>
