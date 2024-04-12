@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/9/2024 1:22:10 PM
+// Generated at: 4/12/2024 4:33:54 PM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -929,6 +929,7 @@ window._language_th_TH = {
   SeparateSabaWinLoss: "แยก Sabaกีฬาเสมือนจริงออกจากสปอร์ตบุ๊ค",
   September: "กันยายน",
   ServerBusyMessage: "คำขอของคุณไม่สามารถดำเนินการได้ในขณะนี้เนื่องจากเซิร์ฟเวอร์ไม่ว่าง กรุณาลองใหม่อีกครั้งในภายหลัง",
+  ServiceMaintenanceMsg: "ระบบกำลังยุ่ง กรุณาลองใหม่อีกครั้งหลังจากผ่านไปสักครู่",
   SessionLoggedMsg: "คุณได้เข้าสู่ระบบจากเซสชันอื่นหรือเซสชันการเข้าสู่ระบบของคุณหมดอายุแล้ว",
   SetAsDefaultGroup: "ตั้งเป็นกลุ่มเริ่มต้น",
   SettleAmount: "จำนวนเงินที่ชำระ",

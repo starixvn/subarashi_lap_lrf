@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/9/2024 1:22:10 PM
+// Generated at: 4/12/2024 4:33:54 PM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -911,6 +911,7 @@ window._language_id_ID = {
   SeparateSabaWinLoss: "Pisahkan Saba Virtual Sports dari Sportsbook",
   September: "September",
   ServerBusyMessage: "Permintaan Anda tidak dapat diproses saat ini karena server sibuk. Harap coba lagi nanti.",
+  ServiceMaintenanceMsg: "Sistem sedang sibuk. Silakan coba lagi setelah beberapa menit",
   SessionLoggedMsg: "Anda telah masuk dari sesi lain atau sesi login Anda telah kadaluarsa",
   SetAsDefaultGroup: "Atur sebagai grup default",
   SettleAmount: "Jumlah Penyelesaian",

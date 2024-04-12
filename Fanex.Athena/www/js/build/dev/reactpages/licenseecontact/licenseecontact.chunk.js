@@ -2101,7 +2101,8 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 const predefinedIcons = {
   error: 'error',
   warning: 'warning',
-  success: 'success'
+  success: 'success',
+  info: 'info'
 };
 const defaultSubmitButton = {
   text: _langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Submit'),

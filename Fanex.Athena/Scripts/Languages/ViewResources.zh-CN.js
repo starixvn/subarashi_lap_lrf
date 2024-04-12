@@ -1,4 +1,4 @@
-﻿// Generated at: 4/9/2024 1:22:10 PM
+﻿// Generated at: 4/12/2024 4:33:54 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -774,6 +774,7 @@ SelectTop:"选择最大",
 Sep:"九月",
 September:"九月",
 ServerBusyMessage:"由于服务器繁忙，您的请求现在无法处理。请稍后再试。",
+ServiceMaintenanceMsg:"系统繁忙,请过几分钟后再试",
 SessionLoggedMsg:"您已从另一会话登入或您的登入会话已过期",
 SetAsDefaultGroup:"设置为默认组",
 SettleAmount:"结算总额",

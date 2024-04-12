@@ -14081,7 +14081,8 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 const predefinedIcons = {
   error: 'error',
   warning: 'warning',
-  success: 'success'
+  success: 'success',
+  info: 'info'
 };
 const defaultSubmitButton = {
   text: _langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Submit'),
@@ -14658,6 +14659,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _messageHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messageHelper */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/helpers/messageHelper.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+
 
 
 
@@ -14690,8 +14693,13 @@ const UpdateVipStatusAlertOption = {
       alertOpt = noAlertResult ? handlerUpdateVipStatusSuccess(resultMessage) : Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(resultMessage, handlerUpdateVipStatusSuccess, null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].success);
       !noAlertResult && setSweetAlertOption(alertOpt);
     } else {
-      const message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('ErrorProcessingMsg');
-      alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(message, () => setSweetAlertOption(null), null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].error);
+      let message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('ErrorProcessingMsg');
+      let icon = _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].error;
+      if (response.errorCode === _constants__WEBPACK_IMPORTED_MODULE_4__["errorCode"].serviceMaintenance) {
+        message = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('ServiceMaintenanceMsg');
+        icon = _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["predefinedIcons"].warning;
+      }
+      alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_1__["generateDefaultAlertOption"])(message, () => setSweetAlertOption(null), null, icon);
       setSweetAlertOption(alertOpt);
     }
   },
@@ -16528,4 +16536,4 @@ const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["defa
 /***/ })
 
 }]);
-//# sourceMappingURL=vipPlayerManagement.3afe51df884158965d6e.chunk.js.map
+//# sourceMappingURL=vipPlayerManagement.3c1d06e084a318fdd7be.chunk.js.map

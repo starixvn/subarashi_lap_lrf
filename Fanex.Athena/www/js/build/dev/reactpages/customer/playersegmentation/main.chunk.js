@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/SabaVirtualSetting":"customer/playersegmentation/SabaVirtualSetting","customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/SabaVirtualSetting":"ebe9861d0d009015b966","customer/playersegmentation/monitoredPlayer":"036e33755b5c3345c58d","customer/playersegmentation/problemPlayer":"95cf6f3714e195ae7a0f","customer/playersegmentation/vipPlayerManagement":"3afe51df884158965d6e","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/SabaVirtualSetting":"customer/playersegmentation/SabaVirtualSetting","customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/SabaVirtualSetting":"ebe9861d0d009015b966","customer/playersegmentation/monitoredPlayer":"1ee6ccc2009946cae62e","customer/playersegmentation/problemPlayer":"4462eef67d456eec7c1d","customer/playersegmentation/vipPlayerManagement":"3c1d06e084a318fdd7be","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -1036,7 +1036,7 @@ const TabMenu = props => {
 /*!**************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js ***!
   \**************************************************************************************/
-/*! exports provided: tabKeys, tabMenuList, preLoadComponents, SortMapper, UploadFileOptionValue, UploadFileOptions, UpdateVIPStatusCode, errorResponse, successResponse, TabType */
+/*! exports provided: tabKeys, tabMenuList, preLoadComponents, SortMapper, UploadFileOptionValue, UploadFileOptions, UpdateVIPStatusCode, errorResponse, errorCode, successResponse, TabType */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1049,6 +1049,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadFileOptions", function() { return UploadFileOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateVIPStatusCode", function() { return UpdateVIPStatusCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorResponse", function() { return errorResponse; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "errorCode", function() { return errorCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "successResponse", function() { return successResponse; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabType", function() { return TabType; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -1117,6 +1118,10 @@ const errorResponse = {
   data: null,
   isSuccess: false
 };
+const errorCode = {
+  serviceMaintenance: 0,
+  serviceError: 500
+};
 const successResponse = {
   isSuccess: true
 };
@@ -1159,15 +1164,23 @@ class CommonQueryService {
   static async updateVipStatus(params) {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/UpdateVipStatus', params);
-      if (response.status === 200) {
+      if (response.status === 200 && response.data !== null) {
         return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_5__["successResponse"]), {
           data: response.data
+        });
+      }
+      // Service Maintenance
+      if (response.status === 200) {
+        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_5__["errorResponse"]), {}, {
+          errorCode: _constants__WEBPACK_IMPORTED_MODULE_5__["errorCode"].serviceMaintenance
         });
       }
     } catch (e) {
       console.log(e);
     }
-    return _constants__WEBPACK_IMPORTED_MODULE_5__["errorResponse"];
+    return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_5__["errorResponse"]), {}, {
+      errorCode: _constants__WEBPACK_IMPORTED_MODULE_5__["errorCode"].serviceError
+    });
   }
 }
 const queryServiceCommonFactory = {
