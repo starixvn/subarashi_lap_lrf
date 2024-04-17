@@ -2,9 +2,10 @@ import GridHelper from './gridHelper';
 import { generateDefaultAlertOption, predefinedIcons } from '@jsroot/lib/sweetAlert';
 import LangHelper from '@jsroot/lib/langHelper';
 import MessageHelper from './messageHelper';
+import { errorCode } from '../constants';
 
 export const UpdateVipStatusAlertOption = {
-    
+
     createHandlerAfterUpdateVipStatusSuccess: ({ setSweetAlertOption, searchPlayer, selectedTabKey, setPagingOption, pagingOption, selectedParams }) => () => {
         setSweetAlertOption(null);
         searchPlayer(selectedTabKey, selectedParams, GridHelper.callBackToUpdatePaging({ pagingOption, setPagingOption }));
@@ -17,8 +18,15 @@ export const UpdateVipStatusAlertOption = {
             alertOpt = noAlertResult ? handlerUpdateVipStatusSuccess(resultMessage) : generateDefaultAlertOption(resultMessage, handlerUpdateVipStatusSuccess, null, predefinedIcons.success);
             !noAlertResult && setSweetAlertOption(alertOpt);
         } else {
-            const message = LangHelper.getSingleResource('ErrorProcessingMsg');
-            alertOpt = generateDefaultAlertOption(message, () => setSweetAlertOption(null), null, predefinedIcons.error);
+            let message = LangHelper.getSingleResource('ErrorProcessingMsg');
+            let icon = predefinedIcons.error;
+
+            if (response.errorCode === errorCode.serviceMaintenance) {
+                message = LangHelper.getSingleResource('ServiceMaintenanceMsg');
+                icon = predefinedIcons.warning;
+            }
+
+            alertOpt = generateDefaultAlertOption(message, () => setSweetAlertOption(null), null, icon);
             setSweetAlertOption(alertOpt);
         }
     },

@@ -3252,4 +3252,7 @@
   <data name="IceHockey" xml:space="preserve">
     <value>Hoki Es</value>
   </data>
+  <data name="ServiceMaintenanceMsg" xml:space="preserve">
+    <value>Sistem sedang sibuk. Silakan coba lagi setelah beberapa menit</value>
+  </data>
 </root>

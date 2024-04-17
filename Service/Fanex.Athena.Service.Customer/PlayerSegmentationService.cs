@@ -33,6 +33,7 @@ namespace Fanex.Athena.Service.Customer
 
         private const string ADD_LIC_VIP_PATH = "/api/cts/AddLicVIP";
         private const string REMOVE_LIC_VIP_PATH = "/api/cts/RemoveLicVIP";
+        private const string HEALTH_CHECK_PATH = "/api/cts/HealthCheck";
 
         public PlayerSegmentationService(
             ISessionService sessionService,
@@ -83,6 +84,13 @@ namespace Fanex.Athena.Service.Customer
 
         public async Task<IEnumerable<UpdateStatusPlayerResult>> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
         {
+            var isOk = await _ctsApiClient.HealthCheck(HEALTH_CHECK_PATH);
+
+            if (!isOk)
+            {
+                return null;
+            }
+
             var (listAffCustId, updateResult) = await _playerDataAccess.UpdateVipStatusAsync(metaModel);
             if (!metaModel.IsUseCtsApi)
             {

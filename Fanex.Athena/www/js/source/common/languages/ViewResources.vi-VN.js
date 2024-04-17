@@ -1,4 +1,4 @@
-﻿// Generated at: 4/9/2024 1:22:10 PM
+﻿// Generated at: 4/12/2024 4:33:54 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -836,6 +836,7 @@ Sep:"Tháng 9",
 SeparateSabaWinLoss:"Tách Saba Thể Thao Ảo ra khỏi Sportsbook",
 September:"Tháng Chín",
 ServerBusyMessage:"Yêu cầu của bạn chưa được xử lý do máy chủ đang bận. Vui lòng thử lại sau.",
+ServiceMaintenanceMsg:"Hệ thống đang bận. Vui lòng thử lại sau ít phút.",
 SessionLoggedMsg:"Bạn đã đăng nhập từ một phiên khác hoặc phiên đăng nhập của bạn đã hết hạn",
 SetAsDefaultGroup:"Đặt làm nhóm mặc định",
 SettleAmount:"Số tiền thanh toán",

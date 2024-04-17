@@ -11,7 +11,7 @@ export const tabKeys = {
 const newTabs = [];
 
 const dynamicImports = {
-    [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),    
+    [tabKeys.problemPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/problemPlayer" */ '../tabs/problem-player/index'),
     [tabKeys.sabaVirtualSetting]: () => import(/* webpackChunkName: "customer/playersegmentation/SabaVirtualSetting" */ '../tabs/saba-virtual-setting/index'),
     [tabKeys.vipPlayerManagement]: () => import(/* webpackChunkName: "customer/playersegmentation/vipPlayerManagement" */ '../tabs/vip-player-management/index'),
     [tabKeys.monitoredPlayer]: () => import(/* webpackChunkName: "customer/playersegmentation/monitoredPlayer" */ '../tabs/monitored-player/index')
@@ -63,12 +63,17 @@ export const errorResponse = {
     isSuccess: false
 }
 
+export const errorCode = {
+    serviceMaintenance: 0,
+    serviceError: 500
+}
+
 export const successResponse = {
     isSuccess: true
 }
 
 export const TabType = {
-    MonitoredPlayer:1,
-    SabaVirtualSetting:2,
-    VipPlayerManagement:3
+    MonitoredPlayer: 1,
+    SabaVirtualSetting: 2,
+    VipPlayerManagement: 3
 }

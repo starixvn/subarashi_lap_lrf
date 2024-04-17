@@ -1,8 +1,11 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Service.StatelessCore.Abstraction;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
+using Fanex.Logging;
 
 namespace Fanex.Athena.Service.StatelessCore
 {
@@ -13,6 +16,24 @@ namespace Fanex.Athena.Service.StatelessCore
         }
 
         protected override string ApiName => "CTS";
+
+        public async Task<bool> HealthCheck(string path, int timeOut = 100)
+        {
+            try
+            {
+                await HealthCheckAsync(path, (response) => Task.FromResult(response), false, timeOut).ConfigureAwait(false);
+                return true;
+            }
+            catch (Exception baseException)
+            {
+                // write log
+                var message = string.Format("Calling CTS API health check failed!\nURL: {0}", BaseAddress + path);
+                var exception = new Exception(message, baseException);
+                Logger.Log.Error(LogMessageHelper.GenerateMessage(exception));
+
+                return false;
+            }
+        }
 
         public async Task<HttpResponseMessage> PostAsync(string path, object value, string language, int timeOut = 100)
         {

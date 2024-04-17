@@ -32,6 +32,8 @@
             }
         }
 
+        public string ServiceName => _serviceName;
+
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue(nameof(_serviceName), _serviceName);

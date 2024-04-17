@@ -3262,4 +3262,7 @@
   <data name="ProductUUSL" xml:space="preserve">
     <value>UU 老虎机</value>
   </data>
+  <data name="ServiceMaintenanceMsg" xml:space="preserve">
+    <value>系统繁忙,请过几分钟后再试</value>
+  </data>
 </root>
