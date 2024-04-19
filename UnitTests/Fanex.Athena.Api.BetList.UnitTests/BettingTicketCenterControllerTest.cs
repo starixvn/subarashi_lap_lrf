@@ -53,7 +53,7 @@
                 const string ApiPath = "/BettingTicketCenter/GetByRefno";
                 var metaModel = new RefNoBetListMetaModel
                 {
-                    RefNo = FakeHelper.Create<uint>()
+                    RefNo = FakeHelper.Create<string>()
                 };
 
                 var expect = new HttpResponseMessage();
