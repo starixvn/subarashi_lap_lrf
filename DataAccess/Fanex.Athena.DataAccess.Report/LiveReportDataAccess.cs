@@ -40,7 +40,7 @@ namespace Fanex.Athena.DataAccess.Report
 
         public async Task<IList<LiveReport>> GetLiveReportSummary(LiveReportMetaModel metaModel)
         {
-            const string UspName = "Lrf_Rpt_LiveReportSummary";
+            string UspName = metaModel.SubsidiarySearch ? "Lrf_Rpt_LiveReport" : "Lrf_Rpt_LiveReportSummary";
             var moveBetsDate = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
 
             using (var db = this.GetObjectDb(UspName))
@@ -69,7 +69,7 @@ namespace Fanex.Athena.DataAccess.Report
 
         public async Task<IList<LiveReport>> GetDetailBySport(LiveReportMetaModel metaModel)
         {
-            const string UspName = "Lrf_Rpt_LiveReportBySport";
+            string UspName = metaModel.SubsidiarySearch ? "Lrf_Rpt_LiveReportBySportType" : "Lrf_Rpt_LiveReportBySport";
             var moveBetsDate = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
 
             var list = new List<LiveReport>();
@@ -100,7 +100,7 @@ namespace Fanex.Athena.DataAccess.Report
             IDictionary<int, string> currencyList,
              IEnumerable<Product> products)
         {
-            const string UspName = "Lrf_Rpt_LiveReportSummaryDetail";
+            string UspName = metaModel.SubsidiarySearch ? "Lrf_Rpt_LiveReportDetail" : "Lrf_Rpt_LiveReportSummaryDetail";
             var moveBetsDate = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay;
 
             using (var db = this.GetObjectDb(UspName))
