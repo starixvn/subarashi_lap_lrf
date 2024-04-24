@@ -18,7 +18,7 @@ class BetListDataGrid extends Component {
     _getResource(key) {
         return this.props.getResourceFunc ? this.props.getResourceFunc(key) : key;
     }
-    
+
     _getTotalCellClassName(column, value) {
         if (this.props.getTotalCellClassNameFunc) {
             return this.props.getTotalCellClassNameFunc(column, value);
@@ -65,7 +65,7 @@ class BetListDataGrid extends Component {
                 let hasTooltip = columnAlignments[j].indexOf('tooltip') !== -1;
 
                 cells.push(
-                    <Cell key={`${column}-${i}`} className={columnAlignments[j]} {...(hasTooltip ? {title: item[column]} : {})} dangerouslySetInnerHTML={{ __html: item[column] }}></Cell>
+                    <Cell key={`${column}-${i}`} className={columnAlignments[j]} {...(hasTooltip ? { title: item[column] } : {})} dangerouslySetInnerHTML={{ __html: item[column] }}></Cell>
                 )
             }
 
@@ -131,7 +131,7 @@ class BetListDataGrid extends Component {
         }
 
         const { data } = this.props;
-        
+
         if (!data.length) {
             return this._renderNodata();
         }
@@ -141,6 +141,7 @@ class BetListDataGrid extends Component {
         return (
             <div className="betlist-container result-content">
                 <Table
+                    key={JSON.stringify(this.props.data)}
                     onSort={this.onSort}
                     minWidth={980}
                     autoWidth={true}
