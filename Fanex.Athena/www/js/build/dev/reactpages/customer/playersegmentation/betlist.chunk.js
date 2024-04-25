@@ -698,6 +698,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "betlist-container result-content"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+      key: JSON.stringify(this.props.data),
       onSort: this.onSort,
       minWidth: 980,
       autoWidth: true,
