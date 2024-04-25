@@ -17,6 +17,7 @@ namespace Fanex.Athena.Controllers.Report
     using Fanex.Athena.Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Auth.Enum;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Model.Report.ViewModel.LiveReports;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -69,6 +70,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyId = 0,
                 LiveIndicator = 1,
                 BaseCurrency = userSession.DefaultBaseCurrency,
+                SubsidiarySearch = (userSession.SubsidiaryViewType == (byte)SubsidiaryViewType.NotManagement && subsidiaryList.Any() && userSession.ApplicationMode == AppMode.Parasitic),
             };
 
             var productAccess = GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
@@ -94,6 +96,7 @@ namespace Fanex.Athena.Controllers.Report
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
+
             var subsidiaryList = GetSubsidiarySelected(
                 _subsidiaryService.GetWhiteLabelTree(userSession, licenseeSession.LicenseeName),
                 !string.IsNullOrEmpty(metaModel.SubsidiaryList) ? metaModel.SubsidiaryList.Split(',') : null);

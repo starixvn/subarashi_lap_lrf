@@ -22,37 +22,41 @@ define(['jquery', 'common/site', 'lib/jquery.multiselect.nlevel'], function ($, 
 
     const _me = {
         initSubsidiaryList: function (onChangeCallback) {
-            const selector = '#grid-subsidiary-multiselect';
-            const data = $.parseJSON($('#subsidiaryData').val());
-            const propertyKeys = { Id: 'Value', Value: 'Value', Text: 'Name' };
-            const length = data.length;
-            let { Items: dataUI, CheckedCount: checkedCount } = _initDataUI(data, propertyKeys);
-            const isCheckAll = checkedCount === length;
-            $(selector).multiSelect({
-                minWidth: 200,
-                maxHeight: 400,
-                shadow: true,
-                showHeader: true,
-                isCheckAll: isCheckAll,
-                checkAllText: Site.getSingleResource('All'),
-                selectedText: Site.getSingleResource('SelectedItemCount'),
-                noneSelectedText: Site.getSingleResource('SelectOptions'),
-                showFooter: false,
-                listData: dataUI,
-                onCheck: function () {
-                    const checkedItems = $(selector).multiSelect('getCheckedItems');
-                    const hasItemsChecked = checkedItems.length > 0;
+            const subsidiaryData = $('#subsidiaryData').val();
+            if (subsidiaryData !== undefined) {
+                const selector = '#grid-subsidiary-multiselect';
+                const data = $.parseJSON(subsidiaryData);
+                const propertyKeys = { Id: 'Value', Value: 'Value', Text: 'Name' };
+                const length = data.length;
+                let { Items: dataUI, CheckedCount: checkedCount } = _initDataUI(data, propertyKeys);
+                const isCheckAll = checkedCount === length;
+                $(selector).multiSelect({
+                    minWidth: 200,
+                    maxHeight: 400,
+                    shadow: true,
+                    showHeader: true,
+                    isCheckAll: isCheckAll,
+                    checkAllText: Site.getSingleResource('All'),
+                    selectedText: Site.getSingleResource('SelectedItemCount'),
+                    noneSelectedText: Site.getSingleResource('SelectOptions'),
+                    showFooter: false,
+                    listData: dataUI,
+                    onCheck: function () {
+                        const checkedItems = $(selector).multiSelect('getCheckedItems');
+                        const hasItemsChecked = checkedItems.length > 0;
 
-                    $('#SubsidiaryList').val(checkedItems.join(','));
-                    $('#SubsidiaryDropdownList').toggleClass('invalid', !hasItemsChecked);
-                    $('#SubmitButton').prop('disabled', !hasItemsChecked);
-                    onChangeCallback && onChangeCallback();
-                }
-            });
+                        $('#SubsidiaryList').val(checkedItems.join(','));
+                        $('#SubsidiaryDropdownList').toggleClass('invalid', !hasItemsChecked);
+                        $('#SubmitButton').prop('disabled', !hasItemsChecked);
+                        onChangeCallback && onChangeCallback();
+                    }
+                });
 
-            const checkedItems = $(selector).multiSelect('getCheckedItems');
+                const checkedItems = $(selector).multiSelect('getCheckedItems');
+                $('#SubsidiaryList').val(checkedItems.join(','));
+            }
+
             const isShowSubsidiaryDropdown = $('#IsShowSubsidiaryDropdown').val() == "true" && $('#IsShowSubsidiarySearchCheckBox').val() == "false";
-            $('#SubsidiaryList').val(checkedItems.join(','));
             $('#SubsidiaryDropdown').toggle($(isShowSubsidiaryDropdown || '#SubsidiarySearch').val() == "true");
             $('#SubsidiarySearchCheckbox').prop('checked', $('#SubsidiarySearch').val() == "true");
         }

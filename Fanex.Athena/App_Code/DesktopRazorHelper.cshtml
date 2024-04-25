@@ -17,10 +17,9 @@
         <div class="multiselect-container" id="SubsidiaryDropdownList">
             <select id="grid-subsidiary-multiselect" name="grid-subsidiary-multiselect"></select>
             <label>@(isWhiteLabelView ? ViewResources.WhiteLabel : ViewResources.Subsidiary)</label>
-            
-            <input type="hidden" id="subsidiaryData" value="@subsidiaryList.ToJson()" />
         </div>
     </div>
+    <input type="hidden" id="subsidiaryData" value="@subsidiaryList.ToJson()" />
 }
 @helper  PlatformList(string id, IDictionary<int, string> platformList)
 {
