@@ -96,6 +96,12 @@
                 new { Controller = "Proxy", Action = "ReportViews", report = "MatchWinLoss", url = "Index" });
             matchWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
+            var liveReportRoute = routes.MapHttpRoute(
+                name: "liveReportRoute",
+                routeTemplate: "LiveReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "LiveReport", url = "Index" });
+            liveReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
             var betListReportRoute = routes.MapHttpRoute(
                 name: "betListReportRoute",
                 routeTemplate: "BetList/Report/{*url}",
