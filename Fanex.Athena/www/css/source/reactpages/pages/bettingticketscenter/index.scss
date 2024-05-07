@@ -10,6 +10,14 @@
 @import "../../components/tab.scss";
 @import "../../components/custom3rd/react-toastify.scss";
 
+.datepicker-disabled {
+    .daterange-container {
+        pointer-events: none;
+        background-color: #DFDFDF !important;
+        color: #9F9F9F !important;
+    }
+}
+
 .table {
     line-height: inherit;
 }

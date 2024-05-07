@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/12/2024 4:33:54 PM
+// Generated at: 5/7/2024 3:05:32 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -209,6 +209,7 @@ window._language_vi_VN = {
   BettingTicketCenter: "Trung Tâm Vé Cược",
   BettingTicketCenter_AdvancedSearchTabNote1: "Tất cả các loại cược, bộ lọc Giải đấu và Trận đấu chỉ khả dụng khi có 1 ngày được chọn.",
   BettingTicketCenter_AdvancedSearchTabNote2: "Dữ liệu có sẵn từ {0}",
+  BettingTicketCenter_BookedBetNote: "Hiển thị dữ liệu lên đến 7 ngày",
   BettingTicketCenter_Exchange_Note_1: "Chỉ hỗ trợ tìm kiếm vé cược bị hủy.",
   BettingTicketCenter_Exchange_Note_2: "Nhập tên người dùng để tra kết quả nhanh hơn.",
   BettingTicketCenter_Exchange_Note_3: "Hỗ trợ dữ liệu lên đến 1 tháng.",
@@ -221,6 +222,10 @@ window._language_vi_VN = {
   BetType: "Loại cược",
   BONTeamToScore: "Cả hai/Một/Không đội nào ghi bàn",
   Bonus: "Thưởng",
+  BookedBet: "Đặt cược trước",
+  BookedId: "Mã đặt trước",
+  BookedTime: "Thời gian đặt",
+  Booking: "Đang đặt",
   BothGroupByAndBreakdownLevelOption: "Dữ liệu sẽ được nhóm lại &amp; phân loại theo từng cấp độ",
   BoughtAmount: "Số tiền đã mua",
   BoughtDetails: "Chi tiết đã mua",
@@ -234,6 +239,7 @@ window._language_vi_VN = {
   ByCurrency: "Theo Đơn vị tiền tệ",
   BySportsType: "Theo Loại Thể Thao",
   Cancel: "Hủy",
+  Cancelled: "Đã hủy",
   CannotUpdateBetLimitForProduct: "Bạn không thể cập nhật giới hạn cược thành viên cho sản phẩm {0}.",
   CashOutAmt: "Tiền bán vé cược",
   CashOutCommission: "Hoa hồng vé cược đã bán",
@@ -743,9 +749,11 @@ window._language_vi_VN = {
   Odds: "Tỷ lệ cược",
   OddsAvg: "Tỷ lệ cược trung bình",
   OddsGroup: "Nhóm tỷ lệ cược",
+  OddsLower: "Tỉ lệ cược tối thiểu",
   OddsMatched: "Tỷ lệ cược phù hợp",
   OddsReq: "Yêu cầu tỷ lệ cược",
   OddsType: "Loại tỷ lệ cược",
+  OddsUpper: "Tỉ lệ cược tối đa",
   of: "của",
   Off: "Tắt",
   Offline: "Ngoại tuyến",
@@ -968,6 +976,7 @@ window._language_vi_VN = {
   SubsidiarySearch: "Tìm kiếm chi nhánh",
   SubsidiaryWL: "Thắng Thua Chi nhánh",
   Success: "Thành Công",
+  Successful: "Thành công",
   SuccessfullyUpdate: "Cập nhật thành công",
   SuccessfullyUpdateBatchCommand: "Cập nhật Thành công: {0}",
   SuccessUpdateVipStatus: "Cập nhật Thành công: {0}",
@@ -1050,6 +1059,7 @@ window._language_vi_VN = {
   UnderSettlement: "Đang chờ kết toán",
   Unfreeze: "Tự Cập Nhật",
   Unknown: "Không xác định",
+  Unsuccessful: "Thất bại",
   Update: "Cập nhật",
   UpdateAccountStatus: "Cập nhật Trạng thái Tài khoản",
   UpdateAccountSuccessMsg: "Cập nhật tài khoản thành công!",

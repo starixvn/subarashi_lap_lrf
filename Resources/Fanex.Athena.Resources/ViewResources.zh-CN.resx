@@ -3265,4 +3265,37 @@
   <data name="ServiceMaintenanceMsg" xml:space="preserve">
     <value>系统繁忙,请过几分钟后再试</value>
   </data>
+  <data name="Booked" xml:space="preserve">
+    <value>预约</value>
+  </data>
+  <data name="BookedBet" xml:space="preserve">
+    <value>预约投注</value>
+  </data>
+  <data name="BookedTime" xml:space="preserve">
+    <value>预约时间</value>
+  </data>
+  <data name="Booking" xml:space="preserve">
+    <value>预约中</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="Successful" xml:space="preserve">
+    <value>已成功</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>未成功</value>
+  </data>
+  <data name="BettingTicketCenter_BookedBetNote" xml:space="preserve">
+    <value>最多可以检索七天前的资料</value>
+  </data>
+  <data name="BookedId" xml:space="preserve">
+    <value>预约注单ID</value>
+  </data>
+  <data name="OddsLower" xml:space="preserve">
+    <value>最低赔率</value>
+  </data>
+  <data name="OddsUpper" xml:space="preserve">
+    <value>最高赔率</value>
+  </data>
 </root>

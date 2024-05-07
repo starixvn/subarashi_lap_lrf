@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/12/2024 4:33:54 PM
+// Generated at: 5/7/2024 3:05:31 PM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -207,6 +207,7 @@ window._language_id_ID = {
   BettingTicketCenter: "Pusat Tiket Taruhan",
   BettingTicketCenter_AdvancedSearchTabNote1: "Semua jenis taruhan, Liga, dan Filter Pertandingan hanya tersedia ketika 1 hari dipilih",
   BettingTicketCenter_AdvancedSearchTabNote2: "Data tersedia dari {0}",
+  BettingTicketCenter_BookedBetNote: "Data tersedia hingga 7 hari",
   BettingTicketCenter_Exchange_Note_1: "Dukung pencarian tiket kosong saja",
   BettingTicketCenter_Exchange_Note_2: "Masukkan nama pengguna untuk mendapatkan hasil lebih cepat.",
   BettingTicketCenter_Exchange_Note_3: "Mendukung data hingga 1 bulan.",
@@ -219,6 +220,10 @@ window._language_id_ID = {
   BetType: "Jenis Taruhan",
   BONTeamToScore: "Kedua/Satu/Tidak ada Tim yang Mencetak Gol",
   Bonus: "Bonus",
+  BookedBet: "Taruhan yang Dipesan",
+  BookedId: "ID Pemesanan",
+  BookedTime: "Waktu yang Dipesan",
+  Booking: "Sedang Dipesan",
   BothGroupByAndBreakdownLevelOption: "Pengelompokan dan pemisahan berdasarkan level",
   BoughtAmount: "Jumlah yang Dibeli",
   BoughtDetails: "Detail Pembelian",
@@ -232,6 +237,7 @@ window._language_id_ID = {
   ByCurrency: "Menurut Mata Uang",
   BySportsType: "Berdasarkan Jenis Olahraga",
   Cancel: "Batal",
+  Cancelled: "Dibatalkan",
   CannotUpdateBetLimitForProduct: "Anda tidak dapat memperbarui batas taruhan anggota untuk produk {0}.",
   CashOutAmt: "Jumlah Pencairan",
   CashOutCommission: "Komisi Penarikan Tunai",
@@ -733,9 +739,11 @@ window._language_id_ID = {
   Odds: "Odds",
   OddsAvg: "Rata-rata Odds",
   OddsGroup: "Kelompok Ganjil",
+  OddsLower: "Peluang Terendah",
   OddsMatched: "Jumlah Odds yang Cocok",
   OddsReq: "Permintaan Odds",
   OddsType: "Jenis Peluang",
+  OddsUpper: "Peluang Tertinggi",
   of: "dari",
   Off: "Nonaktif",
   Offline: "Offline",
@@ -948,6 +956,7 @@ window._language_id_ID = {
   SubsidiarySearch: "Pencarian Cabang",
   SubsidiaryWL: "Kemenangan/Kerugian Anak Perusahaan",
   Success: "Keberhasilan",
+  Successful: "Berhasil",
   SuccessfullyUpdate: "Berhasil diperbarui",
   SuccessfullyUpdateBatchCommand: "Berhasil memperbarui: {0}",
   SuccessUpdateVipStatus: "Berhasil memperbarui: {0}",
@@ -1030,6 +1039,7 @@ window._language_id_ID = {
   UnderSettlement: "Dalam Penyelesaian",
   Unfreeze: "Unfreeze",
   Unknown: "Tidak diketahui",
+  Unsuccessful: "Tidak berhasil",
   Update: "Perbarui",
   UpdateAccountStatus: "Perbarui Status Akun",
   UpdateAccountSuccessMsg: "Perbarui akun berhasil!",

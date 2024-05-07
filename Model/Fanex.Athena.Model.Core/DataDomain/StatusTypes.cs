@@ -18,5 +18,10 @@
         public const int Approved = 132;
         public const int Balance = 141;
         public const int Sum = 142;
+
+        public const int Booking = 0;
+        public const int Successful = 1;
+        public const int Unsuccessful = 2;
+        public const int Cancelled = 4;
     }
 }

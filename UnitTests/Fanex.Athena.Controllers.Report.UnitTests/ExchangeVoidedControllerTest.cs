@@ -79,7 +79,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             userSession.IsSuperAdmin = true;
             StubUserSessionData(userSession);
 
-            const int TotalTabCount = 4;
+            const int TotalTabCount = 5;
 
             using (var controller = CreateController())
             {

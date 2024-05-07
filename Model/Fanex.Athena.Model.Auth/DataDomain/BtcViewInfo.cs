@@ -9,7 +9,8 @@ namespace Fanex.Athena.Model.Auth.DataDomain
             PermissionKeys.BtcAdvancedSearch,
             PermissionKeys.BtcSingleCustomer,
             PermissionKeys.BtcRefNo,
-            PermissionKeys.BtcRunning
+            PermissionKeys.BtcRunning,
+            PermissionKeys.BtcBookedBet
         };
     }
 }

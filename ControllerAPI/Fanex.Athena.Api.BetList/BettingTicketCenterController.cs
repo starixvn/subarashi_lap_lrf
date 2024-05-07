@@ -66,5 +66,18 @@
                 SessionService.UserSession.Language
                 ).ConfigureAwait(false);
         }
+
+        [HttpPost]
+        [ApiFunctionAuthorization(PermissionKeys.BtcBookedBet)]
+        [ValidationApiRequest(IsValidCurrencyList = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true)]
+        public async Task<dynamic> GetByBookedBet(BookedBetBetListMetaModel metaModel)
+        {
+            metaModel.SpecialPlatform = LicenseeSession.SpecialPlatform;
+            return await _betListApiClient.PostAsync("/BettingTicketCenter/GetByBookedBet",
+                metaModel,
+                SessionService.UserSession.Language
+                ).ConfigureAwait(false);
+        }
     }
 }

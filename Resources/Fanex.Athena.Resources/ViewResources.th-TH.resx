@@ -2407,7 +2407,7 @@
     <value>รายงานตามเวลาจริง</value>
   </data>
   <data name="Reason" xml:space="preserve">
-    <value>Reason</value>
+    <value>เหตุผล</value>
   </data>
   <data name="RecommendBrowserOnReportPageMsg" xml:space="preserve">
     <value>เพื่อประสบการณ์ที่ดีโปรดพิจารณาใช้ Firefox หรือ Chrome เมื่อขนาดหน้า &gt; 1,000</value>
@@ -3314,5 +3314,35 @@
   </data>
   <data name="ServiceMaintenanceMsg" xml:space="preserve">
     <value>ระบบกำลังยุ่ง กรุณาลองใหม่อีกครั้งหลังจากผ่านไปสักครู่</value>
+  </data>
+  <data name="BettingTicketCenter_BookedBetNote" xml:space="preserve">
+    <value>แสดงข้อมูลได้มากที่สุดภายใน 7 วัน</value>
+  </data>
+  <data name="BookedBet" xml:space="preserve">
+    <value>การเดิมพันที่จองไว้</value>
+  </data>
+  <data name="BookedId" xml:space="preserve">
+    <value>รหัสการจอง</value>
+  </data>
+  <data name="BookedTime" xml:space="preserve">
+    <value>เวลาที่จองไว้</value>
+  </data>
+  <data name="Booking" xml:space="preserve">
+    <value>กำลังจอง</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>ถูกยกเลิก</value>
+  </data>
+  <data name="OddsLower" xml:space="preserve">
+    <value>อัตราต่อรองต่ำสุด</value>
+  </data>
+  <data name="OddsUpper" xml:space="preserve">
+    <value>อัตราต่อรองสูงสุด</value>
+  </data>
+  <data name="Successful" xml:space="preserve">
+    <value>สำเร็จแล้ว</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>ไม่สำเร็จ</value>
   </data>
 </root>

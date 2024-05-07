@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/12/2024 4:33:54 PM
+// Generated at: 5/7/2024 3:05:31 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -209,6 +209,7 @@ window._language_en_US = {
   BettingTicketCenter: "Betting Ticket Center",
   BettingTicketCenter_AdvancedSearchTabNote1: "All bettypes, League, and Match filter available only when 1 day is selected",
   BettingTicketCenter_AdvancedSearchTabNote2: "Data is available from {0}",
+  BettingTicketCenter_BookedBetNote: "Data is available within up to 7 days",
   BettingTicketCenter_Exchange_Note_1: "Support searching void tickets only.",
   BettingTicketCenter_Exchange_Note_2: "Input username to return results faster.",
   BettingTicketCenter_Exchange_Note_3: "Support data up to 1 month.",
@@ -223,6 +224,10 @@ window._language_en_US = {
   BetType_229: "HDP Time Machine",
   BONTeamToScore: "Both/One/Neither Team To Score",
   Bonus: "Bonus",
+  BookedBet: "Booked Bet",
+  BookedId: "Booked ID",
+  BookedTime: "Booked Time",
+  Booking: "Booking",
   BothGroupByAndBreakdownLevelOption: "Both Group By and Breakdown By levels",
   BoughtAmount: "Bought Amount",
   BoughtDetails: "Bought Details",
@@ -236,6 +241,7 @@ window._language_en_US = {
   ByCurrency: "By Currency",
   BySportsType: "By Sports Type",
   Cancel: "Cancel",
+  Cancelled: "Cancelled",
   CannotUpdateBetLimitForProduct: "You cannot update member bet limit for product {0}.",
   CashOutAmt: "Cash-out Amt",
   CashOutCommission: "Cash Out Commission",
@@ -757,9 +763,11 @@ window._language_en_US = {
   Odds: "Odds",
   OddsAvg: "Odds Avg",
   OddsGroup: "Odds Group",
+  OddsLower: "Odds Lower",
   OddsMatched: "Odds Matched",
   OddsReq: "Odds Req",
   OddsType: "Odds Type",
+  OddsUpper: "Odds Upper",
   of: "of",
   Off: "Off",
   Offline: "Offline",
@@ -999,6 +1007,7 @@ window._language_en_US = {
   SubsidiarySearch: "Subsidiary Search",
   SubsidiaryWL: "Subsidiary W/L",
   Success: "Success",
+  Successful: "Successful",
   SuccessfullyUpdate: "Successfully update",
   SuccessfullyUpdateBatchCommand: "Successfully update: {0}",
   SuccessUpdateVipStatus: "Successfully update: {0}",
@@ -1083,6 +1092,7 @@ window._language_en_US = {
   UnderSettlement: "Under Settlement",
   Unfreeze: "Unfreeze",
   Unknown: "Unknown",
+  Unsuccessful: "Unsuccessful",
   Update: "Update",
   UpdateAccountStatus: "Update Account Status",
   UpdateAccountSuccessMsg: "Update account successfully!",

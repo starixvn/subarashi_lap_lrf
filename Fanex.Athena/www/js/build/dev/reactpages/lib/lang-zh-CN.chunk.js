@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/12/2024 4:33:54 PM
+// Generated at: 5/7/2024 3:05:32 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -199,6 +199,7 @@ window._language_zh_CN = {
   BettingTicketCenter: "注单中心",
   BettingTicketCenter_AdvancedSearchTabNote1: "投注类型，联赛与赛事选单仅支援单日搜寻",
   BettingTicketCenter_AdvancedSearchTabNote2: "仅支援{0}以后的注单",
+  BettingTicketCenter_BookedBetNote: "最多可以检索七天前的资料",
   BettingTicketCenter_Exchange_Note_1: "支援仅搜寻被取消注单。",
   BettingTicketCenter_Exchange_Note_2: "输入玩家名可更快返回结果。",
   BettingTicketCenter_Exchange_Note_3: "仅支援一个月内的数据。",
@@ -208,6 +209,11 @@ window._language_zh_CN = {
   BetType: "投注类别",
   BONTeamToScore: "双方/一方/两者皆不得分",
   Bonus: "红利",
+  Booked: "预约",
+  BookedBet: "预约投注",
+  BookedId: "预约注单ID",
+  BookedTime: "预约时间",
+  Booking: "预约中",
   BothGroupByAndBreakdownLevelOption: "同时以所选组别以及细项显示",
   BoughtAmount: "买入金额",
   BoughtDetails: "买入详情",
@@ -221,6 +227,7 @@ window._language_zh_CN = {
   ByCurrency: "根据货币",
   BySportsType: "根据运动类型",
   Cancel: "取消",
+  Cancelled: "已取消",
   CashOutAmt: "兑现金额",
   CashOutCommission: "即时兑现佣金",
   CashOutDetails: "即时兑现详情",
@@ -697,9 +704,11 @@ window._language_zh_CN = {
   Odds: "赔率",
   OddsAvg: "平均赔率",
   OddsGroup: "水位组别",
+  OddsLower: "最低赔率",
   OddsMatched: "匹配赔率",
   OddsReq: "投注赔率",
   OddsType: "赔率类型",
+  OddsUpper: "最高赔率",
   of: "之",
   Off: "关",
   Offline: "离线",
@@ -898,6 +907,7 @@ window._language_zh_CN = {
   SubsidiarySearch: "收寻子网站",
   SubsidiaryWL: "子网站输赢",
   Success: "完成",
+  Successful: "已成功",
   SuccessfullyUpdate: "更新成功",
   SuccessfullyUpdateBatchCommand: "更新成功: {0}",
   SuccessUpdateVipStatus: "更新成功: {0}",
@@ -973,6 +983,7 @@ window._language_zh_CN = {
   UnderSettlement: "结算中",
   Unfreeze: "解除冻结",
   Unknown: "未知",
+  Unsuccessful: "未成功",
   Update: "更新",
   UpdateAccountSuccessMsg: "更新账号成功!",
   UpdateAgCasinoBetSettings: "确定更新所有AG娱乐城的投注设定吗?",

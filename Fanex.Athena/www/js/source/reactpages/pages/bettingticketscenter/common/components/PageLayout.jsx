@@ -51,7 +51,7 @@ export const PageLayout = (props) => {
                 >
                     <Tabs>
                         {
-                            activedTabList.map(item =>
+                            activedTabList.map(item => item.displayOrder < 4 &&
                                 <Tab key={item.url} isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
                         }
                         {
@@ -59,6 +59,10 @@ export const PageLayout = (props) => {
                             <Tab key={Site.resolveClientUrl("ExchangeVoided")} isActive={selectedTabIndex == 4} label={LangHelper.getSingleResource("Exchange")}
                                 url={Site.resolveClientUrl("ExchangeVoided")}>
                             </Tab>
+                        }
+                        {
+                            activedTabList.map(item => item.displayOrder > 4 &&
+                                <Tab key={item.url} isActive={selectedTabIndex == item.displayOrder} label={item.label} url={item.url} />)
                         }
                     </Tabs>
                     <div>

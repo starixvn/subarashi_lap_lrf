@@ -1,6 +1,13 @@
 ﻿@import "../../scss/abstracts/_variables.scss";
 @import '../../components/sortableheader/sortableheader';
 
+.booked-icon {
+    padding: 0px 10px;
+    background-color: #F27C06;
+    color: white;
+    border-radius: 2px;
+}
+
 .transtime {
     text-overflow: ellipsis;
 }
@@ -402,33 +409,37 @@
     }
 }
 
-.mobile-betlist-container{
-    .report-title-container{
-       padding-left: 5px; 
+.mobile-betlist-container {
+    .report-title-container {
+        padding-left: 5px;
     }
-    .fixed-table-grant-total{
+
+    .fixed-table-grant-total {
         text-align: right;
-        .cell-total{
+
+        .cell-total {
             display: flex;
             justify-content: space-between;
         }
-        td.cell-total-winloss{
+
+        td.cell-total-winloss {
             border-right-color: #b8c3c9;
             overflow: visible;
-            &+ td{
+
+            & + td {
                 border-left-color: #b8c3c9;
             }
         }
-        td:first-child{
+
+        td:first-child {
             text-align: center;
         }
     }
 
-    tr
-    {
-        &.row-active{
-            &.collapse-row, &.collapse-row:hover{
-                td:first-child{
+    tr {
+        &.row-active {
+            &.collapse-row, &.collapse-row:hover {
+                td:first-child {
                     background: #F6DFA1;
                 }
             }
@@ -436,65 +447,76 @@
     }
 
     &.betlist-container {
-        .bettype, .match{
+        .bettype, .match {
             text-align: left;
         }
-        .match + div.league{
+
+        .match + div.league {
             text-align: left;
         }
     }
 
-    .collapse-row{
-        td:first-child{
+    .collapse-row {
+        td:first-child {
             background: #9EB4C3;
         }
     }
-    
-    .table > tbody{
-        tr td{
-           &.cell-collapse{
-            padding-left: 0px;
-            padding-right: 0px;
-           }
-           &.cell-stake{
-            padding-left: 0px;
-            .stake{
+
+    .table > tbody {
+        tr td {
+            &.cell-collapse {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+
+            &.cell-stake {
+                padding-left: 0px;
+
+                .stake {
+                    word-break: break-all;
+                }
+            }
+
+            &.cell-winloss .underdog {
                 word-break: break-all;
             }
-           }
-           &.cell-winloss .underdog{
-            word-break: break-all;
-           }
         }
-        tr.fixed-table-grant-total:hover{
-            td{
+
+        tr.fixed-table-grant-total:hover {
+            td {
                 background-color: #b8c3c9;
             }
         }
-    }  
-    .icon{
+    }
+
+    .icon {
         color: #217A4A;
         font-size: 22px;
     }
-    .cell-index{
-        .index{
+
+    .cell-index {
+        .index {
             color: #AA5200;
         }
+
         margin-bottom: 4px;
-    }  
-    .cell-odd{
+    }
+
+    .cell-odd {
         display: flex;
         margin-top: 4px;
     }
-    .cell-external-id{
+
+    .cell-external-id {
         border-bottom: 1px solid #BFB9A9;
         background: #D9D2C0;
     }
-    .cell-choice{
+
+    .cell-choice {
         margin-top: 8px;
     }
-    .table .status{
+
+    .table .status {
         margin-top: 8px;
     }
 }
-

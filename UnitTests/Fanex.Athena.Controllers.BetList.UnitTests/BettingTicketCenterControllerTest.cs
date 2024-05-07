@@ -103,7 +103,7 @@
             StubUserSessionData(userSession);
             MockProductService();
 
-            const int TotalTabCount = 4;
+            const int TotalTabCount = 5;
 
             using (var controller = CreateController())
             {

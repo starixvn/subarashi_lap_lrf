@@ -54,6 +54,7 @@ var scriptPaths = {
     bettingticketscenter_singlecustomer: "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/index.jsx",
     bettingticketscenter_refno: "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/index.jsx",
     bettingticketscenter_running: "./www/js/source/reactpages/pages/bettingticketscenter/running/components/index.jsx",
+    bettingticketscenter_bookedbet: "./www/js/source/reactpages/pages/bettingticketscenter/bookedbet/components/index.jsx",
     casinoturnover: "./www/js/source/reactpages/pages/casinoturnover/components/index.jsx",
 
     dailybets: "./www/js/source/reactpages/pages/dailybets/components/index.jsx",
