@@ -26,18 +26,8 @@
 
         public decimal CustomerComm { get; set; }
 
-        public decimal CustomerWLTotal
-        {
-            get
-            {
-                return CustomerWL + CustomerComm;
-            }
-        }
+        public decimal CustomerWLTotal { get; set; }
 
         public decimal LicenseeWL { get; set; }
-
-        public decimal AmountDueTo { get; set; }
-
-        public decimal LicenseeWLTotal { get; set; }
     }
 }
