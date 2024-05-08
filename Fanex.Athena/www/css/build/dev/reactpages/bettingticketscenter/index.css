@@ -974,6 +974,11 @@ label.risk-level {
 .Toastify__toast--success {
   background-color: #009b65; }
 
+.datepicker-disabled .daterange-container {
+  pointer-events: none;
+  background-color: #DFDFDF !important;
+  color: #9F9F9F !important; }
+
 .table {
   line-height: inherit; }
 

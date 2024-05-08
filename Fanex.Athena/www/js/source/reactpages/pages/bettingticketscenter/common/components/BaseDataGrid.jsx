@@ -55,10 +55,13 @@ export const BaseDataGrid = (props) => {
         return null;
     }
 
+    const { PageIndex, SortBy, SortOrder, ...otherRequestParam } = requestParam
+
     return (
         <div className="betlist-container result-content">
             <ReportTitle content={reportTitle} />
             <BetListDataGrid
+                key={JSON.stringify(otherRequestParam)}
                 isPaging={isPaging}
                 pageOption={pageOption}
                 onPaging={onPaging}

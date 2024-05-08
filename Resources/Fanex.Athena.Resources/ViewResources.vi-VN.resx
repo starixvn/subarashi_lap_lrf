@@ -3321,4 +3321,34 @@
   <data name="ServiceMaintenanceMsg" xml:space="preserve">
     <value>Hệ thống đang bận. Vui lòng thử lại sau ít phút.</value>
   </data>
+  <data name="BettingTicketCenter_BookedBetNote" xml:space="preserve">
+    <value>Hiển thị dữ liệu lên đến 7 ngày</value>
+  </data>
+  <data name="BookedBet" xml:space="preserve">
+    <value>Đặt cược trước</value>
+  </data>
+  <data name="BookedId" xml:space="preserve">
+    <value>Mã đặt trước</value>
+  </data>
+  <data name="BookedTime" xml:space="preserve">
+    <value>Thời gian đặt</value>
+  </data>
+  <data name="Booking" xml:space="preserve">
+    <value>Đang đặt</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Đã hủy</value>
+  </data>
+  <data name="OddsLower" xml:space="preserve">
+    <value>Tỉ lệ cược tối thiểu</value>
+  </data>
+  <data name="OddsUpper" xml:space="preserve">
+    <value>Tỉ lệ cược tối đa</value>
+  </data>
+  <data name="Successful" xml:space="preserve">
+    <value>Thành công</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>Thất bại</value>
+  </data>
 </root>

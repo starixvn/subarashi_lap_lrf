@@ -1411,7 +1411,6 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "betlist-container result-content"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Table"], {
-      key: JSON.stringify(this.props.data),
       onSort: this.onSort,
       minWidth: 980,
       autoWidth: true,
@@ -7529,6 +7528,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var _lib_Service_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../lib/Service.js */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/Service.js");
+const _excluded = ["PageIndex", "SortBy", "SortOrder"];
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 
 
@@ -7593,11 +7595,18 @@ const BaseDataGrid = props => {
   if (!gridData || !gridData.Data) {
     return null;
   }
+  const {
+      PageIndex,
+      SortBy,
+      SortOrder
+    } = requestParam,
+    otherRequestParam = _objectWithoutProperties(requestParam, _excluded);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "betlist-container result-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_ReportTitle__WEBPACK_IMPORTED_MODULE_5__["default"], {
     content: reportTitle
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_betlist_BetListDataGrid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    key: JSON.stringify(otherRequestParam),
     isPaging: isPaging,
     pageOption: pageOption,
     onPaging: onPaging,
@@ -7980,7 +7989,7 @@ const PageLayout = props => {
     baseCurrency: isConvertAll ? selectedBaseCurrency : '',
     beforeShowFunc: beforeShow,
     afterShowFunc: afterShow
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__["Tabs"], null, activedTabList.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__["Tab"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__["Tabs"], null, activedTabList.map(item => item.displayOrder < 4 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__["Tab"], {
     key: item.url,
     isActive: selectedTabIndex == item.displayOrder,
     label: item.label,
@@ -7990,7 +7999,12 @@ const PageLayout = props => {
     isActive: selectedTabIndex == 4,
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_6__["default"].getSingleResource("Exchange"),
     url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_7__["default"].resolveClientUrl("ExchangeVoided")
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, children))));
+  }), activedTabList.map(item => item.displayOrder > 4 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_simple_tab__WEBPACK_IMPORTED_MODULE_5__["Tab"], {
+    key: item.url,
+    isActive: selectedTabIndex == item.displayOrder,
+    label: item.label,
+    url: item.url
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, children))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(PageLayout));
 
@@ -8111,7 +8125,8 @@ const ApiUrl = {
   RUNNING_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
   REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
   SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
-  ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData')
+  ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData'),
+  BOOKEDBET_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByBookedBet')
 };
 const HeaderText = {
   Index: "#",
@@ -8131,6 +8146,10 @@ const HeaderText = {
   Status: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Status"),
   Live: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Live"),
   Details: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Details"),
+  BookedId: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BookedId"),
+  BookedTime: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BookedTime"),
+  OddsLower: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("OddsLower"),
+  OddsUpper: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("OddsUpper"),
   Icon: ""
 };
 const DefaultPageSize = 50;
@@ -8138,7 +8157,8 @@ const tabKeys = {
   advancedSearch: 'BTC_MultiCustomer',
   singleCustomer: 'BTC_SingleCustomer',
   refNo: 'BTC_RefNo',
-  running: 'BTC_Running'
+  running: 'BTC_Running',
+  bookedBet: 'BTC_BookedBet'
 };
 const tabList = [{
   key: tabKeys.singleCustomer,
@@ -8160,6 +8180,11 @@ const tabList = [{
   label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("AdvancedSearch"),
   url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/AdvancedSearch"),
   displayOrder: 3
+}, {
+  key: tabKeys.bookedBet,
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BookedBet"),
+  url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/BookedBet"),
+  displayOrder: 5
 }];
 
 /***/ }),

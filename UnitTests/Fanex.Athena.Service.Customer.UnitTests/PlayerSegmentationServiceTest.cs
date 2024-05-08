@@ -258,6 +258,7 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             var metaModel = FakeHelper.Create<UpdateStatusPlayerMetaModel>();
             var expectedResult = FakeHelper.Create<IEnumerable<UpdateStatusPlayerResult>>();
             _playerDataAccess.UpdateVipStatusAsync(metaModel).Returns((string.Empty, expectedResult));
+            _ctsApiClient.HealthCheck(Arg.Any<string>()).Returns(true);
 
             //Act
             var actualResult = await _targetService.UpdateVipStatusAsync(metaModel);

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 4/12/2024 4:33:54 PM
+// Generated at: 5/7/2024 3:05:32 PM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -210,6 +210,7 @@ window._language_th_TH = {
   BettingTicketCenter: "ศูนย์ตั๋วเดิมพัน",
   BettingTicketCenter_AdvancedSearchTabNote1: "ประเภทการเดิมพัน ลีก และตัวกรองการแข่งขันทั้งหมด ใช้ได้เมื่อถูกเลือก 1 วัน",
   BettingTicketCenter_AdvancedSearchTabNote2: "ข้อมูลจาก {0}",
+  BettingTicketCenter_BookedBetNote: "แสดงข้อมูลได้มากที่สุดภายใน 7 วัน",
   BettingTicketCenter_Exchange_Note_1: "สนับสนุนการค้นหาตั๋วว่างเท่านั้น",
   BettingTicketCenter_Exchange_Note_2: "ป้อนชื่อผู้ใช้เพื่อรับผลลัพธ์ที่เร็วขึ้น.",
   BettingTicketCenter_Exchange_Note_3: "สนับสนุนข้อมูลสูงสุด 1 เดือน.",
@@ -222,6 +223,10 @@ window._language_th_TH = {
   BetType: "ประเภทการเดิมพัน",
   BONTeamToScore: "ทั้งสอง/หนึ่ง/ไม่มีทีมใดทำคะแนนได้",
   Bonus: "โบนัส",
+  BookedBet: "การเดิมพันที่จองไว้",
+  BookedId: "รหัสการจอง",
+  BookedTime: "เวลาที่จองไว้",
+  Booking: "กำลังจอง",
   BothGroupByAndBreakdownLevelOption: "ทั้งจัดกลุ่มและแบ่งตามระดับ",
   BoughtAmount: "จำนวนที่ซื้อ",
   BoughtDetails: "รายละเอียดการซื้อ",
@@ -235,6 +240,7 @@ window._language_th_TH = {
   ByCurrency: "ตามสกุลเงิน",
   BySportsType: "ตามประเภทกีฬา",
   Cancel: "ยกเลิก",
+  Cancelled: "ถูกยกเลิก",
   CannotUpdateBetLimitForProduct: "คุณไม่สามารถอัปเดตวงเงินเดิมพันสมาชิกของผลิตภัณฑ์ {0}",
   CashOutAmt: "จำนวนเงินออก",
   CashOutCommission: "จ่ายค่าคอมมิชชั่น",
@@ -746,9 +752,11 @@ window._language_th_TH = {
   Odds: "อัตราต่อรอง",
   OddsAvg: "อัตราต่อรองเฉลี่ย",
   OddsGroup: "อัตราต่อรองกลุ่ม",
+  OddsLower: "อัตราต่อรองต่ำสุด",
   OddsMatched: "อัตราต่อรองการแข่งขัน",
   OddsReq: "ราคาต่อรองที่ต้องการ",
   OddsType: "ประเภทอัตราต่อรอง",
+  OddsUpper: "อัตราต่อรองสูงสุด",
   of: "ของ",
   Off: "ของ",
   Offline: "ออฟไลน์",
@@ -864,7 +872,7 @@ window._language_th_TH = {
   ReachedDate: "ถึงวันที่เกณฑ์",
   RealName: "ชื่อจริง",
   RealTimeReport: "รายงานตามเวลาจริง",
-  Reason: "Reason",
+  Reason: "เหตุผล",
   RecommendBrowserOnReportPageMsg: "เพื่อประสบการณ์ที่ดีโปรดพิจารณาใช้ Firefox หรือ Chrome เมื่อขนาดหน้า &gt; 1,000",
   ReducedMaxPerBet: "ลดสูงสุดต่อการเดิมพัน",
   ReducedMaxPerEvent: "ลดสูงสุดต่อกิจกรรม",
@@ -966,6 +974,7 @@ window._language_th_TH = {
   SubsidiarySearch: "ค้นหาบริษัทย่อย",
   SubsidiaryWL: "บริษัทย่อย แพ้ชนะ",
   Success: "ความสำเร็จ",
+  Successful: "สำเร็จแล้ว",
   SuccessfullyUpdate: "อัปเดตสำเร็จ",
   SuccessfullyUpdateBatchCommand: "อัปเดตสำเร็จ: {0}",
   SuccessUpdateVipStatus: "อัปเดตสำเร็จ: {0}",
@@ -1048,6 +1057,7 @@ window._language_th_TH = {
   UnderSettlement: "ภายใต้การตั้ง",
   Unfreeze: "ยกเลิกการหยุดชั่วคราว",
   Unknown: "ไม่ทราบ",
+  Unsuccessful: "ไม่สำเร็จ",
   Update: "อัปเดต",
   UpdateAccountStatus: "อัปเดตสถานะบัญชี",
   UpdateAccountSuccessMsg: "อัปเดตบัญชีสำเร็จแล้ว!",

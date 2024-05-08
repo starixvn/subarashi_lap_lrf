@@ -141,7 +141,6 @@ class BetListDataGrid extends Component {
         return (
             <div className="betlist-container result-content">
                 <Table
-                    key={JSON.stringify(this.props.data)}
                     onSort={this.onSort}
                     minWidth={980}
                     autoWidth={true}

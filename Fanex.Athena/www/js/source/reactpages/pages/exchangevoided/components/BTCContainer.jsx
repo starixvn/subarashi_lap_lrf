@@ -15,11 +15,14 @@ export const BTCContainer = (props) => {
         <div className={className}>
             <Tabs>
                 {
-                    activedTabList.map(item => <Tab key={item.label} label={item.label} url={item.url} />)
+                    activedTabList.map(item => item.displayOrder < 4 && <Tab key={item.label} label={item.label} url={item.url} />)
                 }
                 <Tab isActive={true} key={LangHelper.getSingleResource("Exchange")} label={LangHelper.getSingleResource("Exchange")}
                     url={Site.resolveClientUrl("ExchangeVoided")}>
                 </Tab>
+                {
+                    activedTabList.map(item => item.displayOrder > 4 && <Tab key={item.label} label={item.label} url={item.url} />)
+                }
             </Tabs>
             <div>
                 <ExchangeVoided />

@@ -99,6 +99,7 @@
         public const string BtcSingleCustomer = "BTC_SingleCustomer";
         public const string BtcRefNo = "BTC_RefNo";
         public const string BtcRunning = "BTC_Running";
+        public const string BtcBookedBet = "BTC_BookedBet";
 
         /*BetList*/
         public const string BetlistViewIpvn = "bl_view_ipvn";

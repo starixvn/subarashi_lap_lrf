@@ -3255,4 +3255,34 @@
   <data name="ServiceMaintenanceMsg" xml:space="preserve">
     <value>Sistem sedang sibuk. Silakan coba lagi setelah beberapa menit</value>
   </data>
+  <data name="BettingTicketCenter_BookedBetNote" xml:space="preserve">
+    <value>Data tersedia hingga 7 hari</value>
+  </data>
+  <data name="BookedBet" xml:space="preserve">
+    <value>Taruhan yang Dipesan</value>
+  </data>
+  <data name="BookedId" xml:space="preserve">
+    <value>ID Pemesanan</value>
+  </data>
+  <data name="BookedTime" xml:space="preserve">
+    <value>Waktu yang Dipesan</value>
+  </data>
+  <data name="Booking" xml:space="preserve">
+    <value>Sedang Dipesan</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Dibatalkan</value>
+  </data>
+  <data name="OddsLower" xml:space="preserve">
+    <value>Peluang Terendah</value>
+  </data>
+  <data name="OddsUpper" xml:space="preserve">
+    <value>Peluang Tertinggi</value>
+  </data>
+  <data name="Successful" xml:space="preserve">
+    <value>Berhasil</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>Tidak berhasil</value>
+  </data>
 </root>

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/9/2024 1:22:10 PM
+﻿// Generated at: 4/11/2024 1:29:28 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -208,6 +208,10 @@ BettingTicketCenter_RefnoTabNote2:"{0}: 请提供用户名以便查询{1}之后�
 BetType:"投注类别",
 BONTeamToScore:"双方/一方/两者皆不得分",
 Bonus:"红利",
+Booked:"预约",
+BookedBet:"预约投注",
+BookedTime:"预约时间",
+Booking:"预约中",
 BothGroupByAndBreakdownLevelOption:"同时以所选组别以及细项显示",
 BoughtAmount:"买入金额",
 BoughtDetails:"买入详情",
@@ -221,6 +225,7 @@ ByBetType:"根据投注类型",
 ByCurrency:"根据货币",
 BySportsType:"根据运动类型",
 Cancel:"取消",
+Cancelled:"已取消",
 CashOutAmt:"兑现金额",
 CashOutCommission:"即时兑现佣金",
 CashOutDetails:"即时兑现详情",
@@ -897,6 +902,7 @@ SubsidiaryPerformance:"子网站综合报表",
 SubsidiarySearch:"收寻子网站",
 SubsidiaryWL:"子网站输赢",
 Success:"完成",
+Successful:"已成功",
 SuccessfullyUpdate:"更新成功",
 SuccessfullyUpdateBatchCommand:"更新成功: {0}",
 SuccessUpdateVipStatus:"更新成功: {0}",
@@ -972,6 +978,7 @@ UndermaintenanceMsg:"我们正进行伺服器维护, 网站于{0} 至 {1} 将无
 UnderSettlement:"结算中",
 Unfreeze:"解除冻结",
 Unknown:"未知",
+Unsuccessful:"未成功",
 Update:"更新",
 UpdateAccountSuccessMsg:"更新账号成功!",
 UpdateAgCasinoBetSettings:"确定更新所有AG娱乐城的投注设定吗?",

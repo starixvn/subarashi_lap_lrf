@@ -6,7 +6,8 @@ export const ApiUrl = {
     RUNNING_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
     REFNO_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
     SINGLECUSTOMER_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
-    ADVANCEDSEARCH_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData')
+    ADVANCEDSEARCH_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData'),
+    BOOKEDBET_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByBookedBet')
 }
 
 export const HeaderText = {
@@ -27,6 +28,10 @@ export const HeaderText = {
     Status: LangHelper.getSingleResource("Status"),
     Live: LangHelper.getSingleResource("Live"),
     Details: LangHelper.getSingleResource("Details"),
+    BookedId: LangHelper.getSingleResource("BookedId"),
+    BookedTime: LangHelper.getSingleResource("BookedTime"),
+    OddsLower: LangHelper.getSingleResource("OddsLower"),
+    OddsUpper: LangHelper.getSingleResource("OddsUpper"),
     Icon: ""
 }
 
@@ -36,7 +41,8 @@ export const tabKeys = {
     advancedSearch: 'BTC_MultiCustomer',
     singleCustomer: 'BTC_SingleCustomer',
     refNo: 'BTC_RefNo',
-    running: 'BTC_Running'
+    running: 'BTC_Running',
+    bookedBet: 'BTC_BookedBet'
 }
 
 export const tabList = [
@@ -63,5 +69,11 @@ export const tabList = [
         label: LangHelper.getSingleResource("AdvancedSearch"),
         url: Site.resolveClientUrl("BettingTicketCenter/AdvancedSearch"),
         displayOrder: 3
+    },
+    {
+        key: tabKeys.bookedBet,
+        label: LangHelper.getSingleResource("BookedBet"),
+        url: Site.resolveClientUrl("BettingTicketCenter/BookedBet"),
+        displayOrder: 5
     }
 ]

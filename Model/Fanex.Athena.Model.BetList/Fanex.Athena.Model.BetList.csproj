@@ -99,6 +99,7 @@
     <Compile Include="MetaModel\LastBetsMonitoringMetaModel.cs" />
     <Compile Include="MetaModel\LiveReportBetListMetaModel.cs" />
     <Compile Include="MetaModel\AdvancedSearchBetListMetaModel.cs" />
+    <Compile Include="MetaModel\BookedBetBetListMetaModel.cs" />
     <Compile Include="MetaModel\RefNoBetListMetaModel.cs" />
     <Compile Include="MetaModel\SingleCustomersBetListMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

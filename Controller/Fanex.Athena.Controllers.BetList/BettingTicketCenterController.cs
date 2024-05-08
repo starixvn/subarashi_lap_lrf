@@ -76,6 +76,10 @@
             {
                 return await AdvancedSearch();
             }
+            else if (tabList.Any(x => PermissionKeys.BtcBookedBet == x))
+            {
+                return BookedBet();
+            }
             else
             {
                 return RedirectToAction("AccessDenied", "Utility");
@@ -184,6 +188,25 @@
             ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
 
             return View("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml", viewModel);
+        }
+
+        [FunctionAuthorization(PermissionKeys.BtcBookedBet)]
+        public ActionResult BookedBet()
+        {
+            var tabList = GetEnableTabList();
+            var licenseeSession = SessionServiceInstance.LicenseeSession;
+
+            var viewModel = new BettingTicketCenterViewModel
+            {
+                StatusList = GetBookedBetStatusList(),
+                CurrencyList = GetCurrencyList(),
+                PlatformList = PlatformHelper.GetPlatformList(licenseeSession.SpecialPlatform),
+                SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
+                HasExchange = tabList.Any() && HasExchange(),
+                TabList = tabList
+            };
+
+            return View("~/Views/Desktop/BetList/BettingTicketCenter/BookedBet.cshtml", viewModel);
         }
 
         private IEnumerable<string> GetEnableTabList()
@@ -312,6 +335,17 @@
                 { LiveStatusTypes.NonLive, ViewResources.NoneLive },
                 { LiveStatusTypes.Live, ViewResources.Live },
                 { LiveStatusTypes.Mix, ViewResources.MixLiveAndNoneLive }
+            };
+        }
+
+        private static IEnumerable<CheckedItem> GetBookedBetStatusList()
+        {
+            return new List<CheckedItem>
+            {
+                new CheckedItem { ID = StatusTypes.Booking, Name = ViewResources.Booking, Checked = true },
+                new CheckedItem { ID = StatusTypes.Successful, Name = ViewResources.Successful, Checked = true },
+                new CheckedItem { ID = StatusTypes.Unsuccessful, Name = ViewResources.Unsuccessful, Checked = true },
+                new CheckedItem { ID = StatusTypes.Cancelled, Name = ViewResources.Cancelled, Checked = true }
             };
         }
 
