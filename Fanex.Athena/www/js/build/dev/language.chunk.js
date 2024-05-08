@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/11/2024 1:29:27 PM
+﻿// Generated at: 5/7/2024 3:05:31 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -969,6 +969,7 @@ Sep:"Sep",
 SeparateSabaWinLoss:"Separate Saba Virtual Sports from Sportsbook",
 September:"September",
 ServerBusyMessage:"Your request can&apos;t be processed now due to busy server. Please try again later",
+ServiceMaintenanceMsg:"System is busy. Please try again after a few minutes.",
 SessionLoggedMsg:"You have logged in from another session or your login session has expired",
 SetAsDefaultGroup:"Set as default group",
 SettleAmount:"Settle Amount",
