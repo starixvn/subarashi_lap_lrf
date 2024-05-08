@@ -20,12 +20,7 @@
 }
 @section Filter
 {
-    @if (Model.Param.IsViewedHistory)
-    {
-        Html.RenderPartial("~/Views/Desktop/Report/LiveReport/HistoryFilter.cshtml");
-    }
-    else
-    {
+    @{
         Html.RenderPartial("~/Views/Desktop/Report/LiveReport/Filter.cshtml");
     }
 }

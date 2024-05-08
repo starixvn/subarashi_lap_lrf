@@ -10,7 +10,6 @@
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.StatelessCore.Utility;
-
     using Model.BetList.MetaModel;
 
     using Service.Core.Common.Interfaces;
@@ -30,6 +29,7 @@
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> Match(LiveReportBetListMetaModel metaModel)
         {
             const string UspKey = "Lrf_BetList_LiveReport_SelWinlossByMatch";
@@ -39,6 +39,7 @@
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> Outright(LiveReportBetListMetaModel metaModel)
         {
             const string UspKey = "Lrf_BetList_LiveReport_SelWinlossOutright";
@@ -47,6 +48,7 @@
 
         [HttpGet]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> NumberGame([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             metaModel.IsServerPaging = true;
@@ -56,6 +58,7 @@
 
         [HttpGet]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> MixParlay([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             const string UspKey = "Lrf_BetList_LiveReport_SelWinlossParlay";
@@ -68,6 +71,7 @@
 
         [HttpGet]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> VirtualSports([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             const string UspName = "Lrf_BetList_LiveReport_SelWinlossVHRacing";
@@ -77,6 +81,7 @@
 
         [HttpGet]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> SportsLottery([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             const string UspName = "Lrf_BetList_LiveReport";
@@ -87,6 +92,7 @@
 
         [HttpGet]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> BitCoin([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             const string UspName = "Lrf_BetList_LiveReport";
@@ -97,6 +103,7 @@
 
         [HttpGet]
         [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
         public async Task<dynamic> VS3([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
         {
             const string UspName = "Lrf_BetList_LiveReport";
@@ -110,7 +117,6 @@
         {
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.HasPlayerCom = licenseeSession.IsAllowedCustomerComm;
             metaModel.IsShowIpvn = userSession.IsShowIpvn;
             metaModel.IsShowIp = userSession.IsShowIp;
@@ -126,7 +132,6 @@
 
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.PageIndex = pageIndex < 1 ? 1 : pageIndex;
             metaModel.PageSize = pageSize < 1 ? DefautlPageSize : pageSize;
             metaModel.LicenseeId = licenseeSession.LicenseeId;

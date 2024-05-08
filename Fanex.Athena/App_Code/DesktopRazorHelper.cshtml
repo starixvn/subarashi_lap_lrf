@@ -3,7 +3,24 @@
 @using Fanex.Athena.Model.Core.MetaModel.Product;
 @using Fanex.Athena.Model.Core.DataDomain;
 @using Fanex.Athena.Resources;
-@using Fanex.Athena.Service.Core.Common.Interfaces
+@using Fanex.Athena.Service.Core.Common.Interfaces;
+@using Fanex.Athena.Model.Core.DTO.Common;
+
+@helper  SusidiaryDropdown(byte subsidiaryViewType, bool isOneworksMaster, IEnumerable<CheckedItem> subsidiaryList, int colLg = 3, int colMd = 4)
+{
+    bool isWhiteLabelView = (subsidiaryViewType == (byte)SubsidiaryViewType.MasterManagement) && !isOneworksMaster;
+    /**/
+
+    // initial script in: components/pluginhelper/multiselect.nlevel.js
+
+    <div class="input-field col l@(colLg) m@(colMd) s12" id="SubsidiaryDropdown">
+        <div class="multiselect-container" id="SubsidiaryDropdownList">
+            <select id="grid-subsidiary-multiselect" name="grid-subsidiary-multiselect"></select>
+            <label>@(isWhiteLabelView ? ViewResources.WhiteLabel : ViewResources.Subsidiary)</label>
+        </div>
+    </div>
+    <input type="hidden" id="subsidiaryData" value="@subsidiaryList.ToJson()" />
+}
 @helper  PlatformList(string id, IDictionary<int, string> platformList)
 {
     /**/
@@ -287,6 +304,8 @@
     else if (hasSpanReturn)
     {
         <span>@HttpUtility.HtmlEncode(value)</span>
+
+
 
     }
     else

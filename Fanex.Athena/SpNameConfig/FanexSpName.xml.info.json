@@ -59,6 +59,12 @@
       "Project": null,
       "Path": "SpNameConfig",
       "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.KLDR.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
     }
   ]
 }

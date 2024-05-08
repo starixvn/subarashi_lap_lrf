@@ -12,6 +12,7 @@
     using Excel.Report;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
+    using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -37,11 +38,14 @@
 
         private ILiveReportService _liveReportService;
 
+        private ISubsidiaryService _subsidiaryService;
+
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
             _liveReportService = Substitute.For<ILiveReportService>();
+            _subsidiaryService = Substitute.For<ISubsidiaryService>();
 
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
             {
@@ -53,14 +57,13 @@
             SetUpDefaultFakeData();
         }
 
-        [TestCase(true)]
-        [TestCase(false)]
-        public void Index_WhenGet_ReturnCorrectViewResult(bool isViewedHistory)
+        [Test]
+        public void Index_WhenGet_ReturnCorrectViewResult()
         {
             using (var controller = CreateController())
             {
                 // Action
-                var viewResult = controller.Index(isViewedHistory) as ViewResult;
+                var viewResult = controller.Index() as ViewResult;
                 var viewModel = viewResult.Model as LiveReportViewModel;
 
                 // Assert
@@ -71,7 +74,6 @@
                     Assert.That(viewModel.BalanceUpDate, Is.EqualTo(BalanceUpDate));
                     Assert.That(viewModel.Param.LicenseeId, Is.EqualTo((object)SessionService.LicenseeSession.LicenseeId));
                     Assert.That(viewModel.Param.UserId, Is.EqualTo(SessionService.UserSession.UserId));
-                    Assert.That(viewModel.Param.IsViewedHistory, Is.EqualTo(isViewedHistory));
                     Assert.That(viewModel.Param.CurrencyId, Is.EqualTo(0));
                     Assert.That(viewModel.Param.LiveIndicator, Is.EqualTo(1));
                 }));
@@ -87,7 +89,9 @@
                 var metaModel = new LiveReportMetaModel
                 {
                     CurrencyId = CurrencyId,
-                    IsExportExcel = false
+                    IsExportExcel = false,
+                    SubsidiarySearch = false,
+                    SubsidiaryList = ""
                 };
 
                 var expectedData = new List<LiveReport>
@@ -136,7 +140,9 @@
                     BaseCurrency = "UUS",
                     CurrencyName = "SSU",
                     CurrencyId = CurrencyId,
-                    IsExportExcel = true
+                    IsExportExcel = true,
+                    SubsidiarySearch = false,
+                    SubsidiaryList = ""
                 };
                 var expectedData = new List<LiveReport>
                 {
@@ -173,7 +179,9 @@
                 var metaModel = new LiveReportMatchListMetalModel
                 {
                     CurrencyId = CurrencyId,
-                    CurrencyName = "abc"
+                    CurrencyName = "abc",
+                    SubsidiarySearch = false,
+                    SubsidiaryList = ""
                 };
                 var dataList = new SortableList<LiveReportWinLossByMatch>();
                 _liveReportService.GetLiveReportWinLossByMatch(metaModel).Returns(dataList);
@@ -203,7 +211,9 @@
                 var metaModel = new LiveReportMetaModel
                 {
                     CurrencyId = CurrencyId,
-                    CurrencyName = "abc"
+                    CurrencyName = "abc",
+                    SubsidiarySearch = false,
+                    SubsidiaryList = ""
                 };
                 var resultModel = new LiveReportDetailResultModel
                 {
@@ -254,7 +264,7 @@
                 SessionService.UserSession.Language,
                 FunctionNames.LiveReport).Returns(new ProductAccess(productList.ToList()));
 
-            var controller = Substitute.ForPartsOf<LiveReportController>(_balanceUpDataAccess, _liveReportService);
+            var controller = Substitute.ForPartsOf<LiveReportController>(_balanceUpDataAccess, _liveReportService, _subsidiaryService);
 
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;

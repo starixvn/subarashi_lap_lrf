@@ -1,13 +1,32 @@
 ﻿define(
-    ['jquery', 'common/querystring', 'common/site', 'components/pluginhelper/daterangepicker', 'components/pluginhelper/monthpicker', './helper'],
-    function ($, QueryString, Site, DatePicker, MonthPicker, Helper) {
+    ['jquery', 'common/querystring', 'common/site', 'components/pluginhelper/daterangepicker', 'components/pluginhelper/monthpicker', 'components/pluginhelper/multiselect.nlevel', './helper'],
+    function ($, QueryString, Site, DatePicker, MonthPicker, MultiSelectNLevel, Helper) {
         'use strict';
+        const _selector = {
+            SubmitButton: '#SubmitButton',
+            ExportToExcel: '#ExportToExcel',
+            Form: '#LiveReportForm',
+            FromDate: '#FromDate',
+            ToDate: '#ToDate',
+            ProductCode: '#ProductCode',
+            LiveIndicator: '#LiveIndicator',
+            CurrencyName: '#CurrencyName',
+            CurrencyId: '#CurrencyId',
+            SubsidiarySearchCheckbox: '#SubsidiarySearchCheckbox',
+            SubsidiaryDropdown: '#SubsidiaryDropdown',
+            SubsidiarySearch: '#SubsidiarySearch',
+            DetailContent: '#DetailContent',
+            BaseCurrency: '#BaseCurrency',
+            IsExportExcel: '#IsExportExcel',
+        };
 
         function initialize() {
             Site.initialize();
             initEvent();
             DatePicker.initDateRangePicker();
             MonthPicker.initMonthPicker();
+            MultiSelectNLevel.initSubsidiaryList();
+
             Site.addUserGuide({
                 resourceName: 'LiveReport',
                 title: Site.getSingleResource('LiveReport')
@@ -15,16 +34,6 @@
         }
 
         function initEvent() {
-            $('#switchreport').click(function () {
-                const mod = $(this).attr('data-history-mode');
-                if (mod === 'False') {
-                    Site.redirect(Site.resolveClientUrl('LiveReport?isViewedHistory=True'));
-                }
-                else {
-                    Site.redirect(Site.resolveClientUrl('LiveReport?isViewedHistory=False'));
-                }
-            });
-
             $('body').on('click', '.product-detail-link', function () {
                 viewProductDetail(this);
             });
@@ -33,26 +42,51 @@
                 viewSportDetail(this);
             });
 
-            $('#exporttoexcel').click(function () {
-                $('#IsExportExcel').val(true);
-                $('#livereport').submit();
-                $('#IsExportExcel').val(false);
+            $(_selector.ExportToExcel).click(function () {
+                const subsidiary = Site.getLrfSubsidiary();
+                if (subsidiary && Object.keys(subsidiary).length > 0) {
+                    $("#SubsidiarySearch").val(subsidiary.SubsidiarySearch);
+                    $("#SubsidiaryList").val(subsidiary.SubsidiaryList);
+                }
+
+                $(_selector.IsExportExcel).val(true);
+                $(_selector.Form).submit();
+                $(_selector.IsExportExcel).val(false);
             });
 
-            $('#btnSubmit').click(function () {
+            $(_selector.SubmitButton).click(function () {
+                const subsidiary = Site.getLrfSubsidiary();
+                if (subsidiary && Object.keys(subsidiary).length > 0) {
+                    $("#SubsidiarySearch").val(subsidiary.SubsidiarySearch);
+                    $("#SubsidiaryList").val(subsidiary.SubsidiaryList);
+                }
+
                 Site.blockUI();
-                $('#livereport').submit();
+                $(_selector.Form).submit();
+            });
+
+            $(_selector.SubsidiarySearchCheckbox).click(function () {
+                $(_selector.SubsidiaryDropdown).toggle(this.checked);
+                $(_selector.SubsidiarySearch).val(this.checked);
             });
         }
 
         function viewProductDetail(target) {
             const productCode = $(target).attr('data-product-code');
+            let subsidiary = Site.getLrfSubsidiary();
+            if (!subsidiary || Object.keys(subsidiary).length === 0) {
+                subsidiary.SubsidiarySearch = $("#SubsidiarySearch").val();
+                subsidiary.SubsidiaryList = $("#SubsidiaryList").val();
+            }
+
             let data = {
                 productCode: productCode,
-                FromDate: $('#FromDate').attr('data-original-from'),
-                ToDate: $('#ToDate').attr('data-original-to'),
-                BaseCurrency: $('#BaseCurrency').attr('data-original'),
-                LiveIndicator: $('#LiveIndicator').attr('data-original')
+                SubsidiarySearch: subsidiary.SubsidiarySearch,
+                SubsidiaryList: subsidiary.SubsidiaryList,
+                FromDate: $(_selector.FromDate).attr('data-original-from'),
+                ToDate: $(_selector.ToDate).attr('data-original-to'),
+                BaseCurrency: $(_selector.BaseCurrency).attr('data-original'),
+                LiveIndicator: $(_selector.LiveIndicator).attr('data-original')
             };
             data = Site.setLicenseeOptionOriginalParam(data);
             const isSelected = $(target).parent().hasClass('selected');
@@ -69,8 +103,8 @@
                 beforeSend: Site.blockUI,
                 complete: function (jqXHR) {
                     if (jqXHR.readyState === 4) {
-                        $('#ProductCode').val(data.productCode);
-                        $('#detail-content').html(jqXHR.responseText);
+                        $(_selector.ProductCode).val(data.productCode);
+                        $(_selector.DetailContent).html(jqXHR.responseText);
                     }
                     Site.unBlockUI();
                 }
@@ -78,12 +112,20 @@
         }
 
         function viewBetList(url, totalValue, productOptions) {
+            let subsidiary = Site.getLrfSubsidiary();
+            if (!subsidiary || Object.keys(subsidiary).length === 0) {
+                subsidiary.SubsidiarySearch = $("#SubsidiarySearch").val();
+                subsidiary.SubsidiaryList = $("#SubsidiaryList").val();
+            }
+
             let newUrl = Site.setLicenseeOptionOriginalParam(url);
-            newUrl = QueryString.setParam(newUrl, 'fromdate', $('#FromDate').attr('data-original-from'));
-            newUrl = QueryString.setParam(newUrl, 'todate', $('#ToDate').attr('data-original-to'));
-            newUrl = QueryString.setParam(newUrl, 'LiveIndicator', $('#LiveIndicator').attr('data-original'));
+            newUrl = QueryString.setParam(newUrl, 'FromDate', $(_selector.FromDate).attr('data-original-from'));
+            newUrl = QueryString.setParam(newUrl, 'ToDate', $(_selector.ToDate).attr('data-original-to'));
+            newUrl = QueryString.setParam(newUrl, 'LiveIndicator', $(_selector.LiveIndicator).attr('data-original'));
             newUrl = Helper.setSumParams(newUrl, totalValue);
             newUrl = Site.setProductCodeListParam(newUrl, productOptions);
+            newUrl = QueryString.setParam(newUrl, 'SubsidiarySearch', subsidiary.SubsidiarySearch);
+            newUrl = QueryString.setParam(newUrl, 'SubsidiaryList', subsidiary.SubsidiaryList);
 
             Site.blockUI();
             Site.redirect(newUrl);
@@ -92,11 +134,11 @@
         function viewSportDetail(target) {
             const data = $(target).attr('data-drill-down');
             const jsonData = $.parseJSON(data);
-            const productCode = $('#ProductCode').val();
+            const productCode = $(_selector.ProductCode).val();
             // after users back from match list,
             // the report does not show detailed data,
             // so remove product code to not show detailed data in EXPORT EXCEL
-            $('#ProductCode').val('');
+            $(_selector.ProductCode).val('');
             const productOptions = Helper.getMatchListProductOption(jsonData.SportId, productCode);
             const urlMap = {
                 Key101: 'LiveReportBetList/MixParlay?bettype=9',
@@ -121,14 +163,21 @@
                 viewBetList(Site.resolveClientUrl(url), jsonData.TotalValue, productOptions);
             }
             else {
+                let subsidiary = Site.getLrfSubsidiary();
+                if (!subsidiary || Object.keys(subsidiary).length === 0) {
+                    subsidiary.SubsidiarySearch = $("#SubsidiarySearch").val();
+                    subsidiary.SubsidiaryList = $("#SubsidiaryList").val();
+                }
                 // Match List
                 url = Site.resolveClientUrl('LiveReport/MatchList');
                 url = Site.setLicenseeOptionOriginalParam(url);
+                url = QueryString.setParam(url, 'SubsidiarySearch', subsidiary.SubsidiarySearch);
+                url = QueryString.setParam(url, 'SubsidiaryList', subsidiary.SubsidiaryList);
                 url = QueryString.setParam(url, 'SportId', jsonData.SportId);
                 url = QueryString.setParam(url, 'ProductCode', productCode);
-                url = QueryString.setParam(url, 'FromDate', $('#FromDate').attr('data-original-from'));
-                url = QueryString.setParam(url, 'ToDate', $('#ToDate').attr('data-original-to'));
-                url = QueryString.setParam(url, 'LiveIndicator', $('#LiveIndicator').attr('data-original'));
+                url = QueryString.setParam(url, 'FromDate', $(_selector.FromDate).attr('data-original-from'));
+                url = QueryString.setParam(url, 'ToDate', $(_selector.ToDate).attr('data-original-to'));
+                url = QueryString.setParam(url, 'LiveIndicator', $(_selector.LiveIndicator).attr('data-original'));
                 url = Site.setProductCodeListParam(url, productOptions);
 
                 Site.blockUI();
