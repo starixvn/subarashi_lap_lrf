@@ -1,4 +1,4 @@
-﻿// Generated at: 5/7/2024 3:05:32 PM
+﻿// Generated at: 5/9/2024 2:35:24 PM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",

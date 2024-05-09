@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/7/2024 3:05:31 PM
+// Generated at: 5/9/2024 2:35:24 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -243,6 +243,7 @@ window._language_en_US = {
   Cancel: "Cancel",
   Cancelled: "Cancelled",
   CannotUpdateBetLimitForProduct: "You cannot update member bet limit for product {0}.",
+  CashOut: "Cash Out",
   CashOutAmt: "Cash-out Amt",
   CashOutCommission: "Cash Out Commission",
   CashOutDetails: "Cash Out Details",
@@ -438,6 +439,7 @@ window._language_en_US = {
   Exchange: "Exchange",
   ExchangeUnderMaintenanceMsg: "Exchange&apos;s services are Under Maintenance. Data may be delayed during this period.&lt;br&gt;We sincerely apologize for any inconvenience caused.",
   ExchangeWinLoss: "Exchange Win Loss",
+  ExcludeCashOut: "Exclude Cash Out from Sportsbook",
   ExcludeTestData: "Exclude Test Data",
   ExistingInMonitoredPlayerList: "This player is existing in the list. Please check again!",
   ExportToExcel: "Export to Excel",
@@ -525,6 +527,7 @@ window._language_en_US = {
   HttpError_404: "Page not found, please check the address",
   HttpError_Default: "Oops... you are here because of a system error, please notify the administrators",
   IceHockey: "Ice Hockey",
+  IncludeCashOut: "Include Cash Out into Sportsbook",
   IncludeDrawData: "Include Draw data",
   IncorrectMaxBet: "Incorrect Max Bet",
   IncorrectMaxBetPerDraw: "Incorrect Max Bet Per Draw",
