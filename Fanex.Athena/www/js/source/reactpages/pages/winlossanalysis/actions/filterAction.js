@@ -21,7 +21,7 @@ export const setExcludeTestData = (value) => {
     }
 }
 
-export const setCashOutMode = (value) => {
+export const setSelectedCashOutMode = (value) => {
     return {
         type: types.SET_SELECTED_CASH_OUT_MODE,
         data: value

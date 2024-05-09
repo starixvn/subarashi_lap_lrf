@@ -48,7 +48,7 @@ export const useFilterAction = () => {
 
     const { setReportTitle, setRequestParam, toggleLoader, getReportData, setDateRange, setSelectedProduct, setSelectedCurrency,
         setSelectedPlatform, setSelectedStatus, setSelectedLiveStatus, setSelectedBaseCurrency, setSelectedVipOnly, setSelectedCustomerClass, setSelectedOddsGroup,
-        setUsername, setSearchMode, setGroupInOriginalCurrency, setViewCashOutOnly, setExcludeTestData, setSelectedGroupByOption, setSelectedBreakDownByOption,
+        setUsername, setSearchMode, setGroupInOriginalCurrency, setSelectedCashOutMode, setExcludeTestData, setSelectedGroupByOption, setSelectedBreakDownByOption,
         setSubsidiarySearch, setSubsidiaryList, setAppUuid, setProductList } = ActionCreators;
 
     const _buildTitle = (params) => {
@@ -147,7 +147,7 @@ export const useFilterAction = () => {
             dispatch(setUsername(''));
             dispatch(setSearchMode(SearchMode.MatchPrecise));
             dispatch(setGroupInOriginalCurrency(defaultState.isGroupInOriginalCurrency));
-            dispatch(setViewCashOutOnly(defaultState.selectedCashOutMode));
+            dispatch(setSelectedCashOutMode(defaultState.selectedCashOutMode));
             dispatch(setExcludeTestData(defaultState.isExcludeTestData));
             dispatch(setSelectedGroupByOption(defaultState.selectedGroupByOption));
             dispatch(setSelectedBreakDownByOption(defaultState.selectedBreakDownByOption));

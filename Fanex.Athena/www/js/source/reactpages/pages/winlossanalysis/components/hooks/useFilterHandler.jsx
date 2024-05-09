@@ -12,7 +12,7 @@ export const useFilterHandler = () => {
     const { defaultSelectedSubsidiary } = useSubsidiarySearch();
 
     const { setUsername, setSubsidiaryList, setSelectedStatus, setSelectedProduct, getSportList,
-        getBetTypeList, setSelectedSport, setSelectedBettype, setDateRange, setCashOutMode,
+        getBetTypeList, setSelectedSport, setSelectedBettype, setDateRange, setSelectedCashOutMode,
         setSelectedLiveStatus, setSelectedCustomerClass, setSelectedOddsGroup, setSelectedPlatform,
         setSelectedCurrency, setSelectedBaseCurrency, changeIsConvertAll, setSubsidiarySearch,
         setSelectedVipOnly, setSearchMode, setGroupInOriginalCurrency, setExcludeTestData, setProductList }
@@ -40,7 +40,7 @@ export const useFilterHandler = () => {
         batch(() => {
             dispatch(setSelectedProduct(selectedItemsKey));
             if (!Service.isContainProductSportBookOrBa(selectedItemsKey)) {
-                dispatch(setCashOutMode(0));
+                dispatch(setSelectedCashOutMode(0));
             }
             dispatch(getSportList(selectedItemsKey));
             dispatch(getBetTypeList(selectedItemsKey));
@@ -83,7 +83,7 @@ export const useFilterHandler = () => {
             dispatch(setProductList(productList));
 
         }
-        dispatch(setCashOutMode(item.value));
+        dispatch(setSelectedCashOutMode(item.value));
     }, [])
 
     const onSearchModeChangeHandler = useCallback((event) => {
