@@ -1402,6 +1402,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cash Out.
+        /// </summary>
+        public static string CashOut {
+            get {
+                return ResourceManager.GetString("CashOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cash-out Amt.
         /// </summary>
         public static string CashOutAmt {
@@ -3175,6 +3184,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclude Cash Out from Sportsbook.
+        /// </summary>
+        public static string ExcludeCashOut {
+            get {
+                return ResourceManager.GetString("ExcludeCashOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exclude Test Data.
         /// </summary>
         public static string ExcludeTestData {
@@ -3963,6 +3981,15 @@ namespace Fanex.Athena.Resources {
         public static string IceHockey {
             get {
                 return ResourceManager.GetString("IceHockey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Include Cash Out into Sportsbook.
+        /// </summary>
+        public static string IncludeCashOut {
+            get {
+                return ResourceManager.GetString("IncludeCashOut", resourceCulture);
             }
         }
         

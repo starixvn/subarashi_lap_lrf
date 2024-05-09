@@ -3761,4 +3761,13 @@
   <data name="BookedBet" xml:space="preserve">
     <value>Booked Bet</value>
   </data>
+  <data name="CashOut" xml:space="preserve">
+    <value>Cash Out</value>
+  </data>
+  <data name="IncludeCashOut" xml:space="preserve">
+    <value>Include Cash Out into Sportsbook</value>
+  </data>
+  <data name="ExcludeCashOut" xml:space="preserve">
+    <value>Exclude Cash Out from Sportsbook</value>
+  </data>
 </root>

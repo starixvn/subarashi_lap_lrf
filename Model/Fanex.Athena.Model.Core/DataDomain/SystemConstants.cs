@@ -84,6 +84,16 @@
             { 1, ViewResources.Yes },
         };
 
+#pragma warning disable S109 // Magic numbers should not be used
+
+        public static IReadOnlyDictionary<int, string> CashOutModeList => new Dictionary<int, string> {
+            { 0, ViewResources.IncludeCashOut },
+            { 1, ViewResources.ExcludeCashOut },
+            { 2, ViewResources.ViewCashOutOnly },
+        };
+
+#pragma warning restore S109 // Magic numbers should not be used
+
         public static readonly IReadOnlyDictionary<int, string> TimeZoneList = new Dictionary<int, string> {
             // flat currency
             { TimeZoneType.AST,"GMT-4" },

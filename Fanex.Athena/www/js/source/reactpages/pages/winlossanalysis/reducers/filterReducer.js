@@ -20,8 +20,8 @@ export const isExcludeTestData = createReducer(true, {
     }
 });
 
-export const isViewCashOutOnly = createReducer(false, {
-    [types.SET_VIEW_CASH_OUNT_ONLY](state, action) {
+export const selectedCashOutMode = createReducer({}, {
+    [types.SET_SELECTED_CASH_OUT_MODE](state, action) {
         return action.data
     }
 });

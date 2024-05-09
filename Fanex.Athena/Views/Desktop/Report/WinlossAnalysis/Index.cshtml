@@ -26,6 +26,9 @@
     var vipOnlyList = SystemConstants.VipOnyList
         .Select(c => new { value = c.Key, label = c.Value }).ToList();
 
+    var cashOutModeList = SystemConstants.CashOutModeList
+        .Select(c => new { value = c.Key, label = c.Value }).ToList();
+
     var selectedCustomerClass = string.Join(",", Model.RiskLevels.Select(r => string.Join(",", r.CustomerClassList)));
     var selectedRiskLevel = string.Join(",", Model.RiskLevels.Select(r => r.Id));
     var riskLevelList = Model.RiskLevels.Select(r => new
@@ -70,6 +73,7 @@
     sportList: [],
     selectedSport: 0,
     selectedVipOnly: 0,
+    selectedCashOutMode: 0,
     selectedGroupByOption: 8,
     selectedBreakDownByOption: 2,
     selectedCustomerClass: '@(selectedCustomerClass)',
@@ -79,7 +83,6 @@
     username: '',
     isGroupInOriginalCurrency: true,
     isExcludeTestData: true,
-    isViewCashOutOnly: false,
     };
     window._AppData = {
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
@@ -88,6 +91,7 @@
     whitelabelList: @Html.Raw(whitelabelList.ToJsonWithServiceStack()),
     subsidiaryList: @Html.Raw(subsidiaryList.ToJson()),
     vipOnlyList: @Html.Raw(vipOnlyList.ToJson()),
+    cashOutModeList: @Html.Raw(cashOutModeList.ToJson()),
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { id = x.ID, value = x.Name, status = x.Checked }).ToJson()),
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),

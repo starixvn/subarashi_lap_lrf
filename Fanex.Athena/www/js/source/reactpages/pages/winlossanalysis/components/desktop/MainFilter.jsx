@@ -23,7 +23,7 @@ import OddsGroupFilter from '../filters/OddsGroupFilter.jsx';
 import UserNameFilter from '../filters/UserNameFilter.jsx';
 import GroupInOriginalCurrencyCheckBoxFilter from '../filters/GroupInOriginalCurrencyCheckBoxFilter.jsx';
 import ExcludeTestDataCheckBoxFilter from '../filters/ExcludeTestDataCheckBoxFilter.jsx';
-import ViewCashOutOnlyFilter from '../filters/ViewCashOutOnlyFilter.jsx';
+import CashOutModeFilter from '../filters/CashOutModeFilter.jsx';
 import SubsidiaryCheckBoxFilter from '../filters/SubsidiaryCheckBoxFilter.jsx';
 import StickyIcon from '../filters/StickyIcon.jsx';
 import CurrencyFilter from '../filters/CurrencyFilter.jsx';
@@ -31,14 +31,14 @@ import CurrencyFilter from '../filters/CurrencyFilter.jsx';
 export const MainFilter = () => {
     const { appUuid, dateRange, selectedProduct, selectedSport, sportList, selectedBettype, bettypeList, selectedPlatform,
         selectedStatus, selectedLiveStatus, selectedBaseCurrency, selectedVipOnly, selectedCustomerClass, selectedOddsGroup,
-        searchMode, isGroupInOriginalCurrency, isExcludeTestData, isViewCashOutOnly, selectedCurrency }
+        searchMode, isGroupInOriginalCurrency, isExcludeTestData, selectedCashOutMode, selectedCurrency }
         = useSelector(state => state, shallowEqual)
     const { isShowSubsidiaryDropdown, isSubsidiarySearch, isShowSubsidiarySearchCheckBox, } = useSubsidiarySearch();
     const { baseCurrencyList, selectedBaseCurrency: newBaseCurrency } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
     const { onSubsidiaryDropDownChangeHandler, onDateRangeChangeHandler, onProductChangeHandler, onSportChangeHandler, onBetTypeChangeHandler,
         onPlatformChangeHandler, onStatusChangeHandler, onLiveStatusChangeHandler, onBaseCurrencyChangeHandler, onVipOnlyChangeHandler, onRiskLevelChangeHandler,
         onOddsGroupChangeHandler, onSearchModeChangeHandler, onUserNameInputHandler, onGroupInOriginalCurrencyChangeHandler, onExcludeTextDataChangeHandler,
-        onCashOutOnlyChangeHandler, onSubsidiaryCheckBoxChangeHandler, onCurrencyChangeHandler
+        onCashOutModeChangeHandler, onSubsidiaryCheckBoxChangeHandler, onCurrencyChangeHandler
     } = useFilterHandler();
     const { isOfferCashOutProduct, isHasPermissionViewVip } = AppData;
     const isEnableCashOutFilter = Service.isContainProductSportBookOrBa(selectedProduct);
@@ -90,7 +90,7 @@ export const MainFilter = () => {
                 </div>
 
                 <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
-                    <CurrencyFilter key={`currency-${appUuid}`} isValid={!!selectedCurrency} onChange={onCurrencyChangeHandler}/>
+                    <CurrencyFilter key={`currency-${appUuid}`} isValid={!!selectedCurrency} onChange={onCurrencyChangeHandler} />
                 </div>
 
                 <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
@@ -113,6 +113,12 @@ export const MainFilter = () => {
                     <UserNameFilter key={`username-${appUuid}`} onChangeSearchMode={onSearchModeChangeHandler} onChangeUserName={onUserNameInputHandler} searchMode={searchMode} />
                 </div>
 
+                {isOfferCashOutProduct &&
+                    <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+                        <CashOutModeFilter onChange={onCashOutModeChangeHandler} disabled={!isEnableCashOutFilter} value={selectedCashOutMode} />
+                    </div>
+                }
+
                 <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                     <GroupInOriginalCurrencyCheckBoxFilter disabled={isDisabledGroupInOriginalCurrency} checked={isGroupInOriginalCurrency} onChange={onGroupInOriginalCurrencyChangeHandler} />
                 </div>
@@ -120,12 +126,6 @@ export const MainFilter = () => {
                 <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                     <ExcludeTestDataCheckBoxFilter checked={isExcludeTestData} onChange={onExcludeTextDataChangeHandler} />
                 </div>
-
-                {isOfferCashOutProduct &&
-                    <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
-                        <ViewCashOutOnlyFilter onChange={onCashOutOnlyChangeHandler} disabled={!isEnableCashOutFilter} checked={isViewCashOutOnly} />
-                    </div>
-                }
 
                 {isShowSubsidiarySearchCheckBox && (
                     <div className='col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2'>

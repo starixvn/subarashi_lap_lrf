@@ -12,7 +12,7 @@ export const useFilterHandler = () => {
     const { defaultSelectedSubsidiary } = useSubsidiarySearch();
 
     const { setUsername, setSubsidiaryList, setSelectedStatus, setSelectedProduct, getSportList,
-        getBetTypeList, setSelectedSport, setSelectedBettype, setDateRange, setViewCashOutOnly,
+        getBetTypeList, setSelectedSport, setSelectedBettype, setDateRange, setCashOutMode,
         setSelectedLiveStatus, setSelectedCustomerClass, setSelectedOddsGroup, setSelectedPlatform,
         setSelectedCurrency, setSelectedBaseCurrency, changeIsConvertAll, setSubsidiarySearch,
         setSelectedVipOnly, setSearchMode, setGroupInOriginalCurrency, setExcludeTestData, setProductList }
@@ -40,7 +40,7 @@ export const useFilterHandler = () => {
         batch(() => {
             dispatch(setSelectedProduct(selectedItemsKey));
             if (!Service.isContainProductSportBookOrBa(selectedItemsKey)) {
-                dispatch(setViewCashOutOnly(false));
+                dispatch(setCashOutMode(0));
             }
             dispatch(getSportList(selectedItemsKey));
             dispatch(getBetTypeList(selectedItemsKey));
@@ -73,17 +73,17 @@ export const useFilterHandler = () => {
 
     const onExcludeTextDataChangeHandler = useCallback((checked) => dispatch(setExcludeTestData(checked)), [])
 
-    const onCashOutOnlyChangeHandler = useCallback((checked) => {
-        if (checked) {
-            const seletctProduct = AppData.productList.filter(item => item.id == ProductCode.BA || item.id == ProductCode.SportsBook)
-                .map(item => item.id)
+    const onCashOutModeChangeHandler = useCallback((item) => {
+        if (item.value > 0) {
+            const selectedProduct = AppData.productList.filter(product => product.id == ProductCode.BA || product.id == ProductCode.SportsBook)
+                .map(product => product.id)
                 .join(',');
-            const productList = AppData.productList.map(item => item.id == ProductCode.SportsBook || item.id == ProductCode.BA ? item : {...item, status: false});
-            onProductChangeHandler(null, seletctProduct);
-            dispatch(setProductList(productList));               
+            const productList = AppData.productList.map(product => product.id == ProductCode.SportsBook || product.id == ProductCode.BA ? product : { ...product, status: false });
+            onProductChangeHandler(null, selectedProduct);
+            dispatch(setProductList(productList));
 
         }
-        dispatch(setViewCashOutOnly(checked));
+        dispatch(setCashOutMode(item.value));
     }, [])
 
     const onSearchModeChangeHandler = useCallback((event) => {
@@ -101,6 +101,6 @@ export const useFilterHandler = () => {
         onSportChangeHandler, onBetTypeChangeHandler, onLiveStatusChangeHandler, onDateRangeChangeHandler,
         onRiskLevelChangeHandler, onOddsGroupChangeHandler, onPlatformChangeHandler, onVipOnlyChangeHandler,
         onCurrencyChangeHandler, onBaseCurrencyChangeHandler, onConverAllChangeHandler, onSubsidiaryCheckBoxChangeHandler,
-        onSearchModeChangeHandler, onGroupInOriginalCurrencyChangeHandler, onExcludeTextDataChangeHandler, onCashOutOnlyChangeHandler
+        onSearchModeChangeHandler, onGroupInOriginalCurrencyChangeHandler, onExcludeTextDataChangeHandler, onCashOutModeChangeHandler
     }
 }
