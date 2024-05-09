@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/9/2024 2:35:24 PM
+// Generated at: 5/9/2024 3:37:23 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -439,7 +439,7 @@ window._language_en_US = {
   Exchange: "Exchange",
   ExchangeUnderMaintenanceMsg: "Exchange&apos;s services are Under Maintenance. Data may be delayed during this period.&lt;br&gt;We sincerely apologize for any inconvenience caused.",
   ExchangeWinLoss: "Exchange Win Loss",
-  ExcludeCashOut: "Exclude Cash Out from Sportsbook",
+  ExcludeCOFromSB: "Exclude CO from Sportsbook",
   ExcludeTestData: "Exclude Test Data",
   ExistingInMonitoredPlayerList: "This player is existing in the list. Please check again!",
   ExportToExcel: "Export to Excel",
@@ -527,7 +527,7 @@ window._language_en_US = {
   HttpError_404: "Page not found, please check the address",
   HttpError_Default: "Oops... you are here because of a system error, please notify the administrators",
   IceHockey: "Ice Hockey",
-  IncludeCashOut: "Include Cash Out into Sportsbook",
+  IncludeCOFromSB: "Include CO into Sportsbook",
   IncludeDrawData: "Include Draw data",
   IncorrectMaxBet: "Incorrect Max Bet",
   IncorrectMaxBetPerDraw: "Incorrect Max Bet Per Draw",
@@ -1145,7 +1145,7 @@ window._language_en_US = {
   VendorMemberID: "Vendor Member ID",
   View: "View",
   ViewBy: "View by",
-  ViewCashOutOnly: "View Cash Out Only",
+  ViewCOOnly: "View CO only",
   ViewDataInMonth: "View data in month",
   Viewin: "View in {0}",
   Viewin2: "View in",

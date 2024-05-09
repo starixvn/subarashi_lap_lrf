@@ -5047,7 +5047,7 @@ const setReloadReport = data => {
 /*!********************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/winlossanalysis/actions/filterAction.js ***!
   \********************************************************************************/
-/*! exports provided: setSelectedVipOnly, setGroupInOriginalCurrency, setExcludeTestData, setCashOutMode, setSelectedGroupByOption, setSelectedBreakDownByOption, setSelectedOddsGroup, setAppUuid, setSearchMode */
+/*! exports provided: setSelectedVipOnly, setGroupInOriginalCurrency, setExcludeTestData, setSelectedCashOutMode, setSelectedGroupByOption, setSelectedBreakDownByOption, setSelectedOddsGroup, setAppUuid, setSearchMode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5055,7 +5055,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedVipOnly", function() { return setSelectedVipOnly; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setGroupInOriginalCurrency", function() { return setGroupInOriginalCurrency; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setExcludeTestData", function() { return setExcludeTestData; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setCashOutMode", function() { return setCashOutMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedCashOutMode", function() { return setSelectedCashOutMode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedGroupByOption", function() { return setSelectedGroupByOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedBreakDownByOption", function() { return setSelectedBreakDownByOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedOddsGroup", function() { return setSelectedOddsGroup; });
@@ -5081,7 +5081,7 @@ const setExcludeTestData = value => {
     data: value
   };
 };
-const setCashOutMode = value => {
+const setSelectedCashOutMode = value => {
   return {
     type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_SELECTED_CASH_OUT_MODE"],
     data: value
@@ -8037,7 +8037,7 @@ const useFilterAction = () => {
     setUsername,
     setSearchMode,
     setGroupInOriginalCurrency,
-    setViewCashOutOnly,
+    setSelectedCashOutMode,
     setExcludeTestData,
     setSelectedGroupByOption,
     setSelectedBreakDownByOption,
@@ -8160,7 +8160,7 @@ const useFilterAction = () => {
       dispatch(setUsername(''));
       dispatch(setSearchMode(_common_constants_js__WEBPACK_IMPORTED_MODULE_11__["SearchMode"].MatchPrecise));
       dispatch(setGroupInOriginalCurrency(defaultState.isGroupInOriginalCurrency));
-      dispatch(setViewCashOutOnly(defaultState.selectedCashOutMode));
+      dispatch(setSelectedCashOutMode(defaultState.selectedCashOutMode));
       dispatch(setExcludeTestData(defaultState.isExcludeTestData));
       dispatch(setSelectedGroupByOption(defaultState.selectedGroupByOption));
       dispatch(setSelectedBreakDownByOption(defaultState.selectedBreakDownByOption));
@@ -8225,7 +8225,7 @@ const useFilterHandler = () => {
     setSelectedSport,
     setSelectedBettype,
     setDateRange,
-    setCashOutMode,
+    setSelectedCashOutMode,
     setSelectedLiveStatus,
     setSelectedCustomerClass,
     setSelectedOddsGroup,
@@ -8256,7 +8256,7 @@ const useFilterHandler = () => {
     Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["batch"])(() => {
       dispatch(setSelectedProduct(selectedItemsKey));
       if (!_common_Service__WEBPACK_IMPORTED_MODULE_5__["default"].isContainProductSportBookOrBa(selectedItemsKey)) {
-        dispatch(setCashOutMode(0));
+        dispatch(setSelectedCashOutMode(0));
       }
       dispatch(getSportList(selectedItemsKey));
       dispatch(getBetTypeList(selectedItemsKey));
@@ -8285,7 +8285,7 @@ const useFilterHandler = () => {
       onProductChangeHandler(null, selectedProduct);
       dispatch(setProductList(productList));
     }
-    dispatch(setCashOutMode(item.value));
+    dispatch(setSelectedCashOutMode(item.value));
   }, []);
   const onSearchModeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(event => {
     const {
