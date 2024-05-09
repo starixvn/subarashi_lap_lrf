@@ -141,7 +141,7 @@ export class DataGrid extends Component {
                         ? <HeaderCell colWidth={100} title={HeaderText.player} colSpan='3'>{HeaderText.player}</HeaderCell>
                         : <HeaderCell colWidth={100} title={HeaderText.playerWL} rowSpan='2'>{HeaderText.playerWL}</HeaderCell>
                 }
-                <HeaderCell colWidth={100} title={HeaderText.licensee} colSpan='3'>{HeaderText.licensee}</HeaderCell>
+                <HeaderCell colWidth={100} title={HeaderText.licenseeWL} rowSpan='2'>{HeaderText.licenseeWL}</HeaderCell>
             </HeaderRow>
         );
 
@@ -150,20 +150,6 @@ export class DataGrid extends Component {
                 <HeaderRow style={{ height: 32 }} key='tr-header2'>
                     <HeaderCell colWidth={100} title={HeaderText.playerWL}>{HeaderText.playerWL}</HeaderCell>
                     <HeaderCell colWidth={100} title={HeaderText.playerComm}>{HeaderText.playerComm}</HeaderCell>
-                    <HeaderCell colWidth={100} title={HeaderText.total}>{HeaderText.total}</HeaderCell>
-                    <HeaderCell colWidth={100} title={HeaderText.licenseeWL}>{HeaderText.licenseeWL}</HeaderCell>
-                    <HeaderCell colWidth={100} title={HeaderText.amountDueTo}>{HeaderText.amountDueTo}</HeaderCell>
-                    {/* <HeaderCell colWidth={100} title={HeaderText.licenseeComm}>{HeaderText.licenseeComm}</HeaderCell> */}
-                    <HeaderCell colWidth={100} title={HeaderText.total}>{HeaderText.total}</HeaderCell>
-                </HeaderRow>
-            );
-        }
-        else {
-            headerRows.push(
-                <HeaderRow style={{ height: 32 }} key='tr-header2'>
-                    <HeaderCell colWidth={100} title={HeaderText.licenseeWL}>{HeaderText.licenseeWL}</HeaderCell>
-                    <HeaderCell colWidth={100} title={HeaderText.amountDueTo}>{HeaderText.amountDueTo}</HeaderCell>
-                    {/* <HeaderCell colWidth={100} title={HeaderText.licenseeComm}>{HeaderText.licenseeComm}</HeaderCell> */}
                     <HeaderCell colWidth={100} title={HeaderText.total}>{HeaderText.total}</HeaderCell>
                 </HeaderRow>
             );
@@ -259,10 +245,7 @@ export class DataGrid extends Component {
             customerWL = NumberFormat.formatDecimal(item.CustomerWL),
             customerComm = NumberFormat.formatDecimal(item.CustomerComm),
             customerWLTotal = NumberFormat.formatDecimal(item.CustomerWLTotal),
-            licenseeWL = NumberFormat.formatDecimal(item.LicenseeWL),
-            amountDueTo = NumberFormat.formatDecimal(item.AmountDueTo),
-            //licenseeComm = NumberFormat.formatDecimal(item.LicenseeComm),
-            licenseeWLTotal = NumberFormat.formatDecimal(item.LicenseeWLTotal);
+            licenseeWL = NumberFormat.formatDecimal(item.LicenseeWL);
 
         let cells =
             [<Cell key='turnover' title={turnover} className='right-align'>{turnover}</Cell>,
@@ -271,10 +254,7 @@ export class DataGrid extends Component {
             <Cell key='customerWL' title={customerWL} className='right-align'>{customerWL}</Cell>,
             this.isAllowedCustomerComm && <Cell key='customerComm' title={customerComm} className='right-align'>{customerComm}</Cell>,
             this.isAllowedCustomerComm && <Cell key='customerWLTotal' title={customerWLTotal} className='right-align'>{customerWLTotal}</Cell>,
-            <Cell key='licenseeWL' title={licenseeWL} className={`right-align ${item.LicenseeWL < 0 ? 'negative' : ''}`}>{licenseeWL}</Cell>,
-            <Cell key='amountDueTo' title={amountDueTo} className='right-align'>{amountDueTo}</Cell>,
-            //<Cell key='licenseeComm' title={licenseeComm} className='right-align'>{licenseeComm}</Cell>,
-            <Cell key='licenseeWLTotal' title={licenseeWLTotal} className={`right-align ${item.LicenseeWLTotal < 0 ? 'negative' : ''}`}>{licenseeWLTotal}</Cell>];
+            <Cell key='licenseeWL' title={licenseeWL} className={`right-align ${item.LicenseeWL < 0 ? 'negative' : ''}`}>{licenseeWL}</Cell>];
 
         return cells;
     }
@@ -328,7 +308,7 @@ export class DataGrid extends Component {
         this.betlistTitle = (
             <p>
                 {PLAYER_BET_LIST_TEXT}{" "}
-                {FromDate} → {ToDate} - {externalId}({systemId}) -{" "}
+                {FromDate} → {ToDate} - {"(GMT+8)"} - {externalId}({systemId}) -{" "}
                 <span className="base-currency-title">{viewIn}</span>
             </p>
         )
@@ -404,7 +384,7 @@ export class DataGrid extends Component {
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(ActionCreators, dispatch);
-};
+}
 
 function mapStateToProps(state) {
     const { gridData, params, licenseeId, isAllowedCustomerComm } = state;

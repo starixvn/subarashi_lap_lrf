@@ -300,8 +300,7 @@
             Assert.That(actual.CustomerWL, Is.EqualTo(expected.CustomerWL));
             Assert.That(actual.CustomerComm, Is.EqualTo(expected.CustomerComm));
             Assert.That(actual.LicenseeWL, Is.EqualTo(expected.LicenseeWL));
-            Assert.That(actual.LicenseeWLTotal, Is.EqualTo(expected.LicenseeWLTotal));
-            Assert.That(actual.AmountDueTo, Is.EqualTo(expected.AmountDueTo));
+            Assert.That(actual.CustomerWLTotal, Is.EqualTo(expected.CustomerWLTotal));
         }
 
         private static void AssertResultData(
@@ -335,8 +334,7 @@
                 { "Winlost" + suffix, data.CustomerWL },
                 { "CustComm" + suffix, data.CustomerComm },
                 { "LicenseeWinlost" + suffix, data.LicenseeWL },
-                { "LicTotal" + suffix, data.LicenseeWLTotal },
-                { "AmountDueTo" + suffix, data.AmountDueTo }
+                { "CustomerWLTotal" + suffix, data.CustomerWLTotal }
             };
 
             MapReaderData(returnedData);

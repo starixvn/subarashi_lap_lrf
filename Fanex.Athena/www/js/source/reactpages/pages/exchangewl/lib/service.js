@@ -33,7 +33,7 @@ export const BreadcrumbText = {
     player: LangHelper.getSingleResource('Player')
 }
 
-export const ViewInType ={
+export const ViewInType = {
     SettledAndResettledReport: 2,
     SettledOnly: 1
 }
@@ -42,18 +42,18 @@ export class Service {
     static getReportTitle(dateRange, selectedCurrency, allCurrencies, username, selectedViewInType, isViewResettledTicketOnly) {
         const fromDate = Site.convertDateToString(dateRange.fromDate);
         const toDate = Site.convertDateToString(dateRange.toDate);
-        const viewInByCurrency = allCurrencies 
-            ? LangHelper.getSingleResource('AllCurrencies') 
+        const viewInByCurrency = allCurrencies
+            ? LangHelper.getSingleResource('AllCurrencies')
             : `${LangHelper.getSingleResource('Viewin').replace('{0}', selectedCurrency)}`;
         const usernameText = !username ? "" : `, ${LangHelper.getSingleResource('Username')}: ${username}`;
 
-        let viewInTypeText = selectedViewInType === ViewInType.SettledOnly 
-            ? LangHelper.getSingleResource("SettledOnlyReport") 
+        let viewInTypeText = selectedViewInType === ViewInType.SettledOnly
+            ? LangHelper.getSingleResource("SettledOnlyReport")
             : LangHelper.getSingleResource("SettledAndResettledReport");
 
         viewInTypeText = isViewResettledTicketOnly ? LangHelper.getSingleResource("ResettledReport") : viewInTypeText;
 
-        return `${LangHelper.getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
+        return `${LangHelper.getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, GMT+8, ${viewInByCurrency}${usernameText}`;
     }
 
     static showErrorMsg() {
