@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
@@ -28,7 +29,7 @@
         public async Task<IEnumerable<SabaVirtualSettingInformationModel>> GetSabaVirtualSetting(SabaVirtuaSettingInformationMetaModel metaModel)
         {
             var settings = await _dataAccess.GetSabaVirtualSettingInformation(metaModel);
-            await MapLicLeagueGroup(settings, metaModel.Language);
+            await MapLicLeagueGroup(settings, metaModel.Language, metaModel.IsHideSaba);
 
             settings = settings
                 .GroupBy(x => new { x.Id, x.SportType, x.LicLeagueGroupName, x.ApplyParlay, x.MaxPerMatch, x.BetDelay, x.NextBetInterval })
@@ -40,7 +41,7 @@
             return settings;
         }
 
-        private async Task MapLicLeagueGroup(IEnumerable<SabaVirtualSettingInformationModel> settings, string langCode)
+        private async Task MapLicLeagueGroup(IEnumerable<SabaVirtualSettingInformationModel> settings, string langCode, bool isHideSaba)
         {
             foreach (var setting in settings)
             {
@@ -54,6 +55,11 @@
                 else
                 {
                     setting.LicLeagueGroupName = ViewResources.All;
+                }
+
+                if (isHideSaba)
+                {
+                    setting.LicLeagueGroupName = SabaHelper.RemoveSabaText(setting.LicLeagueGroupName);
                 }
             }
         }

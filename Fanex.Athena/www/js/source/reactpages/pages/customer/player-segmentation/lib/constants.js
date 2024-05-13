@@ -18,7 +18,11 @@ const dynamicImports = {
 }
 
 export const tabMenuList = AppData.TabKeys.map(_ => ({
-    key: _, name: LangHelper.getSingleResource(_), component: React.lazy(dynamicImports[_]), preLoad: dynamicImports[_], isNew: newTabs.some(newTab => newTab === _)
+    key: _,
+    name: LangHelper.getSingleResource(_, AppData.isHideSaba && _ === tabKeys.sabaVirtualSetting),
+    component: React.lazy(dynamicImports[_]),
+    preLoad: dynamicImports[_],
+    isNew: newTabs.some(newTab => newTab === _)
 }))
 
 export const preLoadComponents = (lazyComponents) => {

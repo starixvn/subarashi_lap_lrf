@@ -42,7 +42,7 @@ string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.V
             key = r.Id,
             value = r.Name,
             valueDecoration = "risk-level " + r.Key,
-            customerClassList = string.Join(",",r.CustomerClassList),
+            customerClassList = string.Join(",", r.CustomerClassList),
             status = true
         }),
         dateConstraint = new
@@ -161,7 +161,8 @@ string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.V
     },
     VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson()),
     MonitoredPlayer: @Html.Raw(monitoredPlayerData.ToJson()),
-    SabaVirtualSetting: @Html.Raw(sabaVirtualSettingData.ToJson())
+    SabaVirtualSetting: @Html.Raw(sabaVirtualSettingData.ToJson()),
+    isHideSaba: '@Model.IsHideSaba.ToString()' === 'True'
     }
 }
 <div id="app-container">

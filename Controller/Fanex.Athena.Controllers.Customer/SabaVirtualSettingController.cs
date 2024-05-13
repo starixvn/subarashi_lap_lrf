@@ -8,6 +8,7 @@
     using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Excel.Customer.CustomerClass;
     using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Customer.Interfaces;
@@ -17,6 +18,8 @@
     public class SabaVirtualSettingController : CultureBaseController
     {
         private readonly ISabaVirtualSettingService _service;
+
+        private bool IsHideSaba => SabaHelper.IsHideSaba(SessionServiceInstance.LicenseeSession.SpecialPlatform);
 
         public SabaVirtualSettingController(ISabaVirtualSettingService service)
         {
@@ -28,10 +31,12 @@
             var metaModel = new SabaVirtuaSettingInformationMetaModel
             {
                 LevelList = string.Join(",", SabaVirtualSettingHelper.GenerateDangerLevelList().Select(_ => _.Key)),
-                Language = SessionServiceInstance.UserSession.Language
+                Language = SessionServiceInstance.UserSession.Language,
+                IsHideSaba = IsHideSaba,
             };
 
             var viewModel = await _service.GetSabaVirtualSetting(metaModel);
+            ViewBag.IsHideSaba = IsHideSaba;
             return View("~/Views/Desktop/Customer/SabaVirtualSetting/Index.cshtml", viewModel);
         }
 
@@ -43,7 +48,8 @@
             var metaModel = new SabaVirtuaSettingInformationMetaModel
             {
                 LevelList = string.Join(",", levelIds),
-                Language = SessionServiceInstance.UserSession.Language
+                Language = SessionServiceInstance.UserSession.Language,
+                IsHideSaba = IsHideSaba,
             };
 
             var viewModel = await _service.GetSabaVirtualSetting(metaModel);
@@ -59,7 +65,8 @@
             var metaModel = new SabaVirtuaSettingInformationMetaModel
             {
                 LevelList = string.Join(",", levelIds),
-                Language = SessionServiceInstance.UserSession.Language
+                Language = SessionServiceInstance.UserSession.Language,
+                IsHideSaba = IsHideSaba,
             };
 
             var dataSource = await _service.GetSabaVirtualSetting(metaModel);
@@ -67,8 +74,8 @@
             if (dataSource.Any())
             {
                 var templatePath = Server.MapPath(@"~/App_Data/Template/Customers/PlayerSegmentation/SabaVirtualSettingInformation.xls");
-                var fileName = "SabaVirtualSettingInformation_" + DateTimeHelper.Now.ToString("MM-dd-yyyy");
-                var reportTitle = $"{ViewResources.SabaVirtualSetting} {ViewResources.Information}";
+                var fileName = (IsHideSaba ? "VirtualSettingInformation_" : "SabaVirtualSettingInformation_") + DateTimeHelper.Now.ToString("MM-dd-yyyy");
+                var reportTitle = IsHideSaba ? ViewResources.SabaVirtualSettingInformation_HideSaba : ViewResources.SabaVirtualSettingInformation;
 
                 var excel = new SabaVirtualSettingInformationExcel(templatePath, reportTitle, dataSource);
                 excel.Export();

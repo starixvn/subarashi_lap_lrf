@@ -3345,4 +3345,19 @@
   <data name="ViewSabaCoins" xml:space="preserve">
     <value>ดูเหรียญ SABA</value>
   </data>
+  <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
+    <value>แยก กีฬาเสมือนจริงออกจากสปอร์ตบุ๊ค</value>
+  </data>
+  <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
+    <value>การตั้งค่าเสมือนจริง</value>
+  </data>
+  <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
+    <value>กีฬาเสมือนจริง</value>
+  </data>
+  <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
+    <value>ข้อมูลการตั้งค่าเสมือนจริง</value>
+  </data>
+  <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
+    <value>ระดับการตั้งค่าเสมือนจริง</value>
+  </data>
 </root>

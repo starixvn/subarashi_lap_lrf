@@ -3758,4 +3758,19 @@
   <data name="Reward_Promotion" xml:space="preserve">
     <value>Reward/ Promotion</value>
   </data>
+  <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
+    <value>Separate Virtual Sports from Sportsbook</value>
+  </data>
+  <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
+    <value>Virtual Setting</value>
+  </data>
+  <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
+    <value>Virtual Sport</value>
+  </data>
+  <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
+    <value>Virtual Setting Information</value>
+  </data>
+  <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
+    <value>Virtual Setting Level</value>
+  </data>
 </root>

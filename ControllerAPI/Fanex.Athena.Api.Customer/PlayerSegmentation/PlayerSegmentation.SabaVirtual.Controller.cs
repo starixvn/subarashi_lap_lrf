@@ -9,6 +9,7 @@
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
@@ -26,15 +27,16 @@
         }
 
         [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
+        [ApiFunctionAuthorization(PermissionKeys.SabaVirtualSetting)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindExportAll = true, BindLanguage = true)]
         public async Task<HttpResponseMessage> ExportSabaVirtualPlayerList(SabaVirtualPlayerListMetaModel metaModel)
         {
+            metaModel.IsHideSaba = SabaHelper.IsHideSaba(LicenseeSession.SpecialPlatform);
             var dataSource = await _playerService.GetSabaVirtualPlayerListAsync(metaModel).ConfigureAwait(false);
             if (dataSource.Data.Any())
             {
-                const string fileName = "SabaVirtualSetting.xls";
+                var fileName = metaModel.IsHideSaba ? "VirtualSetting.xls" : "SabaVirtualSetting.xls";
                 var excel = new SabaVirtualSettingExcel(dataSource.Data, metaModel);
                 excel.Export();
 

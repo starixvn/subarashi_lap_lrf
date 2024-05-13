@@ -6,7 +6,7 @@
     using System.Web.Mvc;
 
     using Base.UnitTests;
-
+    using Fanex.Athena.Model.Core;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
@@ -40,13 +40,14 @@
             }
         }
 
-        [TestCase("", false, 6)]
-        [TestCase("BA", false, 8)]
-        [TestCase("BA", true, 10)]
+        [TestCase("", false, 6, 0)]
+        [TestCase("BA", false, 8, 2)]
+        [TestCase("BA", true, 10, 3)]
         public async Task IndexPost_NotExportExcel_ReturnCorrectViewResult(
             string productCodeList,
             bool isAllowedCustomerComm,
-            int expectedColumnCount)
+            int expectedColumnCount,
+            int specialPlatform)
         {
             using (var controller = CreateController(productCodeList))
             {
@@ -57,12 +58,12 @@
                     CurrencyId = CurrencyId,
                     IsExportExcel = false
                 };
-
                 var expectedData = new List<MatchWinLoss>
                 {
                     new MatchWinLoss()
                 };
-                _matchWinLossService.GetDataList(metaModel).Returns(expectedData);
+                var isHideSaba = SabaHelper.IsHideSaba(specialPlatform);
+                _matchWinLossService.GetDataList(metaModel, isHideSaba).Returns(expectedData);
 
                 // Action
                 var viewResult = await controller.Index(metaModel) as ViewResult;

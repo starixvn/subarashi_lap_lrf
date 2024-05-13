@@ -1,4 +1,5 @@
 ﻿using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Resources;
 
 namespace Fanex.Athena.Model.Core
 {
@@ -11,6 +12,11 @@ namespace Fanex.Athena.Model.Core
                 return true;
             }
             return false;
+        }
+
+        public static string RemoveSabaText(string text)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(text, ViewResources.Saba, string.Empty, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         }
     }
 }

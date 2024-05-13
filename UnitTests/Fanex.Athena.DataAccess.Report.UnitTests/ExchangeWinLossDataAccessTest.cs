@@ -334,7 +334,7 @@
                 { "Winlost" + suffix, data.CustomerWL },
                 { "CustComm" + suffix, data.CustomerComm },
                 { "LicenseeWinlost" + suffix, data.LicenseeWL },
-                { "CustomerWLTotal" + suffix, data.CustomerWLTotal }
+                { "PlayerTotal" + suffix, data.CustomerWLTotal }
             };
 
             MapReaderData(returnedData);

@@ -102,8 +102,9 @@
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.MatchWinLoss);
+            var isHideSaba = SabaHelper.IsHideSaba(licenseeSession.SpecialPlatform);
 
-            var reportData = await _matchWinLossService.GetDataList(metaModel).ConfigureAwait(false);
+            var reportData = await _matchWinLossService.GetDataList(metaModel, isHideSaba).ConfigureAwait(false);
             IList<MatchWinLoss> reportDataOutrightParlay = new List<MatchWinLoss>();
 
             var outrightParlayProducts = new List<string> { Product.BA, Product.SB, Product.NG, Product.VS };

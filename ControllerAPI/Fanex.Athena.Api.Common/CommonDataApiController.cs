@@ -12,7 +12,6 @@
     using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.MetaModel.Common;
@@ -187,10 +186,7 @@
             {
                 foreach (var league in leagueList)
                 {
-                    league.LeagueName = System.Text.RegularExpressions.Regex.Replace(
-                        league.LeagueName, ViewResources.Saba
-                        , string.Empty
-                        , System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                    league.LeagueName = SabaHelper.RemoveSabaText(league.LeagueName);
                 }
             }
 

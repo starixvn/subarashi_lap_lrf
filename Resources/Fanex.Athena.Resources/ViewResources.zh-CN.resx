@@ -3313,4 +3313,16 @@
   <data name="ViewSabaCoins" xml:space="preserve">
     <value>查看沙巴点数</value>
   </data>
+  <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
+    <value>虚拟体育设定</value>
+  </data>
+  <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
+    <value>虚拟赛事</value>
+  </data>
+  <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
+    <value>虚拟体育设定资讯</value>
+  </data>
+  <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
+    <value>虚拟体育设定等级</value>
+  </data>
 </root>

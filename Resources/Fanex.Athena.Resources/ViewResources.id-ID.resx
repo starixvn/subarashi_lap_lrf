@@ -3286,4 +3286,19 @@
   <data name="ViewSabaCoins" xml:space="preserve">
     <value>Lihat Koin SABA</value>
   </data>
+  <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
+    <value>Pisahkan Virtual Sports dari Sportsbook</value>
+  </data>
+  <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
+    <value>Pengaturan Virtual</value>
+  </data>
+  <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
+    <value>Virtual Sports</value>
+  </data>
+  <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
+    <value>Informasi Pengaturan Virtual</value>
+  </data>
+  <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
+    <value>Pengaturan Tingkat Virtual</value>
+  </data>
 </root>

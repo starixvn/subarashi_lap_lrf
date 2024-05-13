@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 import Popup from '@jsroot/components/popup/Popup';
+import AppData from '@jsroot/lib/AppData';
 
 export default class SabaVirtualSettingCell extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ export default class SabaVirtualSettingCell extends React.Component {
             {this.props.cell.text}&nbsp;&nbsp;<div class="icon-info" onClick={this.showSabaVirtualSettingInformation}></div>
             {this.state.isSabaVirtualSettingInformation
                 ? (<Popup width={1000} height={600} isShow="true"
-                    title={LangHelper.getSingleResource('SabaVirtualSettingInformation')}
+                    title={LangHelper.getSingleResource('SabaVirtualSettingInformation', AppData.isHideSaba)}
                     onClose={this.closeSabaVirtualSettingInformation}
                     onClick={this.clickOnPopup} isHtml="false"
                     iframeUrl={url}></Popup>)

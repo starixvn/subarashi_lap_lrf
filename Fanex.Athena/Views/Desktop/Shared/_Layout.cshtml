@@ -16,6 +16,7 @@
     var isFakeLicensee = licenseeSettingService.IsFakeLicensee(licSession.LicenseeName);
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
     var identityName = userSession.IdentityName;
+    var isHideSaba = Fanex.Athena.Model.Core.SabaHelper.IsHideSaba(licSession.SpecialPlatform);
 }
 <!DOCTYPE html>
 
@@ -37,6 +38,7 @@
     <input type="hidden" id="HistoryDate" value="@( appSettings.HistoryDate)" />
     <input type="hidden" id="IsFakeLicensee" value="@( isFakeLicensee ? 1 : 0)" />
     <input type="hidden" id="IsSelfMode" value="@( isSelfMode ? 1 : 0)" />
+    <input type="hidden" id="IsHideSaba" value="@( isHideSaba ? 1 : 0)" />
     @Html.AntiForgeryToken()
 
     <div class="loading" style="display: none">

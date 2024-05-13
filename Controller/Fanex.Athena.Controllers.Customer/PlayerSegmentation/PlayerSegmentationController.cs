@@ -10,6 +10,7 @@
     using Fanex.Athena.Controllers.Customer.Helpers;
     using Fanex.Athena.Extension.Utility.Internal;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.ViewModel;
@@ -105,7 +106,8 @@
                     SportList = GetDangerLevelSportList()
                 } : null,
                 ViewType = viewType,
-                SubsidiaryList = subsidiaryList
+                SubsidiaryList = subsidiaryList,
+                IsHideSaba = SabaHelper.IsHideSaba(licenseeSession.SpecialPlatform)
             };
 
             return model;
