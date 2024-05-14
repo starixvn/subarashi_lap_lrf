@@ -5,7 +5,7 @@ import LangHelper from '@jsroot/lib/langHelper'
 import useSubsidiarySearch from '@jsroot/customHooks/useSubsidiarySearch'
 import Service from '../../common/Service'
 import { useCallback } from 'react'
-import { ProductCode } from '../../common/constants.js'
+import { ProductCode, CashOutMode } from '../../common/constants.js'
 
 export const useFilterHandler = () => {
     const dispatch = useDispatch();
@@ -74,7 +74,7 @@ export const useFilterHandler = () => {
     const onExcludeTextDataChangeHandler = useCallback((checked) => dispatch(setExcludeTestData(checked)), [])
 
     const onCashOutModeChangeHandler = useCallback((item) => {
-        if (item.value > 0) {
+        if (item.value === CashOutMode.ViewCOOnly) {
             const selectedProduct = AppData.productList.filter(product => product.id == ProductCode.BA || product.id == ProductCode.SportsBook)
                 .map(product => product.id)
                 .join(',');
