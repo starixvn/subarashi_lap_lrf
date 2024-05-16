@@ -6897,7 +6897,7 @@ const CashOutModeFilter = props => {
   const _renderCashOutFilter = () => {
     const cashOutModeList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].cashOutModeList;
     return cashOutModeList && cashOutModeList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      instanceId: "IsVipOnly",
+      instanceId: "CashOutMode",
       value: value,
       options: cashOutModeList,
       disabled: disabled,
