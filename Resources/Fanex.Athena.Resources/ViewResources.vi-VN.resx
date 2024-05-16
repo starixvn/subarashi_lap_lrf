@@ -3366,4 +3366,7 @@
   <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
     <value>Cấp bậc cài đặt trên Ảo</value>
   </data>
+  <data name="Kabaddi" xml:space="preserve">
+    <value>Kabaddi</value>
+  </data>
 </root>

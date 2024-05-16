@@ -35,6 +35,7 @@
             (-43, (int)SportType.Esports, ViewResources.ESportsPinGoal, new[] { (int)SportType.SabaESportsPinGoal }),
             (5, (int)SportType.Tennis, ViewResources.Tennis , new[] { (int)SportType.SabaTennis }),
             (4, (int)SportType.IceHockey, ViewResources.IceHockey , new[] { (int)SportType.SabaIceHockey }),
+            (47, (int)SportType.SabaKabaddi, ViewResources.Kabaddi , new[] { (int)SportType.SabaKabaddi }),
         };
 
         public SabaVirtualSportsWinLossReportController(

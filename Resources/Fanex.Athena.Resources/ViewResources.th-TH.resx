@@ -3360,4 +3360,7 @@
   <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
     <value>ระดับการตั้งค่าเสมือนจริง</value>
   </data>
+  <data name="Kabaddi" xml:space="preserve">
+    <value>Kabaddi</value>
+  </data>
 </root>
