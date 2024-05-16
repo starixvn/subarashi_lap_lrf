@@ -13,7 +13,7 @@ export const CashOutModeFilter = (props) => {
 
         return cashOutModeList && cashOutModeList.length && (
             <Select
-                instanceId="IsVipOnly"
+                instanceId="CashOutMode"
                 value={value}
                 options={cashOutModeList}
                 disabled={disabled}
