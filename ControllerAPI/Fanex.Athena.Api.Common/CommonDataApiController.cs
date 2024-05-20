@@ -84,10 +84,9 @@
 
             var licenseeId = _sessionService.LicenseeSession.LicenseeId;
             var lang = _sessionService.UserSession.Language;
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
 
             var sports = includeSabaSport
-                ? await _sportService.GetSportAndProductAndSabaSport(licenseeId, lang, isHideSaba, productCode)
+                ? await _sportService.GetSportAndProductAndSabaSport(licenseeId, lang, IsHideSaba, productCode)
                 : await _sportService.GetSportsAndProducts(licenseeId, lang, productCode);
 
             return sports.Where(x => x.ParentId > -1).Select(x => new { value = x.ID, label = x.Name, status = true });
@@ -111,8 +110,7 @@
                 return new List<CheckedItem>();
             }
 
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
-            return await _sportService.GetSportsForTreeView(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, isHideSaba);
+            return await _sportService.GetSportsForTreeView(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, IsHideSaba);
         }
 
         [HttpGet]
@@ -121,13 +119,12 @@
             productCode = _productService.GetAllowedSubProductCodeList(
                 _sessionService.LicenseeSession.OfferedSubProductList,
                 productCode);
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
 
             var bettypes = await _betTypeService.GetBettypesByProduct(
                 _sessionService.LicenseeSession.LicenseeId,
                 productCode,
                 _sessionService.UserSession.Language,
-                isHideSaba).ConfigureAwait(false);
+                IsHideSaba).ConfigureAwait(false);
 
             return bettypes.Select(x => new { value = x.ID, label = x.Name, status = true });
         }
@@ -149,8 +146,7 @@
                 return JsonNetResult(new List<CheckedItem>());
             }
             JsConfig.ExcludeTypeInfo = true;
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
-            var betTypeList = await _betTypeService.GetBetTypeForProducts(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, isHideSaba);
+            var betTypeList = await _betTypeService.GetBetTypeForProducts(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, IsHideSaba);
             var jsonString = ServiceStack.Text.JsonSerializer.SerializeToString(betTypeList);
             _cacheService.Set(cacheKey, jsonString, cacheTime);
             return JsonNetResult(jsonString);
@@ -173,7 +169,6 @@
                 UserId = userSession.UserId,
                 AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
             };
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
 
             var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(_sessionService.LicenseeSession.LicenseeName);
             var leagues = await _leagueDataAccess.GetLeaguesBySport(metaModel, specialLeagues).ConfigureAwait(false);
@@ -182,7 +177,7 @@
 
             var leagueList = (isSabaSport ? GetSabaSportLeagueList(leagues, selectedSabaSport) : GetLeagueListExcludeSabaSport(leagues, excludeSabaSport));
 
-            if (isHideSaba)
+            if (IsHideSaba)
             {
                 foreach (var league in leagueList)
                 {

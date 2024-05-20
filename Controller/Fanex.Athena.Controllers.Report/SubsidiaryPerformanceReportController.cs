@@ -30,18 +30,17 @@
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.SubsidiaryPerformance);
-            var isHideSaba = SabaHelper.IsHideSaba(licenseeSession.SpecialPlatform);
             var model = new SubsidiaryPerformanceViewModel
             {
                 ProductOptionList = productAccess.ProductList.Select(i => new ProductOption
                 {
                     Code = i.ProductCode,
-                    Name = isHideSaba ? SabaHelper.RemoveSabaText(i.ProductName) : i.ProductName,
+                    Name = IsHideSaba ? SabaHelper.RemoveSabaText(i.ProductName) : i.ProductName,
                     Status = true
                 }).ToList(),
                 GroupSubsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licenseeSession.LicenseeName),
                 ViewType = userSession.SubsidiaryViewType,
-                IsHideSaba = isHideSaba
+                IsHideSaba = IsHideSaba,
             };
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
             return View("~/Views/Desktop/Report/SubsidiaryPerformance/Main.cshtml", model);

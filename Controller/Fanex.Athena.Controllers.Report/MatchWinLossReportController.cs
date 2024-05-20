@@ -102,9 +102,8 @@
                 licenseeSession.LicenseeId,
                 userSession.Language,
                 FunctionNames.MatchWinLoss);
-            var isHideSaba = SabaHelper.IsHideSaba(licenseeSession.SpecialPlatform);
 
-            var reportData = await _matchWinLossService.GetDataList(metaModel, isHideSaba).ConfigureAwait(false);
+            var reportData = await _matchWinLossService.GetDataList(metaModel, IsHideSaba).ConfigureAwait(false);
             IList<MatchWinLoss> reportDataOutrightParlay = new List<MatchWinLoss>();
 
             var outrightParlayProducts = new List<string> { Product.BA, Product.SB, Product.NG, Product.VS };
@@ -170,7 +169,7 @@
             const string FileName = nameof(MatchWinLoss);
             var userSession = SessionServiceInstance.UserSession;
             var licenseeSession = SessionServiceInstance.LicenseeSession;
-
+            var isHideSaba = IsHideSaba;
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/Reports/MatchWinLoss.xls");
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
@@ -193,12 +192,13 @@
             };
 
             metaModel.PageSize = PageSize;
+
             var reportData = await _matchWinLossService.GetDetailDataSet(metaModel).ConfigureAwait(false);
             var mainTable = reportData.Tables[0];
             mainTable = AddColumnsForSorting(mainTable);
             mainTable.DefaultView.Sort = $"{NewProductIdColumnName} asc, leaguename asc, matchname ASC";
             mainTable = mainTable.DefaultView.ToTable();
-            var excel = CreateExcel(templatePath, metaModel, showingOption, convertingOption, mainTable, reportData.Tables[1]);
+            var excel = CreateExcel(templatePath, metaModel, showingOption, convertingOption, mainTable, reportData.Tables[1], isHideSaba);
 
             excel.Export();
 
@@ -211,9 +211,10 @@
             ShowingOption showingOption,
             ConvertingOption convertingOption,
             DataTable mainTable,
-            DataTable totalData)
+            DataTable totalData,
+            bool isHideSaba)
         {
-            return new MatchWinLossExcel(templatePath, convertingOption, showingOption, mainTable, totalData, metaModel);
+            return new MatchWinLossExcel(templatePath, convertingOption, showingOption, mainTable, totalData, metaModel, isHideSaba);
         }
 
         private static IDictionary<int, string> CreateLeagueList(IList<MatchWinLoss> reportData)

@@ -6,7 +6,6 @@
     using System.Web.Mvc;
 
     using Base.UnitTests;
-    using Fanex.Athena.Model.Core;
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
@@ -53,6 +52,7 @@
             {
                 // Arrange
                 SessionService.LicenseeSession.IsAllowedCustomerComm = isAllowedCustomerComm;
+                SessionService.LicenseeSession.SpecialPlatform = specialPlatform;
                 var metaModel = new MatchWinLossMetaModel
                 {
                     CurrencyId = CurrencyId,
@@ -62,8 +62,8 @@
                 {
                     new MatchWinLoss()
                 };
-                var isHideSaba = SabaHelper.IsHideSaba(specialPlatform);
-                _matchWinLossService.GetDataList(metaModel, isHideSaba).Returns(expectedData);
+
+                _matchWinLossService.GetDataList(metaModel, controller.IsHideSaba).Returns(expectedData);
 
                 // Action
                 var viewResult = await controller.Index(metaModel) as ViewResult;

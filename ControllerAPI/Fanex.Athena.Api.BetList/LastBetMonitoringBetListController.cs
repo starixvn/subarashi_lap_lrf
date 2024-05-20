@@ -54,8 +54,6 @@
         [HttpGet]
         public async Task<dynamic> GetRunningMatchList(int sportId)
         {
-            var isHideSaba = SabaHelper.IsHideSaba(SessionService.LicenseeSession.SpecialPlatform);
-
             var filterMatches = await GetMatchList(sportId);
 
             var leagueListNormal = filterMatches.Where(i => !i.IsOutRight).Select(m => m.LeagueId).Distinct()
@@ -77,7 +75,7 @@
                                       }).ToList();
 
             var leagueList = leagueListNormal.Union(leagueListOutRight);
-            if (isHideSaba)
+            if (IsHideSaba)
             {
                 foreach (var league in leagueList)
                 {

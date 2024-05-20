@@ -20,6 +20,7 @@
         private const int LicenseeId = 1;
         private const string ProductCode = "VS";
         private const string LanguageCode = "en-US";
+        private const bool IsHideSaba = false;
 
         private ICacheRefAdapter _cacheRefAdapter;
 
@@ -41,7 +42,7 @@
         public async Task GetBettypesByProduct_WhenCall_PassCorrectParameters()
         {
             // Action
-            await DataAccess.GetBettypesByProduct(LicenseeId, ProductCode, LanguageCode);
+            await DataAccess.GetBettypesByProduct(LicenseeId, ProductCode, LanguageCode, IsHideSaba);
 
             // Assert
             Assert.Multiple(() =>
@@ -65,7 +66,7 @@
             Reader.Read().Returns(true, false);
 
             // Action
-            var result = await DataAccess.GetBettypesByProduct(LicenseeId, ProductCode, LanguageCode).ConfigureAwait(false);
+            var result = await DataAccess.GetBettypesByProduct(LicenseeId, ProductCode, LanguageCode, IsHideSaba).ConfigureAwait(false);
 
             // Assert
             Assert.Multiple(() =>

@@ -8,7 +8,7 @@
     {
         Task<IList<(string ProductPrefix, int BetTypeId)>> GetBettypes(string xmlSportList);
 
-        Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba = false);
+        Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba);
 
         Task<IEnumerable<(string ProductCode, int BetType)>> GetBetTypeForProducts(int licenseeId, string productCodes);
     }

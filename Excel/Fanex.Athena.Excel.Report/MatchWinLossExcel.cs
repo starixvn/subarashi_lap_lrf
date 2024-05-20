@@ -9,6 +9,7 @@
     using Base.Helpers;
     using Common;
     using Fanex.Athena.Excel.Base.Extension;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Helpers;
     using Model.Core.DataDomain;
@@ -68,6 +69,8 @@
 
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
+        private readonly bool _isHideSaba;
+
         protected internal MatchWinLossExcel()
             : base(string.Empty, 0)
         {
@@ -80,6 +83,7 @@
                                 DataTable exportData,
                                 DataTable totalData,
                                 MatchWinLossMetaModel model,
+                                bool isHideSaba,
                                 ICacheRefAdapter cacheRefAdapter = null)
             : base(templatePath, exportData.Rows.Count, showingOption)
         {
@@ -88,6 +92,7 @@
             _model = model;
             _exportData = exportData;
             _totalData = totalData;
+            _isHideSaba = isHideSaba;
             AddExtraColumns();
         }
 
@@ -155,6 +160,12 @@
                 }
 
                 var currentLeagueName = Converter.ToString2(exportRow["leaguename"]);
+
+                if (_isHideSaba)
+                {
+                    currentLeagueName = SabaHelper.RemoveSabaText(currentLeagueName);
+                }
+
                 if (leagueName != currentLeagueName)
                 {
                     currentRowIndex = AssignMatchData(sheet, matchInfoList, formatMatchName, currentRowIndex, currentIndex);

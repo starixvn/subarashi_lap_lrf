@@ -8,7 +8,6 @@
     using Fanex.Athena.Excel.Base.Helpers;
     using Fanex.Athena.Excel.Customer.CustomerClass;
     using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Customer.Interfaces;
@@ -18,8 +17,6 @@
     public class SabaVirtualSettingController : CultureBaseController
     {
         private readonly ISabaVirtualSettingService _service;
-
-        private bool IsHideSaba => SabaHelper.IsHideSaba(SessionServiceInstance.LicenseeSession.SpecialPlatform);
 
         public SabaVirtualSettingController(ISabaVirtualSettingService service)
         {

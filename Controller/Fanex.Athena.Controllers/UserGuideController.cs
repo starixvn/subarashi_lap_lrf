@@ -8,7 +8,6 @@
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -134,7 +133,7 @@
             var openingTag = $"{{SABA-section}}";
             var closingTag = $"{{/SABA-section}}";
             var customContent = content;
-            if (!SabaHelper.IsHideSaba(SessionServiceInstance.LicenseeSession.SpecialPlatform))
+            if (!IsHideSaba)
             {
                 customContent = customContent.Replace(openingTag, string.Empty);
                 customContent = customContent.Replace(closingTag, string.Empty);

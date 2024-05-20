@@ -9,7 +9,6 @@
     using Fanex.Athena.Api.Base.Attributes;
     using Fanex.Athena.Excel.Customer;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
     using Fanex.Athena.Model.Customer.MetaModel;
@@ -32,7 +31,7 @@
         [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindExportAll = true, BindLanguage = true)]
         public async Task<HttpResponseMessage> ExportSabaVirtualPlayerList(SabaVirtualPlayerListMetaModel metaModel)
         {
-            metaModel.IsHideSaba = SabaHelper.IsHideSaba(LicenseeSession.SpecialPlatform);
+            metaModel.IsHideSaba = IsHideSaba;
             var dataSource = await _playerService.GetSabaVirtualPlayerListAsync(metaModel).ConfigureAwait(false);
             if (dataSource.Data.Any())
             {
