@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "LAP - " + ViewResources.Report +
+    " - " + ViewResources.PlayerSabaCoins;
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@using Fanex.Athena.Model.Core.DataDomain;
+@model Fanex.Athena.Model.Report.ViewModel.PlayerSabaCoinsViewModel
+@{
+    var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
+    var currencyList = Model.CurrencyList.Select(x => new { Id = x.Key, Value = x.Value, Status = true });
+    var selectedSubsidiary = string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct());
+}
+
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/playersabacoins/index.css")" rel="stylesheet" type="text/css" />
+
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/report/playersabacoins.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    isLoading: false,
+    selectedSubsidiary: '@(selectedSubsidiary)',
+    selectedCurrency:  '@(selectedCurrency)',
+    dateRange: { fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'}
+    }
+    window._AppData = {
+    subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJsonWithServiceStack()),
+    viewType: @((byte)Model.ViewType),
+    currencyList: @Html.Raw(currencyList.ToJson()),
+    dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3 }
+    };
+}
+<div id="app-container">
+</div>

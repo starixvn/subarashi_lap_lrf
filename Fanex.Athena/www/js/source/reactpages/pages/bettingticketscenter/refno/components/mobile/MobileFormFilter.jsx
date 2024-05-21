@@ -4,16 +4,20 @@ import LangHelper from '@jsroot/lib/langHelper'
 import BaseCurrencySelectList from '../filters/BaseCurrencySelectList'
 import useFilterAction from '../hooks/useFilterAction'
 import { useValidParam } from '../hooks/useValidParam'
+import { useSelector } from 'react-redux'
 import StickyIcon from '../filters/StickyIcon'
 import RefNoFilter from '../filters/RefNoFilter'
 import UserNameFilter from '../filters/UserNameFilter'
 import ConvertAllCheckBox from '../filters/ConvertAllCheckBox'
+import ViewSabaCoinsCheckBox from '../filters/ViewSabaCoinsCheckBox'
+import AppData from '@jsroot/lib/AppData'
 import Note from '../filters/Note'
 
 export const MobileFormFilter = () => {
     const isValidModel = useValidParam();
     const { submit } = useFilterAction();
     const [isCollapsed, setIsCollapse] = useState(true);
+    const viewSabaCoins = useSelector(state => state.viewSabaCoins);
 
     const onCollapse = () => {
         setIsCollapse(true);
@@ -39,11 +43,14 @@ export const MobileFormFilter = () => {
                     <UserNameFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style}>
-                    <BaseCurrencySelectList />
+                    <BaseCurrencySelectList disabled={viewSabaCoins}/>
                 </div>
                 <div className="col-12 col-xs-6" style={style}>
-                    <ConvertAllCheckBox />
+                    <ConvertAllCheckBox disabled={viewSabaCoins}/>
                 </div>
+                {AppData.isAllowSabaCoins && <div className="col-12 col-xs-6" style={style}>
+                    <ViewSabaCoinsCheckBox />
+                </div>}
                 <div className="col-12">
                     <div className="form-group">
                         <div className="button-group">

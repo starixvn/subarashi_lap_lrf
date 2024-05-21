@@ -7,19 +7,31 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 
 
-export const BaseCurrencySelectList = () => {
+export const BaseCurrencySelectList = (props) => {
     const selectedBaseCurrency = useSelector(state => state.selectedBaseCurrency);
     const dispatch = useDispatch();
     const {setSelectedBaseCurrency} = ActionCreators;
-    const baseCurrencyList = AppData.baseCurrencyList;
+    let baseCurrencyList = [];
+    
+    if (props.disabled) 
+    {
+        baseCurrencyList = [{ value: "All", label: LangHelper.getSingleResource("All")}];
+    }
+    else 
+    {
+        baseCurrencyList = [...AppData.baseCurrencyList];
+    }
+
     return( 
     <div className="form-group">
         <label className="label-text">{LangHelper.getSingleResource("BaseCurrency")}</label>
         {baseCurrencyList && baseCurrencyList.length && (
             <Select instanceId="ddlBased"
+                key={`ddlBased_${props.disabled}`}
                 value={selectedBaseCurrency}
                 options={baseCurrencyList}
-                onChange={(item) => dispatch(setSelectedBaseCurrency(item.value))} />
+                onChange={(item) => dispatch(setSelectedBaseCurrency(item.value))} 
+                {...props}/>
         )}
     </div>)
 }

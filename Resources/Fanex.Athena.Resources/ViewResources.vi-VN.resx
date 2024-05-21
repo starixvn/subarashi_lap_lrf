@@ -3336,4 +3336,19 @@
   <data name="IncludeCOFromSB" xml:space="preserve">
     <value>Gộp cược đã bán vào Sportsbook</value>
   </data>
+  <data name="ExchangeToCash" xml:space="preserve">
+    <value>Quy Đổi Tiền</value>
+  </data>
+  <data name="PlayerSabaCoins" xml:space="preserve">
+    <value>Saba Xu của người chơi</value>
+  </data>
+  <data name="Reward_Promotion" xml:space="preserve">
+    <value>Thưởng/Khuyến Mãi</value>
+  </data>
+  <data name="SabaCoins" xml:space="preserve">
+    <value>Saba Xu</value>
+  </data>
+  <data name="ViewSabaCoins" xml:space="preserve">
+    <value>Xem Saba Xu</value>
+  </data>
 </root>

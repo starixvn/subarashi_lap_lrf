@@ -178,6 +178,7 @@
     <Compile Include="ViewModel\CasinoTurnoverViewModel.cs" />
     <Compile Include="ViewModel\CustomerWinlossViewModel.cs" />
     <Compile Include="ViewModel\DailyBetDetailsViewModel.cs" />
+    <Compile Include="ViewModel\PlayerSabaCoinsViewModel.cs" />
     <Compile Include="ViewModel\DailyBetsViewModel.cs" />
     <Compile Include="ViewModel\ExchangeVoidedViewModel.cs" />
     <Compile Include="ViewModel\ExchangeWinLossViewModel.cs" />

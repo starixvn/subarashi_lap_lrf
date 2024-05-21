@@ -347,4 +347,7 @@
   <data name="dailybetdetails" xml:space="preserve">
     <value>Daily Bet Details</value>
   </data>
+  <data name="sabacoins" xml:space="preserve">
+    <value>Player Saba Coins</value>
+  </data>
 </root>

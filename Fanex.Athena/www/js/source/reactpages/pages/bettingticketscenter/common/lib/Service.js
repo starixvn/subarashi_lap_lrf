@@ -5,7 +5,11 @@ import AppData from '@jsroot/lib/AppData';
 import moment from 'moment'
 
 export default class Service {
-    static getTitle(fromDate, toDate, baseCurrency) {
+    static getTitle(fromDate, toDate, baseCurrency, viewSabaCoins = false) {
+        if(viewSabaCoins) {
+            return `${LangHelper.getSingleResource("BettingTicketCenter")}, ${LangHelper.getSingleResource("Viewin").replace("{0}", LangHelper.getSingleResource("SabaCoins"))}`;
+        }
+
         const dateRangeText = fromDate && toDate 
             ? `, ${Site.convertDateToString(fromDate)} → ${Site.convertDateToString(toDate)}` 
             : '';

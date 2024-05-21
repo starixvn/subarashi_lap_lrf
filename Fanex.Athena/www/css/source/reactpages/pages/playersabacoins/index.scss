@@ -1,0 +1,23 @@
+﻿@import "../../components/date-range/styles";
+@import "../../components/react-grid";
+@import "../../components/react-multiselect";
+@import "../../components/forms/checkbox";
+@import "../../components/popup";
+@import "../../components/autocomplete";
+
+.rdr-DateRange-index {
+    z-index: 200;
+}
+
+.caret-block div {
+    display: inherit;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+    display: flex;
+}

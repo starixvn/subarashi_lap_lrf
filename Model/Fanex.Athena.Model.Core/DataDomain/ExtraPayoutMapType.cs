@@ -1,3 +1,5 @@
+using System.Security.Policy;
+
 namespace Fanex.Athena.Model.Core.DataDomain
 {
     public static class ExtraPayoutMapType
@@ -53,7 +55,13 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int SabaCasinoRoyaleTournamentPrize = 3706;
 
         public const int SabaRewardRiskFreeRebate = 3707;
-        
+
         public const int Live22Promotion = 7901;
+
+        public const int SabaCoinsCashExchange = 3708;
+
+        public const int PromotionJackpotPrize = 3709;
+
+        public const int PromotionCashPrize = 3710;
     }
 }

@@ -2,7 +2,7 @@ import React, {useMemo, useEffect, memo} from 'react';
 import { ApiUrl, HeaderText } from '../../../common/lib/constants';
 import BaseMobileDataGrid from '../../../common/components/BaseMobileDataGrid';
 import AppData from '@jsroot/lib/AppData';
-import {  useSelector } from 'react-redux';
+import {  useSelector, shallowEqual } from 'react-redux';
 import CompositeRow from '../../../../../components/mobile-component/CompositeRow';
 import Service from '../../../common/lib/Service';
 import MobileBetlistContent from '../../../common/components/MobileBetlistContent';
@@ -12,11 +12,12 @@ import { Cell } from '@9softstudio/react-grid';
 const Columns = [ 'Details', 'Stake', 'WinLoss', 'Icon'];
 
 const MobileGrid = () => {
-    const data = useSelector(state => state.gridData.Data )
+    const [data, requestParam] = useSelector(state => [state.gridData.Data, state.requestParam], shallowEqual)
     useEffect(() => {
     }, [data]);
 
     const isDisplayTxIdColumn = AppData.isAllowTxIDColumn;
+    const isDisplayLicenseeWLColumn = !(AppData.isAllowSabaCoins && requestParam.ViewSabaCoins);
 
     const getRows = () => {
         if (!data)
@@ -42,7 +43,10 @@ const MobileGrid = () => {
             rows.push(renderExpandRow(HeaderText.LicenseeTxId, item.LicenseeTxId));
         }
         rows.push(renderExpandRow(HeaderText.SystemId, item.SystemId));
-        rows.push(renderExpandRow(Service.getHeaderName('LicenseeWL'), item.LicenseeWL));
+        if (isDisplayLicenseeWLColumn) 
+        {
+            rows.push(renderExpandRow(Service.getHeaderName('LicenseeWL'), item.LicenseeWL));
+        }
         rows.push(renderExpandRow(HeaderText.Platform, item.Platform));
         rows.push(renderExpandRow(HeaderText.Live, item.Live))
         return rows;

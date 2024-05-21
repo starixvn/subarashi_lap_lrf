@@ -340,6 +340,11 @@
     <Content Include="App_Data\UserGuide\CommissionGroupList\id-ID.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\th-TH.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\vi-VN.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSabaCoins\en-US.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSabaCoins\id-ID.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSabaCoins\th-TH.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSabaCoins\vi-VN.htm" />
+    <Content Include="App_Data\UserGuide\PlayerSabaCoins\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\id-ID.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\th-TH.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\vi-VN.htm" />
@@ -1147,6 +1152,7 @@
     <Content Include="Views\Desktop\Customer\CustomerAdministration\MainIvoryBet.cshtml" />
     <Content Include="Views\Desktop\Report\DailyBetDetails\Index.cshtml" />
     <Content Include="Views\Desktop\BetList\BettingTicketCenter\BookedBet.cshtml" />
+    <Content Include="Views\Desktop\Report\PlayerSabaCoins\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

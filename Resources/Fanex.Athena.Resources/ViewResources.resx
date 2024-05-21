@@ -3743,4 +3743,19 @@
   <data name="ExcludeCOFromSB" xml:space="preserve">
     <value>Exclude CO from Sportsbook</value>
   </data>
+  <data name="PlayerSabaCoins" xml:space="preserve">
+    <value>Player Saba Coins</value>
+  </data>
+  <data name="SabaCoins" xml:space="preserve">
+    <value>Saba Coins</value>
+  </data>
+  <data name="ViewSabaCoins" xml:space="preserve">
+    <value>View Saba Coins</value>
+  </data>
+  <data name="ExchangeToCash" xml:space="preserve">
+    <value>Exchange To Cash</value>
+  </data>
+  <data name="Reward_Promotion" xml:space="preserve">
+    <value>Reward/ Promotion</value>
+  </data>
 </root>

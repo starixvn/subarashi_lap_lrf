@@ -109,5 +109,8 @@
 
         /*Customer Administration*/
         public const string PlayerReport = "PlayerReport";
+
+        /*Saba Coins*/
+        public const string SabaCoins = "SabaCoins";
     }
 }

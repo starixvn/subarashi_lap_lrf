@@ -279,6 +279,9 @@
   <data name="results41" xml:space="preserve">
     <value>Hasil</value>
   </data>
+  <data name="sabacoins" xml:space="preserve">
+    <value>Koin SABA</value>
+  </data>
   <data name="sabavirtualsportswinloss" xml:space="preserve">
     <value>Saba Virtual Sports Win Loss</value>
   </data>

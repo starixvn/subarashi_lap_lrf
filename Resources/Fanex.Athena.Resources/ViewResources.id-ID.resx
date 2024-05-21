@@ -3271,4 +3271,19 @@
   <data name="IncludeCOFromSB" xml:space="preserve">
     <value>Memasukkan Tunai Keluar ke dalam Sportsbook</value>
   </data>
+  <data name="ExchangeToCash" xml:space="preserve">
+    <value>Menukarkan ke Uang</value>
+  </data>
+  <data name="PlayerSabaCoins" xml:space="preserve">
+    <value>Koin Saba Pemain</value>
+  </data>
+  <data name="Reward_Promotion" xml:space="preserve">
+    <value>Hadiah/Promosi</value>
+  </data>
+  <data name="SabaCoins" xml:space="preserve">
+    <value>Koin SABA</value>
+  </data>
+  <data name="ViewSabaCoins" xml:space="preserve">
+    <value>Lihat Koin SABA</value>
+  </data>
 </root>

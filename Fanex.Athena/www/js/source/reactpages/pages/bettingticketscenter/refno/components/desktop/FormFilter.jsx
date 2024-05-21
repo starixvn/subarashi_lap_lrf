@@ -1,4 +1,5 @@
 ﻿import React, { memo } from 'react'
+import { useSelector } from 'react-redux'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import LangHelper from '@jsroot/lib/langHelper'
 import BaseCurrencySelectList from '../filters/BaseCurrencySelectList'
@@ -8,9 +9,12 @@ import StickyIcon from '../filters/StickyIcon'
 import RefNoFilter from '../filters/RefNoFilter'
 import UserNameFilter from '../filters/UserNameFilter'
 import ConvertAllCheckBox from '../filters/ConvertAllCheckBox'
+import ViewSabaCoinsCheckBox from '../filters/ViewSabaCoinsCheckBox'
+import AppData from '@jsroot/lib/AppData'
 import Note from '../filters/Note'
 
 export const FormFilter = () => {
+    const viewSabaCoins = useSelector(state => state.viewSabaCoins);
     const isValidModel = useValidParam();
     const { submit} = useFilterAction();
 
@@ -24,11 +28,14 @@ export const FormFilter = () => {
                     <UserNameFilter/>
                 </div>
                 <div className="col-12 col-md-3 col-sm-4 col-lg-2 col-xl-2">
-                    <BaseCurrencySelectList />
+                    <BaseCurrencySelectList disabled={viewSabaCoins}/>
                 </div>
                 <div className="col-12 col-md-4 col-sm-4 col-lg-2 col-xl-2">
-                    <ConvertAllCheckBox/>
+                    <ConvertAllCheckBox disabled={viewSabaCoins}/>
                 </div>
+                {AppData.isAllowSabaCoins && <div className="col-12 col-md-4 col-sm-4 col-lg-2 col-xl-2">
+                    <ViewSabaCoinsCheckBox/>
+                </div>}
 
                 <div className="col-12 col-md-3 col-sm-4 col-lg-2 col-xl-2">
                     <div className="form-group">

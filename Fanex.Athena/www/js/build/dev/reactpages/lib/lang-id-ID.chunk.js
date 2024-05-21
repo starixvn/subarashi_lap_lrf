@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2024 11:14:17 AM
+// Generated at: 5/21/2024 2:46:34 PM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -422,6 +422,7 @@ window._language_id_ID = {
   EventType: "Jenis Acara",
   ExcelExceedRowsMsg: "File ini melebihi 65535 entri. Harap hubungi administrator untuk lebih detailnya.",
   Exchange: "Pertukaran",
+  ExchangeToCash: "Menukarkan ke Uang",
   ExchangeUnderMaintenanceMsg: "Layanan Bursa sedang Dalam Pemeliharaan. Data mungkin tertunda selama periode ini. Kami mohon maaf sebesar-besarnya atas ketidaknyamanan yang ditimbulkan.",
   ExchangeWinLoss: "Exchange Win Loss",
   ExcludeCOFromSB: "Mengecualikan Tunai Keluar dari Sportsbook",
@@ -790,6 +791,7 @@ window._language_id_ID = {
   PlayerBettingStatisticsTitle: "Statistik Taruhan Pemain (bulan ini)",
   PlayerComm: "Komisi pemain",
   PlayerName: "Nama Pemain",
+  PlayerSabaCoins: "Koin Saba Pemain",
   PlayerSegmentation: "Segmentasi Pemain",
   PlayerStatementSupportMonths: "Dukungan data hingga 18 bulan",
   PlayerWL: "Kemenangan dan kekalahan pemain",
@@ -879,6 +881,7 @@ window._language_id_ID = {
   Results: "Hasil",
   RetractedPlayerUpdateVipStatus: "Pemain VIP yang ditarik kembali: {0} ({1})",
   RetractedPlayerUpdateVipStatusSingle: "Pemain VIP yang ditarik: {0}",
+  Reward_Promotion: "Hadiah/Promosi",
   RiskLevel: "Tingkat Risiko",
   RiskLevelBetSetting: "Batasan Taruhan Tingkat Risiko",
   RiskLevelInformation: "Informasi Tingkat Risiko",
@@ -888,6 +891,7 @@ window._language_id_ID = {
   Running: "Berjalan",
   Sa: "Sab",
   Saba: "Saba",
+  SabaCoins: "Koin SABA",
   SabaVirtualSetting: "Saba Pengaturan Virtual",
   SabaVirtualSettingInformation: "Informasi Pengaturan Virtual Saba",
   SabaVirtualSettingLevel: "Saba Pengaturan Tingkat Virtual",
@@ -1096,6 +1100,7 @@ window._language_id_ID = {
   ViewNotification: "Lihat Pemberitahuan",
   ViewResettledTicketOnly: "Lihat Hanya Tiket yang Ditetapkan Ulang",
   ViewResettledTicketOnlyNote: "Data &quot;Lihat Hanya Tiket yang Telah Dipindahkan&quot; tersedia mulai 01 Sep 2023.",
+  ViewSabaCoins: "Lihat Koin SABA",
   ViewSubsidiaryOnReports: "Lihat anak perusahaan dalam laporan",
   VIP: "VIP",
   VIP2: "VIP",

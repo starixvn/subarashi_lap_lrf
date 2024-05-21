@@ -18,6 +18,7 @@ var cssPaths = {
     bettingticketscenter: "./www/css/source/reactpages/pages/bettingticketscenter/index.scss",
     betlist: "./www/css/source/reactpages/pages/betlist/index.scss",
     casinoturnover: "./www/css/source/reactpages/pages/casinoturnover/index.scss",
+    playersabacoins: "./www/css/source/reactpages/pages/playersabacoins/index.scss",
     dailybets: "./www/css/source/reactpages/pages/dailybets/index.scss",
     dailybetdetails: "./www/css/source/reactpages/pages/dailybetdetails/index.scss",
     exchangevoided: "./www/css/source/reactpages/pages/exchangevoided/index.scss",
@@ -55,6 +56,7 @@ var scriptPaths = {
     bettingticketscenter_running: "./www/js/source/reactpages/pages/bettingticketscenter/running/components/index.jsx",
     bettingticketscenter_bookedbet: "./www/js/source/reactpages/pages/bettingticketscenter/bookedbet/components/index.jsx",
     casinoturnover: "./www/js/source/reactpages/pages/casinoturnover/components/index.jsx",
+    playersabacoins: "./www/js/source/reactpages/pages/playersabacoins/components/index.jsx",
 
     dailybets: "./www/js/source/reactpages/pages/dailybets/components/index.jsx",
     dailybetdetails: "./www/js/source/reactpages/pages/dailybetdetails/components/index.jsx",

@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DailyBetDetailsReportController.cs" />
+    <Compile Include="PlayerSabaCoinsReportController.cs" />
     <Compile Include="WinlossAnalysisReportController.cs" />
     <Compile Include="CasinoTurnoverController.cs" />
     <Compile Include="DailyBetsReportController.cs" />

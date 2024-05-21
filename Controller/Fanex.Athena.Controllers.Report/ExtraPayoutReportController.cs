@@ -208,6 +208,12 @@ namespace Fanex.Athena.Controllers.Report
                         Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.SabaRewardRiskFreeRebate)}", Checked = true },
                     new CheckedItem { ID = ExtraPayoutMapType.SabaRedEnvelope,
                         Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.SabaRedEnvelope)}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.SabaCoinsCashExchange,
+                        Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int)BetType.SabaCoinsCashExchange)}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.PromotionJackpotPrize,
+                        Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.PromotionJackpotPrize)}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.PromotionCashPrize,
+                        Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.PromotionCashPrize)}", Checked = true },
                     new CheckedItem { ID = ExtraPayoutMapType.SabaCasinoRoyaleTournamentPrize,
                         Name = $"{ViewResources.CasinoPromotion} - {_cacheRefAdapter.GetBettype((int) BetType.SabaCasinoRoyaleTournamentPrize)}", Checked = true }
                 });
