@@ -12,15 +12,21 @@
 
     public class ProxyOptions : IProxyOptions
     {
+        private const string RootUrlHeaderKey = "RootUrl";
+
+        private const string LanguageHeaderKey = "Language";
+
         private static readonly IDictionary<string, string> ProxyApiHostMapper = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
         {
-            { "Report", "Proxy_ReportApiHost" }  ,
+            { "Report", "Proxy_ReportApiHost" },
+            { "ReportClientApp", "Proxy_ReportClientAppHost" },
             { "BetList", "Proxy_BetListApiHost" }
         };
 
         private static readonly IDictionary<string, string> ProxyHealthCheckMapper = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase)
         {
-            { "Report", "Proxy_ReportApiHealthCheck" }  ,
+            { "Report", "Proxy_ReportApiHealthCheck" },
+            { "ReportClientApp", "Proxy_ReportClientAppHealthCheck" },
             { "BetList", "Proxy_BetListApiHealthCheck" }
         };
 
@@ -31,6 +37,8 @@
             PrepareRequest = (originalRequest, message) =>
             {
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", SessionService.UserSession.AccessToken);
+                message.Headers.Add(RootUrlHeaderKey, HttpContext.Current.Request.ApplicationPath);
+                message.Headers.Add(LanguageHeaderKey, SessionService.UserSession.Language);
                 return Task.CompletedTask;
             };
 

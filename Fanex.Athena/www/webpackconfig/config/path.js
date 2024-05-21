@@ -31,8 +31,6 @@ var cssPaths = {
     forecastonextwo: ["./www/css/source/pages/forecast/forecastonextwo.scss"],
     newforecast: ["./www/css/source/pages/forecast/newforecast.scss"],
 
-    settledmatchcount: ["./www/css/source/pages/report/settledmatchcount.scss"],
-    weeklylivematch: ["./www/css/source/pages/report/weeklylivematch.scss"],
     turnover: ["./www/css/source/pages/report/turnover.scss"],
     result: ["./www/css/source/pages/report/result.scss"],
     cashouthistory: ["./www/css/source/pages/betlist/cashouthistory.main.scss", "./www/css/source/extensions/popup-ex.scss"],
@@ -47,7 +45,6 @@ var cssPaths = {
     customerlog: ["./www/css/source/pages/customer/customerlog.scss"],
     licenseelist: ["./www/css/source/pages/utility/licenseelist.scss"],
     agcasinowinloss: ["./www/css/source/pages/report/agcasinowinloss.scss"],
-    customerbalance: ["./www/css/source/pages/report/customerbalance.scss"],
     customerpendingfunds: ["./www/css/source/pages/report/customerpendingfunds.scss"],
     customerturnover: ["./www/css/source/pages/report/customerturnover.scss"],
     customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"],
@@ -92,8 +89,6 @@ var scriptPaths = {
     forecasthdpou: "./www/js/source/pages/forecast/forecast.handicapoverunder.main.js",
     newforecasthdpou: "./www/js/source/pages/forecast/forecast.newforecasthdpou.main.js",
 
-    settledmatchcount: "./www/js/source/pages/report/settledmatchcount/main-settledmatchcount.js",
-    weeklylivematch: "./www/js/source/pages/report/weeklylivematch/main-weeklylivematch.js",
     turnover: "./www/js/source/pages/report/turnover/main.js",
     result: "./www/js/source/pages/report/result/main-result.js",
 
@@ -113,7 +108,6 @@ var scriptPaths = {
     sabavirtualsettinginformation: "./www/js/source/pages/customer/sabavirtualsettinginformation/main.js",
 
     agcasinowinloss: "./www/js/source/pages/report/agcasinowinloss/main.js",
-    customerbalance: "./www/js/source/pages/report/customerbalance/main.js",
     customerpendingfunds: "./www/js/source/pages/report/customerpendingfunds/main.js",
     customerturnover: "./www/js/source/pages/report/customerturnover/main.js",
     customerwinloss: "./www/js/source/pages/report/customerwinloss/main.js"

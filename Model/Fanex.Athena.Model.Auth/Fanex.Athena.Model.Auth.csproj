@@ -56,7 +56,9 @@
     <Compile Include="PortalFunction.cs" />
     <Compile Include="DataDomain\PermissionKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestInfo.cs" />
     <Compile Include="UserAuthInfo.cs" />
+    <Compile Include="ValidatedFunctionKey.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">

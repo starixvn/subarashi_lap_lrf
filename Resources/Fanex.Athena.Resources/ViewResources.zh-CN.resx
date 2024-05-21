@@ -511,9 +511,6 @@
   <data name="EndDate" xml:space="preserve">
     <value>结束日期</value>
   </data>
-  <data name="Entered" xml:space="preserve">
-    <value>成绩已输入场数</value>
-  </data>
   <data name="Error" xml:space="preserve">
     <value>误差</value>
   </data>
@@ -989,9 +986,6 @@
     <value>非滚球(不含混合)</value>
     <comment>108298</comment>
   </data>
-  <data name="NonEntered" xml:space="preserve">
-    <value>成绩还没输入场数</value>
-  </data>
   <data name="NoOfCustmer" xml:space="preserve">
     <value>会员数</value>
   </data>
@@ -1202,9 +1196,6 @@
   </data>
   <data name="SetAsDefaultGroup" xml:space="preserve">
     <value>设置为默认组</value>
-  </data>
-  <data name="SettledMatchCount" xml:space="preserve">
-    <value>已结算赛事计数</value>
   </data>
   <data name="ShowAllLeagues" xml:space="preserve">
     <value>显示所有联赛</value>

@@ -1032,9 +1032,6 @@
   <data name="EndDate" xml:space="preserve">
     <value>Ngày cuối</value>
   </data>
-  <data name="Entered" xml:space="preserve">
-    <value>Đã kết thúc</value>
-  </data>
   <data name="Error" xml:space="preserve">
     <value>Lỗi</value>
   </data>
@@ -1193,15 +1190,6 @@
   </data>
   <data name="GetAll" xml:space="preserve">
     <value>Xem tất cả</value>
-  </data>
-  <data name="GetAllCustomersHavingPositiveClosingBalance" xml:space="preserve">
-    <value>Chỉ hiển thị khách hàng có số dư cuối kỳ &gt; 0</value>
-  </data>
-  <data name="GetAllCustomersHavingRunningTickets" xml:space="preserve">
-    <value>Xem tất cả các khách hàng có vé cược đang diễn ra</value>
-  </data>
-  <data name="GetAllRunningTickets" xml:space="preserve">
-    <value>Xem tất cả các vé đang diễn ra</value>
   </data>
   <data name="GGR" xml:space="preserve">
     <value>GGR</value>
@@ -1938,9 +1926,6 @@
   <data name="NoneLive" xml:space="preserve">
     <value>Không Trực tiếp</value>
   </data>
-  <data name="NonEntered" xml:space="preserve">
-    <value>Chưa có kết quả</value>
-  </data>
   <data name="NoOfCustmer" xml:space="preserve">
     <value>Số Khách hàng</value>
   </data>
@@ -2598,9 +2583,6 @@
   <data name="SettledDateOnly" xml:space="preserve">
     <value>Ngày Tất Toán</value>
   </data>
-  <data name="SettledMatchCount" xml:space="preserve">
-    <value>Số Lượng Trận Đấu Đã Hoàn Tất</value>
-  </data>
   <data name="SettledOnlyReport" xml:space="preserve">
     <value>Báo Cáo Tất Toán</value>
   </data>
@@ -2705,9 +2687,6 @@
   </data>
   <data name="Sunday" xml:space="preserve">
     <value>Chủ Nhật</value>
-  </data>
-  <data name="SupportTask" xml:space="preserve">
-    <value>Nhiệm vụ hỗ trợ</value>
   </data>
   <data name="Suspended" xml:space="preserve">
     <value>Đình chỉ</value>
@@ -3206,9 +3185,6 @@
   </data>
   <data name="Weekly" xml:space="preserve">
     <value>Hàng tuần</value>
-  </data>
-  <data name="WeeklyLiveMatches" xml:space="preserve">
-    <value>Trận Đấu Trực Tiếp Hàng Tuần</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Chào mừng</value>

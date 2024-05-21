@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/9/2024 3:37:23 PM
+// Generated at: 5/21/2024 11:14:17 AM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -409,7 +409,6 @@ window._language_id_ID = {
   Email: "Email",
   EnableRNGCasino: "Aktifkan Permainan Angka Keno",
   EndDate: "Tanggal Berakhir",
-  Entered: "Masuk",
   Error: "Error",
   ErrorNotification: "Anda berada di sini karena salah satu dari alasan berikut: &lt;br/&gt;遭遇问题了!",
   ErrorProcessingMsg: "Maaf, terjadi kesalahan saat memproses permintaan Anda.",
@@ -467,9 +466,6 @@ window._language_id_ID = {
   General: "Umum",
   GeneralInformation: "Informasi Umum",
   GetAll: "Dapatkan Semua",
-  GetAllCustomersHavingPositiveClosingBalance: "Hanya tampilkan pelanggan dengan saldo penutupan &gt; 0",
-  GetAllCustomersHavingRunningTickets: "Dapatkan semua pelanggan yang memiliki tiket berjalan",
-  GetAllRunningTickets: "Dapatkan semua tiket yang sedang berjalan",
   GodOfFortuneWinLoss: "Kemenangan dan Kerugian Dewa Keberuntungan",
   GotoCustomerList: "Pergi ke Daftar Pelanggan",
   GrandPrizeNote: "Hadiah Utama: jumlah kemenangan besar yang dikecualikan dari saldo anggota",
@@ -715,7 +711,6 @@ window._language_id_ID = {
   NoneCurrency: "Mata uang tidak ada",
   NoneLevel: "Tidak ada level",
   NoneLive: "Non-Live",
-  NonEntered: "Belum Dimasukkan",
   NoOfCustmer: "Jumlah Pelanggan",
   NoOfReached: "Jumlah Terjangkau",
   NoProductFound: "Tidak ada produk ditemukan",
@@ -929,7 +924,6 @@ window._language_id_ID = {
   SettledAndResettledDate: "Tanggal Penyelesaian dan Penempatan Ulang",
   SettledAndResettledReport: "Laporan Diselesaikan dan Direset",
   SettledDateOnly: "Tanggal Diselesaikan",
-  SettledMatchCount: "Jumlah Pertandingan yang Diselesaikan",
   SettledOnlyReport: "Laporan Diselesaikan",
   Show: "Tampilkan",
   ShowAllLeagues: "Tampilkan Semua Liga",
@@ -966,7 +960,6 @@ window._language_id_ID = {
   SuccessUpdateVipStatusSingle: "Berhasil diperbarui",
   Summary: "Ringkasan",
   Sunday: "Minggu",
-  SupportTask: "Tugas Dukungan",
   Suspended: "Ditangguhkan",
   Suspicious: "Mencurigakan",
   SystemId: "ID Sistem",
@@ -1136,7 +1129,6 @@ window._language_id_ID = {
   Wednesday: "Rabu",
   Week2: "Minggu {0}",
   Weekly: "Mingguan",
-  WeeklyLiveMatches: "Pertandingan Langsung Mingguan",
   Welcome: "Selamat Datang",
   WhiteLabel: "Whitelabel",
   WinLoss: "Menang-Kalah",

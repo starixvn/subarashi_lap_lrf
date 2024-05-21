@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([40,"www/js/build/dev/pages/lib/common"]);
+/******/ 	deferredModules.push([38,"www/js/build/dev/pages/lib/common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -1831,7 +1831,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 /***/ }),
 
-/***/ 40:
+/***/ 38:
 /*!**************************************************************!*\
   !*** multi ./www/js/source/pages/customer/risklevel/main.js ***!
   \**************************************************************/

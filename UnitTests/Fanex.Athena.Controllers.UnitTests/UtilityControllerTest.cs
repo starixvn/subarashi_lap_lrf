@@ -7,6 +7,7 @@
 
     using Base.UnitTests;
     using Fanex.Athena.Resources;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
 
     using NSubstitute;
@@ -19,6 +20,7 @@
     public class UtilityControllerTest : CultureBaseControllerHelperTest
     {
         private IMaintenanceService _maintenanceService;
+        private IAuthorizationService _authorizationService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -34,6 +36,7 @@
         {
             SetUpDefaultFakeData();
             _maintenanceService = Substitute.For<IMaintenanceService>();
+            _authorizationService = Substitute.For<IAuthorizationService>();
         }
 
         [TearDown]
@@ -309,7 +312,7 @@
 
         private UtilityController CreateController()
         {
-            return new UtilityController(AppSettings, LangService, _maintenanceService, SessionService)
+            return new UtilityController(AppSettings, LangService, _maintenanceService, SessionService, _authorizationService)
             {
                 ControllerContext = ControllerContext
             };

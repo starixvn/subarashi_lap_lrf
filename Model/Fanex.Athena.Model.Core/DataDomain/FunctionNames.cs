@@ -6,8 +6,6 @@
 
         public const string SabaVirtualSportsWinLoss = "SabaVirtualSportsWinLoss";
 
-        public const string CustomerBalance = "CustomerBalance";
-
         public const string CustomerPendingFunds = "CustomerPendingFunds";
 
         public const string CustomerWinLoss = "CustomerWinLoss";

@@ -82,8 +82,6 @@
     <Compile Include="WinlossByProductExcelTest.cs" />
     <Compile Include="WinLossByBetTypeExcelTest.cs" />
     <Compile Include="TestableClasses\WinLossByBetTypeExcelTestable.cs" />
-    <Compile Include="WeeklyLiveMatchExcelTest.cs" />
-    <Compile Include="TestableClasses\WeeklyLiveMatchExcelTestable.cs" />
     <Compile Include="TestableClasses\TurnoverExcelTestable.cs" />
     <Compile Include="ThirdPartyWinLossExcelTest.cs" />
     <Compile Include="CustomerTurnoverExcelTest.cs" />

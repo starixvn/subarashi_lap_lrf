@@ -367,9 +367,6 @@
   <data name="EndDate" xml:space="preserve">
     <value>End Date</value>
   </data>
-  <data name="Entered" xml:space="preserve">
-    <value>Entered</value>
-  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -697,9 +694,6 @@
   <data name="None" xml:space="preserve">
     <value>None</value>
   </data>
-  <data name="NonEntered" xml:space="preserve">
-    <value>Non-Entered</value>
-  </data>
   <data name="NoOfCustmer" xml:space="preserve">
     <value>No. of Customer</value>
   </data>
@@ -872,9 +866,6 @@
   </data>
   <data name="SetAsDefaultGroup" xml:space="preserve">
     <value>Set as default group</value>
-  </data>
-  <data name="SettledMatchCount" xml:space="preserve">
-    <value>Settled Match Count</value>
   </data>
   <data name="ShowAllLeagues" xml:space="preserve">
     <value>Show All Leagues</value>
@@ -1804,10 +1795,6 @@
   <data name="TurnoverPercent" xml:space="preserve">
     <value>%Turnover</value>
     <comment>#54751</comment>
-  </data>
-  <data name="WeeklyLiveMatches" xml:space="preserve">
-    <value>Weekly Live Matches</value>
-    <comment>#52886</comment>
   </data>
   <data name="ParlayComm" xml:space="preserve">
     <value>Parlay Comm</value>
@@ -2992,23 +2979,9 @@
     <value>View subsidiary on reports</value>
     <comment>ignorejs</comment>
   </data>
-  <data name="GetAllCustomersHavingPositiveClosingBalance" xml:space="preserve">
-    <value>Only show customers having closing balance &gt; 0</value>
-  </data>
   <data name="CustomerSupportTask" xml:space="preserve">
     <value>Customer Support Task</value>
     <comment>ignorejs</comment>
-  </data>
-  <data name="GetAllCustomersHavingRunningTickets" xml:space="preserve">
-    <value>Get all customers having running tickets</value>
-    <comment>165136</comment>
-  </data>
-  <data name="GetAllRunningTickets" xml:space="preserve">
-    <value>Get all running tickets</value>
-    <comment>165136</comment>
-  </data>
-  <data name="SupportTask" xml:space="preserve">
-    <value>Support Task</value>
   </data>
   <data name="CustomerReports" xml:space="preserve">
     <value>Customer Reports</value>

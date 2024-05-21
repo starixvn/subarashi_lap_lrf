@@ -123,7 +123,6 @@
     <Compile Include="Models\LicenseeWinLossExcelModel.cs" />
     <Compile Include="Models\WinLossByProductExcelModel.cs" />
     <Compile Include="ThirdPartyWinLossExcel.cs" />
-    <Compile Include="WeeklyLiveMatchExcel.cs" />
     <Compile Include="LiveReportWinLossByMatchExcel.cs" />
     <Compile Include="CustomerPendingFundsExcel.cs" />
     <Compile Include="CustomerTurnoverExcel.cs" />

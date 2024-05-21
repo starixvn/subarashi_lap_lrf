@@ -24,6 +24,7 @@
             apiRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             routes.RegisterProxyRoutes();
+            routes.RegisterReportProxyRoutes();
 
             routes.MapRoute(
                 "Default",
@@ -43,6 +44,33 @@
                    routeTemplate: "Proxy/{apiKey}/{apiUrl}",
                    new { Controller = "Proxy", Action = "Forward" });
             apiProxyRoute.RouteHandler = new ReadonlySessionRouteHandler();
+        }
+
+        private static void RegisterReportProxyRoutes(this RouteCollection routes)
+        {
+            var settledMatchCountReportRoute = routes.MapHttpRoute(
+                   name: "settledMatchCountReportRoute",
+                   routeTemplate: "SettledMatchCountReport/{*url}",
+                   new { Controller = "Proxy", Action = "ReportViews", report = "SettledMatchCount", url = "Index" });
+            settledMatchCountReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var weeklyLiveMatchReportRoute = routes.MapHttpRoute(
+                   name: "weeklyLiveMatchReportRoute",
+                   routeTemplate: "WeeklyLiveMatchReport/{*url}",
+                   new { Controller = "Proxy", Action = "ReportViews", report = "WeeklyLiveMatch", url = "Index" });
+            weeklyLiveMatchReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var customerBalanceReportRoute = routes.MapHttpRoute(
+                name: "customerBalanceReportRoute",
+                routeTemplate: "customerBalanceReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerBalance", url = "Index" });
+            customerBalanceReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var customerSupportTaskReportRoute = routes.MapHttpRoute(
+                name: "customerSupportTaskReportRoute",
+                routeTemplate: "CustomerSupportTaskReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerSupportTask", url = "Index" });
+            customerSupportTaskReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
     }
 }

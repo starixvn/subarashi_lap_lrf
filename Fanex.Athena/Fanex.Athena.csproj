@@ -340,9 +340,6 @@
     <Content Include="App_Data\UserGuide\CommissionGroupList\id-ID.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\th-TH.htm" />
     <Content Include="App_Data\UserGuide\CommissionGroupList\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerBalance\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\CustomerBalance\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\CustomerBalance\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\id-ID.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\th-TH.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\vi-VN.htm" />
@@ -411,9 +408,6 @@
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\id-ID.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\th-TH.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\SettledMatchCount\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\SettledMatchCount\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\SettledMatchCount\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\id-ID.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\th-TH.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\vi-VN.htm" />
@@ -462,9 +456,6 @@
     <Content Include="App_Data\UserGuide\Turnover\id-ID.htm" />
     <Content Include="App_Data\UserGuide\Turnover\th-TH.htm" />
     <Content Include="App_Data\UserGuide\Turnover\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\WeeklyLiveMatches\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\WeeklyLiveMatches\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\WeeklyLiveMatches\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\WinlossAnalysis\th-TH.htm" />
     <Content Include="App_Data\UserGuide\WinlossAnalysis\id-ID.htm" />
     <Content Include="App_Data\UserGuide\WinlossAnalysis\vi-VN.htm" />
@@ -496,7 +487,6 @@
     <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\WeeklyLiveMatches\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\id-ID.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\th-TH.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\vi-VN.htm" />
@@ -568,7 +558,6 @@
     <Content Include="App_Data\UserGuide\CustomerLog\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\PlatformWinLoss\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlatformWinLoss\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerBalance\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\zh-CN.htm" />
     <Content Include="SpNameConfig\FanexSpName.xml.txt">
       <AutoGen>True</AutoGen>
@@ -580,7 +569,6 @@
     </Content>
     <Content Include="App_Data\UserGuide\CustomerTurnover\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerTurnover\en-US.htm" />
-    <Content Include="App_Data\UserGuide\CustomerBalance\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\en-US.htm" />
@@ -618,13 +606,10 @@
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\MatchWL\en-US.htm" />
-    <Content Include="App_Data\UserGuide\SettledMatchCount\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\SettledMatchCount\en-US.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\en-US.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinLossByBetType\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\WeeklyLiveMatches\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinLossByProduct\en-US.htm" />
     <Content Include="App_Data\UserGuide\WinLossByProduct\zh-CN.htm" />
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
@@ -713,7 +698,6 @@
     <Content Include="Views\Desktop\BetList\LiveReport\SportsLottery.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSettingPolicy.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSpreadSettingPolicy.xls" />
-    <Content Include="Views\Desktop\Report\CustomerSupportTask\Main.cshtml" />
     <Content Include="App_Data\Template\Notification\Resettlement\TicketListing.xls" />
     <Content Include="Views\Desktop\Report\NewCashOutWinLoss\Main.cshtml" />
     <Content Include="Views\Desktop\Report\ExtraPayout\Detail.cshtml" />
@@ -793,9 +777,6 @@
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerBalance\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerBalance\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerBalance\Main.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Content.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Main.cshtml" />
@@ -900,7 +881,6 @@
     <Content Include="App_Data\Template\Reports\ThirdPartyWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\AgCasinoBalance.xls" />
     <Content Include="GruntFilters.json" />
-    <Content Include="App_Data\Template\Reports\WeeklyLiveMatch.xls" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -1157,12 +1137,6 @@
     <Content Include="Views\Desktop\BetList\LiveReport\MixParlay.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\Outright.cshtml" />
     <Content Include="Views\Desktop\BetList\LiveReport\NumberGame.cshtml" />
-    <Content Include="Views\Desktop\Report\SettledMatchCount\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\SettledMatchCount\ContentHeader.cshtml" />
-    <Content Include="Views\Desktop\Report\SettledMatchCount\ContentData.cshtml" />
-    <Content Include="Views\Desktop\Report\WeeklyLiveMatch\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\WeeklyLiveMatch\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\WeeklyLiveMatch\Content.cshtml" />
     <Content Include="Views\Desktop\Report\Turnover\Content.cshtml" />
     <Content Include="Views\Desktop\Report\Turnover\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\Turnover\Main.cshtml" />
