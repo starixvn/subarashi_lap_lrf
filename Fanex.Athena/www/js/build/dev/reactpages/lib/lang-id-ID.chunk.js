@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/7/2024 3:05:31 PM
+// Generated at: 5/9/2024 3:37:23 PM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -239,6 +239,7 @@ window._language_id_ID = {
   Cancel: "Batal",
   Cancelled: "Dibatalkan",
   CannotUpdateBetLimitForProduct: "Anda tidak dapat memperbarui batas taruhan anggota untuk produk {0}.",
+  CashOut: "Penukaran Instan",
   CashOutAmt: "Jumlah Pencairan",
   CashOutCommission: "Komisi Penarikan Tunai",
   CashOutDetails: "Rincian Penarikan Tunai",
@@ -424,6 +425,7 @@ window._language_id_ID = {
   Exchange: "Pertukaran",
   ExchangeUnderMaintenanceMsg: "Layanan Bursa sedang Dalam Pemeliharaan. Data mungkin tertunda selama periode ini. Kami mohon maaf sebesar-besarnya atas ketidaknyamanan yang ditimbulkan.",
   ExchangeWinLoss: "Exchange Win Loss",
+  ExcludeCOFromSB: "Mengecualikan Tunai Keluar dari Sportsbook",
   ExcludeTestData: "Kecualikan Data Uji",
   ExistingInMonitoredPlayerList: "Pemain ini sudah ada dalam daftar. Harap periksa kembali!",
   ExportToExcel: "Ekspor ke Excel",
@@ -506,6 +508,7 @@ window._language_id_ID = {
   HttpError_404: "Halaman tidak ditemukan, harap periksa alamat",
   HttpError_Default: "Oops... Anda berada di sini karena adanya kesalahan sistem, harap beri tahu administrator",
   IceHockey: "Hoki Es",
+  IncludeCOFromSB: "Memasukkan Tunai Keluar ke dalam Sportsbook",
   IncludeDrawData: "Sertakan data Undian",
   IncorrectMaxBet: "Maksimum Taruhan Salah",
   IncorrectMaxBetPerDraw: "Maksimum Taruhan yang Salah Per Undian",
@@ -1089,7 +1092,7 @@ window._language_id_ID = {
   VendorMemberID: "ID Anggota Vendor",
   View: "Lihat",
   ViewBy: "Tampilan berdasarkan",
-  ViewCashOutOnly: "Hanya Lihat Cash Out",
+  ViewCOOnly: "Hanya melihat CashOut secara langsung",
   ViewDataInMonth: "Lihat data dalam bulan",
   Viewin: "Lihat {0}",
   Viewin2: "Lihat",

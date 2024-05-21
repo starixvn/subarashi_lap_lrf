@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/7/2024 3:05:32 PM
+// Generated at: 5/9/2024 3:37:23 PM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -242,6 +242,7 @@ window._language_th_TH = {
   Cancel: "ยกเลิก",
   Cancelled: "ถูกยกเลิก",
   CannotUpdateBetLimitForProduct: "คุณไม่สามารถอัปเดตวงเงินเดิมพันสมาชิกของผลิตภัณฑ์ {0}",
+  CashOut: "เงินออก",
   CashOutAmt: "จำนวนเงินออก",
   CashOutCommission: "จ่ายค่าคอมมิชชั่น",
   CashOutDetails: "รายละเอียดการจ่ายเงิน",
@@ -431,6 +432,7 @@ window._language_th_TH = {
   Exchange: "แลกเปลี่ยน",
   ExchangeUnderMaintenanceMsg: "บริการของสถานที่แลกเปลี่ยนอยู่ในระหว่างการบำรุงรักษา ข้อมูลอาจจะล่าช้าในช่วงเวลานี้ เราขออภัยอย่างแท้จริงสำหรับความไม่สะดวกที่เกิดขึ้น",
   ExchangeWinLoss: "Exchange Win Loss",
+  ExcludeCOFromSB: "ไม่รวมการเงินสดออกจาก Sportsbook",
   ExcludeTestData: "ไม่รวมข้อมูลการทดสอบ",
   ExistingInMonitoredPlayerList: "ผู้เล่นนี้มีอยู่ในรายการแล้ว โปรดตรวจสอบอีกครั้ง!",
   ExportToExcel: "ส่งไปที่Excel",
@@ -517,6 +519,7 @@ window._language_th_TH = {
   HttpError_404: "ไม่พบ กรุณาตรวจสอบที่อยู่",
   HttpError_Default: "โอ๊ะ... คุณมาที่นี่เพราะระบบผิดพลาด โปรดแจ้งผู้ดูแลระบบ",
   IceHockey: "ฮ๊อกกี้น้ำแข็ง",
+  IncludeCOFromSB: "รวมการเงินสดออกเข้ากับ Sportsbook",
   IncludeDrawData: "รวมข้อมูลเสมอ",
   IncorrectMaxBet: "เดิมพันสูงสุดไม่ถูกต้อง",
   IncorrectMaxBetPerDraw: "เดิมพันสูงสุดต่อการเสมอไม่ถูกต้อง",
@@ -1107,7 +1110,7 @@ window._language_th_TH = {
   VendorMemberID: "รหัสสมาชิกผู้ขาย",
   View: "ดู",
   ViewBy: "ดูโดย",
-  ViewCashOutOnly: "ดูเงินออกเท่านั้น",
+  ViewCOOnly: "ดูการถอนเงินสดเท่านั้น",
   ViewDataInMonth: "ดูข้อมูลในเดือน",
   Viewin: "ดูใน {0}",
   Viewin2: "ดูใน",

@@ -3400,8 +3400,8 @@
   <data name="WinlossAnalysis" xml:space="preserve">
     <value>Win Loss Analysis</value>
   </data>
-  <data name="ViewCashOutOnly" xml:space="preserve">
-    <value>View Cash Out Only</value>
+  <data name="ViewCOOnly" xml:space="preserve">
+    <value>View CO only</value>
   </data>
   <data name="ClearAllFilters" xml:space="preserve">
     <value>Clear All Filters</value>
@@ -3760,5 +3760,14 @@
   </data>
   <data name="BookedBet" xml:space="preserve">
     <value>Booked Bet</value>
+  </data>
+  <data name="CashOut" xml:space="preserve">
+    <value>Cash Out</value>
+  </data>
+  <data name="IncludeCOFromSB" xml:space="preserve">
+    <value>Include CO into Sportsbook</value>
+  </data>
+  <data name="ExcludeCOFromSB" xml:space="preserve">
+    <value>Exclude CO from Sportsbook</value>
   </data>
 </root>

@@ -3081,7 +3081,7 @@
   <data name="ViewBy" xml:space="preserve">
     <value>Xem theo</value>
   </data>
-  <data name="ViewCashOutOnly" xml:space="preserve">
+  <data name="ViewCOOnly" xml:space="preserve">
     <value>Chỉ xem vé cược đã bán</value>
   </data>
   <data name="ViewDataInMonth" xml:space="preserve">
@@ -3350,5 +3350,14 @@
   </data>
   <data name="Unsuccessful" xml:space="preserve">
     <value>Thất bại</value>
+  </data>
+  <data name="CashOut" xml:space="preserve">
+    <value>Bán vé cược</value>
+  </data>
+  <data name="ExcludeCOFromSB" xml:space="preserve">
+    <value>Trừ cược đã bán khỏi Sportsbook</value>
+  </data>
+  <data name="IncludeCOFromSB" xml:space="preserve">
+    <value>Gộp cược đã bán vào Sportsbook</value>
   </data>
 </root>

@@ -3096,8 +3096,8 @@
   <data name="ViewBy" xml:space="preserve">
     <value>ดูโดย</value>
   </data>
-  <data name="ViewCashOutOnly" xml:space="preserve">
-    <value>ดูเงินออกเท่านั้น</value>
+  <data name="ViewCOOnly" xml:space="preserve">
+    <value>ดูการถอนเงินสดเท่านั้น</value>
   </data>
   <data name="ViewDataInMonth" xml:space="preserve">
     <value>ดูข้อมูลในเดือน</value>
@@ -3344,5 +3344,14 @@
   </data>
   <data name="Unsuccessful" xml:space="preserve">
     <value>ไม่สำเร็จ</value>
+  </data>
+  <data name="CashOut" xml:space="preserve">
+    <value>เงินออก</value>
+  </data>
+  <data name="ExcludeCOFromSB" xml:space="preserve">
+    <value>ไม่รวมการเงินสดออกจาก Sportsbook</value>
+  </data>
+  <data name="IncludeCOFromSB" xml:space="preserve">
+    <value>รวมการเงินสดออกเข้ากับ Sportsbook</value>
   </data>
 </root>

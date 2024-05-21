@@ -3127,7 +3127,7 @@
   <data name="PlayerWL" xml:space="preserve">
     <value>玩家输赢</value>
   </data>
-  <data name="ViewCashOutOnly" xml:space="preserve">
+  <data name="ViewCOOnly" xml:space="preserve">
     <value>只查看实时兑现</value>
   </data>
   <data name="WinlossAnalysis" xml:space="preserve">
@@ -3297,5 +3297,14 @@
   </data>
   <data name="OddsUpper" xml:space="preserve">
     <value>最高赔率</value>
+  </data>
+  <data name="CashOut" xml:space="preserve">
+    <value>实时兑现</value>
+  </data>
+  <data name="ExcludeCOFromSB" xml:space="preserve">
+    <value>体育博彩排除实时兑现</value>
+  </data>
+  <data name="IncludeCOFromSB" xml:space="preserve">
+    <value>体育博彩包含实时兑现</value>
   </data>
 </root>

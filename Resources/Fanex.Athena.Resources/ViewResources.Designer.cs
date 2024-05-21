@@ -1402,6 +1402,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cash Out.
+        /// </summary>
+        public static string CashOut {
+            get {
+                return ResourceManager.GetString("CashOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cash-out Amt.
         /// </summary>
         public static string CashOutAmt {
@@ -3175,6 +3184,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exclude CO from Sportsbook.
+        /// </summary>
+        public static string ExcludeCOFromSB {
+            get {
+                return ResourceManager.GetString("ExcludeCOFromSB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exclude Test Data.
         /// </summary>
         public static string ExcludeTestData {
@@ -3963,6 +3981,15 @@ namespace Fanex.Athena.Resources {
         public static string IceHockey {
             get {
                 return ResourceManager.GetString("IceHockey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Include CO into Sportsbook.
+        /// </summary>
+        public static string IncludeCOFromSB {
+            get {
+                return ResourceManager.GetString("IncludeCOFromSB", resourceCulture);
             }
         }
         
@@ -9538,11 +9565,11 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View Cash Out Only.
+        ///   Looks up a localized string similar to View CO only.
         /// </summary>
-        public static string ViewCashOutOnly {
+        public static string ViewCOOnly {
             get {
-                return ResourceManager.GetString("ViewCashOutOnly", resourceCulture);
+                return ResourceManager.GetString("ViewCOOnly", resourceCulture);
             }
         }
         
