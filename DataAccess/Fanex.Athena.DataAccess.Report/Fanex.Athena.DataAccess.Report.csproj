@@ -114,9 +114,6 @@
     <Compile Include="WinLossByProductDataAccess.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="LiveReportDataAccess.cs">
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="TurnoverDataAccess.cs" />
     <Compile Include="WinLossByBetTypeDataAccess.cs" />
     <Compile Include="Interfaces\ICustPendingFundsDataAccess.cs" />
@@ -124,7 +121,6 @@
     <Compile Include="Interfaces\ITurnoverDataAccess.cs" />
     <Compile Include="Interfaces\ILicenseeWinLossDataAccess.cs" />
     <Compile Include="LicenseeWinLossDataAccess.cs" />
-    <Compile Include="Interfaces\ILiveReportDataAccess.cs" />
     <Compile Include="Interfaces\IWinLossByBetTypeDataAccess.cs" />
     <Compile Include="Interfaces\IWinLossByProductDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
