@@ -2141,7 +2141,7 @@
     <comment>80941</comment>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>All bettypes, League, and Match filter available only when 1 day is selected</value>
+    <value>All bettypes, League and Match filter available only when 1 day is selected</value>
     <comment>80941</comment>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote1" xml:space="preserve">

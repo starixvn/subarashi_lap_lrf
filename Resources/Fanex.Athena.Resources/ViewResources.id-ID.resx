@@ -445,7 +445,7 @@
     <value>Pusat Tiket Taruhan</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>Semua jenis taruhan, Liga, dan Filter Pertandingan hanya tersedia ketika 1 hari dipilih</value>
+    <value>Semua jenis taruhan, Liga dan Filter Pertandingan hanya tersedia ketika 1 hari dipilih</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>Data tersedia dari {0}</value>
@@ -1029,7 +1029,6 @@
   <data name="EndDate" xml:space="preserve">
     <value>Tanggal Berakhir</value>
   </data>
-
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
