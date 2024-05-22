@@ -21,7 +21,6 @@ var cssPaths = {
     betlistResult: ["./www/css/source/pages/betlist/result/betlist.result.scss"],
 
     login: ["./www/css/source/pages/login/login-ex.scss"],
-    livereport: ["./www/css/source/pages/report/livereport.scss"],
     licenseewinloss: ["./www/css/source/pages/report/licenseewinloss.scss"],
     sabavirtualsportswinloss: ["./www/css/source/pages/report/sabavirtualsportswinloss.scss"],
     godoffortunewinloss: ["./www/css/source/pages/report/godoffortunewinloss.scss"],
@@ -64,8 +63,6 @@ var scriptPaths = {
     home: ["./www/js/source/components/navbar.js", "./www/js/source/components/sidebar.js", "malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js", "./www/js/source/pages/home/main.js"],
     signin: ["./www/js/source/pages/signin/main.js"],
 
-    livereport: "./www/js/source/pages/report/livereport/main-livereport.js",
-    livereportmatchlist: "./www/js/source/pages/report/livereport/main-matchlist.js",
     licenseewinloss: "./www/js/source/pages/report/licenseewinloss/main.js",
     sabavirtualsportswinloss: "./www/js/source/pages/report/sabavirtualsportswinloss/main.js",
     godoffortunewinloss: "./www/js/source/pages/report/godoffortunewinloss/main.js",

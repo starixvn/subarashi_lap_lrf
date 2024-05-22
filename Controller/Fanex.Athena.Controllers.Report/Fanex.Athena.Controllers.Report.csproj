@@ -147,7 +147,6 @@
     <Compile Include="GodOfFortuneWinLossReportController.cs" />
     <Compile Include="SabaVirtualSportsWinLossReportController.cs" />
     <Compile Include="LicenseeWinLossReportController.cs" />
-    <Compile Include="LiveReportController.cs" />
     <Compile Include="NoteController.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneReportController.cs" />
     <Compile Include="Result\Indo4DResultReportController.cs" />

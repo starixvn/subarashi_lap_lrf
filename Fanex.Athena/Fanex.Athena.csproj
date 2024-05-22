@@ -313,7 +313,6 @@
     <AdditionalFiles Include="..\.sonarlint\lrf\CSharp\SonarLint.xml">
       <Link>SonarLint.xml</Link>
     </AdditionalFiles>
-    <Content Include="App_Code\DesktopLiveReportRazorHelper.cshtml" />
     <Content Include="App_Data\UserGuide\AbnormalBet\th-TH.htm" />
     <Content Include="App_Data\UserGuide\AbnormalBet\id-ID.htm" />
     <Content Include="App_Data\UserGuide\AbnormalBet\vi-VN.htm" />
@@ -388,9 +387,6 @@
     <Content Include="App_Data\UserGuide\LicenseeWL\id-ID.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\th-TH.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\LiveReport\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\LiveReport\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\LiveReport\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\id-ID.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\th-TH.htm" />
     <Content Include="App_Data\UserGuide\ManageAccount\vi-VN.htm" />
@@ -569,8 +565,6 @@
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\en-US.htm" />
-    <Content Include="App_Data\UserGuide\LiveReport\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\LiveReport\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsBON\en-US.htm" />
@@ -683,16 +677,11 @@
     <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\GodOfFortuneWinLoss\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\GodOfFortuneWl\Main.cshtml" />
-    <Content Include="Views\Desktop\BetList\LiveReport\BitCoin.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\MatchList\Index.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.cshtml" />
-    <Content Include="Views\Desktop\BetList\LiveReport\SportsLottery.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSettingPolicy.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\CustomerClassSpreadSettingPolicy.xls" />
     <Content Include="App_Data\Template\Notification\Resettlement\TicketListing.xls" />
     <Content Include="Views\Desktop\Report\NewCashOutWinLoss\Main.cshtml" />
     <Content Include="Views\Desktop\Module\LicenseeContact\Index.cshtml" />
-    <Content Include="Views\Desktop\BetList\LiveReport\VirtualSports3.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Popup\Main.cshtml" />
     <Content Include="Views\Desktop\Utility\FunctionUnderMaintenance.cshtml" />
     <Content Include="App_Data\FunctionUMSetting.json" />
@@ -761,7 +750,6 @@
     <Content Include="Views\Desktop\Customer\CustomerLog\LoginLog\Filter.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerComm\UpdateGroup.cshtml" />
     <Content Include="Views\Desktop\LicenseeList\Index.cshtml" />
-    <Content Include="Views\Desktop\BetList\LiveReport\VirtualSports.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Main.cshtml" />
@@ -980,23 +968,8 @@
     <Content Include="SiteConfig\WebConfigTransforms\PRO.config" />
     <Content Include="SiteConfig\WebConfigTransforms\SANDBOX.config" />
     <Content Include="SiteConfig\WebConfigTransforms\UAT.config" />
-    <Content Include="Views\Desktop\Report\LiveReport\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\Content.Data.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\Content.Header.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\Main.cshtml" />
     <Content Include="Views\Desktop\Shared\_ReportLayout.cshtml" />
     <Content Include="Views\Desktop\Shared\_Layout.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\ByBettype\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\ByBettype\Content.Data.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\ByBettype\Content.Header.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\ByCurrency\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\ByCurrency\Content.Data.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\ByCurrency\Content.Header.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\BySport\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\BySport\Content.Data.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\BySport\Content.Header.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\AjaxTemplate\LiveReportDetail.cshtml" />
     <Content Include="Views\Desktop\Header\Index.cshtml" />
     <Content Include="Views\Desktop\Home\Index.cshtml" />
     <Content Include="Views\Desktop\Menu\Index.cshtml" />
@@ -1004,8 +977,6 @@
     <Content Include="Views\Desktop\Report\LicenseeWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\LicenseeWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\LicenseeWinLoss\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.Data.cshtml" />
-    <Content Include="Views\Desktop\Report\LiveReport\MatchList\Content.Header.cshtml" />
     <Content Include="Views\Desktop\Shared\_Report.jqGridLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Desktop\Shared\_BetListSimpleLayout.cshtml" />
@@ -1110,10 +1081,6 @@
     <Content Include="Views\Desktop\Forecast\NewForecastHdpOu\Content.ForecastItem.cshtml" />
     <Content Include="Views\Desktop\Forecast\NewForecastHdpOu\MatchOptionList.cshtml" />
     <Content Include="Views\Desktop\BetList\NewForecastBetlist\Main.cshtml" />
-    <Content Include="Views\Desktop\BetList\LiveReport\Match.cshtml" />
-    <Content Include="Views\Desktop\BetList\LiveReport\MixParlay.cshtml" />
-    <Content Include="Views\Desktop\BetList\LiveReport\Outright.cshtml" />
-    <Content Include="Views\Desktop\BetList\LiveReport\NumberGame.cshtml" />
     <Content Include="Views\Desktop\Report\Turnover\Content.cshtml" />
     <Content Include="Views\Desktop\Report\Turnover\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\Turnover\Main.cshtml" />
@@ -3989,11 +3956,9 @@
     <Content Include="App_Data\Template\CustomerReports\CustomerTurnover.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\LicenseeWinLoss.xls" />
-    <Content Include="App_Data\Template\Reports\LiveReport.xls" />
     <Content Include="App_Data\Template\Reports\Turnover.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByBetType.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByProducts.xls" />
-    <Content Include="App_Data\Template\Reports\LiveReportMatchList.xls" />
     <Content Include="Content\Web.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Views\Shared\_Report.jqGridLayout.cshtml" />
