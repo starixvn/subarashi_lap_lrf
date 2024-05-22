@@ -142,11 +142,6 @@
             get { return GetValue("DefaultBaseCurrency"); }
         }
 
-        public IEnumerable<int> LiveReportNoDetailLinkSports
-        {
-            get { return GetValue("LiveReportNoDetailLinkSports").Split(',').Select(n => Convert.ToInt32(n)); }
-        }
-
         public int MaxRowPerExcelFile
         {
             get { return int.Parse(GetValue("MaxRowPerExcelFile")); }

@@ -116,7 +116,6 @@
     <Compile Include="WinLossByBetTypeReportControllerTest.cs" />
     <Compile Include="TurnoverReportControllerTest.cs" />
     <Compile Include="PlatformWinLossReportControllerTest.cs" />
-    <Compile Include="LiveReportControllerTest.cs" />
     <Compile Include="CustomerWinLossReportControllerTest.cs" />
     <Compile Include="CustomerTurnoverReportControllerTest.cs" />
     <Compile Include="CustomerPendingFundsReportControllerTest.cs" />

@@ -28,8 +28,6 @@ function generateConfig(environment) {
             [`${jsPath}/language-id-ID`]: pathConfig.scriptPaths.languageID,
             [`${jsPath}/pages/home/home`]: pathConfig.scriptPaths.home,
             [`${jsPath}/pages/signin/signin`]: pathConfig.scriptPaths.signin,
-            [`${jsPath}/pages/reports/livereport`]: [pathConfig.scriptPaths.livereport],
-            [`${jsPath}/pages/reports/livereportmatchlist`]: [pathConfig.scriptPaths.livereportmatchlist],
             [`${jsPath}/pages/reports/licenseewinloss`]: [pathConfig.scriptPaths.licenseewinloss],
             [`${jsPath}/pages/reports/sabavirtualsportswinloss`]: [pathConfig.scriptPaths.sabavirtualsportswinloss],
             [`${jsPath}/pages/reports/godoffortunewinloss`]: [pathConfig.scriptPaths.godoffortunewinloss],
@@ -72,7 +70,6 @@ function generateConfig(environment) {
             [`${jsPath}/pages/reports/customerwinloss`]: [pathConfig.scriptPaths.customerwinloss],
 
             [`${cssPath}/pages/reports/reportjqgridlayout`]: pathConfig.cssPaths.reportjqgridlayout,
-            [`${cssPath}/pages/reports/livereport`]: pathConfig.cssPaths.livereport,
             [`${cssPath}/main`]: pathConfig.cssPaths.main,
             [`${cssPath}/pages/utility/error`]: pathConfig.cssPaths.error,
             [`${cssPath}/home`]: pathConfig.cssPaths.home,

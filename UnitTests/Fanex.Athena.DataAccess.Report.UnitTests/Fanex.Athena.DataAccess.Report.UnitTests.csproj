@@ -82,7 +82,6 @@
     <Compile Include="WinLossByBetTypeDataAccessTest.cs" />
     <Compile Include="TurnoverDataAccessTest.cs" />
     <Compile Include="ThirdPartyWinLossDataAccessTest.cs" />
-    <Compile Include="LiveReportDataAccessTest.cs" />
     <Compile Include="LicenseeWinLossDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

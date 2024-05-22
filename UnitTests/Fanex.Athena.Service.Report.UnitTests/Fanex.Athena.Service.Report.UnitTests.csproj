@@ -71,7 +71,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ExchangeVoidedServiceTest.cs" />
-    <Compile Include="LiveReportServiceTest.cs" />
     <Compile Include="CustomerTurnoverServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubsidiaryPerformanceServiceTest.cs" />
