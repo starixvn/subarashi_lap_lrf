@@ -153,6 +153,7 @@
             ViewBag.HasExchange = tabList.Any() && HasExchange();
             ViewBag.TabList = tabList;
             ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
+            ViewBag.IsAllowSabaCoins = _authService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.SabaCoins);
             ViewBag.BalanceUpDay = balanceUpDay;
             ViewBag.ProductsRequireTxIdNote = string.Format(
                 ViewResources.BettingTicketCenter_RefnoTabNote_TxIDSearch2,

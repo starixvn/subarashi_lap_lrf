@@ -9,6 +9,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string TxId { get; set; }
 
+        public bool ViewSabaCoins { get; set; }
+
         public override bool IsValid => (!string.IsNullOrEmpty(RefNo) || !string.IsNullOrEmpty(TxId)) && MetaModelHelper.ValidateBaseCurrency(BaseCurrency);
     }
 }

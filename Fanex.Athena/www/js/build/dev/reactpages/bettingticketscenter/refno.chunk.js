@@ -308,7 +308,7 @@ const setRequestParam = data => {
 /*!***************************************************!*\
   !*** ./www/js/source/reactpages/actions/types.js ***!
   \***************************************************/
-/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_WHITELABEL_TREE_LIST, SET_REASON_LIST, SET_SELECTED_VIP_OPTION, SET_SELECTED_CUSTOMERCLASS, SET_SELECTED_RISKLEVEL, SET_SELECTED_ODDGROUP */
+/*! exports provided: FETCH_DATA, SET_GRID_DATA, SET_SELECTED_PRODUCT, SET_SELECTED_BASECURRENCY, SET_BASECURRENCY_LIST, SET_SELECTED_CURRENCY, TOGGLE_LOADER, CHANGE_IS_EXCLUDE_TEST, USER_GUIDE_CONTENT, SET_DATE_RANGE, GET_DATE_CONSTRAINT, CHANGE_IS_CONVERT_ALL, SET_SELECTED_STATUS, SET_SELECTED_PLATFORM, SET_SELECTED_LIVESTATUS, SET_USERNAME, SET_REQUEST_PARAM, SET_REPORT_TITLE, SET_SPORT_LIST, SET_PAGING_OPTION, SET_SUBSIDIARY_LIST, SET_SUBSIDIARY_SEARCH, SET_WHITELABEL_TREE_LIST, SET_REASON_LIST, SET_SELECTED_VIP_OPTION, SET_SELECTED_CUSTOMERCLASS, SET_SELECTED_RISKLEVEL, SET_SELECTED_ODDGROUP, CHANGE_VIEW_SABA_COINS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -341,6 +341,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_CUSTOMERCLASS", function() { return SET_SELECTED_CUSTOMERCLASS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_RISKLEVEL", function() { return SET_SELECTED_RISKLEVEL; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_ODDGROUP", function() { return SET_SELECTED_ODDGROUP; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANGE_VIEW_SABA_COINS", function() { return CHANGE_VIEW_SABA_COINS; });
 const FETCH_DATA = 'FETCH_DATA';
 const SET_GRID_DATA = "SET_GRID_DATA";
 
@@ -404,6 +405,9 @@ const SET_SELECTED_RISKLEVEL = "SET_SELECTED_RISKLEVEL";
 /*Odd group*/
 const SET_SELECTED_ODDGROUP = "SET_SELECTED_ODDGROUP";
 
+/* View Saba Coins */
+const CHANGE_VIEW_SABA_COINS = "CHANGE_VIEW_SABA_COINS";
+
 /***/ }),
 
 /***/ "./www/js/source/reactpages/actions/userGuideAction.js":
@@ -464,6 +468,27 @@ const setUsername = value => {
   return {
     type: _types_js__WEBPACK_IMPORTED_MODULE_0__["SET_USERNAME"],
     data: value
+  };
+};
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/actions/viewSabaCoinsAction.js":
+/*!*****************************************************************!*\
+  !*** ./www/js/source/reactpages/actions/viewSabaCoinsAction.js ***!
+  \*****************************************************************/
+/*! exports provided: changeViewSabaCoins */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "changeViewSabaCoins", function() { return changeViewSabaCoins; });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/actions/types.js");
+
+const changeViewSabaCoins = checked => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_0__["CHANGE_VIEW_SABA_COINS"],
+    data: checked
   };
 };
 
@@ -3267,7 +3292,10 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 class Service {
-  static getTitle(fromDate, toDate, baseCurrency) {
+  static getTitle(fromDate, toDate, baseCurrency, viewSabaCoins = false) {
+    if (viewSabaCoins) {
+      return `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter")}, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("Viewin").replace("{0}", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SabaCoins"))}`;
+    }
     const dateRangeText = fromDate && toDate ? `, ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(fromDate)} → ${_jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].convertDateToString(toDate)}` : '';
     const baseCurrencyText = baseCurrency ? `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BaseCurrency")}: ${baseCurrency}` : '';
     return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
@@ -3432,6 +3460,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/actions/requestParamAction */ "./www/js/source/reactpages/actions/requestParamAction.js");
 /* harmony import */ var _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/actions/reportTitleAction */ "./www/js/source/reactpages/actions/reportTitleAction.js");
 /* harmony import */ var _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/actions/userGuideAction */ "./www/js/source/reactpages/actions/userGuideAction.js");
+/* harmony import */ var _jsroot_actions_viewSabaCoinsAction__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/actions/viewSabaCoinsAction */ "./www/js/source/reactpages/actions/viewSabaCoinsAction.js");
 
 
 
@@ -3441,7 +3470,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerAction_js__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_8__);
+
+const ActionCreators = Object.assign({}, _jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerAction_js__WEBPACK_IMPORTED_MODULE_0__, _jsroot_actions_usernameAction__WEBPACK_IMPORTED_MODULE_2__, _jsroot_actions_baseCurrencyAction__WEBPACK_IMPORTED_MODULE_3__, _jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_4__, _jsroot_actions_convertAllAction__WEBPACK_IMPORTED_MODULE_5__, _jsroot_actions_requestParamAction__WEBPACK_IMPORTED_MODULE_6__, _jsroot_actions_reportTitleAction__WEBPACK_IMPORTED_MODULE_7__, _jsroot_actions_userGuideAction__WEBPACK_IMPORTED_MODULE_8__, _jsroot_actions_viewSabaCoinsAction__WEBPACK_IMPORTED_MODULE_9__);
 
 /***/ }),
 
@@ -3593,20 +3623,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
 /* harmony import */ var _common_components_BaseDataGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/components/BaseDataGrid */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/BaseDataGrid.jsx");
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
 
 
 
 
-var Columns = ['Index', 'ExternalId', 'SystemId', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
-var ColumnWidths = [40, 120, 120, 160, 140, 370, 70, 70, 100, 100, 100, 110, 80, 80];
-var ColumnAlignments = ['center-align', '', '', 'center-align tooltip', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
+
+
+const defaultColumns = ['Index', 'ExternalId', 'SystemId', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
+const defaultColumnWidths = [40, 120, 120, 160, 140, 370, 70, 70, 100, 100, 100, 110, 80, 80];
+const defaultColumnAlignments = ['center-align', '', '', 'center-align tooltip', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
 const DataGrid = props => {
+  const requestParam = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useSelector"])(state => state.requestParam);
+  var Columns = [...defaultColumns];
+  var ColumnWidths = [...defaultColumnWidths];
+  var ColumnAlignments = [...defaultColumnAlignments];
+  if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].isAllowSabaCoins && requestParam.ViewSabaCoins && Columns.includes('LicenseeWL')) {
+    Columns.splice(10, 1);
+    ColumnWidths.splice(10, 1);
+    ColumnAlignments.splice(10, 1);
+  }
   if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
     Columns.splice(4, 0, 'LicenseeTxId');
     ColumnWidths.splice(4, 0, 110);
     ColumnAlignments.splice(4, 0, 'center-align tooltip');
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_BaseDataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    key: `refno_data_${Object(uuid__WEBPACK_IMPORTED_MODULE_5__["v4"])()}`,
     dataUrl: _common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["ApiUrl"].REFNO_DATA_URL,
     isPaging: false,
     columns: Columns,
@@ -3633,16 +3677,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormFilter", function() { return FormFilter; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _filters_BaseCurrencySelectList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../filters/BaseCurrencySelectList */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/BaseCurrencySelectList.jsx");
-/* harmony import */ var _hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFilterAction */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/hooks/useFilterAction.jsx");
-/* harmony import */ var _hooks_useValidParam__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useValidParam */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/hooks/useValidParam.jsx");
-/* harmony import */ var _filters_StickyIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../filters/StickyIcon */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/StickyIcon.jsx");
-/* harmony import */ var _filters_RefNoFilter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../filters/RefNoFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/RefNoFilter.jsx");
-/* harmony import */ var _filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/UserNameFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/UserNameFilter.jsx");
-/* harmony import */ var _filters_ConvertAllCheckBox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../filters/ConvertAllCheckBox */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/ConvertAllCheckBox.jsx");
-/* harmony import */ var _filters_Note__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../filters/Note */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/Note.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/collapsible-panel */ "./www/js/source/reactpages/components/collapsible-panel/index.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _filters_BaseCurrencySelectList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../filters/BaseCurrencySelectList */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/BaseCurrencySelectList.jsx");
+/* harmony import */ var _hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useFilterAction */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/hooks/useFilterAction.jsx");
+/* harmony import */ var _hooks_useValidParam__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hooks/useValidParam */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/hooks/useValidParam.jsx");
+/* harmony import */ var _filters_StickyIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../filters/StickyIcon */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/StickyIcon.jsx");
+/* harmony import */ var _filters_RefNoFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/RefNoFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/RefNoFilter.jsx");
+/* harmony import */ var _filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../filters/UserNameFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/UserNameFilter.jsx");
+/* harmony import */ var _filters_ConvertAllCheckBox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../filters/ConvertAllCheckBox */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/ConvertAllCheckBox.jsx");
+/* harmony import */ var _filters_ViewSabaCoinsCheckBox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../filters/ViewSabaCoinsCheckBox */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/ViewSabaCoinsCheckBox.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _filters_Note__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../filters/Note */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/Note.jsx");
+
+
+
 
 
 
@@ -3655,24 +3705,31 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const FormFilter = () => {
-  const isValidModel = Object(_hooks_useValidParam__WEBPACK_IMPORTED_MODULE_5__["useValidParam"])();
+  const viewSabaCoins = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.viewSabaCoins);
+  const isValidModel = Object(_hooks_useValidParam__WEBPACK_IMPORTED_MODULE_6__["useValidParam"])();
   const {
     submit
-  } = Object(_hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_4__["default"])();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  } = Object(_hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_collapsible_panel__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "mobile-mode page-filter",
-    stickyFooter: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+    stickyFooter: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon__WEBPACK_IMPORTED_MODULE_7__["default"], null)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_RefNoFilter__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_RefNoFilter__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-3 col-xl-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-3 col-sm-4 col-lg-2 col-xl-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BaseCurrencySelectList__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BaseCurrencySelectList__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    disabled: viewSabaCoins
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-4 col-sm-4 col-lg-2 col-xl-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ConvertAllCheckBox__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ConvertAllCheckBox__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    disabled: viewSabaCoins
+  })), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_12__["default"].isAllowSabaCoins && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-4 col-sm-4 col-lg-2 col-xl-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ViewSabaCoinsCheckBox__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-3 col-sm-4 col-lg-2 col-xl-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
@@ -3683,9 +3740,9 @@ const FormFilter = () => {
     disabled: !isValidModel,
     className: "btn btn-submit",
     onClick: submit
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Submit")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("Submit")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_Note__WEBPACK_IMPORTED_MODULE_10__["default"], null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_Note__WEBPACK_IMPORTED_MODULE_13__["default"], null)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(FormFilter));
 
@@ -3708,29 +3765,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/actions/index.js");
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
 
 
 
 
-const BaseCurrencySelectList = () => {
+const BaseCurrencySelectList = props => {
   const selectedBaseCurrency = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useSelector"])(state => state.selectedBaseCurrency);
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useDispatch"])();
   const {
     setSelectedBaseCurrency
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_5__["ActionCreators"];
-  const baseCurrencyList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].baseCurrencyList;
+  let baseCurrencyList = [];
+  if (props.disabled) {
+    baseCurrencyList = [{
+      value: "All",
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("All")
+    }];
+  } else {
+    baseCurrencyList = [..._jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_1__["default"].baseCurrencyList];
+  }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("BaseCurrency")), baseCurrencyList && baseCurrencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("BaseCurrency")), baseCurrencyList && baseCurrencyList.length && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
     instanceId: "ddlBased",
+    key: `ddlBased_${props.disabled}`,
     value: selectedBaseCurrency,
     options: baseCurrencyList,
     onChange: item => dispatch(setSelectedBaseCurrency(item.value))
-  }));
+  }, props)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(BaseCurrencySelectList));
 
@@ -3752,12 +3819,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/actions/index.js");
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
 
 
 
-const ConvertAllCheckBox = () => {
+const ConvertAllCheckBox = props => {
   const isConvertAll = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.isConvertAll, react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
   const {
@@ -3765,12 +3833,13 @@ const ConvertAllCheckBox = () => {
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_4__["ActionCreators"];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({
     id: "IsConvertAll",
+    key: `IsConvertAll_${props.disabled}`,
     checked: isConvertAll,
     onChange: checked => dispatch(changeIsConvertAll(checked)),
     label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ConvertAllFiguresToBaseCurrency")
-  }));
+  }, props)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ConvertAllCheckBox));
 
@@ -3999,6 +4068,60 @@ const UserNameFilter = () => {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/ViewSabaCoinsCheckBox.jsx":
+/*!****************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/ViewSabaCoinsCheckBox.jsx ***!
+  \****************************************************************************************************************/
+/*! exports provided: ViewSabaCoinsCheckBox, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewSabaCoinsCheckBox", function() { return ViewSabaCoinsCheckBox; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/components/CheckBox */ "./www/js/source/reactpages/components/CheckBox.jsx");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/actions/index.js");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+
+
+
+
+
+const ViewSabaCoinsCheckBox = () => {
+  const viewSabaCoins = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => state.viewSabaCoins);
+  const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
+  const {
+    changeViewSabaCoins,
+    changeIsConvertAll,
+    setSelectedBaseCurrency
+  } = _actions_index_js__WEBPACK_IMPORTED_MODULE_4__["ActionCreators"];
+  const onViewSabaCoinsChane = value => {
+    if (value) {
+      dispatch(changeIsConvertAll(false));
+      dispatch(setSelectedBaseCurrency("All"));
+    } else {
+      dispatch(changeIsConvertAll(true));
+      dispatch(setSelectedBaseCurrency(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].defaultSelectedBaseCurrency));
+    }
+    dispatch(changeViewSabaCoins(value));
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "form-group"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_CheckBox__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    id: "ViewSabaCoins",
+    checked: viewSabaCoins,
+    onChange: checked => onViewSabaCoinsChane(checked),
+    label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource("ViewSabaCoins")
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(ViewSabaCoinsCheckBox));
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/hooks/useFilterAction.jsx":
 /*!********************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/refno/components/hooks/useFilterAction.jsx ***!
@@ -4039,7 +4162,8 @@ const useFilterAction = () => {
     searchingId,
     username,
     isConvertAll,
-    selectedBaseCurrency
+    selectedBaseCurrency,
+    viewSabaCoins
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_8__["useSelector"])(state => state, react_redux__WEBPACK_IMPORTED_MODULE_8__["shallowEqual"]);
   const {
     setReportTitle,
@@ -4065,7 +4189,8 @@ const useFilterAction = () => {
       BaseCurrency: isConvertAll ? selectedBaseCurrency : '',
       IsConvertAll: isConvertAll,
       SortBy: SortBy,
-      SortOrder: SortOrder
+      SortOrder: SortOrder,
+      ViewSabaCoins: viewSabaCoins
     };
   };
   const submit = event => {
@@ -4074,7 +4199,7 @@ const useFilterAction = () => {
     if (!params) {
       return;
     }
-    dispatch(setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_5__["default"].getTitle(null, null, params.BaseCurrency)));
+    dispatch(setReportTitle(_common_lib_Service__WEBPACK_IMPORTED_MODULE_5__["default"].getTitle(null, null, params.BaseCurrency, params.ViewSabaCoins)));
     dispatch(setRequestParam(params));
     dispatch(toggleLoader(true));
     dispatch(getGridData(_common_lib_constants__WEBPACK_IMPORTED_MODULE_4__["ApiUrl"].REFNO_DATA_URL, params));
@@ -4133,9 +4258,10 @@ const useValidParam = () => {
     searchingId,
     selectedBaseCurrency,
     username,
-    searchingIdOption
+    searchingIdOption,
+    viewSabaCoins
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => state, react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
-  return searchingId && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__["validateBaseCurrency"])(selectedBaseCurrency) && (username || searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["SearchingIdOptions"].refNo);
+  return searchingId && (viewSabaCoins || Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__["validateBaseCurrency"])(selectedBaseCurrency)) && (username || searchingIdOption === _lib_constants__WEBPACK_IMPORTED_MODULE_2__["SearchingIdOptions"].refNo);
 };
 
 /***/ }),
@@ -4207,11 +4333,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filters_BaseCurrencySelectList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../filters/BaseCurrencySelectList */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/BaseCurrencySelectList.jsx");
 /* harmony import */ var _hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../hooks/useFilterAction */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/hooks/useFilterAction.jsx");
 /* harmony import */ var _hooks_useValidParam__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useValidParam */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/hooks/useValidParam.jsx");
-/* harmony import */ var _filters_StickyIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../filters/StickyIcon */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/StickyIcon.jsx");
-/* harmony import */ var _filters_RefNoFilter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../filters/RefNoFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/RefNoFilter.jsx");
-/* harmony import */ var _filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/UserNameFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/UserNameFilter.jsx");
-/* harmony import */ var _filters_ConvertAllCheckBox__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../filters/ConvertAllCheckBox */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/ConvertAllCheckBox.jsx");
-/* harmony import */ var _filters_Note__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../filters/Note */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/Note.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _filters_StickyIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../filters/StickyIcon */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/StickyIcon.jsx");
+/* harmony import */ var _filters_RefNoFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../filters/RefNoFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/RefNoFilter.jsx");
+/* harmony import */ var _filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../filters/UserNameFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/UserNameFilter.jsx");
+/* harmony import */ var _filters_ConvertAllCheckBox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../filters/ConvertAllCheckBox */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/ConvertAllCheckBox.jsx");
+/* harmony import */ var _filters_ViewSabaCoinsCheckBox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../filters/ViewSabaCoinsCheckBox */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/ViewSabaCoinsCheckBox.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+/* harmony import */ var _filters_Note__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../filters/Note */ "./www/js/source/reactpages/pages/bettingticketscenter/refno/components/filters/Note.jsx");
+
+
+
 
 
 
@@ -4229,6 +4361,7 @@ const MobileFormFilter = () => {
     submit
   } = Object(_hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_4__["default"])();
   const [isCollapsed, setIsCollapse] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
+  const viewSabaCoins = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["useSelector"])(state => state.viewSabaCoins);
   const onCollapse = () => {
     setIsCollapse(true);
   };
@@ -4248,15 +4381,22 @@ const MobileFormFilter = () => {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_RefNoFilter__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_RefNoFilter__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6",
     style: style
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BaseCurrencySelectList__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BaseCurrencySelectList__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    disabled: viewSabaCoins
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6",
     style: style
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ConvertAllCheckBox__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ConvertAllCheckBox__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    disabled: viewSabaCoins
+  })), _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_12__["default"].isAllowSabaCoins && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6",
+    style: style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ViewSabaCoinsCheckBox__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group"
@@ -4269,10 +4409,10 @@ const MobileFormFilter = () => {
     onClick: submit
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("Submit")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "caret-block"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon__WEBPACK_IMPORTED_MODULE_6__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StickyIcon__WEBPACK_IMPORTED_MODULE_7__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row filter-note",
     style: style
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_Note__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_Note__WEBPACK_IMPORTED_MODULE_13__["default"], {
     contentClass: "col-12"
   })));
 };
@@ -4313,9 +4453,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const Columns = ['Details', 'Stake', 'WinLoss', 'Icon'];
 const MobileGrid = () => {
-  const data = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useSelector"])(state => state.gridData.Data);
+  const [data, requestParam] = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useSelector"])(state => [state.gridData.Data, state.requestParam], react_redux__WEBPACK_IMPORTED_MODULE_4__["shallowEqual"]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, [data]);
   const isDisplayTxIdColumn = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].isAllowTxIDColumn;
+  const isDisplayLicenseeWLColumn = !(_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].isAllowSabaCoins && requestParam.ViewSabaCoins);
   const getRows = () => {
     if (!data) {
       return null;
@@ -4346,7 +4487,9 @@ const MobileGrid = () => {
       rows.push(renderExpandRow(_common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["HeaderText"].LicenseeTxId, item.LicenseeTxId));
     }
     rows.push(renderExpandRow(_common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["HeaderText"].SystemId, item.SystemId));
-    rows.push(renderExpandRow(_common_lib_Service__WEBPACK_IMPORTED_MODULE_6__["default"].getHeaderName('LicenseeWL'), item.LicenseeWL));
+    if (isDisplayLicenseeWLColumn) {
+      rows.push(renderExpandRow(_common_lib_Service__WEBPACK_IMPORTED_MODULE_6__["default"].getHeaderName('LicenseeWL'), item.LicenseeWL));
+    }
     rows.push(renderExpandRow(_common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["HeaderText"].Platform, item.Platform));
     rows.push(renderExpandRow(_common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["HeaderText"].Live, item.Live));
     return rows;
@@ -4462,10 +4605,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/reducers/baseCurrencyReducer */ "./www/js/source/reactpages/reducers/baseCurrencyReducer.js");
 /* harmony import */ var _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/reducers/loaderReducer */ "./www/js/source/reactpages/reducers/loaderReducer.js");
 /* harmony import */ var _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/reducers/convertAllReducer */ "./www/js/source/reactpages/reducers/convertAllReducer.js");
-/* harmony import */ var _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/reducers/requestParamReducer */ "./www/js/source/reactpages/reducers/requestParamReducer.js");
-/* harmony import */ var _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/reducers/reportTitleReducer */ "./www/js/source/reactpages/reducers/reportTitleReducer.js");
-/* harmony import */ var _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/reducers/userGuideReducer */ "./www/js/source/reactpages/reducers/userGuideReducer.js");
-/* harmony import */ var _common_components_reducer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../common/components/reducer */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/reducer.js");
+/* harmony import */ var _jsroot_reducers_viewSabaCoinsReducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/reducers/viewSabaCoinsReducer */ "./www/js/source/reactpages/reducers/viewSabaCoinsReducer.js");
+/* harmony import */ var _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @jsroot/reducers/requestParamReducer */ "./www/js/source/reactpages/reducers/requestParamReducer.js");
+/* harmony import */ var _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @jsroot/reducers/reportTitleReducer */ "./www/js/source/reactpages/reducers/reportTitleReducer.js");
+/* harmony import */ var _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/reducers/userGuideReducer */ "./www/js/source/reactpages/reducers/userGuideReducer.js");
+/* harmony import */ var _common_components_reducer__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../common/components/reducer */ "./www/js/source/reactpages/pages/bettingticketscenter/common/components/reducer.js");
 
 
 
@@ -4477,7 +4621,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_gridDataReducer_js__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerReducer_js__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_9__, _common_components_reducer__WEBPACK_IMPORTED_MODULE_10__)));
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(Object.assign(_jsroot_reducers_gridDataReducer_js__WEBPACK_IMPORTED_MODULE_1__, _filterHandlerReducer_js__WEBPACK_IMPORTED_MODULE_2__, _jsroot_reducers_usernameReducer__WEBPACK_IMPORTED_MODULE_3__, _jsroot_reducers_baseCurrencyReducer__WEBPACK_IMPORTED_MODULE_4__, _jsroot_reducers_loaderReducer__WEBPACK_IMPORTED_MODULE_5__, _jsroot_reducers_convertAllReducer__WEBPACK_IMPORTED_MODULE_6__, _jsroot_reducers_viewSabaCoinsReducer__WEBPACK_IMPORTED_MODULE_7__, _jsroot_reducers_requestParamReducer__WEBPACK_IMPORTED_MODULE_8__, _jsroot_reducers_reportTitleReducer__WEBPACK_IMPORTED_MODULE_9__, _jsroot_reducers_userGuideReducer__WEBPACK_IMPORTED_MODULE_10__, _common_components_reducer__WEBPACK_IMPORTED_MODULE_11__)));
 
 /***/ }),
 
@@ -4662,6 +4807,28 @@ __webpack_require__.r(__webpack_exports__);
 
 const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(null, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_USERNAME"]](state, action) {
+    return action.data;
+  }
+});
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/reducers/viewSabaCoinsReducer.js":
+/*!*******************************************************************!*\
+  !*** ./www/js/source/reactpages/reducers/viewSabaCoinsReducer.js ***!
+  \*******************************************************************/
+/*! exports provided: viewSabaCoins */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "viewSabaCoins", function() { return viewSabaCoins; });
+/* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/actions/types.js");
+/* harmony import */ var _lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
+
+
+const viewSabaCoins = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["CHANGE_VIEW_SABA_COINS"]](state, action) {
     return action.data;
   }
 });

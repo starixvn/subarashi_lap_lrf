@@ -583,6 +583,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player Saba Coins.
+        /// </summary>
+        public static string sabacoins {
+            get {
+                return ResourceManager.GetString("sabacoins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saba Virtual Sports Win Loss.
         /// </summary>
         public static string sabavirtualsportswinloss {

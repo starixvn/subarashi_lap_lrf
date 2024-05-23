@@ -12,7 +12,7 @@ import { saveAs } from 'file-saver'
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
     const dispatch = useDispatch();
-    const {requestParam, searchingIdOption, searchingId, username, isConvertAll, selectedBaseCurrency} = useSelector( state => state, shallowEqual);
+    const {requestParam, searchingIdOption, searchingId, username, isConvertAll, selectedBaseCurrency, viewSabaCoins} = useSelector( state => state, shallowEqual);
     const {setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
 
     const _getParams = () => {
@@ -31,7 +31,8 @@ export const useFilterAction = () => {
             BaseCurrency: isConvertAll ? selectedBaseCurrency : '',
             IsConvertAll: isConvertAll,
             SortBy: SortBy,
-            SortOrder: SortOrder
+            SortOrder: SortOrder,
+            ViewSabaCoins: viewSabaCoins
         }
     }
 
@@ -42,7 +43,7 @@ export const useFilterAction = () => {
             return;
         }
 
-        dispatch(setReportTitle(Service.getTitle(null, null, params.BaseCurrency)));
+        dispatch(setReportTitle(Service.getTitle(null, null, params.BaseCurrency, params.ViewSabaCoins)));
         dispatch(setRequestParam(params));
         dispatch(toggleLoader(true));
         dispatch(getGridData(ApiUrl.REFNO_DATA_URL, params));

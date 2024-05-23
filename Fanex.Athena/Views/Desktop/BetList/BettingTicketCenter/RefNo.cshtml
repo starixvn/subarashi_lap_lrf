@@ -30,15 +30,18 @@
     selectedBaseCurrency: '@ViewBag.SelectedBaseCurrency',
     isLoading: false,
     isConvertAll: true,
+    viewSabaCoins: false,
     hasExchange: '@ViewBag.HasExchange.ToString()' === 'True',
     };
     window._AppData = {
     isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True',
+    isAllowSabaCoins: '@ViewBag.IsAllowSabaCoins.ToString()' === 'True',
     isAllowedCustomerComm: @Model.ToJson(),
     baseCurrencyList:@Html.Raw(baseCurrencyList.ToJson()),
     productsRequireUseNameNote: '@Html.Raw(@ViewBag.ProductsRequireUseNameNote)',
     productsRequireTxIdNote: '@Html.Raw(@ViewBag.ProductsRequireTxIdNote)',
     balanceupDay: '@ViewBag.BalanceUpDay',
+    defaultSelectedBaseCurrency: '@ViewBag.SelectedBaseCurrency',
     tabList: @Html.Raw((ViewBag.TabList as IEnumerable<string>).ToJson())
     };
 }

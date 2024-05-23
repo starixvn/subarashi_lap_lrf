@@ -7,6 +7,7 @@ import * as convertAllAction from '@jsroot/actions/convertAllAction'
 import * as requestParamAction from '@jsroot/actions/requestParamAction'
 import * as reportTitleAction from '@jsroot/actions/reportTitleAction'
 import * as userGuideAction from '@jsroot/actions/userGuideAction'
+import * as viewSabaCoinsAction from '@jsroot/actions/viewSabaCoinsAction'
 
 export const ActionCreators = Object.assign({},
     gridDataAction,
@@ -17,5 +18,6 @@ export const ActionCreators = Object.assign({},
     convertAllAction,
     requestParamAction,
     reportTitleAction,
-    userGuideAction
+    userGuideAction,
+    viewSabaCoinsAction
 );

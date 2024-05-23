@@ -279,6 +279,9 @@
   <data name="results41" xml:space="preserve">
     <value>ผลลัพธ์</value>
   </data>
+  <data name="sabacoins" xml:space="preserve">
+    <value>หรียญ SABA</value>
+  </data>
   <data name="sabavirtualsportswinloss" xml:space="preserve">
     <value>Sabaกีฬาเสมือนจริง แพ้ชนะ</value>
   </data>

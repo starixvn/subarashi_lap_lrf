@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2024 11:14:17 AM
+// Generated at: 5/21/2024 2:46:34 PM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -429,6 +429,7 @@ window._language_th_TH = {
   EventType: "ประเภทกิจกรรม",
   ExcelExceedRowsMsg: "ไฟล์นี้เกิน 65535 รายการ โปรดติดต่อผู้ดูแลระบบเพื่อขอรายละเอียดเพิ่มเติม",
   Exchange: "แลกเปลี่ยน",
+  ExchangeToCash: "แลกเป็นเงินสด",
   ExchangeUnderMaintenanceMsg: "บริการของสถานที่แลกเปลี่ยนอยู่ในระหว่างการบำรุงรักษา ข้อมูลอาจจะล่าช้าในช่วงเวลานี้ เราขออภัยอย่างแท้จริงสำหรับความไม่สะดวกที่เกิดขึ้น",
   ExchangeWinLoss: "Exchange Win Loss",
   ExcludeCOFromSB: "ไม่รวมการเงินสดออกจาก Sportsbook",
@@ -803,6 +804,7 @@ window._language_th_TH = {
   PlayerBettingStatisticsTitle: "สถิติการเดิมพันของผู้เล่น (เดือนถึงวันที่)",
   PlayerComm: "ค่าคอมมิชชั่นผู้เล่น",
   PlayerName: "ชื่อผู้เล่น",
+  PlayerSabaCoins: "เหรียญสำหรับนักเดิมพัน SABA",
   PlayerSegmentation: "การแบ่งส่วนผู้เล่น",
   PlayerStatementSupportMonths: "รองรับข้อมูลนานถึง 18 เดือน",
   PlayerWL: "ผู้เล่น ชนะ/แพ้",
@@ -896,6 +898,7 @@ window._language_th_TH = {
   Results: "ผลลัพธ์",
   RetractedPlayerUpdateVipStatus: "ผู้เล่นวีไอพี ถูกถอน: {0} ({1})",
   RetractedPlayerUpdateVipStatusSingle: "ผู้เล่นวีไอพีที่ถูกถอน: {0}",
+  Reward_Promotion: "รางวัล/โปรโมชั่น",
   RiskLevel: "ระดับความเสี่ยง",
   RiskLevelBetSetting: "การตั้งค่าระดับความเสี่ยงของการเดิมพัน",
   RiskLevelInformation: "ข้อมูลระดับความเสี่ยง",
@@ -905,6 +908,7 @@ window._language_th_TH = {
   Running: "แข่งขัน",
   Sa: "ส.",
   Saba: "Saba",
+  SabaCoins: "เหรียญ SABA",
   SabaVirtualSetting: "Saba การตั้งค่าเสมือนจริง",
   SabaVirtualSettingInformation: "Saba ข้อมูลการตั้งค่าเสมือนจริง",
   SabaVirtualSettingLevel: "ระดับการตั้งค่าเสมือนจริง Saba",
@@ -1114,6 +1118,7 @@ window._language_th_TH = {
   ViewNotification: "ดูการแจ้งเตือน",
   ViewResettledTicketOnly: "ดูตั๋วที่ถูกตั้งค่าใหม่เท่านั้น",
   ViewResettledTicketOnlyNote: "&quot;ดูตั๋วที่ถูกตั้งค่าใหม่เท่านั้น&quot; ข้อมูลสามารถใช้ได้ตั้งแต่วันที่ 1 กันยายน.",
+  ViewSabaCoins: "ดูเหรียญ SABA",
   ViewSubsidiaryOnReports: "ดูรายงานบริษัทย่อย",
   VIP: "วีไอพี",
   VIP2: "วีไอพี",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2024 11:14:17 AM
+// Generated at: 5/21/2024 2:46:34 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -402,6 +402,7 @@ window._language_zh_CN = {
   Euro: "欧洲版",
   Event: "项目",
   EventDate: "赛事日期",
+  ExchangeToCash: "兑换现金",
   ExchangeUnderMaintenanceMsg: "Exchange服务目前维护中，报表数据在这段时间内有可能延迟。&lt;br&gt;对于您的不便深感抱歉。",
   ExchangeWinLoss: "Exchange输赢",
   ExcludeCOFromSB: "体育博彩排除实时兑现",
@@ -756,6 +757,7 @@ window._language_zh_CN = {
   PlayerBetList: "玩家注单",
   PlayerBettingStatisticsTitle: "玩家投注统计(本月至今)",
   PlayerComm: "玩家佣金",
+  PlayerSabaCoins: "玩家的沙巴点数",
   PlayerSegmentation: "玩家分类",
   PlayerStatementSupportMonths: "数据最多只支持18个月",
   PlayerWL: "玩家输赢",
@@ -836,6 +838,7 @@ window._language_zh_CN = {
   Results: "赛果",
   RetractedPlayerUpdateVipStatus: "遭撤回VIP的玩家: {0} ({1})",
   RetractedPlayerUpdateVipStatusSingle: "遭撤回VIP的玩家: {0}",
+  Reward_Promotion: "成就/活动",
   RiskLevel: "风险等级",
   RiskLevelBetSetting: "风险等级投注限制",
   RiskLevelInformation: "风险等级资讯",
@@ -846,6 +849,7 @@ window._language_zh_CN = {
   Running: "进行中",
   Sa: "Sa",
   Saba: "沙巴",
+  SabaCoins: "沙巴点数",
   SabaVirtualSetting: "沙巴虚拟体育设定",
   SabaVirtualSettingInformation: "沙巴虚拟体育设定资讯",
   SabaVirtualSettingLevel: "沙巴虚拟体育设定等级",
@@ -1035,6 +1039,7 @@ window._language_zh_CN = {
   ViewNotification: "查看通知",
   ViewResettledTicketOnly: "仅查看已重新结算注单数据",
   ViewResettledTicketOnlyNote: "&apos;&apos;仅查看已重新结算注单数据&apos;&apos; 可查询2023年9月1日后数据。",
+  ViewSabaCoins: "查看沙巴点数",
   VIP: "VIP玩家",
   VIP2: "VIP",
   VIPPlayer: "VIP玩家",

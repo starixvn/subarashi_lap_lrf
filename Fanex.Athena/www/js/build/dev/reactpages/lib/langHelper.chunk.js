@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2024 11:14:17 AM
+// Generated at: 5/21/2024 2:46:34 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -436,6 +436,7 @@ window._language_en_US = {
   EventType: "Event Type",
   ExcelExceedRowsMsg: "This file exceeded 65535 entries. Please contact administrator for more details.",
   Exchange: "Exchange",
+  ExchangeToCash: "Exchange To Cash",
   ExchangeUnderMaintenanceMsg: "Exchange&apos;s services are Under Maintenance. Data may be delayed during this period.&lt;br&gt;We sincerely apologize for any inconvenience caused.",
   ExchangeWinLoss: "Exchange Win Loss",
   ExcludeCOFromSB: "Exclude CO from Sportsbook",
@@ -819,6 +820,7 @@ window._language_en_US = {
   PlayerInformation: "Player Information",
   PlayerName: "Player Name",
   PlayerReport: "Player Report",
+  PlayerSabaCoins: "Player Saba Coins",
   PlayerSegmentation: "Player Segmentation",
   PlayerStatementSupportMonths: "Support data up to 18 months",
   PlayerWL: "Player W/L",
@@ -924,6 +926,7 @@ window._language_en_US = {
   Results: "Results",
   RetractedPlayerUpdateVipStatus: "Retracted VIP player(s): {0} ({1})",
   RetractedPlayerUpdateVipStatusSingle: "Retracted VIP player: {0}",
+  Reward_Promotion: "Reward/ Promotion",
   RiskLevel: "Risk Level",
   RiskLevelBetSetting: "Risk Level Bet Setting",
   RiskLevelInformation: "Risk Level Information",
@@ -935,6 +938,7 @@ window._language_en_US = {
   Running: "Running",
   Sa: "Sa",
   Saba: "Saba",
+  SabaCoins: "Saba Coins",
   SabaVirtualSetting: "Saba Virtual Setting",
   SabaVirtualSettingInformation: "Saba Virtual Setting Information",
   SabaVirtualSettingLevel: "Saba Virtual Setting Level",
@@ -1149,6 +1153,7 @@ window._language_en_US = {
   ViewNotification: "View Notification",
   ViewResettledTicketOnly: "View Resettled Ticket Only",
   ViewResettledTicketOnlyNote: "&quot;View Resettled Ticket Only&quot; data is available from 01 Sep 2023.",
+  ViewSabaCoins: "View Saba Coins",
   VIP: "VIP",
   VIP2: "VIP",
   VIPPlayer: "VIP Player",

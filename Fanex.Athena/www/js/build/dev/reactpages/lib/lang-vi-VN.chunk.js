@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2024 11:14:17 AM
+// Generated at: 5/21/2024 2:46:34 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -426,6 +426,7 @@ window._language_vi_VN = {
   EventDate: "Ngày sự kiện",
   EventType: "Loại sự kiện",
   ExcelExceedRowsMsg: "Tệp này vượt quá 65535 mục nhập. Vui lòng liên hệ với quản trị viên để biết thêm chi tiết.",
+  ExchangeToCash: "Quy Đổi Tiền",
   ExchangeUnderMaintenanceMsg: "Dịch vụ của Exchange đang được bảo trì. Dữ liệu có thể bị chậm trong thời gian này.&lt;br&gt;Chúng tôi chân thành xin lỗi vì sự bất tiện này.",
   ExchangeWinLoss: "Thắng Thua Exchange",
   ExcludeCOFromSB: "Trừ cược đã bán khỏi Sportsbook",
@@ -800,6 +801,7 @@ window._language_vi_VN = {
   PlayerBettingStatisticsTitle: "Thống kê cá cược của người chơi (tháng đến ngày)",
   PlayerComm: "Hoa hồng người chơi",
   PlayerName: "Tên người chơi",
+  PlayerSabaCoins: "Saba Xu của người chơi",
   PlayerSegmentation: "Phân khúc người chơi",
   PlayerStatementSupportMonths: "Hỗ trợ dữ liệu lên đến 18 tháng",
   PlayerWL: "Thắng Thua Người Chơi",
@@ -897,6 +899,7 @@ window._language_vi_VN = {
   Results: "Kết Quả",
   RetractedPlayerUpdateVipStatus: "Thu hồi Vip của người chơi: {0} ({1})",
   RetractedPlayerUpdateVipStatusSingle: "Người chơi không còn là VIP: {0}",
+  Reward_Promotion: "Thưởng/Khuyến Mãi",
   RiskLevel: "Mức Độ Rủi Ro",
   RiskLevelBetSetting: "Giới Hạn Cược theo Mức Độ Rủi Ro",
   RiskLevelInformation: "Thông Tin Mức Độ Rủi Ro",
@@ -907,6 +910,7 @@ window._language_vi_VN = {
   Running: "Đang diễn ra",
   Sa: "T7",
   Saba: "Saba",
+  SabaCoins: "Saba Xu",
   SabaVirtualSetting: "Cài đặt Saba Ảo",
   SabaVirtualSettingInformation: "Thông tin cài đặt của Saba Ảo",
   SabaVirtualSettingLevel: "Cấp bậc cài đặt trên Saba Ảo",
@@ -1116,6 +1120,7 @@ window._language_vi_VN = {
   ViewNotification: "Xem Thông báo",
   ViewResettledTicketOnly: "Chỉ xem Vé Đã Tất Toán Lại",
   ViewResettledTicketOnlyNote: "Dữ liệu của Vé Đã Tất Toán Lại chỉ có từ 01/09/2023.",
+  ViewSabaCoins: "Xem Saba Xu",
   ViewSubsidiaryOnReports: "Xem các chi nhánh trong báo cáo",
   VIP: "VIP",
   VIP2: "VIP",

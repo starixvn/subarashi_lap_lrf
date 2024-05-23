@@ -282,6 +282,9 @@
   <data name="results41" xml:space="preserve">
     <value>Kết Quả</value>
   </data>
+  <data name="sabacoins" xml:space="preserve">
+    <value>Saba Xu</value>
+  </data>
   <data name="sabavirtualsportswinloss" xml:space="preserve">
     <value>Thắng Thua Thể Thao Ảo Saba</value>
   </data>
