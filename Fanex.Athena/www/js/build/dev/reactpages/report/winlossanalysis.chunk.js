@@ -4652,9 +4652,10 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
-  static getSingleResource(key) {
+  static getSingleResource(key, hideSaba = false) {
     var langHandler = window[resourceName];
-    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+    var newKey = hideSaba ? key + "_HideSaba" : key;
+    return langHandler && langHandler[newKey] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][newKey] || newKey;
   }
   static getResources(keys) {
     var langHandler = window[resourceName];
@@ -5216,8 +5217,7 @@ const setSportList = list => {
 function getSportList(productCodes) {
   return async dispatch => {
     const response = await _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
-      productCodes: productCodes,
-      applyHideSaba: true
+      productCodes: productCodes
     });
     const data = response.data;
     const selectedSports = _common_Service__WEBPACK_IMPORTED_MODULE_2__["default"].getSelectedItemFromTreeListItem(data);

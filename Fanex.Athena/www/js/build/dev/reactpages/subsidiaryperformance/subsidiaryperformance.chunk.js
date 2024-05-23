@@ -3042,9 +3042,10 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
-  static getSingleResource(key) {
+  static getSingleResource(key, hideSaba = false) {
     var langHandler = window[resourceName];
-    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+    var newKey = hideSaba ? key + "_HideSaba" : key;
+    return langHandler && langHandler[newKey] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][newKey] || newKey;
   }
   static getResources(keys) {
     var langHandler = window[resourceName];
@@ -4123,7 +4124,7 @@ class FormFilter extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       onChange: () => this._changeIsSeparateSabaWinLoss(!this.state.isSeparateSabaWinLoss)
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
       htmlFor: "SeparateSabaWinLoss"
-    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("SeparateSabaWinLoss")))));
+    }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_7__["default"].getSingleResource("SeparateSabaWinLoss", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_10__["default"].isHideSaba)))));
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "page-filter"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

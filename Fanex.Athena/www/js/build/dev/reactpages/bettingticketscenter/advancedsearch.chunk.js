@@ -4354,9 +4354,10 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
-  static getSingleResource(key) {
+  static getSingleResource(key, hideSaba = false) {
     var langHandler = window[resourceName];
-    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+    var newKey = hideSaba ? key + "_HideSaba" : key;
+    return langHandler && langHandler[newKey] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][newKey] || newKey;
   }
   static getResources(keys) {
     var langHandler = window[resourceName];
@@ -4600,8 +4601,7 @@ function getBettypeList(productCode, hasItemAll = false) {
       return;
     }
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
-      productCode: productCode,
-      applyHideSaba: true
+      productCode: productCode
     }).then(response => {
       var data = response.data;
       _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_3__["default"].set(cacheKey, data);
@@ -4776,8 +4776,7 @@ function getLeagueList(sportId, date) {
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].getData(Url, {
       sportId: sportId,
       fromDate: dateString,
-      toDate: dateString,
-      applyHideSaba: true
+      toDate: dateString
     }).then(response => {
       var data = response.data;
       _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_4__["default"].set(cacheKey, data);
@@ -4938,8 +4937,7 @@ function getSportList(productCode, date) {
   return dispatch => {
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
       productCode: productCode,
-      includeSabaSport: productCode === 'SB',
-      applyHideSaba: true
+      includeSabaSport: productCode === 'SB'
     }).then(response => {
       let data = response.data;
       let itemAll = {
