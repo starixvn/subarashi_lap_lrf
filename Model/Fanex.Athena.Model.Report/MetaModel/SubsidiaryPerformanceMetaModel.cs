@@ -34,6 +34,8 @@
 
         public bool IsSeparateSabaWinLoss { get; set; }
 
+        public bool IsHideSaba { get; set; }
+
         public bool IsValid => FromDate <= ToDate &&
                                 !string.IsNullOrEmpty(ProductCodeList) &&
                                 MetaModelHelper.ValidateBaseCurrency(BaseCurrency, false);

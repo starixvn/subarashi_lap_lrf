@@ -3317,15 +3317,18 @@
     <value>虚拟体育设定</value>
   </data>
   <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
-    <value>虚拟赛事</value>
+    <value>虚拟体育</value>
   </data>
   <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
-    <value>虚拟体育设定资讯</value>
+    <value>虚拟设定信息</value>
   </data>
   <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
-    <value>虚拟体育设定等级</value>
+    <value>虚拟设定等级</value>
   </data>
   <data name="Kabaddi" xml:space="preserve">
     <value>卡巴迪</value>
+  </data>
+  <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
+    <value>将虚拟体育与体育博彩分开</value>
   </data>
 </root>

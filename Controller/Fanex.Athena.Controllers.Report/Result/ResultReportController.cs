@@ -70,6 +70,7 @@
             if (ModelState.IsValid)
             {
                 metaModel.SpecialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
+                metaModel.IsHideSaba = IsHideSaba;
 
                 var data = await _betListApiClient.PostStringAsync(
                     "/ResultReport/Index",
@@ -95,6 +96,7 @@
             const string FileName = "Results.xls";
             metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             metaModel.SpecialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
+            metaModel.IsHideSaba = IsHideSaba;
 
             var stream = await _betListApiClient.PostStreamAsync(
                 "/ResultReport/ResultExcel",
@@ -119,6 +121,7 @@
                    ResultPageGetNormalSportsName);
                 metaModel.ProductCodeList = string.Join(",", productAccess.ProductList.Select(x => x.ProductCode));
                 metaModel.SpecialLeagues = await _portalApiService.GetSpecialLeaguesAsync(SessionServiceInstance.LicenseeSession.LicenseeName);
+                metaModel.IsHideSaba = IsHideSaba;
                 var result = await _betListApiClient.PostStringAsync(
                     "/ResultReport/GetSports",
                     metaModel,

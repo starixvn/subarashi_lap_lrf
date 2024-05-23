@@ -3344,7 +3344,7 @@
     <value>Soccer</value>
   </data>
   <data name="SabaVirtualSport" xml:space="preserve">
-    <value>Saba Virtual Sport</value>
+    <value>Saba Virtual Sports</value>
   </data>
   <data name="SabaVirtualSettingInformation" xml:space="preserve">
     <value>Saba Virtual Setting Information</value>
@@ -3762,10 +3762,10 @@
     <value>Separate Virtual Sports from Sportsbook</value>
   </data>
   <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
-    <value>Virtual Setting</value>
+    <value>Virtual Sports Setting</value>
   </data>
   <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
-    <value>Virtual Sport</value>
+    <value>Virtual Sports</value>
   </data>
   <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
     <value>Virtual Setting Information</value>

@@ -9,6 +9,7 @@
 
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Users;
     using Fanex.Athena.Model.Report.DTO.SubsidiaryPerformance;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -103,7 +104,7 @@
 
                 foreach (var currency in currencyData)
                 {
-                    var products = GetProducts(currency.Details, total);
+                    var products = GetProducts(currency.Details, total, metaModel.IsHideSaba);
 
                     main.Details.Add(currency.Details.First().CurrencyName, products);
                     main.TotalItem += products.Count;
@@ -187,7 +188,7 @@
                 ).ToList();
         }
 
-        private static IList<SubsidiaryPerformanceBase> GetProducts(IEnumerable<SubsidiaryPerformance> productList, SubsidiaryPerformanceBase baseSumTotal)
+        private static IList<SubsidiaryPerformanceBase> GetProducts(IEnumerable<SubsidiaryPerformance> productList, SubsidiaryPerformanceBase baseSumTotal, bool isHideSaba)
         {
             var groupedProduct = productList.GroupBy(
                 x => x.ProductCode,
@@ -219,7 +220,8 @@
 
             foreach (var product in groupedProduct)
             {
-                product.Data.Product = ViewResources.ResourceManager.GetString($"Product{product.ProductCode}");
+                var productName = ViewResources.ResourceManager.GetString($"Product{product.ProductCode}");
+                product.Data.Product = isHideSaba ? SabaHelper.RemoveSabaText(productName) : productName;
                 products.Add(product.Data);
 
                 AssignSumData(productAll, product.Data);

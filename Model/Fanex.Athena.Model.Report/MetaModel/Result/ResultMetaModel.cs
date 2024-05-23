@@ -43,5 +43,8 @@
 
         [ScriptIgnore]
         public IEnumerable<int> SpecialLeagues { get; set; }
+
+        [ScriptIgnore]
+        public bool IsHideSaba { get; set; }
     }
 }

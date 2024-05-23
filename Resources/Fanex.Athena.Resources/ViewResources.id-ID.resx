@@ -3286,19 +3286,19 @@
     <value>Lihat Koin SABA</value>
   </data>
   <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
-    <value>Pisahkan Virtual Sports dari Sportsbook</value>
+    <value>Pisahkan Olahraga Virtual dari Sportsbook</value>
   </data>
   <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
-    <value>Pengaturan Virtual</value>
+    <value>Pengaturan Olahraga Virtual</value>
   </data>
   <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
-    <value>Virtual Sports</value>
+    <value>Olahraga Virtual</value>
   </data>
   <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
     <value>Informasi Pengaturan Virtual</value>
   </data>
   <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
-    <value>Pengaturan Tingkat Virtual</value>
+    <value>Tingkat Olahraga Virtual</value>
   </data>
   <data name="Kabaddi" xml:space="preserve">
     <value>Kabaddi</value>

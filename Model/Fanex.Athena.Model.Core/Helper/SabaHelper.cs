@@ -16,7 +16,10 @@ namespace Fanex.Athena.Model.Core
 
         public static string RemoveSabaText(string text)
         {
-            return System.Text.RegularExpressions.Regex.Replace(text, ViewResources.Saba, string.Empty, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            var sabaText = ViewResources.Saba.Trim();
+            var result = System.Text.RegularExpressions.Regex.Replace(text, sabaText, string.Empty, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            // remove duplicate space
+            return System.Text.RegularExpressions.Regex.Replace(result, "  ", " ", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         }
     }
 }
