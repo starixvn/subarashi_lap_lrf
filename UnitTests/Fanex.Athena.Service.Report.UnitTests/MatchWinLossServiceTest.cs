@@ -49,12 +49,11 @@
                 new MatchWinLoss { ProductName = Product.VS, SportType = (int)SportType.VirtualCycling },
                 new MatchWinLoss { ProductName = Product.NG }
             };
-            var isHideSaba = false;
 
             _dataAccess.GetDataList(metaModel).ReturnsForAnyArgs(dataList);
 
             // Action
-            var result = await _service.GetDataList(metaModel, isHideSaba);
+            var result = await _service.GetDataList(metaModel);
 
             // Assert
             Assert.Multiple(() =>

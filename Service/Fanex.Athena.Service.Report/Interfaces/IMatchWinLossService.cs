@@ -15,7 +15,7 @@ namespace Fanex.Athena.Service.Report.Interfaces
 
     public interface IMatchWinLossService
     {
-        Task<IList<MatchWinLoss>> GetDataList(MatchWinLossMetaModel metaModel, bool isHideSaba);
+        Task<IList<MatchWinLoss>> GetDataList(MatchWinLossMetaModel metaModel);
 
         Task<DataSet> GetDetailDataSet(MatchWinLossMetaModel metaModel);
 

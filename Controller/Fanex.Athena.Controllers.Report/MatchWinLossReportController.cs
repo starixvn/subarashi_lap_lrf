@@ -86,6 +86,7 @@
         {
             var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
+            var isHideSaba = IsHideSaba;
 
             if (metaModel.IsExportExcel)
             {
@@ -103,7 +104,7 @@
                 userSession.Language,
                 FunctionNames.MatchWinLoss);
 
-            var reportData = await _matchWinLossService.GetDataList(metaModel, IsHideSaba).ConfigureAwait(false);
+            var reportData = await _matchWinLossService.GetDataList(metaModel).ConfigureAwait(false);
             IList<MatchWinLoss> reportDataOutrightParlay = new List<MatchWinLoss>();
 
             var outrightParlayProducts = new List<string> { Product.BA, Product.SB, Product.NG, Product.VS };
@@ -119,7 +120,7 @@
             {
                 Param = metaModel,
                 MainResult = reportData,
-                LeagueList = CreateLeagueList(reportData),
+                LeagueList = CreateLeagueList(reportData, isHideSaba),
                 SpecialBetTypeResult = reportDataOutrightParlay,
                 CurrencyList = currencies,
                 ProductAccess = productAccess,
@@ -217,14 +218,20 @@
             return new MatchWinLossExcel(templatePath, convertingOption, showingOption, mainTable, totalData, metaModel, isHideSaba);
         }
 
-        private static IDictionary<int, string> CreateLeagueList(IList<MatchWinLoss> reportData)
+        private static IDictionary<int, string> CreateLeagueList(IList<MatchWinLoss> reportData, bool isHideSaba)
         {
             if (reportData == null || reportData.Count == 0)
             {
                 return new Dictionary<int, string>();
             }
 
-            return reportData.GroupBy(i => i.LeagueId).ToDictionary(i => i.Key, i => i.FirstOrDefault().LeagueName);
+            return reportData.GroupBy(i => i.LeagueId).ToDictionary(
+                i => i.Key,
+                i =>
+                {
+                    var leagueName = i.FirstOrDefault()?.LeagueName;
+                    return isHideSaba ? SabaHelper.RemoveSabaText(leagueName) : leagueName;
+                });
         }
 
         private static MatchWinLoss GetTotal(IList<MatchWinLoss> dataList)

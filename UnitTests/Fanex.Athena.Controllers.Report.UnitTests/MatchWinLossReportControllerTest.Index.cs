@@ -61,9 +61,12 @@
                 var expectedData = new List<MatchWinLoss>
                 {
                     new MatchWinLoss()
+                    {
+                        LeagueName = "Test"
+                    }
                 };
 
-                _matchWinLossService.GetDataList(metaModel, controller.IsHideSaba).Returns(expectedData);
+                _matchWinLossService.GetDataList(metaModel).Returns(expectedData);
 
                 // Action
                 var viewResult = await controller.Index(metaModel) as ViewResult;

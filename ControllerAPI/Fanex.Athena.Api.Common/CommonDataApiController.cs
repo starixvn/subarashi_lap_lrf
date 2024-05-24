@@ -161,6 +161,7 @@
             var sportTypeId = isSabaSport ? selectedSabaSport?.SportTypeId : sportId;
 
             var userSession = _sessionService.UserSession;
+            var isHideSaba = IsHideSaba;
             var metaModel = new LeagueMetaModel
             {
                 FromDate = fromDate,
@@ -177,7 +178,7 @@
 
             var leagueList = (isSabaSport ? GetSabaSportLeagueList(leagues, selectedSabaSport) : GetLeagueListExcludeSabaSport(leagues, excludeSabaSport));
 
-            if (IsHideSaba)
+            if (isHideSaba)
             {
                 foreach (var league in leagueList)
                 {

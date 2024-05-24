@@ -13,7 +13,6 @@ namespace Fanex.Athena.Service.Report
     using System.Threading.Tasks;
 
     using DataAccess.Report.Interfaces;
-    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
@@ -52,14 +51,13 @@ namespace Fanex.Athena.Service.Report
 
         #region IMatchWinLossService Members
 
-        public async Task<IList<MatchWinLoss>> GetDataList(MatchWinLossMetaModel metaModel, bool isHideSaba)
+        public async Task<IList<MatchWinLoss>> GetDataList(MatchWinLossMetaModel metaModel)
         {
             var dataList = await _matchWinLossDataAccess.GetDataList(metaModel).ConfigureAwait(false);
 
             foreach (var data in dataList)
             {
-                var leagueName = GetLeagueName(data);
-                data.LeagueName = isHideSaba ? SabaHelper.RemoveSabaText(leagueName) : leagueName;
+                data.LeagueName = GetLeagueName(data);
                 data.MatchName = GetMatchName(data);
                 data.HomeName = GetHomeName(data);
                 data.AwayName = GetAwayName(data);
