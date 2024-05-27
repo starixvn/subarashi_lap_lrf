@@ -1,7 +1,5 @@
 ﻿import React, { Component } from 'react';
 import { Table, HeaderRow, Row, HeaderCell, Cell } from '@9softstudio/react-grid';
-import Popup from '@jsroot/components/popup';
-import NoDataTitle from '@jsroot/components/NoDataTitle';
 import PropTypes from 'prop-types';
 
 class BetListDataGrid extends Component {
@@ -37,6 +35,7 @@ class BetListDataGrid extends Component {
 
     _buildHeader() {
         let rows = [];
+        const timestamp = new Date().getTime();
         const { columns, columnWidths, sortableColumns } = this.props;
 
         for (let i = 0; i < columns.length; i++) {
@@ -45,7 +44,7 @@ class BetListDataGrid extends Component {
             const headerName = this._getHeaderName(column);
 
             rows.push(
-                <HeaderCell key={column} colWidth={columnWidths[i]} sortBy={isSortable ? column : null}>{headerName}</HeaderCell>
+                <HeaderCell key={column + timestamp} colWidth={columnWidths[i]} sortBy={isSortable ? column : null}>{headerName}</HeaderCell>
             )
         }
 
@@ -55,6 +54,7 @@ class BetListDataGrid extends Component {
     _buildBody() {
         const { columns, columnAlignments, data } = this.props;
         let rows = [];
+        const timestamp = new Date().getTime();
 
         for (let i = 0; i < data.length; i++) {
             const item = this._mapData(data[i]);
@@ -65,11 +65,11 @@ class BetListDataGrid extends Component {
                 let hasTooltip = columnAlignments[j].indexOf('tooltip') !== -1;
 
                 cells.push(
-                    <Cell key={`${column}-${i}`} className={columnAlignments[j]} {...(hasTooltip ? { title: item[column] } : {})} dangerouslySetInnerHTML={{ __html: item[column] }}></Cell>
+                    <Cell key={`${column}-${i}-${timestamp}`} className={columnAlignments[j]} {...(hasTooltip ? { title: item[column] } : {})} dangerouslySetInnerHTML={{ __html: item[column] }}></Cell>
                 )
             }
 
-            rows.push(<Row key={i}>{cells}</Row>);
+            rows.push(<Row key={`${i}-${timestamp}`}>{cells}</Row>);
         }
 
         return rows;
@@ -79,6 +79,7 @@ class BetListDataGrid extends Component {
         if (!this.props.totalColumns || !this.props.totalColumns.length) {
             return false;
         }
+        const timestamp = new Date().getTime();
 
         const { columns, totalColumns, total, totalText, columnAlignments } = this.props;
         const startTotalIndex = columns.indexOf(totalColumns[0]);
@@ -95,16 +96,16 @@ class BetListDataGrid extends Component {
             const className = this._getTotalCellClassName(column, item[column]);
 
             cells.push(
-                <Cell key={`Sum${column}`} className={`${columnAlignments[columnIndex]} ${className}`} dangerouslySetInnerHTML={{ __html: item[column] }}></Cell>
+                <Cell key={`Sum-${column}-${timestamp}`} className={`${columnAlignments[columnIndex]} ${className}`} dangerouslySetInnerHTML={{ __html: item[column] }}></Cell>
             )
         }
 
         const blankRows = columns.length - totalColumns.length - startTotalIndex;
         if (blankRows) {
-            cells.push(<Cell key="blank" colSpan={blankRows}></Cell>);
+            cells.push(<Cell key={`blank-${timestamp}`} colSpan={blankRows}></Cell>);
         }
 
-        rows.push(<Row className="fixed-table-grant-total" key="totalRow">{cells}</Row>);
+        rows.push(<Row className="fixed-table-grant-total" key={`totalRow-${timestamp}`}>{cells}</Row>);
 
         return rows;
     }
@@ -139,7 +140,7 @@ class BetListDataGrid extends Component {
         const { isPaging, pageOption, adjustedHeight } = this.props;
 
         return (
-            <div className="betlist-container result-content">
+            <div className="betlist-container result-content" key="BetListDataGrid">
                 <Table
                     onSort={this.onSort}
                     minWidth={980}

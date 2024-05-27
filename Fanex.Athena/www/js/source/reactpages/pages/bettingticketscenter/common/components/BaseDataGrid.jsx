@@ -6,7 +6,6 @@ import BetListDataGrid from '@jsroot/components/betlist/BetListDataGrid';
 import ReportTitle from '@jsroot/components/ReportTitle';
 import LangHelper from '@jsroot/lib/langHelper';
 import { HeaderText, DefaultPageSize } from '../lib/constants';
-import AppData from '@jsroot/lib/AppData';
 import Service from '../lib/Service.js';
 
 export const BaseDataGrid = (props) => {
@@ -41,7 +40,7 @@ export const BaseDataGrid = (props) => {
         setRequestParam(param);
     }
 
-    const onSort = (sortBy, sortOrder) =>{
+    const onSort = (sortBy, sortOrder) => {
         const param = Object.assign({}, requestParam, { SortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy, SortOrder: sortOrder });
 
         getData(param);
@@ -91,6 +90,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     const { gridData, requestParam, reportTitle } = state;
     return Object.assign({}, { gridData, requestParam, reportTitle });
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(BaseDataGrid);

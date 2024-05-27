@@ -10,7 +10,5 @@
         IList<Licensee> GetByUser(int userId);
 
         Licensee GetLicenseeByName(string licenseeName);
-
-        int GetSpecialPlatformByName(string licenseeName);
     }
 }
