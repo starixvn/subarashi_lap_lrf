@@ -9566,7 +9566,7 @@ const FormFilter = props => {
       if (response.status === NoContentStatusCode) {
         alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_8__["default"].getSingleResource("NoInfo"));
       } else {
-        var filename = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isHideSaba ? "VirtualSetting.xls" : 'SabaVirtualSetting.xls';
+        var filename = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_11__["default"].isHideSaba ? "VirtualSportsSetting.xls" : 'SabaVirtualSetting.xls';
         _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_10__["default"].downloadFile(response.data, filename);
       }
     });
@@ -10261,4 +10261,4 @@ const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["defa
 /***/ })
 
 }]);
-//# sourceMappingURL=SabaVirtualSetting.db111792ed8ec7205033.chunk.js.map
+//# sourceMappingURL=SabaVirtualSetting.ad60fdd15e9192d111cb.chunk.js.map
