@@ -52,7 +52,7 @@ export const FormFilter = (props) => {
                 if (response.status === NoContentStatusCode) {
                     alert(LangHelper.getSingleResource("NoInfo"));
                 } else {
-                    var filename = AppData.isHideSaba ? "VirtualSetting.xls" : 'SabaVirtualSetting.xls';
+                    var filename = AppData.isHideSaba ? "VirtualSportsSetting.xls" : 'SabaVirtualSetting.xls';
                     Site.downloadFile(response.data, filename);
                 }
             });
