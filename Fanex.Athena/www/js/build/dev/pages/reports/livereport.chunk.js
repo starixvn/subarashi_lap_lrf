@@ -2783,18 +2783,6 @@ const decode = (html) => {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (QueryString) {
     'use strict';
-    function setSumParams(url, totalValue) {
-        let newUrl = url;
-        newUrl = QueryString.setParam(newUrl, 'totalrows', totalValue.BetCount);
-        newUrl = QueryString.setParam(newUrl, 'sumwinlost', totalValue.CustomerWinLoss);
-        newUrl = QueryString.setParam(newUrl, 'sumplayercomm', totalValue.CustomerComm);
-        newUrl = QueryString.setParam(newUrl, 'sumlicenseewl', totalValue.LicenseeWinLoss);
-        newUrl = QueryString.setParam(newUrl, 'sumcomm', totalValue.LicenseeComm);
-        newUrl = QueryString.setParam(newUrl, 'sumturnover', totalValue.TurnOver);
-        newUrl = QueryString.setParam(newUrl, 'sumamtdueto3rd', totalValue.AmountDue);
-
-        return newUrl;
-    }
 
     function getMatchListProductOption(sportId, productCode) {
         const newSportId = Number(sportId);
@@ -2829,7 +2817,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     }
 
     return {
-        setSumParams: setSumParams,
         getMatchListProductOption: getMatchListProductOption,
     };
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -2966,7 +2953,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             newUrl = QueryString.setParam(newUrl, 'FromDate', $(_selector.FromDate).attr('data-original-from'));
             newUrl = QueryString.setParam(newUrl, 'ToDate', $(_selector.ToDate).attr('data-original-to'));
             newUrl = QueryString.setParam(newUrl, 'LiveIndicator', $(_selector.LiveIndicator).attr('data-original'));
-            newUrl = Helper.setSumParams(newUrl, totalValue);
             newUrl = Site.setProductCodeListParam(newUrl, productOptions);
             newUrl = QueryString.setParam(newUrl, 'SubsidiarySearch', subsidiary.SubsidiarySearch);
             newUrl = QueryString.setParam(newUrl, 'SubsidiaryList', subsidiary.SubsidiaryList);

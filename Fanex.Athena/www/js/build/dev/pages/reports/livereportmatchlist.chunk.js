@@ -855,18 +855,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (QueryString) {
     'use strict';
-    function setSumParams(url, totalValue) {
-        let newUrl = url;
-        newUrl = QueryString.setParam(newUrl, 'totalrows', totalValue.BetCount);
-        newUrl = QueryString.setParam(newUrl, 'sumwinlost', totalValue.CustomerWinLoss);
-        newUrl = QueryString.setParam(newUrl, 'sumplayercomm', totalValue.CustomerComm);
-        newUrl = QueryString.setParam(newUrl, 'sumlicenseewl', totalValue.LicenseeWinLoss);
-        newUrl = QueryString.setParam(newUrl, 'sumcomm', totalValue.LicenseeComm);
-        newUrl = QueryString.setParam(newUrl, 'sumturnover', totalValue.TurnOver);
-        newUrl = QueryString.setParam(newUrl, 'sumamtdueto3rd', totalValue.AmountDue);
-
-        return newUrl;
-    }
 
     function getMatchListProductOption(sportId, productCode) {
         const newSportId = Number(sportId);
@@ -901,7 +889,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
     }
 
     return {
-        setSumParams: setSumParams,
         getMatchListProductOption: getMatchListProductOption,
     };
 }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -1019,7 +1006,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             url = QueryString.setParam(url, 'LiveIndicator', data.LiveIndicator);
             url = QueryString.setParam(url, 'SubsidiarySearch', $(_selector.SubsidiarySearch).val());
             url = QueryString.setParam(url, 'SubsidiaryList', $(_selector.SubsidiaryList).val());
-            url = Helper.setSumParams(url, data);
 
             const productOptions = Helper.getMatchListProductOption($(_selector.SportId).val(), $(_selector.ProductCode).val());
 
