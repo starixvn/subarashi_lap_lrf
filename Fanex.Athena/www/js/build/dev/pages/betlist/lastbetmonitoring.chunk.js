@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([30,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
+/******/ 	deferredModules.push([27,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -4649,26 +4649,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             initialize: function () {
                 Site.initialize();
 
-                if (_me.isMatchWLBetList() === true) {
-                    _me.updateSortColumn();
-                }
-
                 _isShowSumStake = $('#IsShowSumStake').val() === '1';
 
                 _sortColumnName = _sortColumnName || $('#SortBy').val();
                 _sortOrder = _sortOrder || $('#SortOrder').val();
 
                 _me.registerBetListGlobalFunctions();
-            },
-
-            updateSortColumn: function () {
-                BetListOption.columnModel[1].sortable = true; // externalId
-                BetListOption.columnModel[2].sortable = true; // systemId
-            },
-
-            isMatchWLBetList: function () {
-                const regex = /MatchWinLossBetList/i;
-                return regex.test($('#ApiUrl').val());
             },
 
             gridComplete: function (grid) {
@@ -6039,7 +6025,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
 /***/ }),
 
-/***/ 30:
+/***/ 27:
 /*!*********************************************************************!*\
   !*** multi ./www/js/source/pages/betlist/lastbetmonitoring/main.js ***!
   \*********************************************************************/
