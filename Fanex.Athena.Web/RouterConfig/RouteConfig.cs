@@ -48,6 +48,18 @@
 
         private static void RegisterReportProxyRoutes(this RouteCollection routes)
         {
+            var turnoverReportRoute = routes.MapHttpRoute(
+                name: "turnoverReportRoute",
+                routeTemplate: "TurnoverReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "Turnover", url = "Index" });
+            turnoverReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var customerTurnoverReportRoute = routes.MapHttpRoute(
+                name: "customerTurnoverReportRoute",
+                routeTemplate: "CustomerTurnoverReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerTurnover", url = "Index" });
+            customerTurnoverReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
             var settledMatchCountReportRoute = routes.MapHttpRoute(
                    name: "settledMatchCountReportRoute",
                    routeTemplate: "SettledMatchCountReport/{*url}",
