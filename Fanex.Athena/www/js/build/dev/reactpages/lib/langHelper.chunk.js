@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2024 2:46:34 PM
+// Generated at: 5/23/2024 3:07:07 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -207,7 +207,7 @@ window._language_en_US = {
   BettingLimit: "Betting Limit",
   BettingStatement: "Betting Statement",
   BettingTicketCenter: "Betting Ticket Center",
-  BettingTicketCenter_AdvancedSearchTabNote1: "All bettypes, League, and Match filter available only when 1 day is selected",
+  BettingTicketCenter_AdvancedSearchTabNote1: "All bettypes, League and Match filter available only when 1 day is selected",
   BettingTicketCenter_AdvancedSearchTabNote2: "Data is available from {0}",
   BettingTicketCenter_BookedBetNote: "Data is available within up to 7 days",
   BettingTicketCenter_Exchange_Note_1: "Support searching void tickets only.",
@@ -566,6 +566,7 @@ window._language_en_US = {
   July: "July",
   Jun: "Jun",
   June: "June",
+  Kabaddi: "Kabaddi",
   KeepCurrentComm: "Keep current commission",
   KOTime: "K.O Time",
   Last: "Last",
@@ -940,9 +941,13 @@ window._language_en_US = {
   Saba: "Saba",
   SabaCoins: "Saba Coins",
   SabaVirtualSetting: "Saba Virtual Setting",
+  SabaVirtualSetting_HideSaba: "Virtual Sports Setting",
   SabaVirtualSettingInformation: "Saba Virtual Setting Information",
+  SabaVirtualSettingInformation_HideSaba: "Virtual Setting Information",
   SabaVirtualSettingLevel: "Saba Virtual Setting Level",
-  SabaVirtualSport: "Saba Virtual Sport",
+  SabaVirtualSettingLevel_HideSaba: "Virtual Setting Level",
+  SabaVirtualSport: "Saba Virtual Sports",
+  SabaVirtualSport_HideSaba: "Virtual Sports",
   SabaVirtualSportsNote: "Saba Virtual Sports does not support System Parlay bet type.",
   SabaVirtualSportsWinLoss: "Saba Virtual Sports Win Loss",
   Saturday: "Saturday",
@@ -969,6 +974,7 @@ window._language_en_US = {
   SelectTop: "Select Top",
   Sep: "Sep",
   SeparateSabaWinLoss: "Separate Saba Virtual Sports from Sportsbook",
+  SeparateSabaWinLoss_HideSaba: "Separate Virtual Sports from Sportsbook",
   September: "September",
   ServerBusyMessage: "Your request can&apos;t be processed now due to busy server. Please try again later",
   ServiceMaintenanceMsg: "System is busy. Please try again after a few minutes.",
@@ -1231,9 +1237,10 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
-  static getSingleResource(key) {
+  static getSingleResource(key, hideSaba = false) {
     var langHandler = window[resourceName];
-    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+    var newKey = hideSaba ? key + "_HideSaba" : key;
+    return langHandler && langHandler[newKey] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][newKey] || newKey;
   }
   static getResources(keys) {
     var langHandler = window[resourceName];

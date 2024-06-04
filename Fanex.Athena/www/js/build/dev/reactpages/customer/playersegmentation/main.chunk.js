@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/SabaVirtualSetting":"customer/playersegmentation/SabaVirtualSetting","customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/SabaVirtualSetting":"ebe9861d0d009015b966","customer/playersegmentation/monitoredPlayer":"1ee6ccc2009946cae62e","customer/playersegmentation/problemPlayer":"4462eef67d456eec7c1d","customer/playersegmentation/vipPlayerManagement":"3c1d06e084a318fdd7be","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/SabaVirtualSetting":"customer/playersegmentation/SabaVirtualSetting","customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/SabaVirtualSetting":"ad60fdd15e9192d111cb","customer/playersegmentation/monitoredPlayer":"1ee6ccc2009946cae62e","customer/playersegmentation/problemPlayer":"4462eef67d456eec7c1d","customer/playersegmentation/vipPlayerManagement":"3c1d06e084a318fdd7be","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -581,9 +581,10 @@ class LangHelper {
   static get currentLanguage() {
     return langCode;
   }
-  static getSingleResource(key) {
+  static getSingleResource(key, hideSaba = false) {
     var langHandler = window[resourceName];
-    return langHandler && langHandler[key] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][key] || key;
+    var newKey = hideSaba ? key + "_HideSaba" : key;
+    return langHandler && langHandler[newKey] || window[DEFAULT_RESOURCE_NAME] && window[DEFAULT_RESOURCE_NAME][newKey] || newKey;
   }
   static getResources(keys) {
     var langHandler = window[resourceName];
@@ -1077,7 +1078,7 @@ const dynamicImports = {
 };
 const tabMenuList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].TabKeys.map(_ => ({
   key: _,
-  name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_),
+  name: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource(_, _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].isHideSaba && _ === tabKeys.sabaVirtualSetting),
   component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(dynamicImports[_]),
   preLoad: dynamicImports[_],
   isNew: newTabs.some(newTab => newTab === _)

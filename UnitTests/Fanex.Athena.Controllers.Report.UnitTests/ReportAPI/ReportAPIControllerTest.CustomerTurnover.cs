@@ -81,7 +81,8 @@
 
                 _betTypeService.GetBettypes(
                     sports,
-                    SessionService.UserSession.Language).Returns(dataList);
+                    SessionService.UserSession.Language,
+                    controller.IsHideSaba).Returns(dataList);
 
                 // Action
                 var result = await controller.GetBettypesBySport(sports) as JsonResult;

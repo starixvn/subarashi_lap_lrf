@@ -1078,7 +1078,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All bettypes, League, and Match filter available only when 1 day is selected.
+        ///   Looks up a localized string similar to All bettypes, League and Match filter available only when 1 day is selected.
         /// </summary>
         public static string BettingTicketCenter_AdvancedSearchTabNote1 {
             get {
@@ -4323,6 +4323,15 @@ namespace Fanex.Athena.Resources {
         public static string June {
             get {
                 return ResourceManager.GetString("June", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kabaddi.
+        /// </summary>
+        public static string Kabaddi {
+            get {
+                return ResourceManager.GetString("Kabaddi", resourceCulture);
             }
         }
         
@@ -7702,11 +7711,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Setting.
+        /// </summary>
+        public static string SabaVirtualSetting_HideSaba {
+            get {
+                return ResourceManager.GetString("SabaVirtualSetting_HideSaba", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saba Virtual Setting Information.
         /// </summary>
         public static string SabaVirtualSettingInformation {
             get {
                 return ResourceManager.GetString("SabaVirtualSettingInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Setting Information.
+        /// </summary>
+        public static string SabaVirtualSettingInformation_HideSaba {
+            get {
+                return ResourceManager.GetString("SabaVirtualSettingInformation_HideSaba", resourceCulture);
             }
         }
         
@@ -7720,11 +7747,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Setting Level.
+        /// </summary>
+        public static string SabaVirtualSettingLevel_HideSaba {
+            get {
+                return ResourceManager.GetString("SabaVirtualSettingLevel_HideSaba", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Saba Virtual Sport.
         /// </summary>
         public static string SabaVirtualSport {
             get {
                 return ResourceManager.GetString("SabaVirtualSport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Sport.
+        /// </summary>
+        public static string SabaVirtualSport_HideSaba {
+            get {
+                return ResourceManager.GetString("SabaVirtualSport_HideSaba", resourceCulture);
             }
         }
         
@@ -7959,6 +8004,15 @@ namespace Fanex.Athena.Resources {
         public static string SeparateSabaWinLoss {
             get {
                 return ResourceManager.GetString("SeparateSabaWinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Separate Virtual Sports from Sportsbook.
+        /// </summary>
+        public static string SeparateSabaWinLoss_HideSaba {
+            get {
+                return ResourceManager.GetString("SeparateSabaWinLoss_HideSaba", resourceCulture);
             }
         }
         

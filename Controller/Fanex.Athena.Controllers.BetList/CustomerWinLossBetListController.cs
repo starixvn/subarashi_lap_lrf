@@ -27,6 +27,8 @@
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
+
             return ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/CustomerWl/Main.cshtml", "Shard_Lrf_BetList_CustomerWL_Mem");
         }
 

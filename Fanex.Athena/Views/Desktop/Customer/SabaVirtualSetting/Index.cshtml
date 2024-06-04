@@ -24,7 +24,7 @@
                     <div class="multiselect-container">
                         <select id="danger-level-multiselect" name="danger-level-multiselect"></select>
                     </div>
-                    <label for="danger-level-ids">@ViewResources.SabaVirtualSettingLevel</label>
+                    <label for="danger-level-ids">@(ViewBag.IsHideSaba ? ViewResources.SabaVirtualSettingLevel_HideSaba : ViewResources.SabaVirtualSettingLevel)</label>
                 </div>
                 <div class="col m5 s5 l5 xl5">
                     <div class="button-block">

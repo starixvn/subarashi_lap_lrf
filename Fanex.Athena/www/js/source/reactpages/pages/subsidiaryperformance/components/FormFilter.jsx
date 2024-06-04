@@ -211,7 +211,7 @@ export class FormFilter extends Component {
                     <div className="checkbox-group">
                         <input disabled={disableSeparateSabaWinLoss} type="checkbox" className="checkbox" checked={this.props.isSeparateSabaWinLoss} id="SeparateSabaWinLoss"
                             onChange={() => this._changeIsSeparateSabaWinLoss(!this.state.isSeparateSabaWinLoss)} />
-                        <label htmlFor="SeparateSabaWinLoss">{LangHelper.getSingleResource("SeparateSabaWinLoss")}</label>
+                        <label htmlFor="SeparateSabaWinLoss">{LangHelper.getSingleResource("SeparateSabaWinLoss", AppData.isHideSaba)}</label>
                     </div>
                 </div>
             </div>);

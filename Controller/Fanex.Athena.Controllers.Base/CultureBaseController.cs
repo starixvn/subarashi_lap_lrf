@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using Extension.Utility;
     using Fanex.Athena.Controllers.Base;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
@@ -24,6 +25,8 @@
         public IProductService ProductServiceInstance { get; set; }
 
         public bool IsFakeLicensee(string licenseeName) => LicenseeSettingServiceInstance.IsFakeLicensee(licenseeName);
+
+        public bool IsHideSaba => SabaHelper.IsHideSaba(SessionServiceInstance.LicenseeSession.SpecialPlatform);
 
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {

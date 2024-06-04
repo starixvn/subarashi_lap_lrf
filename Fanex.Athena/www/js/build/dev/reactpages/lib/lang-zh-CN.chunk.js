@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2024 2:46:34 PM
+// Generated at: 5/23/2024 3:07:07 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -522,6 +522,7 @@ window._language_zh_CN = {
   July: "七月",
   Jun: "六月",
   June: "六月",
+  Kabaddi: "卡巴迪",
   KeepCurrentComm: "保持当前的佣金",
   KOTime: "开赛时间",
   Last: "最后",
@@ -851,9 +852,13 @@ window._language_zh_CN = {
   Saba: "沙巴",
   SabaCoins: "沙巴点数",
   SabaVirtualSetting: "沙巴虚拟体育设定",
+  SabaVirtualSetting_HideSaba: "虚拟体育设定",
   SabaVirtualSettingInformation: "沙巴虚拟体育设定资讯",
+  SabaVirtualSettingInformation_HideSaba: "虚拟设定信息",
   SabaVirtualSettingLevel: "沙巴虚拟体育设定等级",
+  SabaVirtualSettingLevel_HideSaba: "虚拟设定等级",
   SabaVirtualSport: "沙巴虚拟赛事",
+  SabaVirtualSport_HideSaba: "虚拟体育",
   SabaVirtualSportsNote: "沙巴虚拟体育不支援系统串关。",
   SabaVirtualSportsWinLoss: "沙巴虚拟赛事输赢",
   Saturday: "星期日",
@@ -875,6 +880,7 @@ window._language_zh_CN = {
   SelectOptions: "选择一个选项",
   SelectTop: "选择最大",
   Sep: "九月",
+  SeparateSabaWinLoss_HideSaba: "将虚拟体育与体育博彩分开",
   September: "九月",
   ServerBusyMessage: "由于服务器繁忙，您的请求现在无法处理。请稍后再试。",
   ServiceMaintenanceMsg: "系统繁忙,请过几分钟后再试",

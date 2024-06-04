@@ -26,6 +26,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
 
             return await ProcessDefaultRequest(
                 metaModel,

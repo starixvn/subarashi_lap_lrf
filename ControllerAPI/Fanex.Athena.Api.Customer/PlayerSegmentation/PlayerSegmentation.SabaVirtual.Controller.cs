@@ -26,15 +26,16 @@
         }
 
         [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement)]
+        [ApiFunctionAuthorization(PermissionKeys.SabaVirtualSetting)]
         [ValidationApiRequest(IsValidCurrencyList = true)]
         [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindExportAll = true, BindLanguage = true)]
         public async Task<HttpResponseMessage> ExportSabaVirtualPlayerList(SabaVirtualPlayerListMetaModel metaModel)
         {
+            metaModel.IsHideSaba = IsHideSaba;
             var dataSource = await _playerService.GetSabaVirtualPlayerListAsync(metaModel).ConfigureAwait(false);
             if (dataSource.Data.Any())
             {
-                const string fileName = "SabaVirtualSetting.xls";
+                var fileName = metaModel.IsHideSaba ? "VirtualSetting.xls" : "SabaVirtualSetting.xls";
                 var excel = new SabaVirtualSettingExcel(dataSource.Data, metaModel);
                 excel.Export();
 

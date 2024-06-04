@@ -59,7 +59,9 @@
                             x.BaseCurrency == metaModel.BaseCurrency &&
                             x.CurrencyName == metaModel.CurrencyName),
                         Arg.Is<DataTable>(x => x.TableName == "MainData"),
-                        Arg.Is<DataTable>(x => x.TableName == "TotalData"));
+                        Arg.Is<DataTable>(x => x.TableName == "TotalData"),
+                        Arg.Is<bool>(x => x == controller.IsHideSaba));
+
                     Assert.That(result, Is.InstanceOf<ExcelResult>());
                 });
             }

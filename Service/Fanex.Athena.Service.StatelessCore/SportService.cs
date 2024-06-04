@@ -28,6 +28,7 @@ namespace Fanex.Athena.Service.StatelessCore
             ((int)SportType.SabaFutsal, (int)SportType.Soccer, new [] { 108 }),
             ((int)SportType.SabaTennis, (int)SportType.Tennis, new [] { 42 }),
             ((int)SportType.SabaIceHockey, (int)SportType.IceHockey, new [] { 42 }),
+            ((int)SportType.SabaKabaddi, (int)SportType.Kabaddi, new [] { 42 }),
             ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, new [] { 113 }),
             ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new [] { 122 }),
             ((int)SportType.SabaESportsPinGoal, (int)SportType.Esports, new [] { 151 })
@@ -59,7 +60,7 @@ namespace Fanex.Athena.Service.StatelessCore
         public Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "")
             => _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes);
 
-        public async Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, string productCodes = "", bool isHideSaba = false)
+        public async Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, bool isHideSaba, string productCodes = "")
         {
             var result = new List<SportProductItem>();
             result.AddRange(await GetSportsAndProducts(licenseeId, languageCode, productCodes));
@@ -207,6 +208,10 @@ namespace Fanex.Athena.Service.StatelessCore
 
                 case HardCodeSportType.SabaIceHockey:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.IceHockey);
+                    break;
+
+                case HardCodeSportType.SabaKabaddi:
+                    sportName = _cacheRefAdapter.GetSportName((int)SportType.Kabaddi);
                     break;
 
                 default:

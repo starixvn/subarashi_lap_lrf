@@ -13,10 +13,10 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
     public interface IBetTypeService
     {
-        Task<IList<BettypeProductItem>> GetBettypes(IList<SportProductItem> sports, string languageCode);
+        Task<IList<BettypeProductItem>> GetBettypes(IList<SportProductItem> sports, string languageCode, bool isHideSaba);
 
-        Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba = false);
+        Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba);
 
-        Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes, bool isHideSaba = false);
+        Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes, bool isHideSaba);
     }
 }

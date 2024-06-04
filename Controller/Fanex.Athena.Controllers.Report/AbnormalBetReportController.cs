@@ -33,12 +33,11 @@ namespace Fanex.Athena.Controllers.Report
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
-            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportAbnormalBet,
-                licenseeSession.LicenseeName);
+            var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportAbnormalBet, licenseeSession.LicenseeName);
 
-            var sports = (await _sportService.GetSportAndProductAndSabaSport(licenseeSession.LicenseeId, userSession.Language, Product.SB).ConfigureAwait(true))
+            var sports = (await _sportService.GetSportAndProductAndSabaSport(licenseeSession.LicenseeId, userSession.Language, IsHideSaba, Product.SB).ConfigureAwait(true))
                     .Where(x => x.ParentId >= 0);
-            var bettypes = await _betTypeService.GetBettypesByProduct(licenseeSession.LicenseeId, Product.SB, userSession.Language).ConfigureAwait(true);
+            var bettypes = await _betTypeService.GetBettypesByProduct(licenseeSession.LicenseeId, Product.SB, userSession.Language, IsHideSaba).ConfigureAwait(true);
 
             var model = new AbnormalBetViewModel
             {

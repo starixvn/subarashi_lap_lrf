@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/21/2024 2:46:34 PM
+// Generated at: 5/23/2024 3:07:07 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -554,6 +554,7 @@ window._language_vi_VN = {
   July: "Tháng Bảy",
   Jun: "Tháng 6",
   June: "Tháng Sáu",
+  Kabaddi: "Kabaddi",
   KeepCurrentComm: "Giữ hoa hồng hiện tại",
   KOTime: "Thời gian bắt đầu",
   Last: "Cuối cùng",
@@ -912,9 +913,13 @@ window._language_vi_VN = {
   Saba: "Saba",
   SabaCoins: "Saba Xu",
   SabaVirtualSetting: "Cài đặt Saba Ảo",
+  SabaVirtualSetting_HideSaba: "Cài Đặt Thể Thao Ảo",
   SabaVirtualSettingInformation: "Thông tin cài đặt của Saba Ảo",
+  SabaVirtualSettingInformation_HideSaba: "Thông tin cài đặt Ảo",
   SabaVirtualSettingLevel: "Cấp bậc cài đặt trên Saba Ảo",
+  SabaVirtualSettingLevel_HideSaba: "Cấp Độ Cài Đặt Ảo",
   SabaVirtualSport: "Thể Thao Ảo Saba",
+  SabaVirtualSport_HideSaba: "Thể Thao Ảo",
   SabaVirtualSportsNote: "Thể Thao Ảo Saba không hỗ trợ cho Cược Tổng Hợp.",
   SabaVirtualSportsWinLoss: "Thắng Thua Thể Thao Ảo Saba",
   Saturday: "Thứ Bảy",
@@ -939,6 +944,7 @@ window._language_vi_VN = {
   SelectTop: "Chọn Hàng đầu",
   Sep: "Tháng 9",
   SeparateSabaWinLoss: "Tách Saba Thể Thao Ảo ra khỏi Sportsbook",
+  SeparateSabaWinLoss_HideSaba: "Tách Thể Thao Ảo khỏi Sportsbook",
   September: "Tháng Chín",
   ServerBusyMessage: "Yêu cầu của bạn chưa được xử lý do máy chủ đang bận. Vui lòng thử lại sau.",
   ServiceMaintenanceMsg: "Hệ thống đang bận. Vui lòng thử lại sau ít phút.",

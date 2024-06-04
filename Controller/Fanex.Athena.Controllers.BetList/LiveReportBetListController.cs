@@ -130,6 +130,7 @@
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
 
             if (!metaModel.IsExportExcel)
             {
@@ -152,6 +153,8 @@
             };
             metaModel.StartIndex = ((metaModel.PageIndex - 1) * metaModel.PageSize) + 1;
             metaModel.HiddenColumns = HiddenColumns;
+            metaModel.SpecialPlatform = SessionServiceInstance.LicenseeSession.SpecialPlatform;
+
             return await ProcessExportExcel(metaModel, "LiveReportBetList", "/BetList/ExportExcelLiveReport").ConfigureAwait(false);
         }
 

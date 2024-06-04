@@ -5,5 +5,7 @@
         public string LevelList { get; set; }
 
         public string Language { get; set; }
+
+        public bool IsHideSaba { get; set; }
     }
 }

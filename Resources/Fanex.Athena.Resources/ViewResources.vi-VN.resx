@@ -3351,4 +3351,22 @@
   <data name="ViewSabaCoins" xml:space="preserve">
     <value>Xem Saba Xu</value>
   </data>
+  <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
+    <value>Tách Thể Thao Ảo khỏi Sportsbook</value>
+  </data>
+  <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
+    <value>Cài Đặt Thể Thao Ảo</value>
+  </data>
+  <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
+    <value>Thể Thao Ảo</value>
+  </data>
+  <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
+    <value>Thông tin cài đặt Ảo</value>
+  </data>
+  <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
+    <value>Cấp Độ Cài Đặt Ảo</value>
+  </data>
+  <data name="Kabaddi" xml:space="preserve">
+    <value>Kabaddi</value>
+  </data>
 </root>

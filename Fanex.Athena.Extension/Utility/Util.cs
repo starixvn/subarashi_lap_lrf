@@ -20,7 +20,7 @@ namespace Fanex.Athena.Extension.Utility
                     {
                         { "en-US", "English" },
                         { "zh-CN", "简体中文" },
-                        { "vi-VN", "Việt Nam" },
+                        { "vi-VN", "Tiếng Việt" },
                         { "id-ID", "Bahasa Indonesia" },
                         { "th-TH", "แบบไทย" },
                     };

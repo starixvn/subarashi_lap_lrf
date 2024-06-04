@@ -68,7 +68,7 @@
                SessionServiceInstance.LicenseeSession.OfferedSubProductList,
                Product.SB);
 
-            var sports = await _sportService.GetSportAndProductAndSabaSport(licenseeId, languageCode, productCode).ConfigureAwait(false);
+            var sports = await _sportService.GetSportAndProductAndSabaSport(licenseeId, languageCode, IsHideSaba, productCode).ConfigureAwait(false);
             var sportListItems = sports.Where(item => item.ParentId != ProductType).Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.Name }).ToList();
             sportListItems.Add(new SelectListItem { Value = ParlayId, Text = ViewResources.Parlay });
 

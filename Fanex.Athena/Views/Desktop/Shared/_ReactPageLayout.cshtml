@@ -6,6 +6,7 @@
     var sessionService = DependencyResolver.Current.GetService<ISessionService>();
     var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
     var userSession = sessionService.UserSession;
+    var licSession = sessionService.LicenseeSession;
     var userCurrencies = userSession == null || userSession.CurrencyList == null ?
 new Dictionary<string, string>() :
 userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
@@ -13,6 +14,8 @@ userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
     var identityName = userSession.IdentityName;
     var langCode = System.Globalization.CultureInfo.CurrentUICulture.IetfLanguageTag;
     var rootUrl = Url.Content("~");
+    var isHideSaba = Fanex.Athena.Model.Core.SabaHelper.IsHideSaba(licSession.SpecialPlatform);
+
 }
 <!DOCTYPE html>
 
@@ -28,6 +31,7 @@ userSession.CurrencyList.ToDictionary(x => x.Key.ToString(), x => x.Value);
     @RenderSection("pagecss", required: false)
 </head>
 <body>
+    <input type="hidden" id="IsHideSaba" value="@( isHideSaba ? 1 : 0)" />
     @Html.AntiForgeryToken()
 
     <div class="wrapper">

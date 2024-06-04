@@ -7,6 +7,7 @@ import NoDataTitle from '@jsroot/components/NoDataTitle';
 import GridHelper from '../../../lib/helpers/gridHelper';
 import PlayerRow from './grid/PlayerRow';
 import LangHelper from '@jsroot/lib/langHelper';
+import AppData from '@jsroot/lib/AppData'
 import SabaVirtualSettingCell from './grid/SabaVirtualSettingCell';
 
 const MAX_WIDTH_PAGE = 1920;
@@ -29,19 +30,19 @@ export const DataGrid = (props) => {
     })
 
     const _renderHeaderSection = () => {
-        return([
+        return ([
             <HeaderRow style={{ height: 32 }} key='header1'>
                 {showSubsidiary && <HeaderCell colWidth={120} rowSpan={2}>{LangHelper.getSingleResource('Subsidiary')}</HeaderCell>}
                 <HeaderCell colWidth={180} rowSpan={2} sortBy={2}>{LangHelper.getSingleResource('ExternalId')}</HeaderCell>
-                <HeaderCell colWidth={180} rowSpan={2} sortBy={1}>{LangHelper.getSingleResource('SystemId')}</HeaderCell>    
-                <HeaderCell colWidth={240} colSpan={2}><SabaVirtualSettingCell cell={{text : LangHelper.getSingleResource('SabaVirtualSetting')}}></SabaVirtualSettingCell></HeaderCell>
+                <HeaderCell colWidth={180} rowSpan={2} sortBy={1}>{LangHelper.getSingleResource('SystemId')}</HeaderCell>
+                <HeaderCell colWidth={240} colSpan={2}><SabaVirtualSettingCell cell={{ text: LangHelper.getSingleResource('SabaVirtualSetting', AppData.isHideSaba) }}></SabaVirtualSettingCell></HeaderCell>
                 <HeaderCell colWidth={180} rowSpan={2} sortBy={3}>{LangHelper.getSingleResource('LastModifiedDate')}</HeaderCell>
             </HeaderRow>,
             <HeaderRow style={{ height: 32 }} key='header2'>
                 <HeaderCell colWidth={120} sortBy={4}>{LangHelper.getSingleResource('Soccer')}</HeaderCell>
                 <HeaderCell colWidth={120} sortBy={5}>{LangHelper.getSingleResource('Basketball')}</HeaderCell>
             </HeaderRow>
-        ])             
+        ])
     }
 
     const _handleSort = (orderCol, sortType) => {
@@ -69,7 +70,7 @@ export const DataGrid = (props) => {
                 body={_renderDataSection(playerList)}
                 containerPadding={30}
                 shouldResetScrollPosition={true}
-                onSort={_handleSort}/>
+                onSort={_handleSort} />
         </React.Fragment>
     );
 }

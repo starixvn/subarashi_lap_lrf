@@ -52,7 +52,8 @@
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     subsidiaryList: @Html.Raw(Model.GroupSubsidiaryList.ToJsonWithServiceStack()),
     dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")'},
-    viewType: @Model.ViewType
+    viewType: @Model.ViewType,
+    isHideSaba: '@Model.IsHideSaba.ToString()' === 'True',
     };
 }
 <div id="app-container">

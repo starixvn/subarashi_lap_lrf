@@ -12,6 +12,7 @@
     using Fanex.Athena.Excel.Base;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.MetaModel;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
@@ -56,6 +57,8 @@
         protected UserAuthInfo UserSession => SessionService.UserSession;
 
         protected LicenseeAuthInfo LicenseeSession => SessionService.LicenseeSession;
+
+        public bool IsHideSaba => SabaHelper.IsHideSaba(LicenseeSession.SpecialPlatform);
 
         protected IDictionary<int, int[]> CurrencyAgentListBySubsidiaryBusiness(IMetaModelSubsidiarySearch metaModel) =>
             SubsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, UserSession) ? UserSession.CurrencyAgentList

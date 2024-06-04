@@ -5,7 +5,14 @@
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class BaseBettingTicketMetaModel : IMetaModelValidation, IMetaModelAgent, IMetaModelCurrencyIdList, IMetaModelShowBetFromIP, IMetaModelProductCodeList, IMetaModelSubsidiarySearch
+    public class BaseBettingTicketMetaModel :
+        IMetaModelValidation,
+        IMetaModelAgent,
+        IMetaModelCurrencyIdList,
+        IMetaModelShowBetFromIP,
+        IMetaModelProductCodeList,
+        IMetaModelSubsidiarySearch,
+        IMetaModelSpecialPlatform
     {
         private const int DefaultPageSize = 50;
 

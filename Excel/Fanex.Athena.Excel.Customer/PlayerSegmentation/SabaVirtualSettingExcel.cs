@@ -43,7 +43,7 @@
             row.Cells[ColumnSubsidiary].SetCellValue(ViewResources.Subsidiary);
             row.Cells[ColumnExternalId].SetCellValue(ViewResources.ExternalId);
             row.Cells[ColumnSystemId].SetCellValue(ViewResources.SystemId);
-            row.Cells[ColumnSabaVirtualSetting].SetCellValue(ViewResources.SabaVirtualSetting);
+            row.Cells[ColumnSabaVirtualSetting].SetCellValue(_metaModel.IsHideSaba ? ViewResources.SabaVirtualSetting_HideSaba : ViewResources.SabaVirtualSetting);
             row.Cells[ColumnLastModifiedDate].SetCellValue(ViewResources.LastModifiedDate);
 
             var row2 = sheet.CopyRow(TemplateSheet, sourceRowIndex: RowHeaderTemplate + 1, destRowIndex: RowHeaderTemplate + 1);
@@ -53,7 +53,7 @@
 
         protected override void AssignTitle(ISheet sheet)
         {
-            var title = ViewResources.SabaVirtualSetting;
+            var title = _metaModel.IsHideSaba ? ViewResources.SabaVirtualSetting_HideSaba : ViewResources.SabaVirtualSetting;
 
             sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, destRowIndex: RowTitleTemplate, 1, title, CellTitleIndex);
             sheet.CreateFreezePane(0, RowContentTemplate);

@@ -39,6 +39,7 @@
             var licenseeSession = SessionService.LicenseeSession;
             var isSubsidiary = userSession.UserLevel == UserLevelType.Subsidiary;
             metaModel.LicenseeName = licenseeSession.LicenseeName;
+            metaModel.IsHideSaba = IsHideSaba;
 
             string agentListXml = null;
             if (isSubsidiary)
@@ -65,6 +66,7 @@
             var licenseeSession = SessionService.LicenseeSession;
             var userSession = SessionService.UserSession;
             metaModel.LicenseeName = licenseeSession.LicenseeName;
+            metaModel.IsHideSaba = IsHideSaba;
 
             var agentIdListByCurrency = SubsidiaryService.GetCurrencyAgentList(userSession, licenseeSession.LicenseeName, metaModel.SubsidiaryId, metaModel.IsExcludeTest);
             if (agentIdListByCurrency.Any())

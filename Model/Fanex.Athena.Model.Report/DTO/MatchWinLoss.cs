@@ -14,6 +14,8 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public int LeagueId { get; set; }
 
+        public int LeagueGroupId { get; set; }
+
         public string LeagueName { get; set; }
 
         public short SportType { get; set; }

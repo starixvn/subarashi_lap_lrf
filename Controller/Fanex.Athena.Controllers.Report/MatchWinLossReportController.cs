@@ -86,6 +86,7 @@
         {
             var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
+            var isHideSaba = IsHideSaba;
 
             if (metaModel.IsExportExcel)
             {
@@ -119,7 +120,7 @@
             {
                 Param = metaModel,
                 MainResult = reportData,
-                LeagueList = CreateLeagueList(reportData),
+                LeagueList = CreateLeagueList(reportData, isHideSaba),
                 SpecialBetTypeResult = reportDataOutrightParlay,
                 CurrencyList = currencies,
                 ProductAccess = productAccess,
@@ -169,7 +170,7 @@
             const string FileName = nameof(MatchWinLoss);
             var userSession = SessionServiceInstance.UserSession;
             var licenseeSession = SessionServiceInstance.LicenseeSession;
-
+            var isHideSaba = IsHideSaba;
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/Reports/MatchWinLoss.xls");
             var productAccess = ProductServiceInstance.GetSingleWalletProductAccess(
                 licenseeSession.LicenseeId,
@@ -192,12 +193,13 @@
             };
 
             metaModel.PageSize = PageSize;
+
             var reportData = await _matchWinLossService.GetDetailDataSet(metaModel).ConfigureAwait(false);
             var mainTable = reportData.Tables[0];
             mainTable = AddColumnsForSorting(mainTable);
             mainTable.DefaultView.Sort = $"{NewProductIdColumnName} asc, leaguename asc, matchname ASC";
             mainTable = mainTable.DefaultView.ToTable();
-            var excel = CreateExcel(templatePath, metaModel, showingOption, convertingOption, mainTable, reportData.Tables[1]);
+            var excel = CreateExcel(templatePath, metaModel, showingOption, convertingOption, mainTable, reportData.Tables[1], isHideSaba);
 
             excel.Export();
 
@@ -210,19 +212,26 @@
             ShowingOption showingOption,
             ConvertingOption convertingOption,
             DataTable mainTable,
-            DataTable totalData)
+            DataTable totalData,
+            bool isHideSaba)
         {
-            return new MatchWinLossExcel(templatePath, convertingOption, showingOption, mainTable, totalData, metaModel);
+            return new MatchWinLossExcel(templatePath, convertingOption, showingOption, mainTable, totalData, metaModel, isHideSaba);
         }
 
-        private static IDictionary<int, string> CreateLeagueList(IList<MatchWinLoss> reportData)
+        private static IDictionary<int, string> CreateLeagueList(IList<MatchWinLoss> reportData, bool isHideSaba)
         {
             if (reportData == null || reportData.Count == 0)
             {
                 return new Dictionary<int, string>();
             }
 
-            return reportData.GroupBy(i => i.LeagueId).ToDictionary(i => i.Key, i => i.FirstOrDefault().LeagueName);
+            return reportData.GroupBy(i => i.LeagueId).ToDictionary(
+                i => i.Key,
+                i =>
+                {
+                    var leagueName = i.FirstOrDefault()?.LeagueName;
+                    return isHideSaba ? SabaHelper.RemoveSabaText(leagueName) : leagueName;
+                });
         }
 
         private static MatchWinLoss GetTotal(IList<MatchWinLoss> dataList)

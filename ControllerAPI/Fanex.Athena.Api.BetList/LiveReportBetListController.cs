@@ -121,6 +121,7 @@
             metaModel.IsShowIpvn = userSession.IsShowIpvn;
             metaModel.IsShowIp = userSession.IsShowIp;
             metaModel.UspKey = uspKey;
+            metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
 
             return await BridgeClientService.PostAsync("/LiveReportBetList/GetData",
                 metaModel, userSession.Language).ConfigureAwait(false);
@@ -139,6 +140,7 @@
             metaModel.IsShowIpvn = userSession.IsShowIpvn;
             metaModel.IsShowIp = userSession.IsShowIp;
             metaModel.UspKey = uspKey;
+            metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
 
             return await BridgeClientService.PostAsync("/LiveReportBetList/GetPagingData",
                 metaModel, userSession.Language).ConfigureAwait(false);

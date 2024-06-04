@@ -6,7 +6,7 @@ using Fanex.Athena.Model.Customer.DTO;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {
-    public class LastBetsMonitoringMetaModel : IMetaModelValidation, IMetaModelShowBetFromIP, IMetaModelProductCodeList
+    public class LastBetsMonitoringMetaModel : IMetaModelValidation, IMetaModelShowBetFromIP, IMetaModelProductCodeList, IMetaModelSpecialPlatform
     {
         private const int DefaultPageSize = 10;
 

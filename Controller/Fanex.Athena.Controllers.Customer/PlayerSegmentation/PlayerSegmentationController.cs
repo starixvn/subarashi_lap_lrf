@@ -105,7 +105,8 @@
                     SportList = GetDangerLevelSportList()
                 } : null,
                 ViewType = viewType,
-                SubsidiaryList = subsidiaryList
+                SubsidiaryList = subsidiaryList,
+                IsHideSaba = IsHideSaba,
             };
 
             return model;

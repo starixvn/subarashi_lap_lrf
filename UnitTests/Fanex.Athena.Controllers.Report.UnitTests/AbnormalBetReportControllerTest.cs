@@ -59,10 +59,11 @@
                 MinDate = DateTimeHelper.CreateDateTime(2021, 2, 15),
                 MaxDate = DateTimeHelper.CreateDateTime(2021, 3, 30),
             };
+            const bool isHideSaba = false;
 
             _reportSettingService.GetSetting(PermissionKeys.ReportAbnormalBet, SessionService.LicenseeSession.LicenseeName).
                 Returns(reportSetting);
-            _sportService.GetSportAndProductAndSabaSport(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language, Product.SB).Returns(new List<SportProductItem>());
+            _sportService.GetSportAndProductAndSabaSport(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language, isHideSaba, Product.SB).Returns(new List<SportProductItem>());
 
             return new AbnormalBetReportController(_reportSettingService, _sportService, _betTypeService)
             {

@@ -47,7 +47,7 @@
         {
             const string DefaultLicenseeName = "12bet";
 
-            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>(), LicenseeName = DefaultLicenseeName });
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>(), LicenseeName = DefaultLicenseeName, SpecialPlatform = 0 });
             _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 UserId = FakeHelper.Create<int>(),
@@ -116,7 +116,8 @@
                 _betTypeService.GetBettypesByProduct(
                  _sessionService.LicenseeSession.LicenseeId,
                  productCode,
-                 _sessionService.UserSession.Language)
+                 _sessionService.UserSession.Language,
+                 controller.IsHideSaba)
                  .Returns(new List<CheckedItem> { item });
 
                 _productService.GetAllowedSubProductCodeList(
@@ -200,7 +201,10 @@
                 _portalApiService,
                 _productService,
                 _sportService,
-                _memCacheService);
+                _memCacheService)
+            {
+                SessionService = _sessionService
+            };
         }
     }
 }

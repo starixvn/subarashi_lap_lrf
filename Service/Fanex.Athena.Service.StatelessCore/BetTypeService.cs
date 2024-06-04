@@ -25,22 +25,23 @@
             _cacheRefAdapter = cacheRefAdapter;
         }
 
-        public async Task<IList<BettypeProductItem>> GetBettypes(IList<SportProductItem> sports, string languageCode)
+        public async Task<IList<BettypeProductItem>> GetBettypes(IList<SportProductItem> sports, string languageCode, bool isHideSaba)
         {
             if (sports != null && sports.Count > 0)
             {
                 var sportsParameters = BuildSportXmlParameter(sports);
                 var betypes = await _betTypeDataAccess.GetBettypes(sportsParameters).ConfigureAwait(false);
-                return betypes.Select(bettype => BuildBetTypeCheckItem(bettype, languageCode)).ToList();
+                return betypes.Select(bettype => BuildBetTypeCheckItem(bettype, languageCode, isHideSaba)).ToList();
             }
 
             return new List<BettypeProductItem>();
         }
 
-        private BettypeProductItem BuildBetTypeCheckItem((string ProductPrefix, int BetTypeId) betType, string languageCode)
+        private BettypeProductItem BuildBetTypeCheckItem((string ProductPrefix, int BetTypeId) betType, string languageCode, bool isHideSaba)
         {
             var betTypeId = betType.BetTypeId;
-            var bettypeName = _cacheRefAdapter.GetBetTypeName(betTypeId, languageCode);
+            var bettypeName = _cacheRefAdapter.GetBetTypeName(betTypeId, languageCode, isHideSaba);
+
             if (MappingHelper.MapBettypeSportBySport.ContainsKey(betType.BetTypeId))
             {
                 var suffix = _cacheRefAdapter.GetSportName(MappingHelper.MapBettypeSportBySport[betTypeId], languageCode);
@@ -57,12 +58,12 @@
             };
         }
 
-        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba = false)
+        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba)
         {
             return await _betTypeDataAccess.GetBettypesByProduct(licenseeId, productCode, languageCode, isHideSaba).ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes, bool isHideSaba = false)
+        public async Task<IEnumerable<CheckedItem>> GetBetTypeForProducts(int licenseeId, string lang, string productCodes, bool isHideSaba)
         {
             var betTypes = await _betTypeDataAccess.GetBetTypeForProducts(licenseeId, productCodes);
             var result = betTypes.GroupBy(_ => _.ProductCode,

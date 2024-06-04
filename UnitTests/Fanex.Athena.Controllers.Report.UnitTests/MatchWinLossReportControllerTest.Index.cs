@@ -6,7 +6,6 @@
     using System.Web.Mvc;
 
     using Base.UnitTests;
-
     using Model.Report.DTO;
     using Model.Report.MetaModel;
     using Model.Report.ViewModel;
@@ -40,28 +39,33 @@
             }
         }
 
-        [TestCase("", false, 6)]
-        [TestCase("BA", false, 8)]
-        [TestCase("BA", true, 10)]
+        [TestCase("", false, 6, 0)]
+        [TestCase("BA", false, 8, 2)]
+        [TestCase("BA", true, 10, 3)]
         public async Task IndexPost_NotExportExcel_ReturnCorrectViewResult(
             string productCodeList,
             bool isAllowedCustomerComm,
-            int expectedColumnCount)
+            int expectedColumnCount,
+            int specialPlatform)
         {
             using (var controller = CreateController(productCodeList))
             {
                 // Arrange
                 SessionService.LicenseeSession.IsAllowedCustomerComm = isAllowedCustomerComm;
+                SessionService.LicenseeSession.SpecialPlatform = specialPlatform;
                 var metaModel = new MatchWinLossMetaModel
                 {
                     CurrencyId = CurrencyId,
                     IsExportExcel = false
                 };
-
                 var expectedData = new List<MatchWinLoss>
                 {
                     new MatchWinLoss()
+                    {
+                        LeagueName = "Test"
+                    }
                 };
+
                 _matchWinLossService.GetDataList(metaModel).Returns(expectedData);
 
                 // Action

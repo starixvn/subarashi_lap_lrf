@@ -25,5 +25,7 @@
         public bool ConvertAll { get; set; }
 
         public byte ViewType { get; set; }
+
+        public bool IsHideSaba { get; set; }
     }
 }

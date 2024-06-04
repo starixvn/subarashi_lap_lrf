@@ -12,7 +12,6 @@
     using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Model.Core.MetaModel.Common;
@@ -77,7 +76,7 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<object>> GetSports(string productCode, bool includeSabaSport = false, bool applyHideSaba = false)
+        public async Task<IEnumerable<object>> GetSports(string productCode, bool includeSabaSport = false)
         {
             productCode = _productService.GetAllowedSubProductCodeList(
                 _sessionService.LicenseeSession.OfferedSubProductList,
@@ -85,10 +84,9 @@
 
             var licenseeId = _sessionService.LicenseeSession.LicenseeId;
             var lang = _sessionService.UserSession.Language;
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform) && applyHideSaba;
 
             var sports = includeSabaSport
-                ? await _sportService.GetSportAndProductAndSabaSport(licenseeId, lang, productCode, isHideSaba)
+                ? await _sportService.GetSportAndProductAndSabaSport(licenseeId, lang, IsHideSaba, productCode)
                 : await _sportService.GetSportsAndProducts(licenseeId, lang, productCode);
 
             return sports.Where(x => x.ParentId > -1).Select(x => new { value = x.ID, label = x.Name, status = true });
@@ -105,30 +103,28 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(string productCodes, bool applyHideSaba = false)
+        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(string productCodes)
         {
             if (String.IsNullOrWhiteSpace(productCodes))
             {
                 return new List<CheckedItem>();
             }
 
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform) && applyHideSaba;
-            return await _sportService.GetSportsForTreeView(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, isHideSaba);
+            return await _sportService.GetSportsForTreeView(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, IsHideSaba);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<object>> GetBetTypes(string productCode, bool applyHideSaba = false)
+        public async Task<IEnumerable<object>> GetBetTypes(string productCode)
         {
             productCode = _productService.GetAllowedSubProductCodeList(
                 _sessionService.LicenseeSession.OfferedSubProductList,
                 productCode);
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform) && applyHideSaba;
 
             var bettypes = await _betTypeService.GetBettypesByProduct(
                 _sessionService.LicenseeSession.LicenseeId,
                 productCode,
                 _sessionService.UserSession.Language,
-                isHideSaba).ConfigureAwait(false);
+                IsHideSaba).ConfigureAwait(false);
 
             return bettypes.Select(x => new { value = x.ID, label = x.Name, status = true });
         }
@@ -150,15 +146,14 @@
                 return JsonNetResult(new List<CheckedItem>());
             }
             JsConfig.ExcludeTypeInfo = true;
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
-            var betTypeList = await _betTypeService.GetBetTypeForProducts(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, isHideSaba);
+            var betTypeList = await _betTypeService.GetBetTypeForProducts(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, IsHideSaba);
             var jsonString = ServiceStack.Text.JsonSerializer.SerializeToString(betTypeList);
             _cacheService.Set(cacheKey, jsonString, cacheTime);
             return JsonNetResult(jsonString);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<object>> GetLeagues(DateTime fromDate, DateTime toDate, int sportId = 0, bool applyHideSaba = false)
+        public async Task<IEnumerable<object>> GetLeagues(DateTime fromDate, DateTime toDate, int sportId = 0)
         {
             var isSabaSport = sportId < 0;
             var sabaSports = _sportService.GetSabaSports();
@@ -166,6 +161,7 @@
             var sportTypeId = isSabaSport ? selectedSabaSport?.SportTypeId : sportId;
 
             var userSession = _sessionService.UserSession;
+            var isHideSaba = IsHideSaba;
             var metaModel = new LeagueMetaModel
             {
                 FromDate = fromDate,
@@ -174,7 +170,6 @@
                 UserId = userSession.UserId,
                 AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
             };
-            var isHideSaba = SabaHelper.IsHideSaba(_sessionService.LicenseeSession.SpecialPlatform);
 
             var specialLeagues = await _portalApiService.GetSpecialLeaguesAsync(_sessionService.LicenseeSession.LicenseeName);
             var leagues = await _leagueDataAccess.GetLeaguesBySport(metaModel, specialLeagues).ConfigureAwait(false);
@@ -183,14 +178,11 @@
 
             var leagueList = (isSabaSport ? GetSabaSportLeagueList(leagues, selectedSabaSport) : GetLeagueListExcludeSabaSport(leagues, excludeSabaSport));
 
-            if (isHideSaba && applyHideSaba)
+            if (isHideSaba)
             {
                 foreach (var league in leagueList)
                 {
-                    league.LeagueName = System.Text.RegularExpressions.Regex.Replace(
-                        league.LeagueName, ViewResources.Saba
-                        , string.Empty
-                        , System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                    league.LeagueName = SabaHelper.RemoveSabaText(league.LeagueName);
                 }
             }
 

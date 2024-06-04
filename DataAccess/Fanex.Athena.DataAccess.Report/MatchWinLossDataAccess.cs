@@ -159,6 +159,7 @@ namespace Fanex.Athena.DataAccess.Report
         {
             var hasBetType = reader.HasColumn("bettype");
             var hasProductName = reader.HasColumn("productname");
+            var hasLeagueGroupId = reader.HasColumn("LeagueGroupId");
             var hasLiveIndicator = reader.HasColumn("liveindicator");
             var hasIsNeutral = reader.HasColumn("isneutral");
             var hasKickOffTime = reader.HasColumn("KickoffTime");
@@ -170,6 +171,7 @@ namespace Fanex.Athena.DataAccess.Report
                 dataList.Add(new MatchWinLoss
                 {
                     LeagueId = reader.ToInt("leagueid"),
+                    LeagueGroupId = hasLeagueGroupId ? reader.ToInt("LeagueGroupId") : 0,
                     MatchId = reader.ToInt("matchid"),
                     MatchCode = reader.ToString("matchcode"),
                     HomeId = reader.ToInt("homeid"),

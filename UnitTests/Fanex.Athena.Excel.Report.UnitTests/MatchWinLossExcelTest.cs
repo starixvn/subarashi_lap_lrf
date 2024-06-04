@@ -238,6 +238,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 _contentData,
                 _totalData,
                 MetaModel,
+                false,
                 Substitute.For<ICacheRefAdapter>());
             excel.TemplateSheet.Returns(Substitute.For<ISheet>());
             return excel;

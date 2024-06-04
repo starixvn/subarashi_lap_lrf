@@ -18,8 +18,9 @@ namespace Fanex.Athena.Excel.Report.UnitTests.TestableClasses
             DataTable exportData,
             DataTable totalData,
             MatchWinLossMetaModel model,
+            bool isHideSaba,
             ICacheRefAdapter cacheRefAdapter)
-            : base(templatePath, convertingOption, showingOption, exportData, totalData, model, cacheRefAdapter)
+            : base(templatePath, convertingOption, showingOption, exportData, totalData, model, isHideSaba, cacheRefAdapter)
         {
         }
 

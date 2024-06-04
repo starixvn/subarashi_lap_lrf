@@ -31,6 +31,7 @@ namespace Fanex.Athena.Controllers.BetList
         {
             var metaModel = CreateDefaultMetaModel();
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
 
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
@@ -57,6 +58,8 @@ namespace Fanex.Athena.Controllers.BetList
 
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
+
             metaModel.IsShowSumStake = true;
             metaModel.UspKey = UspKey;
 

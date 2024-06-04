@@ -1,4 +1,5 @@
 ﻿using Fanex.Athena.Model.Core.DataDomain;
+using Fanex.Athena.Resources;
 
 namespace Fanex.Athena.Model.Core
 {
@@ -11,6 +12,14 @@ namespace Fanex.Athena.Model.Core
                 return true;
             }
             return false;
+        }
+
+        public static string RemoveSabaText(string text)
+        {
+            var sabaText = ViewResources.Saba.Trim();
+            var result = System.Text.RegularExpressions.Regex.Replace(text, sabaText, string.Empty, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            // remove duplicate space
+            return System.Text.RegularExpressions.Regex.Replace(result, "  ", " ", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         }
     }
 }

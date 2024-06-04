@@ -12,6 +12,8 @@
 
         public bool HasVIPManagementEditPermission { get; set; }
 
+        public bool IsHideSaba { get; set; }
+
         public ProblemPlayerViewModel ProblemPlayerVM { get; set; }
 
         public VipPlayerViewModel VipPlayerVM { get; set; }

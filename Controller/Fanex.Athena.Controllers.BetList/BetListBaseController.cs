@@ -117,6 +117,14 @@
             }
         }
 
+        protected void AssignSpecialPlatformValue(BetListMetaModel metaModel)
+        {
+            if (metaModel != null)
+            {
+                metaModel.SpecialPlatform = SessionServiceInstance.LicenseeSession.SpecialPlatform;
+            }
+        }
+
         protected internal virtual FileContentResult EmptyExcel()
         {
             return File(ExcelHelper.ExportEmptyFile(), "application/vnd.ms-excel", "Empty.xls");

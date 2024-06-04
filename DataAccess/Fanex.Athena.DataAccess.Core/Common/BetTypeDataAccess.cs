@@ -48,7 +48,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
             return results;
         }
 
-        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba = false)
+        public async Task<IList<CheckedItem>> GetBettypesByProduct(int licenseeId, string productCode, string languageCode, bool isHideSaba)
         {
             const string UspName = "Lrf_SelBetTypesByProduct";
 

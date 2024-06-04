@@ -2141,7 +2141,7 @@
     <comment>80941</comment>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>All bettypes, League, and Match filter available only when 1 day is selected</value>
+    <value>All bettypes, League and Match filter available only when 1 day is selected</value>
     <comment>80941</comment>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote1" xml:space="preserve">
@@ -3344,7 +3344,7 @@
     <value>Soccer</value>
   </data>
   <data name="SabaVirtualSport" xml:space="preserve">
-    <value>Saba Virtual Sport</value>
+    <value>Saba Virtual Sports</value>
   </data>
   <data name="SabaVirtualSettingInformation" xml:space="preserve">
     <value>Saba Virtual Setting Information</value>
@@ -3757,5 +3757,23 @@
   </data>
   <data name="Reward_Promotion" xml:space="preserve">
     <value>Reward/ Promotion</value>
+  </data>
+  <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
+    <value>Separate Virtual Sports from Sportsbook</value>
+  </data>
+  <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
+    <value>Virtual Sports Setting</value>
+  </data>
+  <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
+    <value>Virtual Sports</value>
+  </data>
+  <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
+    <value>Virtual Setting Information</value>
+  </data>
+  <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
+    <value>Virtual Setting Level</value>
+  </data>
+  <data name="Kabaddi" xml:space="preserve">
+    <value>Kabaddi</value>
   </data>
 </root>

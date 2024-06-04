@@ -85,7 +85,7 @@
         {
             var excel = Substitute.ForPartsOf<MatchWinLossExcel>();
             excel.When(x => x.Export()).DoNotCallBase();
-            controller.CreateExcel(string.Empty, null, null, null, null, null).ReturnsForAnyArgs(excel);
+            controller.CreateExcel(string.Empty, null, null, null, null, null, controller.IsHideSaba).ReturnsForAnyArgs(excel);
         }
 
         private MatchWinLossReportController CreateController(string productCodeList = null)
@@ -111,7 +111,7 @@
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;
             controller.ProductServiceInstance = productService;
-            controller.When(x => x.CreateExcel(string.Empty, null, null, null, null, null)).DoNotCallBase();
+            controller.When(x => x.CreateExcel(string.Empty, null, null, null, null, null, controller.IsHideSaba)).DoNotCallBase();
 
             return controller;
         }

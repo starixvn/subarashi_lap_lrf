@@ -53,10 +53,11 @@
             {
                 // Arrange
                 const string ParlayId = "999";
+                const bool isHideSaba = false;
 
                 var sports = new List<SportProductItem>() { new SportProductItem { ID = 1, ParentId = 0, Name = "Test Sport" } };
 
-                _sportService.GetSportAndProductAndSabaSport(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, string.Empty).Returns(sports);
+                _sportService.GetSportAndProductAndSabaSport(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language, isHideSaba, string.Empty).Returns(sports);
                 _customerClass.GetAllRiskLevel().Returns(new List<RiskLevel> { new RiskLevel { Id = "1" } });
                 // Action
                 var result = await controller.Index() as ViewResult;

@@ -445,7 +445,7 @@
     <value>Pusat Tiket Taruhan</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>Semua jenis taruhan, Liga, dan Filter Pertandingan hanya tersedia ketika 1 hari dipilih</value>
+    <value>Semua jenis taruhan, Liga dan Filter Pertandingan hanya tersedia ketika 1 hari dipilih</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>Data tersedia dari {0}</value>
@@ -1029,7 +1029,6 @@
   <data name="EndDate" xml:space="preserve">
     <value>Tanggal Berakhir</value>
   </data>
-
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -3285,5 +3284,23 @@
   </data>
   <data name="ViewSabaCoins" xml:space="preserve">
     <value>Lihat Koin SABA</value>
+  </data>
+  <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
+    <value>Pisahkan Olahraga Virtual dari Sportsbook</value>
+  </data>
+  <data name="SabaVirtualSetting_HideSaba" xml:space="preserve">
+    <value>Pengaturan Olahraga Virtual</value>
+  </data>
+  <data name="SabaVirtualSport_HideSaba" xml:space="preserve">
+    <value>Olahraga Virtual</value>
+  </data>
+  <data name="SabaVirtualSettingInformation_HideSaba" xml:space="preserve">
+    <value>Informasi Pengaturan Virtual</value>
+  </data>
+  <data name="SabaVirtualSettingLevel_HideSaba" xml:space="preserve">
+    <value>Tingkat Olahraga Virtual</value>
+  </data>
+  <data name="Kabaddi" xml:space="preserve">
+    <value>Kabaddi</value>
   </data>
 </root>

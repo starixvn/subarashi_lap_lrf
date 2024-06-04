@@ -20,6 +20,7 @@
         {
             CreateDefaultMetaModel(metaModel);
             InitBaseCurrencyValue(metaModel);
+            AssignSpecialPlatformValue(metaModel);
 
             return await ProcessDefaultRequest(metaModel, "~/Views/Desktop/BetList/GodOfFortuneWl/Main.cshtml", "Lrf_BetList_GodOfFortuneWL_Mem").ConfigureAwait(false);
         }

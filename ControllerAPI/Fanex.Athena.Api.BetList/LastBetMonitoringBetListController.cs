@@ -9,6 +9,7 @@
     using Base;
     using Base.Attributes;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Common.Interfaces;
@@ -74,6 +75,13 @@
                                       }).ToList();
 
             var leagueList = leagueListNormal.Union(leagueListOutRight);
+            if (IsHideSaba)
+            {
+                foreach (var league in leagueList)
+                {
+                    league.LeagueName = SabaHelper.RemoveSabaText(league.LeagueName);
+                }
+            }
 
             return new
             {

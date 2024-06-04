@@ -50,6 +50,8 @@
 
         public string LevelIdList { get; set; }
 
+        public bool IsHideSaba { get; set; }
+
         public override bool IsValid => base.IsValid && (IsGetAll || FromDate <= ToDate);
     }
 }

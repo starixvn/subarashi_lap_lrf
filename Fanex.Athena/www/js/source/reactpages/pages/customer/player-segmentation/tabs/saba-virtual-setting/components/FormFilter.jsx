@@ -25,7 +25,7 @@ export const FormFilter = (props) => {
     const _submit = (event) => {
         event.preventDefault();
         const { setSelectedParams, searchPlayer, selectedTabKey } = props;
-        const defaultSort =  { orderCol: 2, sortType: 1};
+        const defaultSort = { orderCol: 2, sortType: 1 };
         const params = ParamHelper.ToAPIParams(props, defaultSort, selectedSport, selectedLevel);
         if (!params) {
             return;
@@ -52,7 +52,8 @@ export const FormFilter = (props) => {
                 if (response.status === NoContentStatusCode) {
                     alert(LangHelper.getSingleResource("NoInfo"));
                 } else {
-                    Site.downloadFile(response.data, 'SabaVirtualSetting.xls');
+                    var filename = AppData.isHideSaba ? "VirtualSportsSetting.xls" : 'SabaVirtualSetting.xls';
+                    Site.downloadFile(response.data, filename);
                 }
             });
     }
@@ -127,7 +128,7 @@ export const FormFilter = (props) => {
             keyField="Value"
             valueField="Name"
             statusField="Checked"
-            texts={{ SelectOptions: "Please select"}}
+            texts={{ SelectOptions: "Please select" }}
             isAllTextShown={false}
             hasSearchBox={false}
             treeViewOption={TreeViewOption}
@@ -149,9 +150,9 @@ export const FormFilter = (props) => {
     }
 
     const isDisabledSubmit = (
-        props.subsidiarySearch 
-        && StringHelper.isEmptyOrWhiteSpace(props.selectedSubsidiary)) 
-        || StringHelper.isEmptyOrWhiteSpace(props.selectedCurrency) 
+        props.subsidiarySearch
+        && StringHelper.isEmptyOrWhiteSpace(props.selectedSubsidiary))
+        || StringHelper.isEmptyOrWhiteSpace(props.selectedCurrency)
         || StringHelper.isEmptyOrWhiteSpace(selectedSport)
         || StringHelper.isEmptyOrWhiteSpace(selectedLevel);
 
@@ -199,16 +200,16 @@ export const FormFilter = (props) => {
                 </div>
                 <div className="col-12 col-md-3 col-sm-3 col-lg-3 col-xl-2">
                     <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("SabaVirtualSport")}</label>
+                        <label className="label-text">{LangHelper.getSingleResource("SabaVirtualSport", AppData.isHideSaba)}</label>
                         {_renderSportSelectList()}
                     </div>
                 </div>
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
-                        <label className="label-text">{LangHelper.getSingleResource("SabaVirtualSetting")}</label>
+                        <label className="label-text">{LangHelper.getSingleResource("SabaVirtualSetting", AppData.isHideSaba)}</label>
                         {_renderLevelSelectList()}
                     </div>
-                </div>                    
+                </div>
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <div className="form-group">
                         <label className="label-text">{LangHelper.getSingleResource("Currency")}</label>
@@ -249,7 +250,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     const {
         dateRange, isGetAll, selectedCurrency, selectedParams,
-        username, pagingOption, selectedTabKey, selectedSubsidiary, subsidiarySearch        
+        username, pagingOption, selectedTabKey, selectedSubsidiary, subsidiarySearch
     } = state;
 
     return Object.assign({}, {
