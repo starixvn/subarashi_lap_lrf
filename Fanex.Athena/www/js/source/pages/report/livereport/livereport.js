@@ -122,7 +122,6 @@
             newUrl = QueryString.setParam(newUrl, 'FromDate', $(_selector.FromDate).attr('data-original-from'));
             newUrl = QueryString.setParam(newUrl, 'ToDate', $(_selector.ToDate).attr('data-original-to'));
             newUrl = QueryString.setParam(newUrl, 'LiveIndicator', $(_selector.LiveIndicator).attr('data-original'));
-            newUrl = Helper.setSumParams(newUrl, totalValue);
             newUrl = Site.setProductCodeListParam(newUrl, productOptions);
             newUrl = QueryString.setParam(newUrl, 'SubsidiarySearch', subsidiary.SubsidiarySearch);
             newUrl = QueryString.setParam(newUrl, 'SubsidiaryList', subsidiary.SubsidiaryList);

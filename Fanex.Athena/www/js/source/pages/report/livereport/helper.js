@@ -1,17 +1,5 @@
 ﻿define(['common/querystring'], function (QueryString) {
     'use strict';
-    function setSumParams(url, totalValue) {
-        let newUrl = url;
-        newUrl = QueryString.setParam(newUrl, 'totalrows', totalValue.BetCount);
-        newUrl = QueryString.setParam(newUrl, 'sumwinlost', totalValue.CustomerWinLoss);
-        newUrl = QueryString.setParam(newUrl, 'sumplayercomm', totalValue.CustomerComm);
-        newUrl = QueryString.setParam(newUrl, 'sumlicenseewl', totalValue.LicenseeWinLoss);
-        newUrl = QueryString.setParam(newUrl, 'sumcomm', totalValue.LicenseeComm);
-        newUrl = QueryString.setParam(newUrl, 'sumturnover', totalValue.TurnOver);
-        newUrl = QueryString.setParam(newUrl, 'sumamtdueto3rd', totalValue.AmountDue);
-
-        return newUrl;
-    }
 
     function getMatchListProductOption(sportId, productCode) {
         const newSportId = Number(sportId);
@@ -46,7 +34,6 @@
     }
 
     return {
-        setSumParams: setSumParams,
         getMatchListProductOption: getMatchListProductOption,
     };
 });
