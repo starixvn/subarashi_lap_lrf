@@ -660,5 +660,10 @@
     bottom: 5px;
     right: 0; }
 
+.report-title .icon-excel-white {
+  position: absolute;
+  bottom: 15%;
+  right: 4px; }
+
 
 /*# sourceMappingURL=index.css.map*/

@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Excels\AmendmentTicketListingMultipleExcel.cs" />
     <Compile Include="Excels\AmendmentTicketListingExcel.cs" />
     <Compile Include="Model\DTO\AmendmentTicketListing.cs" />
     <Compile Include="Model\DTO\Notification.cs" />

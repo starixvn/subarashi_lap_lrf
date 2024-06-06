@@ -13,6 +13,7 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.Excels;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
@@ -144,6 +145,37 @@
                 excel.Export();
                 var result = new ExcelResult(excel.Workbook, "TicketListing");
                 return result;
+            }
+
+            return File(ExcelHelper.ExportEmptyFile(), "application/vnd.ms-excel");
+        }
+
+        [HttpPost]
+        [AutoBindMetaModel(BindAgent = true)]
+        public async Task<ActionResult> ExportAllAmendmentTicketListing(NotificationMetaModel metaModel)
+        {
+            UpdateMetaModel(metaModel);
+
+            var result = _notificationService.GetResultAmendment(metaModel);
+            var sessionIdList = result.DataList.Select(_ => _.SessionId);
+            var amendmentTicketList = new List<AmendmentTicketListing>();
+
+            foreach (var sessionid in sessionIdList)
+            {
+                var amendmentTicketMetaModel = new AmendmentTicketListingMetaModel
+                {
+                    SessionId = sessionid,
+                    AgentListXml = metaModel.AgentListXml
+                };
+                var amendmentTicket = await _notificationService.GetAmendmentTicketListing(amendmentTicketMetaModel).ConfigureAwait(false);
+                amendmentTicketList.Add(amendmentTicket);
+            }
+
+            if (amendmentTicketList.Any())
+            {
+                var excel = new AmendmentTicketListingMultipleExcel(amendmentTicketList);
+                excel.Export();
+                return new ExcelResult(excel.Workbook, "TicketListing");
             }
 
             return File(ExcelHelper.ExportEmptyFile(), "application/vnd.ms-excel");

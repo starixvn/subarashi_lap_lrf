@@ -3286,6 +3286,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var _lib_excel__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../lib/excel */ "./www/js/source/reactpages/lib/excel.js");
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -3356,7 +3358,6 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const params = {
       fileName: item.DataFilePath
     };
-    const fileName = this.props.licenseeName;
     this.props.toggleLoader(true);
     this.props.exportAttachment(params).then(response => {
       if (response.status === 204) {
@@ -3444,6 +3445,22 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       content: this.reportTitle
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null));
   }
+  exportExcelAll() {
+    const params = _objectSpread(_objectSpread({}, this.props.param), {}, {
+      PageIndex: 0,
+      PageSize: 0
+    });
+    this.props.toggleLoader(true);
+    _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_8__["default"].exportAllTicketListing(params);
+    this.props.toggleLoader(false);
+  }
+  _buildExportExcelAll() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+      class: "icon-excel-white",
+      title: _lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("ExportToExcel"),
+      onClick: () => this.exportExcelAll()
+    });
+  }
   render() {
     const gridData = this.props.gridData;
     if (!gridData.Data) {
@@ -3462,7 +3479,8 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "result-content"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_ReportTitle__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      content: this.reportTitle
+      content: this.reportTitle,
+      extendContent: this._buildExportExcelAll()
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_4__["Table"], {
       minWidth: 650,
       autoWidth: true,
@@ -3828,6 +3846,16 @@ class Service {
     const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].getFile('NotificationReport/ExportAmendmentTicketListing', {
       sessionId
     });
+    const noContentStatusCode = 204;
+    if (response.status === noContentStatusCode) {
+      alert(_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("NoInfo"));
+    } else {
+      _lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].downloadFile(response.data, 'TicketList.xls');
+    }
+    ;
+  }
+  static async exportAllTicketListing(params) {
+    const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].getFile('NotificationReport/ExportAllAmendmentTicketListing', params);
     const noContentStatusCode = 204;
     if (response.status === noContentStatusCode) {
       alert(_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("NoInfo"));
