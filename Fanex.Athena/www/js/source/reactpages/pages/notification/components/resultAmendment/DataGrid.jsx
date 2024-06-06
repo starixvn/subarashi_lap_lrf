@@ -71,7 +71,6 @@ export class DataGrid extends Component {
         const params = {
             fileName: item.DataFilePath
         };
-        const fileName = this.props.licenseeName;
 
         this.props.toggleLoader(true);
         this.props.exportAttachment(params).then(response => {
@@ -149,6 +148,20 @@ export class DataGrid extends Component {
         )
     }
 
+    exportExcelAll() {
+        const params = {...this.props.param,
+                        PageIndex : 0,
+                        PageSize : 0};
+
+        this.props.toggleLoader(true);
+        service.exportAllTicketListing(params);
+        this.props.toggleLoader(false);              
+    }
+
+    _buildExportExcelAll() {
+        return <i class="icon-excel-white" title={LangHelper.getSingleResource("ExportToExcel")} onClick={() => this.exportExcelAll()}></i>;
+    }
+
     render() {
         const gridData = this.props.gridData;
         if (!gridData.Data) {
@@ -169,7 +182,7 @@ export class DataGrid extends Component {
 
         return (
             <div className="result-content">
-                <ReportTitle content={this.reportTitle} />
+                <ReportTitle content={this.reportTitle} extendContent={this._buildExportExcelAll()}/>
 
                 <Table minWidth={650}
                     autoWidth={true}

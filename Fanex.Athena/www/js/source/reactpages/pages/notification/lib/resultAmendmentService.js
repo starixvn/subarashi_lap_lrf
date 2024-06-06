@@ -43,4 +43,14 @@ export default class Service {
             Site.downloadFile(response.data, 'TicketList.xls');
         };
     }
+
+    static async exportAllTicketListing(params) {
+        const response = await DataService.getFile('NotificationReport/ExportAllAmendmentTicketListing', params)
+        const noContentStatusCode = 204;
+        if (response.status === noContentStatusCode) {
+            alert(LangHelper.getSingleResource("NoInfo"));
+        } else {
+            Site.downloadFile(response.data, 'TicketList.xls');
+        };
+    }
 }

@@ -4,7 +4,7 @@
     using Extension.Helper;
     using Fanex.Athena.Model.Core.MetaModel;
 
-    public class NotificationMetaModel : IMetaModelValidation
+    public class NotificationMetaModel : IMetaModelValidation, IMetaModelAgent
     {
         public int MaximumMonthRange { get; set; } = 6;
 
@@ -27,6 +27,10 @@
         public bool IsOnlyUnread { get; set; }
 
         public string Language { get; set; }
+
+        public string AgentListXml { get; set; }
+
+        public bool IsExcludedTestData { get; set; }
 
         public bool IsValid => DateTimeHelper.IsValidMonthRange(FromDate, ToDate, MaximumMonthRange);
     }
