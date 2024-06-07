@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 6/25/2024 4:51:41 PM
+﻿// Generated at: 7/4/2024 1:24:19 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -759,7 +759,7 @@ PlayerAdminUpdateFailedMsg:"请重试一次!",
 PlayerBetList:"玩家注单",
 PlayerBettingStatisticsTitle:"玩家投注统计(本月至今)",
 PlayerComm:"玩家佣金",
-PlayerSabaCoins:"玩家的沙巴点数",
+PlayerSabaCoins:"玩家的沙巴币",
 PlayerSegmentation:"玩家分类",
 PlayerStatementSupportMonths:"数据最多只支持18个月",
 PlayerWL:"玩家输赢",
@@ -853,7 +853,7 @@ Robot:"機械",
 Running:"进行中",
 Sa:"Sa",
 Saba:"沙巴",
-SabaCoins:"沙巴点数",
+SabaCoins:"沙巴币",
 SabaVirtualSetting:"沙巴虚拟体育设定",
 SabaVirtualSetting_HideSaba:"虚拟体育设定",
 SabaVirtualSettingInformation:"沙巴虚拟体育设定资讯",
@@ -1049,7 +1049,7 @@ ViewInWithNoParam:"查看",
 ViewNotification:"查看通知",
 ViewResettledTicketOnly:"仅查看已重新结算注单数据",
 ViewResettledTicketOnlyNote:"&apos;&apos;仅查看已重新结算注单数据&apos;&apos; 可查询2023年9月1日后数据。",
-ViewSabaCoins:"查看沙巴点数",
+ViewSabaCoins:"查看沙巴币",
 VIP:"VIP玩家",
 VIP2:"VIP",
 VIPPlayer:"VIP玩家",
