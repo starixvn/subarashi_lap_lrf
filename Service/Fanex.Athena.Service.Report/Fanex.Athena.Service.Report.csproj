@@ -124,10 +124,6 @@
     <Compile Include="Interfaces\IExchangeVoidedService.cs" />
     <Compile Include="Interfaces\ISubsidiaryPerformanceService.cs" />
     <Compile Include="SubsidiaryPerformanceService.cs" />
-    <Compile Include="CustomerTurnoverService.cs" />
-    <Compile Include="TurnoverService.cs" />
-    <Compile Include="Interfaces\ICustomerTurnoverService.cs" />
-    <Compile Include="Interfaces\ITurnoverService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

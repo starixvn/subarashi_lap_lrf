@@ -355,9 +355,6 @@
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\id-ID.htm" />
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\th-TH.htm" />
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerTurnover\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\CustomerTurnover\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\CustomerTurnover\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\id-ID.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\th-TH.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\vi-VN.htm" />
@@ -453,9 +450,6 @@
     <Content Include="App_Data\UserGuide\TotalBetsToWinToNil\id-ID.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsToWinToNil\th-TH.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsToWinToNil\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\Turnover\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\Turnover\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\Turnover\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\en-US.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterRefno\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\BettingTicketCenterAdvancedSearch\en-US.htm" />
@@ -560,8 +554,6 @@
     <Content Include="SpNameConfig\FanexSpNameConfig.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\UserGuide\CustomerTurnover\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerTurnover\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerPendingFunds\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\en-US.htm" />
@@ -591,8 +583,6 @@
     <Content Include="App_Data\UserGuide\TotalBetsTotalGoal\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsToWinToNil\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsToWinToNil\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\Turnover\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\Turnover\en-US.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\en-US.htm" />
@@ -756,9 +746,6 @@
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Content.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerPendingFunds\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerTurnover\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerTurnover\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerTurnover\Main.cshtml" />
     <Content Include="Views\Desktop\BetList\PendingFunds\Main.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Filter.cshtml" />
@@ -1081,9 +1068,6 @@
     <Content Include="Views\Desktop\Forecast\NewForecastHdpOu\Content.ForecastItem.cshtml" />
     <Content Include="Views\Desktop\Forecast\NewForecastHdpOu\MatchOptionList.cshtml" />
     <Content Include="Views\Desktop\BetList\NewForecastBetlist\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\Turnover\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\Turnover\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\Turnover\Main.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Main.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Content.cshtml" />
@@ -3953,10 +3937,8 @@
     <Content Include="App_Browsers\firefox.browser" />
     <Content Include="App_Data\Template\CustomerGroup\CustomerCommGroup.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerPendingFunds.xls" />
-    <Content Include="App_Data\Template\CustomerReports\CustomerTurnover.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\LicenseeWinLoss.xls" />
-    <Content Include="App_Data\Template\Reports\Turnover.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByBetType.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByProducts.xls" />
     <Content Include="Content\Web.config" />
