@@ -111,13 +111,9 @@
     <Compile Include="NoteControllerTest.cs" />
     <Compile Include="GodOfFortuneWinLossReportControllerTest.cs" />
     <Compile Include="WinLossByProductReportControllerTest.cs" />
-    <Compile Include="ReportAPI\ReportAPIControllerTest.CustomerTurnover.cs" />
-    <Compile Include="ReportAPI\ReportAPIControllerTest.Turnover.cs" />
     <Compile Include="WinLossByBetTypeReportControllerTest.cs" />
-    <Compile Include="TurnoverReportControllerTest.cs" />
     <Compile Include="PlatformWinLossReportControllerTest.cs" />
     <Compile Include="CustomerWinLossReportControllerTest.cs" />
-    <Compile Include="CustomerTurnoverReportControllerTest.cs" />
     <Compile Include="CustomerPendingFundsReportControllerTest.cs" />
     <Compile Include="AgCasinoWinLossReportControllerTest.cs" />
     <Compile Include="AgCasinoBalanceReportControllerTest.cs" />
@@ -205,6 +201,7 @@
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

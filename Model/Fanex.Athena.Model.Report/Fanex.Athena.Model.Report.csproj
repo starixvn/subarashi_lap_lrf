@@ -130,14 +130,12 @@
     <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryResultViewModel.cs" />
     <Compile Include="DTO\ThirdPartyWinLoss.cs" />
     <Compile Include="DTO\CustPendingFunds.cs" />
-    <Compile Include="DTO\CustTurnover.cs" />
     <Compile Include="DTO\CustomerWinLoss.cs" />
     <Compile Include="DTO\ICustomerWinLoss.cs" />
     <Compile Include="DTO\ILicenseeWL.cs" />
     <Compile Include="DTO\ITurnOver.cs" />
     <Compile Include="DTO\LicenseeWinLoss.cs" />
     <Compile Include="DTO\WinLossByBetType.cs" />
-    <Compile Include="DTO\TurnoverDTO.cs" />
     <Compile Include="DTO\WinLossByProduct.cs" />
     <Compile Include="MetaModel\BaseDrilldownReportMetaModel.cs" />
     <Compile Include="MetaModel\CasinoTurnoverMetaModel.cs" />
@@ -156,11 +154,9 @@
     <Compile Include="MetaModel\ResultPopupMetalModel.cs" />
     <Compile Include="MetaModel\WinLossByProductMetaModel.cs" />
     <Compile Include="MetaModel\CustomerPendingFundsMetaModel.cs" />
-    <Compile Include="MetaModel\CustomerTurnoverMetaModel.cs" />
     <Compile Include="MetaModel\CustomerWinlossMetaModel.cs" />
     <Compile Include="MetaModel\LicenseeWinLossMetaModel.cs" />
     <Compile Include="MetaModel\PlatformWinLossMetaModel.cs" />
-    <Compile Include="MetaModel\TurnoverMetaModel.cs" />
     <Compile Include="MetaModel\WinLossByBetTypeMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultModel\WinLossByProductResultModel.cs" />
@@ -188,11 +184,9 @@
     <Compile Include="ViewModel\LicenseeWinLossGridViewModel.cs" />
     <Compile Include="ViewModel\WinLossByProductViewModel.cs" />
     <Compile Include="ViewModel\CustomerPendingFundsViewModel.cs" />
-    <Compile Include="ViewModel\CustomerTurnoverViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossViewModel.cs" />
     <Compile Include="ViewModel\PlatformWinLossViewModel.cs" />
     <Compile Include="ViewModel\WinLossByBetTypeViewModel.cs" />
-    <Compile Include="ViewModel\TurnoverViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -48,7 +48,6 @@ function generateConfig(environment) {
             [`${jsPath}/pages/forecast/forecastonextwo`]: [pathConfig.scriptPaths.forecastonextwo],
             [`${jsPath}/pages/forecast/forecasthdpou`]: [pathConfig.scriptPaths.forecasthdpou],
             [`${jsPath}/pages/forecast/newforecasthdpou`]: [pathConfig.scriptPaths.newforecasthdpou],
-            [`${jsPath}/pages/reports/turnover`]: [pathConfig.scriptPaths.turnover],
             [`${jsPath}/pages/reports/result`]: [pathConfig.scriptPaths.result],
             [`${jsPath}/pages/reports/winlossbyproduct`]: [pathConfig.scriptPaths.winlossbyproduct],
             [`${jsPath}/pages/reports/platformwinloss`]: [pathConfig.scriptPaths.platformwinloss],
@@ -66,7 +65,6 @@ function generateConfig(environment) {
 
             [`${jsPath}/pages/reports/agcasinowinloss`]: [pathConfig.scriptPaths.agcasinowinloss],
             [`${jsPath}/pages/reports/customerpendingfunds`]: [pathConfig.scriptPaths.customerpendingfunds],
-            [`${jsPath}/pages/reports/customerturnover`]: [pathConfig.scriptPaths.customerturnover],
             [`${jsPath}/pages/reports/customerwinloss`]: [pathConfig.scriptPaths.customerwinloss],
 
             [`${cssPath}/pages/reports/reportjqgridlayout`]: pathConfig.cssPaths.reportjqgridlayout,
@@ -89,7 +87,6 @@ function generateConfig(environment) {
             [`${cssPath}/pages/forecast/forecastonextwo`]: pathConfig.cssPaths.forecastonextwo,
             [`${cssPath}/pages/totalbet/mixparlay`]: pathConfig.cssPaths.mixparlay,
             [`${cssPath}/pages/forecast/newforecast`]: pathConfig.cssPaths.newforecast,
-            [`${cssPath}/pages/reports/turnover`]: pathConfig.cssPaths.turnover,
             [`${cssPath}/pages/reports/result`]: pathConfig.cssPaths.result,
             [`${cssPath}/pages/betlist/cashouthistory`]: pathConfig.cssPaths.cashouthistory,
             [`${cssPath}/pages/reports/winlossbyproduct`]: pathConfig.cssPaths.winlossbyproduct,
@@ -102,7 +99,6 @@ function generateConfig(environment) {
             [`${cssPath}/pages/utility/licenseelist`]: pathConfig.cssPaths.licenseelist,
             [`${cssPath}/pages/reports/agcasinowinloss`]: pathConfig.cssPaths.agcasinowinloss,
             [`${cssPath}/pages/reports/customerpendingfunds`]: pathConfig.cssPaths.customerpendingfunds,
-            [`${cssPath}/pages/reports/customerturnover`]: pathConfig.cssPaths.customerturnover,
             [`${cssPath}/pages/reports/customerwinloss`]: pathConfig.cssPaths.customerwinloss,
 
             [`${cssPath}/pages/customer/customer-class`]: pathConfig.cssPaths.customerClass,
