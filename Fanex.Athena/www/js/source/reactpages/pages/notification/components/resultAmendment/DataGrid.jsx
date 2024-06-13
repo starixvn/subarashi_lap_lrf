@@ -148,13 +148,13 @@ export class DataGrid extends Component {
         )
     }
 
-    exportExcelAll() {
+    async exportExcelAll() {
         const params = {...this.props.param,
                         PageIndex : 0,
                         PageSize : 0};
 
         this.props.toggleLoader(true);
-        service.exportAllTicketListing(params);
+        await service.exportAllTicketListing(params);
         this.props.toggleLoader(false);              
     }
 

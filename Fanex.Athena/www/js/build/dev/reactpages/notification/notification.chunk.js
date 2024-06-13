@@ -3445,13 +3445,13 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       content: this.reportTitle
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_7__["default"], null));
   }
-  exportExcelAll() {
+  async exportExcelAll() {
     const params = _objectSpread(_objectSpread({}, this.props.param), {}, {
       PageIndex: 0,
       PageSize: 0
     });
     this.props.toggleLoader(true);
-    _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_8__["default"].exportAllTicketListing(params);
+    await _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_8__["default"].exportAllTicketListing(params);
     this.props.toggleLoader(false);
   }
   _buildExportExcelAll() {

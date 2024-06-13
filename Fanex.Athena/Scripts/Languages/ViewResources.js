@@ -1,4 +1,4 @@
-﻿// Generated at: 5/23/2024 3:07:07 PM
+﻿// Generated at: 6/5/2024 3:06:23 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -1080,6 +1080,7 @@ VIPPlayerOnly:"VIP Player Only",
 VIPPlayerTooltipMsg:"VIP Players are marked in Player Segmentation",
 Virtual:"Virtual",
 VirtualBasketball:"Virtual Basketball",
+VirtualCockFighting:"Virtual Cock Fighting",
 VirtualCycling:"Virtual Cycling",
 VirtualGreyhounds:"Virtual Greyhounds",
 VirtualHorseRacing:"Virtual Horse Racing",

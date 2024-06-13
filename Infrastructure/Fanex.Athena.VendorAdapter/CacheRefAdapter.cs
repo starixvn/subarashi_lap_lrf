@@ -118,7 +118,7 @@ namespace Fanex.Athena.VendorAdapter
         {
             var betTypeName = GetBettype(betType, liveIndicator);
 
-            if (productCode == Product.VS2)
+            if (productCode == Product.VS)
             {
                 return betTypeName + " (" + ViewResources.ProductVS + ")";
             }

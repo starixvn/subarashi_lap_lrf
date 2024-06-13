@@ -122,6 +122,8 @@
 
         VirtualCycling = 185,
 
+        VirtualCockFighting = 188,
+
         Keno = 202,
 
         AllBet = 211,

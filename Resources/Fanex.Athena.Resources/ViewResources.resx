@@ -3776,4 +3776,7 @@
   <data name="Kabaddi" xml:space="preserve">
     <value>Kabaddi</value>
   </data>
+  <data name="VirtualCockFighting" xml:space="preserve">
+    <value>Virtual Cock Fighting</value>
+  </data>
 </root>
