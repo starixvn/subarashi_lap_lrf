@@ -35,12 +35,14 @@ namespace Fanex.Athena.Module.Notification.Excels
         {
             var sheet = Workbook.CloneSheet(TemplateSheetName, "Data");
             var numberOfSheets = 1;
+            sheet.DeleteRow(RowContentTemplate);
 
             foreach (var data in _dataList)
             {
                 if ((RowIndex + data.Data.Count() + RowContentTemplate) > MaxExcelRowPerSheet)
                 {
                     sheet = Workbook.CloneSheet(TemplateSheetName, "Data" + (++numberOfSheets).ToString());
+                    sheet.DeleteRow(RowContentTemplate);
                     RowIndex = 0;
                 }
 
@@ -56,6 +58,7 @@ namespace Fanex.Athena.Module.Notification.Excels
         protected override void AssignTitle(ISheet sheet)
         {
             sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, destRowIndex: RowIndex++, 1, $"{ViewResources.TicketList} - {_data.MatchInfo}");
+            sheet.MergeCells(firstRow: RowIndex - 1, lastRow: RowIndex - 1, firstCol: ColumnIndex, lastCol: ColumnSystemId);
         }
 
         protected override void AssignHeader(ISheet sheet)
