@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/5/2024 3:06:23 PM
+// Generated at: 6/13/2024 11:53:30 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -393,6 +393,7 @@ window._language_en_US = {
   DepositHistory: "Deposit History",
   Desktop: "Desktop",
   DesktopChina: "Desktop China",
+  DesktopCompact: "Desktop Compact",
   DesktopGalaxy: "Desktop Galaxy",
   DesktopNewAsia: "Desktop New Asia",
   DesktopOthers: "Desktop Others",

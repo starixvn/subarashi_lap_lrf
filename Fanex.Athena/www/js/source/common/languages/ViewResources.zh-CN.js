@@ -1,4 +1,4 @@
-﻿// Generated at: 6/5/2024 3:06:23 PM
+﻿// Generated at: 6/13/2024 11:53:31 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -266,6 +266,7 @@ Deposit:"存款",
 Deposited:"已存钱账号",
 Desktop:"桌机",
 DesktopChina:"桌机中国版",
+DesktopCompact:"桌机轻量版",
 DesktopGalaxy:"桌机银河版",
 DesktopNewAsia:"桌机新亚洲版",
 DesktopOthers:"桌机其他",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/5/2024 3:06:23 PM
+// Generated at: 6/13/2024 11:53:30 AM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -386,6 +386,7 @@ window._language_th_TH = {
   Deposited: "ฝากเงิน",
   Desktop: "คอมพิวเตอร์ตั้งโต๊ะ",
   DesktopChina: "เดสก์ทอปจีน",
+  DesktopCompact: "เดสก์ท็อปคอมแพค",
   DesktopGalaxy: "เดสก์ท็อปแกแล็กซี่",
   DesktopNewAsia: "เดสก์ท็อป นิวเอเชีย",
   DesktopOthers: "เดสก์ท็อปอื่นๆ",

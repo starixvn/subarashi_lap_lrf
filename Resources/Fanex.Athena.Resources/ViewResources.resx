@@ -3779,4 +3779,7 @@
   <data name="VirtualCockFighting" xml:space="preserve">
     <value>Virtual Cock Fighting</value>
   </data>
+  <data name="DesktopCompact" xml:space="preserve">
+    <value>Desktop Compact</value>
+  </data>
 </root>

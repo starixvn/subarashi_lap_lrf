@@ -3363,4 +3363,7 @@
   <data name="Kabaddi" xml:space="preserve">
     <value>Kabaddi</value>
   </data>
+  <data name="DesktopCompact" xml:space="preserve">
+    <value>เดสก์ท็อปคอมแพค</value>
+  </data>
 </root>

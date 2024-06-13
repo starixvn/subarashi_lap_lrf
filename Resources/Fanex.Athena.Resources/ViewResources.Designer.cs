@@ -2768,7 +2768,18 @@ namespace Fanex.Athena.Resources {
                 return ResourceManager.GetString("DesktopChina", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Desktop Compact.
+        /// </summary>
+        public static string DesktopCompact
+        {
+            get
+            {
+                return ResourceManager.GetString("DesktopCompact", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Desktop Galaxy.
         /// </summary>
