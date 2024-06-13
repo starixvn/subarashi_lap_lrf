@@ -188,7 +188,7 @@
 		<Setting Key="Lrf_CustomerClassSitePolicyMemberSel" SpName="Lrf_CustomerClassSitePolicyMemberSel" DbName="DBCUST.CustDB.wsv_lap" />
 	</Function>
 	<Function Name="Notification">
-		<Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DBEXT.bodb02.wsv_lap" />
+		<Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DB052.bodb02.wsv_lap" />
 		<Setting Key="Lrf_MessageListSel" SpName="Lrf_MessageListSel" DbName="DBCUST.SiteConfig.wsv_lap" />
 		<Setting Key="Lrf_MessageUserIns" SpName="Lrf_MessageUserIns" DbName="DBCUST.SiteConfig.wsv_lap" />
 	</Function>

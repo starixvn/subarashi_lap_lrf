@@ -65,7 +65,6 @@
 		<Setting Key="Lrf_Rpt_WinLossByBettype" SpName="Lrf_Rpt_WinLossByBettype" DbName="DBEXT.bodb02.wsv_lap"></Setting>
 		<Setting Key="Lrf_Rpt_CustomerTurnOver" SpName="Lrf_Rpt_CustomerTurnOver" DbName="DBEXT.bodb02.wsv_lap"></Setting>
 		<Setting Key="Lrf_SportsGetAll" SpName="Lrf_SportsGetAll" DbName="DBEXT.bodb02.wsv_lap"></Setting>
-		<Setting Key="Lrf_Rpt_CustomerBalance" SpName="Lrf_Rpt_CustomerBalance" DbName="DBACC.bodb02.wsv_lap"></Setting>
 		<Setting Key="Lrf_Rpt_WinLoss" SpName="Lrf_Rpt_WinLoss" DbName="DBEXT.bodb02.wsv_lap"></Setting>
 		<Setting Key="Lrf_Rpt_MatchSelResultEntered" SpName="Lrf_Rpt_MatchSelResultEntered" DbName="DBEXT.bodb02.wsv_lap"></Setting>
 		<Setting Key="Shard_Lrf_Rpt_Outstanding" SpName="Lrf_Rpt_Outstanding" DbName="DBBOF.bodb02.wsv_lap" />
@@ -189,7 +188,7 @@
 		<Setting Key="Lrf_CustomerClassSitePolicyMemberSel" SpName="Lrf_CustomerClassSitePolicyMemberSel" DbName="DBCUST.CustDB.wsv_lap" />
 	</Function>
 	<Function Name="Notification">
-		<Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DBEXT.bodb02.wsv_lap" />
+		<Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DB052.bodb02.wsv_lap" />
 		<Setting Key="Lrf_MessageListSel" SpName="Lrf_MessageListSel" DbName="DBCUST.SiteConfig.wsv_lap" />
 		<Setting Key="Lrf_MessageUserIns" SpName="Lrf_MessageUserIns" DbName="DBCUST.SiteConfig.wsv_lap" />
 	</Function>
