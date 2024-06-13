@@ -3331,4 +3331,7 @@
   <data name="SeparateSabaWinLoss_HideSaba" xml:space="preserve">
     <value>将虚拟体育与体育博彩分开</value>
   </data>
+  <data name="DesktopCompact" xml:space="preserve">
+    <value>桌机轻量版</value>
+  </data>
 </root>

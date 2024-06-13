@@ -8732,6 +8732,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 '15': Site.getSingleResource('WAP'),
                 '16': Site.getSingleResource('ChatRoom'),
                 '17': Site.getSingleResource('DesktopGalaxy'),
+                '18': Site.getSingleResource('MobileGalaxy'),
+                '19': Site.getSingleResource('DesktopCompact'),
                 '88': Site.getSingleResource('BetfromOthers')
             };
 

@@ -1,4 +1,4 @@
-﻿// Generated at: 6/5/2024 3:06:23 PM
+﻿// Generated at: 6/13/2024 11:53:30 AM
 var _language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -285,6 +285,7 @@ Deposit:"Deposit",
 Deposited:"Deposit",
 Desktop:"Komputer meja",
 DesktopChina:"Desktop Cina",
+DesktopCompact:"Desktop Kompak",
 DesktopGalaxy:"Desktop Galaxy",
 DesktopNewAsia:"Desktop New Asia",
 DesktopOthers:"Desktop Lainnya",

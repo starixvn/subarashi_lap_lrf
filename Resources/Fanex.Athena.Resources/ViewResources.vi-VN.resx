@@ -3369,4 +3369,7 @@
   <data name="Kabaddi" xml:space="preserve">
     <value>Kabaddi</value>
   </data>
+  <data name="DesktopCompact" xml:space="preserve">
+    <value>Desktop nhỏ gọn</value>
+  </data>
 </root>

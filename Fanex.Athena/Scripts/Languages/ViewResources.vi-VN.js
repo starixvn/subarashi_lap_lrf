@@ -1,4 +1,4 @@
-﻿// Generated at: 6/5/2024 3:06:23 PM
+﻿// Generated at: 6/13/2024 11:53:31 AM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -289,6 +289,7 @@ Deposit:"Nạp tiền",
 Deposited:"Đã nạp tiền",
 Desktop:"Máy tính",
 DesktopChina:"Phiên bản máy tính Trung Quốc",
+DesktopCompact:"Desktop nhỏ gọn",
 DesktopGalaxy:"Desktop Galaxy",
 DesktopNewAsia:"Nền tảng trên máy tính phiên bản Châu Á mới",
 DesktopOthers:"Phiên bản máy tính khác",
