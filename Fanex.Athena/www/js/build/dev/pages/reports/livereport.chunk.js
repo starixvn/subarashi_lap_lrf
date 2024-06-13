@@ -2789,7 +2789,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         let productOptions = [];
         if (newSportId > 0) {
             if (newSportId === 180 || newSportId === 186 || newSportId === 231 || newSportId === 104 ||
-                (newSportId >= 190 && newSportId <= 197) || newSportId === 178 || newSportId === 179) {
+                (newSportId >= 190 && newSportId <= 197) || newSportId === 178 || newSportId === 179
+                || newSportId === 188) {
                 productOptions.push('VS');
             }
             else if (newSportId === 162) {
@@ -2982,7 +2983,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Key183: 'LiveReportBetList/VirtualSports?SportType=183',
                 Key184: 'LiveReportBetList/VirtualSports?SportType=184',
                 Key185: 'LiveReportBetList/VirtualSports?SportType=185',
-                Key104: 'LiveReportBetList/MixParlay?bettype=2799',
+                Key104: 'LiveReportBetList/MixParlay?bettype=9',
                 Key175: 'LiveReportBetList/BitCoin?SportType=175',
                 Key169: 'LiveReportBetList/SportsLottery?Sporttype=169',
                 Key231: 'LiveReportBetList/VS3?Sporttype=231'

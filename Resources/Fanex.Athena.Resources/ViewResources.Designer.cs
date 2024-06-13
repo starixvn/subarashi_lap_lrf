@@ -9763,6 +9763,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Cock Fighting.
+        /// </summary>
+        public static string VirtualCockFighting {
+            get {
+                return ResourceManager.GetString("VirtualCockFighting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual Cycling.
         /// </summary>
         public static string VirtualCycling {
