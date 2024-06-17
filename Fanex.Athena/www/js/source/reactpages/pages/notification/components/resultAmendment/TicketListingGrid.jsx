@@ -18,7 +18,12 @@ const TicketListingGrid = ({ sessionId }) => {
         _fetchData();
     }, [])
 
-    if(!Data || !Data.length) {
+    if(!Data) 
+    { 
+        return null 
+    } 
+
+    if(!Data.length) {
         return <NoDataTitle />;
     }
    

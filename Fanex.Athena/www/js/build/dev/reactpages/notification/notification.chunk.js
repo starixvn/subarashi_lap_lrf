@@ -3684,7 +3684,10 @@ const TicketListingGrid = ({
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     _fetchData();
   }, []);
-  if (!Data || !Data.length) {
+  if (!Data) {
+    return null;
+  }
+  if (!Data.length) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_2__["default"], null);
   }
   const _renderCaption = () => {
