@@ -1,7 +1,10 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
@@ -9,6 +12,7 @@
     using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Common;
+    using Fanex.Common.Extensions;
 
     public class GroupComDataAccess : BaseDataAccess, IGroupComDataAccess
     {
@@ -27,11 +31,26 @@
 
                     while (reader.Read())
                     {
-                        var comm = new GroupCommMetaModel();
-                        comm.GroupName = Converter.ToString2(reader["GroupName"]);
-                        comm.NumberOfCustomer = Converter.ToInt(reader["NumberOfCustomer"]);
-                        comm.MapData(reader, hardcodedColumns, visibility);
+                        var comm = new GroupCommMetaModel
+                        {
+                            GroupName = Converter.ToString2(reader["GroupName"]),
+                            NumberOfCustomer = Converter.ToInt(reader["NumberOfCustomer"])
+                        };
+                        comm.MapData(reader);
                         comms.Add(comm);
+                    }
+
+                    if (comms.Any() && reader.NextResult() && reader.Read())
+                    {
+                        var groupCommId = Convert.ToInt32(reader["GroupDiscountID"]);
+                        var comm = comms.FirstOrDefault(_ => _.GroupCommId == groupCommId);
+
+                        comm?.CommDetailList.Add(new GroupCommDetailMetaModel
+                        {
+                            Sporttype = Convert.ToInt32(reader["Sporttype"]),
+                            Bettype = Convert.ToInt32(reader["Bettype"]),
+                            Discount = Convert.ToInt32(reader["Discount"])
+                        });
                     }
                 }
             }
@@ -69,7 +88,7 @@
                     while (reader.Read())
                     {
                         comm.GroupName = Converter.ToString2(reader["GroupName"]);
-                        comm.MapData(reader, hardcodedColumns, visibility);
+                        comm.MapData(reader);
                     }
                 }
             }

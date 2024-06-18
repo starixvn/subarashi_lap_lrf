@@ -86,6 +86,7 @@
     <Compile Include="MetaModel\CustomerLog\CustomerLogMetaModel.cs" />
     <Compile Include="MetaModel\CustomerLog\PlayerUpdatingLogMetaModel.cs" />
     <Compile Include="MetaModel\DeleteGroupMetaModel.cs" />
+    <Compile Include="MetaModel\GroupCommDetailMetaModel.cs" />
     <Compile Include="MetaModel\SabaVirtuaSettingInformationMetaModel.cs" />
     <Compile Include="MetaModel\GetLimitLeaguesMetaModel.cs" />
     <Compile Include="MetaModel\GroupCommMetaModel.cs" />

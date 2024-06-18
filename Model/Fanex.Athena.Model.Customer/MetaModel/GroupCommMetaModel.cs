@@ -130,6 +130,8 @@
 
         public decimal MgRNGComm { get; set; }
 
+        public IList<GroupCommDetailMetaModel> CommDetailList { get; set; } = new List<GroupCommDetailMetaModel>();
+
         public void MapQuery()
         {
             CommValues = new Dictionary<string, decimal>
@@ -174,18 +176,20 @@
             };
         }
 
-        public void MapData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)
+        public void MapData(IDataReader reader)
         {
             // Support config for new products
-            GroupCommId = Convert.ToInt32(reader["GroupCommId"]);
+            GroupCommId = Convert.ToInt32(reader["GroupDiscountID"]);
             GroupColor = Convert.ToString(reader["GroupColor"]);
             IsDefaultGroup = Convert.ToBoolean(reader["IsDefault"]);
-            CommValues = new Dictionary<string, decimal>();
-            foreach (var c in columns)
-            {
-                var val = visibility[c.Key] ? reader[c.Value + "Comm"] : null;
-                CommValues[c.Key] = val == DBNull.Value ? 0 : Convert.ToDecimal(val);
-            }
+        }
+
+        public void MapCommData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)
+        {
+            // Support config for new products
+            GroupCommId = Convert.ToInt32(reader["GroupDiscountID"]);
+            GroupColor = Convert.ToString(reader["GroupColor"]);
+            IsDefaultGroup = Convert.ToBoolean(reader["IsDefault"]);
         }
     }
 }
