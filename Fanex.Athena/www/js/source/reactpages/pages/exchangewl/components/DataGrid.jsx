@@ -308,7 +308,7 @@ export class DataGrid extends Component {
         this.betlistTitle = (
             <p>
                 {PLAYER_BET_LIST_TEXT}{" "}
-                {FromDate} → {ToDate} - {"(GMT+8)"} - {externalId}({systemId}) -{" "}
+                {FromDate} → {ToDate} - {externalId}({systemId}) -{" "}
                 <span className="base-currency-title">{viewIn}</span>
             </p>
         )
