@@ -5,9 +5,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
+    using Fanex.Athena.Extension;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Service.Customer.Helpers;
     using Fanex.Athena.Service.Customer.Interfaces;
 
     public class GroupComService : IGroupComService
@@ -19,8 +21,23 @@
             _groupDataAccess = groupDataAccess;
         }
 
-        public IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
-            => _groupDataAccess.GetAllAsync(licenseeId, permissions).OrderBy(_ => _.GroupCommId).ToList();
+        public async Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
+        {
+            var (comm, commDetails) = await _groupDataAccess.GetAllAsync(licenseeId, permissions).ConfigureAwait(false);
+            var result = comm.GroupJoin(commDetails, c => c.GroupCommId, d => d.GroupCommId,
+                (c, ds) => new GroupCommMetaModel
+                {
+                    GroupCommId = c.GroupCommId,
+                    GroupColor = c.GroupColor,
+                    GroupName = c.GroupName,
+                    IsDefaultGroup = c.IsDefaultGroup,
+                    DefaultGroupId = c.DefaultGroupId,
+                    CommDetailList = ds.Where(_ => !string.IsNullOrEmpty(GroupCommHelper.GetCommSettingName(_)))
+                    .ToDictionary(_ => GroupCommHelper.GetCommSettingName(_), _ => _)
+                }).ToList();
+
+            return comm;
+        }
 
         public async Task<DataTable> GetDataForExcelAsync(int licenseeId)
         {

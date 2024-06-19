@@ -52,13 +52,15 @@
         #region Get data
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
             var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
+            var group = _groupComService.GetAllAsync(licenseeId, permissions);
+
             var model = new CommissionGroupListViewModel(
-                groups: _groupComService.GetAllAsync(licenseeId, permissions),
+                groups: await _groupComService.GetAllAsync(licenseeId, permissions).ConfigureAwait(false),
                 productPermissions: permissions);
 
             return View("~/Views/Desktop/Customer/CustomerComm/GroupCommList.cshtml", model);
@@ -69,11 +71,11 @@
         #region Create group
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
             var model = new GroupCommMetaModel();
 
-            CreateMetaModel(model);
+            await CreateMetaModel(model);
 
             return View("~/Views/Desktop/Customer/CustomerComm/CreateNewGroup.cshtml", model);
         }
@@ -127,7 +129,7 @@
         #region Update group
 
         [HttpGet]
-        public ActionResult Update(int groupId)
+        public async Task<ActionResult> Update(int groupId)
         {
             var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
             var productPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
@@ -138,7 +140,7 @@
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
 
-            CreateMetaModel(model);
+            await CreateMetaModel(model);
 
             return View("~/Views/Desktop/Customer/CustomerComm/UpdateGroup.cshtml", model);
         }
@@ -205,11 +207,11 @@
         #region Group Comm API
 
         [HttpGet]
-        public JsonResult GetDefaultGroup()
+        public async Task<JsonResult> GetDefaultGroup()
         {
             var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
             var productPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-            var groupList = _groupComService.GetAllAsync(SessionServiceInstance.LicenseeSession.LicenseeId, productPermissions);
+            var groupList = await _groupComService.GetAllAsync(SessionServiceInstance.LicenseeSession.LicenseeId, productPermissions).ConfigureAwait(false);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             return Json(new { id = defaultGroupId }, JsonRequestBehavior.AllowGet);
@@ -269,13 +271,13 @@
             }
         }
 
-        private void CreateMetaModel(GroupCommMetaModel metaModel)
+        private async Task CreateMetaModel(GroupCommMetaModel metaModel)
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
             metaModel.ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
 
-            var groupList = _groupComService.GetAllAsync(licenseeId, metaModel.ProductPermissions);
+            var groupList = await _groupComService.GetAllAsync(licenseeId, metaModel.ProductPermissions).ConfigureAwait(false);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             metaModel.LicenseeId = licenseeId;

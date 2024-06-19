@@ -20,7 +20,7 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
         Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions);
 
-        IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
+        Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
 
         Task<DataTable> GetDataForExcelAsync(int licenseeId);
 

@@ -16,19 +16,19 @@
 
     public class GroupComDataAccess : BaseDataAccess, IGroupComDataAccess
     {
-        public IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
+        public async Task<(IList<GroupCommMetaModel>, IList<GroupCommDetailMetaModel>)> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
         {
             const string UspName = "Lrf_LicenseeGroupCommSel";
-            var hardcodedColumns = CommissionGroupHelper.MapHardcodedNameFromDB(permissions, isUpdate: false);
 
             var comms = new List<GroupCommMetaModel>();
+            var comDetails = new List<GroupCommDetailMetaModel>();
+
             using (var db = GetObjectDb(UspName))
             {
                 db.SetParameterValue("LicenseeID", licenseeId);
-                using (var reader = db.ExecuteReader())
-                {
-                    var visibility = CommissionGroupHelper.GetProductColumns(reader, hardcodedColumns);
 
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
+                {
                     while (reader.Read())
                     {
                         var comm = new GroupCommMetaModel
@@ -40,22 +40,16 @@
                         comms.Add(comm);
                     }
 
-                    if (comms.Any() && reader.NextResult() && reader.Read())
-                    {
-                        var groupCommId = Convert.ToInt32(reader["GroupDiscountID"]);
-                        var comm = comms.FirstOrDefault(_ => _.GroupCommId == groupCommId);
+                    reader.NextResult();
 
-                        comm?.CommDetailList.Add(new GroupCommDetailMetaModel
-                        {
-                            Sporttype = Convert.ToInt32(reader["Sporttype"]),
-                            Bettype = Convert.ToInt32(reader["Bettype"]),
-                            Discount = Convert.ToInt32(reader["Discount"])
-                        });
+                    while (comms.Any() && reader.Read())
+                    {
+                        comDetails.Add(new GroupCommDetailMetaModel(reader));
                     }
                 }
             }
 
-            return comms;
+            return (comms, comDetails);
         }
 
         public async Task<DataTable> GetDataForExcelAsync(int licenseeId)
