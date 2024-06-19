@@ -133,7 +133,13 @@ namespace Fanex.Athena.Service.StatelessCore
 
         private ICollection<CheckedItem> BuildSportList(IEnumerable<SportForTreeViewItem> sportItems, bool isHideSaba = false)
         {
-            var sportList = sportItems.GroupBy(_ => (_.ProductId, _.ProductCode),
+            var hideSports = new List<int> { 
+                175, // Bitcoin
+                169 // Sports Lottery
+            };
+            var sportList = sportItems
+                .Where(x => !hideSports.Contains(x.SportType))
+                .GroupBy(_ => (_.ProductId, _.ProductCode),
                 _ => BuildSportCheckItem(_, isHideSaba),
                 (key, elems) => new CheckedItem
                 {

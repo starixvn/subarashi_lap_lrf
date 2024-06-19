@@ -7,7 +7,7 @@ export const Note = (props) => {
     return (
         <>
             <div className="col-12 note">
-                {LangHelper.getSingleResource('Note')}:
+                {AppData.isAllowTxIDColumn && LangHelper.getSingleResource('Note') + ':'}
             </div>
             <div className={props.contentClass}>
                 {AppData.isAllowTxIDColumn && <>
@@ -16,7 +16,7 @@ export const Note = (props) => {
                     * {AppData.productsRequireTxIdNote}
                     <br />
                 </>}
-                * {AppData.productsRequireUseNameNote}
+                {/* * {AppData.productsRequireUseNameNote} */}
             </div>
         </>)
 }
