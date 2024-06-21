@@ -42,6 +42,9 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int MP = -12;
         public const int NPR = -14;
         public const int TRY = -15;
+        public const int JPY = -16;
+        public const int MXN = -17;
+        public const int NGN = -18;
 
         public const int USDT = -99;
     }

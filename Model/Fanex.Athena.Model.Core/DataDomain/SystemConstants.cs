@@ -32,6 +32,9 @@
             { BaseCurrencyType.MP,"MP" },
             { BaseCurrencyType.NPR,"NPR" },
             { BaseCurrencyType.TRY,"TRY" },
+            { BaseCurrencyType.JPY,"JPY" },
+            { BaseCurrencyType.MXN,"MXN" },
+            { BaseCurrencyType.NGN,"NGN" },
 
             // crypto currency
             { BaseCurrencyType.USDT,"USDT" }
@@ -51,6 +54,9 @@
             { BaseCurrencyType.PHP,"PHP" },
             { BaseCurrencyType.NPR,"NPR" },
             { BaseCurrencyType.TRY,"TRY" },
+            { BaseCurrencyType.JPY,"JPY" },
+            { BaseCurrencyType.MXN,"MXN" },
+            { BaseCurrencyType.NGN,"NGN" },
         };
 
         public static readonly IReadOnlyDictionary<int, string> JollysportsBaseCurrencyList = new Dictionary<int, string> {
@@ -67,6 +73,9 @@
             { BaseCurrencyType.MP,"MP" },
             { BaseCurrencyType.NPR,"NPR" },
             { BaseCurrencyType.TRY,"TRY" },
+            { BaseCurrencyType.JPY,"JPY" },
+            { BaseCurrencyType.MXN,"MXN" },
+            { BaseCurrencyType.NGN,"NGN" },
         };
 
         public static readonly IReadOnlyDictionary<int, string> CryptoBaseCurrencyList = new Dictionary<int, string> {
