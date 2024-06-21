@@ -130,8 +130,6 @@
 
         public decimal MgRNGComm { get; set; }
 
-        public IList<GroupCommDetailMetaModel> CommDetailList2 { get; set; } = new List<GroupCommDetailMetaModel>();
-
         public IDictionary<string, GroupCommDetailMetaModel> CommDetailList { get; set; } = new Dictionary<string, GroupCommDetailMetaModel>();
 
         public void MapQuery()

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -16,7 +17,7 @@
 
     public class GroupComDataAccess : BaseDataAccess, IGroupComDataAccess
     {
-        public async Task<(IList<GroupCommMetaModel>, IList<GroupCommDetailMetaModel>)> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
+        public async Task<(IList<GroupCommMetaModel>, IList<GroupCommDetailMetaModel>)> GetAllAsync(int licenseeId)
         {
             const string UspName = "Lrf_LicenseeGroupCommSel";
 
@@ -44,7 +45,10 @@
 
                     while (comms.Any() && reader.Read())
                     {
-                        comDetails.Add(new GroupCommDetailMetaModel(reader));
+                        comDetails.Add(new GroupCommDetailMetaModel(reader)
+                        {
+                            GroupCommId = Convert.ToInt32(reader["GroupDiscountID"])
+                        });
                     }
                 }
             }
@@ -64,30 +68,35 @@
             }
         }
 
-        public GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions)
+        public (GroupCommMetaModel, IList<GroupCommDetailMetaModel>) GetById(int groupCommId, int licenseeId)
         {
             const string UspName = "Lrf_GroupCommGetById";
             var comm = new GroupCommMetaModel();
-            var hardcodedColumns = CommissionGroupHelper.MapHardcodedNameFromDB(permissions, isUpdate: false);
+            var commDetails = new List<GroupCommDetailMetaModel>();
 
             using (var db = GetObjectDb(UspName))
             {
                 db.SetParameterValue("LicenseeId", licenseeId);
-                db.SetParameterValue("GroupCommID", groupCommId);
+                db.SetParameterValue("GroupDiscountID", groupCommId);
 
                 using (var reader = db.ExecuteReader())
                 {
-                    var visibility = CommissionGroupHelper.GetProductColumns(reader, hardcodedColumns);
-
-                    while (reader.Read())
+                    if (reader.Read())
                     {
                         comm.GroupName = Converter.ToString2(reader["GroupName"]);
                         comm.MapData(reader);
                     }
+
+                    reader.NextResult();
+
+                    while (reader.Read())
+                    {
+                        commDetails.Add(new GroupCommDetailMetaModel(reader));
+                    }
                 }
             }
 
-            return comm;
+            return (comm, commDetails);
         }
 
         public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions)
@@ -125,27 +134,14 @@
         public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId, IDictionary<string, bool> permissions)
         {
             const string UspName = "Lrf_LicenseeGroupCommUpd";
-            var hardcodedColumns = CommissionGroupHelper.MapHardcodedNameFromDB(permissions, isUpdate: false);
 
             using (var db = GetObjectDb(UspName, 900))
             {
-                var comms = newItem.CommValues;
-                foreach (var p in permissions)
-                {
-                    var code = hardcodedColumns[p.Key];
-                    db.SetParameterValue(code + "Comm", comms[p.Key]);
-                    if (p.Key == Product.SB || p.Key == "Parlay")
-                    {
-                        continue;
-                    }
-
-                    db.SetParameterValue("IsUpdate" + code, permissions[p.Key]);
-                }
-
                 db.SetParameterValue("LicenseeID", newItem.LicenseeId);
-                db.SetParameterValue("GroupCommId", newItem.GroupCommId);
+                db.SetParameterValue("GroupDiscountID", newItem.GroupCommId);
                 db.SetParameterValue("GroupName", newItem.GroupName);
                 db.SetParameterValue("GroupColor", newItem.GroupColor);
+                db.SetParameterValue("DiscountSettings", BuildDiscountSettingsXmlString(newItem));
                 db.SetParameterValue("UserId", userId);
                 db.SetParameterValue("Ip", request.Ip);
                 db.SetParameterValue("langkey", request.Language);
@@ -201,6 +197,24 @@
 
                 return Converter.ToInt(db.ExecuteScalar()) != 1;
             }
+        }
+
+        private static string BuildDiscountSettingsXmlString(GroupCommMetaModel metaModel)
+        {
+            const string XmlPattern = "<Root>{0}</Root>";
+            const string XmlElementPattern = "<r SportType=\"{0}\" BetType=\"{1}\" Discount=\"{2}\" />";
+            var xmlElementBuilder = new StringBuilder();
+
+            foreach (var setting in metaModel.CommDetailList)
+            {
+                xmlElementBuilder.Append(string.Format(
+                    XmlElementPattern,
+                    setting.Value.Sporttype,
+                    setting.Value.Bettype,
+                    setting.Value.Discount));
+            }
+
+            return string.Format(XmlPattern, xmlElementBuilder);
         }
     }
 }

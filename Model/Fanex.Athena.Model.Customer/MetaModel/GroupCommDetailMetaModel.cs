@@ -18,14 +18,13 @@
 
         public decimal Discount { get; set; }
 
-        public string DisplayName { get; set; }
+        public string ProductCode { get; set; }
 
         public GroupCommDetailMetaModel()
         { }
 
         public GroupCommDetailMetaModel(IDataReader reader)
         {
-            GroupCommId = Convert.ToInt32(reader["GroupDiscountID"]);
             Sporttype = Convert.ToInt32(reader["Sporttype"]);
             Bettype = Convert.ToInt32(reader["Bettype"]);
             Discount = Convert.ToDecimal(reader["Discount"]);

@@ -20,16 +20,13 @@
 
         private static Dictionary<Tuple<int, int>, string> CommMapper = new Dictionary<Tuple<int, int>, string>
         {
-            //{ Tuple.Create(1, 1), Product.SB },
-            //{ Tuple.Create(1, 4), Product.SB },
-            //{ Tuple.Create(1, 5), Product.SB },
-            //{ Tuple.Create(2, 2), Product.SB },
+            { Tuple.Create(1, 1), Product.SB },
             { Tuple.Create(1, 9), CommissionGroupHelper.ParlayName },
             { Tuple.Create(212, 4001), Product.VB },
             { Tuple.Create(248, 4101), Product.PP },
             { Tuple.Create(243, 3101), Product.SXG },
             { Tuple.Create(247, 4301), Product.SG },
-            { Tuple.Create(220, 1021), Product.SLT },
+            { Tuple.Create(220, 1021), Product.LT },
             { Tuple.Create(9908, 1201), Product.VS },
             { Tuple.Create(222, 4901), Product.TG },
             { Tuple.Create(245, 4601), Product.VRG },
@@ -90,6 +87,13 @@
             var key = Tuple.Create(detail.Sporttype, detail.Bettype);
 
             return CommMapper.TryGetValue(key, out string value) ? value : string.Empty;
+        }
+
+        public static bool GetCommSetting(string productCode, Tuple<int, int> setting)
+        {
+            setting = CommMapper.FirstOrDefault(x => x.Value == productCode).Key;
+
+            return CommMapper.ContainsValue(productCode);
         }
     }
 }

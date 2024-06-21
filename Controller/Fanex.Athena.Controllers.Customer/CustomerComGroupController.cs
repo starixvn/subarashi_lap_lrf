@@ -57,7 +57,6 @@
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
             var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-            var group = _groupComService.GetAllAsync(licenseeId, permissions);
 
             var model = new CommissionGroupListViewModel(
                 groups: await _groupComService.GetAllAsync(licenseeId, permissions).ConfigureAwait(false),
@@ -283,6 +282,7 @@
             metaModel.LicenseeId = licenseeId;
             metaModel.DefaultGroupId = defaultGroupId;
             metaModel.OriginalGroupName = metaModel.GroupName;
+            _groupComService.InitCommSetting(metaModel, metaModel.ProductPermissions);
         }
 
         private async Task<IResultInfo> UpdateGroupComm(GroupCommMetaModel metaModel)

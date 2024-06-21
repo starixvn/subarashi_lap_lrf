@@ -18,6 +18,8 @@ namespace Fanex.Athena.Service.Customer.Interfaces
     {
         Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions);
 
+        GroupCommMetaModel InitCommSetting(GroupCommMetaModel comm, IDictionary<string, bool> permissions);
+
         Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions);
 
         Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);

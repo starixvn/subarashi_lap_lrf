@@ -26,7 +26,7 @@ namespace Fanex.Athena.Controllers.Customer.Helpers
 
         public static bool IsValidCommissions(GroupCommMetaModel metaModel)
         {
-            var comms = metaModel.CommValues.Select(p => p.Value).ToArray();
+            var comms = metaModel.CommDetailList.Select(p => p.Value.Discount).ToArray();
             return GroupCommHelper.IsAllValid(comms);
         }
 
@@ -59,12 +59,12 @@ namespace Fanex.Athena.Controllers.Customer.Helpers
 
         public static bool IsSameGroup(GroupCommMetaModel currentGroup, GroupCommMetaModel editedGroup)
         {
-            var currentComm = currentGroup.CommValues;
-            var editedComm = editedGroup.CommValues;
+            var currentComm = currentGroup.CommDetailList;
+            var editedComm = editedGroup.CommDetailList;
 
             foreach (var c in currentComm)
             {
-                if (!editedComm.ContainsKey(c.Key) || c.Value != editedComm[c.Key])
+                if (!editedComm.ContainsKey(c.Key) || c.Value.Discount != editedComm[c.Key].Discount)
                 {
                     return false;
                 }

@@ -12,11 +12,11 @@
 
         Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId, IDictionary<string, bool> permissions);
 
-        Task<(IList<GroupCommMetaModel>, IList<GroupCommDetailMetaModel>)> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
+        Task<(IList<GroupCommMetaModel>, IList<GroupCommDetailMetaModel>)> GetAllAsync(int licenseeId);
 
         Task<DataTable> GetDataForExcelAsync(int licenseeId);
 
-        GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions);
+        (GroupCommMetaModel, IList<GroupCommDetailMetaModel>) GetById(int groupCommId, int licenseeId);
 
         bool CheckByName(int licenseeId, string groupName);
 

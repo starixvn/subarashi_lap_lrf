@@ -7106,10 +7106,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     ...item
                 };
 
-                let commValues = item.CommValues;
+                let commValues = item.CommDetailList;
                 for (var j = 0; j < products.length; j++) {
                     var key = products[j];
-                    row['Col-' + key] = commValues[key];
+                    row['Col-' + key] = !commValues[key] ? 0 : commValues[key].Discount;
                 }
 
                 rows.push(row);
@@ -7141,7 +7141,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         return _me;
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
 
 /***/ }),
 
