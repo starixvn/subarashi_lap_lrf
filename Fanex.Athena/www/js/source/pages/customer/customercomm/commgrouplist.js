@@ -333,7 +333,7 @@
                     ...item
                 };
 
-                let commValues = item.CommDetailList;
+                let commValues = item.CommValues;
                 for (var j = 0; j < products.length; j++) {
                     var key = products[j];
                     row['Col-' + key] = !commValues[key] ? 0 : commValues[key].Discount;

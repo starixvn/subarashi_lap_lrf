@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IGroupComService.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.Customer.Interfaces
+﻿namespace Fanex.Athena.Service.Customer.Interfaces
 {
     using System.Collections.Generic;
     using System.Data;
@@ -18,13 +12,9 @@ namespace Fanex.Athena.Service.Customer.Interfaces
     {
         Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions);
 
-        GroupCommMetaModel InitCommSetting(GroupCommMetaModel comm, IDictionary<string, bool> permissions);
-
         Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions);
 
         Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
-
-        Task<DataTable> GetDataForExcelAsync(int licenseeId);
 
         GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions);
 

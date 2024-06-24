@@ -4,13 +4,12 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
-    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
     using Resources;
 
     public class GroupCommMetaModel
     {
-        private Dictionary<string, decimal> _commValues;
+        private IDictionary<string, GroupCommSettingMetaModel> _commValues;
 
         private const int MaxGroupNameLength = 100;
 
@@ -46,147 +45,57 @@
 
         public IDictionary<string, bool> ProductPermissions { get; set; }
 
-        public Dictionary<string, decimal> CommValues
+        public IDictionary<string, GroupCommSettingMetaModel> CommValues
         {
             get
             {
                 if (_commValues == null)
                 {
-                    MapQuery();
+                    InitSetting();
                 }
 
                 return _commValues;
             }
-
             set
             {
                 _commValues = value;
             }
         }
 
-        [Required]
-        public decimal SBComm { get; set; }
-
-        [Required]
-        public decimal ParlayComm { get; set; }
-
-        [Required]
-        public decimal NGComm { get; set; }
-
-        [Required]
-        public decimal CSComm { get; set; }
-
-        public decimal ABComm { get; set; }
-
-        public decimal VBComm { get; set; }
-
-        public decimal PPComm { get; set; }
-
-        public decimal SXGComm { get; set; }
-
-        public decimal SGComm { get; set; }
-
-        public decimal KNComm { get; set; }
-
-        public decimal LTComm { get; set; }
-
-        public decimal TGComm { get; set; }
-
-        public decimal VSComm { get; set; }
-
-        public decimal VRGComm { get; set; }
-
-        public decimal CCComm { get; set; }
-
-        public decimal SBCComm { get; set; }
-
-        public decimal SAGComm { get; set; }
-
-        public decimal PGSComm { get; set; }
-
-        public decimal WMComm { get; set; }
-
-        public decimal BGGComm { get; set; }
-
-        public decimal JKComm { get; set; }
-
-        public decimal HBComm { get; set; }
-
-        public decimal VGAComm { get; set; }
-
-        public decimal CGComm { get; set; }
-
-        public decimal APComm { get; set; }
-
-        public decimal APMComm { get; set; }
-
-        public decimal FGGLComm { get; set; }
-
-        public decimal MXGComm { get; set; }
-
-        public decimal JIGComm { get; set; }
-
-        public decimal YBComm { get; set; }
-
-        public decimal MgRNGComm { get; set; }
-
-        public IDictionary<string, GroupCommDetailMetaModel> CommDetailList { get; set; } = new Dictionary<string, GroupCommDetailMetaModel>();
-
-        public void MapQuery()
+        public void InitSetting()
         {
-            CommValues = new Dictionary<string, decimal>
+            if (ProductPermissions != null)
             {
-                { Product.SB, SBComm },
-                { CommissionGroupHelper.ParlayName, ParlayComm },
-                { Product.NG, NGComm },
-                { Product.CS, CSComm },
-                { Product.VB, VBComm },
-                { Product.PP, PPComm },
+                _commValues = new Dictionary<string, GroupCommSettingMetaModel>();
 
-                { Product.SXG, SXGComm },
-                { Product.SG, SGComm },
-                { Product.KN, KNComm },
-                { Product.LT, LTComm },
-                { Product.TG, TGComm },
-                { Product.VS, VSComm },
+                foreach (var permission in ProductPermissions)
+                {
+                    var setting = CommissionGroupHelper.GetSetting(permission.Key);
 
-                { Product.VRG, VRGComm },
-                { Product.CC, CCComm },
-                { Product.SBC, SBCComm },
-                { Product.SAG, SAGComm },
-                { Product.PGS, PGSComm },
-                { Product.AB, ABComm },
-
-                { Product.WM, WMComm },
-                { Product.BGG, BGGComm },
-                { Product.JK, JKComm },
-                { Product.HB, HBComm },
-
-                { Product.VGA, VGAComm },
-                { Product.CG, CGComm },
-                { Product.AP, APComm },
-                { Product.APM, APMComm },
-
-                { Product.FGGL, FGGLComm },
-                { Product.MXG, MXGComm },
-                { Product.JIG, JIGComm },
-
-                { Product.YB, YBComm },
-                { Product.MGRNG, MgRNGComm }
-            };
+                    if (setting != null)
+                    {
+                        _commValues.Add(
+                            permission.Key,
+                            new GroupCommSettingMetaModel
+                            {
+                                Sporttype = setting.Item1,
+                                Bettype = setting.Item2
+                            }
+                        );
+                    }
+                }
+            }
         }
 
         public void MapData(IDataReader reader)
         {
-            // Support config for new products
             GroupCommId = Convert.ToInt32(reader["GroupDiscountID"]);
             GroupColor = Convert.ToString(reader["GroupColor"]);
             IsDefaultGroup = Convert.ToBoolean(reader["IsDefault"]);
         }
 
-        public void MapCommData(IDataReader reader, IDictionary<string, string> columns, IDictionary<string, bool> visibility)
+        public void MapCommData(IDataReader reader)
         {
-            // Support config for new products
             GroupCommId = Convert.ToInt32(reader["GroupDiscountID"]);
             GroupColor = Convert.ToString(reader["GroupColor"]);
             IsDefaultGroup = Convert.ToBoolean(reader["IsDefault"]);

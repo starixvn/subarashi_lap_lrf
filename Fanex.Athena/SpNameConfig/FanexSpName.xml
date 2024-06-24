@@ -125,7 +125,7 @@
 			<Mapping DataField="RNGComm" ObjectProperty="CSComm" />
 			<Mapping DataField="IsDefault" ObjectProperty="IsDefaultGroup" />
 		</Setting>
-		<Setting Key="Lrf_GroupCommCheckByName" SpName="Lrf_GroupCommCheckByName" DbName="DBLIC.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_GroupCommCheckByName" SpName="Lrf_GroupCommCheckByName_xpre" DbName="DBLIC.bodb_Licensee.wsv_lap" />
 	</Function>
 	<Function Name="TotalBets">
 		<Setting Key="Lrf_TotalBets_Sel1378" SpName="Lrf_TotalBets_Sel1378" DbName="DBBOF.bodb02.wsv_lap"></Setting>

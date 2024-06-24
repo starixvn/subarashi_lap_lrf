@@ -1,12 +1,12 @@
 ﻿namespace Fanex.Athena.Excel.Customer
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using Base;
     using Common;
     using Fanex.Athena.Excel.Base.Extension;
-    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
     using NPOI.SS.UserModel;
     using Resources;
@@ -17,28 +17,19 @@
         private const int RowContentTemplate = 2;
         private const int RowNoInfoTemplate = 5;
 
-        private readonly DataTable _exportData;
-        private readonly Dictionary<string, bool> hasColumnInTable;
-        private readonly IDictionary<string, string> hardcodedColumns;
-        private readonly IDictionary<string, bool> productPermissions;
+        private readonly IList<GroupCommMetaModel> _exportData;
+        private readonly IDictionary<string, bool> _productPermissions;
 
         public CustomerCommGroupExcel(
             string templatePath,
-            DataTable exportData,
             CommissionGroupListViewModel viewModel)
-            : base(templatePath, exportData.Rows.Count, null)
+            : base(templatePath, viewModel.Groups.Count, null)
         {
-            _exportData = exportData;
-            productPermissions = viewModel.ProductPermissions;
-            hardcodedColumns = CommissionGroupHelper.MapHardcodedNameFromDB(viewModel.ProductPermissions, isUpdate: false);
-            hasColumnInTable = new Dictionary<string, bool>();
-            foreach (var p in hardcodedColumns)
-            {
-                hasColumnInTable.Add(p.Key, _exportData.Columns.Contains(p.Value + "Comm"));
-            }
+            _exportData = viewModel.Groups;
+            _productPermissions = viewModel.ProductPermissions;
 
             const int columnTemplateCount = 4;
-            ColumnTemplateCount = columnTemplateCount + productPermissions.Count;
+            ColumnTemplateCount = columnTemplateCount + _productPermissions.Count;
         }
 
         protected override void AssignHeader(ISheet sheet)
@@ -51,7 +42,7 @@
                 ViewResources.NoOfCustmer
             };
 
-            foreach (var p in hardcodedColumns)
+            foreach (var p in _productPermissions)
             {
                 headerTextList.Add(ViewResources.ResourceManager.GetString("Product" + p.Key));
             }
@@ -70,7 +61,7 @@
 
         protected override void AssignSheetData(ISheet sheet)
         {
-            var rowCount = _exportData.Rows.Count;
+            var rowCount = _exportData.Count;
             int index;
             var currentColumn = 0;
 
@@ -78,15 +69,14 @@
             {
                 currentColumn = 0;
                 var row = sheet.CopyRow(TemplateSheet, RowContentTemplate, index + RowContentTemplate);
-                var exportRow = _exportData.Rows[index];
-                var isDefault = Convert.ToBoolean(exportRow["IsDefault"].ToString());
+                var exportRow = _exportData[index];
 
                 row.Cells[currentColumn++].SetCellValue(index + 1);
-                row.Cells[currentColumn++].SetCellValue(exportRow["GroupName"]);
-                row.Cells[currentColumn++].SetCellValue(isDefault ? "X" : string.Empty);
-                row.Cells[currentColumn++].SetCellValue(exportRow["NumberOfCustomer"]);
+                row.Cells[currentColumn++].SetCellValue(exportRow.GroupName);
+                row.Cells[currentColumn++].SetCellValue(exportRow.IsDefaultGroup ? "X" : string.Empty);
+                row.Cells[currentColumn++].SetCellValue(exportRow.NumberOfCustomer);
 
-                foreach (var p in hardcodedColumns)
+                foreach (var p in _productPermissions)
                 {
                     row.Cells[currentColumn++].SetCellValue(GetCommValue(exportRow, p.Key));
                 }
@@ -109,7 +99,7 @@
             const int startCommissionColumnIndex = 4;
             var currentColumn = startCommissionColumnIndex;
 
-            foreach (var p in productPermissions)
+            foreach (var p in _productPermissions)
             {
                 if (!p.Value)
                 {
@@ -120,11 +110,10 @@
             }
         }
 
-        public string GetCommValue(DataRow exportRow, string productCode)
+        public string GetCommValue(GroupCommMetaModel exportRow, string productCode)
         {
-            var name = hardcodedColumns[productCode];
-            var value = hasColumnInTable.ContainsKey(productCode) && hasColumnInTable[productCode]
-                ? Converter.ToDecimal(exportRow[name + "Comm"].ToString())
+            var value = exportRow.CommValues.TryGetValue(productCode, out GroupCommSettingMetaModel comm)
+                ? Converter.ToDecimal(comm.Discount)
                 : 0;
 
             const int percent = 100;

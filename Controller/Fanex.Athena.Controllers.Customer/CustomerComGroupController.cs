@@ -229,10 +229,13 @@
 
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
-            var mainTable = await _groupComService.GetDataForExcelAsync(licenseeId);
             var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-            var viewModel = new CommissionGroupListViewModel(null, permissions);
-            var excel = CreateExcel(templatePath, mainTable, viewModel);
+
+            var model = new CommissionGroupListViewModel(
+                groups: await _groupComService.GetAllAsync(licenseeId, permissions).ConfigureAwait(false),
+                productPermissions: permissions);
+
+            var excel = CreateExcel(templatePath, model);
 
             excel.Export();
 
@@ -240,9 +243,9 @@
         }
 
         protected internal virtual CustomerCommGroupExcel CreateExcel(
-            string templatePath, DataTable mainTable, CommissionGroupListViewModel viewModel)
+            string templatePath, CommissionGroupListViewModel viewModel)
         {
-            return new CustomerCommGroupExcel(templatePath, mainTable, viewModel);
+            return new CustomerCommGroupExcel(templatePath, viewModel);
         }
 
         #endregion Export Excel
@@ -282,7 +285,6 @@
             metaModel.LicenseeId = licenseeId;
             metaModel.DefaultGroupId = defaultGroupId;
             metaModel.OriginalGroupName = metaModel.GroupName;
-            _groupComService.InitCommSetting(metaModel, metaModel.ProductPermissions);
         }
 
         private async Task<IResultInfo> UpdateGroupComm(GroupCommMetaModel metaModel)

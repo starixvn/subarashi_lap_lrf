@@ -2,38 +2,44 @@
 @model Fanex.Athena.Model.Customer.MetaModel.GroupCommMetaModel
 @{
     Layout = null;
-    var comms = Model.CommDetailList;
+    var comms = Model.CommValues;
 }
 <div class="row">
     <div class="col s12 text-bold input-field">
         @ViewResources.Commission (%)
     </div>
 </div>
-@foreach (var comm in comms)
-{
-    var dropdownId = comm.Key + "Comm";
-    var isOffer = false;
-    Model.ProductPermissions.TryGetValue(comm.Key, out isOffer);
 
-    @Html.Hidden("CommDetailList[" + comm.Key + "].Key", comm.Key)
-    @Html.Hidden("CommDetailList[" + comm.Key + "].Sporttype", comm.Value.Sporttype)
-    @Html.Hidden("CommDetailList[" + comm.Key + "].Bettype", comm.Value.Bettype)
-    @Html.Hidden("CommDetailList[" + comm.Key + "].Discount", comm.Value.Discount, new { id = dropdownId })
+@foreach (var product in Model.ProductPermissions)
+{
+    var dropdownId = product.Key + "Comm";
+    var isOffer = product.Value;
+    var comm = comms.FirstOrDefault(_ => _.Key == product.Key).Value;
+
+    if (comm == null)
+    {
+        continue;
+    }
+
+    @Html.Hidden("CommValues[" + product.Key + "].Key", product.Key)
+    @Html.Hidden("CommValues[" + product.Key + "].Sporttype", comm.Sporttype)
+    @Html.Hidden("CommValues[" + product.Key + "].Bettype", comm.Bettype)
+    @Html.Hidden("CommValues[" + product.Key + "].Discount", comm.Discount, new { id = dropdownId })
 
     if (isOffer)
     {
         <div class="row">
             <div class="col l2 m4 s12 input-field">
-                @ViewResources.ResourceManager.GetString("Product" + comm.Key)
+                @ViewResources.ResourceManager.GetString("Product" + product.Key)
             </div>
             <div class="col l1 m2 s4 first-value">
-                @DesktopGroupCommRazorHelper.CommDropDownFirst(dropdownId + "1", CustomerComGroupHelper.GetCommPart(comm.Value.Discount, 1))
+                @DesktopGroupCommRazorHelper.CommDropDownFirst(dropdownId + "1", CustomerComGroupHelper.GetCommPart(comm.Discount, 1))
             </div>
             <div class="col l1 m2 s4">
-                @DesktopGroupCommRazorHelper.CommDropDownSecond(dropdownId + "2", CustomerComGroupHelper.GetCommPart(comm.Value.Discount, 2))
+                @DesktopGroupCommRazorHelper.CommDropDownSecond(dropdownId + "2", CustomerComGroupHelper.GetCommPart(comm.Discount, 2))
             </div>
             <div class="col l1 m2 s4 third-value">
-                @DesktopGroupCommRazorHelper.CommDropDownThird(dropdownId + "3", CustomerComGroupHelper.GetCommPart(comm.Value.Discount, 3))
+                @DesktopGroupCommRazorHelper.CommDropDownThird(dropdownId + "3", CustomerComGroupHelper.GetCommPart(comm.Discount, 3))
             </div>
         </div>
     }

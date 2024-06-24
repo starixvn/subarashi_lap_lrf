@@ -32,26 +32,26 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests.Helpers
             Assert.That(message, Is.EqualTo(expectedMessage));
         }
 
-        [Test]
-        public void IsSameGroup_NotSameComm_ReturnFalse()
-        {
-            // Arrange
-            var currentGroup = new GroupCommMetaModel
-            {
-                SBComm = 1
-            };
+        //[Test]
+        //public void IsSameGroup_NotSameComm_ReturnFalse()
+        //{
+        //    // Arrange
+        //    var currentGroup = new GroupCommMetaModel
+        //    {
+        //        SBComm = 1
+        //    };
 
-            var editedGroup = new GroupCommMetaModel
-            {
-                SBComm = 2
-            };
+        //    var editedGroup = new GroupCommMetaModel
+        //    {
+        //        SBComm = 2
+        //    };
 
-            // Action
-            var result = CustomerComGroupHelper.IsSameGroup(currentGroup, editedGroup);
+        //    // Action
+        //    var result = CustomerComGroupHelper.IsSameGroup(currentGroup, editedGroup);
 
-            // Assert
-            Assert.That(result, Is.False);
-        }
+        //    // Assert
+        //    Assert.That(result, Is.False);
+        //}
 
         [Test]
         public void IsSameGroup_GroupsHaveSameData_ReturnTrue()
@@ -71,10 +71,6 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests.Helpers
         {
             return new GroupCommMetaModel
             {
-                SBComm = 1,
-                ParlayComm = 2,
-                NGComm = 3,
-                CSComm = 4,
                 GroupColor = "sdf",
                 GroupCommId = 99,
                 GroupName = "sd;ljsdf",

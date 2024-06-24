@@ -1,16 +1,14 @@
 ﻿namespace Fanex.Athena.Service.Customer
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
-    using Fanex.Athena.Extension;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Service.Customer.Helpers;
     using Fanex.Athena.Service.Customer.Interfaces;
 
     public class GroupComService : IGroupComService
@@ -24,24 +22,16 @@
 
         public async Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
         {
-            var (comms, commDetails) = await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
+            var (comms, commValues) = await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
 
-            return MergeCommSetting(comms, commDetails, permissions);
+            return MergeCommSetting(comms, commValues, permissions);
         }
 
-        public GroupCommMetaModel InitCommSetting(GroupCommMetaModel comm, IDictionary<string, bool> permissions)
+        private IList<GroupCommMetaModel> MergeCommSetting(IEnumerable<GroupCommMetaModel> comms, IEnumerable<GroupCommSettingMetaModel> commValues, IDictionary<string, bool> permissions)
         {
-            var commDetails = InitCommProductSetting(permissions);
-            comm.CommDetailList = commDetails;
+            commValues = MapCommProductSetting(commValues, permissions);
 
-            return comm;
-        }
-
-        private IList<GroupCommMetaModel> MergeCommSetting(IEnumerable<GroupCommMetaModel> comms, IEnumerable<GroupCommDetailMetaModel> commDetails, IDictionary<string, bool> permissions)
-        {
-            commDetails = MapCommProductSetting(commDetails, permissions);
-
-            return comms.GroupJoin(commDetails, c => c.GroupCommId, d => d.GroupCommId,
+            return comms.GroupJoin(commValues, c => c.GroupCommId, d => d.GroupCommId,
                 (c, ds) => new GroupCommMetaModel
                 {
                     GroupCommId = c.GroupCommId,
@@ -50,63 +40,28 @@
                     IsDefaultGroup = c.IsDefaultGroup,
                     DefaultGroupId = c.DefaultGroupId,
                     NumberOfCustomer = c.NumberOfCustomer,
-                    CommDetailList = ds.ToDictionary(_ => _.ProductCode, _ => _)
+                    CommValues = ds.ToDictionary(_ => CommissionGroupHelper.GetProductCode(_.Sporttype, _.Bettype), _ => _)
                 }).ToList();
         }
 
-        private IDictionary<string, GroupCommDetailMetaModel> InitCommProductSetting(IDictionary<string, bool> permissions)
+        private GroupCommMetaModel MergeCommSetting(GroupCommMetaModel comm, IEnumerable<GroupCommSettingMetaModel> commValues, IDictionary<string, bool> permissions)
         {
-            var commDetails = new List<GroupCommDetailMetaModel>();
+            commValues = MapCommProductSetting(commValues, permissions);
+            comm.CommValues = commValues.ToDictionary(_ => CommissionGroupHelper.GetProductCode(_.Sporttype, _.Bettype), _ => _);
 
-            foreach (var permission in permissions)
-            {
-                var setting = new Tuple<int, int>(0, 0);
-                if (GroupCommHelper.GetCommSetting(permission.Key, setting))
-                {
-                    commDetails.Add(
-                        new GroupCommDetailMetaModel
-                        {
-                            ProductCode = permission.Key,
-                            Sporttype = setting.Item1,
-                            Bettype = setting.Item2
-                        });
-                }
-            }
-
-            return commDetails.ToDictionary(_ => _.ProductCode, _ => _);
+            return comm;
         }
 
-        private IEnumerable<GroupCommDetailMetaModel> MapCommProductSetting(IEnumerable<GroupCommDetailMetaModel> commDetails, IDictionary<string, bool> permissions)
+        private IEnumerable<GroupCommSettingMetaModel> MapCommProductSetting(IEnumerable<GroupCommSettingMetaModel> commValues, IDictionary<string, bool> permissions)
         {
-            foreach (var commDetail in commDetails)
-            {
-                commDetail.ProductCode = GroupCommHelper.GetCommSettingName(commDetail);
-            }
-
-            return commDetails.Where(_ => permissions.TryGetValue(_.ProductCode, out bool productAllow) && productAllow);
-        }
-
-        public async Task<DataTable> GetDataForExcelAsync(int licenseeId)
-        {
-            var dt = await _groupDataAccess.GetDataForExcelAsync(licenseeId).ConfigureAwait(false);
-            dt.DefaultView.Sort = "GroupCommID ASC";
-            dt = dt.DefaultView.ToTable();
-            return dt;
+            return commValues.Where(_ => permissions.TryGetValue(CommissionGroupHelper.GetProductCode(_.Sporttype, _.Bettype), out bool productAllow) && productAllow);
         }
 
         public GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions)
         {
-            var (comm, commDetails) = _groupDataAccess.GetById(groupCommId, licenseeId);
+            var (comm, commValues) = _groupDataAccess.GetById(groupCommId, licenseeId);
 
-            return MergeCommSetting(comm, commDetails, permissions);
-        }
-
-        private GroupCommMetaModel MergeCommSetting(GroupCommMetaModel comm, IEnumerable<GroupCommDetailMetaModel> commDetails, IDictionary<string, bool> permissions)
-        {
-            commDetails = MapCommProductSetting(commDetails, permissions);
-            comm.CommDetailList = commDetails.ToDictionary(_ => _.ProductCode, _ => _);
-
-            return comm;
+            return MergeCommSetting(comm, commValues, permissions);
         }
 
         public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions)
