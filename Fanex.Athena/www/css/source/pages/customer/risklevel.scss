@@ -42,11 +42,20 @@
 }
 
 .risk-level-info-spread-setting {
-    max-width: 300px;
+    .result-content {
+        max-width: 600px;
+    }
+
 
     .main-content {
         max-height: 20vh;
         overflow: auto;
+    }
+
+    .note{
+        color: red;
+        text-align: left;
+        width: 100% !important;
     }
 }
 

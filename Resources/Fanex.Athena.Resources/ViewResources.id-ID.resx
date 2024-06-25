@@ -3306,4 +3306,13 @@
   <data name="DesktopCompact" xml:space="preserve">
     <value>Desktop Kompak</value>
   </data>
+  <data name="Spread" xml:space="preserve">
+    <value>Spread</value>
+  </data>
+  <data name="RiskLevelSpreadSettingNote" xml:space="preserve">
+    <value>Sistem akan menghitung nilai spread pemain dan menerapkan nilai yang paling ketat.</value>
+  </data>
+  <data name="RiskLevelSpreadSetting" xml:space="preserve">
+    <value>Pengaturan Spread Tingkat Risiko</value>
+  </data>
 </root>

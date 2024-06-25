@@ -14,6 +14,6 @@ namespace Fanex.Athena.Model.Customer.MetaModel
 
         public string CustomerClass { get; set; }
 
-        public string GetSettingKey() => "Lrf_CustomerClassPolicySel";
+        public bool IsTest { get; set; }
     }
 }

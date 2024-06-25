@@ -3366,4 +3366,13 @@
   <data name="DesktopCompact" xml:space="preserve">
     <value>เดสก์ท็อปคอมแพค</value>
   </data>
+  <data name="Spread" xml:space="preserve">
+    <value>สเปรด</value>
+  </data>
+  <data name="RiskLevelSpreadSettingNote" xml:space="preserve">
+    <value>ระบบจะคำนวณค่าน้ำของนักเดิมพันและใช้ค่าที่เข้มงวดที่สุด.</value>
+  </data>
+  <data name="RiskLevelSpreadSetting" xml:space="preserve">
+    <value>การตั้งค่าระดับความเสี่ยง</value>
+  </data>
 </root>

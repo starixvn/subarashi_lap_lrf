@@ -31,6 +31,7 @@
             using (var db = GetObjectDb("Lrf_CustomerClassPolicySel", 180))
             {
                 db.SetParameterValue("Site", metaModel.SiteName);
+                db.SetParameterValue("IsTest", metaModel.IsTest);
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
@@ -95,7 +96,7 @@
                             Id = Convert.ToString(reader[CustomerClass]),
                             OddsGroup = Convert.ToString(reader["SpreadGroup"]).ToUpperInvariant(),
                             CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0,
-                            Platform = platform == 0 ? ViewResources.All : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
+                            Platform = platform == 0 ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
                         };
                         result.Add(policy);
                     }
@@ -117,18 +118,21 @@
                 db.SetParameterValue("Site", metaModel.SiteName);
                 db.SetParameterValue("CurrencyID", metaModel.CurrencyId);
                 db.SetParameterValue("CustomerClass", metaModel.CustomerClass);
+                db.SetParameterValue("IsTest", metaModel.IsTest);
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     while (reader.Read())
                     {
                         var platform = reader.ToNullableInt("Platform");
+                        var sportType = Convert.ToString(reader["SportType"]);
 
                         result.Add(new CustomerClassSitePolicyMemberModel
                         {
-                            Id = Convert.ToString(reader[CustomerClass]),
-                            OddsGroup = Convert.ToString(reader["SpreadGroup"]).ToUpperInvariant(),
-                            Platform = platform == 0 ? ViewResources.All : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
+                            Spread = FormatNumber(reader.ToNullableDecimal("Spread"), NumberStyle),
+                            SportType = sportType,
+                            SportTypeName = _cacheRefAdapter.GetSportName(sportType),
+                            Platform = platform == 0 ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
                         });
                     }
                 }

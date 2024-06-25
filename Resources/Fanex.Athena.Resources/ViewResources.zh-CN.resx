@@ -3334,4 +3334,13 @@
   <data name="DesktopCompact" xml:space="preserve">
     <value>桌机轻量版</value>
   </data>
+  <data name="Spread" xml:space="preserve">
+    <value>水位</value>
+  </data>
+  <data name="RiskLevelSpreadSettingNote" xml:space="preserve">
+    <value>系统将应用最严格的值计算玩家的水位。</value>
+  </data>
+  <data name="RiskLevelSpreadSetting" xml:space="preserve">
+    <value>风险等级水位设定</value>
+  </data>
 </root>
