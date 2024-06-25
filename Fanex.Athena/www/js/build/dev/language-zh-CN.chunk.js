@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 6/13/2024 11:53:31 AM
+﻿// Generated at: 6/25/2024 3:30:15 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -846,6 +846,8 @@ RiskLevelBetSetting:"风险等级投注限制",
 RiskLevelInformation:"风险等级资讯",
 RiskLevelLastMarkDate:"风险等级的最新标记日期",
 RiskLevelOddsGroup:"风险等级水位组别",
+RiskLevelSpreadSetting:"风险等级水位设定",
+RiskLevelSpreadSettingNote:"系统将应用最严格的值计算玩家的水位。",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Robot:"機械",
 Running:"进行中",
@@ -907,6 +909,7 @@ SpecificDate:"特定日期",
 Sport:"运动",
 Sportsbook:"体育博彩",
 SportType:"运动类型",
+Spread:"水位",
 Stake:"投注额",
 StakeFrom:"投注额从",
 Statement:"账目",

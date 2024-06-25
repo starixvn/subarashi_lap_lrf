@@ -24,11 +24,17 @@
   overflow: hidden;
   text-overflow: ellipsis; }
 
-.risk-level-info-spread-setting {
-  max-width: 300px; }
-  .risk-level-info-spread-setting .main-content {
-    max-height: 20vh;
-    overflow: auto; }
+.risk-level-info-spread-setting .result-content {
+  max-width: 600px; }
+
+.risk-level-info-spread-setting .main-content {
+  max-height: 20vh;
+  overflow: auto; }
+
+.risk-level-info-spread-setting .note {
+  color: red;
+  text-align: left;
+  width: 100% !important; }
 
 .risk-level-policy-setting {
   overflow: auto; }

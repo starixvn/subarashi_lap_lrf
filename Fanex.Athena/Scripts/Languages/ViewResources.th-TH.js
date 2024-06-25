@@ -1,4 +1,4 @@
-﻿// Generated at: 6/13/2024 11:53:30 AM
+﻿// Generated at: 6/25/2024 3:30:15 PM
 var _language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -811,6 +811,8 @@ RiskLevelBetSetting:"การตั้งค่าระดับความ�
 RiskLevelInformation:"ข้อมูลระดับความเสี่ยง",
 RiskLevelLastMarkDate:"วันที่ทำเครื่องหมายระดับความเสี่ยงล่าสุด",
 RiskLevelOddsGroup:"การตั้งค่าระดับความเสี่ยงของอัตราต่อรอง",
+RiskLevelSpreadSetting:"การตั้งค่าระดับความเสี่ยง",
+RiskLevelSpreadSettingNote:"ระบบจะคำนวณค่าน้ำของนักเดิมพันและใช้ค่าที่เข้มงวดที่สุด.",
 Robot:"หุ่นยนต์",
 Running:"แข่งขัน",
 Sa:"ส.",
@@ -875,6 +877,7 @@ SpecificDate:"ระบุวันที่",
 Sport:"กีฬา",
 Sportsbook:"สปอร์ตบุ๊ค",
 SportType:"ประเภทกีฬา",
+Spread:"สเปรด",
 Stake:"เงินเดิมพัน",
 StakeFrom:"เดิมพันจาก",
 Statement:"รายงานการเงิน",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 6/13/2024 11:53:31 AM
+// Generated at: 6/25/2024 3:30:15 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -907,6 +907,8 @@ window._language_vi_VN = {
   RiskLevelInformation: "Thông Tin Mức Độ Rủi Ro",
   RiskLevelLastMarkDate: "Ngày Cập Nhật Mức Độ Rủi Ro",
   RiskLevelOddsGroup: "Nhóm Tỷ Lệ Cược theo Mức Độ Rủi Ro",
+  RiskLevelSpreadSetting: "Cài đặt mức rủi ro chênh lệch tỷ lệ cược",
+  RiskLevelSpreadSettingNote: "Hệ thống sẽ tính toán các mức chênh lệch tỷ lệ cược của người chơi và áp dụng giá trị hạn chế nhất.",
   RNGCasinoUpdateSettingUnAvailableMsg: "Cơ sở dữ liệu RNG Game Casino hiện không khả dụng. Vui lòng thử lại sau.",
   Robot: "Robot",
   Running: "Đang diễn ra",
@@ -972,6 +974,7 @@ window._language_vi_VN = {
   Sport: "Thể thao",
   Sportsbook: "Sportsbook",
   SportType: "Loại thể thao",
+  Spread: "Chênh lệch tỷ lệ cược",
   Stake: "Tiền cược",
   StakeFrom: "Cược Từ",
   Statement: "Sao kê",

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 6/13/2024 11:53:30 AM
+﻿// Generated at: 6/25/2024 3:30:15 PM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -889,6 +889,8 @@ RiskLevelBetSetting:"Batasan Taruhan Tingkat Risiko",
 RiskLevelInformation:"Informasi Tingkat Risiko",
 RiskLevelLastMarkDate:"Tanggal penandaan terbaru untuk tingkat risiko",
 RiskLevelOddsGroup:"Kelompok Odds Tingkat Risiko",
+RiskLevelSpreadSetting:"Pengaturan Spread Tingkat Risiko",
+RiskLevelSpreadSettingNote:"Sistem akan menghitung nilai spread pemain dan menerapkan nilai yang paling ketat.",
 Robot:"Robot",
 Running:"Berjalan",
 Sa:"Sab",
@@ -952,6 +954,7 @@ SpecificDate:"Tanggal Tertentu",
 Sport:"Olahraga",
 Sportsbook:"Sportsbook",
 SportType:"Jenis Olahraga",
+Spread:"Spread",
 Stake:"Taruhan",
 StakeFrom:"Taruhan Dari",
 Statement:"Laporan Pernyataan",
