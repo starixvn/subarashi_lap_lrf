@@ -3379,6 +3379,6 @@
     <value>Hệ thống sẽ tính toán các mức chênh lệch tỷ lệ cược của người chơi và áp dụng giá trị hạn chế nhất.</value>
   </data>
   <data name="RiskLevelSpreadSetting" xml:space="preserve">
-    <value>Cài đặt mức rủi ro chênh lệch tỷ lệ cược</value>
+    <value>Chênh lệch tỷ lệ cược theo Mức Độ Rủi Ro</value>
   </data>
 </root>

@@ -129,7 +129,7 @@
 
                         result.Add(new CustomerClassSitePolicyMemberModel
                         {
-                            Spread = FormatNumber(reader.ToNullableDecimal("Spread"), NumberStyle),
+                            Spread = FormatNumber(reader.ToNullableDecimal("Spread"), "{0:#,##0.00}"),
                             SportType = sportType,
                             SportTypeName = _cacheRefAdapter.GetSportName(sportType),
                             Platform = platform == 0 ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
