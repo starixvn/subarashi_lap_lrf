@@ -1,4 +1,4 @@
-﻿// Generated at: 6/25/2024 3:30:15 PM
+﻿// Generated at: 6/25/2024 4:51:41 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -812,7 +812,7 @@ RiskLevelBetSetting:"Giới Hạn Cược theo Mức Độ Rủi Ro",
 RiskLevelInformation:"Thông Tin Mức Độ Rủi Ro",
 RiskLevelLastMarkDate:"Ngày Cập Nhật Mức Độ Rủi Ro",
 RiskLevelOddsGroup:"Nhóm Tỷ Lệ Cược theo Mức Độ Rủi Ro",
-RiskLevelSpreadSetting:"Cài đặt mức rủi ro chênh lệch tỷ lệ cược",
+RiskLevelSpreadSetting:"Chênh lệch tỷ lệ cược theo Mức Độ Rủi Ro",
 RiskLevelSpreadSettingNote:"Hệ thống sẽ tính toán các mức chênh lệch tỷ lệ cược của người chơi và áp dụng giá trị hạn chế nhất.",
 RNGCasinoUpdateSettingUnAvailableMsg:"Cơ sở dữ liệu RNG Game Casino hiện không khả dụng. Vui lòng thử lại sau.",
 Robot:"Robot",
