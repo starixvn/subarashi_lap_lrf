@@ -36,22 +36,26 @@
             <div class="result-content">
                 <div class="panel-heading active">
                     <div class="panel-title">
-                        <span class="report-title">@ViewResources.RiskLevelOddsGroup</span>
+                        <span class="report-title">@ViewResources.RiskLevelSpreadSetting</span>
                     </div>
                 </div>
                 <div class="main-content" id="main-content">
                     <table id="info-spread-setting" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="col-small">@ViewResources.OddsGroup</th>
-                                <th class="col-small">@ViewResources.Platform</th>
+                                <th class="note" colspan="3">@ViewResources.RiskLevelSpreadSettingNote</th>
+                            </tr>
+                            <tr>
+                                <th class="col-large">@ViewResources.SportType</th>
+                                <th class="col-large">@ViewResources.Platform</th>
+                                <th class="col-medium large">@ViewResources.Spread</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (Model.SiteMemberPolicies.Count() == 0)
                             {
                                 <tr>
-                                    <td class="center-align" colspan="2">@ViewResources.NoInfo</td>
+                                    <td class="center-align" colspan="3">@ViewResources.NoInfo</td>
                                 </tr>
                             }
                             else
@@ -59,8 +63,9 @@
                                 foreach (var m in Model.SiteMemberPolicies)
                                 {
                                     <tr>
-                                        <td class="center-align">@m.OddsGroup</td>
+                                        <td class="left-align">@m.SportTypeName</td>
                                         <td class="left-align">@m.Platform</td>
+                                        <td class="right-align">@m.Spread</td>
                                     </tr>
                                 }
                             }

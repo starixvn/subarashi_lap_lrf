@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
+    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Fanex.Athena.Excel.Customer.CustomerClass;
@@ -60,7 +61,8 @@
                 CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
                 Language = SessionServiceInstance.UserSession.Language,
                 CurrencyId = currencyId,
-                CustomerClass = customerClass
+                CustomerClass = customerClass,
+                IsTest = !AppSettingInstance.Environment.Equals("PRO", StringComparison.OrdinalIgnoreCase)
             };
         }
     }

@@ -45,12 +45,7 @@
         [CustomValidateAntiForgery]
         public async Task<PartialViewResult> GetCustomerSettingPolicy(byte tabKey = 1, IEnumerable<string> customerClassIds = null)
         {
-            var metaModel = new GetCustomerClassInformationMetaModel
-            {
-                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
-                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
-                Language = SessionServiceInstance.UserSession.Language
-            };
+            var metaModel = BuildMetaModel();
 
             var viewModel = await (tabKey == (byte)CustomerClassTabType.SettingPolicy ? _service.GetSettingPolicy(metaModel) : _service.GetSpreadSettingPolicy(metaModel));
             var model = viewModel;
@@ -71,12 +66,7 @@
         [CustomValidateAntiForgery]
         public async Task<ActionResult> ExportExcel(byte tabKey = 1, IEnumerable<string> customerClassIds = null)
         {
-            var metaModel = new GetCustomerClassInformationMetaModel
-            {
-                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
-                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
-                Language = SessionServiceInstance.UserSession.Language
-            };
+            var metaModel = BuildMetaModel();
             var dataSource = await (tabKey == (byte)CustomerClassTabType.SettingPolicy ? _service.GetSettingPolicy(metaModel) : _service.GetSpreadSettingPolicy(metaModel));
 
             if (customerClassIds != null && customerClassIds.Any())
@@ -144,12 +134,8 @@
 
         private async Task<IEnumerable<CustomerClassModel>> GetModelForTabAsync(byte tabKey)
         {
-            var metaModel = new GetCustomerClassInformationMetaModel
-            {
-                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
-                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
-                Language = SessionServiceInstance.UserSession.Language
-            };
+            var metaModel = BuildMetaModel();
+
             switch (tabKey)
             {
                 case (byte)CustomerClassTabType.SettingPolicy:
@@ -169,6 +155,17 @@
                 default:
                     return await _service.GetSettingPolicy(metaModel);
             }
+        }
+
+        private GetCustomerClassInformationMetaModel BuildMetaModel()
+        {
+            return new GetCustomerClassInformationMetaModel
+            {
+                SiteName = SessionServiceInstance.LicenseeSession.LicenseeName,
+                CurrencyList = SessionServiceInstance.UserSession.CurrencyList,
+                Language = SessionServiceInstance.UserSession.Language,
+                IsTest = !AppSettingInstance.Environment.Equals("PRO", StringComparison.OrdinalIgnoreCase)
+            };
         }
     }
 }

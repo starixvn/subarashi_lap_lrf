@@ -3782,4 +3782,13 @@
   <data name="DesktopCompact" xml:space="preserve">
     <value>Desktop Compact</value>
   </data>
+  <data name="RiskLevelSpreadSettingNote" xml:space="preserve">
+    <value>The system will calculate the player's spread values and apply the strictest value.</value>
+  </data>
+  <data name="Spread" xml:space="preserve">
+    <value>Spread</value>
+  </data>
+  <data name="RiskLevelSpreadSetting" xml:space="preserve">
+    <value>Risk Level Spread Setting</value>
+  </data>
 </root>

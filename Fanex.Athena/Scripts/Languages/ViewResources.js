@@ -1,4 +1,4 @@
-﻿// Generated at: 6/13/2024 11:53:30 AM
+﻿// Generated at: 6/25/2024 4:51:41 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -845,6 +845,8 @@ RiskLevelBetSetting:"Risk Level Bet Setting",
 RiskLevelInformation:"Risk Level Information",
 RiskLevelLastMarkDate:"Risk Level&apos;s Last Mark Date",
 RiskLevelOddsGroup:"Risk Level Odds Group",
+RiskLevelSpreadSetting:"Risk Level Spread Setting",
+RiskLevelSpreadSettingNote:"The system will calculate the player&apos;s spread values and apply the strictest value.",
 RNGCasinoUpdateSettingUnAvailableMsg:"RNG Casino Database is not currently available. Please try again later.",
 Robot:"Robot",
 Rule:"Rule",
@@ -914,6 +916,7 @@ SpecificDate:"Specific Date",
 Sport:"Sport",
 Sportsbook:"Sportsbook",
 SportType:"Sport Type",
+Spread:"Spread",
 Stake:"Stake",
 StakeFrom:"Stake From",
 Statement:"Statement",

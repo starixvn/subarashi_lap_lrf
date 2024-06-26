@@ -2768,18 +2768,16 @@ namespace Fanex.Athena.Resources {
                 return ResourceManager.GetString("DesktopChina", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Desktop Compact.
         /// </summary>
-        public static string DesktopCompact
-        {
-            get
-            {
+        public static string DesktopCompact {
+            get {
                 return ResourceManager.GetString("DesktopCompact", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Desktop Galaxy.
         /// </summary>
@@ -3164,6 +3162,15 @@ namespace Fanex.Athena.Resources {
         public static string Exchange {
             get {
                 return ResourceManager.GetString("Exchange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange To Cash.
+        /// </summary>
+        public static string ExchangeToCash {
+            get {
+                return ResourceManager.GetString("ExchangeToCash", resourceCulture);
             }
         }
         
@@ -7605,6 +7612,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reward/ Promotion.
+        /// </summary>
+        public static string Reward_Promotion {
+            get {
+                return ResourceManager.GetString("Reward_Promotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Risk Level.
         /// </summary>
         public static string RiskLevel {
@@ -7646,6 +7662,24 @@ namespace Fanex.Athena.Resources {
         public static string RiskLevelOddsGroup {
             get {
                 return ResourceManager.GetString("RiskLevelOddsGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Risk Level Spread Setting.
+        /// </summary>
+        public static string RiskLevelSpreadSetting {
+            get {
+                return ResourceManager.GetString("RiskLevelSpreadSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The system will calculate the player&apos;s spread values and apply the strictest value..
+        /// </summary>
+        public static string RiskLevelSpreadSettingNote {
+            get {
+                return ResourceManager.GetString("RiskLevelSpreadSettingNote", resourceCulture);
             }
         }
         
@@ -7722,7 +7756,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual Setting.
+        ///   Looks up a localized string similar to Virtual Sports Setting.
         /// </summary>
         public static string SabaVirtualSetting_HideSaba {
             get {
@@ -7767,7 +7801,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Saba Virtual Sport.
+        ///   Looks up a localized string similar to Saba Virtual Sports.
         /// </summary>
         public static string SabaVirtualSport {
             get {
@@ -7776,7 +7810,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Virtual Sport.
+        ///   Looks up a localized string similar to Virtual Sports.
         /// </summary>
         public static string SabaVirtualSport_HideSaba {
             get {
@@ -8267,6 +8301,15 @@ namespace Fanex.Athena.Resources {
         public static string SportType {
             get {
                 return ResourceManager.GetString("SportType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spread.
+        /// </summary>
+        public static string Spread {
+            get {
+                return ResourceManager.GetString("Spread", resourceCulture);
             }
         }
         

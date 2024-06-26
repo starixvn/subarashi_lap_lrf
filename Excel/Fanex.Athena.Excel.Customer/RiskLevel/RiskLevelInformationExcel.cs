@@ -11,15 +11,17 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
     public class RiskLevelInformationExcel : ReportBase
     {
         private const int ColumnTemplateCount = 12;
-        private const int RowRiskLevelOddsGroupTitleTemplate = 2;
-        private const int RowRiskLevelOddsGroupHeaderTemplate = 3;
-        private const int RowRiskLevelOddsGroupContentTemplate = 4;
-        private const int RowCCSettingPolicyTitleTemplate = 6;
-        private const int RowCCSettingPolicyHeaderTemplate = 7;
-        private const int RowCCSettingPolicyContentTemplate = 8;
+        private const int RowRiskLevelSpreadSettingTitleTemplate = 2;
+        private const int RowRiskLevelSpreadSettingNoteTemplate = 3;
+        private const int RowRiskLevelSpreadSettingHeaderTemplate = 4;
+        private const int RowRiskLevelSpreadSettingContentTemplate = 5;
+        private const int RowCCSettingPolicyTitleTemplate = 7;
+        private const int RowCCSettingPolicyHeaderTemplate = 8;
+        private const int RowCCSettingPolicyContentTemplate = 9;
 
-        private const int RiskLevelOddsGroupColumn = 0;
+        private const int RiskLevelSporttypeColumn = 0;
         private const int RiskLevelPlatformColumn = 1;
+        private const int RiskLevelSpreadColumn = 2;
 
         private const int SportTypeColumn = 0;
         private const int LivePreMatchColumn = 1;
@@ -84,15 +86,16 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
             };
             _RiskLevelOddsGroupHeaderTexts = new List<string>
             {
-                ViewResources.OddsGroup,
-                ViewResources.Platform
+                ViewResources.SportType,
+                ViewResources.Platform,
+                ViewResources.Spread
             };
         }
 
         protected override void AssignHeader(ISheet sheet)
         {
             ClearTemplate(sheet, RowTitleTemplate);
-            var row = sheet.CopyRow(TemplateSheet, RowRiskLevelOddsGroupHeaderTemplate);
+            var row = sheet.CopyRow(TemplateSheet, RowRiskLevelSpreadSettingHeaderTemplate);
 
             for (int i = 0; i < _RiskLevelOddsGroupHeaderTexts.Count; i++)
             {
@@ -112,33 +115,36 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
             var rowCCSettingPolicyTitle = RowCCSettingPolicyTitleTemplate + _siteMemberPoliciesRowCount;
 
             sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, ColumnTemplateCount, _reporTitle);
-            sheet.SetTextRowValue(TemplateSheet, RowRiskLevelOddsGroupTitleTemplate, RiskLevelPlatformColumn, ViewResources.RiskLevelOddsGroup);
+            sheet.SetTextRowValue(TemplateSheet, RowRiskLevelSpreadSettingTitleTemplate, RiskLevelSpreadColumn, ViewResources.RiskLevelSpreadSetting);
+            sheet.SetTextRowValue(TemplateSheet, RowRiskLevelSpreadSettingNoteTemplate, RiskLevelSpreadColumn, ViewResources.RiskLevelSpreadSettingNote);
 
             var row = sheet.CopyRow(TemplateSheet, RowCCSettingPolicyTitleTemplate, rowCCSettingPolicyTitle);
             row.Cells[ColumnIndex].SetCellValue(ViewResources.RiskLevelBetSetting);
 
-            sheet.MergeCells(firstRow: RowRiskLevelOddsGroupTitleTemplate, lastRow: RowRiskLevelOddsGroupTitleTemplate, firstCol: RiskLevelOddsGroupColumn, lastCol: RiskLevelPlatformColumn);
+            sheet.MergeCells(firstRow: RowRiskLevelSpreadSettingTitleTemplate, lastRow: RowRiskLevelSpreadSettingTitleTemplate, firstCol: RiskLevelSporttypeColumn, lastCol: RiskLevelSpreadColumn);
+            sheet.MergeCells(firstRow: RowRiskLevelSpreadSettingNoteTemplate, lastRow: RowRiskLevelSpreadSettingNoteTemplate, firstCol: RiskLevelSporttypeColumn, lastCol: RiskLevelSpreadColumn);
             sheet.MergeCells(firstRow: rowCCSettingPolicyTitle, lastRow: rowCCSettingPolicyTitle, firstCol: SportTypeColumn, lastCol: RepeatedBetColumn);
         }
 
         protected override void AssignSheetData(ISheet sheet)
         {
-            var rowIndex = RowRiskLevelOddsGroupContentTemplate;
+            var rowIndex = RowRiskLevelSpreadSettingContentTemplate;
 
             if (_data.SiteMemberPolicies.Any())
             {
                 foreach (var item in _data.SiteMemberPolicies)
                 {
-                    var row = sheet.CopyRow(TemplateSheet, RowRiskLevelOddsGroupContentTemplate, rowIndex);
-                    row.Cells[RiskLevelOddsGroupColumn].SetCellValue(item.OddsGroup);
+                    var row = sheet.CopyRow(TemplateSheet, RowRiskLevelSpreadSettingContentTemplate, rowIndex);
+                    row.Cells[RiskLevelSporttypeColumn].SetCellValue(item.SportTypeName);
                     row.Cells[RiskLevelPlatformColumn].SetCellValue(item.Platform);
+                    row.Cells[RiskLevelSpreadColumn].SetCellValue(item.Spread);
                     rowIndex++;
                 }
             }
             else
             {
-                var row = sheet.CopyRow(TemplateSheet, RowRiskLevelOddsGroupContentTemplate, rowIndex);
-                BuildNoInfomationRow(sheet, row, rowIndex, rowIndex, RiskLevelOddsGroupColumn, RiskLevelPlatformColumn);
+                var row = sheet.CopyRow(TemplateSheet, RowRiskLevelSpreadSettingContentTemplate, rowIndex);
+                BuildNoInfomationRow(sheet, row, rowIndex, rowIndex, RiskLevelSporttypeColumn, RiskLevelSpreadColumn);
             }
 
             rowIndex = RowCCSettingPolicyContentTemplate + _siteMemberPoliciesRowCount;
@@ -191,8 +197,8 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
 
         protected override void AssignNoInfoRow(ISheet sheet)
         {
-            var rowRiskLevelOddsGroupNoInfo = sheet.CopyRow(TemplateSheet, RowRiskLevelOddsGroupContentTemplate, RowRiskLevelOddsGroupContentTemplate);
-            BuildNoInfomationRow(sheet, rowRiskLevelOddsGroupNoInfo, RowRiskLevelOddsGroupContentTemplate, RowRiskLevelOddsGroupContentTemplate, RiskLevelOddsGroupColumn, RiskLevelPlatformColumn);
+            var rowRiskLevelOddsGroupNoInfo = sheet.CopyRow(TemplateSheet, RowRiskLevelSpreadSettingContentTemplate, RowRiskLevelSpreadSettingContentTemplate);
+            BuildNoInfomationRow(sheet, rowRiskLevelOddsGroupNoInfo, RowRiskLevelSpreadSettingContentTemplate, RowRiskLevelSpreadSettingContentTemplate, RiskLevelSporttypeColumn, RiskLevelPlatformColumn);
 
             var rowCCSettingPolicyNoInfo = sheet.CopyRow(TemplateSheet, RowCCSettingPolicyContentTemplate, RowCCSettingPolicyContentTemplate);
             BuildNoInfomationRow(sheet, rowCCSettingPolicyNoInfo, RowCCSettingPolicyContentTemplate, RowCCSettingPolicyContentTemplate, SportTypeColumn, RepeatedBetColumn);
