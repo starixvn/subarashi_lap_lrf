@@ -1312,11 +1312,40 @@ body {
   .account-info-container-content {
     padding: 0 10px 10px 10px; }
   .account-info-container .table {
-    min-width: 80%; }
+    width: 100%; }
     .account-info-container .table tr {
       height: 28px; }
-      .account-info-container .table tr .first-cell {
+      .account-info-container .table tr th:first-child {
         width: 30%; }
+      .account-info-container .table tr th:nth-child(2) {
+        width: 20%; }
+      .account-info-container .table tr td:first-child {
+        width: 30%; }
+      .account-info-container .table tr td:nth-child(2) {
+        width: 20%; }
+      .account-info-container .table tr td:last-child {
+        vertical-align: top; }
+      .account-info-container .table tr .account-kyc-container {
+        max-height: 350px;
+        overflow-y: auto; }
+      .account-info-container .table tr .account-kyc-image {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 4px solid;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 500px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto; }
+      .account-info-container .table tr .icon-loading {
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        height: fit-content;
+        margin-top: 100px; }
   .account-info-container .side-content {
     margin-top: 0; }
 
