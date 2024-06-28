@@ -15,11 +15,13 @@ namespace Fanex.Athena.Module.Notification.Excels
 
         private const int MaxExcelRowPerSheet = 65536;
         private const int RowContentTemplate = 2;
+        private const int RowNoInfoTemplate = 3;
         private const int ColumnRefNo = 1;
         private const int ColumnExternalId = 2;
         private const int ColumnSystemId = 3;
+        private const int ColumnTemplateCount = 4;
 
-        private int RowIndex = 0;
+        private int RowIndex;
 
         private readonly IEnumerable<AmendmentTicketListing> _dataList;
         private AmendmentTicketListing _data;
@@ -33,15 +35,16 @@ namespace Fanex.Athena.Module.Notification.Excels
 
         protected override void AssignDataMultiSheet()
         {
-            var sheet = Workbook.CloneSheet(TemplateSheetName, "Data");
-            var numberOfSheets = 1;
+            var currentSheetNumber = 1;
+            var sheet = CreateNewSheet(ref currentSheetNumber);
 
             foreach (var data in _dataList)
             {
-                if ((RowIndex + data.Data.Count() + RowContentTemplate) > MaxExcelRowPerSheet)
+                var totalRows = RowIndex + data.Data.Count() + RowContentTemplate;
+
+                if (totalRows > MaxExcelRowPerSheet)
                 {
-                    sheet = Workbook.CloneSheet(TemplateSheetName, "Data" + (++numberOfSheets).ToString());
-                    RowIndex = 0;
+                    sheet = CreateNewSheet(ref currentSheetNumber);
                 }
 
                 _data = data;
@@ -53,9 +56,25 @@ namespace Fanex.Athena.Module.Notification.Excels
             }
         }
 
+        private ISheet CreateNewSheet(ref int number)
+        {
+            var suffixText = number == 1 ? string.Empty : number.ToString();
+            var sheet = Workbook.CloneSheet(TemplateSheetName, "Data" + suffixText);
+            ClearTemplate(sheet, RowTitleTemplate);
+            RowIndex = 0;
+            number++;
+
+            return sheet;
+        }
+
+        protected override void AssignNoInfoRow(ISheet sheet)
+        {
+            sheet.SetTextRowValue(TemplateSheet, RowNoInfoTemplate, RowIndex++, ColumnTemplateCount, ViewResources.NoInfo);
+        }
+
         protected override void AssignTitle(ISheet sheet)
         {
-            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, destRowIndex: RowIndex++, 1, $"{ViewResources.TicketList} - {_data.MatchInfo}");
+            sheet.SetTextRowValue(TemplateSheet, RowTitleTemplate, RowIndex++, ColumnTemplateCount, $"{ViewResources.TicketList} - {_data.MatchInfo}");
         }
 
         protected override void AssignHeader(ISheet sheet)
@@ -69,6 +88,12 @@ namespace Fanex.Athena.Module.Notification.Excels
 
         protected override void AssignSheetData(ISheet sheet)
         {
+            if (!_data.Data.Any())
+            {
+                AssignNoInfoRow(sheet);
+                return;
+            }
+
             for (var rowIndex = 0; rowIndex < _data.Data.Count; rowIndex++)
             {
                 var rowExcel = sheet.CopyRow(TemplateSheet, RowContentTemplate, RowIndex++);
