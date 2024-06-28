@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Fanex.Athena.Extension.Helpers;
 using Fanex.Athena.Extension.Utility;
 using Fanex.Athena.Extension.Utility.Interfaces;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Core.DTO.Configuration;
-using Fanex.Athena.Model.Customer.DTO;
 using Fanex.Athena.Model.Customer.DTO.CustomerAdmin;
 using Fanex.Athena.Model.Customer.Enum;
 using Fanex.Athena.Model.Customer.MetaModel.CustomerAdmin;
@@ -37,7 +35,8 @@ namespace Fanex.Athena.Service.Customer
 
         public async Task<CustomerInfo> GetCustomerInfoByUserName(GetCustomerInfoMetaModel metaModel)
         {
-            var uri = new Uri($"{_appSettings.GetValue("12BCustomerDataApi")}?username={metaModel.UserName}");
+            const string relativePath = "/Get12BCustomerData";
+            var uri = new Uri($"{_appSettings.GetValue("12BCustomerApi")}{relativePath}?username={metaModel.UserName}");
 
             try
             {
@@ -58,6 +57,26 @@ namespace Fanex.Athena.Service.Customer
             }
 
             return null;
+        }
+
+        public async Task<HttpResponseMessage> GetKYCInfoByUserName(GetCustomerInfoMetaModel metaModel)
+        {
+            const string relativePath = "/GetMemberImage";
+
+            var uri = new Uri($"{_appSettings.GetValue("12BCustomerApi")}{relativePath}?username={metaModel.UserName}");
+
+            try
+            {
+                var proxyUrl = _appSettings.GetValue("Portal_Proxy");
+                var response = await _webClientService.SendRequest(uri, proxyUrl);
+                response.EnsureSuccessStatusCode();
+                return response;
+            }
+            catch (Exception exception)
+            {
+                _logger.Error($"Send request incorrectly! Url:" + $" {uri.AbsoluteUri}; \n {LogMessageHelper.GenerateMessage(exception)}");
+                return null;
+            }
         }
 
         public CustomerInfoIvory GetCustomerInfoIvoryByUserName(GetCustomerInfoMetaModel metaModel, string siteName)

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Fanex.Athena.Api.Base;
@@ -22,6 +25,7 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         private readonly ICustomerAdminService _customerAdminService;
         private readonly ICustomerAdminAPIService _customerAdminAPIService;
         private readonly IList<string> _ivorySites = new List<string> { "N8I", "N88" };
+
         public IBalanceUpDataAccess BalanceUpDataAccessInstance { get; set; }
 
         public CustomerAdministrationController(
@@ -40,6 +44,14 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
                 ?? await _customerAdminService.GetCustomerInfoByUserName(model);
 
             return JsonApi(result);
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> GetKYCInfoByUserName(GetCustomerInfoMetaModel model)
+        {
+            var result = await _customerAdminAPIService.GetKYCInfoByUserName(model);
+
+            return result ?? new HttpResponseMessage(HttpStatusCode.NoContent);
         }
 
         [HttpPost]

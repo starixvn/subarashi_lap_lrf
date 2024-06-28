@@ -24,25 +24,25 @@ export const PlayerProfile = (props) => {
     const Component = selectedTab.component;
     return (
         <>
-        <div className="page-filter">
-            <div className="player-profile">
-                <ul className="columns">
-                    <li>{LangHelper.getSingleResource("Username")}: <span className='user-info'>{userName}</span></li>
-                    <li>{LangHelper.getSingleResource("Currency")}:  <span className='user-info'>{currencyCode}</span></li>
-                    <li>{LangHelper.getSingleResource("DateOfRegistration")}:  <span className='user-info'>{registeredDateString}</span></li>
-                </ul>
-                <ul className="columns">
-                    <li>{LangHelper.getSingleResource("Country")}:  <span className='user-info'>{country}</span></li>
-                    <li>{LangHelper.getSingleResource("IP")}:  <span className='user-info'>{ip}</span></li>
-                </ul>
-            </div>   
-            <div id="customer-admin">
-                <TabMenu selectedTabMenu={props.selectedTabKey} onClickTabMenu={_onClickTabMenu} tabMenuList={tabMenuList} />
+            <div className="page-filter">
+                <div className="player-profile">
+                    <ul className="columns">
+                        <li>{LangHelper.getSingleResource("Username")}: <span className='user-info'>{userName}</span></li>
+                        <li>{LangHelper.getSingleResource("Currency")}:  <span className='user-info'>{currencyCode}</span></li>
+                        <li>{LangHelper.getSingleResource("DateOfRegistration")}:  <span className='user-info'>{registeredDateString}</span></li>
+                    </ul>
+                    <ul className="columns">
+                        <li>{LangHelper.getSingleResource("Country")}:  <span className='user-info'>{country}</span></li>
+                        <li>{LangHelper.getSingleResource("IP")}:  <span className='user-info'>{ip}</span></li>
+                    </ul>
+                </div>
+                <div id="customer-admin">
+                    <TabMenu selectedTabMenu={props.selectedTabKey} onClickTabMenu={_onClickTabMenu} tabMenuList={tabMenuList} />
+                </div>
             </div>
-        </div>
-        {Component && <Suspense fallback={<div>Loading...</div>}>
-                            <Component selectedTabKey={props.selectedTabKey} />
-        </Suspense>}
+            {Component && <Suspense fallback={<div>Loading...</div>}>
+                <Component selectedTabKey={props.selectedTabKey} />
+            </Suspense>}
         </>
     )
 }
@@ -52,7 +52,7 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({ setSelectedTab }, dispatch);
 }
 function mapStateToProps(state) {
-    const { isSubmitted, username, selectedTabKey, param , userInfo} = state;
+    const { isSubmitted, username, selectedTabKey, param, userInfo } = state;
     return Object.assign({}, { isSubmitted, username, selectedTabKey, param, userInfo });
 }
 
