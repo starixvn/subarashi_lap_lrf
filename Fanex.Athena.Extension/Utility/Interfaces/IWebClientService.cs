@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
 
     public interface IWebClientService
@@ -22,5 +23,7 @@
         Task<string> UploadStringAsync(Uri address, string parameters);
 
         Task<string> DownloadStringAsync(Uri address, string proxyUrl = null);
+
+        Task<HttpResponseMessage> SendRequest(Uri address, string proxyUrl = null);
     }
 }

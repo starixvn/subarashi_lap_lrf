@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Net;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -85,6 +87,28 @@
             {
                 webClient.Encoding = Encoding.UTF8;
                 return await webClient.DownloadStringTaskAsync(address);
+            }
+        }
+
+        public async Task<HttpResponseMessage> SendRequest(Uri address, string proxyUrl = null)
+        {
+            var proxy = !string.IsNullOrEmpty(proxyUrl) ? new WebProxy
+            {
+                Address = new Uri(proxyUrl),
+                UseDefaultCredentials = true,
+                BypassProxyOnLocal = false
+            } : null;
+
+            var httpClientHandler = new HttpClientHandler
+            {
+                Proxy = proxy,
+            };
+
+            using (var client = new HttpClient(handler: httpClientHandler, disposeHandler: true))
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                return await client.GetAsync(address);
             }
         }
     }
