@@ -6,7 +6,6 @@
     using System.Web.Http;
     using Base.Attributes;
     using DataAccess.Report.Interfaces;
-    using Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
@@ -18,18 +17,15 @@
     [ApiFunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]
     public class ExchangeWinLossReportController : ApiReportBaseController
     {
-        private readonly IReportSettingService _reportSettingService;
         private readonly IExchangeWinLossDataAccess _dataAccess;
         private readonly ILGAPIClient _lgClient;
 
         public ExchangeWinLossReportController(
             ILanguageService langService,
-            IReportSettingService reportSettingService,
             IExchangeWinLossDataAccess dataAccess,
             ILGAPIClient lgClient)
             : base(langService)
         {
-            _reportSettingService = reportSettingService;
             _dataAccess = dataAccess;
             _lgClient = lgClient;
         }
@@ -75,15 +71,7 @@
 
         private bool IsValidParams(ExchangeWinLossMetaModel metaModel)
         {
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss
-                , SessionService.LicenseeSession.LicenseeName);
-            if (setting == null)
-            {
-                return true;
-            }
-
-            return DateTimeHelper.IsBetween(metaModel.FromDate, setting.MinDate, setting.MaxDate) &&
-                DateTimeHelper.IsBetween(metaModel.ToDate, setting.MinDate, setting.MaxDate);
+            return metaModel.FromDate <= metaModel.ToDate;
         }
     }
 }

@@ -51,7 +51,6 @@
         {
             _controller = new ExchangeWinLossReportController(
                             LangService,
-                            _reportSettingService,
                             _dataAccess,
                             _lgClient)
             {
