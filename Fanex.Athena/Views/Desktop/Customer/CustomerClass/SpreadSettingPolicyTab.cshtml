@@ -8,14 +8,15 @@
 }
 else
 {
-    <table id="customer-class-info-spread-setting" class="table table-bordered">
+    <table id="customer-class-info-spread-setting" class="table table-bordered customer-class-info-spread-setting">
         <thead>
             <tr>
                 <th class="col-small">@ViewResources.CustomerClass</th>
                 <th class="col-small">@ViewResources.Category</th>
-                <th class="col-small">@ViewResources.OddsGroup</th>
+                <th class="col-small">@ViewResources.SportType</th>
                 <th class="col-small">@ViewResources.Currency</th>
                 <th class="col-small">@ViewResources.Platform</th>
+                <th class="col-small">@ViewResources.Spread</th>
             </tr>
         </thead>
         <tbody>
@@ -26,9 +27,10 @@ else
                     <tr>
                         <td class="center-align">@m.Id</td>
                         <td class="center-align">@m.Category</td>
-                        <td class="center-align">-</td>
+                        <td class="left-align">-</td>
                         <td class="center-align">-</td>
                         <td class="left-align">-</td>
+                        <td class="right-align">-</td>
                     </tr>
 
                     continue;
@@ -44,9 +46,10 @@ else
                             <td class="center-align" rowspan="@m.Policies.Count">@m.Id</td>
                             <td class="center-align" rowspan="@m.Policies.Count">@m.Category</td>
                         }
-                        <td class="center-align">@p.OddsGroup</td>
+                        <td class="left-align">@p.SportTypeName</td>
                         <td class="center-align">@p.Currency</td>
                         <td class="left-align">@p.Platform</td>
+                        <td class="right-align">@p.Spread</td>
                     </tr>
 
                     isFirstRow = false;

@@ -18,9 +18,10 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
 
         private const int CustomerClassColumn = 0;
         private const int CategoryColumn = 1;
-        private const int OddsGroupColumn = 2;
+        private const int SportTypeColumn = 2;
         private const int CurrencyColumn = 3;
         private const int PlatformColumn = 4;
+        private const int SpreadColumn = 5;
 
         private readonly string _reporTitle;
         private readonly IList<string> _headerTexts;
@@ -28,9 +29,10 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
 
         private readonly IDictionary<int, string> _gridCommonColumNames = new Dictionary<int, string>
         {
-            { OddsGroupColumn, "OddsGroup" },
+            { SportTypeColumn, "SportTypeName" },
             { CurrencyColumn, "Currency" },
             { PlatformColumn, "Platform" },
+            { SpreadColumn, "Spread" },
         };
 
         public CustomerClassSpreadSettingPolicyExcel(string templatePath, string reportTitle, IEnumerable<CustomerClassModel> data)
@@ -42,9 +44,10 @@ namespace Fanex.Athena.Excel.Customer.CustomerClass
             {
                 ViewResources.CustomerClass,
                 ViewResources.Category,
-                ViewResources.OddsGroup,
+                ViewResources.SportType,
                 ViewResources.Currency,
                 ViewResources.Platform,
+                ViewResources.Spread,
             };
         }
 
