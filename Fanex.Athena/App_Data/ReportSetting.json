@@ -23,7 +23,8 @@
   {
     "ReportKey": "ExchangeWinloss77",
     "MinDateString": "",
-    "MaxDateString": ""
+    "MaxDateString": "today",
+    "TimeZone": 8
   },
   {
     "ReportKey": "CustomerWinLoss29",

@@ -59,7 +59,7 @@
             var subsidiaryList = _subsidiaryService.GetSubsidiaryTree(userSession, licensee.LicenseeName);
             var viewType = !subsidiaryList.Any() ? SubsidiaryViewType.NotManagement : (SubsidiaryViewType)userSession.SubsidiaryViewType;
             var reportSetting = _reportSettingService.GetSetting(PermissionKeys.ReportExchangeWinLoss, licensee.LicenseeName);
-            return new ExchangeWinLossViewModel
+            return new ExchangeWinLossViewModel(reportSetting.TimeZone)
             {
                 MinDate = reportSetting.MinDate,
                 MaxDate = reportSetting.MaxDate,

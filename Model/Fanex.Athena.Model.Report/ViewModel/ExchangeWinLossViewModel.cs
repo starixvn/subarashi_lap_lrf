@@ -9,10 +9,10 @@
 
     public class ExchangeWinLossViewModel
     {
-        public ExchangeWinLossViewModel()
+        public ExchangeWinLossViewModel(int? timeZone)
         {
-            FromDate = DateTimeHelper.Today;
-            ToDate = DateTimeHelper.Today;
+            FromDate = timeZone.HasValue ? DateTimeHelper.UtcNow.AddHours(timeZone.Value) : DateTimeHelper.Now;
+            ToDate = timeZone.HasValue ? DateTimeHelper.UtcNow.AddHours(timeZone.Value) : DateTimeHelper.Now;
             ReportBy = ReportByType.Daily;
             DateOptionType = ViewInTypes.SettledAndResettledReport;
             ExcludeTestData = true;
