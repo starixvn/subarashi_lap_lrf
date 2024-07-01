@@ -42,7 +42,7 @@
     subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
     viewType: @((byte)Model.ViewType),
     currencyList: @Html.Raw(currencyList.ToJson()),
-    dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', toDay: '@today'}
+    dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.AddDays(1).ToString("MM/dd/yyyy")', toDay: '@today'}
     };
 }
 <div id="app-container">

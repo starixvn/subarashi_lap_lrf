@@ -58,7 +58,7 @@
     isExcludeTest: true,
     dateRange: {fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
     isLoading: false,
-    dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.ToString("MM/dd/yyyy")'}
+    dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@maxDate.AddDays(1).ToString("MM/dd/yyyy")'}
     }
     window._AppData = {
     productOptions: @Html.Raw(productOptions.ToJson()),
