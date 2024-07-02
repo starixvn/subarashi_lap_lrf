@@ -93,17 +93,22 @@
                     {
                         var platform = reader.ToNullableInt("Platform");
                         var sportType = Convert.ToString(reader["SportType"]);
+                        var currencyId = reader.ToNullableInt("Currency") ?? 0;
 
                         var policy = new CustomerClassLimitPolicyModel
                         {
                             Id = Convert.ToString(reader[CustomerClass]),
                             Spread = FormatNumber(reader.ToNullableDecimal("Spread"), "{0:#,##0.00}"),
-                            CurrencyId = reader.ToNullableInt("Currency") ?? 0,
+                            CurrencyId = currencyId,
                             SportType = sportType,
                             SportTypeName = _cacheRefAdapter.GetSportName(sportType),
                             Platform = platform == 0 ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
                         };
-                        result.Add(policy);
+
+                        if (metaModel.CurrencyList.ContainsKey(currencyId) || currencyId == 0)
+                        {
+                            result.Add(policy);
+                        }
                     }
                 }
             }
