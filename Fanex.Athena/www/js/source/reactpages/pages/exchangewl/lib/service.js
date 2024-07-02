@@ -53,7 +53,7 @@ export class Service {
 
         viewInTypeText = isViewResettledTicketOnly ? LangHelper.getSingleResource("ResettledReport") : viewInTypeText;
 
-        return `${LangHelper.getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
+        return `${LangHelper.getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, GMT+8, ${viewInByCurrency}${usernameText}`;
     }
 
     static showErrorMsg() {

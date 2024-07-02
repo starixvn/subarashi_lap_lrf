@@ -4636,7 +4636,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         data: this.betlistParams
       };
       const viewIn = _lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("Viewin").replace("{0}", BaseCurrency ? BaseCurrency : CurrencyName);
-      this.betlistTitle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, PLAYER_BET_LIST_TEXT, " ", FromDate, " \u2192 ", ToDate, " - ", externalId, "(", systemId, ") -", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      this.betlistTitle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, PLAYER_BET_LIST_TEXT, " ", FromDate, " \u2192 ", ToDate, " - ", "(GMT+8)", " - ", externalId, "(", systemId, ") -", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "base-currency-title"
       }, viewIn));
       this.props.toggleLoader(true);
@@ -6144,7 +6144,7 @@ class Service {
     const usernameText = !username ? "" : `, ${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('Username')}: ${username}`;
     let viewInTypeText = selectedViewInType === ViewInType.SettledOnly ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SettledOnlyReport") : _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SettledAndResettledReport");
     viewInTypeText = isViewResettledTicketOnly ? _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("ResettledReport") : viewInTypeText;
-    return `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, ${viewInByCurrency}${usernameText}`;
+    return `${_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ExchangeWinLoss')} - ${viewInTypeText}, ${fromDate} - ${toDate}, GMT+8, ${viewInByCurrency}${usernameText}`;
   }
   static showErrorMsg() {
     alert(_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource('ErrorProcessingMsg'));
