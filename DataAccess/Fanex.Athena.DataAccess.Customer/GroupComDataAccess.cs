@@ -13,12 +13,32 @@
 
     public class GroupComDataAccess : BaseDataAccess, IGroupComDataAccess
     {
+        public async Task<IEnumerable<GroupCommSettingMetaModel>> GetAllCommSettingAsync()
+        {
+            const string UspName = "Lrf_LicenseeCommProductList";
+
+            var comSettings = new List<GroupCommSettingMetaModel>();
+
+            using (var db = GetObjectDb(UspName))
+            {
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    while (reader.Read())
+                    {
+                        comSettings.Add(new GroupCommSettingMetaModel(reader));
+                    }
+                }
+            }
+
+            return comSettings;
+        }
+
         public async Task<(IList<GroupCommMetaModel>, IList<GroupCommSettingMetaModel>)> GetAllAsync(int licenseeId)
         {
             const string UspName = "Lrf_LicenseeGroupCommSel";
 
             var comms = new List<GroupCommMetaModel>();
-            var comDetails = new List<GroupCommSettingMetaModel>();
+            var commDetails = new List<GroupCommSettingMetaModel>();
 
             using (var db = GetObjectDb(UspName))
             {
@@ -41,10 +61,8 @@
 
                     while (comms.Any() && reader.Read())
                     {
-                        comDetails.Add(new GroupCommSettingMetaModel
+                        commDetails.Add(new GroupCommSettingMetaModel(reader)
                         {
-                            Sporttype = Convert.ToInt32(reader["Sporttype"]),
-                            Bettype = Convert.ToInt32(reader["Bettype"]),
                             Discount = Convert.ToDecimal(reader["Discount"]),
                             GroupCommId = Convert.ToInt32(reader["GroupDiscountID"])
                         });
@@ -52,10 +70,10 @@
                 }
             }
 
-            return (comms, comDetails);
+            return (comms, commDetails);
         }
 
-        public (GroupCommMetaModel, IList<GroupCommSettingMetaModel>) GetById(int groupCommId, int licenseeId)
+        public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId)
         {
             const string UspName = "Lrf_GroupCommGetById";
             var comm = new GroupCommMetaModel();
@@ -66,7 +84,7 @@
                 db.SetParameterValue("LicenseeId", licenseeId);
                 db.SetParameterValue("GroupDiscountID", groupCommId);
 
-                using (var reader = db.ExecuteReader())
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     if (reader.Read())
                     {
@@ -78,20 +96,20 @@
 
                     while (reader.Read())
                     {
-                        commValues.Add(new GroupCommSettingMetaModel
+                        commValues.Add(new GroupCommSettingMetaModel(reader)
                         {
-                            Sporttype = Convert.ToInt32(reader["Sporttype"]),
-                            Bettype = Convert.ToInt32(reader["Bettype"]),
                             Discount = Convert.ToDecimal(reader["Discount"])
                         });
                     }
                 }
             }
 
-            return (comm, commValues);
+            comm.CommValues = commValues;
+
+            return comm;
         }
 
-        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions)
+        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId)
         {
             const string UspName = "Lrf_LicenseeGroupCommIns";
 
@@ -117,7 +135,7 @@
             }
         }
 
-        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId, IDictionary<string, bool> permissions)
+        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId)
         {
             const string UspName = "Lrf_LicenseeGroupCommUpd";
 
@@ -195,9 +213,9 @@
             {
                 xmlElementBuilder.Append(string.Format(
                     XmlElementPattern,
-                    setting.Value.Sporttype,
-                    setting.Value.Bettype,
-                    setting.Value.Discount));
+                    setting.Sporttype,
+                    setting.Bettype,
+                    setting.Discount));
             }
 
             return string.Format(XmlPattern, xmlElementBuilder);

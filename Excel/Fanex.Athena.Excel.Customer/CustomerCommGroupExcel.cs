@@ -18,7 +18,7 @@
         private const int RowNoInfoTemplate = 5;
 
         private readonly IList<GroupCommMetaModel> _exportData;
-        private readonly IDictionary<string, bool> _productPermissions;
+        private readonly IEnumerable<string> _products;
 
         public CustomerCommGroupExcel(
             string templatePath,
@@ -26,10 +26,10 @@
             : base(templatePath, viewModel.Groups.Count, null)
         {
             _exportData = viewModel.Groups;
-            _productPermissions = viewModel.ProductPermissions;
+            _products = viewModel.ProductList;
 
             const int columnTemplateCount = 4;
-            ColumnTemplateCount = columnTemplateCount + _productPermissions.Count;
+            ColumnTemplateCount = columnTemplateCount + _products.Count();
         }
 
         protected override void AssignHeader(ISheet sheet)
@@ -42,12 +42,13 @@
                 ViewResources.NoOfCustmer
             };
 
-            foreach (var p in _productPermissions)
+            foreach (var p in _products)
             {
-                headerTextList.Add(ViewResources.ResourceManager.GetString("Product" + p.Key));
+                headerTextList.Add(ViewResources.ResourceManager.GetString("Product" + p));
             }
 
             var row = sheet.CopyRow(TemplateSheet, RowHeaderTemplate);
+
             for (int i = 0; i < headerTextList.Count; i++)
             {
                 row.Cells[i].SetCellValue(headerTextList[i]);
@@ -76,9 +77,10 @@
                 row.Cells[currentColumn++].SetCellValue(exportRow.IsDefaultGroup ? "X" : string.Empty);
                 row.Cells[currentColumn++].SetCellValue(exportRow.NumberOfCustomer);
 
-                foreach (var p in _productPermissions)
+                foreach (var comm in exportRow.CommValues)
                 {
-                    row.Cells[currentColumn++].SetCellValue(GetCommValue(exportRow, p.Key));
+                    row.CreateCell(currentColumn);
+                    row.Cells[currentColumn++].SetCellValue(GetCommValue(comm.Discount));
                 }
             }
         }
@@ -94,28 +96,8 @@
             ClearTemplate(sheet, RowContentTemplate);
         }
 
-        protected override void ProcessUI(ISheet sheet)
+        public string GetCommValue(decimal value)
         {
-            const int startCommissionColumnIndex = 4;
-            var currentColumn = startCommissionColumnIndex;
-
-            foreach (var p in _productPermissions)
-            {
-                if (!p.Value)
-                {
-                    sheet.HideColumn(currentColumn);
-                }
-
-                currentColumn++;
-            }
-        }
-
-        public string GetCommValue(GroupCommMetaModel exportRow, string productCode)
-        {
-            var value = exportRow.CommValues.TryGetValue(productCode, out GroupCommSettingMetaModel comm)
-                ? Converter.ToDecimal(comm.Discount)
-                : 0;
-
             const int percent = 100;
             return (value * percent).ToString("#,##0.00") + "%";
         }

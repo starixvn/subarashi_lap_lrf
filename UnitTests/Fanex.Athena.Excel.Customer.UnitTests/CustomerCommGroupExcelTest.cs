@@ -145,7 +145,7 @@ namespace Fanex.Athena.Excel.Customer.UnitTests
             var excel = Substitute.ForPartsOf<CustomerCommGroupExcelTestable>(
                 string.Empty,
                 table,
-                new CommissionGroupListViewModel(new List<GroupCommMetaModel>(), new Dictionary<string, bool>()));
+                new CommissionGroupListViewModel(new List<GroupCommMetaModel>(), new List<string>()));
             excel.TemplateSheet.Returns(Substitute.For<ISheet>());
             return excel;
         }

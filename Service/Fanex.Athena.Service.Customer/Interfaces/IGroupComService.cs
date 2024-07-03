@@ -10,13 +10,15 @@
 
     public interface IGroupComService
     {
-        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions);
+        Task<GroupCommMetaModel> InitCommValues(ProductAccess productAccess);
 
-        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions);
+        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId);
 
-        Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
+        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user);
 
-        GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions);
+        Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId);
+
+        Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId);
 
         bool CheckExistingGroupByName(int licenseeId, string groupName);
 

@@ -1210,7 +1210,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         'use strict';
 
         function initialize(titleResource) {
-            _me.products = $("#GroupCommProductList").val().split(",");
+            _me.comms = $("[id$='CommDiscount']");
             Site.initialize();
 
             initColorPicker();
@@ -1230,10 +1230,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 Site.redirect(Site.resolveClientUrl('CustomerComGroup/Index'));
             });
 
-            // Commission dropdownlist change
-            _me.products.forEach(function (p, i) {
-                $('#' + p + 'Comm1').on('change', function () {
-                    commissionOnChange($(this).val(), p + 'Comm');
+            _me.comms.each(function () {
+                var commId = $(this).attr("id");
+                $('#' + commId + '1').on('change', function () {
+                    commissionOnChange($(this).val(), commId);
                 }).change();
             });
         }
@@ -1323,10 +1323,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         }
 
         function submit(formId) {
-            for (var i = 0; i < _me.products.length; i++) {
-                var p = _me.products[i];
-                initCommParam('#' + p + 'Comm');
-            }
+            _me.comms.each(function () {
+                initCommParam('#' + $(this).attr("id"));
+            });
 
             initDefaultParam(formId);
         }

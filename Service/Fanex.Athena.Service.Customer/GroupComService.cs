@@ -8,6 +8,7 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
 
@@ -20,17 +21,28 @@
             _groupDataAccess = groupDataAccess;
         }
 
-        public async Task<IList<GroupCommMetaModel>> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
+        public async Task<GroupCommMetaModel> InitCommValues(ProductAccess productAccess)
         {
-            var (comms, commValues) = await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
+            var commSettings = await _groupDataAccess.GetAllCommSettingAsync().ConfigureAwait(false);
+            commSettings = commSettings.Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
+                .OrderBy(_ => CommissionGroupHelper.ProductListComparer(_.ProductCode)).ThenBy(_ => _.ProductCode); ;
 
-            return MergeCommSetting(comms, commValues, permissions);
+            return new GroupCommMetaModel
+            {
+                CommValues = commSettings
+            };
         }
 
-        private IList<GroupCommMetaModel> MergeCommSetting(IEnumerable<GroupCommMetaModel> comms, IEnumerable<GroupCommSettingMetaModel> commValues, IDictionary<string, bool> permissions)
+        public async Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId)
         {
-            commValues = MapCommProductSetting(commValues, permissions);
+            var (comms, commValues) = await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
+            var productList = commValues.Select(_ => _.ProductCode).Distinct().OrderBy(_ => CommissionGroupHelper.ProductListComparer(_)).ThenBy(_ => _);
 
+            return (MergeCommSetting(comms, commValues), productList);
+        }
+
+        private static IList<GroupCommMetaModel> MergeCommSetting(IEnumerable<GroupCommMetaModel> comms, IEnumerable<GroupCommSettingMetaModel> commValues)
+        {
             return comms.GroupJoin(commValues, c => c.GroupCommId, d => d.GroupCommId,
                 (c, ds) => new GroupCommMetaModel
                 {
@@ -40,38 +52,26 @@
                     IsDefaultGroup = c.IsDefaultGroup,
                     DefaultGroupId = c.DefaultGroupId,
                     NumberOfCustomer = c.NumberOfCustomer,
-                    CommValues = ds.ToDictionary(_ => CommissionGroupHelper.GetProductCode(_.Sporttype, _.Bettype), _ => _)
+                    CommValues = ds.OrderBy(_ => _, new GroupCommSettingComparer()).ThenBy(_ => _.ProductCode),
                 }).ToList();
         }
 
-        private GroupCommMetaModel MergeCommSetting(GroupCommMetaModel comm, IEnumerable<GroupCommSettingMetaModel> commValues, IDictionary<string, bool> permissions)
+        public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId)
         {
-            commValues = MapCommProductSetting(commValues, permissions);
-            comm.CommValues = commValues.ToDictionary(_ => CommissionGroupHelper.GetProductCode(_.Sporttype, _.Bettype), _ => _);
+            var result = await _groupDataAccess.GetById(groupCommId, licenseeId);
+            result.CommValues = result.CommValues.OrderBy(_ => _, new GroupCommSettingComparer()).ThenBy(_ => _.ProductCode);
 
-            return comm;
+            return result;
         }
 
-        private IEnumerable<GroupCommSettingMetaModel> MapCommProductSetting(IEnumerable<GroupCommSettingMetaModel> commValues, IDictionary<string, bool> permissions)
+        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId)
         {
-            return commValues.Where(_ => permissions.TryGetValue(CommissionGroupHelper.GetProductCode(_.Sporttype, _.Bettype), out bool productAllow) && productAllow);
+            return await _groupDataAccess.InsertGroupAsync(item, request, userId).ConfigureAwait(false);
         }
 
-        public GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions)
+        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user)
         {
-            var (comm, commValues) = _groupDataAccess.GetById(groupCommId, licenseeId);
-
-            return MergeCommSetting(comm, commValues, permissions);
-        }
-
-        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions)
-        {
-            return await _groupDataAccess.InsertGroupAsync(item, request, userId, permissions).ConfigureAwait(false);
-        }
-
-        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions)
-        {
-            var resultInfo = await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId, permissions).ConfigureAwait(false);
+            var resultInfo = await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId).ConfigureAwait(false);
             return resultInfo;
         }
 

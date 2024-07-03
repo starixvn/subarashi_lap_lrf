@@ -24,6 +24,7 @@
 		</Setting>
 		<Setting Key="Lrf_SyncInternalUser" SpName="Lrf_SyncInternalUser" DbName="DBCUST.bodb_Licensee.wsv_lap" />
 	</Function>
+
 	<Function Name="Authorization">
 		<Setting Key="Licensee_UserSaltSel" SpName="Licensee_UserSaltSel" DbName="DBLIC.bodb_Licensee.wsv_lap" />
 		<Setting Key="Lrf_UserLogin" SpName="Lrf_UserLogin" DbName="DBCUST.bodb_Licensee.wsv_lap" />
@@ -38,6 +39,7 @@
 		<Setting Key="Lrf_CurrencyCustIns" SpName="Lrf_CurrencyCustIns" DbName="DBCUST.bodb_Licensee.wsv_lap" />
 		<Setting Key="Lrf_UserInfoSelByUserName" SpName="Lrf_UserInfoSelByUserName" DbName="DBLIC.bodb_Licensee.wsv_lap" />
 	</Function>
+
 	<Function Name="Report">
 		<Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_SabaVirtualSportsWinLoss_Mem" SpName="Lrf_Rpt_SabaVirtualSportsWinLoss_Mem" DbName="DBEXT.bodb02.wsv_lap" />
@@ -66,7 +68,7 @@
 		<Setting Key="Lrf_Rpt_WinLoss" SpName="Lrf_Rpt_WinLoss" DbName="DBEXT.bodb02.wsv_lap"></Setting>
 		<Setting Key="Lrf_Rpt_MatchSelResultEntered" SpName="Lrf_Rpt_MatchSelResultEntered" DbName="DBEXT.bodb02.wsv_lap"></Setting>
 		<Setting Key="Shard_Lrf_Rpt_Outstanding" SpName="Lrf_Rpt_Outstanding" DbName="DBBOF.bodb02.wsv_lap" />
-		<Setting Key="Lrf_Rpt_WinlossByProduct" SpName="Lrf_Rpt_WinlossByProduct" DbName="DBEXT.bodb02.wsv_lap" />
+		<Setting Key="Lrf_Rpt_WinlossByProduct" SpName="Lrf_Rpt_WinlossByProduct"  DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_WinlossByProductDetail" SpName="Lrf_Rpt_WinlossByProductDetail" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_WinlossByProductDetail_Ag" SpName="Lrf_Rpt_WinlossByProductDetail_Ag" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_AGCasinoWinloss" SpName="Lrf_Rpt_AGCasinoWinloss" DbName="DBACC.bodb02.wsv_lap" />
@@ -84,10 +86,12 @@
 		<Setting Key="Lrf_Rpt_ExchangeWinloss_Mem" SpName="Lrf_Rpt_ExchangeWinloss_Mem" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_CasinoTurnover" SpName="Lrf_Rpt_CasinoTurnover" DbName="DBEXT.bodb02.wsv_lap" />
 	</Function>
+
 	<Function Name="CustomerInformation">
 		<Setting Key="Lrf_CustomerSelUserSearch" SpName="Lrf_CustomerSelUserSearch" DbName="DBLIC.bodb_Licensee.wsv_lap" />
 		<Setting Key="Lrf_UserInfoByUserNameSel" SpName="Lrf_UserInfoByUserNameSel" DbName="DBEXT.bodb02.wsv_lap" />
 	</Function>
+
 	<Function Name="PlayerSegmentation">
 		<Setting Key="Lrf_ProblemAccount_LicenseeProblemPlayerSel" SpName="Lrf_ProblemAccount_LicenseeProblemPlayerSel" DbName="DBACC.bodb02.wsv_lap" />
 		<Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel" DbName="DBACC.bodb02.wsv_lap" />
@@ -96,6 +100,7 @@
 		<Setting Key="Lrf_Licensee_DangerLevelSel" SpName="Lrf_Licensee_DangerLevelSel" DbName="DBLOG.bodb_CustomerLog.wsv_lap" />
 		<Setting Key="Lrf_AbnormalBet_SubIssueSel" SpName="Lrf_AbnormalBet_SubIssueSel" DbName="DBWH.bodb_DWRS.wsv_lap" />
 		<Setting Key="Lrf_SabaVirtualSettingSel" SpName="Lrf_SabaVirtualSettingSel" DbName="DBCUST.CustDB.wsv_lap" />
+
 		<Setting Key="Acc_Dep_WLMonitored_Player_Sel" SpName="Acc_Dep_WLMonitored_Player_Sel" DbName="DBCUST.CustDB.wsv_lap" />
 		<Setting Key="Acc_Dep_WLMonitored_Player_Ins" SpName="Acc_Dep_WLMonitored_Player_Ins" DbName="DBCUST.CustDB.wsv_lap" />
 		<Setting Key="Acc_Dep_WLMonitored_Player_Upd" SpName="Acc_Dep_WLMonitored_Player_Upd" DbName="DBCUST.CustDB.wsv_lap" />
@@ -104,6 +109,7 @@
 		<Setting Key="Acc_Dep_WLMonitored_Player_ReachDetail_Sel" SpName="Acc_Dep_WLMonitored_Player_ReachDetail_Sel" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Acc_Dep_WLMonitored_HistorySelByAG" SpName="Acc_Dep_WLMonitored_HistorySelByAG" DbName="DBEXT.bodb02.wsv_lap" />
 	</Function>
+
 	<Function Name="CustomerAdmin">
 		<Setting Key="Lrf_Rpt_Audit_AdminPlayerSearch" SpName="Lrf_Rpt_Audit_AdminPlayerSearch" DbName="DBPLO.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_Audit_AdminBetList" SpName="Lrf_Rpt_Audit_AdminBetList" DbName="DBPLO.bodb02.wsv_lap" />
@@ -111,22 +117,17 @@
 		<Setting Key="Lrf_Rpt_Audit_AdminDepositHistory" SpName="Lrf_Rpt_Audit_AdminDepositHistory" DbName="DBPLO.bodb02.wsv_lap" />
 		<Setting Key="Lrf_Rpt_Audit_AdminPlayerSearch_Site" SpName="Lrf_Rpt_Audit_AdminPlayerSearch_Site" DbName="DBPLO.bodb02.wsv_lap" />
 	</Function>
+
 	<Function Name="GroupComm">
-		<Setting Key="Lrf_LicenseeGroupCommSel" SpName="Lrf_LicenseeGroupCommSel_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap">
-			<Mapping DataField="Parlaycomm" ObjectProperty="ParlayComm" />
-			<Mapping DataField="RNGComm" ObjectProperty="CSComm" />
-			<Mapping DataField="IsDefault" ObjectProperty="IsDefaultGroup" />
-		</Setting>
-		<Setting Key="Lrf_LicenseeGroupCommIns" SpName="Lrf_LicenseeGroupCommIns_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" />
-		<Setting Key="Lrf_LicenseeGroupCommDel" SpName="Lrf_LicenseeGroupCommDel_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" TimeOut="300" />
-		<Setting Key="Lrf_LicenseeGroupCommUpd" SpName="Lrf_LicenseeGroupCommUpd_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" TimeOut="300" />
-		<Setting Key="Lrf_GroupCommGetById" SpName="Lrf_GroupCommGetById_xpre" DbName="DBLIC.bodb_Licensee.wsv_lap">
-			<Mapping DataField="Parlaycomm" ObjectProperty="ParlayComm" />
-			<Mapping DataField="RNGComm" ObjectProperty="CSComm" />
-			<Mapping DataField="IsDefault" ObjectProperty="IsDefaultGroup" />
-		</Setting>
-		<Setting Key="Lrf_GroupCommCheckByName" SpName="Lrf_GroupCommCheckByName_xpre" DbName="DBLIC.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_LicenseeCommProductList" SpName="Lrf_LicenseeCommProductList" DbName="DBCUST.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_LicenseeGroupCommSel" SpName="Lrf_LicenseeGroupCommSel" DbName="DBCUST.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_LicenseeGroupCommIns" SpName="Lrf_LicenseeGroupCommIns" DbName="DBCUST.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_LicenseeGroupCommDel" SpName="Lrf_LicenseeGroupCommDel" DbName="DBCUST.bodb_Licensee.wsv_lap" TimeOut="300" />
+		<Setting Key="Lrf_LicenseeGroupCommUpd" SpName="Lrf_LicenseeGroupCommUpd" DbName="DBCUST.bodb_Licensee.wsv_lap" TimeOut="300" />
+		<Setting Key="Lrf_GroupCommGetById" SpName="Lrf_GroupCommGetById" DbName="DBCUST.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_GroupCommCheckByName" SpName="Lrf_GroupCommCheckByName" DbName="DBLIC.bodb_Licensee.wsv_lap" />
 	</Function>
+
 	<Function Name="TotalBets">
 		<Setting Key="Lrf_TotalBets_Sel1378" SpName="Lrf_TotalBets_Sel1378" DbName="DBBOF.bodb02.wsv_lap"></Setting>
 		<Setting Key="Lrf_TotalBets_Sel2021" SpName="Lrf_TotalBets_Sel2021" DbName="DBBOF.bodb02.wsv_lap"></Setting>
@@ -137,6 +138,7 @@
 		<Setting Key="Lrf_TotalBets_Sel14" SpName="Lrf_TotalBets_Sel14" DbName="DBBOF.bodb02.wsv_lap"></Setting>
 		<Setting Key="Lrf_TotalBets_Sel121" SpName="Lrf_TotalBets_Sel121" DbName="DBBOF.bodb02.wsv_lap"></Setting>
 	</Function>
+
 	<Function Name="Forecast">
 		<Setting Key="Lrf_Forecast_OddsSelTopByMatch" SpName="Lrf_Forecast_OddsSelTopByMatch" DbName="DBBOF.bodb02.wsv_lap"></Setting>
 		<Setting Key="Shard_Lrf_Forecast_SelHDP" SpName="Lrf_Forecast_SelHDP" DbName="DBBOF.bodb02.wsv_lap"></Setting>
@@ -148,6 +150,7 @@
 		<Setting Key="Shard_Lrf_Forecast_SelByLeague" SpName="Lrf_Forecast_SelByLeague" DbName="DBBOF.bodb02.wsv_lap"></Setting>
 		<Setting Key="Shard_Lrf_Forecast_MatchTotalForecast" SpName="Lrf_Forecast_MatchTotalForecast" DbName="DBBOF.bodb02.wsv_lap"></Setting>
 	</Function>
+
 	<Function Name="Common">
 		<Setting Key="Lrf_LeagueMatchSelRunning" SpName="Lrf_LeagueMatchSelRunning" DbName="DBBOF.bodb02.wsv_lap" />
 		<Setting Key="Lrf_SelBetTypeBySport" SpName="Lrf_SelBetTypeBySport" DbName="DBEXT.bodb02.wsv_lap" />
@@ -159,12 +162,14 @@
 		<Setting Key="LAP_Rpt_WinlossAnalysis_SportSel" SpName="LAP_Rpt_WinlossAnalysis_SportSel" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="LAP_Rpt_WinlossAnalysis_BettypeSel" SpName="LAP_Rpt_WinlossAnalysis_BettypeSel" DbName="DBEXT.bodb02.wsv_lap" />
 	</Function>
+
 	<Function Name="CustomerLog">
 		<Setting Key="Lrf_UserLog_LoginSel" SpName="Lrf_UserLog_LoginSel" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_CustomerSettingLog_Sel" SpName="Lrf_CustomerSettingLog_Sel" DbName="DBLOG.bodb_CustomerLog.wsv_lap" />
 		<Setting Key="Lrf_GroupCommLog_Sel" SpName="Lrf_GroupCommLog_Sel" DbName="DBLOG.bodb_CustomerLog.wsv_lap" />
 		<Setting Key="Lrf_WriteLog_UserLog_UserControl_Multiple" SpName="Lrf_WriteLog_UserLog_UserControl_Multiple" DbName="DBLOG.bodb_CustomerLog.wsv_lap" />
 	</Function>
+
 	<Function Name="SiteConfig">
 		<Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST.SiteConfig.wsv_lap" />
 		<Setting Key="Portal_Sub_GetSubsidiaryList" SpName="Portal_Sub_GetSubsidiaryList" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" />
@@ -183,6 +188,7 @@
 		<Setting Key="Lrf_AdmNotificationSel" SpName="Lrf_AdmNotificationSel" DbName="DBCRM.MessageNotification.wsv_lap" />
 		<Setting Key="Lrf_AdmTicketListSel" SpName="Lrf_AdmTicketListSel" DbName="DBCRM.MessageNotification.wsv_lap" />
 	</Function>
+
 	<SiteDB>
 		<Setting Key="SiteDB_Lrf_Rpt_LicWinloss" SpName="SiteDB_Lrf_Rpt_LicWinloss" DbName="DBSID.bodb02.wsv_lap" />
 		<Setting Key="SiteDB_Lrf_Rpt_LicWinlossDetail" SpName="SiteDB_Lrf_Rpt_LicWinlossDetail" DbName="DBSID.bodb02.wsv_lap" />

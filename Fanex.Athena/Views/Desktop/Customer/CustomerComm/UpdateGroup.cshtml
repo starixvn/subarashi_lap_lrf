@@ -85,6 +85,5 @@
         @Html.ValidationMessageFor(model => model.LicenseeId)
         @Html.HiddenFor(model => model.GroupCommId)
         @Html.ValidationMessageFor(model => model.GroupCommId)
-        <input type="hidden" id="GroupCommProductList" value="@string.Join(",", Model.ProductPermissions.Select(s=>s.Key))" />
     </form>
 </div>

@@ -9,8 +9,6 @@
 
     public class GroupCommMetaModel
     {
-        private IDictionary<string, GroupCommSettingMetaModel> _commValues;
-
         private const int MaxGroupNameLength = 100;
 
         public GroupCommMetaModel()
@@ -43,49 +41,7 @@
 
         public bool IsResetDefault { get; set; }
 
-        public IDictionary<string, bool> ProductPermissions { get; set; }
-
-        public IDictionary<string, GroupCommSettingMetaModel> CommValues
-        {
-            get
-            {
-                if (_commValues == null)
-                {
-                    InitSetting();
-                }
-
-                return _commValues;
-            }
-            set
-            {
-                _commValues = value;
-            }
-        }
-
-        public void InitSetting()
-        {
-            if (ProductPermissions != null)
-            {
-                _commValues = new Dictionary<string, GroupCommSettingMetaModel>();
-
-                foreach (var permission in ProductPermissions)
-                {
-                    var setting = CommissionGroupHelper.GetSetting(permission.Key);
-
-                    if (setting != null)
-                    {
-                        _commValues.Add(
-                            permission.Key,
-                            new GroupCommSettingMetaModel
-                            {
-                                Sporttype = setting.Item1,
-                                Bettype = setting.Item2
-                            }
-                        );
-                    }
-                }
-            }
-        }
+        public IEnumerable<GroupCommSettingMetaModel> CommValues { get; set; }
 
         public void MapData(IDataReader reader)
         {
