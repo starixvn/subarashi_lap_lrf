@@ -85,20 +85,30 @@
             using (var db = GetObjectDb("Lrf_CustomerClassSitePolicySel", 180))
             {
                 db.SetParameterValue("Site", metaModel.SiteName);
+                db.SetParameterValue("IsTest", metaModel.IsTest);
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
                     while (reader.Read())
                     {
                         var platform = reader.ToNullableInt("Platform");
+                        var sportType = Convert.ToString(reader["SportType"]);
+                        var currencyId = reader.ToNullableInt("Currency") ?? 0;
+
                         var policy = new CustomerClassLimitPolicyModel
                         {
                             Id = Convert.ToString(reader[CustomerClass]),
-                            OddsGroup = Convert.ToString(reader["SpreadGroup"]).ToUpperInvariant(),
-                            CurrencyId = reader.ToNullableInt("CurrencyId") ?? 0,
+                            Spread = FormatNumber(reader.ToNullableDecimal("Spread"), "{0:#,##0.00}"),
+                            CurrencyId = currencyId,
+                            SportType = sportType,
+                            SportTypeName = _cacheRefAdapter.GetSportName(sportType),
                             Platform = platform == 0 ? DefaultTextValue : ViewResources.ResourceManager.GetString($"Platform_{platform}"),
                         };
-                        result.Add(policy);
+
+                        if (metaModel.CurrencyList.ContainsKey(currencyId) || currencyId == 0)
+                        {
+                            result.Add(policy);
+                        }
                     }
                 }
             }

@@ -41,7 +41,7 @@ namespace Fanex.Athena.Model.Customer.DTO
 
         public string Currency { get; set; }
 
-        public string OddsGroup { get; set; }
+        public string Spread { get; set; }
 
         public string RuleTitle { get; set; }
 
