@@ -3343,4 +3343,7 @@
   <data name="RiskLevelSpreadSetting" xml:space="preserve">
     <value>风险等级水位设定</value>
   </data>
+  <data name="ProductFS" xml:space="preserve">
+    <value>FS电子</value>
+  </data>
 </root>

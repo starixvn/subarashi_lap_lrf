@@ -227,43 +227,16 @@
 
         private string GetProductsRequireUseName()
         {
-            var productsRequireUseName = new[]
+            var productsDoesNotRequireUseName = new[]
             {
-                Product.KN,
-                Product.LT,
-                Product.CS,
-                Product.AB,
-                Product.VB,
-                Product.CC,
-                Product.PP,
-                Product.SG,
-                Product.VRG,
-                Product.TG,
-                Product.I4D,
-                Product.SXG,
-                Product.SBC,
-                Product.SAG,
-                Product.PGS,
-                Product.JK,
-                Product.HB,
-                Product.WM,
-                Product.BGG,
-                Product.VGA,
-                Product.CG,
-                Product.AP,
-                Product.APM,
-                Product.FGGL,
-                Product.MXG,
-                Product.JIG,
-                Product.YB,
-                Product.MGRNG,
-                Product.SEA,
-                Product.WE,
-                Product.L22,
-                Product.UUSL
+                Product.SB,
+                Product.BA,
+                Product.NG,
+                Product.VS,
+                Product.CO
             };
 
-            return string.Join(", ", GetProductRequireNote(productsRequireUseName));
+            return string.Join(", ", GetProductRequireNote(productsDoesNotRequireUseName, true));
         }
 
         private string GetProductsSupportTxIDSearchOnly()
@@ -279,15 +252,16 @@
             return string.Join(", ", GetProductRequireNote(productsRequireTxId));
         }
 
-        private List<string> GetProductRequireNote(string[] productCode)
+        private List<string> GetProductRequireNote(string[] productCode, bool isExclude = false)
         {
             var productAccess = _productService.GetSingleWalletProductAccess(
                 SessionServiceInstance.LicenseeSession.LicenseeId,
-                SessionServiceInstance.UserSession.Language);
+                SessionServiceInstance.UserSession.Language,
+                FunctionNames.BettingTicketCenter);
 
             var licProductsRequire = productAccess.ProductList
-                .Where(product => productCode.Contains(product.ProductCode))
-                .Select(x => x.ProductName).ToList();
+                    .Where(product => (isExclude && !productCode.Contains(product.ProductCode) || productCode.Contains(product.ProductCode)))
+                    .Select(x => x.ProductName).ToList();
 
             var offeredSubProductList = SessionServiceInstance.LicenseeSession.OfferedSubProductList;
 

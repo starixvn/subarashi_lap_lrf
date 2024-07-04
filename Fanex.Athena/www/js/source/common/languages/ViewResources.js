@@ -1,4 +1,4 @@
-﻿// Generated at: 7/4/2024 1:24:18 PM
+﻿// Generated at: 7/12/2024 1:55:31 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -757,6 +757,7 @@ ProductCG:"CG",
 ProductCO:"Cash Out",
 ProductCS:"Saba Casino",
 ProductFGGL:"FGG",
+ProductFS:"FastSpin",
 ProductHB:"Habanero",
 ProductI4D:"Togel 4D",
 ProductJIG:"Jili",

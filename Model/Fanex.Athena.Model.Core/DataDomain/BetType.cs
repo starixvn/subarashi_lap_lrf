@@ -328,5 +328,7 @@
         PromotionJackpotPrize = 17009,
 
         PromotionCashPrize = 17010,
+
+        FastSpinPromotion = 11295
     }
 }

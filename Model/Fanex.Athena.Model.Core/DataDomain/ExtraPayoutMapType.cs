@@ -63,5 +63,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int PromotionJackpotPrize = 3709;
 
         public const int PromotionCashPrize = 3710;
+
+        public const int FastSpinPromotion = 8701;
     }
 }
