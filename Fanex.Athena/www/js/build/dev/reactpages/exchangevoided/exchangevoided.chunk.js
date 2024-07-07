@@ -1584,7 +1584,6 @@ const SUCCESS_CODE = 1;
 const UM_ERR_CODE = 1041;
 const UM_MESSAGE = 'Exchange product is under maintenance now';
 const ERROR_MESSAGE = 'Your request cannot be processed now, please try again later';
-const MAX_REFNO = 2147483647;
 const dispatchResult = (dispatch, data) => {
   dispatch(Object(_jsroot_actions_gridDataAction__WEBPACK_IMPORTED_MODULE_1__["setGridData"])(data));
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(false));
@@ -1592,34 +1591,27 @@ const dispatchResult = (dispatch, data) => {
 const apiUrl = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('ExchangeVoided/Index');
 const getData = param => dispatch => {
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
-  if (isNaN(param.refNo) || Number(param.refNo) > MAX_REFNO) {
+  _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].postData(apiUrl, param).then(response => {
+    const {
+      dataList,
+      totalPage,
+      errCode
+    } = response.data;
+    const isSuccess = errCode === SUCCESS_CODE;
+    const data = {
+      dataList: isSuccess ? dataList : [],
+      totalPage: param.refNo ? 0 : totalPage
+    };
+    dispatchResult(dispatch, data);
+    !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
+  }).catch(error => {
+    console.error(error.message);
+    window.alert(ERROR_MESSAGE);
     dispatchResult(dispatch, {
       dataList: [],
       totalPage: 0
     });
-  } else {
-    _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].postData(apiUrl, param).then(response => {
-      const {
-        dataList,
-        totalPage,
-        errCode
-      } = response.data;
-      const isSuccess = errCode === SUCCESS_CODE;
-      const data = {
-        dataList: isSuccess ? dataList : [],
-        totalPage: param.refNo ? 0 : totalPage
-      };
-      dispatchResult(dispatch, data);
-      !isSuccess && window.alert(errCode === UM_ERR_CODE ? UM_MESSAGE : ERROR_MESSAGE);
-    }).catch(error => {
-      console.error(error.message);
-      window.alert(ERROR_MESSAGE);
-      dispatchResult(dispatch, {
-        dataList: [],
-        totalPage: 0
-      });
-    });
-  }
+  });
 };
 const exportExcel = (dataList, title) => () => {
   const service = new _lib_reportExcel__WEBPACK_IMPORTED_MODULE_4__["default"](dataList, title);

@@ -28,7 +28,7 @@ namespace Fanex.Athena.Service.Report
         public async Task<ExchangeVoidedViewModel> GetData(ExchangeVoidedMetaModel metaModel)
         {
             var refNoString = metaModel.RefNo?.Trim();
-            if (!string.IsNullOrEmpty(refNoString) && !int.TryParse(refNoString, out int refNo))
+            if (!string.IsNullOrEmpty(refNoString) && !long.TryParse(refNoString, out long _))
             {
                 return CreateEmptyResult();
             }
