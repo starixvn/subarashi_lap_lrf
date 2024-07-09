@@ -4974,7 +4974,7 @@ const getBetTypeList = productCodes => {
   return async dispatch => {
     var cacheData = _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_4__["default"].get(cacheKey);
     if (cacheData) {
-      dispatchBettypeList(dispatch, cacheData);
+      dispatchBettypeList(dispatch, [...cacheData]);
       return;
     }
     if (currentCancellationTokenSource) {
@@ -8287,15 +8287,17 @@ const useFilterHandler = () => {
   const onGroupInOriginalCurrencyChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(setGroupInOriginalCurrency(checked)), []);
   const onExcludeTextDataChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(checked => dispatch(setExcludeTestData(checked)), []);
   const onCashOutModeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(item => {
-    if (item.value === _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["CashOutMode"].ViewCOOnly) {
-      const selectedProduct = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].productList.filter(product => product.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].BA || product.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].SportsBook).map(product => product.id).join(',');
-      const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].productList.map(product => product.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].SportsBook || product.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].BA ? product : _objectSpread(_objectSpread({}, product), {}, {
-        status: false
-      }));
-      onProductChangeHandler(null, selectedProduct);
-      dispatch(setProductList(productList));
-    }
-    dispatch(setSelectedCashOutMode(item.value));
+    Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["batch"])(() => {
+      if (item.value === _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["CashOutMode"].ViewCOOnly) {
+        const selectedProduct = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].productList.filter(product => product.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].BA || product.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].SportsBook).map(product => product.id).join(',');
+        const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].productList.map(product => product.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].SportsBook || product.id == _common_constants_js__WEBPACK_IMPORTED_MODULE_7__["ProductCode"].BA ? product : _objectSpread(_objectSpread({}, product), {}, {
+          status: false
+        }));
+        onProductChangeHandler(null, selectedProduct);
+        dispatch(setProductList(productList));
+      }
+      dispatch(setSelectedCashOutMode(item.value));
+    });
   }, []);
   const onSearchModeChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(event => {
     const {

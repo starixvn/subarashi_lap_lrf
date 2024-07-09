@@ -11,9 +11,9 @@ const Url = Site.resolveClientUrl('api/CommonDataApi/GetBetTypeInTreeList');
 let currentCancellationTokenSource = null;
 
 const dispatchBettypeList = (dispatch, data) => {
-        const selectedSports = Service.getSelectedItemFromTreeListItem(data);
-        dispatch(setBettypeList(data));
-        dispatch(setSelectedBettype(selectedSports));
+    const selectedSports = Service.getSelectedItemFromTreeListItem(data);
+    dispatch(setBettypeList(data));
+    dispatch(setSelectedBettype(selectedSports));
 }
 
 export const setSelectedBettype = (betTypeIds) => {
@@ -42,7 +42,7 @@ export const getBetTypeList = (productCodes) => {
     return async (dispatch) => {
         var cacheData = Cache.get(cacheKey);
         if (cacheData) {
-            dispatchBettypeList(dispatch, cacheData);
+            dispatchBettypeList(dispatch, [...cacheData]);
             return;
         }
         if (currentCancellationTokenSource) {

@@ -74,16 +74,18 @@ export const useFilterHandler = () => {
     const onExcludeTextDataChangeHandler = useCallback((checked) => dispatch(setExcludeTestData(checked)), [])
 
     const onCashOutModeChangeHandler = useCallback((item) => {
-        if (item.value === CashOutMode.ViewCOOnly) {
-            const selectedProduct = AppData.productList.filter(product => product.id == ProductCode.BA || product.id == ProductCode.SportsBook)
-                .map(product => product.id)
-                .join(',');
-            const productList = AppData.productList.map(product => product.id == ProductCode.SportsBook || product.id == ProductCode.BA ? product : { ...product, status: false });
-            onProductChangeHandler(null, selectedProduct);
-            dispatch(setProductList(productList));
+        batch(() => {
+            if (item.value === CashOutMode.ViewCOOnly) {
+                const selectedProduct = AppData.productList.filter(product => product.id == ProductCode.BA || product.id == ProductCode.SportsBook)
+                    .map(product => product.id)
+                    .join(',');
+                const productList = AppData.productList.map(product => product.id == ProductCode.SportsBook || product.id == ProductCode.BA ? product : { ...product, status: false });
+                onProductChangeHandler(null, selectedProduct);
+                dispatch(setProductList(productList));
 
-        }
-        dispatch(setSelectedCashOutMode(item.value));
+            }
+            dispatch(setSelectedCashOutMode(item.value));
+        })
     }, [])
 
     const onSearchModeChangeHandler = useCallback((event) => {
