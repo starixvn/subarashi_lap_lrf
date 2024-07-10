@@ -74,18 +74,23 @@
         [HttpGet]
         public async Task<ActionResult> Create()
         {
-            const int cacheTime = 60 * 30;
+            const int cacheTime = 60 * 30 * 24;
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             var cacheKey = $"{CacheKey.MemorycacheCommSettingsByLicensee}_{licenseeId}";
-            var model = _cacheService.Get<GroupCommMetaModel>(cacheKey);
+            var commSettings = _cacheService.Get<IEnumerable<GroupCommSettingMetaModel>>(cacheKey);
 
-            if (model == null)
+            if (commSettings == null)
             {
                 var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
-                model = await _groupComService.InitCommValues(productAccess);
-                _cacheService.Set(cacheKey, model, cacheTime);
+                commSettings = await _groupComService.InitCommValues(productAccess);
+                _cacheService.Set(cacheKey, commSettings, cacheTime);
             }
+
+            var model = new GroupCommMetaModel
+            {
+                CommValues = commSettings
+            };
 
             await CreateMetaModel(model);
 

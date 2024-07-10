@@ -10,7 +10,7 @@
 
     public interface IGroupComService
     {
-        Task<GroupCommMetaModel> InitCommValues(ProductAccess productAccess);
+        Task<IEnumerable<GroupCommSettingMetaModel>> InitCommValues(ProductAccess productAccess);
 
         Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId);
 

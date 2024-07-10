@@ -12,6 +12,7 @@
     using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Customer.DTO.CustomerLog;
     using Model.Customer.MetaModel.CustomerLog;
@@ -27,7 +28,9 @@
 
         private ILogInLogDataAccess _logInLogDataAccess;
 
-        private IAppSettings _appSettings;
+        private IGroupComService _groupComService;
+
+        private ICustomMemoryCacheService _cacheService;
 
         private LogController _controller;
 
@@ -38,8 +41,9 @@
             MockSessionData();
 
             _customerLogDataAccess = Substitute.For<ICustomerLogDataAccess>();
-            _appSettings = Substitute.For<IAppSettings>();
             _logInLogDataAccess = Substitute.For<ILogInLogDataAccess>();
+            _groupComService = Substitute.For<IGroupComService>();
+            _cacheService = Substitute.For<ICustomMemoryCacheService>();
             CreateController();
         }
 
@@ -148,9 +152,10 @@
                 LangService,
                 _customerLogDataAccess,
                 _logInLogDataAccess,
-                _appSettings,
                 Substitute.For<IFileSystem>(),
-                Substitute.For<IProductService>())
+                Substitute.For<IProductService>(),
+                _groupComService,
+                _cacheService)
             {
                 SessionService = SessionService,
                 ProductService = ProductService

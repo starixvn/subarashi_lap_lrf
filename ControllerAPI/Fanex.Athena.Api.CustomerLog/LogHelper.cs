@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Fanex.Athena.Model.Core.Helper;
-using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
 using Fanex.Athena.Resources;
 using RazorEngine;
 using RazorEngine.Configuration;
@@ -16,9 +14,11 @@ namespace Fanex.Athena.Api.CustomerLog
 
         public static void SetTemplateServiceConfiguration()
         {
-            var config = new TemplateServiceConfiguration();
-            config.Debug = true;
-            config.TemplateManager = new MyTemplateManager();
+            var config = new TemplateServiceConfiguration
+            {
+                Debug = true,
+                TemplateManager = new MyTemplateManager()
+            };
             Engine.Razor = RazorEngineService.Create(config);
         }
 
@@ -26,7 +26,7 @@ namespace Fanex.Athena.Api.CustomerLog
         {
             var result = new List<string>
             {
-                "GroupCommID",
+                "GroupDiscountID",
                 "GroupName",
                 "GroupColor",
                 "IsDefault",
@@ -35,17 +35,10 @@ namespace Fanex.Athena.Api.CustomerLog
                 "SpecialLevel"
             };
 
-            var productPermissions = ActionViewModel.ProductPermissions;
-            var columnNames = CommissionGroupHelper.MapHardcodedNameFromDB(productPermissions, false);
-            foreach (var p in productPermissions)
-            {
-                result.Add(columnNames[p.Key] + "Comm");
-            }
-
             return result.ToArray();
         }
 
-        public static Dictionary<string, string> GetGroupCommissionLogResources(IDictionary<string, bool> productPermissions)
+        public static Dictionary<string, string> GetGroupCommissionLogResources(IEnumerable<string> productCode)
         {
             var resource = new Dictionary<string, string>
             {
@@ -58,9 +51,9 @@ namespace Fanex.Athena.Api.CustomerLog
                 ["OldColor"] = ViewResources.OldColor
             };
 
-            foreach (var p in productPermissions)
+            foreach (var p in productCode)
             {
-                resource.Add(p.Key + "Comm", ViewResources.ResourceManager.GetString("Product" + p.Key));
+                resource.Add(p, ViewResources.ResourceManager.GetString("Product" + p));
             }
 
             return resource;

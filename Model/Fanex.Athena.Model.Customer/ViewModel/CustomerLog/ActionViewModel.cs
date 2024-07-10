@@ -5,11 +5,11 @@
 
     public class ActionViewModel
     {
-        public static IDictionary<string, bool> ProductPermissions { get; set; }
-
         public IDictionary<string, string> Data { get; set; }
 
         public IDictionary<string, string> Resource { get; set; }
+
+        public IEnumerable<string> ProductList { get; set; }
 
         public string GetClassName(string fieldName)
         {
@@ -48,22 +48,6 @@
             var value = Data[fieldName];
 
             return value == "1" ? ViewResources.Yes : ViewResources.No;
-        }
-
-        public static void SetProductPermissions(IDictionary<string, bool> productPermissions)
-        {
-            var result = new Dictionary<string, bool>();
-            foreach (var p in productPermissions)
-            {
-                if (!p.Value)
-                {
-                    continue;
-                }
-
-                result[p.Key] = p.Value;
-            }
-
-            ProductPermissions = result;
         }
     }
 }

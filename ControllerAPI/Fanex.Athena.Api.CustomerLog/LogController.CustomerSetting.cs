@@ -21,10 +21,7 @@ namespace Fanex.Athena.Api.CustomerLog
         public async Task<dynamic> CustomerSetting(string username, int viewbyid, int year, int month, int fromday, int today)
         {
             LogHelper.SetTemplateServiceConfiguration();
-            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
             var productAccess = _productService.GetProductAccess(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language);
-            var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-            ActionViewModel.SetProductPermissions(permissions);
             var actionTypes = LogHelper.GroupLogAttributes();
 
             var userSession = SessionService.UserSession;

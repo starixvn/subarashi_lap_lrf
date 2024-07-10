@@ -21,16 +21,12 @@
             _groupDataAccess = groupDataAccess;
         }
 
-        public async Task<GroupCommMetaModel> InitCommValues(ProductAccess productAccess)
+        public async Task<IEnumerable<GroupCommSettingMetaModel>> InitCommValues(ProductAccess productAccess)
         {
             var commSettings = await _groupDataAccess.GetAllCommSettingAsync().ConfigureAwait(false);
-            commSettings = commSettings.Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
-                .OrderBy(_ => CommissionGroupHelper.ProductListComparer(_.ProductCode)).ThenBy(_ => _.ProductCode); ;
 
-            return new GroupCommMetaModel
-            {
-                CommValues = commSettings
-            };
+            return commSettings.Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
+                .OrderBy(_ => CommissionGroupHelper.ProductListComparer(_.ProductCode)).ThenBy(_ => _.ProductCode); ;
         }
 
         public async Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId)
