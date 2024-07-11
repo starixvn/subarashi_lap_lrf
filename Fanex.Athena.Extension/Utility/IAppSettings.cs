@@ -25,9 +25,7 @@
 
         IEnumerable<int> LicenseeOfferStatusFunction { get; }
 
-        string ResultAmendmentApiUrl { get; }
-
-        string MarkNotificationAsReadApiUrl { get; }
+        string OICApiUrl { get; }
 
         string ResultAmendmentAttachmentApiUrl { get; }
 

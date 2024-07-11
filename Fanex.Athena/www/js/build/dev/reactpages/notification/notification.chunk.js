@@ -3034,7 +3034,8 @@ const markNotification = params => {
   const url = _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('NotificationReport/MarkNotificationAsRead');
   return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post(url, {
     MessageId: params.id,
-    MessageType: params.type
+    MessageType: params.type,
+    Source: params.source
   }, {
     headers: header()
   });
@@ -3079,6 +3080,7 @@ function markItemAsRead(params) {
     markNotification({
       id: params.Id,
       type: params.Type,
+      source: params.Source,
       xsrfToken: _lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].getXsrfToken()
     }).then(response => {
       if (response.data.IsSuccessful) {
@@ -3344,6 +3346,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         Index: index,
         Id: item.Id,
         Type: item.Type,
+        Source: item.Source,
         Data: Data,
         Total: Total
       });

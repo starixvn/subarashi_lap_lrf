@@ -18,6 +18,9 @@ using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
 using Fanex.Athena.Extension;
 using Fanex.Athena.Extension.Utility.Internal;
+using Fanex.Athena.Module.Notification.Constants;
+using Fanex.Athena.Module.Notification.Service;
+using Fanex.Athena.Module.Notification.Service.Interfaces;
 using Fanex.Athena.Service.Core.OAuth;
 using Fanex.Athena.Service.Core.Proxy;
 using Fanex.Athena.Service.Core.Users;
@@ -79,6 +82,10 @@ namespace Fanex.Athena
             var moduleAssemblies = GetModuleAssemblies(assemblies);
             builder.RegisteModuleModuleAndApi(moduleAssemblies, "Fanex.Athena.Module.LicenseeContact");
             builder.RegisteModuleModuleAndApi(moduleAssemblies, "Fanex.Athena.Module.Notification");
+
+            // Notification Service
+            builder.RegisterType<OICNotificationService>().Named<INotificationService>(NotificationSource.OIC);
+            builder.RegisterType<InternalNotificationService>().Named<INotificationService>(NotificationSource.Internal);
         }
 
         private static void RegisterHttpClient(ContainerBuilder builder)

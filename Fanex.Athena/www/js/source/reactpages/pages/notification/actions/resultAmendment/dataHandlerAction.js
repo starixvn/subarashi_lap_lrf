@@ -2,7 +2,7 @@ import * as types from './types.js'
 import axios from 'axios'
 
 import Site from '../../../../lib/site'
-import {toggleLoader} from '../../../../actions/loaderAction'
+import { toggleLoader } from '../../../../actions/loaderAction'
 
 const header = () => {
     return {
@@ -20,14 +20,14 @@ const fetchData = (params) => {
 
 const markNotification = (params) => {
     const url = Site.resolveClientUrl('NotificationReport/MarkNotificationAsRead');
-    return axios.post(url, { MessageId: params.id, MessageType: params.type }, {
+    return axios.post(url, { MessageId: params.id, MessageType: params.type, Source: params.source }, {
         headers: header()
     });
 }
 
 const downloadData = (params) => {
     const url = Site.resolveClientUrl('NotificationReport/DownLoadFileAttachment');
-    return axios.post(url, { FileName: params.fileName } ,{
+    return axios.post(url, { FileName: params.fileName }, {
         headers: header(),
         responseType: 'blob'
     });
@@ -62,13 +62,12 @@ export function setGridData(data) {
     };
 }
 
-export function markItemAsRead(params) {   
+export function markItemAsRead(params) {
     return (dispatch) => {
         dispatch(toggleLoader(true));
 
-        markNotification({ id: params.Id, type: params.Type, xsrfToken: Site.getXsrfToken()}).then(response => {
-            if(response.data.IsSuccessful)
-            {
+        markNotification({ id: params.Id, type: params.Type, source: params.Source, xsrfToken: Site.getXsrfToken() }).then(response => {
+            if (response.data.IsSuccessful) {
                 params.Data[params.Index].IsRead = true;
 
                 dispatch(setGridData({
