@@ -78,6 +78,27 @@ namespace Fanex.Athena.Excel.Base.Extension
             return newRow;
         }
 
+        public static void CopyColumn(this ISheet sheet, ISheet sourceSheet, int sourceRowIndex, int destRowIndex, int beginColumnIndex, int lastColumnIndex)
+        {
+            var sourceRow = sourceSheet.GetRow(sourceRowIndex);
+            var sourceCell = sourceRow.GetCell(beginColumnIndex);
+            var sourceWidth = sourceSheet.GetColumnWidth(beginColumnIndex);
+
+            var destRow = sheet.GetRow(destRowIndex);
+            destRow = destRow ?? sheet.CreateRow(destRowIndex);
+
+            if (sourceRow != null)
+            {
+                for (int i = beginColumnIndex + 1; i < lastColumnIndex; i++)
+                {
+                    var newCell = destRow.CreateCell(i);
+
+                    sheet.SetColumnWidth(i, sourceWidth);
+                    sheet.CopyCell(sourceCell, newCell);
+                }
+            }
+        }
+
         public static ICell CopyCell(this ISheet sheet, ICell sourceCell, ICell destCell)
         {
             if (sourceCell == null)

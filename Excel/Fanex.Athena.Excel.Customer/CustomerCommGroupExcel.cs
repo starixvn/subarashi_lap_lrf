@@ -1,10 +1,8 @@
 ﻿namespace Fanex.Athena.Excel.Customer
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using Base;
-    using Common;
     using Fanex.Athena.Excel.Base.Extension;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
@@ -13,7 +11,8 @@
 
     public class CustomerCommGroupExcel : ReportBase
     {
-        private readonly int ColumnTemplateCount = 4;
+        private readonly int ColumnTemplateCount;
+        private const int ColumnProductSBIndex = 4;
         private const int RowContentTemplate = 2;
         private const int RowNoInfoTemplate = 5;
 
@@ -28,8 +27,7 @@
             _exportData = viewModel.Groups;
             _products = viewModel.ProductList;
 
-            const int columnTemplateCount = 4;
-            ColumnTemplateCount = columnTemplateCount + _products.Count();
+            ColumnTemplateCount = ColumnProductSBIndex + _products.Count();
         }
 
         protected override void AssignHeader(ISheet sheet)
@@ -48,6 +46,7 @@
             }
 
             var row = sheet.CopyRow(TemplateSheet, RowHeaderTemplate);
+            sheet.CopyColumn(TemplateSheet, RowHeaderTemplate, RowHeaderTemplate, ColumnProductSBIndex, ColumnTemplateCount);
 
             for (int i = 0; i < headerTextList.Count; i++)
             {
@@ -63,8 +62,7 @@
         protected override void AssignSheetData(ISheet sheet)
         {
             var rowCount = _exportData.Count;
-            int index;
-            var currentColumn = 0;
+            int index, currentColumn;
 
             for (index = 0; index < rowCount; index++)
             {
@@ -77,9 +75,9 @@
                 row.Cells[currentColumn++].SetCellValue(exportRow.IsDefaultGroup ? "X" : string.Empty);
                 row.Cells[currentColumn++].SetCellValue(exportRow.NumberOfCustomer);
 
+                sheet.CopyColumn(TemplateSheet, RowContentTemplate, index + RowContentTemplate, ColumnProductSBIndex, ColumnTemplateCount);
                 foreach (var comm in exportRow.CommValues)
                 {
-                    row.CreateCell(currentColumn);
                     row.Cells[currentColumn++].SetCellValue(GetCommValue(comm.Discount));
                 }
             }

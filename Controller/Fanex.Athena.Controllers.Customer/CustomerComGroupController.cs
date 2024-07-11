@@ -2,11 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
-    using System.Web.Caching;
     using System.Web.Hosting;
     using System.Web.Mvc;
     using System.Web.SessionState;
@@ -16,10 +14,8 @@
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Core.Enum;
-    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
-    using Fanex.Athena.Service.Core.Users;
     using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
@@ -74,7 +70,6 @@
         [HttpGet]
         public async Task<ActionResult> Create()
         {
-            const int cacheTime = 60 * 30 * 24;
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
             var cacheKey = $"{CacheKey.MemorycacheCommSettingsByLicensee}_{licenseeId}";
@@ -84,7 +79,7 @@
             {
                 var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
                 commSettings = await _groupComService.InitCommValues(productAccess);
-                _cacheService.Set(cacheKey, commSettings, cacheTime);
+                _cacheService.Set(cacheKey, commSettings);
             }
 
             var model = new GroupCommMetaModel

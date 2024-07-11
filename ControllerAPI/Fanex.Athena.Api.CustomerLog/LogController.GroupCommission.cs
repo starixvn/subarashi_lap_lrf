@@ -12,8 +12,6 @@
         [HttpGet]
         public async Task<dynamic> GroupCommission(int year, int month, int fromday, int today)
         {
-            const int cacheTime = 60 * 30 * 24;
-
             LogHelper.SetTemplateServiceConfiguration();
 
             var productAccess = _productService.GetProductAccess(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language);
@@ -34,7 +32,7 @@
             if (commSettings == null)
             {
                 commSettings = await _groupComService.InitCommValues(productAccess);
-                _cacheService.Set(cacheKey, commSettings, cacheTime);
+                _cacheService.Set(cacheKey, commSettings);
             }
 
             var dataList = await _customerLogDataAccess.GetGroupCommList(metaModel).ConfigureAwait(false);
