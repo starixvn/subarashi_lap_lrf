@@ -24,7 +24,6 @@ function generateConfig(environment) {
             [`${jsPath}/subsidiaryperformance/subsidiaryperformance`]: pathConfig.scriptPaths.subsidiaryperformance,
             [`${jsPath}/notification/notification`]: pathConfig.scriptPaths.notification,
             [`${jsPath}/licenseecontact/licenseecontact`]: pathConfig.scriptPaths.licenseecontact,
-            [`${jsPath}/report/licenseewlbytimezone`]: pathConfig.scriptPaths.licenseewlbytimezone,
             [`${jsPath}/report/abnormalbet`]: pathConfig.scriptPaths.abnormalbet,
             [`${jsPath}/exchangewl/exchangewl`]: pathConfig.scriptPaths.exchangewl,
             [`${jsPath}/report/speciallicenseewl`]: pathConfig.scriptPaths.speciallicenseewl,
@@ -49,7 +48,6 @@ function generateConfig(environment) {
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
             [`${cssPath}/subsidiaryperformance/index`]: pathConfig.cssPaths.subsidiaryperformance,
-            [`${cssPath}/licenseewlbytimezone/index`]: pathConfig.cssPaths.licenseewlbytimezone,
             [`${cssPath}/abnormalbet/index`]: pathConfig.cssPaths.abnormalbet,
             [`${cssPath}/notification/index`]: pathConfig.cssPaths.notification,
             [`${cssPath}/licenseecontact/index`]: pathConfig.cssPaths.licenseecontact,

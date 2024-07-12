@@ -380,9 +380,6 @@
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\id-ID.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\th-TH.htm" />
     <Content Include="App_Data\UserGuide\LastBetsMonitoring\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\id-ID.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\th-TH.htm" />
     <Content Include="App_Data\UserGuide\LicenseeWL\vi-VN.htm" />
@@ -470,8 +467,6 @@
     <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\LicenseeWLByTimeZone\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\en-US.htm" />
@@ -699,7 +694,6 @@
     <Content Include="Views\Desktop\Customer\CustomerAdministration\Main.cshtml" />
     <Content Include="Content\Plugin\Toast\toast.scss" />
     <Content Include="App_Code\DesktopGroupCommRazorHelper.cshtml" />
-    <Content Include="Views\Desktop\Report\LicenseeWinLossByTimeZone\Main.cshtml" />
     <Content Include="Views\Desktop\Module\Notification\Notification.cshtml" />
     <Content Include="Views\Desktop\Report\ExchangeWinLoss\Main.cshtml" />
     <Content Include="App_Data\FakeLicenseeSetting.json" />
