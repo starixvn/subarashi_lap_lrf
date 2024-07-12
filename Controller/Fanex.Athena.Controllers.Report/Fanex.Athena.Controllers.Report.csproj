@@ -148,7 +148,6 @@
     <Compile Include="SabaVirtualSportsWinLossReportController.cs" />
     <Compile Include="LicenseeWinLossReportController.cs" />
     <Compile Include="NoteController.cs" />
-    <Compile Include="LicenseeWinLossByTimeZoneReportController.cs" />
     <Compile Include="Result\Indo4DResultReportController.cs" />
     <Compile Include="SubsidiaryPerformanceReportController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
