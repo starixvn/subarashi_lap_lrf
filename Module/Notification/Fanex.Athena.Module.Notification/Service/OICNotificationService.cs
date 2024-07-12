@@ -33,6 +33,7 @@
         private readonly ICacheRefAdapter _cacheRefAdapter;
 
         private const int MAX_MONTH = 6;
+        private readonly string[] PermissionList = new[] { PermissionKeys.ResultAmendmentNotificationReport };
 
         public OICNotificationService(
             ILogger logger,
@@ -57,9 +58,14 @@
             return metaModel.Source == NotificationSource.OIC;
         }
 
+        public bool CanHandleAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
+        {
+            return metaModel.Source == NotificationSource.OIC;
+        }
+
         public ReportResultModel<NotificationMessage> GetNotificationMessages(NotificationMetaModel metaModel)
         {
-            if (NotificationHelper.IsValidMessageTypeByPermission(metaModel.MessageTypes, PermissionKeys.ResultAmendmentNotificationReport))
+            if (NotificationHelper.IsValidMessageTypeByPermission(metaModel.MessageTypes, PermissionList))
             {
                 var paramModel = CreateNotificationMetaModel(metaModel);
                 var data = GetDataFromAPI(paramModel, MapToNotificationMessage);
@@ -113,7 +119,8 @@
 
         public ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel)
         {
-            var data = GetDataFromAPI(metaModel, MapToResultAmendment);
+            var param = CreateResultAmendmentMetaModel(metaModel);
+            var data = GetDataFromAPI(param, MapToResultAmendment);
 
             return data;
         }
@@ -261,15 +268,15 @@
             };
         }
 
-        private static NotificationMetaModel CreateNotificationMetaModel(NotificationMetaModel defaultMetaModel)
+        private NotificationMetaModel CreateNotificationMetaModel(NotificationMetaModel defaultMetaModel)
         {
             var today = DateTimeHelper.Today;
             var maximumMonthDistance = MAX_MONTH - 1;
             return new NotificationMetaModel
             {
-                PageIndex = defaultMetaModel.PageIndex,
-                PageSize = defaultMetaModel.PageSize,
-                IsOnlyUnread = defaultMetaModel.IsOnlyUnread,
+                PageIndex = 1,
+                PageSize = int.MaxValue - 1000,
+                IsOnlyUnread = true,
                 LicenseeName = defaultMetaModel.LicenseeName,
                 MessageTypes = defaultMetaModel.MessageTypes,
                 UserName = defaultMetaModel.UserName,
@@ -277,6 +284,25 @@
                 MaximumMonthRange = MAX_MONTH,
                 FromDate = DateTimeHelper.CreateDateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance),
                 ToDate = today.AddDays(1).AddMilliseconds(-1),
+                AgentListXml = defaultMetaModel.AgentListXml,
+            };
+        }
+
+        private NotificationMetaModel CreateResultAmendmentMetaModel(NotificationMetaModel defaultMetaModel)
+        {
+            return new NotificationMetaModel
+            {
+                PageIndex = 1,
+                PageSize = int.MaxValue - 1000,
+                IsOnlyUnread = defaultMetaModel.IsOnlyUnread,
+                LicenseeName = defaultMetaModel.LicenseeName,
+                MessageTypes = defaultMetaModel.MessageTypes,
+                UserName = defaultMetaModel.UserName,
+                Language = defaultMetaModel.Language,
+                MaximumMonthRange = MAX_MONTH,
+                FromDate = defaultMetaModel.FromDate,
+                ToDate = defaultMetaModel.ToDate,
+                AgentListXml = defaultMetaModel.AgentListXml,
             };
         }
 

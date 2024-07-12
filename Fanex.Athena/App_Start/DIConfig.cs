@@ -86,6 +86,7 @@ namespace Fanex.Athena
             // Notification Service
             builder.RegisterType<OICNotificationService>().Named<INotificationService>(NotificationSource.OIC);
             builder.RegisterType<InternalNotificationService>().Named<INotificationService>(NotificationSource.Internal);
+            builder.RegisterType<CRMNotificationService>().Named<INotificationService>(NotificationSource.CRM);
         }
 
         private static void RegisterHttpClient(ContainerBuilder builder)

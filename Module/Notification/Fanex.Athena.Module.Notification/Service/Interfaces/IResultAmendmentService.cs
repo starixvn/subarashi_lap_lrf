@@ -9,5 +9,7 @@
         ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel);
 
         AmendmentTicketListing GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel);
+
+        bool CanHandleAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel);
     }
 }

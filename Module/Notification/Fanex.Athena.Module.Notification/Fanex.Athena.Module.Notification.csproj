@@ -44,6 +44,9 @@
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.Data, Version=4.2.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Fanex.Data.4.2.2\lib\net461\Fanex.Data.dll</HintPath>
     </Reference>
@@ -109,6 +112,7 @@
     <Compile Include="Model\MetaModel\NotificationMarkAsReadMetaModel.cs" />
     <Compile Include="Model\MetaModel\NotificationMetaModel.cs" />
     <Compile Include="Model\ViewModel\NotificationViewModel.cs" />
+    <Compile Include="Service\CRMNotificationService.cs" />
     <Compile Include="Service\Interfaces\INotificationManagerService.cs" />
     <Compile Include="Service\Interfaces\IResultAmendmentService.cs" />
     <Compile Include="Service\InternalNotificationService.cs" />

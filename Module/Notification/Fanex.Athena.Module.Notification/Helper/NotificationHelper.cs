@@ -4,6 +4,7 @@
     using System.Linq;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Module.Notification.Constants;
 
     public static class NotificationHelper
     {
@@ -27,6 +28,22 @@
             { "zhcn", "Cs" }
         };
 
+        private static readonly IDictionary<string, int> _sourceIdMapper = new Dictionary<string, int>
+        {
+            {NotificationSource.Internal, 0 },
+            {NotificationSource.CRM, 1 },
+        };
+
+        public static int GetSourceIdBySourceName(string sourceName)
+        {
+            if (_sourceIdMapper.ContainsKey(sourceName))
+            {
+                return _sourceIdMapper[sourceName];
+            }
+
+            return default;
+        }
+
         public static string GetNotificationTypeName(string messageType)
         {
             if (_notificationType.ContainsKey(messageType))
@@ -46,13 +63,13 @@
             return string.Join(",", messageTypes);
         }
 
-        public static bool IsValidMessageTypeByPermission(string messageType, string permission)
+        public static bool IsValidMessageTypeByPermission(string messageType, string[] permission)
         {
             if (string.IsNullOrEmpty(messageType))
             {
                 return false;
             }
-            return messageType.Split(',').Any(x => _messageType.ContainsKey(permission) && x.Contains(_messageType[permission].ToString()));
+            return messageType.Split(',').Any(x => permission.Any(pers => _messageType.ContainsKey(pers) && x.Contains(_messageType[pers].ToString())));
         }
 
         public static string GetSupportedLanguage(string lang)

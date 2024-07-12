@@ -191,6 +191,9 @@
 		<Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DBEXT.bodb02.wsv_lap" />
 		<Setting Key="Lrf_MessageListSel" SpName="Lrf_MessageListSel" DbName="DBCUST.SiteConfig.wsv_lap" />
 		<Setting Key="Lrf_MessageUserIns" SpName="Lrf_MessageUserIns" DbName="DBCUST.SiteConfig.wsv_lap" />
+		<Setting Key="Lrf_MessageUserSel" SpName="Lrf_MessageUserSel" DbName="DBCUST.SiteConfig.wsv_lap" />
+		<Setting Key="Lrf_AdmNotificationSel" SpName="Lrf_AdmNotificationSel" DbName="DBCRM.MessageNotification.wsv_lap" />
+		<Setting Key="Lrf_AdmTicketListSel" SpName="Lrf_AdmTicketListSel" DbName="DBCRM.MessageNotification.wsv_lap" />
 	</Function>
 
 	<SiteDB>

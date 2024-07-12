@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Module.Notification.Service
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -16,10 +15,12 @@
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
     using Fanex.Athena.Resources;
+    using Fanex.Common;
 
     public class InternalNotificationService : INotificationService
     {
         private const int MAX_MONTH = 2;
+        private readonly string[] PermissionList = new[] { PermissionKeys.ReportAbnormalBet };
 
         private readonly IDbFactory _dbFactory;
 
@@ -38,7 +39,7 @@
             var dataList = new List<NotificationMessage>();
             var totalRows = 0;
 
-            if (NotificationHelper.IsValidMessageTypeByPermission(metaModel.MessageTypes, PermissionKeys.ReportAbnormalBet))
+            if (NotificationHelper.IsValidMessageTypeByPermission(metaModel.MessageTypes, PermissionList))
             {
                 var paramModel = CreateNotificationMetaModel(metaModel);
                 const string SpKey = "Lrf_MessageListSel";
@@ -56,13 +57,14 @@
                     {
                         while (reader.Read())
                         {
+                            var messageType = Converter.ToInt(reader["MessageType"], -1) + 1;
                             dataList.Add(new NotificationMessage
                             {
-                                Id = ReadMessageId(reader),
-                                Subject = Convert.ToString(reader["Subject" + lang]),
-                                Content = Convert.ToString(reader["Content" + lang]),
-                                Type = NotificationHelper.GetNotificationTypeName(ReadMessageType(reader).ToString()),
-                                DateTime = ReadEventDate(reader),
+                                Id = Converter.ToInt(reader["MessageId"], -1),
+                                Subject = Converter.ToString2(reader["Subject" + lang]),
+                                Content = Converter.ToString2(reader["Content" + lang]),
+                                Type = NotificationHelper.GetNotificationTypeName(messageType.ToString()),
+                                DateTime = Converter.ToDateTime(reader["EventDate"], DateTimeHelper.Now),
                                 Source = NotificationSource.Internal
                             });
                         }
@@ -84,42 +86,18 @@
             };
 
             const string SpKey = "Lrf_MessageUserIns";
+            var sourceId = NotificationHelper.GetSourceIdBySourceName(metaModel.Source);
+
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
                 objectDb.SetParameterValue("MessageId", metaModel.MessageId);
                 objectDb.SetParameterValue("LicenseeName", metaModel.LicenseeName);
                 objectDb.SetParameterValue("UserName", metaModel.UserName);
+                objectDb.SetParameterValue("Source", sourceId);
                 objectDb.ExecuteNonQuery();
             }
 
             return result;
-        }
-
-        private static int ReadMessageId(IDataReader reader)
-        {
-            if (int.TryParse(reader["MessageId"]?.ToString(), out int id))
-            {
-                return id;
-            }
-            return -1;
-        }
-
-        private static int ReadMessageType(IDataReader reader)
-        {
-            if (int.TryParse(reader["MessageType"]?.ToString(), out int type))
-            {
-                return type + 1;
-            }
-            return -1;
-        }
-
-        private static DateTime ReadEventDate(IDataReader reader)
-        {
-            if (DateTime.TryParse(reader["EventDate"]?.ToString(), out DateTime eventDate))
-            {
-                return eventDate;
-            }
-            return DateTimeHelper.Now;
         }
 
         private static NotificationMetaModel CreateNotificationMetaModel(NotificationMetaModel defaultMetaModel)

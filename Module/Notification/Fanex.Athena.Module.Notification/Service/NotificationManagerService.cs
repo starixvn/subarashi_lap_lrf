@@ -20,6 +20,7 @@
         {
             NotificationSource.Internal,
             NotificationSource.OIC,
+            NotificationSource.CRM
         };
 
         public NotificationManagerService(INotificationServiceFactory notificationServiceFactory)
@@ -81,22 +82,20 @@
                 result.DataList = result.DataList.Concat(data.DataList).OrderByDescending(x => x.DateTime);
             }
 
-            return result;
+            return GetPagingData(result, metaModel.PageIndex, metaModel.PageSize);
         }
 
         public AmendmentTicketListing GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
         {
             var result = AmendmentTicketListing.Empty();
 
-            var handleServices = GetNotificationServiceByType<IResultAmendmentService>();
+            var handleService = GetNotificationServiceByType<IResultAmendmentService>()
+                .FirstOrDefault(service => service.CanHandleAmendmentTicketListing(metaModel));
 
-            foreach (var service in handleServices)
+            if (handleService != null)
             {
-                var data = service.GetAmendmentTicketListing(metaModel);
-                if (data.Data.Any())
-                {
-                    return data;
-                }
+                var data = handleService.GetAmendmentTicketListing(metaModel);
+                return data;
             }
 
             return result;
@@ -110,6 +109,18 @@
                 return result.Where(predicate);
             }
 
+            return result;
+        }
+
+        private ReportResultModel<ResultAmendment> GetPagingData(ReportResultModel<ResultAmendment> data, int pageIndex, int pageSize)
+        {
+            if (pageIndex == 0 || pageSize == 0) return data;
+
+            var result = new ReportResultModel<ResultAmendment>
+            {
+                DataList = data.DataList.Skip((pageIndex - 1) * pageSize).Take(pageSize),
+                TotalRows = data.TotalRows
+            };
             return result;
         }
     }

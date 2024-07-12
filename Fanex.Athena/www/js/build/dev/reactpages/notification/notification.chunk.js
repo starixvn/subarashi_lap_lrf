@@ -3224,6 +3224,11 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     if (!this.props.selectedViewEvent) {
       return null;
     }
+    const {
+      SessionId,
+      Source,
+      DateTime
+    } = this.props.selectedViewEvent;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_jsroot_components_popup__WEBPACK_IMPORTED_MODULE_4__["default"], {
       height: 550,
       width: 680,
@@ -3231,7 +3236,9 @@ class AppContainer extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_9__["default"].getSingleResource("TicketList"),
       onClose: () => this.props.setSelectedViewEvent(null)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_TicketListingGrid__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      sessionId: this.props.selectedViewEvent.SessionId
+      sessionId: SessionId,
+      source: Source,
+      dateTime: DateTime
     }));
   }
   render() {
@@ -3673,7 +3680,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const TicketListingGrid = ({
-  sessionId
+  sessionId,
+  source,
+  dateTime
 }) => {
   const [data, setData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
   const {
@@ -3681,7 +3690,7 @@ const TicketListingGrid = ({
     MatchInfo
   } = data;
   const _fetchData = async () => {
-    const response = await _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_4__["default"].fetchTicketListing(sessionId);
+    const response = await _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_4__["default"].fetchTicketListing(sessionId, source, dateTime);
     setData(response);
   };
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
@@ -3700,7 +3709,7 @@ const TicketListingGrid = ({
       className: "caret-block"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "icon-excel-wrapper",
-      onClick: () => _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_4__["default"].exportTicketListing(sessionId)
+      onClick: () => _lib_resultAmendmentService__WEBPACK_IMPORTED_MODULE_4__["default"].exportTicketListing(sessionId, source, dateTime)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
       className: "icon-excel",
       title: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('ExportToExcel')
@@ -3817,6 +3826,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/site */ "./www/js/source/reactpages/lib/site.js");
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -3835,10 +3847,13 @@ class Service {
   static getHeaderText() {
     return headerText;
   }
-  static async fetchTicketListing(sessionId) {
+  static async fetchTicketListing(sessionId, source, dateTime) {
     try {
+      const dateTimeString = moment__WEBPACK_IMPORTED_MODULE_3___default()(dateTime).format("MM/DD/YYYY");
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].postData('NotificationReport/GetAmendmentTicketListing', {
-        sessionId
+        sessionId,
+        source,
+        dateTime: dateTimeString
       });
       if (response.status === 200) {
         return response.data;
@@ -3848,9 +3863,12 @@ class Service {
     }
     return {};
   }
-  static async exportTicketListing(sessionId) {
+  static async exportTicketListing(sessionId, source, dateTime) {
+    const dateTimeString = moment__WEBPACK_IMPORTED_MODULE_3___default()(dateTime).format("MM/DD/YYYY");
     const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].getFile('NotificationReport/ExportAmendmentTicketListing', {
-      sessionId
+      sessionId,
+      source,
+      dateTime: dateTimeString
     });
     const noContentStatusCode = 204;
     if (response.status === noContentStatusCode) {

@@ -49,7 +49,7 @@
             _service.GetNotificationMessages(Arg.Do<NotificationMetaModel>(x => metaModel = x));
 
             // Action
-            _controller.GetNotificationMessages();
+            _controller.GetNotificationMessages(metaModel);
 
             // Asset
             Assert.Multiple(() =>

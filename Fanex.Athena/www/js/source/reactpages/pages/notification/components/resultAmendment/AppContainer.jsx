@@ -15,12 +15,13 @@ export class AppContainer extends Component {
         super(props);
     }
     _renderTicketListingPopup() {
-        if(!this.props.selectedViewEvent) {
+        if (!this.props.selectedViewEvent) {
             return null;
         }
+        const { SessionId, Source, DateTime } = this.props.selectedViewEvent;
 
         return (<Popup height={550} width={680} isShow={true} title={LangHelper.getSingleResource("TicketList")} onClose={() => this.props.setSelectedViewEvent(null)}>
-            <TicketListingGrid sessionId={this.props.selectedViewEvent.SessionId} />
+            <TicketListingGrid sessionId={SessionId} source={Source} dateTime={DateTime} />
         </Popup>)
     }
 

@@ -46,22 +46,18 @@
         }
 
         [HttpGet]
-        public ActionResult GetNotificationMessages()
+        [AutoBindMetaModel(BindAgent = true)]
+        public ActionResult GetNotificationMessages(NotificationMetaModel metaModel)
         {
-            var metaModel = new NotificationMetaModel
-            {
-                IsOnlyUnread = true,
-                PageIndex = 1,
-                PageSize = 10
-            };
-
             UpdateMetaModel(metaModel);
+
             var data = _notificationManagerService.GetNotificationMessages(metaModel);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [ValidationWebRequest]
+        [AutoBindMetaModel(BindAgent = true)]
         public ActionResult ResultAmendment(NotificationMetaModel metaModel)
         {
             UpdateMetaModel(metaModel);
@@ -122,14 +118,15 @@
             UpdateMetaModel(metaModel);
 
             var result = _notificationManagerService.GetResultAmendment(metaModel);
-            var sessionIdList = result.DataList.Select(_ => _.SessionId);
             var amendmentTicketList = new List<AmendmentTicketListing>();
 
-            foreach (var sessionid in sessionIdList)
+            foreach (var data in result.DataList)
             {
                 var amendmentTicketMetaModel = new AmendmentTicketListingMetaModel
                 {
-                    SessionId = sessionid,
+                    Source = data.Source,
+                    SessionId = data.SessionId,
+                    DateTime= data.DateTime,
                     AgentListXml = metaModel.AgentListXml
                 };
                 var amendmentTicket = _notificationManagerService.GetAmendmentTicketListing(amendmentTicketMetaModel);

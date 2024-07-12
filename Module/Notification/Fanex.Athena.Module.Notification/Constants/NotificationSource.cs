@@ -4,5 +4,6 @@
     {
         public const string OIC = "OIC";
         public const string Internal = "Internal";
+        public const string CRM = "CRM";
     }
 }
