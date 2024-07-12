@@ -41,18 +41,14 @@
         public const string ReportLicenseeWinLoss = "LicenseeWinLoss27";
         public const string AuditLicenseeWinLoss = "AuditLicenseeWinLoss";
         public const string ReportCustomerWinLoss = "CustomerWinLoss29";
-        public const string ReportCustomerPendingFunds = "CustomerPendingFunds30";
         public const string ReportWinLossByProduct = "WinLossByProducts32";
         public const string ReportWinLossByBetType = "WinLossByBetType33";
-        public const string ReportLiveReport = "LiveReport38";
         public const string ReportTurnover = "Turnover39";
         public const string ReportResults = "Results41";
         public const string ReportAGCasinoWinLoss = "AGCasinoWinLoss62";
         public const string ReportAGCasinoBalance = "AGCasinoBalance63";
-        public const string ReportCustomerTurnover = "CustomerTurnover51";
         public const string ReportPlatformWinLoss = "MobileWinLoss53";
         public const string ReportSubsidiaryPerformance = "SubsidiaryPerformance73";
-        public const string ReportLicenseeWinLossByTimeZone = "LicenseeWinLossByTimeZone76";
         public const string ReportExchangeWinLoss = "ExchangeWinloss77";
         public const string ReportCasinoTurnover = "CasinoTurnover80";
         public const string ReportDailyBets = "DailyBets81";
@@ -60,7 +56,6 @@
         public const string ReportNewCashOutWinLoss = "NewCashOutWinLoss";
         public const string ReportAbnormalBet = "AbnormalBet";
         public const string ReportGrossGamingRevenue = "GrossGamingRevenue";
-        public const string ReportWinlossAnalysis = "WinlossAnalysis";
         public const string ReportDailyBetDetails = "DailyBetDetails";
 
         /* Customer Info. */

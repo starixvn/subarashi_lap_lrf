@@ -143,7 +143,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerPendingFundsReportController.cs" />
     <Compile Include="ExchangeWinLossReportController.cs" />
     <Compile Include="CasinoTurnoverReportController.cs" />
     <Compile Include="SabaVirtualSportsWinLossReportController.cs" />
