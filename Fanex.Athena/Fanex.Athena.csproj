@@ -354,9 +354,6 @@
     <Content Include="App_Data\UserGuide\CustomerLog\id-ID.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\th-TH.htm" />
     <Content Include="App_Data\UserGuide\CustomerLog\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerPendingFunds\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\CustomerPendingFunds\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\CustomerPendingFunds\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\id-ID.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\th-TH.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\vi-VN.htm" />
@@ -542,7 +539,6 @@
     <Content Include="App_Data\UserGuide\CustomerLog\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\PlatformWinLoss\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlatformWinLoss\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\CustomerPendingFunds\zh-CN.htm" />
     <Content Include="SpNameConfig\FanexSpName.xml.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -551,7 +547,6 @@
     <Content Include="SpNameConfig\FanexSpNameConfig.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\UserGuide\CustomerPendingFunds\en-US.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\CustomerWL\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\en-US.htm" />
@@ -739,10 +734,6 @@
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\AgCasinoWinLoss\Main.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerPendingFunds\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerPendingFunds\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\CustomerPendingFunds\Main.cshtml" />
-    <Content Include="Views\Desktop\BetList\PendingFunds\Main.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Content.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\CustomerWinloss\Main.cshtml" />
@@ -3932,7 +3923,6 @@
     <Content Include="App_Browsers\ie.browser" />
     <Content Include="App_Browsers\firefox.browser" />
     <Content Include="App_Data\Template\CustomerGroup\CustomerCommGroup.xls" />
-    <Content Include="App_Data\Template\CustomerReports\CustomerPendingFunds.xls" />
     <Content Include="App_Data\Template\CustomerReports\CustomerWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\LicenseeWinLoss.xls" />
     <Content Include="App_Data\Template\Reports\WinLossByBetType.xls" />

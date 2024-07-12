@@ -8,12 +8,9 @@
 		<Function Name="SabaVirtualSportsWinLoss" Product="SB,CO"></Function>
 		<Function Name="LicenseeWinLoss" Product="SB,NG,VS,CS,KN,BT,AGC,VB,AB,CO,LT,SG,PP,CC,VRG,TG,I4D,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG"></Function>
 		<Function Name="SpecialLicenseeWinLoss" Product="SB,NG,CS,LC"></Function>
-		<Function Name="WinLossByTimeZone" Product="SB"></Function>
 		<Function Name="SubsidiaryPerformance" Product="SB,NG,VS,CS,KN,AGC,VB,AB,LT,TG,I4D,VRG,PP,CC,SG,SBC,SXG,JK,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG,SEA,WE,L22,UUSL,FS,FAC,NS,ON,PTRNG,GPIRNG,GPILC,PS,ASK"></Function>
-		<Function Name="CustomerPendingFunds" Product="SB,NG,VS,CS,KN,AGC,VB,AB,LT,SG,PP,CC,VRG,TG,I4D,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG,SEA,WE,L22,UUSL,FS,FAC,NS,ON,PTRNG,GPIRNG,GPILC,PS,ASK"></Function>
 		<Function Name="CustomerWinLoss" Product="SB,NG,VS,CS,KN,BT,AGC,VB,AB,CO,LT,SG,PP,CC,VRG,TG,I4D,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG"></Function>
 		<Function Name="PlatformWinloss" Product="SB,NG,VS,KN,CS,VB,AB,LT,SG,PP,CC,VRG,TG,I4D,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG"></Function>
-		<Function Name="Turnover" Product="SB,NG,VS,CS,KN,BT,AGC,VB,AB,CO,LT,SG,PP,CC,VRG,TG,I4D,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG,SEA,WE,L22,UUSL,FS,FAC,NS,ON,PTRNG,GPIRNG,GPILC,PS,ASK"></Function>
 		<Function Name="WinLossByProduct" Product="SB,NG,VS,CS,KN,VB,LT,SG,PP,CC,VRG,TG,I4D,SXG,SBC,SAG,PGS,JK,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG"></Function>
 		<Function Name="ResultPage_GetNormalSports" Product="SB,NG,VS,KN,LT"></Function>
 		<Function Name="CasinoTurnover" Product="CS,VB,AB,SXG,SAG,PP,PGS,SBC,HB,WM,BGG,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG"></Function>

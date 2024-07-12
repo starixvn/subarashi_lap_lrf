@@ -30,7 +30,6 @@ var cssPaths = {
     forecastonextwo: ["./www/css/source/pages/forecast/forecastonextwo.scss"],
     newforecast: ["./www/css/source/pages/forecast/newforecast.scss"],
 
-    turnover: ["./www/css/source/pages/report/turnover.scss"],
     result: ["./www/css/source/pages/report/result.scss"],
     cashouthistory: ["./www/css/source/pages/betlist/cashouthistory.main.scss", "./www/css/source/extensions/popup-ex.scss"],
 
@@ -43,8 +42,6 @@ var cssPaths = {
     customerlog: ["./www/css/source/pages/customer/customerlog.scss"],
     licenseelist: ["./www/css/source/pages/utility/licenseelist.scss"],
     agcasinowinloss: ["./www/css/source/pages/report/agcasinowinloss.scss"],
-    customerpendingfunds: ["./www/css/source/pages/report/customerpendingfunds.scss"],
-    customerturnover: ["./www/css/source/pages/report/customerturnover.scss"],
     customerwinloss: ["./www/css/source/pages/report/customerwinloss.scss"],
     customerClass: ["./www/css/source/pages/customer/customer-class.scss"],
     risklevel: ["./www/css/source/pages/customer/risklevel.scss"],
@@ -85,7 +82,6 @@ var scriptPaths = {
     forecasthdpou: "./www/js/source/pages/forecast/forecast.handicapoverunder.main.js",
     newforecasthdpou: "./www/js/source/pages/forecast/forecast.newforecasthdpou.main.js",
 
-    turnover: "./www/js/source/pages/report/turnover/main.js",
     result: "./www/js/source/pages/report/result/main-result.js",
 
     winlossbyproduct: "./www/js/source/pages/report/winlossbyproduct/main-winlossbyproduct.js",
@@ -103,8 +99,6 @@ var scriptPaths = {
     sabavirtualsettinginformation: "./www/js/source/pages/customer/sabavirtualsettinginformation/main.js",
 
     agcasinowinloss: "./www/js/source/pages/report/agcasinowinloss/main.js",
-    customerpendingfunds: "./www/js/source/pages/report/customerpendingfunds/main.js",
-    customerturnover: "./www/js/source/pages/report/customerturnover/main.js",
     customerwinloss: "./www/js/source/pages/report/customerwinloss/main.js"
 };
 
