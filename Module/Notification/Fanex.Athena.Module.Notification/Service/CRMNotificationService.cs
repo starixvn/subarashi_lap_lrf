@@ -106,7 +106,9 @@
                 {
                     if (reader.Read())
                     {
+                        result.Id = Converter.ToString2(reader["NotiID"]);
                         result.MatchInfo = Converter.ToString2(reader["EventName"]);
+                        result.DateTime = Converter.ToDateTime(reader["EventDate"]);
                     }
                     reader.NextResult();
 
@@ -115,6 +117,7 @@
                     {
                         result.Data.Add(new AmendmentTicket
                         {
+                            Id = Converter.ToString2(reader["NotiID"]),
                             Index = ++index,
                             RefNo = Converter.ToString2(reader["RefNo"]),
                             ExternalId = Converter.ToString2(reader["ExternalId"]),
@@ -123,6 +126,59 @@
                     }
                 }
             }
+
+            return result;
+        }
+
+        public List<AmendmentTicketListing> GetAllAmendmentTicketListing(NotificationMetaModel metaModel)
+        {
+            const string SpKey = "Lrf_AdmTicketListSel";
+            var info = new List<AmendmentTicketListing>();
+            var detail = new List<AmendmentTicket>();
+
+            using (var objectDb = _dbFactory.GetObjectDb(SpKey))
+            {
+                objectDb.SetParameterValue("AgentList", "<ROOT><Agent AgentId=\"20121327\"/></ROOT>");
+                //objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+                objectDb.SetParameterValue("FEventDate", metaModel.FromDate);
+                objectDb.SetParameterValue("TEventDate", metaModel.ToDate);
+
+                using (var reader = objectDb.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var dataInfo = new AmendmentTicketListing
+                        {
+                            Id = Converter.ToString2(reader["NotiID"]),
+                            MatchInfo = Converter.ToString2(reader["EventName"]),
+                            DateTime = Converter.ToDateTime(reader["EventDate"]),
+                        };
+                        info.Add(dataInfo);
+                    }
+                    reader.NextResult();
+
+                    while (reader.Read())
+                    {
+                        var dataDetail = new AmendmentTicket
+                        {
+                            Id = Converter.ToString2(reader["NotiID"]),
+                            RefNo = Converter.ToString2(reader["RefNo"]),
+                            ExternalId = Converter.ToString2(reader["ExternalId"]),
+                            SystemId = Converter.ToString2(reader["SystemId"])
+                        };
+
+                        detail.Add(dataDetail);
+                    }
+                }
+            }
+
+            var result = info.GroupJoin(detail, n => n.Id, m => m.Id, (i, d) => new AmendmentTicketListing
+            {
+                Id = i.Id,
+                MatchInfo = i.MatchInfo,
+                DateTime = i.DateTime,
+                Data = d.DefaultIfEmpty().ToList(),
+            }).ToList();
 
             return result;
         }

@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Module.Notification.Controller
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.SessionState;
@@ -11,7 +10,6 @@
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Module.Notification.DTO;
     using Fanex.Athena.Module.Notification.Excels;
     using Fanex.Athena.Module.Notification.Helper;
     using Fanex.Athena.Module.Notification.MetaModel;
@@ -116,26 +114,11 @@
         public ActionResult ExportAllAmendmentTicketListing(NotificationMetaModel metaModel)
         {
             UpdateMetaModel(metaModel);
+            var data = _notificationManagerService.GetAllAmendmentTicketListing(metaModel);
 
-            var result = _notificationManagerService.GetResultAmendment(metaModel);
-            var amendmentTicketList = new List<AmendmentTicketListing>();
-
-            foreach (var data in result.DataList)
+            if (data.Any())
             {
-                var amendmentTicketMetaModel = new AmendmentTicketListingMetaModel
-                {
-                    Source = data.Source,
-                    SessionId = data.SessionId,
-                    DateTime= data.DateTime,
-                    AgentListXml = metaModel.AgentListXml
-                };
-                var amendmentTicket = _notificationManagerService.GetAmendmentTicketListing(amendmentTicketMetaModel);
-                amendmentTicketList.Add(amendmentTicket);
-            }
-
-            if (amendmentTicketList.Any())
-            {
-                var excel = new AmendmentTicketListingMultipleExcel(amendmentTicketList);
+                var excel = new AmendmentTicketListingMultipleExcel(data);
                 excel.Export();
                 return new ExcelResult(excel.Workbook, "TicketListing");
             }

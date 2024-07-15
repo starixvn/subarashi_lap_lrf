@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Module.Notification.Service.Interfaces
 {
+    using System.Collections.Generic;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.ResultModel;
     using Fanex.Athena.Module.Notification.DTO;
@@ -14,5 +15,7 @@
         ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel);
 
         AmendmentTicketListing GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel);
+
+        List<AmendmentTicketListing> GetAllAmendmentTicketListing(NotificationMetaModel metaModel);
     }
 }

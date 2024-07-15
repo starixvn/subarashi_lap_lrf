@@ -1,10 +1,15 @@
 ﻿namespace Fanex.Athena.Module.Notification.DTO
 {
+    using System;
     using System.Collections.Generic;
 
     public class AmendmentTicketListing
     {
+        public string Id { get; set; }
+
         public string MatchInfo { get; set; }
+
+        public DateTime DateTime { get; set; }
 
         public IList<AmendmentTicket> Data { get; set; }
 
@@ -14,6 +19,8 @@
 
     public class AmendmentTicket
     {
+        public string Id { get; set; }
+
         public int Index { get; set; }
 
         public string RefNo { get; set; }

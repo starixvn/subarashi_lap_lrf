@@ -101,6 +101,23 @@
             return result;
         }
 
+        public List<AmendmentTicketListing> GetAllAmendmentTicketListing(NotificationMetaModel metaModel)
+        {
+            var result = new List<AmendmentTicketListing>();
+
+            var handleServices = GetNotificationServiceByType<IResultAmendmentService>();
+            foreach (var service in handleServices)
+            {
+                var data = service.GetAllAmendmentTicketListing(metaModel);
+                if (data != null && data.Any())
+                {
+                    result.AddRange(data);
+                }
+            }
+
+            return result.OrderByDescending(_ => _.DateTime).ToList();
+        }
+
         private IEnumerable<T> GetNotificationServiceByType<T>(Func<T, bool> predicate = null)
         {
             var result = _notificationsSource.Values.Where(service => service is T).OfType<T>();

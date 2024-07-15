@@ -153,8 +153,28 @@
                 }
 
                 result.MatchInfo = ReadMatchInfo(objectDb);
+                result.DateTime = metaModel.DateTime;
             }
 
+            return result;
+        }
+
+        public List<AmendmentTicketListing> GetAllAmendmentTicketListing(NotificationMetaModel metaModel)
+        {
+            var result = new List<AmendmentTicketListing>();
+            var resultAmendment = GetResultAmendment(metaModel);
+            foreach (var amendment in resultAmendment.DataList)
+            {
+                var param = new AmendmentTicketListingMetaModel
+                {
+                    Source = amendment.Source,
+                    SessionId = amendment.SessionId,
+                    DateTime = amendment.DateTime,
+                    AgentListXml = metaModel.AgentListXml
+                };
+                var data = GetAmendmentTicketListing(param);
+                result.Add(data);
+            }
             return result;
         }
 
