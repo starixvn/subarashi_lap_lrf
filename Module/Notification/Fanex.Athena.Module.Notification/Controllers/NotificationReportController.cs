@@ -129,11 +129,21 @@
         private void UpdateMetaModel(NotificationMetaModel metaModel)
         {
             var userSession = SessionServiceInstance.UserSession;
-            var permissionKeys = (userSession.FunctionList ?? Enumerable.Empty<Function>()).Select(x => x.FunctionKey);
+            var permissionKeys = Enumerable.Empty<string>();
+
+            if (userSession.IsPortalUser)
+            {
+                permissionKeys = (userSession.PortalFunctionList ?? Enumerable.Empty<PortalFunction>()).Select(x => x.FunctionKey);
+            }
+            else
+            {
+                permissionKeys = (userSession.FunctionList ?? Enumerable.Empty<Function>()).Select(x => x.FunctionKey);
+            }
+
             metaModel.UserName = userSession.UserName;
             metaModel.LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
             metaModel.Language = Util.MapLanguages.GetValueOrDefault(userSession.Language, "en");
-            metaModel.MessageTypes = NotificationHelper.GetMessageTypesByPermission(permissionKeys);
+            metaModel.MessageTypes = NotificationHelper.GetMessageTypesByPermission(permissionKeys, userSession.IsSuperAdmin);
         }
     }
 }

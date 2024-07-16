@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ApiOneAuthorizationAttribute.cs" />
     <Compile Include="Attributes\Extensions\DependencyScopeExtension.cs" />
+    <Compile Include="Attributes\ExternalApiAutoBindMetaModelAttribute.cs" />
     <Compile Include="ExternalApiBaseController.cs" />
     <Compile Include="Logger\ApiExceptionLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

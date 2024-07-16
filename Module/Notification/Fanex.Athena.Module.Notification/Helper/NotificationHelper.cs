@@ -54,8 +54,13 @@
             return string.Empty;
         }
 
-        public static string GetMessageTypesByPermission(IEnumerable<string> functionKeys)
+        public static string GetMessageTypesByPermission(IEnumerable<string> functionKeys, bool isAdmin = false)
         {
+            if (isAdmin)
+            {
+                return string.Join(",", _messageType.Values);
+            }
+
             var messageTypes = (functionKeys ?? Enumerable.Empty<string>())
                .Where(x => _messageType.ContainsKey(x))
                .Select(x => _messageType[x]);

@@ -12,7 +12,6 @@
     using Fanex.Athena.Module.Notification.Helper;
     using Fanex.Athena.Module.Notification.MetaModel;
     using Fanex.Athena.Module.Notification.Service.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
 
     /// <summary>
     /// Used by LAP container
@@ -28,7 +27,7 @@
         }
 
         [HttpGet]
-        [AutoBindMetaModel(BindAgent = true)]
+        [ExternalApiAutoBindMetaModel(BindAgent = true)]
         public ReportResultModel<NotificationMessage> GetNotificationMessages([FromUri] NotificationMetaModel metaModel)
         {
             var permissionKeys = (Permissions ?? Enumerable.Empty<PortalFunction>()).Select(x => x.FunctionKey);

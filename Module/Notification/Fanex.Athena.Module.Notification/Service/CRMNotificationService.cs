@@ -44,6 +44,16 @@
         {
             var paramModel = CreateNotificationMetaModel(metaModel);
             var data = GetDataFromDB(paramModel, GetDataNotificationMessage);
+
+            if (data == null || data.DataList == null)
+            {
+                return new ReportResultModel<NotificationMessage>
+                {
+                    TotalRows = 0,
+                    DataList = new List<NotificationMessage>()
+                };
+            }
+
             var readMessageIds = GetReadNotification(paramModel);
 
             data.DataList = data.DataList.Where(x => !readMessageIds.Contains(x.Id));
@@ -78,6 +88,15 @@
         {
             var paramModel = CreateResultAmendmentMetaModel(metaModel);
             var data = GetDataFromDB(paramModel, GetDataResultAmendment);
+
+            if (data == null || data.DataList == null)
+            {
+                return new ReportResultModel<ResultAmendment>
+                {
+                    TotalRows = 0,
+                    DataList = new List<ResultAmendment>()
+                };
+            }
 
             var readNotificationModel = CreateNotificationMetaModel(metaModel);
             var readMessageIds = GetReadNotification(readNotificationModel);
