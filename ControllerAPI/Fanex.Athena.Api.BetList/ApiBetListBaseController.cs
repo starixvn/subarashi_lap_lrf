@@ -69,7 +69,7 @@
 
             AutoBindMetaModelService.BindProductCodeList(metaModel, SessionService.LicenseeSession.OfferedSubProductList, ProductService);
 
-            return await BridgeClientService.PostAsync(apiPath ?? "BetList/GetBetList", metaModel, userSession.Language).ConfigureAwait(false);
+            return await BridgeClientService.PostAsync(apiPath ?? "/BetList/GetBetList", metaModel, userSession.Language).ConfigureAwait(false);
         }
 
         protected internal virtual async Task<dynamic> GetPagingBetListResult(

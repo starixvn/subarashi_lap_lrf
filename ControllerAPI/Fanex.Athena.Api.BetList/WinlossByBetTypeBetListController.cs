@@ -24,7 +24,7 @@
             IAuthorizationService authorizationService,
             IBetListApiClient betListApiClient,
             IBalanceUpDataAccess balanceUpDataAccess,
-             ICurrencyValidation currencyValidation
+            ICurrencyValidation currencyValidation
             )
         : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
         {
