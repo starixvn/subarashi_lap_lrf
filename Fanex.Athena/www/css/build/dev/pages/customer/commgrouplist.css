@@ -590,6 +590,12 @@ table tbody tr.row-group-level1 td {
   height: 100%;
   z-index: 10000; }
 
+.wrapper {
+  overflow-y: unset !important; }
+
+.fixed-columns-right .sticky-header-container.fixed-table-container {
+  right: 1.5rem !important; }
+
 .table > thead > tr > th {
   background: #4C6375;
   color: #fff; }
@@ -663,9 +669,6 @@ div.icon-edit, div.icon-delete {
 .table > tbody tr td.col-frozen {
   background-color: #dfe1df;
   border-color: #ffffff; }
-
-.fixed-table-container {
-  min-width: 1100px; }
 
 .input-field label {
   width: 100%; }

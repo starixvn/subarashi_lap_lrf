@@ -1,5 +1,8 @@
 ﻿define(['jquery', 'common/site', 'common/popup', './commgroup', 'lib/numberformat',
-    'lib/jquery.multiselect.nlevel', 'lib/bootstrap-table/bootstrap-table', 'lib/bootstrap-table/bootstrap-table-fixed-columns'],
+    'lib/jquery.multiselect.nlevel',
+    'lib/bootstrap-table/bootstrap-table',
+    'lib/bootstrap-table/bootstrap-table-sticky-header',
+    'lib/bootstrap-table/bootstrap-table-fixed-columns'],
     function ($, Site, Popup, CustomerCommGroup, NumberFormatter) {
         'use strict';
 
@@ -345,6 +348,7 @@
             let gridOptions = {
                 columns: columns,
                 data: rows,
+                stickyHeader: true,
                 fixedColumns: true,
                 fixedNumber: 5,
                 fixedRightNumber: 2,

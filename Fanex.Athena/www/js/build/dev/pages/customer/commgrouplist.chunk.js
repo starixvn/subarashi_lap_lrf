@@ -804,391 +804,593 @@ const PIXEL_STEP = 10
 const LINE_HEIGHT = 40
 const PAGE_HEIGHT = 800
 
-function normalizeWheel (event) {
-  let sX = 0 // spinX
-  let sY = 0 // spinY
-  let pX = 0 // pixelX
-  let pY = 0 // pixelY
+function normalizeWheel(event) {
+    let sX = 0 // spinX
+    let sY = 0 // spinY
+    let pX = 0 // pixelX
+    let pY = 0 // pixelY
 
-  // Legacy
-  if ('detail' in event) { sY = event.detail }
-  if ('wheelDelta' in event) { sY = -event.wheelDelta / 120 }
-  if ('wheelDeltaY' in event) { sY = -event.wheelDeltaY / 120 }
-  if ('wheelDeltaX' in event) { sX = -event.wheelDeltaX / 120 }
-
-  // side scrolling on FF with DOMMouseScroll
-  if ( 'axis' in event && event.axis === event.HORIZONTAL_AXIS ) {
-    sX = sY
-    sY = 0
-  }
-
-  pX = sX * PIXEL_STEP
-  pY = sY * PIXEL_STEP
-
-  if ('deltaY' in event) { pY = event.deltaY }
-  if ('deltaX' in event) { pX = event.deltaX }
-
-  if ((pX || pY) && event.deltaMode) {
-    if (event.deltaMode === 1) { // delta in LINE units
-      pX *= LINE_HEIGHT
-      pY *= LINE_HEIGHT
-    } else { // delta in PAGE units
-      pX *= PAGE_HEIGHT
-      pY *= PAGE_HEIGHT
+    // Legacy
+    if ('detail' in event) {
+        sY = event.detail
     }
-  }
+    if ('wheelDelta' in event) {
+        sY = -event.wheelDelta / 120
+    }
+    if ('wheelDeltaY' in event) {
+        sY = -event.wheelDeltaY / 120
+    }
+    if ('wheelDeltaX' in event) {
+        sX = -event.wheelDeltaX / 120
+    }
 
-  // Fall-back if spin cannot be determined
-  if (pX && !sX) { sX = (pX < 1) ? -1 : 1 }
-  if (pY && !sY) { sY = (pY < 1) ? -1 : 1 }
+    // side scrolling on FF with DOMMouseScroll
+    if ('axis' in event && event.axis === event.HORIZONTAL_AXIS) {
+        sX = sY
+        sY = 0
+    }
 
-  return {
-    spinX: sX,
-    spinY: sY,
-    pixelX: pX,
-    pixelY: pY
-  }
+    pX = sX * PIXEL_STEP
+    pY = sY * PIXEL_STEP
+
+    if ('deltaY' in event) {
+        pY = event.deltaY
+    }
+    if ('deltaX' in event) {
+        pX = event.deltaX
+    }
+
+    if ((pX || pY) && event.deltaMode) {
+        if (event.deltaMode === 1) { // delta in LINE units
+            pX *= LINE_HEIGHT
+            pY *= LINE_HEIGHT
+        } else { // delta in PAGE units
+            pX *= PAGE_HEIGHT
+            pY *= PAGE_HEIGHT
+        }
+    }
+
+    // Fall-back if spin cannot be determined
+    if (pX && !sX) {
+        sX = pX < 1 ? -1 : 1
+    }
+    if (pY && !sY) {
+        sY = pY < 1 ? -1 : 1
+    }
+
+    return {
+        spinX: sX,
+        spinY: sY,
+        pixelX: pX,
+        pixelY: pY
+    }
 }
 
-$.extend($.fn.bootstrapTable.defaults, {
-  fixedColumns: false,
-  fixedNumber: 0,
-  fixedRightNumber: 0
+Object.assign($.fn.bootstrapTable.defaults, {
+    fixedColumns: false,
+    fixedNumber: 0,
+    fixedRightNumber: 0
 })
 
 $.BootstrapTable = class extends $.BootstrapTable {
 
-  fixedColumnsSupported () {
-    return this.options.fixedColumns &&
-      !this.options.detailView &&
-      !this.options.cardView
-  }
-
-  initContainer () {
-    super.initContainer()
-
-    if (!this.fixedColumnsSupported()) {
-      return
+    fixedColumnsSupported() {
+        return this.options.fixedColumns &&
+            !this.options.detailView &&
+            !this.options.cardView
     }
 
-    if (this.options.fixedNumber) {
-      this.$tableContainer.append('<div class="fixed-columns"></div>')
-      this.$fixedColumns = this.$tableContainer.find('.fixed-columns')
-    }
+    initContainer() {
+        super.initContainer()
 
-    if (this.options.fixedRightNumber) {
-      this.$tableContainer.append('<div class="fixed-columns-right"></div>')
-      this.$fixedColumnsRight = this.$tableContainer.find('.fixed-columns-right')
-    }
-  }
-
-  initBody (...args) {
-    super.initBody(...args)
-
-    if (!this.fixedColumnsSupported()) {
-      return
-    }
-
-    if (this.options.showHeader && this.options.height) {
-      return
-    }
-
-    this.initFixedColumnsBody()
-    this.initFixedColumnsEvents()
-  }
-
-  trigger (...args) {
-    super.trigger(...args)
-
-    if (!this.fixedColumnsSupported()) {
-      return
-    }
-
-    if (args[0] === 'post-header') {
-      this.initFixedColumnsHeader()
-    } else if (args[0] === 'scroll-body') {
-      if (this.needFixedColumns && this.options.fixedNumber) {
-        this.$fixedBody.scrollTop(this.$tableBody.scrollTop())
-      }
-
-      if (this.needFixedColumns && this.options.fixedRightNumber) {
-        this.$fixedBodyRight.scrollTop(this.$tableBody.scrollTop())
-      }
-    }
-  }
-
-  updateSelected () {
-    super.updateSelected()
-
-    if (!this.fixedColumnsSupported()) {
-      return
-    }
-
-    this.$tableBody.find('tr').each((i, el) => {
-      const $el = $(el)
-      const index = $el.data('index')
-      const classes = $el.attr('class')
-
-      const inputSelector = `[name="${this.options.selectItemName}"]`
-      const $input = $el.find(inputSelector)
-
-      if (typeof index === undefined) {
-        return
-      }
-
-      const updateFixedBody = ($fixedHeader, $fixedBody) => {
-        const $tr = $fixedBody.find(`tr[data-index="${index}"]`)
-        $tr.attr('class', classes)
-
-        if ($input.length) {
-          $tr.find(inputSelector).prop('checked', $input.prop('checked'))
+        if (!this.fixedColumnsSupported()) {
+            return
         }
 
-        if (this.$selectAll.length) {
-          $fixedHeader.add($fixedBody)
-            .find('[name="btSelectAll"]')
-            .prop('checked', this.$selectAll.prop('checked'))
-        }
-      }
-
-      if (this.$fixedBody && this.options.fixedNumber) {
-        updateFixedBody(this.$fixedHeader, this.$fixedBody)
-      }
-
-      if (this.$fixedBodyRight && this.options.fixedRightNumber) {
-        updateFixedBody(this.$fixedHeaderRight, this.$fixedBodyRight)
-      }
-    })
-  }
-
-  hideLoading () {
-    super.hideLoading()
-
-    if (this.needFixedColumns && this.options.fixedNumber) {
-      this.$fixedColumns.find('.fixed-table-loading').hide()
-    }
-
-    if (this.needFixedColumns && this.options.fixedRightNumber) {
-      this.$fixedColumnsRight.find('.fixed-table-loading').hide()
-    }
-  }
-
-  initFixedColumnsHeader () {
-    if (this.options.height) {
-      this.needFixedColumns = this.$tableHeader.outerWidth(true) < this.$tableHeader.find('table').outerWidth(true)
-    } else {
-      this.needFixedColumns = this.$tableBody.outerWidth(true) < this.$tableBody.find('table').outerWidth(true)
-    }
-
-    const initFixedHeader = ($fixedColumns, isRight) => {
-      $fixedColumns.find('.fixed-table-header').remove()
-      $fixedColumns.append(this.$tableHeader.clone(true))
-
-      $fixedColumns.css({
-        width: this.getFixedColumnsWidth(isRight)
-      })
-      return $fixedColumns.find('.fixed-table-header')
-    }
-
-    if (this.needFixedColumns && this.options.fixedNumber) {
-      this.$fixedHeader = initFixedHeader(this.$fixedColumns)
-      this.$fixedHeader.css('margin-right', '')
-    } else if (this.$fixedColumns) {
-      this.$fixedColumns.html('').css('width', '')
-    }
-
-    if (this.needFixedColumns && this.options.fixedRightNumber) {
-      this.$fixedHeaderRight = initFixedHeader(this.$fixedColumnsRight, true)
-      this.$fixedHeaderRight.scrollLeft(this.$fixedHeaderRight.find('table').width())
-    } else if (this.$fixedColumnsRight) {
-      this.$fixedColumnsRight.html('').css('width', '')
-    }
-
-    this.initFixedColumnsBody()
-    this.initFixedColumnsEvents()
-  }
-
-  initFixedColumnsBody () {
-    const initFixedBody = ($fixedColumns, $fixedHeader) => {
-      $fixedColumns.find('.fixed-table-body').remove()
-      $fixedColumns.append(this.$tableBody.clone(true))
-
-      const $fixedBody = $fixedColumns.find('.fixed-table-body')
-
-      const tableBody = this.$tableBody.get(0)
-      const scrollHeight = tableBody.scrollWidth > tableBody.clientWidth
-        ? Utils.getScrollBarWidth() : 0
-      const height = this.$tableContainer.outerHeight(true) - scrollHeight - 1
-
-      $fixedColumns.css({
-        height
-      })
-
-      $fixedBody.css({
-        height: height - $fixedHeader.height()
-      })
-
-      return $fixedBody
-    }
-
-    if (this.needFixedColumns && this.options.fixedNumber) {
-      this.$fixedBody = initFixedBody(this.$fixedColumns, this.$fixedHeader)
-    }
-
-    if (this.needFixedColumns && this.options.fixedRightNumber) {
-      this.$fixedBodyRight = initFixedBody(this.$fixedColumnsRight, this.$fixedHeaderRight)
-      this.$fixedBodyRight.scrollLeft(this.$fixedBodyRight.find('table').width())
-      this.$fixedBodyRight.css('overflow-y', this.options.height ? 'auto' : 'hidden')
-    }
-  }
-
-  getFixedColumnsWidth (isRight) {
-    let visibleFields = this.getVisibleFields()
-    let width = 0
-    let fixedNumber = this.options.fixedNumber
-    let marginRight = 0
-
-    if (isRight) {
-      visibleFields = visibleFields.reverse()
-      fixedNumber = this.options.fixedRightNumber
-      marginRight = parseInt(this.$tableHeader.css('margin-right'), 10)
-    }
-
-    for (let i = 0; i < fixedNumber; i++) {
-      width += this.$header.find(`th[data-field="${visibleFields[i]}"]`).outerWidth(true)
-    }
-
-    return width + marginRight + 1
-  }
-
-  initFixedColumnsEvents () {
-    const toggleHover = (e, toggle) => {
-      const tr = `tr[data-index="${$(e.currentTarget).data('index')}"]`
-      let $trs = this.$tableBody.find(tr)
-
-      if (this.$fixedBody) {
-        $trs = $trs.add(this.$fixedBody.find(tr))
-      }
-      if (this.$fixedBodyRight) {
-        $trs = $trs.add(this.$fixedBodyRight.find(tr))
-      }
-
-      $trs.css('background-color', toggle ? $(e.currentTarget).css('background-color') : '')
-    }
-
-    this.$tableBody.find('tr').hover(e => {
-      toggleHover(e, true)
-    }, e => {
-      toggleHover(e, false)
-    })
-
-    const isFirefox = typeof navigator !== 'undefined' &&
-      navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-    const mousewheel = isFirefox ? 'DOMMouseScroll' : 'mousewheel'
-    const updateScroll = (e, fixedBody) => {
-      const normalized = normalizeWheel(e)
-      const deltaY = Math.ceil(normalized.pixelY)
-      const top = this.$tableBody.scrollTop() + deltaY
-
-      if (
-        deltaY < 0 && top > 0 ||
-        deltaY > 0 && top < fixedBody.scrollHeight - fixedBody.clientHeight
-      ) {
-        e.preventDefault()
-      }
-
-      this.$tableBody.scrollTop(top)
-      if (this.$fixedBody) {
-        this.$fixedBody.scrollTop(top)
-      }
-      if (this.$fixedBodyRight) {
-        this.$fixedBodyRight.scrollTop(top)
-      }
-    }
-
-    if (this.needFixedColumns && this.options.fixedNumber) {
-      this.$fixedBody.find('tr').hover(e => {
-        toggleHover(e, true)
-      }, e => {
-        toggleHover(e, false)
-      })
-
-      this.$fixedBody[0].addEventListener(mousewheel, e => {
-        updateScroll(e, this.$fixedBody[0])
-      })
-    }
-
-    if (this.needFixedColumns && this.options.fixedRightNumber) {
-      this.$fixedBodyRight.find('tr').hover(e => {
-        toggleHover(e, true)
-      }, e => {
-        toggleHover(e, false)
-      })
-
-      this.$fixedBodyRight.off('scroll').on('scroll', () => {
-        const top = this.$fixedBodyRight.scrollTop()
-
-        this.$tableBody.scrollTop(top)
-        if (this.$fixedBody) {
-          this.$fixedBody.scrollTop(top)
-        }
-      })
-    }
-
-    if (this.options.filterControl) {
-      $(this.$fixedColumns).off('keyup change').on('keyup change', e => {
-        const $target = $(e.target)
-        const value = $target.val()
-        const field = $target.parents('th').data('field')
-        const $coreTh = this.$header.find(`th[data-field="${field}"]`)
-
-        if ($target.is('input')) {
-          $coreTh.find('input').val(value)
-        } else if ($target.is('select')) {
-          const $select = $coreTh.find('select')
-          $select.find('option[selected]').removeAttr('selected')
-          $select.find(`option[value="${value}"]`).attr('selected', true)
+        if (this.options.fixedNumber) {
+            this.$tableContainer.append('<div class="fixed-columns"></div>')
+            this.$fixedColumns = this.$tableContainer.find('.fixed-columns')
         }
 
-        this.triggerSearch()
-      })
-    }
-  }
-
-  renderStickyHeader () {
-    if (!this.options.stickyHeader) {
-      return
+        if (this.options.fixedRightNumber) {
+            this.$tableContainer.append('<div class="fixed-columns-right"></div>')
+            this.$fixedColumnsRight = this.$tableContainer.find('.fixed-columns-right')
+        }
     }
 
-    this.$stickyContainer = this.$container.find('.sticky-header-container')
-    super.renderStickyHeader()
+    initBody(...args) {
+        super.initBody(...args)
 
-    if (this.needFixedColumns && this.options.fixedNumber) {
-      this.$fixedColumns.css('z-index', 101)
-        .find('.sticky-header-container')
-        .css('right', '')
-        .width(this.$fixedColumns.outerWidth())
+        if (this.$fixedColumns && this.$fixedColumns.length) {
+            this.$fixedColumns.toggle(this.fixedColumnsSupported())
+        }
+        if (this.$fixedColumnsRight && this.$fixedColumnsRight.length) {
+            this.$fixedColumnsRight.toggle(this.fixedColumnsSupported())
+        }
+
+        if (!this.fixedColumnsSupported()) {
+            return
+        }
+
+        if (this.options.showHeader && this.options.height) {
+            return
+        }
+
+        this.initFixedColumnsBody()
+        this.initFixedColumnsEvents()
     }
 
-    if (this.needFixedColumns && this.options.fixedRightNumber) {
-      const $stickyHeaderContainerRight = this.$fixedColumnsRight.find('.sticky-header-container')
+    trigger(...args) {
+        super.trigger(...args)
 
-      this.$fixedColumnsRight.css('z-index', 101)
-      $stickyHeaderContainerRight.css('left', '')
-        .scrollLeft($stickyHeaderContainerRight.find('.table').outerWidth())
-        .width(this.$fixedColumnsRight.outerWidth())
+        if (!this.fixedColumnsSupported()) {
+            return
+        }
+
+        if (args[0] === 'post-header') {
+            this.initFixedColumnsHeader()
+        } else if (args[0] === 'scroll-body') {
+            if (this.needFixedColumns && this.options.fixedNumber) {
+                this.$fixedBody.scrollTop(this.$tableBody.scrollTop())
+            }
+
+            if (this.needFixedColumns && this.options.fixedRightNumber) {
+                this.$fixedBodyRight.scrollTop(this.$tableBody.scrollTop())
+            }
+        }
     }
-  }
 
-  matchPositionX () {
-    if (!this.options.stickyHeader) {
-      return
+    updateSelected() {
+        super.updateSelected()
+
+        if (!this.fixedColumnsSupported()) {
+            return
+        }
+
+        this.$tableBody.find('tr').each((i, el) => {
+            const $el = $(el)
+            const index = $el.data('index')
+            const classes = $el.attr('class')
+
+            const inputSelector = `[name="${this.options.selectItemName}"]`
+            const $input = $el.find(inputSelector)
+
+            if (typeof index === 'undefined') {
+                return
+            }
+
+            const updateFixedBody = ($fixedHeader, $fixedBody) => {
+                const $tr = $fixedBody.find(`tr[data-index="${index}"]`)
+
+                $tr.attr('class', classes)
+
+                if ($input.length) {
+                    $tr.find(inputSelector).prop('checked', $input.prop('checked'))
+                }
+
+                if (this.$selectAll.length) {
+                    $fixedHeader.add($fixedBody)
+                        .find('[name="btSelectAll"]')
+                        .prop('checked', this.$selectAll.prop('checked'))
+                }
+            }
+
+            if (this.$fixedBody && this.options.fixedNumber) {
+                updateFixedBody(this.$fixedHeader, this.$fixedBody)
+            }
+
+            if (this.$fixedBodyRight && this.options.fixedRightNumber) {
+                updateFixedBody(this.$fixedHeaderRight, this.$fixedBodyRight)
+            }
+        })
     }
 
-    this.$stickyContainer.eq(0).scrollLeft(this.$tableBody.scrollLeft())
-  }
+    hideLoading() {
+        super.hideLoading()
+
+        if (this.needFixedColumns && this.options.fixedNumber) {
+            this.$fixedColumns.find('.fixed-table-loading').hide()
+        }
+
+        if (this.needFixedColumns && this.options.fixedRightNumber) {
+            this.$fixedColumnsRight.find('.fixed-table-loading').hide()
+        }
+    }
+
+    initFixedColumnsHeader() {
+        if (this.options.height) {
+            this.needFixedColumns = this.$tableHeader.outerWidth(true) < this.$tableHeader.find('table').outerWidth(true)
+        } else {
+            this.needFixedColumns = this.$tableBody.outerWidth(true) < this.$tableBody.find('table').outerWidth(true)
+        }
+
+        const initFixedHeader = ($fixedColumns, isRight) => {
+            $fixedColumns.find('.fixed-table-header').remove()
+            $fixedColumns.append(this.$tableHeader.clone(true))
+
+            $fixedColumns.css({
+                width: this.getFixedColumnsWidth(isRight)
+            })
+            return $fixedColumns.find('.fixed-table-header')
+        }
+
+        if (this.needFixedColumns && this.options.fixedNumber) {
+            this.$fixedHeader = initFixedHeader(this.$fixedColumns)
+            this.$fixedHeader.css('margin-right', '')
+        } else if (this.$fixedColumns) {
+            this.$fixedColumns.html('').css('width', '')
+        }
+
+        if (this.needFixedColumns && this.options.fixedRightNumber) {
+            this.$fixedHeaderRight = initFixedHeader(this.$fixedColumnsRight, true)
+            this.$fixedHeaderRight.scrollLeft(this.$fixedHeaderRight.find('table').width())
+        } else if (this.$fixedColumnsRight) {
+            this.$fixedColumnsRight.html('').css('width', '')
+        }
+
+        this.initFixedColumnsBody()
+        this.initFixedColumnsEvents()
+    }
+
+    initFixedColumnsBody() {
+        const initFixedBody = ($fixedColumns, $fixedHeader) => {
+            $fixedColumns.find('.fixed-table-body').remove()
+            $fixedColumns.append(this.$tableBody.clone(true))
+            $fixedColumns.find('.fixed-table-body table').removeAttr('id')
+
+            const $fixedBody = $fixedColumns.find('.fixed-table-body')
+
+            const tableBody = this.$tableBody.get(0)
+            const scrollHeight = tableBody.scrollWidth > tableBody.clientWidth ?
+                Utils.getScrollBarWidth() : 0
+            const height = this.$tableContainer.outerHeight(true) - scrollHeight - 1
+
+            $fixedColumns.css({
+                height
+            })
+
+            $fixedBody.css({
+                height: height - $fixedHeader.height()
+            })
+
+            return $fixedBody
+        }
+
+        if (this.needFixedColumns && this.options.fixedNumber) {
+            this.$fixedBody = initFixedBody(this.$fixedColumns, this.$fixedHeader)
+        }
+
+        if (this.needFixedColumns && this.options.fixedRightNumber) {
+            this.$fixedBodyRight = initFixedBody(this.$fixedColumnsRight, this.$fixedHeaderRight)
+            this.$fixedBodyRight.scrollLeft(this.$fixedBodyRight.find('table').width())
+            this.$fixedBodyRight.css('overflow-y', this.options.height ? 'auto' : 'hidden')
+        }
+    }
+
+    getFixedColumnsWidth(isRight) {
+        let visibleFields = this.getVisibleFields()
+        let width = 0
+        let fixedNumber = this.options.fixedNumber
+        let marginRight = 0
+
+        if (isRight) {
+            visibleFields = visibleFields.reverse()
+            fixedNumber = this.options.fixedRightNumber
+            marginRight = parseInt(this.$tableHeader.css('margin-right'), 10)
+        }
+
+        for (let i = 0; i < fixedNumber; i++) {
+            width += this.$header.find(`th[data-field="${visibleFields[i]}"]`).outerWidth(true)
+        }
+
+        return width + marginRight + 1
+    }
+
+    initFixedColumnsEvents() {
+        const toggleHover = (e, toggle) => {
+            const tr = `tr[data-index="${$(e.currentTarget).data('index')}"]`
+            let $trs = this.$tableBody.find(tr)
+
+            if (this.$fixedBody) {
+                $trs = $trs.add(this.$fixedBody.find(tr))
+            }
+            if (this.$fixedBodyRight) {
+                $trs = $trs.add(this.$fixedBodyRight.find(tr))
+            }
+
+            $trs.css('background-color', toggle ? $(e.currentTarget).css('background-color') : '')
+        }
+
+        this.$tableBody.find('tr').hover(e => {
+            toggleHover(e, true)
+        }, e => {
+            toggleHover(e, false)
+        })
+
+        const isFirefox = typeof navigator !== 'undefined' &&
+            navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+        const mousewheel = isFirefox ? 'DOMMouseScroll' : 'mousewheel'
+        const updateScroll = (e, fixedBody) => {
+            const normalized = normalizeWheel(e)
+            const deltaY = Math.ceil(normalized.pixelY)
+            const top = this.$tableBody.scrollTop() + deltaY
+
+            if (
+                deltaY < 0 && top > 0 ||
+                deltaY > 0 && top < fixedBody.scrollHeight - fixedBody.clientHeight
+            ) {
+                e.preventDefault()
+            }
+
+            this.$tableBody.scrollTop(top)
+            if (this.$fixedBody) {
+                this.$fixedBody.scrollTop(top)
+            }
+            if (this.$fixedBodyRight) {
+                this.$fixedBodyRight.scrollTop(top)
+            }
+        }
+
+        if (this.needFixedColumns && this.options.fixedNumber) {
+            this.$fixedBody.find('tr').hover(e => {
+                toggleHover(e, true)
+            }, e => {
+                toggleHover(e, false)
+            })
+
+            this.$fixedBody[0].addEventListener(mousewheel, e => {
+                updateScroll(e, this.$fixedBody[0])
+            })
+        }
+
+        if (this.needFixedColumns && this.options.fixedRightNumber) {
+            this.$fixedBodyRight.find('tr').hover(e => {
+                toggleHover(e, true)
+            }, e => {
+                toggleHover(e, false)
+            })
+
+            this.$fixedBodyRight.off('scroll').on('scroll', () => {
+                const top = this.$fixedBodyRight.scrollTop()
+
+                this.$tableBody.scrollTop(top)
+                if (this.$fixedBody) {
+                    this.$fixedBody.scrollTop(top)
+                }
+            })
+        }
+
+        if (this.options.filterControl) {
+            $(this.$fixedColumns).off('keyup change').on('keyup change', e => {
+                const $target = $(e.target)
+                const value = $target.val()
+                const field = $target.parents('th').data('field')
+                const $coreTh = this.$header.find(`th[data-field="${field}"]`)
+
+                if ($target.is('input')) {
+                    $coreTh.find('input').val(value)
+                } else if ($target.is('select')) {
+                    const $select = $coreTh.find('select')
+
+                    $select.find('option[selected]').removeAttr('selected')
+                    $select.find(`option[value="${value}"]`).attr('selected', true)
+                }
+
+                this.triggerSearch()
+            })
+        }
+    }
+
+    renderStickyHeader() {
+        if (!this.options.stickyHeader) {
+            return
+        }
+
+        this.$stickyContainer = this.$container.find('.sticky-header-container')
+        super.renderStickyHeader()
+
+        if (this.needFixedColumns && this.options.fixedNumber) {
+            this.$fixedColumns.css('z-index', 101)
+                .find('.sticky-header-container')
+                .css('right', '')
+                .width(this.$fixedColumns.outerWidth())
+        }
+
+        if (this.needFixedColumns && this.options.fixedRightNumber) {
+            const $stickyHeaderContainerRight = this.$fixedColumnsRight.find('.sticky-header-container')
+
+            this.$fixedColumnsRight.css('z-index', 101)
+            $stickyHeaderContainerRight.css('left', '')
+                .width(this.$fixedColumnsRight.outerWidth())
+                .scrollLeft($stickyHeaderContainerRight.find('.table').outerWidth());
+        }
+    }
+
+    matchPositionX() {
+        if (!this.options.stickyHeader) {
+            return
+        }
+
+        this.$stickyContainer.eq(0).scrollLeft(this.$tableBody.scrollLeft())
+    }
 }
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")))
 
+/***/ }),
+
+/***/ "./www/js/source/lib/bootstrap-table/bootstrap-table-sticky-header.js":
+/*!****************************************************************************!*\
+  !*** ./www/js/source/lib/bootstrap-table/bootstrap-table-sticky-header.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {/**
+ * @author vincent loh <vincent.ml@gmail.com>
+ * @update J Manuel Corona <jmcg92@gmail.com>
+ * @update zhixin wen <wenzhixin2010@gmail.com>
+ */
+
+const Utils = $.fn.bootstrapTable.utils
+
+Object.assign($.fn.bootstrapTable.defaults, {
+    stickyHeader: false,
+    stickyHeaderOffsetY: 0,
+    stickyHeaderOffsetLeft: 0,
+    stickyHeaderOffsetRight: 0
+})
+
+$.BootstrapTable = class extends $.BootstrapTable {
+    initHeader(...args) {
+        super.initHeader(...args)
+        if (!this.options.stickyHeader) {
+            return
+        }
+
+        this.$tableBody.find('.sticky-header-container,.sticky_anchor_begin,.sticky_anchor_end').remove()
+
+        this.$el.before('<div class="sticky-header-container"></div>')
+        this.$el.before('<div class="sticky_anchor_begin"></div>')
+        this.$el.after('<div class="sticky_anchor_end"></div>')
+        this.$header.addClass('sticky-header')
+
+        // clone header just once, to be used as sticky header
+        // deep clone header, using source header affects tbody>td width
+        this.$stickyContainer = this.$tableBody.find('.sticky-header-container')
+        this.$stickyBegin = this.$tableBody.find('.sticky_anchor_begin')
+        this.$stickyEnd = this.$tableBody.find('.sticky_anchor_end')
+        this.$stickyHeader = this.$header.clone(true, true)
+
+        // render sticky on window scroll or resize
+        const resizeEvent = Utils.getEventName('resize.sticky-header-table', this.$el.attr('id'))
+        const scrollEvent = Utils.getEventName('scroll.sticky-header-table', this.$el.attr('id'))
+
+        $(window).off(resizeEvent).on(resizeEvent, () => this.renderStickyHeader())
+        $(window).off(scrollEvent).on(scrollEvent, () => this.renderStickyHeader())
+        this.$tableBody.off('scroll').on('scroll', () => this.matchPositionX())
+    }
+
+    onColumnSearch({ currentTarget, keyCode }) {
+        super.onColumnSearch({ currentTarget, keyCode })
+        if (!this.options.stickyHeader) {
+            return
+        }
+
+        this.renderStickyHeader()
+    }
+
+    resetView(...args) {
+        super.resetView(...args)
+        if (!this.options.stickyHeader) {
+            return
+        }
+
+        $('.bootstrap-table.fullscreen').off('scroll')
+            .on('scroll', () => this.renderStickyHeader())
+    }
+
+    getCaret(...args) {
+        super.getCaret(...args)
+        if (!this.options.stickyHeader) {
+            return
+        }
+
+        if (this.$stickyHeader) {
+            const $ths = this.$stickyHeader.find('th')
+
+            this.$header.find('th').each((i, th) => {
+                $ths.eq(i).find('.sortable').attr('class', $(th).find('.sortable').attr('class'))
+            })
+        }
+    }
+
+    horizontalScroll() {
+        super.horizontalScroll()
+        if (!this.options.stickyHeader) {
+            return
+        }
+
+        this.$tableBody.on('scroll', () => this.matchPositionX())
+    }
+
+    renderStickyHeader() {
+        const that = this
+
+        this.$stickyHeader = this.$header.clone(true, true)
+
+        if (this.options.filterControl) {
+            $(this.$stickyHeader).off('keyup change mouseup').on('keyup change mouse', function (e) {
+                const $target = $(e.target)
+                const value = $target.val()
+                const field = $target.parents('th').data('field')
+                const $coreTh = that.$header.find(`th[data-field="${field}"]`)
+
+                if ($target.is('input')) {
+                    $coreTh.find('input').val(value)
+                } else if ($target.is('select')) {
+                    const $select = $coreTh.find('select')
+
+                    $select.find('option[selected]').removeAttr('selected')
+                    $select.find(`option[value="${value}"]`).attr('selected', true)
+                }
+
+                that.triggerSearch()
+            })
+        }
+
+        const top = $(window).scrollTop()
+        // top anchor scroll position, minus header height
+        const start = this.$stickyBegin.offset().top - this.options.stickyHeaderOffsetY
+        // bottom anchor scroll position, minus header height, minus sticky height
+        const end = this.$stickyEnd.offset().top - this.options.stickyHeaderOffsetY - this.$header.height()
+
+        // show sticky when top anchor touches header, and when bottom anchor not exceeded
+        if (top > start && top <= end) {
+            // ensure clone and source column widths are the same
+            this.$stickyHeader.find('tr').each((indexRows, rows) => {
+                $(rows).find('th').each((index, el) => {
+                    $(el).css('min-width', this.$header.find(`tr:eq(${indexRows})`).find(`th:eq(${index})`).css('width'))
+                })
+            })
+            // match bootstrap table style
+            this.$stickyContainer.show().addClass('fix-sticky fixed-table-container')
+            // stick it in position
+            const coords = this.$tableBody[0].getBoundingClientRect()
+            let width = '100%'
+            let stickyHeaderOffsetLeft = this.options.stickyHeaderOffsetLeft
+            let stickyHeaderOffsetRight = this.options.stickyHeaderOffsetRight
+
+            if (!stickyHeaderOffsetLeft) {
+                stickyHeaderOffsetLeft = coords.left
+            }
+            if (!stickyHeaderOffsetRight) {
+                width = `${coords.width}px`
+            }
+            if (this.$el.closest('.bootstrap-table').hasClass('fullscreen')) {
+                stickyHeaderOffsetLeft = 0
+                stickyHeaderOffsetRight = 0
+                width = '100%'
+            }
+            this.$stickyContainer.css('top', `${this.options.stickyHeaderOffsetY}px`)
+            this.$stickyContainer.css('left', `${stickyHeaderOffsetLeft}px`)
+            this.$stickyContainer.css('right', `${stickyHeaderOffsetRight}px`)
+            this.$stickyContainer.css('width', `${width}`)
+            // create scrollable container for header
+            this.$stickyTable = $('<table/>')
+            this.$stickyTable.addClass(this.options.classes)
+            // append cloned header to dom
+            this.$stickyContainer.html(this.$stickyTable.append(this.$stickyHeader))
+            // match clone and source header positions when left-right scroll
+            this.matchPositionX()
+        } else {
+            this.$stickyContainer.removeClass('fix-sticky').hide()
+        }
+    }
+
+    matchPositionX() {
+        this.$stickyContainer.scrollLeft(this.$tableBody.scrollLeft())
+    }
+}
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")))
 
 /***/ }),
@@ -1202,12 +1404,12 @@ $.BootstrapTable = class extends $.BootstrapTable {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var _constants_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants/index.js */ "./www/js/source/lib/bootstrap-table/constants/index.js");
+/* WEBPACK VAR INJECTION */(function($, jQuery) {/* harmony import */ var _constants_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants/index.js */ "./www/js/source/lib/bootstrap-table/constants/index.js");
 /* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/index.js */ "./www/js/source/lib/bootstrap-table/utils/index.js");
 /* harmony import */ var _virtual_scroll_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./virtual-scroll/index.js */ "./www/js/source/lib/bootstrap-table/virtual-scroll/index.js");
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.18.0
+ * version: 1.23.1
  * https://github.com/wenzhixin/bootstrap-table/
  */
 
@@ -1216,73 +1418,105 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class BootstrapTable {
-  constructor (el, options) {
-    this.options = options
-    this.$el = $(el)
-    this.$el_ = this.$el.clone()
-    this.timeoutId_ = 0
-    this.timeoutFooter_ = 0
-  }
-
-  init () {
-    this.initConstants()
-    this.initLocale()
-    this.initContainer()
-    this.initTable()
-    this.initHeader()
-    this.initData()
-    this.initHiddenRows()
-    this.initToolbar()
-    this.initPagination()
-    this.initBody()
-    this.initSearchText()
-    this.initServer()
-  }
-
-  initConstants () {
-    const opts = this.options
-    this.constants = _constants_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].CONSTANTS
-    this.constants.theme = $.fn.bootstrapTable.theme
-
-    const buttonsPrefix = opts.buttonsPrefix ? `${opts.buttonsPrefix}-` : ''
-    this.constants.buttonsClass = [
-      opts.buttonsPrefix,
-      buttonsPrefix + opts.buttonsClass,
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(`${buttonsPrefix}%s`, opts.iconSize)
-    ].join(' ').trim()
-
-    this.buttons = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this, opts.buttons, [], [])
-  }
-
-  initLocale () {
-    if (this.options.locale) {
-      const locales = $.fn.bootstrapTable.locales
-      const parts = this.options.locale.split(/-|_/)
-
-      parts[0] = parts[0].toLowerCase()
-      if (parts[1]) {
-        parts[1] = parts[1].toUpperCase()
-      }
-
-      if (locales[this.options.locale]) {
-        $.extend(this.options, locales[this.options.locale])
-      } else if (locales[parts.join('-')]) {
-        $.extend(this.options, locales[parts.join('-')])
-      } else if (locales[parts[0]]) {
-        $.extend(this.options, locales[parts[0]])
-      }
+    constructor(el, options) {
+        this.options = options
+        this.$el = $(el)
+        this.$el_ = this.$el.clone()
+        this.timeoutId_ = 0
+        this.timeoutFooter_ = 0
     }
-  }
 
-  initContainer () {
-    const topPagination = ['top', 'both'].includes(this.options.paginationVAlign)
-      ? '<div class="fixed-table-pagination clearfix"></div>' : ''
-    const bottomPagination = ['bottom', 'both'].includes(this.options.paginationVAlign)
-      ? '<div class="fixed-table-pagination"></div>' : ''
-    const loadingTemplate = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options,
-      this.options.loadingTemplate, [this.options.formatLoadingMessage()])
+    init() {
+        this.initConstants()
+        this.initLocale()
+        this.initContainer()
+        this.initTable()
+        this.initHeader()
+        this.initData()
+        this.initHiddenRows()
+        this.initToolbar()
+        this.initPagination()
+        this.initBody()
+        this.initSearchText()
+        this.initServer()
+    }
 
-    this.$container = $(`
+    initConstants() {
+        const opts = this.options
+
+        this.constants = _constants_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].CONSTANTS
+        this.constants.theme = $.fn.bootstrapTable.theme
+        this.constants.dataToggle = this.constants.html.dataToggle || 'data-toggle'
+
+        // init iconsPrefix and icons
+        const iconsPrefix = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getIconsPrefix($.fn.bootstrapTable.theme)
+
+        if (typeof opts.icons === 'string') {
+            opts.icons = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, opts.icons)
+        }
+
+        opts.iconsPrefix = opts.iconsPrefix || $.fn.bootstrapTable.defaults.iconsPrefix || iconsPrefix
+        opts.icons = Object.assign(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getIcons(opts.iconsPrefix), $.fn.bootstrapTable.defaults.icons, opts.icons)
+
+        // init buttons class
+        const buttonsPrefix = opts.buttonsPrefix ? `${opts.buttonsPrefix}-` : ''
+
+        this.constants.buttonsClass = [
+            opts.buttonsPrefix,
+            buttonsPrefix + opts.buttonsClass,
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(`${buttonsPrefix}%s`, opts.iconSize)
+        ].join(' ').trim()
+
+        this.buttons = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this, opts.buttons, [], {})
+        if (typeof this.buttons !== 'object') {
+            this.buttons = {}
+        }
+    }
+
+    initLocale() {
+        if (this.options.locale) {
+            const locales = $.fn.bootstrapTable.locales
+            const parts = this.options.locale.split(/-|_/)
+
+            parts[0] = parts[0].toLowerCase()
+            if (parts[1]) {
+                parts[1] = parts[1].toUpperCase()
+            }
+
+            let localesToExtend = {}
+
+            if (locales[this.options.locale]) {
+                localesToExtend = locales[this.options.locale]
+            } else if (locales[parts.join('-')]) {
+                localesToExtend = locales[parts.join('-')]
+            } else if (locales[parts[0]]) {
+                localesToExtend = locales[parts[0]]
+            }
+
+            this._defaultLocales = this._defaultLocales || {}
+            for (const [formatName, func] of Object.entries(localesToExtend)) {
+                const defaultLocale = this._defaultLocales.hasOwnProperty(formatName) ?
+                    this._defaultLocales[formatName] : BootstrapTable.DEFAULTS[formatName]
+
+                if (this.options[formatName] !== defaultLocale) {
+                    continue
+                }
+
+                this.options[formatName] = func
+                this._defaultLocales[formatName] = func
+            }
+        }
+    }
+
+    initContainer() {
+        const topPagination = ['top', 'both'].includes(this.options.paginationVAlign) ?
+            '<div class="fixed-table-pagination clearfix"></div>' : ''
+        const bottomPagination = ['bottom', 'both'].includes(this.options.paginationVAlign) ?
+            '<div class="fixed-table-pagination"></div>' : ''
+        const loadingTemplate = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options,
+            this.options.loadingTemplate, [this.options.formatLoadingMessage()])
+
+        this.$container = $(`
       <div class="bootstrap-table ${this.constants.theme}">
       <div class="fixed-table-toolbar"></div>
       ${topPagination}
@@ -1293,1467 +1527,1598 @@ class BootstrapTable {
       ${loadingTemplate}
       </div>
       </div>
-      <div class="fixed-table-footer"><table><thead><tr></tr></thead></table></div>
+      <div class="fixed-table-footer"></div>
       </div>
       ${bottomPagination}
       </div>
     `)
 
-    this.$container.insertAfter(this.$el)
-    this.$tableContainer = this.$container.find('.fixed-table-container')
-    this.$tableHeader = this.$container.find('.fixed-table-header')
-    this.$tableBody = this.$container.find('.fixed-table-body')
-    this.$tableLoading = this.$container.find('.fixed-table-loading')
-    this.$tableFooter = this.$el.find('tfoot')
-    // checking if custom table-toolbar exists or not
-    if (this.options.buttonsToolbar) {
-      this.$toolbar = $('body').find(this.options.buttonsToolbar)
-    } else {
-      this.$toolbar = this.$container.find('.fixed-table-toolbar')
-    }
-    this.$pagination = this.$container.find('.fixed-table-pagination')
-
-    this.$tableBody.append(this.$el)
-    this.$container.after('<div class="clearfix"></div>')
-
-    this.$el.addClass(this.options.classes)
-    this.$tableLoading.addClass(this.options.classes)
-
-    if (this.options.height) {
-      this.$tableContainer.addClass('fixed-height')
-
-      if (this.options.showFooter) {
-        this.$tableContainer.addClass('has-footer')
-      }
-
-      if (this.options.classes.split(' ').includes('table-bordered')) {
-        this.$tableBody.append('<div class="fixed-table-border"></div>')
-        this.$tableBorder = this.$tableBody.find('.fixed-table-border')
-        this.$tableLoading.addClass('fixed-table-border')
-      }
-
-      this.$tableFooter = this.$container.find('.fixed-table-footer')
-    }
-  }
-
-  initTable () {
-    const columns = []
-    const data = []
-
-    this.$header = this.$el.find('>thead')
-    if (!this.$header.length) {
-      this.$header = $(`<thead class="${this.options.theadClasses}"></thead>`).appendTo(this.$el)
-    } else if (this.options.theadClasses) {
-      this.$header.addClass(this.options.theadClasses)
-    }
-
-    this._headerTrClasses = []
-    this._headerTrStyles = []
-    this.$header.find('tr').each((i, el) => {
-      const $tr = $(el)
-      const column = []
-
-      $tr.find('th').each((i, el) => {
-        const $th = $(el)
-
-        // #2014: getFieldIndex and elsewhere assume this is string, causes issues if not
-        if (typeof $th.data('field') !== 'undefined') {
-          $th.data('field', `${$th.data('field')}`)
+        this.$container.insertAfter(this.$el)
+        this.$tableContainer = this.$container.find('.fixed-table-container')
+        this.$tableHeader = this.$container.find('.fixed-table-header')
+        this.$tableBody = this.$container.find('.fixed-table-body')
+        this.$tableLoading = this.$container.find('.fixed-table-loading')
+        this.$tableFooter = this.$el.find('tfoot')
+        // checking if custom table-toolbar exists or not
+        if (this.options.buttonsToolbar) {
+            this.$toolbar = $('body').find(this.options.buttonsToolbar)
+        } else {
+            this.$toolbar = this.$container.find('.fixed-table-toolbar')
         }
-        column.push($.extend({}, {
-          title: $th.html(),
-          'class': $th.attr('class'),
-          titleTooltip: $th.attr('title'),
-          rowspan: $th.attr('rowspan') ? +$th.attr('rowspan') : undefined,
-          colspan: $th.attr('colspan') ? +$th.attr('colspan') : undefined
-        }, $th.data()))
-      })
-      columns.push(column)
+        this.$pagination = this.$container.find('.fixed-table-pagination')
 
-      if ($tr.attr('class')) {
-        this._headerTrClasses.push($tr.attr('class'))
-      }
-      if ($tr.attr('style')) {
-        this._headerTrStyles.push($tr.attr('style'))
-      }
-    })
+        this.$tableBody.append(this.$el)
+        this.$container.after('<div class="clearfix"></div>')
 
-    if (!Array.isArray(this.options.columns[0])) {
-      this.options.columns = [this.options.columns]
+        this.$el.addClass(this.options.classes)
+        this.$tableLoading.addClass(this.options.classes)
+
+        if (this.options.height) {
+            this.$tableContainer.addClass('fixed-height')
+
+            if (this.options.showFooter) {
+                this.$tableContainer.addClass('has-footer')
+            }
+
+            if (this.options.classes.split(' ').includes('table-bordered')) {
+                this.$tableBody.append('<div class="fixed-table-border"></div>')
+                this.$tableBorder = this.$tableBody.find('.fixed-table-border')
+                this.$tableLoading.addClass('fixed-table-border')
+            }
+
+            this.$tableFooter = this.$container.find('.fixed-table-footer')
+        }
     }
 
-    this.options.columns = $.extend(true, [], columns, this.options.columns)
-    this.columns = []
-    this.fieldsColumnsIndex = []
+    initTable() {
+        const columns = []
 
-    _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].setFieldIndex(this.options.columns)
-
-    this.options.columns.forEach((columns, i) => {
-      columns.forEach((_column, j) => {
-        const column = $.extend({}, BootstrapTable.COLUMN_DEFAULTS, _column)
-
-        if (typeof column.fieldIndex !== 'undefined') {
-          this.columns[column.fieldIndex] = column
-          this.fieldsColumnsIndex[column.field] = column.fieldIndex
+        this.$header = this.$el.find('>thead')
+        if (!this.$header.length) {
+            this.$header = $(`<thead class="${this.options.theadClasses}"></thead>`).appendTo(this.$el)
+        } else if (this.options.theadClasses) {
+            this.$header.addClass(this.options.theadClasses)
         }
 
-        this.options.columns[i][j] = column
-      })
-    })
+        this._headerTrClasses = []
+        this._headerTrStyles = []
+        this.$header.find('tr').each((i, el) => {
+            const $tr = $(el)
+            const column = []
 
-    // if options.data is setting, do not process tbody and tfoot data
-    if (!this.options.data.length) {
-      const htmlData = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].trToData(this.columns, this.$el.find('>tbody>tr'))
-      if (htmlData.length) {
-        this.options.data = htmlData
-        this.fromHtml = true
-      }
+            $tr.find('th').each((i, el) => {
+                const $th = $(el)
+
+                // #2014: getFieldIndex and elsewhere assume this is string, causes issues if not
+                if (typeof $th.data('field') !== 'undefined') {
+                    $th.data('field', `${$th.data('field')}`)
+                }
+                const _data = Object.assign({}, $th.data())
+
+                for (const key in _data) {
+                    if ($.fn.bootstrapTable.columnDefaults.hasOwnProperty(key)) {
+                        delete _data[key]
+                    }
+                }
+
+                column.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend({}, {
+                    _data: _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getRealDataAttr(_data),
+                    title: $th.html(),
+                    class: $th.attr('class'),
+                    titleTooltip: $th.attr('title'),
+                    rowspan: $th.attr('rowspan') ? +$th.attr('rowspan') : undefined,
+                    colspan: $th.attr('colspan') ? +$th.attr('colspan') : undefined
+                }, $th.data()))
+            })
+            columns.push(column)
+
+            if ($tr.attr('class')) {
+                this._headerTrClasses.push($tr.attr('class'))
+            }
+            if ($tr.attr('style')) {
+                this._headerTrStyles.push($tr.attr('style'))
+            }
+        })
+
+        if (!Array.isArray(this.options.columns[0])) {
+            this.options.columns = [this.options.columns]
+        }
+
+        this.options.columns = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend(true, [], columns, this.options.columns)
+        this.columns = []
+        this.fieldsColumnsIndex = []
+
+        _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].setFieldIndex(this.options.columns)
+
+        this.options.columns.forEach((columns, i) => {
+            columns.forEach((_column, j) => {
+                const column = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend({}, BootstrapTable.COLUMN_DEFAULTS, _column, { passed: _column })
+
+                if (typeof column.fieldIndex !== 'undefined') {
+                    this.columns[column.fieldIndex] = column
+                    this.fieldsColumnsIndex[column.field] = column.fieldIndex
+                }
+
+                this.options.columns[i][j] = column
+            })
+        })
+
+        // if options.data is setting, do not process tbody and tfoot data
+        if (!this.options.data.length) {
+            const htmlData = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].trToData(this.columns, this.$el.find('>tbody>tr'))
+
+            if (htmlData.length) {
+                this.options.data = htmlData
+                this.fromHtml = true
+            }
+        }
+
+        if (!(this.options.pagination && this.options.sidePagination !== 'server')) {
+            this.footerData = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].trToData(this.columns, this.$el.find('>tfoot>tr'))
+        }
+
+        if (this.footerData) {
+            this.$el.find('tfoot').html('<tr></tr>')
+        }
+
+        if (!this.options.showFooter || this.options.cardView) {
+            this.$tableFooter.hide()
+        } else {
+            this.$tableFooter.show()
+        }
     }
 
-    if (!(this.options.pagination && this.options.sidePagination !== 'server')) {
-      this.footerData = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].trToData(this.columns, this.$el.find('>tfoot>tr'))
-    }
+    initHeader() {
+        const visibleColumns = {}
+        const headerHtml = []
 
-    if (this.footerData) {
-      this.$el.find('tfoot').html('<tr></tr>')
-    }
+        this.header = {
+            fields: [],
+            styles: [],
+            classes: [],
+            formatters: [],
+            detailFormatters: [],
+            events: [],
+            sorters: [],
+            sortNames: [],
+            cellStyles: [],
+            searchables: []
+        }
 
-    if (!this.options.showFooter || this.options.cardView) {
-      this.$tableFooter.hide()
-    } else {
-      this.$tableFooter.show()
-    }
-  }
+        _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].updateFieldGroup(this.options.columns, this.columns)
 
-  initHeader () {
-    const visibleColumns = {}
-    const html = []
+        this.options.columns.forEach((columns, i) => {
+            const html = []
 
-    this.header = {
-      fields: [],
-      styles: [],
-      classes: [],
-      formatters: [],
-      detailFormatters: [],
-      events: [],
-      sorters: [],
-      sortNames: [],
-      cellStyles: [],
-      searchables: []
-    }
+            html.push(`<tr${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', this._headerTrClasses[i])} ${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' style="%s"', this._headerTrStyles[i])}>`)
 
-    _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].updateFieldGroup(this.options.columns)
+            let detailViewTemplate = ''
 
-    this.options.columns.forEach((columns, i) => {
-      html.push(`<tr${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', this._headerTrClasses[i])} ${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' style="%s"', this._headerTrStyles[i])}>`)
+            if (i === 0 && _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
+                const rowspan = this.options.columns.length > 1 ?
+                    ` rowspan="${this.options.columns.length}"` : ''
 
-      let detailViewTemplate = ''
-
-      if (i === 0 && _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
-        detailViewTemplate = `<th class="detail" rowspan="${this.options.columns.length}">
+                detailViewTemplate = `<th class="detail"${rowspan}>
           <div class="fht-cell"></div>
           </th>`
-      }
-
-      if (detailViewTemplate && this.options.detailViewAlign !== 'right') {
-        html.push(detailViewTemplate)
-      }
-
-      columns.forEach((column, j) => {
-        const class_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', column['class'])
-        const unitWidth = column.widthUnit
-        const width = parseFloat(column.width)
-
-        const halign = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('text-align: %s; ', column.halign ? column.halign : column.align)
-        const align = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('text-align: %s; ', column.align)
-        let style = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('vertical-align: %s; ', column.valign)
-        style += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('width: %s; ', (column.checkbox || column.radio) && !width
-          ? (!column.showSelectTitle ? '36px' : undefined)
-          : (width ? width + unitWidth : undefined))
-
-        if (typeof column.fieldIndex === 'undefined' && !column.visible) {
-          return
-        }
-
-        const headerStyle = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.headerStyle, [column])
-        const csses = []
-        let classes = ''
-
-        if (headerStyle && headerStyle.css) {
-          for (const [key, value] of Object.entries(headerStyle.css)) {
-            csses.push(`${key}: ${value}`)
-          }
-        }
-        if (headerStyle && headerStyle.classes) {
-          classes = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', column['class'] ?
-            [column['class'], headerStyle.classes].join(' ') : headerStyle.classes)
-        }
-
-        if (typeof column.fieldIndex !== 'undefined') {
-          this.header.fields[column.fieldIndex] = column.field
-          this.header.styles[column.fieldIndex] = align + style
-          this.header.classes[column.fieldIndex] = class_
-          this.header.formatters[column.fieldIndex] = column.formatter
-          this.header.detailFormatters[column.fieldIndex] = column.detailFormatter
-          this.header.events[column.fieldIndex] = column.events
-          this.header.sorters[column.fieldIndex] = column.sorter
-          this.header.sortNames[column.fieldIndex] = column.sortName
-          this.header.cellStyles[column.fieldIndex] = column.cellStyle
-          this.header.searchables[column.fieldIndex] = column.searchable
-
-          if (!column.visible) {
-            return
-          }
-
-          if (this.options.cardView && (!column.cardVisible)) {
-            return
-          }
-
-          visibleColumns[column.field] = column
-        }
-
-        html.push(`<th${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' title="%s"', column.titleTooltip)}`,
-          column.checkbox || column.radio
-            ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="bs-checkbox %s"', column['class'] || '')
-            : classes || class_,
-          _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' style="%s"', halign + style + csses.join('; ')),
-          _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' rowspan="%s"', column.rowspan),
-          _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' colspan="%s"', column.colspan),
-          _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' data-field="%s"', column.field),
-          // If `column` is not the first element of `this.options.columns[0]`, then className 'data-not-first-th' should be added.
-          j === 0 && i > 0 ? ' data-not-first-th' : '',
-          '>')
-
-        html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<div class="th-inner %s">', this.options.sortable && column.sortable
-          ? 'sortable both' : ''))
-
-        let text = this.options.escape ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(column.title) : column.title
-
-        const title = text
-        if (column.checkbox) {
-          text = ''
-          if (!this.options.singleSelect && this.options.checkboxHeader) {
-            text = '<label><input name="btSelectAll" type="checkbox" /><span></span></label>'
-          }
-          this.header.stateField = column.field
-        }
-        if (column.radio) {
-          text = ''
-          this.header.stateField = column.field
-        }
-        if (!text && column.showSelectTitle) {
-          text += title
-        }
-
-        html.push(text)
-        html.push('</div>')
-        html.push('<div class="fht-cell"></div>')
-        html.push('</div>')
-        html.push('</th>')
-      })
-
-      if (detailViewTemplate && this.options.detailViewAlign === 'right') {
-        html.push(detailViewTemplate)
-      }
-
-      html.push('</tr>')
-    })
-
-    this.$header.html(html.join(''))
-    this.$header.find('th[data-field]').each((i, el) => {
-      $(el).data(visibleColumns[$(el).data('field')])
-    })
-    this.$container.off('click', '.th-inner').on('click', '.th-inner', e => {
-      const $this = $(e.currentTarget)
-
-      if (this.options.detailView && !$this.parent().hasClass('bs-checkbox')) {
-        if ($this.closest('.bootstrap-table')[0] !== this.$container[0]) {
-          return false
-        }
-      }
-
-      if (this.options.sortable && $this.parent().data().sortable) {
-        this.onSort(e)
-      }
-    })
-
-    this.$header.children().children().off('keypress').on('keypress', e => {
-      if (this.options.sortable && $(e.currentTarget).data().sortable) {
-        const code = e.keyCode || e.which
-        if (code === 13) { // Enter keycode
-          this.onSort(e)
-        }
-      }
-    })
-
-    const resizeEvent = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getEventName('resize.bootstrap-table', this.$el.attr('id'))
-    $(window).off(resizeEvent)
-    if (!this.options.showHeader || this.options.cardView) {
-      this.$header.hide()
-      this.$tableHeader.hide()
-      this.$tableLoading.css('top', 0)
-    } else {
-      this.$header.show()
-      this.$tableHeader.show()
-      this.$tableLoading.css('top', this.$header.outerHeight() + 1)
-      // Assign the correct sortable arrow
-      this.getCaret()
-      $(window).on(resizeEvent, () => this.resetView())
-    }
-
-    this.$selectAll = this.$header.find('[name="btSelectAll"]')
-    this.$selectAll.off('click').on('click', e => {
-      e.stopPropagation()
-      const checked = $(e.currentTarget).prop('checked')
-      this[checked ? 'checkAll' : 'uncheckAll']()
-      this.updateSelected()
-    })
-  }
-
-  initData (data, type) {
-    if (type === 'append') {
-      this.options.data = this.options.data.concat(data)
-    } else if (type === 'prepend') {
-      this.options.data = [].concat(data).concat(this.options.data)
-    } else {
-      data = data || _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].deepCopy(this.options.data)
-      this.options.data = Array.isArray(data) ? data : data[this.options.dataField]
-    }
-
-    this.data = [...this.options.data]
-
-    if (this.options.sortReset) {
-      this.unsortedData = [...this.data]
-    }
-
-    if (this.options.sidePagination === 'server') {
-      return
-    }
-    this.initSort()
-  }
-
-  initSort () {
-    let name = this.options.sortName
-    const order = this.options.sortOrder === 'desc' ? -1 : 1
-    const index = this.header.fields.indexOf(this.options.sortName)
-    let timeoutId = 0
-
-    if (index !== -1) {
-      if (this.options.sortStable) {
-        this.data.forEach((row, i) => {
-          if (!row.hasOwnProperty('_position')) {
-            row._position = i
-          }
-        })
-      }
-
-      if (this.options.customSort) {
-        _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.customSort, [
-          this.options.sortName,
-          this.options.sortOrder,
-          this.data
-        ])
-      } else {
-        this.data.sort((a, b) => {
-          if (this.header.sortNames[index]) {
-            name = this.header.sortNames[index]
-          }
-          const aa = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(a, name, this.options.escape)
-          const bb = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(b, name, this.options.escape)
-          const value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.header, this.header.sorters[index], [aa, bb, a, b])
-
-          if (value !== undefined) {
-            if (this.options.sortStable && value === 0) {
-              return order * (a._position - b._position)
             }
-            return order * value
-          }
 
-          return _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sort(aa, bb, order, this.options.sortStable,
-            a._position, b._position)
+            if (detailViewTemplate && this.options.detailViewAlign !== 'right') {
+                html.push(detailViewTemplate)
+            }
+
+            columns.forEach((column, j) => {
+                const class_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', column['class'])
+                const unitWidth = column.widthUnit
+                const width = parseFloat(column.width)
+
+                const columnHalign = column.halign ? column.halign : column.align
+                const halign = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('text-align: %s; ', columnHalign)
+                const align = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('text-align: %s; ', column.align)
+                let style = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('vertical-align: %s; ', column.valign)
+
+                style += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('width: %s; ', (column.checkbox || column.radio) && !width ?
+                    !column.showSelectTitle ? '36px' : undefined :
+                    width ? width + unitWidth : undefined)
+
+                if (typeof column.fieldIndex === 'undefined' && !column.visible) {
+                    return
+                }
+
+                const headerStyle = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.headerStyle, [column])
+                const csses = []
+                const data_ = []
+                let classes = ''
+
+                if (headerStyle && headerStyle.css) {
+                    for (const [key, value] of Object.entries(headerStyle.css)) {
+                        csses.push(`${key}: ${value}`)
+                    }
+                }
+                if (headerStyle && headerStyle.classes) {
+                    classes = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', column['class'] ?
+                        [column['class'], headerStyle.classes].join(' ') : headerStyle.classes)
+                }
+
+                if (typeof column.fieldIndex !== 'undefined') {
+                    this.header.fields[column.fieldIndex] = column.field
+                    this.header.styles[column.fieldIndex] = align + style
+                    this.header.classes[column.fieldIndex] = class_
+                    this.header.formatters[column.fieldIndex] = column.formatter
+                    this.header.detailFormatters[column.fieldIndex] = column.detailFormatter
+                    this.header.events[column.fieldIndex] = column.events
+                    this.header.sorters[column.fieldIndex] = column.sorter
+                    this.header.sortNames[column.fieldIndex] = column.sortName
+                    this.header.cellStyles[column.fieldIndex] = column.cellStyle
+                    this.header.searchables[column.fieldIndex] = column.searchable
+
+                    if (!column.visible) {
+                        return
+                    }
+
+                    if (this.options.cardView && !column.cardVisible) {
+                        return
+                    }
+
+                    visibleColumns[column.field] = column
+                }
+
+                if (Object.keys(column._data || {}).length > 0) {
+                    for (const [k, v] of Object.entries(column._data)) {
+                        data_.push(`data-${k}='${typeof v === 'object' ? JSON.stringify(v) : v}'`)
+                    }
+                }
+
+                html.push(`<th${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' title="%s"', column.titleTooltip)}`,
+                    column.checkbox || column.radio ?
+                        _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="bs-checkbox %s"', column['class'] || '') :
+                        classes || class_,
+                    _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' style="%s"', halign + style + csses.join('; ') || undefined),
+                    _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' rowspan="%s"', column.rowspan),
+                    _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' colspan="%s"', column.colspan),
+                    _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' data-field="%s"', column.field),
+                    // If `column` is not the first element of `this.options.columns[0]`, then className 'data-not-first-th' should be added.
+                    j === 0 && i > 0 ? ' data-not-first-th' : '',
+                    data_.length > 0 ? data_.join(' ') : '',
+                    '>')
+
+                html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<div class="th-inner %s">',
+                    this.options.sortable && column.sortable ? `sortable${columnHalign === 'center' ? ' sortable-center' : ''} both` : ''))
+
+                let text = this.options.escape && this.options.escapeTitle ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(column.title) : column.title
+
+                const title = text
+
+                if (column.checkbox) {
+                    text = ''
+                    if (!this.options.singleSelect && this.options.checkboxHeader) {
+                        text = '<label><input name="btSelectAll" type="checkbox" /><span></span></label>'
+                    }
+                    this.header.stateField = column.field
+                }
+                if (column.radio) {
+                    text = ''
+                    this.header.stateField = column.field
+                }
+                if (!text && column.showSelectTitle) {
+                    text += title
+                }
+
+                html.push(text)
+                html.push('</div>')
+                html.push('<div class="fht-cell"></div>')
+                html.push('</div>')
+                html.push('</th>')
+            })
+
+            if (detailViewTemplate && this.options.detailViewAlign === 'right') {
+                html.push(detailViewTemplate)
+            }
+
+            html.push('</tr>')
+
+            if (html.length > 3) {
+                headerHtml.push(html.join(''))
+            }
         })
-      }
 
-      if (this.options.sortClass !== undefined) {
-        clearTimeout(timeoutId)
-        timeoutId = setTimeout(() => {
-          this.$el.removeClass(this.options.sortClass)
-          const index = this.$header.find(`[data-field="${this.options.sortName}"]`).index()
-          this.$el.find(`tr td:nth-child(${index + 1})`).addClass(this.options.sortClass)
-        }, 250)
-      }
-    } else if (this.options.sortReset) {
-      this.data = [...this.unsortedData]
-    }
-  }
+        this.$header.html(headerHtml.join(''))
+        this.$header.find('th[data-field]').each((i, el) => {
+            $(el).data(visibleColumns[$(el).data('field')])
+        })
+        this.$container.off('click', '.th-inner').on('click', '.th-inner', e => {
+            const $this = $(e.currentTarget)
 
-  onSort ({type, currentTarget}) {
-    const $this = type === 'keypress' ? $(currentTarget) : $(currentTarget).parent()
-    const $this_ = this.$header.find('th').eq($this.index())
+            if (this.options.detailView && !$this.parent().hasClass('bs-checkbox')) {
+                if ($this.closest('.bootstrap-table')[0] !== this.$container[0]) {
+                    return false
+                }
+            }
 
-    this.$header.add(this.$header_).find('span.order').remove()
+            if (this.options.sortable && $this.parent().data().sortable) {
+                this.onSort(e)
+            }
+        })
 
-    if (this.options.sortName === $this.data('field')) {
-      const currentSortOrder = this.options.sortOrder
+        const resizeEvent = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getEventName('resize.bootstrap-table', this.$el.attr('id'))
 
-      if (currentSortOrder === undefined) {
-        this.options.sortOrder = 'asc'
-      } else if (currentSortOrder === 'asc') {
-        this.options.sortOrder = 'desc'
-      } else if (this.options.sortOrder === 'desc') {
-        this.options.sortOrder = this.options.sortReset ? undefined : 'asc'
-      }
-
-      if (this.options.sortOrder === undefined) {
-        this.options.sortName = undefined
-      }
-    } else {
-      this.options.sortName = $this.data('field')
-      if (this.options.rememberOrder) {
-        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc'
-      } else {
-        this.options.sortOrder = this.columns[this.fieldsColumnsIndex[$this.data('field')]].sortOrder ||
-          this.columns[this.fieldsColumnsIndex[$this.data('field')]].order
-      }
-    }
-    this.trigger('sort', this.options.sortName, this.options.sortOrder)
-
-    $this.add($this_).data('order', this.options.sortOrder)
-
-    // Assign the correct sortable arrow
-    this.getCaret()
-
-    if (this.options.sidePagination === 'server' && this.options.serverSort) {
-      this.options.pageNumber = 1
-      this.initServer(this.options.silentSort)
-      return
-    }
-
-    this.initSort()
-    this.initBody()
-  }
-
-  initToolbar () {
-    const opts = this.options
-    let html = []
-    let timeoutId = 0
-    let $keepOpen
-    let switchableCount = 0
-
-    if (this.$toolbar.find('.bs-bars').children().length) {
-      $('body').append($(opts.toolbar))
-    }
-    this.$toolbar.html('')
-
-    if (typeof opts.toolbar === 'string' || typeof opts.toolbar === 'object') {
-      $(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<div class="bs-bars %s-%s"></div>', this.constants.classes.pull, opts.toolbarAlign))
-        .appendTo(this.$toolbar)
-        .append($(opts.toolbar))
-    }
-
-    // showColumns, showToggle, showRefresh
-    html = [`<div class="${[
-      'columns',
-      `columns-${opts.buttonsAlign}`,
-      this.constants.classes.buttonsGroup,
-      `${this.constants.classes.pull}-${opts.buttonsAlign}`
-    ].join(' ')}">`]
-
-    if (typeof opts.icons === 'string') {
-      opts.icons = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, opts.icons)
-    }
-
-    if (typeof opts.buttonsOrder === 'string') {
-      opts.buttonsOrder = opts.buttonsOrder.replace(/\[|\]| |'/g, '').toLowerCase().split(',')
-    }
-
-    this.buttons = Object.assign(this.buttons, {
-      paginationSwitch: {
-        text: opts.pagination ? opts.formatPaginationSwitchUp() : opts.formatPaginationSwitchDown(),
-        icon: opts.pagination ? opts.icons.paginationSwitchDown : opts.icons.paginationSwitchUp,
-        render: false,
-        event: this.togglePagination,
-        attributes: {
-          'aria-label': opts.formatPaginationSwitch(),
-          title: opts.formatPaginationSwitch()
+        $(window).off(resizeEvent)
+        if (!this.options.showHeader || this.options.cardView) {
+            this.$header.hide()
+            this.$tableHeader.hide()
+            this.$tableLoading.css('top', 0)
+        } else {
+            this.$header.show()
+            this.$tableHeader.show()
+            this.$tableLoading.css('top', this.$header.outerHeight() + 1)
+            // Assign the correct sortable arrow
+            this.getCaret()
+            $(window).on(resizeEvent, () => this.resetView())
         }
-      },
-      refresh: {
-        text: opts.formatRefresh(),
-        icon: opts.icons.refresh,
-        render: false,
-        event: this.refresh,
-        attributes: {
-          'aria-label': opts.formatRefresh(),
-          title: opts.formatRefresh()
+
+        this.$selectAll = this.$header.find('[name="btSelectAll"]')
+        this.$selectAll.off('click').on('click', e => {
+            e.stopPropagation()
+            const checked = $(e.currentTarget).prop('checked')
+
+            this[checked ? 'checkAll' : 'uncheckAll']()
+            this.updateSelected()
+        })
+    }
+
+    initData(data, type) {
+        if (type === 'append') {
+            this.options.data = this.options.data.concat(data)
+        } else if (type === 'prepend') {
+            this.options.data = [].concat(data).concat(this.options.data)
+        } else {
+            data = data || _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].deepCopy(this.options.data)
+            this.options.data = Array.isArray(data) ? data : data[this.options.dataField]
         }
-      },
-      toggle: {
-        text: opts.formatToggle(),
-        icon: opts.icons.toggleOff,
-        render: false,
-        event: this.toggleView,
-        attributes: {
-          'aria-label': opts.formatToggleOn(),
-          title: opts.formatToggleOn()
+
+        this.data = [...this.options.data]
+
+        if (this.options.sortReset) {
+            this.unsortedData = [...this.data]
         }
-      },
-      fullscreen: {
-        text: opts.formatFullscreen(),
-        icon: opts.icons.fullscreen,
-        render: false,
-        event: this.toggleFullscreen,
-        attributes: {
-          'aria-label': opts.formatFullscreen(),
-          title: opts.formatFullscreen()
+
+        if (this.options.sidePagination === 'server') {
+            return
         }
-      },
-      columns: {
-        render: false,
-        html: (() => {
-          const html = []
-          html.push(`<div class="keep-open ${this.constants.classes.buttonsDropdown}" title="${opts.formatColumns()}">
-            <button class="${this.constants.buttonsClass} dropdown-toggle" type="button" data-toggle="dropdown"
-            aria-label="Columns" title="${opts.formatColumns()}">
+        this.initSort()
+    }
+
+    initSort() {
+        let name = this.options.sortName
+        const order = this.options.sortOrder === 'desc' ? -1 : 1
+        const index = this.header.fields.indexOf(this.options.sortName)
+        let timeoutId = 0
+
+        if (index !== -1) {
+            if (this.options.sortStable) {
+                this.data.forEach((row, i) => {
+                    if (!row.hasOwnProperty('_position')) {
+                        row._position = i
+                    }
+                })
+            }
+
+            if (this.options.customSort) {
+                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.customSort, [
+                    this.options.sortName,
+                    this.options.sortOrder,
+                    this.data
+                ])
+            } else {
+                this.data.sort((a, b) => {
+                    if (this.header.sortNames[index]) {
+                        name = this.header.sortNames[index]
+                    }
+                    const aa = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(a, name, this.options.escape)
+                    const bb = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(b, name, this.options.escape)
+                    const value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.header, this.header.sorters[index], [aa, bb, a, b])
+
+                    if (value !== undefined) {
+                        if (this.options.sortStable && value === 0) {
+                            return order * (a._position - b._position)
+                        }
+                        return order * value
+                    }
+
+                    return _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sort(aa, bb, order, this.options, a._position, b._position)
+                })
+            }
+
+            if (this.options.sortClass !== undefined) {
+                clearTimeout(timeoutId)
+                timeoutId = setTimeout(() => {
+                    this.$el.removeClass(this.options.sortClass)
+                    const index = this.$header.find(`[data-field="${this.options.sortName}"]`).index()
+
+                    this.$el.find(`tr td:nth-child(${index + 1})`).addClass(this.options.sortClass)
+                }, 250)
+            }
+        } else if (this.options.sortReset) {
+            this.data = [...this.unsortedData]
+        }
+    }
+
+    sortBy(params) {
+        this.options.sortName = params.field
+        this.options.sortOrder = params.hasOwnProperty('sortOrder') ? params.sortOrder : 'asc'
+        this._sort()
+    }
+
+    onSort({ type, currentTarget }) {
+        const $this = type === 'keypress' ? $(currentTarget) : $(currentTarget).parent()
+        const $this_ = this.$header.find('th').eq($this.index())
+
+        this.$header.add(this.$header_).find('span.order').remove()
+
+        if (this.options.sortName === $this.data('field')) {
+            const currentSortOrder = this.options.sortOrder
+            const initialSortOrder = this.columns[this.fieldsColumnsIndex[$this.data('field')]].sortOrder ||
+                this.columns[this.fieldsColumnsIndex[$this.data('field')]].order
+
+            if (currentSortOrder === undefined) {
+                this.options.sortOrder = 'asc'
+            } else if (currentSortOrder === 'asc') {
+                this.options.sortOrder = this.options.sortReset ? initialSortOrder === 'asc' ? 'desc' : undefined : 'desc'
+            } else if (this.options.sortOrder === 'desc') {
+                this.options.sortOrder = this.options.sortReset ? initialSortOrder === 'desc' ? 'asc' : undefined : 'asc'
+            }
+
+            if (this.options.sortOrder === undefined) {
+                this.options.sortName = undefined
+            }
+        } else {
+            this.options.sortName = $this.data('field')
+            if (this.options.rememberOrder) {
+                this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc'
+            } else {
+                this.options.sortOrder = this.columns[this.fieldsColumnsIndex[$this.data('field')]].sortOrder ||
+                    this.columns[this.fieldsColumnsIndex[$this.data('field')]].order
+            }
+        }
+
+        $this.add($this_).data('order', this.options.sortOrder)
+
+        // Assign the correct sortable arrow
+        this.getCaret()
+
+        this._sort()
+    }
+
+    _sort() {
+        if (this.options.sidePagination === 'server' && this.options.serverSort) {
+            this.options.pageNumber = 1
+
+            this.trigger('sort', this.options.sortName, this.options.sortOrder)
+            this.initServer(this.options.silentSort)
+            return
+        }
+
+        if (this.options.pagination && this.options.sortResetPage) {
+            this.options.pageNumber = 1
+            this.initPagination()
+        }
+
+        this.trigger('sort', this.options.sortName, this.options.sortOrder)
+        this.initSort()
+        this.initBody()
+    }
+
+    initToolbar() {
+        const opts = this.options
+        let html = []
+        let timeoutId = 0
+        let $keepOpen
+        let switchableCount = 0
+
+        if (this.$toolbar.find('.bs-bars').children().length) {
+            $('body').append($(opts.toolbar))
+        }
+        this.$toolbar.html('')
+
+        if (typeof opts.toolbar === 'string' || typeof opts.toolbar === 'object') {
+            $(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<div class="bs-bars %s-%s"></div>', this.constants.classes.pull, opts.toolbarAlign))
+                .appendTo(this.$toolbar)
+                .append($(opts.toolbar))
+        }
+
+        // showColumns, showToggle, showRefresh
+        html = [`<div class="${[
+            'columns',
+            `columns-${opts.buttonsAlign}`,
+            this.constants.classes.buttonsGroup,
+            `${this.constants.classes.pull}-${opts.buttonsAlign}`
+        ].join(' ')}">`]
+
+        if (typeof opts.buttonsOrder === 'string') {
+            opts.buttonsOrder = opts.buttonsOrder.replace(/\[|\]| |'/g, '').split(',')
+        }
+
+        this.buttons = Object.assign(this.buttons, {
+            paginationSwitch: {
+                text: opts.pagination ? opts.formatPaginationSwitchUp() : opts.formatPaginationSwitchDown(),
+                icon: opts.pagination ? opts.icons.paginationSwitchDown : opts.icons.paginationSwitchUp,
+                render: false,
+                event: this.togglePagination,
+                attributes: {
+                    'aria-label': opts.formatPaginationSwitch(),
+                    title: opts.formatPaginationSwitch()
+                }
+            },
+            refresh: {
+                text: opts.formatRefresh(),
+                icon: opts.icons.refresh,
+                render: false,
+                event: this.refresh,
+                attributes: {
+                    'aria-label': opts.formatRefresh(),
+                    title: opts.formatRefresh()
+                }
+            },
+            toggle: {
+                text: opts.formatToggleOn(),
+                icon: opts.icons.toggleOff,
+                render: false,
+                event: this.toggleView,
+                attributes: {
+                    'aria-label': opts.formatToggleOn(),
+                    title: opts.formatToggleOn()
+                }
+            },
+            fullscreen: {
+                text: opts.formatFullscreen(),
+                icon: opts.icons.fullscreen,
+                render: false,
+                event: this.toggleFullscreen,
+                attributes: {
+                    'aria-label': opts.formatFullscreen(),
+                    title: opts.formatFullscreen()
+                }
+            },
+            columns: {
+                render: false,
+                html: () => {
+                    const html = []
+
+                    html.push(`<div class="keep-open ${this.constants.classes.buttonsDropdown}">
+            <button class="${this.constants.buttonsClass} dropdown-toggle" type="button" ${this.constants.dataToggle}="dropdown"
+            aria-label="${opts.formatColumns()}" title="${opts.formatColumns()}">
             ${opts.showButtonIcons ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, opts.iconsPrefix, opts.icons.columns) : ''}
             ${opts.showButtonText ? opts.formatColumns() : ''}
             ${this.constants.html.dropdownCaret}
             </button>
             ${this.constants.html.toolbarDropdown[0]}`)
 
-          if (opts.showColumnsSearch) {
-            html.push(
-              _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.toolbarDropdownItem,
-                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<input type="text" class="%s" name="columnsSearch" placeholder="%s" autocomplete="off">', this.constants.classes.input, opts.formatSearch())
-              )
-            )
-            html.push(this.constants.html.toolbarDropdownSeparator)
-          }
+                    if (opts.showColumnsSearch) {
+                        html.push(
+                            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.toolbarDropdownItem,
+                                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<input type="text" class="%s" name="columnsSearch" placeholder="%s" autocomplete="off">', this.constants.classes.input, opts.formatSearch())
+                            )
+                        )
+                        html.push(this.constants.html.toolbarDropdownSeparator)
+                    }
 
-          if (opts.showColumnsToggleAll) {
-            const allFieldsVisible = this.getVisibleColumns().length === this.columns.filter(column => !this.isSelectionColumn(column)).length
-            html.push(
-              _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.toolbarDropdownItem,
-                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<input type="checkbox" class="toggle-all" %s> <span>%s</span>',
-                  allFieldsVisible ? 'checked="checked"' : '', opts.formatColumnsToggleAll())
-              )
-            )
+                    if (opts.showColumnsToggleAll) {
+                        const allFieldsVisible = this.getVisibleColumns().length === this.columns.filter(column => !this.isSelectionColumn(column)).length
 
-            html.push(this.constants.html.toolbarDropdownSeparator)
-          }
+                        html.push(
+                            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.toolbarDropdownItem,
+                                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<input type="checkbox" class="toggle-all" %s> <span>%s</span>',
+                                    allFieldsVisible ? 'checked="checked"' : '', opts.formatColumnsToggleAll())
+                            )
+                        )
 
-          let visibleColumns = 0
-          this.columns.forEach((column, i) => {
-            if (column.visible) {
-              visibleColumns++
+                        html.push(this.constants.html.toolbarDropdownSeparator)
+                    }
+
+                    let visibleColumns = 0
+
+                    this.columns.forEach(column => {
+                        if (column.visible) {
+                            visibleColumns++
+                        }
+                    })
+
+                    this.columns.forEach((column, i) => {
+                        if (this.isSelectionColumn(column)) {
+                            return
+                        }
+
+                        if (opts.cardView && !column.cardVisible) {
+                            return
+                        }
+
+                        const checked = column.visible ? ' checked="checked"' : ''
+                        const disabled = visibleColumns <= opts.minimumCountColumns && checked ? ' disabled="disabled"' : ''
+
+                        if (column.switchable) {
+                            html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.toolbarDropdownItem,
+                                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<input type="checkbox" data-field="%s" value="%s"%s%s> <span>%s</span>',
+                                    column.field, i, checked, disabled, column.switchableLabel || column.title)))
+                            switchableCount++
+                        }
+                    })
+                    html.push(this.constants.html.toolbarDropdown[1], '</div>')
+                    return html.join('')
+                }
             }
-          })
-
-          this.columns.forEach((column, i) => {
-            if (this.isSelectionColumn(column)) {
-              return
-            }
-
-            if (opts.cardView && !column.cardVisible) {
-              return
-            }
-
-            const checked = column.visible ? ' checked="checked"' : ''
-            const disabled = (visibleColumns <= opts.minimumCountColumns) && checked ? ' disabled="disabled"' : ''
-            if (column.switchable) {
-              html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.toolbarDropdownItem,
-                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<input type="checkbox" data-field="%s" value="%s"%s%s> <span>%s</span>',
-                  column.field, i, checked, disabled, column.title)))
-              switchableCount++
-            }
-          })
-          html.push(this.constants.html.toolbarDropdown[1], '</div>')
-          return html.join('')
         })
-      }
-    })
 
-    const buttonsHtml = {}
-    for (const [buttonName, buttonConfig] of Object.entries(this.buttons)) {
-      let buttonHtml
-      if (buttonConfig.hasOwnProperty('html')) {
-        buttonHtml = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(opts, buttonConfig.html)
-      } else {
-        buttonHtml = `<button class="${this.constants.buttonsClass}" type="button" name="${buttonName}"`
+        const buttonsHtml = {}
 
-        if (buttonConfig.hasOwnProperty('attributes')) {
-          for (const [attributeName, value] of Object.entries(buttonConfig.attributes)) {
-            buttonHtml += ` ${attributeName}="${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(opts, value)}"`
-          }
-        }
+        for (const [buttonName, buttonConfig] of Object.entries(this.buttons)) {
+            let buttonHtml
 
-        buttonHtml += '>'
+            if (buttonConfig.hasOwnProperty('html')) {
+                if (typeof buttonConfig.html === 'function') {
+                    buttonHtml = buttonConfig.html()
+                } else if (typeof buttonConfig.html === 'string') {
+                    buttonHtml = buttonConfig.html
+                }
+            } else {
+                let buttonClass = this.constants.buttonsClass
 
-        if (opts.showButtonIcons && buttonConfig.hasOwnProperty('icon')) {
-          const icon = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(opts, buttonConfig.icon)
-          buttonHtml += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, opts.iconsPrefix, icon) + ' '
-        }
+                if (buttonConfig.hasOwnProperty('attributes') && buttonConfig.attributes.class) {
+                    buttonClass += ` ${buttonConfig.attributes.class}`
+                }
+                buttonHtml = `<button class="${buttonClass}" type="button" name="${buttonName}"`
 
-        if (opts.showButtonText && buttonConfig.hasOwnProperty('text')) {
-          buttonHtml += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(opts, buttonConfig.text)
-        }
+                if (buttonConfig.hasOwnProperty('attributes')) {
+                    for (const [attributeName, value] of Object.entries(buttonConfig.attributes)) {
+                        if (attributeName === 'class') {
+                            continue
+                        }
+                        buttonHtml += ` ${attributeName}="${value}"`
+                    }
+                }
 
-        buttonHtml += '</button>'
-      }
+                buttonHtml += '>'
 
-      buttonsHtml[buttonName] = buttonHtml
-      const optionName = `show${buttonName.charAt(0).toUpperCase()}${buttonName.substring(1)}`
-      const showOption = opts[optionName]
-      if ((
-        !buttonConfig.hasOwnProperty('render') ||
-        buttonConfig.hasOwnProperty('render') &&
-        buttonConfig.render) &&
-        (showOption === undefined || showOption === true)
-      ) {
-        opts[optionName] = true
-      }
+                if (opts.showButtonIcons && buttonConfig.hasOwnProperty('icon')) {
+                    buttonHtml += `${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, opts.iconsPrefix, buttonConfig.icon)} `
+                }
 
-      if (!opts.buttonsOrder.includes(buttonName)) {
-        opts.buttonsOrder.push(buttonName)
-      }
-    }
+                if (opts.showButtonText && buttonConfig.hasOwnProperty('text')) {
+                    buttonHtml += buttonConfig.text
+                }
 
-    // Adding the button html to the final toolbar html when the showOption is true
-    for (const button of opts.buttonsOrder) {
-      const showOption = opts[`show${button.charAt(0).toUpperCase()}${button.substring(1)}`]
-      if (showOption) {
-        html.push(buttonsHtml[button])
-      }
-    }
-
-    html.push('</div>')
-
-    // Fix #188: this.showToolbar is for extensions
-    if (this.showToolbar || html.length > 2) {
-      this.$toolbar.append(html.join(''))
-    }
-
-    for (const [buttonName, buttonConfig] of Object.entries(this.buttons)) {
-      if (buttonConfig.hasOwnProperty('event')) {
-        if (typeof buttonConfig.event === 'function' || typeof buttonConfig.event === 'string') {
-          const event = typeof buttonConfig.event === 'string' ? window[buttonConfig.event] : buttonConfig.event
-          this.$toolbar.find(`button[name="${buttonName}"]`)
-            .off('click')
-            .on('click', () => event.call(this))
-          continue
-        }
-
-        for (const [eventType, eventFunction] of Object.entries(buttonConfig.event)) {
-          const event = typeof eventFunction === 'string' ? window[eventFunction] : eventFunction
-          this.$toolbar.find(`button[name="${buttonName}"]`)
-            .off(eventType)
-            .on(eventType, () => event.call(this))
-        }
-      }
-    }
-
-    if (opts.showColumns) {
-      $keepOpen = this.$toolbar.find('.keep-open')
-      const $checkboxes = $keepOpen.find('input[type="checkbox"]:not(".toggle-all")')
-      const $toggleAll = $keepOpen.find('input[type="checkbox"].toggle-all')
-
-      if (switchableCount <= opts.minimumCountColumns) {
-        $keepOpen.find('input').prop('disabled', true)
-      }
-
-      $keepOpen.find('li, label').off('click').on('click', e => {
-        e.stopImmediatePropagation()
-      })
-
-      $checkboxes.off('click').on('click', ({currentTarget}) => {
-        const $this = $(currentTarget)
-
-        this._toggleColumn($this.val(), $this.prop('checked'), false)
-        this.trigger('column-switch', $this.data('field'), $this.prop('checked'))
-        $toggleAll.prop('checked', $checkboxes.filter(':checked').length === this.columns.filter(column => !this.isSelectionColumn(column)).length)
-      })
-
-      $toggleAll.off('click').on('click', ({currentTarget}) => {
-        this._toggleAllColumns($(currentTarget).prop('checked'))
-      })
-
-      if (opts.showColumnsSearch) {
-        const $columnsSearch = $keepOpen.find('[name="columnsSearch"]')
-        const $listItems = $keepOpen.find('.dropdown-item-marker')
-        $columnsSearch.on('keyup paste change', ({currentTarget}) => {
-          const $this = $(currentTarget)
-          const searchValue = $this.val().toLowerCase()
-          $listItems.show()
-          $checkboxes.each((i, el) => {
-            const $checkbox = $(el)
-            const $listItem = $checkbox.parents('.dropdown-item-marker')
-            const text = $listItem.text().toLowerCase()
-            if (!text.includes(searchValue)) {
-              $listItem.hide()
+                buttonHtml += '</button>'
             }
-          })
-        })
-      }
-    }
-    const handleInputEvent = ($searchInput) => {
-      const eventTriggers = 'keyup drop blur mouseup'
-      $searchInput.off(eventTriggers).on(eventTriggers, event => {
-        if (opts.searchOnEnterKey && event.keyCode !== 13) {
-          return
+
+            buttonsHtml[buttonName] = buttonHtml
+            const optionName = `show${buttonName.charAt(0).toUpperCase()}${buttonName.substring(1)}`
+            const showOption = opts[optionName]
+
+            if ((
+                !buttonConfig.hasOwnProperty('render') ||
+                buttonConfig.hasOwnProperty('render') &&
+                buttonConfig.render) &&
+                (showOption === undefined || showOption === true)
+            ) {
+                opts[optionName] = true
+            }
+
+            if (!opts.buttonsOrder.includes(buttonName)) {
+                opts.buttonsOrder.push(buttonName)
+            }
         }
 
-        if ([37, 38, 39, 40].includes(event.keyCode)) {
-          return
+        // Adding the button html to the final toolbar html when the showOption is true
+        for (const button of opts.buttonsOrder) {
+            const showOption = opts[`show${button.charAt(0).toUpperCase()}${button.substring(1)}`]
+
+            if (showOption) {
+                html.push(buttonsHtml[button])
+            }
         }
 
-        clearTimeout(timeoutId) // doesn't matter if it's 0
-        timeoutId = setTimeout(() => {
-          this.onSearch({currentTarget: event.currentTarget})
-        }, opts.searchTimeOut)
-      })
-    }
-    // Fix #4516: this.showSearchClearButton is for extensions
-    if (
-      (opts.search || this.showSearchClearButton)
-      && typeof opts.searchSelector !== 'string'
-    ) {
-      html = []
-      const showSearchButton = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.searchButton,
-        this.constants.buttonsClass,
-        opts.formatSearch(),
-        opts.showButtonIcons ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, opts.iconsPrefix, opts.icons.search) : '',
-        opts.showButtonText ? opts.formatSearch() : ''
-      )
-      const showSearchClearButton = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.searchClearButton,
-        this.constants.buttonsClass,
-        opts.formatClearSearch(),
-        opts.showButtonIcons ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, opts.iconsPrefix, opts.icons.clearSearch) : '',
-        opts.showButtonText ? opts.formatClearSearch() : ''
-      )
-      const searchInputHtml = `<input class="${this.constants.classes.input}
+        html.push('</div>')
+
+        // Fix #188: this.showToolbar is for extensions
+        if (this.showToolbar || html.length > 2) {
+            this.$toolbar.append(html.join(''))
+        }
+
+        for (const [buttonName, buttonConfig] of Object.entries(this.buttons)) {
+            if (buttonConfig.hasOwnProperty('event')) {
+                if (typeof buttonConfig.event === 'function' || typeof buttonConfig.event === 'string') {
+                    const event = typeof buttonConfig.event === 'string' ? window[buttonConfig.event] : buttonConfig.event
+
+                    this.$toolbar.find(`button[name="${buttonName}"]`)
+                        .off('click')
+                        .on('click', () => event.call(this))
+                    continue
+                }
+
+                for (const [eventType, eventFunction] of Object.entries(buttonConfig.event)) {
+                    const event = typeof eventFunction === 'string' ? window[eventFunction] : eventFunction
+
+                    this.$toolbar.find(`button[name="${buttonName}"]`)
+                        .off(eventType)
+                        .on(eventType, () => event.call(this))
+                }
+            }
+        }
+
+        if (opts.showColumns) {
+            $keepOpen = this.$toolbar.find('.keep-open')
+            const $checkboxes = $keepOpen.find('input[type="checkbox"]:not(".toggle-all")')
+            const $toggleAll = $keepOpen.find('input[type="checkbox"].toggle-all')
+
+            if (switchableCount <= opts.minimumCountColumns) {
+                $keepOpen.find('input').prop('disabled', true)
+            }
+
+            $keepOpen.find('li, label').off('click').on('click', e => {
+                e.stopImmediatePropagation()
+            })
+
+            $checkboxes.off('click').on('click', ({ currentTarget }) => {
+                const $this = $(currentTarget)
+
+                this._toggleColumn($this.val(), $this.prop('checked'), false)
+                this.trigger('column-switch', $this.data('field'), $this.prop('checked'))
+                $toggleAll.prop('checked', $checkboxes.filter(':checked').length === this.columns.filter(column => !this.isSelectionColumn(column)).length)
+            })
+
+            $toggleAll.off('click').on('click', ({ currentTarget }) => {
+                this._toggleAllColumns($(currentTarget).prop('checked'))
+                this.trigger('column-switch-all', $(currentTarget).prop('checked'))
+            })
+
+            if (opts.showColumnsSearch) {
+                const $columnsSearch = $keepOpen.find('[name="columnsSearch"]')
+                const $listItems = $keepOpen.find('.dropdown-item-marker')
+
+                $columnsSearch.on('keyup paste change', ({ currentTarget }) => {
+                    const $this = $(currentTarget)
+                    const searchValue = $this.val().toLowerCase()
+
+                    $listItems.show()
+                    $checkboxes.each((i, el) => {
+                        const $checkbox = $(el)
+                        const $listItem = $checkbox.parents('.dropdown-item-marker')
+                        const text = $listItem.text().toLowerCase()
+
+                        if (!text.includes(searchValue)) {
+                            $listItem.hide()
+                        }
+                    })
+                })
+            }
+        }
+        const handleInputEvent = $searchInput => {
+            const eventTriggers = $searchInput.is('select') ? 'change' : 'keyup drop blur mouseup'
+
+            $searchInput.off(eventTriggers).on(eventTriggers, event => {
+                if (opts.searchOnEnterKey && event.keyCode !== 13) {
+                    return
+                }
+
+                if ([37, 38, 39, 40].includes(event.keyCode)) {
+                    return
+                }
+
+                clearTimeout(timeoutId) // doesn't matter if it's 0
+                timeoutId = setTimeout(() => {
+                    this.onSearch({ currentTarget: event.currentTarget })
+                }, opts.searchTimeOut)
+            })
+        }
+
+        // Fix #4516: this.showSearchClearButton is for extensions
+        if (
+            (opts.search || this.showSearchClearButton) &&
+            typeof opts.searchSelector !== 'string'
+        ) {
+            html = []
+            const showSearchButton = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.searchButton,
+                this.constants.buttonsClass,
+                opts.formatSearch(),
+                opts.showButtonIcons ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, opts.iconsPrefix, opts.icons.search) : '',
+                opts.showButtonText ? opts.formatSearch() : ''
+            )
+            const showSearchClearButton = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.searchClearButton,
+                this.constants.buttonsClass,
+                opts.formatClearSearch(),
+                opts.showButtonIcons ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, opts.iconsPrefix, opts.icons.clearSearch) : '',
+                opts.showButtonText ? opts.formatClearSearch() : ''
+            )
+            const searchInputHtml = `<input class="${this.constants.classes.input}
         ${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' %s%s', this.constants.classes.inputPrefix, opts.iconSize)}
-        search-input" type="search" placeholder="${opts.formatSearch()}" autocomplete="off">`
-      let searchInputFinalHtml = searchInputHtml
+        search-input" type="search" aria-label="${opts.formatSearch()}" placeholder="${opts.formatSearch()}" autocomplete="off">`
+            let searchInputFinalHtml = searchInputHtml
 
-      if (opts.showSearchButton || opts.showSearchClearButton) {
-        const buttonsHtml = (opts.showSearchButton ? showSearchButton : '') +
-          (opts.showSearchClearButton ? showSearchClearButton : '')
+            if (opts.showSearchButton || opts.showSearchClearButton) {
+                const buttonsHtml = (opts.showSearchButton ? showSearchButton : '') +
+                    (opts.showSearchClearButton ? showSearchClearButton : '')
 
-        searchInputFinalHtml = opts.search ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.inputGroup,
-          searchInputHtml, buttonsHtml) : buttonsHtml
-      }
+                searchInputFinalHtml = opts.search ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.inputGroup,
+                    searchInputHtml, buttonsHtml) : buttonsHtml
+            }
 
-      html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(`
+            html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(`
         <div class="${this.constants.classes.pull}-${opts.searchAlign} search ${this.constants.classes.inputGroup}">
           %s
         </div>
       `, searchInputFinalHtml))
 
-      this.$toolbar.append(html.join(''))
-      const $searchInput = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)
-      if (opts.showSearchButton) {
-        this.$toolbar.find('.search button[name=search]').off('click').on('click', event => {
-          clearTimeout(timeoutId) // doesn't matter if it's 0
-          timeoutId = setTimeout(() => {
-            this.onSearch({currentTarget: $searchInput})
-          }, opts.searchTimeOut)
-        })
+            this.$toolbar.append(html.join(''))
+            const $searchInput = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)
 
-        if (opts.searchOnEnterKey) {
-          handleInputEvent($searchInput)
-        }
-      } else {
-        handleInputEvent($searchInput)
-      }
+            if (opts.showSearchButton) {
+                this.$toolbar.find('.search button[name=search]').off('click').on('click', () => {
+                    clearTimeout(timeoutId) // doesn't matter if it's 0
+                    timeoutId = setTimeout(() => {
+                        this.onSearch({ currentTarget: $searchInput })
+                    }, opts.searchTimeOut)
+                })
 
-      if (opts.showSearchClearButton) {
-        this.$toolbar.find('.search button[name=clearSearch]').click(() => {
-          this.resetSearch()
-        })
-      }
-    } else if (typeof opts.searchSelector === 'string') {
-      const $searchInput = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)
-      handleInputEvent($searchInput)
-    }
-  }
-
-  onSearch ({currentTarget, firedByInitSearchText} = {}, overwriteSearchText = true) {
-    if (currentTarget !== undefined && $(currentTarget).length && overwriteSearchText) {
-      const text = $(currentTarget).val().trim()
-
-      if (this.options.trimOnSearch && $(currentTarget).val() !== text) {
-        $(currentTarget).val(text)
-      }
-
-      if (this.searchText === text) {
-        return
-      }
-
-      if (currentTarget === _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)[0] || $(currentTarget).hasClass('search-input')) {
-        this.searchText = text
-        this.options.searchText = text
-      }
-    }
-
-    if (!firedByInitSearchText) {
-      this.options.pageNumber = 1
-    }
-    this.initSearch()
-    if (firedByInitSearchText) {
-      if (this.options.sidePagination === 'client') {
-        this.updatePagination()
-      }
-    } else {
-      this.updatePagination()
-    }
-    this.trigger('search', this.searchText)
-  }
-
-  initSearch () {
-    this.filterOptions = this.filterOptions || this.options.filterOptions
-    if (this.options.sidePagination !== 'server') {
-      if (this.options.customSearch) {
-        this.data = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.customSearch,
-          [this.options.data, this.searchText, this.filterColumns])
-
-        if (this.options.sortReset) {
-          this.unsortedData = [...this.data]
-        }
-        return
-      }
-
-      const s = this.searchText && (this.fromHtml
-        ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(this.searchText) : this.searchText).toLowerCase()
-      const f = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(this.filterColumns) ? null : this.filterColumns
-
-      // Check filter
-      if (typeof this.filterOptions.filterAlgorithm === 'function') {
-        this.data = this.options.data.filter((item, i) => this.filterOptions.filterAlgorithm.apply(null, [item, f]))
-      } else if (typeof this.filterOptions.filterAlgorithm === 'string') {
-        this.data = f ? this.options.data.filter((item, i) => {
-          const filterAlgorithm = this.filterOptions.filterAlgorithm
-          if (filterAlgorithm === 'and') {
-            for (const key in f) {
-              if (
-                (Array.isArray(f[key]) &&
-                  !f[key].includes(item[key])) ||
-                (!Array.isArray(f[key]) &&
-                  item[key] !== f[key])
-              ) {
-                return false
-              }
-            }
-          } else if (filterAlgorithm === 'or') {
-            let match = false
-            for (const key in f) {
-              if (
-                (Array.isArray(f[key]) &&
-                  f[key].includes(item[key])) ||
-                (!Array.isArray(f[key]) &&
-                  item[key] === f[key])
-              ) {
-                match = true
-              }
-            }
-
-            return match
-          }
-
-          return true
-        }) : [...this.options.data]
-      }
-
-      const visibleFields = this.getVisibleFields()
-      this.data = s ? this.data.filter((item, i) => {
-        for (let j = 0; j < this.header.fields.length; j++) {
-          if (!this.header.searchables[j] || (this.options.visibleSearch && visibleFields.indexOf(this.header.fields[j]) === -1)) {
-            continue
-          }
-
-          const key = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isNumeric(this.header.fields[j]) ? parseInt(this.header.fields[j], 10) : this.header.fields[j]
-          const column = this.columns[this.fieldsColumnsIndex[key]]
-          let value
-
-          if (typeof key === 'string') {
-            value = item
-            const props = key.split('.')
-            for (let i = 0; i < props.length; i++) {
-              if (value[props[i]] !== null) {
-                value = value[props[i]]
-              }
-            }
-          } else {
-            value = item[key]
-          }
-
-          if (this.options.searchAccentNeutralise) {
-            value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].normalizeAccent(value)
-          }
-
-          // Fix #142: respect searchFormatter boolean
-          if (column && column.searchFormatter) {
-            value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column,
-              this.header.formatters[j], [value, item, i, column.field], value)
-          }
-
-          if (typeof value === 'string' || typeof value === 'number') {
-            if (this.options.strictSearch) {
-              if ((`${value}`).toLowerCase() === s) {
-                return true
-              }
-            } else {
-              const largerSmallerEqualsRegex = /(?:(<=|=>|=<|>=|>|<)(?:\s+)?(\d+)?|(\d+)?(\s+)?(<=|=>|=<|>=|>|<))/gm
-              const matches = largerSmallerEqualsRegex.exec(s)
-              let comparisonCheck = false
-
-              if (matches) {
-                const operator = matches[1] || `${matches[5]}l`
-                const comparisonValue = matches[2] || matches[3]
-                const int = parseInt(value, 10)
-                const comparisonInt = parseInt(comparisonValue, 10)
-
-                switch (operator) {
-                  case '>':
-                  case '<l':
-                    comparisonCheck = int > comparisonInt
-                    break
-                  case '<':
-                  case '>l':
-                    comparisonCheck = int < comparisonInt
-                    break
-                  case '<=':
-                  case '=<':
-                  case '>=l':
-                  case '=>l':
-                    comparisonCheck = int <= comparisonInt
-                    break
-                  case '>=':
-                  case '=>':
-                  case '<=l':
-                  case '=<l':
-                    comparisonCheck = int >= comparisonInt
-                    break
-                  default:
-                    break
+                if (opts.searchOnEnterKey) {
+                    handleInputEvent($searchInput)
                 }
-              }
-
-              if (comparisonCheck || (`${value}`).toLowerCase().includes(s)) {
-                return true
-              }
+            } else {
+                handleInputEvent($searchInput)
             }
-          }
+
+            if (opts.showSearchClearButton) {
+                this.$toolbar.find('.search button[name=clearSearch]').click(() => {
+                    this.resetSearch()
+                })
+            }
+        } else if (typeof opts.searchSelector === 'string') {
+            handleInputEvent(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this))
         }
-        return false
-      }) : this.data
-
-      if (this.options.sortReset) {
-        this.unsortedData = [...this.data]
-      }
-
-      this.initSort()
-    }
-  }
-
-  initPagination () {
-    const opts = this.options
-    if (!opts.pagination) {
-      this.$pagination.hide()
-      return
-    }
-    this.$pagination.show()
-
-    const html = []
-    let allSelected = false
-    let i
-    let from
-    let to
-    let $pageList
-    let $pre
-    let $next
-    let $number
-    const data = this.getData({includeHiddenRows: false})
-    let pageList = opts.pageList
-
-    if (typeof pageList === 'string') {
-      pageList = pageList.replace(/\[|\]| /g, '').toLowerCase().split(',')
     }
 
-    pageList = pageList.map(value => {
-      if (typeof value === 'string') {
-        return (value.toLowerCase() === opts.formatAllRows().toLowerCase() ||
-          ['all', 'unlimited'].includes(value.toLowerCase())) ? opts.formatAllRows() : +value
-      }
-      return value
-    })
+    onSearch({ currentTarget, firedByInitSearchText } = {}, overwriteSearchText = true) {
+        if (currentTarget !== undefined && $(currentTarget).length && overwriteSearchText) {
+            const text = $(currentTarget).val().trim()
 
-    this.paginationParts = opts.paginationParts
-    if (typeof this.paginationParts === 'string') {
-      this.paginationParts = this.paginationParts.replace(/\[|\]| |'/g, '').split(',')
+            if (this.options.trimOnSearch && $(currentTarget).val() !== text) {
+                $(currentTarget).val(text)
+            }
+
+            if (this.searchText === text) {
+                return
+            }
+
+            const $searchInput = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)
+            const $currentTarget = currentTarget instanceof jQuery ? currentTarget : $(currentTarget)
+
+            if ($currentTarget.is($searchInput) || $currentTarget.hasClass('search-input')) {
+                this.searchText = text
+                this.options.searchText = text
+            }
+        }
+
+        if (!firedByInitSearchText) {
+            this.options.pageNumber = 1
+        }
+        this.initSearch()
+        if (firedByInitSearchText) {
+            if (this.options.sidePagination === 'client') {
+                this.updatePagination()
+            }
+        } else {
+            this.updatePagination()
+        }
+        this.trigger('search', this.searchText)
     }
 
-    if (opts.sidePagination !== 'server') {
-      opts.totalRows = data.length
+    initSearch() {
+        this.filterOptions = this.filterOptions || this.options.filterOptions
+        if (this.options.sidePagination !== 'server') {
+            if (this.options.customSearch) {
+                this.data = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.customSearch,
+                    [this.options.data, this.searchText, this.filterColumns])
+
+                if (this.options.sortReset) {
+                    this.unsortedData = [...this.data]
+                }
+
+                this.initSort()
+                return
+            }
+
+            const rawSearchText = this.searchText && (this.fromHtml ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(this.searchText) : this.searchText)
+            let searchText = rawSearchText ? rawSearchText.toLowerCase() : ''
+            const f = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(this.filterColumns) ? null : this.filterColumns
+
+            if (this.options.searchAccentNeutralise) {
+                searchText = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].normalizeAccent(searchText)
+            }
+
+            // Check filter
+            if (typeof this.filterOptions.filterAlgorithm === 'function') {
+                this.data = this.options.data.filter(item => this.filterOptions.filterAlgorithm.apply(null, [item, f]))
+            } else if (typeof this.filterOptions.filterAlgorithm === 'string') {
+                this.data = f ? this.options.data.filter(item => {
+                    const filterAlgorithm = this.filterOptions.filterAlgorithm
+
+                    if (filterAlgorithm === 'and') {
+                        for (const key in f) {
+                            if (
+                                Array.isArray(f[key]) &&
+                                !f[key].includes(item[key]) ||
+                                !Array.isArray(f[key]) &&
+                                item[key] !== f[key]
+                            ) {
+                                return false
+                            }
+                        }
+                    } else if (filterAlgorithm === 'or') {
+                        let match = false
+
+                        for (const key in f) {
+                            if (
+                                Array.isArray(f[key]) &&
+                                f[key].includes(item[key]) ||
+                                !Array.isArray(f[key]) &&
+                                item[key] === f[key]
+                            ) {
+                                match = true
+                            }
+                        }
+
+                        return match
+                    }
+
+                    return true
+                }) : [...this.options.data]
+            }
+
+            const visibleFields = this.getVisibleFields()
+
+            this.data = searchText ? this.data.filter((item, i) => {
+                for (let j = 0; j < this.header.fields.length; j++) {
+                    if (!this.header.searchables[j] || this.options.visibleSearch && visibleFields.indexOf(this.header.fields[j]) === -1) {
+                        continue
+                    }
+
+                    const key = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isNumeric(this.header.fields[j]) ? parseInt(this.header.fields[j], 10) : this.header.fields[j]
+                    const column = this.columns[this.fieldsColumnsIndex[key]]
+                    let value
+
+                    if (typeof key === 'string' && !item.hasOwnProperty(key)) {
+                        value = item
+                        const props = key.split('.')
+
+                        for (let i = 0; i < props.length; i++) {
+                            if (value[props[i]] !== null) {
+                                value = value[props[i]]
+                            } else {
+                                value = null
+                                break
+                            }
+                        }
+                    } else {
+                        value = item[key]
+                    }
+
+                    if (this.options.searchAccentNeutralise) {
+                        value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].normalizeAccent(value)
+                    }
+
+                    // Fix #142: respect searchFormatter boolean
+                    if (column && column.searchFormatter) {
+                        value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column,
+                            this.header.formatters[j], [value, item, i, column.field], value)
+                    }
+
+                    if (typeof value === 'string' || typeof value === 'number') {
+                        if (
+                            this.options.strictSearch && `${value}`.toLowerCase() === searchText ||
+                            this.options.regexSearch && _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].regexCompare(value, rawSearchText)
+                        ) {
+                            return true
+                        }
+
+                        const largerSmallerEqualsRegex = /(?:(<=|=>|=<|>=|>|<)(?:\s+)?(-?\d+)?|(-?\d+)?(\s+)?(<=|=>|=<|>=|>|<))/gm
+                        const matches = largerSmallerEqualsRegex.exec(this.searchText)
+                        let comparisonCheck = false
+
+                        if (matches) {
+                            const operator = matches[1] || `${matches[5]}l`
+                            const comparisonValue = matches[2] || matches[3]
+                            const int = parseInt(value, 10)
+                            const comparisonInt = parseInt(comparisonValue, 10)
+
+                            switch (operator) {
+                                case '>':
+                                case '<l':
+                                    comparisonCheck = int > comparisonInt
+                                    break
+                                case '<':
+                                case '>l':
+                                    comparisonCheck = int < comparisonInt
+                                    break
+                                case '<=':
+                                case '=<':
+                                case '>=l':
+                                case '=>l':
+                                    comparisonCheck = int <= comparisonInt
+                                    break
+                                case '>=':
+                                case '=>':
+                                case '<=l':
+                                case '=<l':
+                                    comparisonCheck = int >= comparisonInt
+                                    break
+                                default:
+                                    break
+                            }
+                        }
+
+                        if (comparisonCheck || `${value}`.toLowerCase().includes(searchText)) {
+                            return true
+                        }
+                    }
+                }
+                return false
+            }) : this.data
+
+            if (this.options.sortReset) {
+                this.unsortedData = [...this.data]
+            }
+
+            this.initSort()
+        }
     }
 
-    this.totalPages = 0
-    if (opts.totalRows) {
-      if (opts.pageSize === opts.formatAllRows()) {
-        opts.pageSize = opts.totalRows
-        allSelected = true
-      }
+    initPagination() {
+        const opts = this.options
 
-      this.totalPages = ~~((opts.totalRows - 1) / opts.pageSize) + 1
+        if (!opts.pagination) {
+            this.$pagination.hide()
+            return
+        }
+        this.$pagination.show()
 
-      opts.totalPages = this.totalPages
-    }
-    if (this.totalPages > 0 && opts.pageNumber > this.totalPages) {
-      opts.pageNumber = this.totalPages
-    }
+        const html = []
+        let allSelected = false
+        let i
+        let from
+        let to
+        let $pageList
+        let $pre
+        let $next
+        let $number
+        const data = this.getData({ includeHiddenRows: false })
+        let pageList = opts.pageList
 
-    this.pageFrom = (opts.pageNumber - 1) * opts.pageSize + 1
-    this.pageTo = opts.pageNumber * opts.pageSize
-    if (this.pageTo > opts.totalRows) {
-      this.pageTo = opts.totalRows
-    }
+        if (typeof pageList === 'string') {
+            pageList = pageList.replace(/\[|\]| /g, '').toLowerCase().split(',')
+        }
 
-    if (this.options.pagination && this.options.sidePagination !== 'server') {
-      this.options.totalNotFiltered = this.options.data.length
-    }
+        pageList = pageList.map(value => {
+            if (typeof value === 'string') {
+                return value.toLowerCase() === opts.formatAllRows().toLowerCase() ||
+                    ['all', 'unlimited'].includes(value.toLowerCase()) ? opts.formatAllRows() : +value
+            }
+            return value
+        })
 
-    if (!this.options.showExtendedPagination) {
-      this.options.totalNotFiltered = undefined
-    }
+        this.paginationParts = opts.paginationParts
+        if (typeof this.paginationParts === 'string') {
+            this.paginationParts = this.paginationParts.replace(/\[|\]| |'/g, '').split(',')
+        }
 
-    if (this.paginationParts.includes('pageInfo') || this.paginationParts.includes('pageInfoShort') || this.paginationParts.includes('pageSize')) {
-      html.push(`<div class="${this.constants.classes.pull}-${opts.paginationDetailHAlign} pagination-detail">`)
-    }
+        if (opts.sidePagination !== 'server') {
+            opts.totalRows = data.length
+        }
 
-    if (this.paginationParts.includes('pageInfo') || this.paginationParts.includes('pageInfoShort')) {
-      const paginationInfo = this.paginationParts.includes('pageInfoShort') ? opts.formatDetailPagination(opts.totalRows) : opts.formatShowingRows(this.pageFrom, this.pageTo, opts.totalRows, opts.totalNotFiltered)
-      html.push(`<span class="pagination-info">
+        this.totalPages = 0
+        if (opts.totalRows) {
+            if (opts.pageSize === opts.formatAllRows()) {
+                opts.pageSize = opts.totalRows
+                allSelected = true
+            }
+
+            this.totalPages = ~~((opts.totalRows - 1) / opts.pageSize) + 1
+
+            opts.totalPages = this.totalPages
+        }
+        if (this.totalPages > 0 && opts.pageNumber > this.totalPages) {
+            opts.pageNumber = this.totalPages
+        }
+
+        this.pageFrom = (opts.pageNumber - 1) * opts.pageSize + 1
+        this.pageTo = opts.pageNumber * opts.pageSize
+        if (this.pageTo > opts.totalRows) {
+            this.pageTo = opts.totalRows
+        }
+
+        if (this.options.pagination && this.options.sidePagination !== 'server') {
+            this.options.totalNotFiltered = this.options.data.length
+        }
+
+        if (!this.options.showExtendedPagination) {
+            this.options.totalNotFiltered = undefined
+        }
+
+        if (this.paginationParts.includes('pageInfo') || this.paginationParts.includes('pageInfoShort') || this.paginationParts.includes('pageSize')) {
+            html.push(`<div class="${this.constants.classes.pull}-${opts.paginationDetailHAlign} pagination-detail">`)
+        }
+
+        if (this.paginationParts.includes('pageInfo') || this.paginationParts.includes('pageInfoShort')) {
+            const totalRows = this.options.totalRows +
+                (this.options.sidePagination === 'client' &&
+                    this.options.paginationLoadMore &&
+                    !this._paginationLoaded ? ' +' : '')
+            const paginationInfo = this.paginationParts.includes('pageInfoShort') ?
+                opts.formatDetailPagination(totalRows) :
+                opts.formatShowingRows(this.pageFrom, this.pageTo, totalRows, opts.totalNotFiltered)
+
+            html.push(`<span class="pagination-info">
       ${paginationInfo}
       </span>`)
-    }
+        }
 
-    if (this.paginationParts.includes('pageSize')) {
-      html.push('<span class="page-list">')
+        if (this.paginationParts.includes('pageSize')) {
+            html.push('<div class="page-list">')
 
-      const pageNumber = [
-        `<span class="${this.constants.classes.paginationDropdown}">
-        <button class="${this.constants.buttonsClass} dropdown-toggle" type="button" data-toggle="dropdown">
+            const pageNumber = [
+                `<div class="${this.constants.classes.paginationDropdown}">
+        <button class="${this.constants.buttonsClass} dropdown-toggle" type="button" ${this.constants.dataToggle}="dropdown">
         <span class="page-size">
         ${allSelected ? opts.formatAllRows() : opts.pageSize}
         </span>
         ${this.constants.html.dropdownCaret}
         </button>
-        ${this.constants.html.pageDropdown[0]}`]
+        ${this.constants.html.pageDropdown[0]}`
+            ]
 
-      pageList.forEach((page, i) => {
-        if (!opts.smartDisplay || i === 0 || pageList[i - 1] < opts.totalRows) {
-          let active
-          if (allSelected) {
-            active = page === opts.formatAllRows() ? this.constants.classes.dropdownActive : ''
-          } else {
-            active = page === opts.pageSize ? this.constants.classes.dropdownActive : ''
-          }
-          pageNumber.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.pageDropdownItem, active, page))
+            pageList.forEach((page, i) => {
+                if (!opts.smartDisplay || i === 0 || pageList[i - 1] < opts.totalRows || page === opts.formatAllRows()) {
+                    let active
+
+                    if (allSelected) {
+                        active = page === opts.formatAllRows() ? this.constants.classes.dropdownActive : ''
+                    } else {
+                        active = page === opts.pageSize ? this.constants.classes.dropdownActive : ''
+                    }
+                    pageNumber.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.pageDropdownItem, active, page))
+                }
+            })
+            pageNumber.push(`${this.constants.html.pageDropdown[1]}</div>`)
+
+            html.push(opts.formatRecordsPerPage(pageNumber.join('')))
         }
-      })
-      pageNumber.push(`${this.constants.html.pageDropdown[1]}</span>`)
 
-      html.push(opts.formatRecordsPerPage(pageNumber.join('')))
-    }
-
-    if (this.paginationParts.includes('pageInfo') || this.paginationParts.includes('pageInfoShort') || this.paginationParts.includes('pageSize')) {
-      html.push('</span></div>')
-    }
-
-    if (this.paginationParts.includes('pageList')) {
-      html.push(`<div class="${this.constants.classes.pull}-${opts.paginationHAlign} pagination">`,
-        _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.pagination[0], _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' pagination-%s', opts.iconSize)),
-        _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem, ' page-pre', opts.formatSRPaginationPreText(), opts.paginationPreText))
-
-      if (this.totalPages < opts.paginationSuccessivelySize) {
-        from = 1
-        to = this.totalPages
-      } else {
-        from = opts.pageNumber - opts.paginationPagesBySide
-        to = from + (opts.paginationPagesBySide * 2)
-      }
-
-      if (opts.pageNumber < (opts.paginationSuccessivelySize - 1)) {
-        to = opts.paginationSuccessivelySize
-      }
-
-      if (opts.paginationSuccessivelySize > this.totalPages - from) {
-        from = from - (opts.paginationSuccessivelySize - (this.totalPages - from)) + 1
-      }
-
-      if (from < 1) {
-        from = 1
-      }
-
-      if (to > this.totalPages) {
-        to = this.totalPages
-      }
-
-      const middleSize = Math.round(opts.paginationPagesBySide / 2)
-      const pageItem = (i, classes = '') => _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem,
-        classes + (i === opts.pageNumber ? ` ${this.constants.classes.paginationActive}` : ''), opts.formatSRPaginationPageText(i), i)
-
-      if (from > 1) {
-        let max = opts.paginationPagesBySide
-        if (max >= from) max = from - 1
-        for (i = 1; i <= max; i++) {
-          html.push(pageItem(i))
+        if (this.paginationParts.includes('pageInfo') || this.paginationParts.includes('pageInfoShort') || this.paginationParts.includes('pageSize')) {
+            html.push('</div></div>')
         }
-        if ((from - 1) === max + 1) {
-          i = from - 1
-          html.push(pageItem(i))
-        } else {
-          if ((from - 1) > max) {
-            if (
-              (from - opts.paginationPagesBySide * 2) > opts.paginationPagesBySide &&
-              opts.paginationUseIntermediate
-            ) {
-              i = Math.round(((from - middleSize) / 2) + middleSize)
-              html.push(pageItem(i, ' page-intermediate'))
+
+        if (this.paginationParts.includes('pageList')) {
+            html.push(`<div class="${this.constants.classes.pull}-${opts.paginationHAlign} pagination">`,
+                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.pagination[0], _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' pagination-%s', opts.iconSize)),
+                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem, ' page-pre', opts.formatSRPaginationPreText(), opts.paginationPreText))
+
+            if (this.totalPages < opts.paginationSuccessivelySize) {
+                from = 1
+                to = this.totalPages
             } else {
-              html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem,
-                ' page-first-separator disabled', '', '...'))
+                from = opts.pageNumber - opts.paginationPagesBySide
+                to = from + opts.paginationPagesBySide * 2
             }
-          }
+
+            if (opts.pageNumber < opts.paginationSuccessivelySize - 1) {
+                to = opts.paginationSuccessivelySize
+            }
+
+            if (opts.paginationSuccessivelySize > this.totalPages - from) {
+                from = from - (opts.paginationSuccessivelySize - (this.totalPages - from)) + 1
+            }
+
+            if (from < 1) {
+                from = 1
+            }
+
+            if (to > this.totalPages) {
+                to = this.totalPages
+            }
+
+            const middleSize = Math.round(opts.paginationPagesBySide / 2)
+            const pageItem = (i, classes = '') => _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem,
+                classes + (i === opts.pageNumber ? ` ${this.constants.classes.paginationActive}` : ''), opts.formatSRPaginationPageText(i), i)
+
+            if (from > 1) {
+                let max = opts.paginationPagesBySide
+
+                if (max >= from) max = from - 1
+                for (i = 1; i <= max; i++) {
+                    html.push(pageItem(i))
+                }
+                if (from - 1 === max + 1) {
+                    i = from - 1
+                    html.push(pageItem(i))
+                } else if (from - 1 > max) {
+                    if (
+                        from - opts.paginationPagesBySide * 2 > opts.paginationPagesBySide &&
+                        opts.paginationUseIntermediate
+                    ) {
+                        i = Math.round((from - middleSize) / 2 + middleSize)
+                        html.push(pageItem(i, ' page-intermediate'))
+                    } else {
+                        html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem,
+                            ' page-first-separator disabled', '', '...'))
+                    }
+                }
+            }
+
+            for (i = from; i <= to; i++) {
+                html.push(pageItem(i))
+            }
+
+            if (this.totalPages > to) {
+                let min = this.totalPages - (opts.paginationPagesBySide - 1)
+
+                if (to >= min) min = to + 1
+                if (to + 1 === min - 1) {
+                    i = to + 1
+                    html.push(pageItem(i))
+                } else if (min > to + 1) {
+                    if (
+                        this.totalPages - to > opts.paginationPagesBySide * 2 &&
+                        opts.paginationUseIntermediate
+                    ) {
+                        i = Math.round((this.totalPages - middleSize - to) / 2 + to)
+                        html.push(pageItem(i, ' page-intermediate'))
+                    } else {
+                        html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem,
+                            ' page-last-separator disabled', '', '...'))
+                    }
+                }
+
+                for (i = min; i <= this.totalPages; i++) {
+                    html.push(pageItem(i))
+                }
+            }
+
+            html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem, ' page-next', opts.formatSRPaginationNextText(), opts.paginationNextText))
+            html.push(this.constants.html.pagination[1], '</div>')
         }
-      }
+        this.$pagination.html(html.join(''))
 
-      for (i = from; i <= to; i++) {
-        html.push(pageItem(i))
-      }
+        const dropupClass = ['bottom', 'both'].includes(opts.paginationVAlign) ?
+            ` ${this.constants.classes.dropup}` : ''
 
-      if (this.totalPages > to) {
-        let min = this.totalPages - (opts.paginationPagesBySide - 1)
-        if (to >= min) min = to + 1
-        if ((to + 1) === min - 1) {
-          i = to + 1
-          html.push(pageItem(i))
+        this.$pagination.last().find('.page-list > div').addClass(dropupClass)
+
+        if (!opts.onlyInfoPagination) {
+            $pageList = this.$pagination.find('.page-list a')
+            $pre = this.$pagination.find('.page-pre')
+            $next = this.$pagination.find('.page-next')
+            $number = this.$pagination.find('.page-item').not('.page-next, .page-pre, .page-last-separator, .page-first-separator')
+
+            if (this.totalPages <= 1) {
+                this.$pagination.find('div.pagination').hide()
+            }
+
+            if (opts.smartDisplay) {
+                if (pageList.length < 2 || opts.totalRows <= pageList[0]) {
+                    this.$pagination.find('div.page-list').hide()
+                }
+            }
+
+            // when data is empty, hide the pagination
+            this.$pagination[this.getData().length ? 'show' : 'hide']()
+
+            if (!opts.paginationLoop) {
+                if (opts.pageNumber === 1) {
+                    $pre.addClass('disabled')
+                }
+                if (opts.pageNumber === this.totalPages) {
+                    $next.addClass('disabled')
+                }
+            }
+
+            if (allSelected) {
+                opts.pageSize = opts.formatAllRows()
+            }
+            $pageList.off('click').on('click', e => this.onPageListChange(e))
+            $pre.off('click').on('click', e => this.onPagePre(e))
+            $next.off('click').on('click', e => this.onPageNext(e))
+            $number.off('click').on('click', e => this.onPageNumber(e))
+        }
+    }
+
+    updatePagination(event) {
+        // Fix #171: IE disabled button can be clicked bug.
+        if (event && $(event.currentTarget).hasClass('disabled')) {
+            return
+        }
+
+        if (!this.options.maintainMetaData) {
+            this.resetRows()
+        }
+
+        this.initPagination()
+
+        this.trigger('page-change', this.options.pageNumber, this.options.pageSize)
+
+        if (
+            this.options.sidePagination === 'server' ||
+            this.options.sidePagination === 'client' &&
+            this.options.paginationLoadMore &&
+            !this._paginationLoaded &&
+            this.options.pageNumber === this.totalPages
+        ) {
+            this.initServer()
         } else {
-          if (min > (to + 1)) {
-            if (
-              (this.totalPages - to) > opts.paginationPagesBySide * 2 &&
-              opts.paginationUseIntermediate
-            ) {
-              i = Math.round(((this.totalPages - middleSize - to) / 2) + to)
-              html.push(pageItem(i, ' page-intermediate'))
-            } else {
-              html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem,
-                ' page-last-separator disabled', '', '...'))
+            this.initBody()
+        }
+    }
+
+    onPageListChange(event) {
+        event.preventDefault()
+        const $this = $(event.currentTarget)
+
+        $this.parent().addClass(this.constants.classes.dropdownActive)
+            .siblings().removeClass(this.constants.classes.dropdownActive)
+        this.options.pageSize = $this.text().toUpperCase() === this.options.formatAllRows().toUpperCase() ?
+            this.options.formatAllRows() : +$this.text()
+        this.$toolbar.find('.page-size').text(this.options.pageSize)
+
+        this.updatePagination(event)
+        return false
+    }
+
+    onPagePre(event) {
+        if ($(event.target).hasClass('disabled')) {
+            return
+        }
+        event.preventDefault()
+        if (this.options.pageNumber - 1 === 0) {
+            this.options.pageNumber = this.options.totalPages
+        } else {
+            this.options.pageNumber--
+        }
+        this.updatePagination(event)
+        return false
+    }
+
+    onPageNext(event) {
+        if ($(event.target).hasClass('disabled')) {
+            return
+        }
+        event.preventDefault()
+        if (this.options.pageNumber + 1 > this.options.totalPages) {
+            this.options.pageNumber = 1
+        } else {
+            this.options.pageNumber++
+        }
+        this.updatePagination(event)
+        return false
+    }
+
+    onPageNumber(event) {
+        event.preventDefault()
+        if (this.options.pageNumber === +$(event.currentTarget).text()) {
+            return
+        }
+        this.options.pageNumber = +$(event.currentTarget).text()
+        this.updatePagination(event)
+        return false
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    initRow(item, i, data, trFragments) {
+        const html = []
+        let style = {}
+        const csses = []
+        let data_ = ''
+        let attributes = {}
+        const htmlAttributes = []
+
+        if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].findIndex(this.hiddenRows, item) > -1) {
+            return
+        }
+
+        style = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.rowStyle, [item, i], style)
+
+        if (style && style.css) {
+            for (const [key, value] of Object.entries(style.css)) {
+                csses.push(`${key}: ${value}`)
             }
-          }
         }
 
-        for (i = min; i <= this.totalPages; i++) {
-          html.push(pageItem(i))
+        attributes = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options,
+            this.options.rowAttributes, [item, i], attributes)
+
+        if (attributes) {
+            for (const [key, value] of Object.entries(attributes)) {
+                htmlAttributes.push(`${key}="${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(value)}"`)
+            }
         }
-      }
 
-      html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.paginationItem, ' page-next', opts.formatSRPaginationNextText(), opts.paginationNextText))
-      html.push(this.constants.html.pagination[1], '</div>')
-    }
-    this.$pagination.html(html.join(''))
-
-    const dropupClass = ['bottom', 'both'].includes(opts.paginationVAlign) ?
-      ` ${this.constants.classes.dropup}` : ''
-    this.$pagination.last().find('.page-list > span').addClass(dropupClass)
-
-    if (!opts.onlyInfoPagination) {
-      $pageList = this.$pagination.find('.page-list a')
-      $pre = this.$pagination.find('.page-pre')
-      $next = this.$pagination.find('.page-next')
-      $number = this.$pagination.find('.page-item').not('.page-next, .page-pre, .page-last-separator, .page-first-separator')
-
-      if (this.totalPages <= 1) {
-        this.$pagination.find('div.pagination').hide()
-      }
-
-      if (opts.smartDisplay) {
-        if (pageList.length < 2 || opts.totalRows <= pageList[0]) {
-          this.$pagination.find('span.page-list').hide()
+        if (item._data && !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(item._data)) {
+            for (const [k, v] of Object.entries(item._data)) {
+                // ignore data-index
+                if (k === 'index') {
+                    return
+                }
+                data_ += ` data-${k}='${typeof v === 'object' ? JSON.stringify(v) : v}'`
+            }
         }
-      }
 
-      // when data is empty, hide the pagination
-      this.$pagination[this.getData().length ? 'show' : 'hide']()
+        html.push('<tr',
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' %s', htmlAttributes.length ? htmlAttributes.join(' ') : undefined),
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' id="%s"', Array.isArray(item) ? undefined : item._id),
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', style.classes || (Array.isArray(item) ? undefined : item._class)),
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' style="%s"', Array.isArray(item) ? undefined : item._style),
+            ` data-index="${i}"`,
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' data-uniqueid="%s"', _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(item, this.options.uniqueId, false)),
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' data-has-detail-view="%s"', this.options.detailView && _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.detailFilter, [i, item]) ? 'true' : undefined),
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('%s', data_),
+            '>'
+        )
 
-      if (!opts.paginationLoop) {
-        if (opts.pageNumber === 1) {
-          $pre.addClass('disabled')
+        if (this.options.cardView) {
+            html.push(`<td colspan="${this.header.fields.length}"><div class="card-views">`)
         }
-        if (opts.pageNumber === this.totalPages) {
-          $next.addClass('disabled')
-        }
-      }
 
-      if (allSelected) {
-        opts.pageSize = opts.formatAllRows()
-      }
-      // removed the events for last and first, onPageNumber executeds the same logic
-      $pageList.off('click').on('click', e => this.onPageListChange(e))
-      $pre.off('click').on('click', e => this.onPagePre(e))
-      $next.off('click').on('click', e => this.onPageNext(e))
-      $number.off('click').on('click', e => this.onPageNumber(e))
-    }
-  }
+        let detailViewTemplate = ''
 
-  updatePagination (event) {
-    // Fix #171: IE disabled button can be clicked bug.
-    if (event && $(event.currentTarget).hasClass('disabled')) {
-      return
-    }
+        if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
+            detailViewTemplate = '<td>'
 
-    if (!this.options.maintainMetaData) {
-      this.resetRows()
-    }
-
-    this.initPagination()
-
-    this.trigger('page-change', this.options.pageNumber, this.options.pageSize)
-
-    if (this.options.sidePagination === 'server') {
-      this.initServer()
-    } else {
-      this.initBody()
-    }
-  }
-
-  onPageListChange (event) {
-    event.preventDefault()
-    const $this = $(event.currentTarget)
-
-    $this.parent().addClass(this.constants.classes.dropdownActive)
-      .siblings().removeClass(this.constants.classes.dropdownActive)
-    this.options.pageSize = $this.text().toUpperCase() === this.options.formatAllRows().toUpperCase()
-      ? this.options.formatAllRows() : +$this.text()
-    this.$toolbar.find('.page-size').text(this.options.pageSize)
-
-    this.updatePagination(event)
-    return false
-  }
-
-  onPagePre (event) {
-    event.preventDefault()
-    if ((this.options.pageNumber - 1) === 0) {
-      this.options.pageNumber = this.options.totalPages
-    } else {
-      this.options.pageNumber--
-    }
-    this.updatePagination(event)
-    return false
-  }
-
-  onPageNext (event) {
-    event.preventDefault()
-    if ((this.options.pageNumber + 1) > this.options.totalPages) {
-      this.options.pageNumber = 1
-    } else {
-      this.options.pageNumber++
-    }
-    this.updatePagination(event)
-    return false
-  }
-
-  onPageNumber (event) {
-    event.preventDefault()
-    if (this.options.pageNumber === +$(event.currentTarget).text()) {
-      return
-    }
-    this.options.pageNumber = +$(event.currentTarget).text()
-    this.updatePagination(event)
-    return false
-  }
-
-  initRow (item, i, data, trFragments) {
-    const html = []
-    let style = {}
-    const csses = []
-    let data_ = ''
-    let attributes = {}
-    const htmlAttributes = []
-
-    if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].findIndex(this.hiddenRows, item) > -1) {
-      return
-    }
-
-    style = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.rowStyle, [item, i], style)
-
-    if (style && style.css) {
-      for (const [key, value] of Object.entries(style.css)) {
-        csses.push(`${key}: ${value}`)
-      }
-    }
-
-    attributes = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options,
-      this.options.rowAttributes, [item, i], attributes)
-
-    if (attributes) {
-      for (const [key, value] of Object.entries(attributes)) {
-        htmlAttributes.push(`${key}="${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(value)}"`)
-      }
-    }
-
-    if (item._data && !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(item._data)) {
-      for (const [k, v] of Object.entries(item._data)) {
-        // ignore data-index
-        if (k === 'index') {
-          return
-        }
-        data_ += ` data-${k}='${typeof v === 'object' ? JSON.stringify(v) : v}'`
-      }
-    }
-
-    html.push('<tr',
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' %s', htmlAttributes.length ? htmlAttributes.join(' ') : undefined),
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' id="%s"', Array.isArray(item) ? undefined : item._id),
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', style.classes || (Array.isArray(item) ? undefined : item._class)),
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' style="%s"', Array.isArray(item) ? undefined : item._style),
-      ` data-index="${i}"`,
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' data-uniqueid="%s"', _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(item, this.options.uniqueId, false)),
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' data-has-detail-view="%s"', (this.options.detailView && _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.detailFilter, [i, item])) ? 'true' : undefined),
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('%s', data_),
-      '>'
-    )
-
-    if (this.options.cardView) {
-      html.push(`<td colspan="${this.header.fields.length}"><div class="card-views">`)
-    }
-
-    let detailViewTemplate = ''
-
-    if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
-      detailViewTemplate = '<td>'
-
-      if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.detailFilter, [i, item])) {
-        detailViewTemplate += `
+            if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.detailFilter, [i, item])) {
+                detailViewTemplate += `
           <a class="detail-icon" href="#">
           ${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, this.options.icons.detailOpen)}
           </a>
         `
-      }
+            }
 
-      detailViewTemplate += '</td>'
-    }
-
-    if (detailViewTemplate && this.options.detailViewAlign !== 'right') {
-      html.push(detailViewTemplate)
-    }
-
-    this.header.fields.forEach((field, j) => {
-      let text = ''
-      let value_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(item, field, this.options.escape)
-      let value = ''
-      let type = ''
-      let cellStyle = {}
-      let id_ = ''
-      let class_ = this.header.classes[j]
-      let style_ = ''
-      let styleToAdd_ = ''
-      let data_ = ''
-      let rowspan_ = ''
-      let colspan_ = ''
-      let title_ = ''
-      const column = this.columns[j]
-
-      if ((this.fromHtml || this.autoMergeCells) && typeof value_ === 'undefined') {
-        if ((!column.checkbox) && (!column.radio)) {
-          return
+            detailViewTemplate += '</td>'
         }
-      }
 
-      if (!column.visible) {
-        return
-      }
-
-      if (this.options.cardView && (!column.cardVisible)) {
-        return
-      }
-
-      if (column.escape) {
-        value_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(value_)
-      }
-
-      // Style concat
-      if (csses.concat([this.header.styles[j]]).length) {
-        styleToAdd_ += `${csses.concat([this.header.styles[j]]).join('; ')}`
-      }
-      if (item[`_${field}_style`]) {
-        styleToAdd_ += `${item[`_${field}_style`]}`
-      }
-
-      if (styleToAdd_) {
-        style_ = ` style="${styleToAdd_}"`
-      }
-      // Style concat
-
-      // handle id and class of td
-      if (item[`_${field}_id`]) {
-        id_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' id="%s"', item[`_${field}_id`])
-      }
-      if (item[`_${field}_class`]) {
-        class_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', item[`_${field}_class`])
-      }
-      if (item[`_${field}_rowspan`]) {
-        rowspan_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' rowspan="%s"', item[`_${field}_rowspan`])
-      }
-      if (item[`_${field}_colspan`]) {
-        colspan_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' colspan="%s"', item[`_${field}_colspan`])
-      }
-      if (item[`_${field}_title`]) {
-        title_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' title="%s"', item[`_${field}_title`])
-      }
-      cellStyle = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.header,
-        this.header.cellStyles[j], [value_, item, i, field], cellStyle)
-      if (cellStyle.classes) {
-        class_ = ` class="${cellStyle.classes}"`
-      }
-      if (cellStyle.css) {
-        const csses_ = []
-        for (const [key, value] of Object.entries(cellStyle.css)) {
-          csses_.push(`${key}: ${value}`)
+        if (detailViewTemplate && this.options.detailViewAlign !== 'right') {
+            html.push(detailViewTemplate)
         }
-        style_ = ` style="${csses_.concat(this.header.styles[j]).join('; ')}"`
-      }
 
-      value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column,
-        this.header.formatters[j], [value_, item, i, field], value_)
+        this.header.fields.forEach((field, j) => {
+            const column = this.columns[j]
+            let text = ''
+            const value_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(item, field, this.options.escape, column.escape)
+            let value = ''
+            let type = ''
+            let cellStyle = {}
+            let id_ = ''
+            let class_ = this.header.classes[j]
+            let style_ = ''
+            let styleToAdd_ = ''
+            let data_ = ''
+            let rowspan_ = ''
+            let colspan_ = ''
+            let title_ = ''
 
-      if (this.searchText !== '' && this.options.searchHighlight) {
-        value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column, column.searchHighlightFormatter, [value, this.searchText], value.replace(new RegExp('(' + this.searchText + ')', 'gim'), '<mark>$1</mark>'))
-      }
+            if ((this.fromHtml || this.autoMergeCells) && typeof value_ === 'undefined') {
+                if (!column.checkbox && !column.radio) {
+                    return
+                }
+            }
 
-      if (item[`_${field}_data`] && !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(item[`_${field}_data`])) {
-        for (const [k, v] of Object.entries(item[`_${field}_data`])) {
-          // ignore data-index
-          if (k === 'index') {
-            return
-          }
-          data_ += ` data-${k}="${v}"`
-        }
-      }
+            if (!column.visible) {
+                return
+            }
 
-      if (column.checkbox || column.radio) {
-        type = column.checkbox ? 'checkbox' : type
-        type = column.radio ? 'radio' : type
+            if (this.options.cardView && !column.cardVisible) {
+                return
+            }
 
-        const c = column['class'] || ''
-        const isChecked = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isObject(value) && value.hasOwnProperty('checked') ?
-          value.checked : (value === true || value_) && value !== false
-        const isDisabled = !column.checkboxEnabled || (value && value.disabled)
+            // Style concat
+            if (csses.concat([this.header.styles[j]]).length) {
+                styleToAdd_ += `${csses.concat([this.header.styles[j]]).join('; ')}`
+            }
+            if (item[`_${field}_style`]) {
+                styleToAdd_ += `${item[`_${field}_style`]}`
+            }
 
-        text = [
-          this.options.cardView
-            ? `<div class="card-view ${c}">`
-            : `<td class="bs-checkbox ${c}"${class_}${style_}>`,
-          `<label>
+            if (styleToAdd_) {
+                style_ = ` style="${styleToAdd_}"`
+            }
+            // Style concat
+
+            // handle id and class of td
+            if (item[`_${field}_id`]) {
+                id_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' id="%s"', item[`_${field}_id`])
+            }
+            if (item[`_${field}_class`]) {
+                class_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', item[`_${field}_class`])
+            }
+            if (item[`_${field}_rowspan`]) {
+                rowspan_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' rowspan="%s"', item[`_${field}_rowspan`])
+            }
+            if (item[`_${field}_colspan`]) {
+                colspan_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' colspan="%s"', item[`_${field}_colspan`])
+            }
+            if (item[`_${field}_title`]) {
+                title_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' title="%s"', item[`_${field}_title`])
+            }
+            cellStyle = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.header,
+                this.header.cellStyles[j], [value_, item, i, field], cellStyle)
+            if (cellStyle.classes) {
+                class_ = ` class="${cellStyle.classes}"`
+            }
+            if (cellStyle.css) {
+                const csses_ = []
+
+                for (const [key, value] of Object.entries(cellStyle.css)) {
+                    csses_.push(`${key}: ${value}`)
+                }
+                style_ = ` style="${csses_.concat(this.header.styles[j]).join('; ')}"`
+            }
+
+            value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column,
+                this.header.formatters[j], [value_, item, i, field], value_)
+
+            if (!(column.checkbox || column.radio)) {
+                value = typeof value === 'undefined' || value === null ?
+                    this.options.undefinedText : value
+            }
+
+            if (column.searchable && this.searchText && this.options.searchHighlight && !(column.checkbox || column.radio)) {
+                let defValue = ''
+                let searchText = this.searchText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+                if (this.options.searchAccentNeutralise) {
+                    const indexRegex = new RegExp(`${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].normalizeAccent(searchText)}`, 'gmi')
+                    const match = indexRegex.exec(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].normalizeAccent(value))
+
+                    if (match) {
+                        searchText = value.substring(match.index, match.index + searchText.length)
+                    }
+                }
+
+                const regExp = new RegExp(`(${searchText})`, 'gim')
+                const marker = '<mark>$1</mark>'
+                const isHTML = value && /<(?=.*? .*?\/ ?>|br|hr|input|!--|wbr)[a-z]+.*?>|<([a-z]+).*?<\/\1>/i.test(value)
+
+                if (isHTML) {
+                    // value can contains a HTML tags
+                    let textContent = new DOMParser().parseFromString(value.toString(), 'text/html').documentElement.textContent
+                    const textReplaced = textContent.replace(regExp, marker)
+
+                    textContent = textContent.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+                    defValue = value.replace(new RegExp(`(>\\s*)(${textContent})(\\s*)`, 'gm'), `$1${textReplaced}$3`)
+                } else {
+                    // but usually not
+                    defValue = value.toString().replace(regExp, marker)
+                }
+                value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column, column.searchHighlightFormatter, [value, this.searchText], defValue)
+            }
+
+            if (item[`_${field}_data`] && !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(item[`_${field}_data`])) {
+                for (const [k, v] of Object.entries(item[`_${field}_data`])) {
+                    // ignore data-index
+                    if (k === 'index') {
+                        return
+                    }
+                    data_ += ` data-${k}="${v}"`
+                }
+            }
+
+            if (column.checkbox || column.radio) {
+                type = column.checkbox ? 'checkbox' : type
+                type = column.radio ? 'radio' : type
+
+                const c = column['class'] || ''
+                const isChecked = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isObject(value) && value.hasOwnProperty('checked') ?
+                    value.checked : (value === true || value_) && value !== false
+                const isDisabled = !column.checkboxEnabled || value && value.disabled
+
+                text = [
+                    this.options.cardView ?
+                        `<div class="card-view ${c}">` :
+                        `<td class="bs-checkbox ${c}"${class_}${style_}>`,
+                    `<label>
             <input
             data-index="${i}"
             name="${this.options.selectItemName}"
@@ -2763,1581 +3128,1719 @@ class BootstrapTable {
             ${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('disabled="%s"', isDisabled ? 'disabled' : undefined)} />
             <span></span>
             </label>`,
-          this.header.formatters[j] && typeof value === 'string' ? value : '',
-          this.options.cardView ? '</div>' : '</td>'
-        ].join('')
+                    this.header.formatters[j] && typeof value === 'string' ? value : '',
+                    this.options.cardView ? '</div>' : '</td>'
+                ].join('')
 
-        item[this.header.stateField] = value === true || (!!value_ || (value && value.checked))
-      } else {
-        value = typeof value === 'undefined' || value === null
-          ? this.options.undefinedText : value
+                item[this.header.stateField] = value === true || (!!value_ || value && value.checked)
+            } else if (this.options.cardView) {
+                const cardTitle = this.options.showHeader ?
+                    `<span class="card-view-title ${cellStyle.classes || ''}"${style_}>${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getFieldTitle(this.columns, field)}</span>` : ''
+
+                text = `<div class="card-view">${cardTitle}<span class="card-view-value ${cellStyle.classes || ''}"${style_}>${value}</span></div>`
+
+                if (this.options.smartDisplay && value === '') {
+                    text = '<div class="card-view"></div>'
+                }
+            } else {
+                text = `<td${id_}${class_}${style_}${data_}${rowspan_}${colspan_}${title_}>${value}</td>`
+            }
+
+            html.push(text)
+        })
+
+        if (detailViewTemplate && this.options.detailViewAlign === 'right') {
+            html.push(detailViewTemplate)
+        }
 
         if (this.options.cardView) {
-          const cardTitle = this.options.showHeader
-            ? `<span class="card-view-title"${style_}>${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getFieldTitle(this.columns, field)}</span>` : ''
+            html.push('</div></td>')
+        }
+        html.push('</tr>')
 
-          text = `<div class="card-view">${cardTitle}<span class="card-view-value">${value}</span></div>`
+        return html.join('')
+    }
 
-          if (this.options.smartDisplay && value === '') {
-            text = '<div class="card-view"></div>'
-          }
+    initBody(fixedScroll, updatedUid) {
+        const data = this.getData()
+
+        this.trigger('pre-body', data)
+
+        this.$body = this.$el.find('>tbody')
+        if (!this.$body.length) {
+            this.$body = $('<tbody></tbody>').appendTo(this.$el)
+        }
+
+        // Fix #389 Bootstrap-table-flatJSON is not working
+        if (!this.options.pagination || this.options.sidePagination === 'server') {
+            this.pageFrom = 1
+            this.pageTo = data.length
+        }
+
+        const rows = []
+        const trFragments = $(document.createDocumentFragment())
+        let hasTr = false
+        const toExpand = []
+
+        this.autoMergeCells = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkAutoMergeCells(data.slice(this.pageFrom - 1, this.pageTo))
+
+        for (let i = this.pageFrom - 1; i < this.pageTo; i++) {
+            const item = data[i]
+            let tr = this.initRow(item, i, data, trFragments)
+
+            hasTr = hasTr || !!tr
+            if (tr && typeof tr === 'string') {
+                const uniqueId = this.options.uniqueId
+
+                if (uniqueId && item.hasOwnProperty(uniqueId)) {
+                    const itemUniqueId = item[uniqueId]
+
+                    const oldTr = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('> tr[data-uniqueid="%s"][data-has-detail-view]', itemUniqueId))
+                    const oldTrNext = oldTr.next()
+
+                    if (oldTrNext.is('tr.detail-view')) {
+                        toExpand.push(i)
+
+                        if (!updatedUid || itemUniqueId !== updatedUid) {
+                            tr += oldTrNext[0].outerHTML
+                        }
+                    }
+                }
+
+                if (!this.options.virtualScroll) {
+                    trFragments.append(tr)
+                } else {
+                    rows.push(tr)
+                }
+            }
+        }
+
+        // show no records
+        if (!hasTr) {
+            this.$body.html(`<tr class="no-records-found">${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<td colspan="%s">%s</td>',
+                this.getVisibleFields().length + _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options),
+                this.options.formatNoMatches())}</tr>`)
+        } else if (!this.options.virtualScroll) {
+            this.$body.html(trFragments)
         } else {
-          text = `<td${id_}${class_}${style_}${data_}${rowspan_}${colspan_}${title_}>${value}</td>`
+            if (this.virtualScroll) {
+                this.virtualScroll.destroy()
+            }
+            this.virtualScroll = new _virtual_scroll_index_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
+                rows,
+                fixedScroll,
+                scrollEl: this.$tableBody[0],
+                contentEl: this.$body[0],
+                itemHeight: this.options.virtualScrollItemHeight,
+                callback: (startIndex, endIndex) => {
+                    this.fitHeader()
+                    this.initBodyEvent()
+                    this.trigger('virtual-scroll', startIndex, endIndex)
+                }
+            })
         }
-      }
 
-      html.push(text)
-    })
-
-    if (detailViewTemplate && this.options.detailViewAlign === 'right') {
-      html.push(detailViewTemplate)
-    }
-
-    if (this.options.cardView) {
-      html.push('</div></td>')
-    }
-    html.push('</tr>')
-
-    return html.join('')
-  }
-
-  initBody (fixedScroll) {
-    const data = this.getData()
-
-    this.trigger('pre-body', data)
-
-    this.$body = this.$el.find('>tbody')
-    if (!this.$body.length) {
-      this.$body = $('<tbody></tbody>').appendTo(this.$el)
-    }
-
-    // Fix #389 Bootstrap-table-flatJSON is not working
-    if (!this.options.pagination || this.options.sidePagination === 'server') {
-      this.pageFrom = 1
-      this.pageTo = data.length
-    }
-
-    const rows = []
-    const trFragments = $(document.createDocumentFragment())
-    let hasTr = false
-
-    this.autoMergeCells = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].checkAutoMergeCells(data.slice(this.pageFrom - 1, this.pageTo))
-
-    for (let i = this.pageFrom - 1; i < this.pageTo; i++) {
-      const item = data[i]
-      const tr = this.initRow(item, i, data, trFragments)
-      hasTr = hasTr || !!tr
-      if (tr && typeof tr === 'string') {
-        if (!this.options.virtualScroll) {
-          trFragments.append(tr)
-        } else {
-          rows.push(tr)
-        }
-      }
-    }
-
-    // show no records
-    if (!hasTr) {
-      this.$body.html(`<tr class="no-records-found">${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<td colspan="%s">%s</td>',
-        this.getVisibleFields().length + _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options),
-        this.options.formatNoMatches())}</tr>`)
-    } else {
-      if (!this.options.virtualScroll) {
-        this.$body.html(trFragments)
-      } else {
-        if (this.virtualScroll) {
-          this.virtualScroll.destroy()
-        }
-        this.virtualScroll = new _virtual_scroll_index_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
-          rows,
-          fixedScroll,
-          scrollEl: this.$tableBody[0],
-          contentEl: this.$body[0],
-          itemHeight: this.options.virtualScrollItemHeight,
-          callback: () => {
-            this.fitHeader()
-            this.initBodyEvent()
-          }
+        toExpand.forEach(index => {
+            this.expandRow(index)
         })
-      }
-    }
 
-    if (!fixedScroll) {
-      this.scrollTo(0)
-    }
-
-    this.initBodyEvent()
-    this.updateSelected()
-    this.initFooter()
-    this.resetView()
-
-    if (this.options.sidePagination !== 'server') {
-      this.options.totalRows = data.length
-    }
-
-    this.trigger('post-body', data)
-  }
-
-  initBodyEvent () {
-    // click to select by column
-    this.$body.find('> tr[data-index] > td').off('click dblclick').on('click dblclick', e => {
-      const $td = $(e.currentTarget)
-      const $tr = $td.parent()
-      const $cardViewArr = $(e.target).parents('.card-views').children()
-      const $cardViewTarget = $(e.target).parents('.card-view')
-      const rowIndex = $tr.data('index')
-      const item = this.data[rowIndex]
-      const index = this.options.cardView ? $cardViewArr.index($cardViewTarget) : $td[0].cellIndex
-      const fields = this.getVisibleFields()
-      const field = fields[index - _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)]
-      const column = this.columns[this.fieldsColumnsIndex[field]]
-      const value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(item, field, this.options.escape)
-
-      if ($td.find('.detail-icon').length) {
-        return
-      }
-
-      this.trigger(e.type === 'click' ? 'click-cell' : 'dbl-click-cell', field, value, item, $td)
-      this.trigger(e.type === 'click' ? 'click-row' : 'dbl-click-row', item, $tr, field)
-
-      // if click to select - then trigger the checkbox/radio click
-      if (
-        e.type === 'click' &&
-        this.options.clickToSelect &&
-        column.clickToSelect &&
-        !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.ignoreClickToSelectOn, [e.target])
-      ) {
-        const $selectItem = $tr.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('[name="%s"]', this.options.selectItemName))
-        if ($selectItem.length) {
-          $selectItem[0].click()
+        if (!fixedScroll) {
+            this.scrollTo(0)
         }
-      }
 
-      if (e.type === 'click' && this.options.detailViewByClick) {
-        this.toggleDetailView(rowIndex, this.header.detailFormatters[this.fieldsColumnsIndex[field]])
-      }
-    }).off('mousedown').on('mousedown', e => {
-      // https://github.com/jquery/jquery/issues/1741
-      this.multipleSelectRowCtrlKey = e.ctrlKey || e.metaKey
-      this.multipleSelectRowShiftKey = e.shiftKey
-    })
+        this.initBodyEvent()
+        this.initFooter()
+        this.resetView()
+        this.updateSelected()
 
-    this.$body.find('> tr[data-index] > td > .detail-icon').off('click').on('click', e => {
-      e.preventDefault()
-      this.toggleDetailView($(e.currentTarget).parent().parent().data('index'))
-      return false
-    })
-
-    this.$selectItem = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('[name="%s"]', this.options.selectItemName))
-    this.$selectItem.off('click').on('click', e => {
-      e.stopImmediatePropagation()
-
-      const $this = $(e.currentTarget)
-      this._toggleCheck($this.prop('checked'), $this.data('index'))
-    })
-
-    this.header.events.forEach((_events, i) => {
-      let events = _events
-      if (!events) {
-        return
-      }
-      // fix bug, if events is defined with namespace
-      if (typeof events === 'string') {
-        events = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, events)
-      }
-
-      const field = this.header.fields[i]
-      let fieldIndex = this.getVisibleFields().indexOf(field)
-
-      if (fieldIndex === -1) {
-        return
-      }
-
-      fieldIndex += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)
-
-      for (const key in events) {
-        if (!events.hasOwnProperty(key)) {
-          continue
+        if (this.options.sidePagination !== 'server') {
+            this.options.totalRows = data.length
         }
-        const event = events[key]
-        this.$body.find('>tr:not(.no-records-found)').each((i, tr) => {
-          const $tr = $(tr)
-          const $td = $tr.find(this.options.cardView ? '.card-views>.card-view' : '>td').eq(fieldIndex)
-          const index = key.indexOf(' ')
-          const name = key.substring(0, index)
-          const el = key.substring(index + 1)
 
-          $td.find(el).off(name).on(name, e => {
-            const index = $tr.data('index')
-            const row = this.data[index]
-            const value = row[field]
+        this.trigger('post-body', data)
+    }
 
-            event.apply(this, [e, value, row, index])
-          })
+    initBodyEvent() {
+        // click to select by column
+        this.$body.find('> tr[data-index] > td').off('click dblclick').on('click dblclick', e => {
+            const $td = $(e.currentTarget)
+
+            if (
+                $td.find('.detail-icon').length ||
+                $td.index() - _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options) < 0
+            ) {
+                return
+            }
+
+            const $tr = $td.parent()
+            const $cardViewArr = $(e.target).parents('.card-views').children()
+            const $cardViewTarget = $(e.target).parents('.card-view')
+            const rowIndex = $tr.data('index')
+            const item = this.data[rowIndex]
+            const index = this.options.cardView ? $cardViewArr.index($cardViewTarget) : $td[0].cellIndex
+            const fields = this.getVisibleFields()
+            const field = fields[index - _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)]
+            const column = this.columns[this.fieldsColumnsIndex[field]]
+            const value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(item, field, this.options.escape, column.escape)
+
+            this.trigger(e.type === 'click' ? 'click-cell' : 'dbl-click-cell', field, value, item, $td)
+            this.trigger(e.type === 'click' ? 'click-row' : 'dbl-click-row', item, $tr, field)
+
+            // if click to select - then trigger the checkbox/radio click
+            if (
+                e.type === 'click' &&
+                this.options.clickToSelect &&
+                column.clickToSelect &&
+                !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.ignoreClickToSelectOn, [e.target])
+            ) {
+                const $selectItem = $tr.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('[name="%s"]', this.options.selectItemName))
+
+                if ($selectItem.length) {
+                    $selectItem[0].click()
+                }
+            }
+
+            if (e.type === 'click' && this.options.detailViewByClick) {
+                this.toggleDetailView(rowIndex, this.header.detailFormatters[this.fieldsColumnsIndex[field]])
+            }
+        }).off('mousedown').on('mousedown', e => {
+            // https://github.com/jquery/jquery/issues/1741
+            this.multipleSelectRowCtrlKey = e.ctrlKey || e.metaKey
+            this.multipleSelectRowShiftKey = e.shiftKey
         })
-      }
-    })
-  }
 
-  initServer (silent, query, url) {
-    let data = {}
-    const index = this.header.fields.indexOf(this.options.sortName)
+        this.$body.find('> tr[data-index] > td > .detail-icon').off('click').on('click', e => {
+            e.preventDefault()
+            this.toggleDetailView($(e.currentTarget).parent().parent().data('index'))
+            return false
+        })
 
-    let params = {
-      searchText: this.searchText,
-      sortName: this.options.sortName,
-      sortOrder: this.options.sortOrder
+        this.$selectItem = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('[name="%s"]', this.options.selectItemName))
+        this.$selectItem.off('click').on('click', e => {
+            e.stopImmediatePropagation()
+
+            const $this = $(e.currentTarget)
+
+            this._toggleCheck($this.prop('checked'), $this.data('index'))
+        })
+
+        this.header.events.forEach((_events, i) => {
+            let events = _events
+
+            if (!events) {
+                return
+            }
+            // fix bug, if events is defined with namespace
+            if (typeof events === 'string') {
+                events = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, events)
+            }
+
+            if (!events) {
+                throw new Error(`Unknown event in the scope: ${_events}`)
+            }
+
+            const field = this.header.fields[i]
+            let fieldIndex = this.getVisibleFields().indexOf(field)
+
+            if (fieldIndex === -1) {
+                return
+            }
+
+            fieldIndex += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)
+
+            for (const key in events) {
+                if (!events.hasOwnProperty(key)) {
+                    continue
+                }
+                const event = events[key]
+
+                this.$body.find('>tr:not(.no-records-found)').each((i, tr) => {
+                    const $tr = $(tr)
+                    const $td = $tr.find(this.options.cardView ? '.card-views>.card-view' : '>td').eq(fieldIndex)
+                    const index = key.indexOf(' ')
+                    const name = key.substring(0, index)
+                    const el = key.substring(index + 1)
+
+                    $td.find(el).off(name).on(name, e => {
+                        const index = $tr.data('index')
+                        const row = this.data[index]
+                        const value = row[field]
+
+                        event.apply(this, [e, value, row, index])
+                    })
+                })
+            }
+        })
     }
 
-    if (this.header.sortNames[index]) {
-      params.sortName = this.header.sortNames[index]
-    }
+    initServer(silent, query, url) {
+        let data = {}
+        const index = this.header.fields.indexOf(this.options.sortName)
 
-    if (this.options.pagination && this.options.sidePagination === 'server') {
-      params.pageSize = this.options.pageSize === this.options.formatAllRows()
-        ? this.options.totalRows : this.options.pageSize
-      params.pageNumber = this.options.pageNumber
-    }
-
-    if (!(url || this.options.url) && !this.options.ajax) {
-      return
-    }
-
-    if (this.options.queryParamsType === 'limit') {
-      params = {
-        search: params.searchText,
-        sort: params.sortName,
-        order: params.sortOrder
-      }
-
-      if (this.options.pagination && this.options.sidePagination === 'server') {
-        params.offset = this.options.pageSize === this.options.formatAllRows()
-          ? 0 : this.options.pageSize * (this.options.pageNumber - 1)
-        params.limit = this.options.pageSize === this.options.formatAllRows()
-          ? this.options.totalRows : this.options.pageSize
-        if (params.limit === 0) {
-          delete params.limit
-        }
-      }
-    }
-
-    if (
-      this.options.search &&
-      this.options.sidePagination === 'server' &&
-      this.columns.filter(column => !column.searchable).length
-    ) {
-      params.searchable = []
-
-      for (const column of this.columns) {
-        if (
-          !column.checkbox &&
-          column.searchable &&
-          (
-            this.options.visibleSearch &&
-            column.visible ||
-            !this.options.visibleSearch
-          )
-        ) {
-          params.searchable.push(column.field)
-        }
-      }
-    }
-
-    if (!(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(this.filterColumnsPartial))) {
-      params.filter = JSON.stringify(this.filterColumnsPartial, null)
-    }
-
-    $.extend(params, query || {})
-
-    data = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.queryParams, [params], data)
-
-    // false to stop request
-    if (data === false) {
-      return
-    }
-
-    if (!silent) {
-      this.showLoading()
-    }
-    const request = $.extend({}, _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.ajaxOptions), {
-      type: this.options.method,
-      url: url || this.options.url,
-      data: this.options.contentType === 'application/json' && this.options.method === 'post'
-        ? JSON.stringify(data) : data,
-      cache: this.options.cache,
-      contentType: this.options.contentType,
-      dataType: this.options.dataType,
-      success: (_res, textStatus, jqXHR) => {
-        const res = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options,
-          this.options.responseHandler, [_res, jqXHR], _res)
-
-        this.load(res)
-        this.trigger('load-success', res, jqXHR && jqXHR.status, jqXHR)
-        if (!silent) {
-          this.hideLoading()
+        let params = {
+            searchText: this.searchText,
+            sortName: this.options.sortName,
+            sortOrder: this.options.sortOrder
         }
 
-        if (
-          this.options.sidePagination === 'server' &&
-          res[this.options.totalField] > 0 &&
-          !res[this.options.dataField].length
-        ) {
-          this.updatePagination()
+        if (this.header.sortNames[index]) {
+            params.sortName = this.header.sortNames[index]
         }
-      },
-      error: jqXHR => {
-        let data = []
-        if (this.options.sidePagination === 'server') {
-          data = {}
-          data[this.options.totalField] = 0
-          data[this.options.dataField] = []
+
+        if (this.options.pagination && this.options.sidePagination === 'server') {
+            params.pageSize = this.options.pageSize === this.options.formatAllRows() ?
+                this.options.totalRows : this.options.pageSize
+            params.pageNumber = this.options.pageNumber
         }
-        this.load(data)
-        this.trigger('load-error', jqXHR && jqXHR.status, jqXHR)
-        if (!silent) this.$tableLoading.hide()
-      }
-    })
 
-    if (this.options.ajax) {
-      _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this, this.options.ajax, [request], null)
-    } else {
-      if (this._xhr && this._xhr.readyState !== 4) {
-        this._xhr.abort()
-      }
-      this._xhr = $.ajax(request)
-    }
-
-    return data
-  }
-
-  initSearchText () {
-    if (this.options.search) {
-      this.searchText = ''
-      if (this.options.searchText !== '') {
-        const $search = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)
-        $search.val(this.options.searchText)
-        this.onSearch({currentTarget: $search, firedByInitSearchText: true})
-      }
-    }
-  }
-
-  getCaret () {
-    this.$header.find('th').each((i, th) => {
-      $(th).find('.sortable').removeClass('desc asc')
-        .addClass($(th).data('field') === this.options.sortName
-          ? this.options.sortOrder : 'both')
-    })
-  }
-
-  updateSelected () {
-    const checkAll = this.$selectItem.filter(':enabled').length &&
-      this.$selectItem.filter(':enabled').length ===
-      this.$selectItem.filter(':enabled').filter(':checked').length
-
-    this.$selectAll.add(this.$selectAll_).prop('checked', checkAll)
-
-    this.$selectItem.each((i, el) => {
-      $(el).closest('tr')[$(el).prop('checked') ? 'addClass' : 'removeClass']('selected')
-    })
-  }
-
-  updateRows () {
-    this.$selectItem.each((i, el) => {
-      this.data[$(el).data('index')][this.header.stateField] = $(el).prop('checked')
-    })
-  }
-
-  resetRows () {
-    for (const row of this.data) {
-      this.$selectAll.prop('checked', false)
-      this.$selectItem.prop('checked', false)
-      if (this.header.stateField) {
-        row[this.header.stateField] = false
-      }
-    }
-    this.initHiddenRows()
-  }
-
-  trigger (_name, ...args) {
-    const name = `${_name}.bs.table`
-    this.options[BootstrapTable.EVENTS[name]](...[...args, this])
-    this.$el.trigger($.Event(name, { sender: this }), args)
-
-    this.options.onAll(name, ...[...args, this])
-    this.$el.trigger($.Event('all.bs.table', { sender: this }), [name, args])
-  }
-
-  resetHeader () {
-    // fix #61: the hidden table reset header bug.
-    // fix bug: get $el.css('width') error sometime (height = 500)
-    clearTimeout(this.timeoutId_)
-    this.timeoutId_ = setTimeout(() => this.fitHeader(), this.$el.is(':hidden') ? 100 : 0)
-  }
-
-  fitHeader () {
-    if (this.$el.is(':hidden')) {
-      this.timeoutId_ = setTimeout(() => this.fitHeader(), 100)
-      return
-    }
-
-    const fixedBody = this.$tableBody.get(0)
-    const scrollWidth = fixedBody.scrollWidth > fixedBody.clientWidth &&
-    fixedBody.scrollHeight > fixedBody.clientHeight + this.$header.outerHeight()
-      ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getScrollBarWidth() : 0
-
-    this.$el.css('margin-top', -this.$header.outerHeight())
-
-    const focused = $(':focus')
-    if (focused.length > 0) {
-      const $th = focused.parents('th')
-      if ($th.length > 0) {
-        const dataField = $th.attr('data-field')
-        if (dataField !== undefined) {
-          const $headerTh = this.$header.find(`[data-field='${dataField}']`)
-          if ($headerTh.length > 0) {
-            $headerTh.find(':input').addClass('focus-temp')
-          }
-        }
-      }
-    }
-
-    this.$header_ = this.$header.clone(true, true)
-    this.$selectAll_ = this.$header_.find('[name="btSelectAll"]')
-    this.$tableHeader
-      .css('margin-right', scrollWidth)
-      .find('table').css('width', this.$el.outerWidth())
-      .html('').attr('class', this.$el.attr('class'))
-      .append(this.$header_)
-
-    this.$tableLoading.css('width', this.$el.outerWidth())
-
-    const focusedTemp = $('.focus-temp:visible:eq(0)')
-    if (focusedTemp.length > 0) {
-      focusedTemp.focus()
-      this.$header.find('.focus-temp').removeClass('focus-temp')
-    }
-
-    // fix bug: $.data() is not working as expected after $.append()
-    this.$header.find('th[data-field]').each((i, el) => {
-      this.$header_.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('th[data-field="%s"]', $(el).data('field'))).data($(el).data())
-    })
-
-    const visibleFields = this.getVisibleFields()
-    const $ths = this.$header_.find('th')
-    let $tr = this.$body.find('>tr:not(.no-records-found,.virtual-scroll-top)').eq(0)
-
-    while ($tr.length && $tr.find('>td[colspan]:not([colspan="1"])').length) {
-      $tr = $tr.next()
-    }
-
-    const trLength = $tr.find('> *').length
-
-    $tr.find('> *').each((i, el) => {
-      const $this = $(el)
-
-      if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
-        if (
-          i === 0 && this.options.detailViewAlign !== 'right' ||
-          i === trLength - 1 && this.options.detailViewAlign === 'right'
-        ) {
-          const $thDetail = $ths.filter('.detail')
-          const zoomWidth = $thDetail.innerWidth() - $thDetail.find('.fht-cell').width()
-          $thDetail.find('.fht-cell').width($this.innerWidth() - zoomWidth)
-          return
-        }
-      }
-
-      const index = i - _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)
-      let $th = this.$header_.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('th[data-field="%s"]', visibleFields[index]))
-      if ($th.length > 1) {
-        $th = $($ths[$this[0].cellIndex])
-      }
-
-      const zoomWidth = $th.innerWidth() - $th.find('.fht-cell').width()
-      $th.find('.fht-cell').width($this.innerWidth() - zoomWidth)
-    })
-
-    this.horizontalScroll()
-    this.trigger('post-header')
-  }
-
-  initFooter () {
-    if (!this.options.showFooter || this.options.cardView) { // do nothing
-      return
-    }
-
-    const data = this.getData()
-    const html = []
-    let detailTemplate = ''
-
-    if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
-      detailTemplate = '<th class="detail"><div class="th-inner"></div><div class="fht-cell"></div></th>'
-    }
-
-    if (detailTemplate && this.options.detailViewAlign !== 'right') {
-      html.push(detailTemplate)
-    }
-
-    for (const column of this.columns) {
-      let falign = ''
-      let valign = ''
-      const csses = []
-      let style = {}
-      let class_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', column['class'])
-
-      if (
-        !column.visible
-        || (this.footerData && this.footerData.length > 0 && !(column.field in this.footerData[0]))
-      ) {
-        continue
-      }
-
-      if (this.options.cardView && (!column.cardVisible)) {
-        return
-      }
-
-      falign = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('text-align: %s; ', column.falign ? column.falign : column.align)
-      valign = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('vertical-align: %s; ', column.valign)
-
-      style = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.footerStyle, [column])
-
-      if (style && style.css) {
-        for (const [key, value] of Object.entries(style.css)) {
-          csses.push(`${key}: ${value}`)
-        }
-      }
-      if (style && style.classes) {
-        class_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', column['class'] ?
-          [column['class'], style.classes].join(' ') : style.classes)
-      }
-
-      html.push('<th', class_, _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' style="%s"', falign + valign + csses.concat().join('; ')))
-      let colspan = 0
-      if (this.footerData && this.footerData.length > 0) {
-        colspan = this.footerData[0]['_' + column.field + '_colspan'] || 0
-      }
-      if (colspan) {
-        html.push(` colspan="${colspan}" `)
-      }
-
-      html.push('>')
-      html.push('<div class="th-inner">')
-
-      let value = ''
-      if (this.footerData && this.footerData.length > 0) {
-        value = this.footerData[0][column.field] || ''
-      }
-      html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column, column.footerFormatter,
-        [data, value], value))
-
-      html.push('</div>')
-      html.push('<div class="fht-cell"></div>')
-      html.push('</div>')
-      html.push('</th>')
-    }
-
-    if (detailTemplate && this.options.detailViewAlign === 'right') {
-      html.push(detailTemplate)
-    }
-
-    if (!this.options.height && !this.$tableFooter.length) {
-      this.$el.append('<tfoot><tr></tr></tfoot>')
-      this.$tableFooter = this.$el.find('tfoot')
-    }
-
-    this.$tableFooter.find('tr').html(html.join(''))
-
-    this.trigger('post-footer', this.$tableFooter)
-  }
-
-  fitFooter () {
-    if (this.$el.is(':hidden')) {
-      setTimeout(() => this.fitFooter(), 100)
-      return
-    }
-
-    const fixedBody = this.$tableBody.get(0)
-    const scrollWidth = fixedBody.scrollWidth > fixedBody.clientWidth &&
-    fixedBody.scrollHeight > fixedBody.clientHeight + this.$header.outerHeight()
-      ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getScrollBarWidth() : 0
-
-    this.$tableFooter
-      .css('margin-right', scrollWidth)
-      .find('table').css('width', this.$el.outerWidth())
-      .attr('class', this.$el.attr('class'))
-
-    const visibleFields = this.getVisibleFields()
-    const $ths = this.$tableFooter.find('th')
-    let $tr = this.$body.find('>tr:first-child:not(.no-records-found)')
-
-    $ths.find('.fht-cell').width('auto')
-
-    while ($tr.length && $tr.find('>td[colspan]:not([colspan="1"])').length) {
-      $tr = $tr.next()
-    }
-
-    const trLength = $tr.find('> *').length
-
-    $tr.find('> *').each((i, el) => {
-      const $this = $(el)
-
-      if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
-        if (
-          i === 0 && this.options.detailViewAlign === 'left' ||
-          i === trLength - 1 && this.options.detailViewAlign === 'right'
-        ) {
-          const $thDetail = $ths.filter('.detail')
-          const zoomWidth = $thDetail.innerWidth() - $thDetail.find('.fht-cell').width()
-          $thDetail.find('.fht-cell').width($this.innerWidth() - zoomWidth)
-          return
-        }
-      }
-
-      const $th = $ths.eq(i)
-      const zoomWidth = $th.innerWidth() - $th.find('.fht-cell').width()
-      $th.find('.fht-cell').width($this.innerWidth() - zoomWidth)
-    })
-
-    this.horizontalScroll()
-  }
-
-  horizontalScroll () {
-    // horizontal scroll event
-    // TODO: it's probably better improving the layout than binding to scroll event
-    this.$tableBody.off('scroll').on('scroll', () => {
-      const scrollLeft = this.$tableBody.scrollLeft()
-
-      if (this.options.showHeader && this.options.height) {
-        this.$tableHeader.scrollLeft(scrollLeft)
-      }
-
-      if (this.options.showFooter && !this.options.cardView) {
-        this.$tableFooter.scrollLeft(scrollLeft)
-      }
-
-      this.trigger('scroll-body', this.$tableBody)
-    })
-  }
-
-  getVisibleFields () {
-    const visibleFields = []
-
-    for (const field of this.header.fields) {
-      const column = this.columns[this.fieldsColumnsIndex[field]]
-
-      if (!column || !column.visible) {
-        continue
-      }
-      visibleFields.push(field)
-    }
-    return visibleFields
-  }
-
-  initHiddenRows () {
-    this.hiddenRows = []
-  }
-
-  // PUBLIC FUNCTION DEFINITION
-  // =======================
-
-  getOptions () {
-    // deep copy and remove data
-    const options = $.extend({}, this.options)
-    delete options.data
-    return $.extend(true, {}, options)
-  }
-
-  refreshOptions (options) {
-    // If the objects are equivalent then avoid the call of destroy / init methods
-    if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].compareObjects(this.options, options, true)) {
-      return
-    }
-    this.options = $.extend(this.options, options)
-    this.trigger('refresh-options', this.options)
-    this.destroy()
-    this.init()
-  }
-
-  getData (params) {
-    let data = this.options.data
-    if (
-      (
-        this.searchText ||
-        this.options.customSearch ||
-        this.options.sortName !== undefined ||
-        !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(this.filterColumns) ||
-        !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(this.filterColumnsPartial)
-      ) && (!params || !params.unfiltered)
-    ) {
-      data = this.data
-    }
-
-    if (params && params.useCurrentPage) {
-      data = data.slice(this.pageFrom - 1, this.pageTo)
-    }
-
-    if (params && !params.includeHiddenRows) {
-      const hiddenRows = this.getHiddenRows()
-      data = data.filter(row => _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].findIndex(hiddenRows, row) === -1)
-    }
-
-    if (params && params.formatted) {
-      data.forEach((row) => {
-        for (const [key, value] of Object.entries(row)) {
-          const column = this.columns[this.fieldsColumnsIndex[key]]
-          if (!column) {
+        if (!(url || this.options.url) && !this.options.ajax) {
             return
-          }
-
-          row[key] = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column, this.header.formatters[column.fieldIndex], [value, row, row.index, column.field], value)
         }
-      })
-    }
 
-    return data
-  }
+        if (this.options.queryParamsType === 'limit') {
+            params = {
+                search: params.searchText,
+                sort: params.sortName,
+                order: params.sortOrder
+            }
 
-  getSelections () {
-    return this.options.data.filter(row => row[this.header.stateField] === true)
-  }
-
-  load (_data) {
-    let fixedScroll = false
-    let data = _data
-
-    // #431: support pagination
-    if (this.options.pagination && this.options.sidePagination === 'server') {
-      this.options.totalRows = data[this.options.totalField]
-      this.options.totalNotFiltered = data[this.options.totalNotFilteredField]
-      this.footerData = data[this.options.footerField] ? [data[this.options.footerField]] : undefined
-    }
-
-    fixedScroll = data.fixedScroll
-    data = Array.isArray(data) ? data : data[this.options.dataField]
-
-    this.initData(data)
-    this.initSearch()
-    this.initPagination()
-    this.initBody(fixedScroll)
-  }
-
-  append (data) {
-    this.initData(data, 'append')
-    this.initSearch()
-    this.initPagination()
-    this.initSort()
-    this.initBody(true)
-  }
-
-  prepend (data) {
-    this.initData(data, 'prepend')
-    this.initSearch()
-    this.initPagination()
-    this.initSort()
-    this.initBody(true)
-  }
-
-  remove (params) {
-    const len = this.options.data.length
-    let i
-    let row
-
-    if (!params.hasOwnProperty('field') || !params.hasOwnProperty('values')) {
-      return
-    }
-
-    for (i = len - 1; i >= 0; i--) {
-      let exists = false
-      row = this.options.data[i]
-
-      if (!row.hasOwnProperty(params.field) && params.field !== '$index') {
-        continue
-      } else if (!row.hasOwnProperty(params.field) && params.field === '$index') {
-        exists = params.values.includes(i)
-      } else {
-        exists = params.values.includes(row[params.field])
-      }
-      if (exists) {
-        this.options.data.splice(i, 1)
-        if (this.options.sidePagination === 'server') {
-          this.options.totalRows -= 1
+            if (this.options.pagination && this.options.sidePagination === 'server') {
+                params.offset = this.options.pageSize === this.options.formatAllRows() ?
+                    0 : this.options.pageSize * (this.options.pageNumber - 1)
+                params.limit = this.options.pageSize
+                if (params.limit === 0 || this.options.pageSize === this.options.formatAllRows()) {
+                    delete params.limit
+                }
+            }
         }
-      }
-    }
 
-    if (len === this.options.data.length) {
-      return
-    }
+        if (
+            this.options.search &&
+            this.options.sidePagination === 'server' &&
+            this.options.searchable &&
+            this.columns.filter(column => column.searchable).length
+        ) {
+            params.searchable = []
 
-    this.initSearch()
-    this.initPagination()
-    this.initSort()
-    this.initBody(true)
-  }
-
-  removeAll () {
-    if (this.options.data.length > 0) {
-      this.options.data.splice(0, this.options.data.length)
-      this.initSearch()
-      this.initPagination()
-      this.initBody(true)
-    }
-  }
-
-  insertRow (params) {
-    if (!params.hasOwnProperty('index') || !params.hasOwnProperty('row')) {
-      return
-    }
-    this.options.data.splice(params.index, 0, params.row)
-    this.initSearch()
-    this.initPagination()
-    this.initSort()
-    this.initBody(true)
-  }
-
-  updateRow (params) {
-    const allParams = Array.isArray(params) ? params : [params]
-
-    for (const params of allParams) {
-      if (!params.hasOwnProperty('index') || !params.hasOwnProperty('row')) {
-        continue
-      }
-
-      if (params.hasOwnProperty('replace') && params.replace) {
-        this.options.data[params.index] = params.row
-      } else {
-        $.extend(this.options.data[params.index], params.row)
-      }
-    }
-
-    this.initSearch()
-    this.initPagination()
-    this.initSort()
-    this.initBody(true)
-  }
-
-  getRowByUniqueId (_id) {
-    const uniqueId = this.options.uniqueId
-    const len = this.options.data.length
-    let id = _id
-    let dataRow = null
-    let i
-    let row
-    let rowUniqueId
-
-    for (i = len - 1; i >= 0; i--) {
-      row = this.options.data[i]
-
-      if (row.hasOwnProperty(uniqueId)) { // uniqueId is a column
-        rowUniqueId = row[uniqueId]
-      } else if (row._data && row._data.hasOwnProperty(uniqueId)) { // uniqueId is a row data property
-        rowUniqueId = row._data[uniqueId]
-      } else {
-        continue
-      }
-
-      if (typeof rowUniqueId === 'string') {
-        id = id.toString()
-      } else if (typeof rowUniqueId === 'number') {
-        if ((Number(rowUniqueId) === rowUniqueId) && (rowUniqueId % 1 === 0)) {
-          id = parseInt(id)
-        } else if ((rowUniqueId === Number(rowUniqueId)) && (rowUniqueId !== 0)) {
-          id = parseFloat(id)
+            for (const column of this.columns) {
+                if (
+                    !column.checkbox &&
+                    column.searchable &&
+                    (
+                        this.options.visibleSearch &&
+                        column.visible ||
+                        !this.options.visibleSearch
+                    )
+                ) {
+                    params.searchable.push(column.field)
+                }
+            }
         }
-      }
 
-      if (rowUniqueId === id) {
-        dataRow = row
-        break
-      }
-    }
-
-    return dataRow
-  }
-
-  updateByUniqueId (params) {
-    const allParams = Array.isArray(params) ? params : [params]
-
-    for (const params of allParams) {
-      if (!params.hasOwnProperty('id') || !params.hasOwnProperty('row')) {
-        continue
-      }
-
-      const rowId = this.options.data.indexOf(this.getRowByUniqueId(params.id))
-      if (rowId === -1) {
-        continue
-      }
-
-      if (params.hasOwnProperty('replace') && params.replace) {
-        this.options.data[rowId] = params.row
-      } else {
-        $.extend(this.options.data[rowId], params.row)
-      }
-    }
-
-    this.initSearch()
-    this.initPagination()
-    this.initSort()
-    this.initBody(true)
-  }
-
-  removeByUniqueId (id) {
-    const len = this.options.data.length
-    const row = this.getRowByUniqueId(id)
-
-    if (row) {
-      this.options.data.splice(this.options.data.indexOf(row), 1)
-    }
-
-    if (len === this.options.data.length) {
-      return
-    }
-
-    this.initSearch()
-    this.initPagination()
-    this.initBody(true)
-  }
-
-  updateCell (params) {
-    if (!params.hasOwnProperty('index') ||
-      !params.hasOwnProperty('field') ||
-      !params.hasOwnProperty('value')) {
-      return
-    }
-    this.data[params.index][params.field] = params.value
-
-    if (params.reinit === false) {
-      return
-    }
-    this.initSort()
-    this.initBody(true)
-  }
-
-  updateCellByUniqueId (params) {
-    const allParams = Array.isArray(params) ? params : [params]
-
-    allParams.forEach(({id, field, value}) => {
-      const rowId = this.options.data.indexOf(this.getRowByUniqueId(id))
-
-      if (rowId === -1) {
-        return
-      }
-      this.options.data[rowId][field] = value
-    })
-
-    if (params.reinit === false) {
-      return
-    }
-    this.initSort()
-    this.initBody(true)
-  }
-
-  showRow (params) {
-    this._toggleRow(params, true)
-  }
-
-  hideRow (params) {
-    this._toggleRow(params, false)
-  }
-
-  _toggleRow (params, visible) {
-    let row
-
-    if (params.hasOwnProperty('index')) {
-      row = this.getData()[params.index]
-    } else if (params.hasOwnProperty('uniqueId')) {
-      row = this.getRowByUniqueId(params.uniqueId)
-    }
-
-    if (!row) {
-      return
-    }
-
-    const index = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].findIndex(this.hiddenRows, row)
-
-    if (!visible && index === -1) {
-      this.hiddenRows.push(row)
-    } else if (visible && index > -1) {
-      this.hiddenRows.splice(index, 1)
-    }
-
-    this.initBody(true)
-    this.initPagination()
-  }
-
-  getHiddenRows (show) {
-    if (show) {
-      this.initHiddenRows()
-      this.initBody(true)
-      this.initPagination()
-      return
-    }
-    const data = this.getData()
-    const rows = []
-
-    for (const row of data) {
-      if (this.hiddenRows.includes(row)) {
-        rows.push(row)
-      }
-    }
-    this.hiddenRows = rows
-    return rows
-  }
-
-  showColumn (field) {
-    const fields = Array.isArray(field) ? field : [field]
-    fields.forEach(field => {
-      this._toggleColumn(this.fieldsColumnsIndex[field], true, true)
-    })
-  }
-
-  hideColumn (field) {
-    const fields = Array.isArray(field) ? field : [field]
-    fields.forEach(field => {
-      this._toggleColumn(this.fieldsColumnsIndex[field], false, true)
-    })
-  }
-
-  _toggleColumn (index, checked, needUpdate) {
-    if (index === -1 || this.columns[index].visible === checked) {
-      return
-    }
-    this.columns[index].visible = checked
-    this.initHeader()
-    this.initSearch()
-    this.initPagination()
-    this.initBody()
-
-    if (this.options.showColumns) {
-      const $items = this.$toolbar.find('.keep-open input:not(".toggle-all")').prop('disabled', false)
-
-      if (needUpdate) {
-        $items.filter(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('[value="%s"]', index)).prop('checked', checked)
-      }
-
-      if ($items.filter(':checked').length <= this.options.minimumCountColumns) {
-        $items.filter(':checked').prop('disabled', true)
-      }
-    }
-  }
-
-  getVisibleColumns () {
-    return this.columns.filter((column) => column.visible && !this.isSelectionColumn(column))
-  }
-
-  getHiddenColumns () {
-    return this.columns.filter(({visible}) => !visible)
-  }
-
-  isSelectionColumn (column) {
-    return column.radio || column.checkbox
-  }
-
-  showAllColumns () {
-    this._toggleAllColumns(true)
-  }
-
-  hideAllColumns () {
-    this._toggleAllColumns(false)
-  }
-
-  _toggleAllColumns (visible) {
-    for (const column of this.columns.slice().reverse()) {
-      if (column.switchable) {
-        if (!visible && this.options.showColumns && this.getVisibleColumns().length === this.options.minimumCountColumns) {
-          continue
+        if (!_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(this.filterColumnsPartial)) {
+            params.filter = JSON.stringify(this.filterColumnsPartial, null)
         }
-        column.visible = visible
-      }
-    }
 
-    this.initHeader()
-    this.initSearch()
-    this.initPagination()
-    this.initBody()
-    if (this.options.showColumns) {
-      const $items = this.$toolbar.find('.keep-open input[type="checkbox"]:not(".toggle-all")').prop('disabled', false)
+        _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend(params, query || {})
 
-      if (visible) {
-        $items.prop('checked', visible)
-      } else {
-        $items.get().reverse().forEach((item) => {
-          if ($items.filter(':checked').length > this.options.minimumCountColumns) {
-            $(item).prop('checked', visible)
-          }
+        data = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, this.options.queryParams, [params], data)
+
+        // false to stop request
+        if (data === false) {
+            return
+        }
+
+        if (!silent) {
+            this.showLoading()
+        }
+        const request = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend({}, _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, this.options.ajaxOptions), {
+            type: this.options.method,
+            url: url || this.options.url,
+            data: this.options.contentType === 'application/json' && this.options.method === 'post' ?
+                JSON.stringify(data) : data,
+            cache: this.options.cache,
+            contentType: this.options.contentType,
+            dataType: this.options.dataType,
+            success: (_res, textStatus, jqXHR) => {
+                const res = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options,
+                    this.options.responseHandler, [_res, jqXHR], _res)
+
+                if (
+                    this.options.sidePagination === 'client' &&
+                    this.options.paginationLoadMore
+                ) {
+                    this._paginationLoaded = this.data.length === res.length
+                }
+
+                this.load(res)
+                this.trigger('load-success', res, jqXHR && jqXHR.status, jqXHR)
+                if (!silent) {
+                    this.hideLoading()
+                }
+
+                if (
+                    this.options.sidePagination === 'server' &&
+                    this.options.pageNumber > 1 &&
+                    res[this.options.totalField] > 0 &&
+                    !res[this.options.dataField].length
+                ) {
+                    this.updatePagination()
+                }
+            },
+            error: jqXHR => {
+                // abort ajax by multiple request
+                if (jqXHR && jqXHR.status === 0 && this._xhrAbort) {
+                    this._xhrAbort = false
+                    return
+                }
+
+                let data = []
+
+                if (this.options.sidePagination === 'server') {
+                    data = {}
+                    data[this.options.totalField] = 0
+                    data[this.options.dataField] = []
+                }
+                this.load(data)
+                this.trigger('load-error', jqXHR && jqXHR.status, jqXHR)
+                if (!silent) {
+                    this.hideLoading()
+                }
+            }
         })
-      }
 
-      if ($items.filter(':checked').length <= this.options.minimumCountColumns) {
-        $items.filter(':checked').prop('disabled', true)
-      }
-    }
-  }
-
-  mergeCells (options) {
-    const row = options.index
-    let col = this.getVisibleFields().indexOf(options.field)
-    const rowspan = options.rowspan || 1
-    const colspan = options.colspan || 1
-    let i
-    let j
-    const $tr = this.$body.find('>tr')
-
-    col += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)
-
-    const $td = $tr.eq(row).find('>td').eq(col)
-
-    if (row < 0 || col < 0 || row >= this.data.length) {
-      return
-    }
-
-    for (i = row; i < row + rowspan; i++) {
-      for (j = col; j < col + colspan; j++) {
-        $tr.eq(i).find('>td').eq(j).hide()
-      }
-    }
-
-    $td.attr('rowspan', rowspan).attr('colspan', colspan).show()
-  }
-
-  checkAll () {
-    this._toggleCheckAll(true)
-  }
-
-  uncheckAll () {
-    this._toggleCheckAll(false)
-  }
-
-  _toggleCheckAll (checked) {
-    const rowsBefore = this.getSelections()
-    this.$selectAll.add(this.$selectAll_).prop('checked', checked)
-    this.$selectItem.filter(':enabled').prop('checked', checked)
-    this.updateRows()
-    this.updateSelected()
-
-    const rowsAfter = this.getSelections()
-    if (checked) {
-      this.trigger('check-all', rowsAfter, rowsBefore)
-      return
-    }
-
-    this.trigger('uncheck-all', rowsAfter, rowsBefore)
-  }
-
-  checkInvert () {
-    const $items = this.$selectItem.filter(':enabled')
-    let checked = $items.filter(':checked')
-    $items.each((i, el) => {
-      $(el).prop('checked', !$(el).prop('checked'))
-    })
-    this.updateRows()
-    this.updateSelected()
-    this.trigger('uncheck-some', checked)
-    checked = this.getSelections()
-    this.trigger('check-some', checked)
-  }
-
-  check (index) {
-    this._toggleCheck(true, index)
-  }
-
-  uncheck (index) {
-    this._toggleCheck(false, index)
-  }
-
-  _toggleCheck (checked, index) {
-    const $el = this.$selectItem.filter(`[data-index="${index}"]`)
-    const row = this.options.data[index]
-
-    if (
-      $el.is(':radio') ||
-      this.options.singleSelect ||
-      this.options.multipleSelectRow &&
-      !this.multipleSelectRowCtrlKey &&
-      !this.multipleSelectRowShiftKey
-    ) {
-      for (const r of this.options.data) {
-        r[this.header.stateField] = false
-      }
-      this.$selectItem.filter(':checked').not($el).prop('checked', false)
-    }
-
-    row[this.header.stateField] = checked
-
-    if (this.options.multipleSelectRow) {
-      if (this.multipleSelectRowShiftKey && this.multipleSelectRowLastSelectedIndex >= 0) {
-        const indexes = [this.multipleSelectRowLastSelectedIndex, index].sort()
-
-        for (let i = indexes[0] + 1; i < indexes[1]; i++) {
-          this.data[i][this.header.stateField] = true
-          this.$selectItem.filter(`[data-index="${i}"]`).prop('checked', true)
+        if (this.options.ajax) {
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this, this.options.ajax, [request], null)
+        } else {
+            if (this._xhr && this._xhr.readyState !== 4) {
+                this._xhrAbort = true
+                this._xhr.abort()
+            }
+            this._xhr = $.ajax(request)
         }
-      }
 
-      this.multipleSelectRowCtrlKey = false
-      this.multipleSelectRowShiftKey = false
-      this.multipleSelectRowLastSelectedIndex = checked ? index : -1
+        return data
     }
 
-    $el.prop('checked', checked)
-    this.updateSelected()
-    this.trigger(checked ? 'check' : 'uncheck', this.data[index], $el)
-  }
+    initSearchText() {
+        if (this.options.search) {
+            this.searchText = ''
+            if (this.options.searchText !== '') {
+                const $search = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)
 
-  checkBy (obj) {
-    this._toggleCheckBy(true, obj)
-  }
-
-  uncheckBy (obj) {
-    this._toggleCheckBy(false, obj)
-  }
-
-  _toggleCheckBy (checked, obj) {
-    if (!obj.hasOwnProperty('field') || !obj.hasOwnProperty('values')) {
-      return
+                $search.val(this.options.searchText)
+                this.onSearch({ currentTarget: $search, firedByInitSearchText: true })
+            }
+        }
     }
 
-    const rows = []
-    this.data.forEach((row, i) => {
-      if (!row.hasOwnProperty(obj.field)) {
-        return false
-      }
-      if (obj.values.includes(row[obj.field])) {
-        let $el = this.$selectItem.filter(':enabled')
-          .filter(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('[data-index="%s"]', i))
+    getCaret() {
+        this.$header.find('th').each((i, th) => {
+            $(th).find('.sortable').removeClass('desc asc')
+                .addClass($(th).data('field') === this.options.sortName ?
+                    this.options.sortOrder : 'both')
+        })
+    }
 
-        $el = checked ? $el.not(':checked') : $el.filter(':checked')
+    updateSelected() {
+        const checkAll = this.$selectItem.filter(':enabled').length &&
+            this.$selectItem.filter(':enabled').length ===
+            this.$selectItem.filter(':enabled').filter(':checked').length
 
-        if (!$el.length) {
-          return
+        this.$selectAll.add(this.$selectAll_).prop('checked', checkAll)
+
+        this.$selectItem.each((i, el) => {
+            $(el).closest('tr')[$(el).prop('checked') ? 'addClass' : 'removeClass']('selected')
+        })
+    }
+
+    updateRows() {
+        this.$selectItem.each((i, el) => {
+            this.data[$(el).data('index')][this.header.stateField] = $(el).prop('checked')
+        })
+    }
+
+    resetRows() {
+        for (const row of this.data) {
+            this.$selectAll.prop('checked', false)
+            this.$selectItem.prop('checked', false)
+            if (this.header.stateField) {
+                row[this.header.stateField] = false
+            }
+        }
+        this.initHiddenRows()
+    }
+
+    trigger(_name, ...args) {
+        const name = `${_name}.bs.table`
+
+        this.options[BootstrapTable.EVENTS[name]](...[...args, this])
+        this.$el.trigger($.Event(name, { sender: this }), args)
+
+        this.options.onAll(name, ...[...args, this])
+        this.$el.trigger($.Event('all.bs.table', { sender: this }), [name, args])
+    }
+
+    resetHeader() {
+        // fix #61: the hidden table reset header bug.
+        // fix bug: get $el.css('width') error sometime (height = 500)
+        clearTimeout(this.timeoutId_)
+        this.timeoutId_ = setTimeout(() => this.fitHeader(), this.$el.is(':hidden') ? 100 : 0)
+    }
+
+    fitHeader() {
+        if (this.$el.is(':hidden')) {
+            this.timeoutId_ = setTimeout(() => this.fitHeader(), 100)
+            return
+        }
+
+        const fixedBody = this.$tableBody.get(0)
+        const scrollWidth = this.hasScrollBar &&
+            fixedBody.scrollHeight > fixedBody.clientHeight + this.$header.outerHeight() ?
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getScrollBarWidth() : 0
+
+        this.$el.css('margin-top', -this.$header.outerHeight())
+
+        const focused = this.$tableHeader.find(':focus')
+
+        if (focused.length > 0) {
+            const $th = focused.parents('th')
+
+            if ($th.length > 0) {
+                const dataField = $th.attr('data-field')
+
+                if (dataField !== undefined) {
+                    const $headerTh = this.$header.find(`[data-field='${dataField}']`)
+
+                    if ($headerTh.length > 0) {
+                        $headerTh.find(':input').addClass('focus-temp')
+                    }
+                }
+            }
+        }
+
+        this.$header_ = this.$header.clone(true, true)
+        this.$selectAll_ = this.$header_.find('[name="btSelectAll"]')
+        this.$tableHeader
+            .css('margin-right', scrollWidth)
+            .find('table').css('width', this.$el.outerWidth())
+            .html('').attr('class', this.$el.attr('class'))
+            .append(this.$header_)
+
+        this.$tableLoading.css('width', this.$el.outerWidth())
+
+        const focusedTemp = $('.focus-temp:visible:eq(0)')
+
+        if (focusedTemp.length > 0) {
+            focusedTemp.focus()
+            this.$header.find('.focus-temp').removeClass('focus-temp')
+        }
+
+        // fix bug: $.data() is not working as expected after $.append()
+        this.$header.find('th[data-field]').each((i, el) => {
+            this.$header_.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('th[data-field="%s"]', $(el).data('field'))).data($(el).data())
+        })
+
+        const visibleFields = this.getVisibleFields()
+        const $ths = this.$header_.find('th')
+        let $tr = this.$body.find('>tr:not(.no-records-found,.virtual-scroll-top)').eq(0)
+
+        while ($tr.length && $tr.find('>td[colspan]:not([colspan="1"])').length) {
+            $tr = $tr.next()
+        }
+
+        const trLength = $tr.find('> *').length
+
+        $tr.find('> *').each((i, el) => {
+            const $this = $(el)
+
+            if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
+                if (
+                    i === 0 && this.options.detailViewAlign !== 'right' ||
+                    i === trLength - 1 && this.options.detailViewAlign === 'right'
+                ) {
+                    const $thDetail = $ths.filter('.detail')
+                    const zoomWidth = $thDetail.innerWidth() - $thDetail.find('.fht-cell').width()
+
+                    $thDetail.find('.fht-cell').width($this.innerWidth() - zoomWidth)
+                    return
+                }
+            }
+
+            const index = i - _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)
+            let $th = this.$header_.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('th[data-field="%s"]', visibleFields[index]))
+
+            if ($th.length > 1) {
+                $th = $($ths[$this[0].cellIndex])
+            }
+
+            const zoomWidth = $th.innerWidth() - $th.find('.fht-cell').width()
+
+            $th.find('.fht-cell').width($this.innerWidth() - zoomWidth)
+        })
+
+        this.horizontalScroll()
+        this.trigger('post-header')
+    }
+
+    initFooter() {
+        if (!this.options.showFooter || this.options.cardView) { // do nothing
+            return
+        }
+
+        const data = this.getData()
+        const html = []
+        let detailTemplate = ''
+
+        if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
+            detailTemplate = '<th class="detail"><div class="th-inner"></div><div class="fht-cell"></div></th>'
+        }
+
+        if (detailTemplate && this.options.detailViewAlign !== 'right') {
+            html.push(detailTemplate)
+        }
+
+        for (const column of this.columns) {
+            let falign = ''
+            let valign = ''
+            const csses = []
+            let style = {}
+            let class_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', column['class'])
+
+            if (
+                !column.visible ||
+                this.footerData && this.footerData.length > 0 && !(column.field in this.footerData[0])
+            ) {
+                continue
+            }
+
+            if (this.options.cardView && !column.cardVisible) {
+                return
+            }
+
+            falign = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('text-align: %s; ', column.falign ? column.falign : column.align)
+            valign = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('vertical-align: %s; ', column.valign)
+
+            style = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(null, column.footerStyle || this.options.footerStyle, [column])
+
+            if (style && style.css) {
+                for (const [key, value] of Object.entries(style.css)) {
+                    csses.push(`${key}: ${value}`)
+                }
+            }
+            if (style && style.classes) {
+                class_ = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' class="%s"', column['class'] ?
+                    [column['class'], style.classes].join(' ') : style.classes)
+            }
+
+            html.push('<th', class_, _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(' style="%s"', falign + valign + csses.concat().join('; ') || undefined))
+            let colspan = 0
+
+            if (this.footerData && this.footerData.length > 0) {
+                colspan = this.footerData[0][`_${column.field}_colspan`] || 0
+            }
+            if (colspan) {
+                html.push(` colspan="${colspan}" `)
+            }
+
+            html.push('>')
+            html.push('<div class="th-inner">')
+
+            let value = ''
+
+            if (this.footerData && this.footerData.length > 0) {
+                value = this.footerData[0][column.field] || ''
+            }
+            html.push(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column, column.footerFormatter,
+                [data, value], value))
+
+            html.push('</div>')
+            html.push('<div class="fht-cell"></div>')
+            html.push('</div>')
+            html.push('</th>')
+        }
+
+        if (detailTemplate && this.options.detailViewAlign === 'right') {
+            html.push(detailTemplate)
+        }
+
+        if (!this.options.height && !this.$tableFooter.length) {
+            this.$el.append('<tfoot><tr></tr></tfoot>')
+            this.$tableFooter = this.$el.find('tfoot')
+        }
+
+        if (!this.$tableFooter.find('tr').length) {
+            this.$tableFooter.html('<table><thead><tr></tr></thead></table>')
+        }
+
+        this.$tableFooter.find('tr').html(html.join(''))
+
+        this.trigger('post-footer', this.$tableFooter)
+    }
+
+    fitFooter() {
+        if (this.$el.is(':hidden')) {
+            setTimeout(() => this.fitFooter(), 100)
+            return
+        }
+
+        const fixedBody = this.$tableBody.get(0)
+        const scrollWidth = this.hasScrollBar &&
+            fixedBody.scrollHeight > fixedBody.clientHeight + this.$header.outerHeight() ?
+            _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getScrollBarWidth() : 0
+
+        this.$tableFooter
+            .css('margin-right', scrollWidth)
+            .find('table').css('width', this.$el.outerWidth())
+            .attr('class', this.$el.attr('class'))
+
+        const $ths = this.$tableFooter.find('th')
+        let $tr = this.$body.find('>tr:first-child:not(.no-records-found)')
+
+        $ths.find('.fht-cell').width('auto')
+
+        while ($tr.length && $tr.find('>td[colspan]:not([colspan="1"])').length) {
+            $tr = $tr.next()
+        }
+
+        const trLength = $tr.find('> *').length
+
+        $tr.find('> *').each((i, el) => {
+            const $this = $(el)
+
+            if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].hasDetailViewIcon(this.options)) {
+                if (
+                    i === 0 && this.options.detailViewAlign === 'left' ||
+                    i === trLength - 1 && this.options.detailViewAlign === 'right'
+                ) {
+                    const $thDetail = $ths.filter('.detail')
+                    const zoomWidth = $thDetail.innerWidth() - $thDetail.find('.fht-cell').width()
+
+                    $thDetail.find('.fht-cell').width($this.innerWidth() - zoomWidth)
+                    return
+                }
+            }
+
+            const $th = $ths.eq(i)
+            const zoomWidth = $th.innerWidth() - $th.find('.fht-cell').width()
+
+            $th.find('.fht-cell').width($this.innerWidth() - zoomWidth)
+        })
+
+        this.horizontalScroll()
+    }
+
+    horizontalScroll() {
+        // horizontal scroll event
+        // TODO: it's probably better improving the layout than binding to scroll event
+        this.$tableBody.off('scroll').on('scroll', () => {
+            const scrollLeft = this.$tableBody.scrollLeft()
+
+            if (this.options.showHeader && this.options.height) {
+                this.$tableHeader.scrollLeft(scrollLeft)
+            }
+
+            if (this.options.showFooter && !this.options.cardView) {
+                this.$tableFooter.scrollLeft(scrollLeft)
+            }
+
+            this.trigger('scroll-body', this.$tableBody)
+        })
+    }
+
+    getVisibleFields() {
+        const visibleFields = []
+
+        for (const field of this.header.fields) {
+            const column = this.columns[this.fieldsColumnsIndex[field]]
+
+            if (!column || !column.visible || this.options.cardView && !column.cardVisible) {
+                continue
+            }
+            visibleFields.push(field)
+        }
+        return visibleFields
+    }
+
+    initHiddenRows() {
+        this.hiddenRows = []
+    }
+
+    // PUBLIC FUNCTION DEFINITION
+    // =======================
+
+    getOptions() {
+        // deep copy and remove data
+        const options = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend({}, this.options)
+
+        delete options.data
+        return _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend(true, {}, options)
+    }
+
+    refreshOptions(options) {
+        // If the objects are equivalent then avoid the call of destroy / init methods
+        if (_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].compareObjects(this.options, options, true)) {
+            return
+        }
+        this.options = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend(this.options, options)
+        this.trigger('refresh-options', this.options)
+        this.destroy()
+        this.init()
+    }
+
+    getData(params) {
+        let data = this.options.data
+
+        if (
+            (
+                this.searchText ||
+                this.options.customSearch ||
+                this.options.sortName !== undefined ||
+                this.enableCustomSort || // Fix #4616: this.enableCustomSort is for extensions
+                !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(this.filterColumns) ||
+                typeof this.options.filterOptions.filterAlgorithm === 'function' ||
+                !_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(this.filterColumnsPartial)
+            ) && (!params || !params.unfiltered)
+        ) {
+            data = this.data
+        }
+
+        if (params && !params.includeHiddenRows) {
+            const hiddenRows = this.getHiddenRows()
+
+            data = data.filter(row => _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].findIndex(hiddenRows, row) === -1)
+        }
+
+        if (params && params.useCurrentPage) {
+            data = data.slice(this.pageFrom - 1, this.pageTo)
+        }
+
+        if (params && params.formatted) {
+            return data.map(row => {
+                for (const [key, value] of Object.entries(row)) {
+                    const column = this.columns[this.fieldsColumnsIndex[key]]
+
+                    if (!column) {
+                        continue
+                    }
+
+                    return _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(column, this.header.formatters[column.fieldIndex],
+                        [value, row, row.index, column.field], value)
+                }
+            })
+        }
+
+        return data
+    }
+
+    getSelections() {
+        return (this.options.maintainMetaData ? this.options.data : this.data)
+            .filter(row => row[this.header.stateField] === true)
+    }
+
+    load(_data) {
+        let fixedScroll = false
+        let data = _data
+
+        // #431: support pagination
+        if (this.options.pagination && this.options.sidePagination === 'server') {
+            this.options.totalRows = data[this.options.totalField]
+            this.options.totalNotFiltered = data[this.options.totalNotFilteredField]
+            this.footerData = data[this.options.footerField] ? [data[this.options.footerField]] : undefined
+        }
+
+        fixedScroll = this.options.fixedScroll || data.fixedScroll
+        data = Array.isArray(data) ? data : data[this.options.dataField]
+
+        this.initData(data)
+        this.initSearch()
+        this.initPagination()
+        this.initBody(fixedScroll)
+    }
+
+    append(data) {
+        this.initData(data, 'append')
+        this.initSearch()
+        this.initPagination()
+        this.initSort()
+        this.initBody(true)
+    }
+
+    prepend(data) {
+        this.initData(data, 'prepend')
+        this.initSearch()
+        this.initPagination()
+        this.initSort()
+        this.initBody(true)
+    }
+
+    remove(params) {
+        let removed = 0
+
+        for (let i = this.options.data.length - 1; i >= 0; i--) {
+            const row = this.options.data[i]
+            const value = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(row, params.field, this.options.escape, row.escape)
+
+            if (value === undefined && params.field !== '$index') {
+                continue
+            }
+
+            if (
+                !row.hasOwnProperty(params.field) &&
+                params.field === '$index' &&
+                params.values.includes(i) ||
+                params.values.includes(value)
+            ) {
+                removed++
+
+                this.options.data.splice(i, 1)
+            }
+        }
+
+        if (!removed) {
+            return
+        }
+
+        if (this.options.sidePagination === 'server') {
+            this.options.totalRows -= removed
+            this.data = [...this.options.data]
+        }
+
+        this.initSearch()
+        this.initPagination()
+        this.initSort()
+        this.initBody(true)
+    }
+
+    removeAll() {
+        if (this.options.data.length > 0) {
+            this.options.data.splice(0, this.options.data.length)
+            this.initSearch()
+            this.initPagination()
+            this.initBody(true)
+        }
+    }
+
+    insertRow(params) {
+        if (!params.hasOwnProperty('index') || !params.hasOwnProperty('row')) {
+            return
+        }
+        this.options.data.splice(params.index, 0, params.row)
+        this.initSearch()
+        this.initPagination()
+        this.initSort()
+        this.initBody(true)
+    }
+
+    updateRow(params) {
+        const allParams = Array.isArray(params) ? params : [params]
+
+        for (const params of allParams) {
+            if (!params.hasOwnProperty('index') || !params.hasOwnProperty('row')) {
+                continue
+            }
+
+            if (params.hasOwnProperty('replace') && params.replace) {
+                this.options.data[params.index] = params.row
+            } else {
+                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend(this.options.data[params.index], params.row)
+            }
+        }
+
+        this.initSearch()
+        this.initPagination()
+        this.initSort()
+        this.initBody(true)
+    }
+
+    getRowByUniqueId(_id) {
+        const uniqueId = this.options.uniqueId
+        const len = this.options.data.length
+        let id = _id
+        let dataRow = null
+        let i
+        let row
+
+        for (i = len - 1; i >= 0; i--) {
+            row = this.options.data[i]
+            const rowUniqueId = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getItemField(row, uniqueId, this.options.escape, row.escape)
+
+            if (rowUniqueId === undefined) {
+                continue
+            }
+
+            if (typeof rowUniqueId === 'string') {
+                id = _id.toString()
+            } else if (typeof rowUniqueId === 'number') {
+                if (Number(rowUniqueId) === rowUniqueId && rowUniqueId % 1 === 0) {
+                    id = parseInt(_id, 10)
+                } else if (rowUniqueId === Number(rowUniqueId) && rowUniqueId !== 0) {
+                    id = parseFloat(_id)
+                }
+            }
+
+            if (rowUniqueId === id) {
+                dataRow = row
+                break
+            }
+        }
+
+        return dataRow
+    }
+
+    updateByUniqueId(params) {
+        const allParams = Array.isArray(params) ? params : [params]
+        let updatedUid = null
+
+        for (const params of allParams) {
+            if (!params.hasOwnProperty('id') || !params.hasOwnProperty('row')) {
+                continue
+            }
+
+            const rowId = this.options.data.indexOf(this.getRowByUniqueId(params.id))
+
+            if (rowId === -1) {
+                continue
+            }
+
+            if (params.hasOwnProperty('replace') && params.replace) {
+                this.options.data[rowId] = params.row
+            } else {
+                _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend(this.options.data[rowId], params.row)
+            }
+            updatedUid = params.id
+        }
+
+        this.initSearch()
+        this.initPagination()
+        this.initSort()
+        this.initBody(true, updatedUid)
+    }
+
+    removeByUniqueId(id) {
+        const len = this.options.data.length
+        const row = this.getRowByUniqueId(id)
+
+        if (row) {
+            this.options.data.splice(this.options.data.indexOf(row), 1)
+        }
+
+        if (len === this.options.data.length) {
+            return
+        }
+
+        if (this.options.sidePagination === 'server') {
+            this.options.totalRows -= 1
+            this.data = [...this.options.data]
+        }
+
+        this.initSearch()
+        this.initPagination()
+        this.initBody(true)
+    }
+
+    _updateCellOnly(field, index) {
+        const rowHtml = this.initRow(this.options.data[index], index)
+        let fieldIndex = this.getVisibleFields().indexOf(field)
+
+        if (fieldIndex === -1) {
+            return
+        }
+
+        fieldIndex += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)
+
+        this.$body.find(`>tr[data-index=${index}]`)
+            .find(`>td:eq(${fieldIndex})`)
+            .replaceWith($(rowHtml).find(`>td:eq(${fieldIndex})`))
+
+        this.initBodyEvent()
+        this.initFooter()
+        this.resetView()
+        this.updateSelected()
+    }
+
+    updateCell(params) {
+        if (!params.hasOwnProperty('index') ||
+            !params.hasOwnProperty('field') ||
+            !params.hasOwnProperty('value')) {
+            return
+        }
+        this.options.data[params.index][params.field] = params.value
+
+        if (params.reinit === false) {
+            this._updateCellOnly(params.field, params.index)
+            return
+        }
+        this.initSort()
+        this.initBody(true)
+    }
+
+    updateCellByUniqueId(params) {
+        const allParams = Array.isArray(params) ? params : [params]
+
+        allParams.forEach(({ id, field, value }) => {
+            const index = this.options.data.indexOf(this.getRowByUniqueId(id))
+
+            if (index === -1) {
+                return
+            }
+            this.options.data[index][field] = value
+        })
+
+        if (params.reinit === false) {
+            this._updateCellOnly(params.field,
+                this.options.data.indexOf(this.getRowByUniqueId(params.id)))
+            return
+        }
+        this.initSort()
+        this.initBody(true)
+    }
+
+    showRow(params) {
+        this._toggleRow(params, true)
+    }
+
+    hideRow(params) {
+        this._toggleRow(params, false)
+    }
+
+    _toggleRow(params, visible) {
+        let row
+
+        if (params.hasOwnProperty('index')) {
+            row = this.getData()[params.index]
+        } else if (params.hasOwnProperty('uniqueId')) {
+            row = this.getRowByUniqueId(params.uniqueId)
+        }
+
+        if (!row) {
+            return
+        }
+
+        const index = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].findIndex(this.hiddenRows, row)
+
+        if (!visible && index === -1) {
+            this.hiddenRows.push(row)
+        } else if (visible && index > -1) {
+            this.hiddenRows.splice(index, 1)
+        }
+
+        this.initBody(true)
+        this.initPagination()
+    }
+
+    getHiddenRows(show) {
+        if (show) {
+            this.initHiddenRows()
+            this.initBody(true)
+            this.initPagination()
+            return
+        }
+        const data = this.getData()
+        const rows = []
+
+        for (const row of data) {
+            if (this.hiddenRows.includes(row)) {
+                rows.push(row)
+            }
+        }
+        this.hiddenRows = rows
+        return rows
+    }
+
+    showColumn(field) {
+        const fields = Array.isArray(field) ? field : [field]
+
+        fields.forEach(field => {
+            this._toggleColumn(this.fieldsColumnsIndex[field], true, true)
+        })
+    }
+
+    hideColumn(field) {
+        const fields = Array.isArray(field) ? field : [field]
+
+        fields.forEach(field => {
+            this._toggleColumn(this.fieldsColumnsIndex[field], false, true)
+        })
+    }
+
+    _toggleColumn(index, checked, needUpdate) {
+        if (index === undefined || this.columns[index].visible === checked) {
+            return
+        }
+        this.columns[index].visible = checked
+        this.initHeader()
+        this.initSearch()
+        this.initPagination()
+        this.initBody()
+
+        if (this.options.showColumns) {
+            const $items = this.$toolbar.find('.keep-open input:not(".toggle-all")').prop('disabled', false)
+
+            if (needUpdate) {
+                $items.filter(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('[value="%s"]', index)).prop('checked', checked)
+            }
+
+            if ($items.filter(':checked').length <= this.options.minimumCountColumns) {
+                $items.filter(':checked').prop('disabled', true)
+            }
+        }
+    }
+
+    getVisibleColumns() {
+        return this.columns.filter(column => column.visible && !this.isSelectionColumn(column))
+    }
+
+    getHiddenColumns() {
+        return this.columns.filter(({ visible }) => !visible)
+    }
+
+    isSelectionColumn(column) {
+        return column.radio || column.checkbox
+    }
+
+    showAllColumns() {
+        this._toggleAllColumns(true)
+    }
+
+    hideAllColumns() {
+        this._toggleAllColumns(false)
+    }
+
+    _toggleAllColumns(visible) {
+        for (const column of this.columns.slice().reverse()) {
+            if (column.switchable) {
+                if (
+                    !visible &&
+                    this.options.showColumns &&
+                    this.getVisibleColumns().filter(it => it.switchable).length === this.options.minimumCountColumns
+                ) {
+                    continue
+                }
+                column.visible = visible
+            }
+        }
+
+        this.initHeader()
+        this.initSearch()
+        this.initPagination()
+        this.initBody()
+        if (this.options.showColumns) {
+            const $items = this.$toolbar.find('.keep-open input[type="checkbox"]:not(".toggle-all")').prop('disabled', false)
+
+            if (visible) {
+                $items.prop('checked', visible)
+            } else {
+                $items.get().reverse().forEach(item => {
+                    if ($items.filter(':checked').length > this.options.minimumCountColumns) {
+                        $(item).prop('checked', visible)
+                    }
+                })
+            }
+
+            if ($items.filter(':checked').length <= this.options.minimumCountColumns) {
+                $items.filter(':checked').prop('disabled', true)
+            }
+        }
+    }
+
+    mergeCells(options) {
+        const row = options.index
+        let col = this.getVisibleFields().indexOf(options.field)
+        const rowspan = options.rowspan || 1
+        const colspan = options.colspan || 1
+        let i
+        let j
+        const $tr = this.$body.find('>tr[data-index]')
+
+        col += _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getDetailViewIndexOffset(this.options)
+
+        const $td = $tr.eq(row).find('>td').eq(col)
+
+        if (row < 0 || col < 0 || row >= this.data.length) {
+            return
+        }
+
+        for (i = row; i < row + rowspan; i++) {
+            for (j = col; j < col + colspan; j++) {
+                $tr.eq(i).find('>td').eq(j).hide()
+            }
+        }
+
+        $td.attr('rowspan', rowspan).attr('colspan', colspan).show()
+    }
+
+    checkAll() {
+        this._toggleCheckAll(true)
+    }
+
+    uncheckAll() {
+        this._toggleCheckAll(false)
+    }
+
+    _toggleCheckAll(checked) {
+        const rowsBefore = this.getSelections()
+
+        this.$selectAll.add(this.$selectAll_).prop('checked', checked)
+        this.$selectItem.filter(':enabled').prop('checked', checked)
+        this.updateRows()
+        this.updateSelected()
+
+        const rowsAfter = this.getSelections()
+
+        if (checked) {
+            this.trigger('check-all', rowsAfter, rowsBefore)
+            return
+        }
+
+        this.trigger('uncheck-all', rowsAfter, rowsBefore)
+    }
+
+    checkInvert() {
+        const $items = this.$selectItem.filter(':enabled')
+        let checked = $items.filter(':checked')
+
+        $items.each((i, el) => {
+            $(el).prop('checked', !$(el).prop('checked'))
+        })
+        this.updateRows()
+        this.updateSelected()
+        this.trigger('uncheck-some', checked)
+        checked = this.getSelections()
+        this.trigger('check-some', checked)
+    }
+
+    check(index) {
+        this._toggleCheck(true, index)
+    }
+
+    uncheck(index) {
+        this._toggleCheck(false, index)
+    }
+
+    _toggleCheck(checked, index) {
+        const $el = this.$selectItem.filter(`[data-index="${index}"]`)
+        const row = this.data[index]
+
+        if (
+            $el.is(':radio') ||
+            this.options.singleSelect ||
+            this.options.multipleSelectRow &&
+            !this.multipleSelectRowCtrlKey &&
+            !this.multipleSelectRowShiftKey
+        ) {
+            for (const r of this.options.data) {
+                r[this.header.stateField] = false
+            }
+            this.$selectItem.filter(':checked').not($el).prop('checked', false)
+        }
+
+        row[this.header.stateField] = checked
+
+        if (this.options.multipleSelectRow) {
+            if (this.multipleSelectRowShiftKey && this.multipleSelectRowLastSelectedIndex >= 0) {
+                const [fromIndex, toIndex] = this.multipleSelectRowLastSelectedIndex < index ?
+                    [this.multipleSelectRowLastSelectedIndex, index] : [index, this.multipleSelectRowLastSelectedIndex]
+
+                for (let i = fromIndex + 1; i < toIndex; i++) {
+                    this.data[i][this.header.stateField] = true
+                    this.$selectItem.filter(`[data-index="${i}"]`).prop('checked', true)
+                }
+            }
+
+            this.multipleSelectRowCtrlKey = false
+            this.multipleSelectRowShiftKey = false
+            this.multipleSelectRowLastSelectedIndex = checked ? index : -1
         }
 
         $el.prop('checked', checked)
-        row[this.header.stateField] = checked
-        rows.push(row)
-        this.trigger(checked ? 'check' : 'uncheck', row, $el)
-      }
-    })
-    this.updateSelected()
-    this.trigger(checked ? 'check-some' : 'uncheck-some', rows)
-  }
-
-  refresh (params) {
-    if (params && params.url) {
-      this.options.url = params.url
-    }
-    if (params && params.pageNumber) {
-      this.options.pageNumber = params.pageNumber
-    }
-    if (params && params.pageSize) {
-      this.options.pageSize = params.pageSize
-    }
-    this.trigger('refresh', this.initServer(params && params.silent,
-      params && params.query, params && params.url))
-  }
-
-  destroy () {
-    this.$el.insertBefore(this.$container)
-    $(this.options.toolbar).insertBefore(this.$el)
-    this.$container.next().remove()
-    this.$container.remove()
-    this.$el.html(this.$el_.html())
-      .css('margin-top', '0')
-      .attr('class', this.$el_.attr('class') || '') // reset the class
-  }
-
-  resetView (params) {
-    let padding = 0
-
-    if (params && params.height) {
-      this.options.height = params.height
+        this.updateSelected()
+        this.trigger(checked ? 'check' : 'uncheck', this.data[index], $el)
     }
 
-    this.$selectAll.prop('checked', this.$selectItem.length > 0 &&
-      this.$selectItem.length === this.$selectItem.filter(':checked').length)
-
-    this.$tableContainer.toggleClass('has-card-view', this.options.cardView)
-
-    if (!this.options.cardView && this.options.showHeader && this.options.height) {
-      this.$tableHeader.show()
-      this.resetHeader()
-      padding += this.$header.outerHeight(true) + 1
-    } else {
-      this.$tableHeader.hide()
-      this.trigger('post-header')
+    checkBy(obj) {
+        this._toggleCheckBy(true, obj)
     }
 
-    if (!this.options.cardView && this.options.showFooter) {
-      this.$tableFooter.show()
-      this.fitFooter()
-      if (this.options.height) {
-        padding += this.$tableFooter.outerHeight(true)
-      }
+    uncheckBy(obj) {
+        this._toggleCheckBy(false, obj)
     }
 
-    if (this.$container.hasClass('fullscreen')) {
-      this.$tableContainer.css('height', '')
-      this.$tableContainer.css('width', '')
-    } else if (this.options.height) {
-      if (this.$tableBorder) {
-        this.$tableBorder.css('width', '')
-        this.$tableBorder.css('height', '')
-      }
-
-      const toolbarHeight = this.$toolbar.outerHeight(true)
-      const paginationHeight = this.$pagination.outerHeight(true)
-      const height = this.options.height - toolbarHeight - paginationHeight
-      const $bodyTable = this.$tableBody.find('>table')
-      const tableHeight = $bodyTable.outerHeight()
-      this.$tableContainer.css('height', `${height}px`)
-
-      if (this.$tableBorder && $bodyTable.is(':visible')) {
-        let tableBorderHeight = height - tableHeight - 2
-        if (this.$tableBody[0].scrollWidth - this.$tableBody.innerWidth()) {
-          tableBorderHeight -= _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getScrollBarWidth()
+    _toggleCheckBy(checked, obj) {
+        if (!obj.hasOwnProperty('field') || !obj.hasOwnProperty('values')) {
+            return
         }
-        this.$tableBorder.css('width', `${$bodyTable.outerWidth()}px`)
-        this.$tableBorder.css('height', `${tableBorderHeight}px`)
-      }
+
+        const rows = []
+
+        this.data.forEach((row, i) => {
+            if (!row.hasOwnProperty(obj.field)) {
+                return false
+            }
+            if (obj.values.includes(row[obj.field])) {
+                let $el = this.$selectItem.filter(':enabled')
+                    .filter(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('[data-index="%s"]', i))
+                const onlyCurrentPage = obj.hasOwnProperty('onlyCurrentPage') ? obj.onlyCurrentPage : false
+
+                $el = checked ? $el.not(':checked') : $el.filter(':checked')
+
+                if (!$el.length && onlyCurrentPage) {
+                    return
+                }
+
+                $el.prop('checked', checked)
+                row[this.header.stateField] = checked
+                rows.push(row)
+                this.trigger(checked ? 'check' : 'uncheck', row, $el)
+            }
+        })
+        this.updateSelected()
+        this.trigger(checked ? 'check-some' : 'uncheck-some', rows)
     }
 
-    if (this.options.cardView) {
-      // remove the element css
-      this.$el.css('margin-top', '0')
-      this.$tableContainer.css('padding-bottom', '0')
-      this.$tableFooter.hide()
-    } else {
-      // Assign the correct sortable arrow
-      this.getCaret()
-      this.$tableContainer.css('padding-bottom', `${padding}px`)
-    }
-
-    this.trigger('reset-view')
-  }
-
-  showLoading () {
-    this.$tableLoading.toggleClass('open', true)
-
-    let fontSize = this.options.loadingFontSize
-
-    if (this.options.loadingFontSize === 'auto') {
-      fontSize = this.$tableLoading.width() * 0.04
-      fontSize = Math.max(12, fontSize)
-      fontSize = Math.min(32, fontSize)
-      fontSize = `${fontSize}px`
-    }
-
-    this.$tableLoading.find('.loading-text').css('font-size', fontSize)
-  }
-
-  hideLoading () {
-    this.$tableLoading.toggleClass('open', false)
-  }
-
-  togglePagination () {
-    this.options.pagination = !this.options.pagination
-
-    const icon = this.options.showButtonIcons ? this.options.pagination ? this.options.icons.paginationSwitchDown : this.options.icons.paginationSwitchUp : ''
-    const text = this.options.showButtonText ? this.options.pagination ? this.options.formatPaginationSwitchUp() : this.options.formatPaginationSwitchDown() : ''
-    this.$toolbar.find('button[name="paginationSwitch"]')
-      .html(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, icon) + ' ' + text)
-    this.updatePagination()
-  }
-
-  toggleFullscreen () {
-    this.$el.closest('.bootstrap-table').toggleClass('fullscreen')
-    this.resetView()
-  }
-
-  toggleView () {
-    this.options.cardView = !this.options.cardView
-    this.initHeader()
-
-    const icon = this.options.showButtonIcons ? this.options.cardView ? this.options.icons.toggleOn : this.options.icons.toggleOff : ''
-    const text = this.options.showButtonText ? this.options.cardView ? this.options.formatToggleOff() : this.options.formatToggleOn() : ''
-    this.$toolbar.find('button[name="toggle"]')
-      .html(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, icon) + ' ' + text)
-    this.initBody()
-    this.trigger('toggle', this.options.cardView)
-  }
-
-  resetSearch (text) {
-    const $search = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)
-    $search.val(text || '')
-    this.onSearch({currentTarget: $search})
-  }
-
-  filterBy (columns, options) {
-    this.filterOptions = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(options) ? this.options.filterOptions : $.extend(this.options.filterOptions, options)
-    this.filterColumns = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(columns) ? {} : columns
-    this.options.pageNumber = 1
-    this.initSearch()
-    this.updatePagination()
-  }
-
-  scrollTo (params) {
-    let options = {unit: 'px', value: 0}
-    if (typeof params === 'object') {
-      options = Object.assign(options, params)
-    } else if (typeof params === 'string' && params === 'bottom') {
-      options.value = this.$tableBody[0].scrollHeight
-    } else if (typeof params === 'string' || typeof params === 'number') {
-      options.value = params
-    }
-
-    let scrollTo = options.value
-    if (options.unit === 'rows') {
-      scrollTo = 0
-      this.$body.find(`> tr:lt(${options.value})`).each((i, el) => {
-        scrollTo += $(el).outerHeight(true)
-      })
-    }
-
-    this.$tableBody.scrollTop(scrollTo)
-  }
-
-  getScrollPosition () {
-    return this.$tableBody.scrollTop()
-  }
-
-  selectPage (page) {
-    if (page > 0 && page <= this.options.totalPages) {
-      this.options.pageNumber = page
-      this.updatePagination()
-    }
-  }
-
-  prevPage () {
-    if (this.options.pageNumber > 1) {
-      this.options.pageNumber--
-      this.updatePagination()
-    }
-  }
-
-  nextPage () {
-    if (this.options.pageNumber < this.options.totalPages) {
-      this.options.pageNumber++
-      this.updatePagination()
-    }
-  }
-
-  toggleDetailView (index, _columnDetailFormatter) {
-    const $tr = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('> tr[data-index="%s"]', index))
-
-    if ($tr.next().is('tr.detail-view')) {
-      this.collapseRow(index)
-    } else {
-      this.expandRow(index, _columnDetailFormatter)
-    }
-
-    this.resetView()
-  }
-
-  expandRow (index, _columnDetailFormatter) {
-    const row = this.data[index]
-    const $tr = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('> tr[data-index="%s"][data-has-detail-view]', index))
-    if ($tr.next().is('tr.detail-view')) {
-      return
-    }
-
-    if (this.options.detailViewIcon) {
-      $tr.find('a.detail-icon').html(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, this.options.icons.detailClose))
-    }
-
-    $tr.after(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<tr class="detail-view"><td colspan="%s"></td></tr>', $tr.children('td').length))
-
-    const $element = $tr.next().find('td')
-
-    const detailFormatter = _columnDetailFormatter || this.options.detailFormatter
-    const content = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, detailFormatter, [index, row, $element], '')
-    if ($element.length === 1) {
-      $element.append(content)
-    }
-
-    this.trigger('expand-row', index, row, $element)
-  }
-
-  expandRowByUniqueId (uniqueId) {
-    const row = this.getRowByUniqueId(uniqueId)
-
-    if (!row) {
-      return
-    }
-
-    this.expandRow(this.data.indexOf(row))
-  }
-
-  collapseRow (index) {
-    const row = this.data[index]
-    const $tr = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('> tr[data-index="%s"][data-has-detail-view]', index))
-    if (!$tr.next().is('tr.detail-view')) {
-      return
-    }
-
-    if (this.options.detailViewIcon) {
-      $tr.find('a.detail-icon').html(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, this.options.icons.detailOpen))
-    }
-
-    this.trigger('collapse-row', index, row, $tr.next())
-    $tr.next().remove()
-  }
-
-  collapseRowByUniqueId (uniqueId) {
-    const row = this.getRowByUniqueId(uniqueId)
-
-    if (!row) {
-      return
-    }
-
-    this.collapseRow(this.data.indexOf(row))
-  }
-
-  expandAllRows () {
-    const trs = this.$body.find('> tr[data-index][data-has-detail-view]')
-    for (let i = 0; i < trs.length; i++) {
-      this.expandRow($(trs[i]).data('index'))
-    }
-  }
-
-  collapseAllRows () {
-    const trs = this.$body.find('> tr[data-index][data-has-detail-view]')
-    for (let i = 0; i < trs.length; i++) {
-      this.collapseRow($(trs[i]).data('index'))
-    }
-  }
-
-  updateColumnTitle (params) {
-    if (!params.hasOwnProperty('field') || !params.hasOwnProperty('title')) {
-      return
-    }
-
-    this.columns[this.fieldsColumnsIndex[params.field]].title =
-      this.options.escape ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(params.title) : params.title
-
-    if (this.columns[this.fieldsColumnsIndex[params.field]].visible) {
-      const header = this.options.height !== undefined ? this.$tableHeader : this.$header
-      header.find('th[data-field]').each((i, el) => {
-        if ($(el).data('field') === params.field) {
-          $($(el).find('.th-inner')[0]).text(params.title)
-          return false
+    refresh(params) {
+        if (params && params.url) {
+            this.options.url = params.url
         }
-      })
+        if (params && params.pageNumber) {
+            this.options.pageNumber = params.pageNumber
+        }
+        if (params && params.pageSize) {
+            this.options.pageSize = params.pageSize
+        }
+        this.trigger('refresh', this.initServer(params && params.silent,
+            params && params.query, params && params.url))
     }
-  }
 
-  updateFormatText (formatName, text) {
-    if (!/^format/.test(formatName) || !this.options[formatName]) {
-      return
+    destroy() {
+        this.$el.insertBefore(this.$container)
+        $(this.options.toolbar).insertBefore(this.$el)
+        this.$container.next().remove()
+        this.$container.remove()
+        this.$el.html(this.$el_.html())
+            .css('margin-top', '0')
+            .attr('class', this.$el_.attr('class') || '') // reset the class
+
+        const resizeEvent = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getEventName('resize.bootstrap-table', this.$el.attr('id'))
+
+        $(window).off(resizeEvent)
     }
-    if (typeof text === 'string') {
-      this.options[formatName] = () => text
-    } else if (typeof text === 'function') {
-      this.options[formatName] = text
+
+    resetView(params) {
+        let padding = 0
+
+        if (params && params.height) {
+            this.options.height = params.height
+        }
+
+        this.$tableContainer.toggleClass('has-card-view', this.options.cardView)
+
+        if (this.options.height) {
+            const fixedBody = this.$tableBody.get(0)
+
+            this.hasScrollBar = fixedBody.scrollWidth > fixedBody.clientWidth
+        }
+
+        if (!this.options.cardView && this.options.showHeader && this.options.height) {
+            this.$tableHeader.show()
+            this.resetHeader()
+            padding += this.$header.outerHeight(true) + 1
+        } else {
+            this.$tableHeader.hide()
+            this.trigger('post-header')
+        }
+
+        if (!this.options.cardView && this.options.showFooter) {
+            this.$tableFooter.show()
+            this.fitFooter()
+            if (this.options.height) {
+                padding += this.$tableFooter.outerHeight(true)
+            }
+        }
+
+        if (this.$container.hasClass('fullscreen')) {
+            this.$tableContainer.css('height', '')
+            this.$tableContainer.css('width', '')
+        } else if (this.options.height) {
+            if (this.$tableBorder) {
+                this.$tableBorder.css('width', '')
+                this.$tableBorder.css('height', '')
+            }
+
+            const toolbarHeight = this.$toolbar.outerHeight(true)
+            const paginationHeight = this.$pagination.outerHeight(true)
+            const height = this.options.height - toolbarHeight - paginationHeight
+            const $bodyTable = this.$tableBody.find('>table')
+            const tableHeight = $bodyTable.outerHeight()
+
+            this.$tableContainer.css('height', `${height}px`)
+
+            if (this.$tableBorder && $bodyTable.is(':visible')) {
+                let tableBorderHeight = height - tableHeight - 2
+
+                if (this.hasScrollBar) {
+                    tableBorderHeight -= _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getScrollBarWidth()
+                }
+                this.$tableBorder.css('width', `${$bodyTable.outerWidth()}px`)
+                this.$tableBorder.css('height', `${tableBorderHeight}px`)
+            }
+        }
+
+        if (this.options.cardView) {
+            // remove the element css
+            this.$el.css('margin-top', '0')
+            this.$tableContainer.css('padding-bottom', '0')
+            this.$tableFooter.hide()
+        } else {
+            // Assign the correct sortable arrow
+            this.getCaret()
+            this.$tableContainer.css('padding-bottom', `${padding}px`)
+        }
+
+        this.trigger('reset-view')
     }
-    this.initToolbar()
-    this.initPagination()
-    this.initBody()
-  }
+
+    showLoading() {
+        this.$tableLoading.toggleClass('open', true)
+
+        let fontSize = this.options.loadingFontSize
+
+        if (this.options.loadingFontSize === 'auto') {
+            fontSize = this.$tableLoading.width() * 0.04
+            fontSize = Math.max(12, fontSize)
+            fontSize = Math.min(32, fontSize)
+            fontSize = `${fontSize}px`
+        }
+
+        this.$tableLoading.find('.loading-text').css('font-size', fontSize)
+    }
+
+    hideLoading() {
+        this.$tableLoading.toggleClass('open', false)
+    }
+
+    togglePagination() {
+        this.options.pagination = !this.options.pagination
+
+        const icon = this.options.showButtonIcons ? this.options.pagination ? this.options.icons.paginationSwitchDown : this.options.icons.paginationSwitchUp : ''
+        const text = this.options.showButtonText ? this.options.pagination ? this.options.formatPaginationSwitchUp() : this.options.formatPaginationSwitchDown() : ''
+
+        this.$toolbar.find('button[name="paginationSwitch"]')
+            .html(`${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, icon)} ${text}`)
+        this.updatePagination()
+        this.trigger('toggle-pagination', this.options.pagination)
+    }
+
+    toggleFullscreen() {
+        this.$el.closest('.bootstrap-table').toggleClass('fullscreen')
+        this.resetView()
+    }
+
+    toggleView() {
+        this.options.cardView = !this.options.cardView
+        this.initHeader()
+
+        const icon = this.options.showButtonIcons ? this.options.cardView ? this.options.icons.toggleOn : this.options.icons.toggleOff : ''
+        const text = this.options.showButtonText ? this.options.cardView ? this.options.formatToggleOff() : this.options.formatToggleOn() : ''
+
+        this.$toolbar.find('button[name="toggle"]')
+            .html(`${_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, icon)} ${text}`)
+            .attr('aria-label', text)
+            .attr('title', text)
+
+        this.initBody()
+        this.trigger('toggle', this.options.cardView)
+    }
+
+    resetSearch(text) {
+        const $search = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].getSearchInput(this)
+
+        const textToUse = text || ''
+
+        $search.val(textToUse)
+        this.searchText = textToUse
+        this.onSearch({ currentTarget: $search }, false)
+    }
+
+    filterBy(columns, options) {
+        this.filterOptions = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(options) ? this.options.filterOptions : _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend(this.options.filterOptions, options)
+        this.filterColumns = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].isEmptyObject(columns) ? {} : columns
+        this.options.pageNumber = 1
+        this.initSearch()
+        this.updatePagination()
+    }
+
+    scrollTo(params) {
+        let options = { unit: 'px', value: 0 }
+
+        if (typeof params === 'object') {
+            options = Object.assign(options, params)
+        } else if (typeof params === 'string' && params === 'bottom') {
+            options.value = this.$tableBody[0].scrollHeight
+        } else if (typeof params === 'string' || typeof params === 'number') {
+            options.value = params
+        }
+
+        let scrollTo = options.value
+
+        if (options.unit === 'rows') {
+            scrollTo = 0
+            this.$body.find(`> tr:lt(${options.value})`).each((i, el) => {
+                scrollTo += $(el).outerHeight(true)
+            })
+        }
+
+        this.$tableBody.scrollTop(scrollTo)
+    }
+
+    getScrollPosition() {
+        return this.$tableBody.scrollTop()
+    }
+
+    selectPage(page) {
+        if (page > 0 && page <= this.options.totalPages) {
+            this.options.pageNumber = page
+            this.updatePagination()
+        }
+    }
+
+    prevPage() {
+        if (this.options.pageNumber > 1) {
+            this.options.pageNumber--
+            this.updatePagination()
+        }
+    }
+
+    nextPage() {
+        if (this.options.pageNumber < this.options.totalPages) {
+            this.options.pageNumber++
+            this.updatePagination()
+        }
+    }
+
+    toggleDetailView(index, _columnDetailFormatter) {
+        const $tr = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('> tr[data-index="%s"]', index))
+
+        if ($tr.next().is('tr.detail-view')) {
+            this.collapseRow(index)
+        } else {
+            this.expandRow(index, _columnDetailFormatter)
+        }
+
+        this.resetView()
+    }
+
+    expandRow(index, _columnDetailFormatter) {
+        const row = this.data[index]
+        const $tr = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('> tr[data-index="%s"][data-has-detail-view]', index))
+
+        if (this.options.detailViewIcon) {
+            $tr.find('a.detail-icon').html(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, this.options.icons.detailClose))
+        }
+
+        if ($tr.next().is('tr.detail-view')) {
+            return
+        }
+
+        $tr.after(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('<tr class="detail-view"><td colspan="%s"></td></tr>', $tr.children('td').length))
+
+        const $element = $tr.next().find('td')
+
+        const detailFormatter = _columnDetailFormatter || this.options.detailFormatter
+        const content = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].calculateObjectValue(this.options, detailFormatter, [index, row, $element], '')
+
+        if ($element.length === 1) {
+            $element.append(content)
+        }
+
+        this.trigger('expand-row', index, row, $element)
+    }
+
+    expandRowByUniqueId(uniqueId) {
+        const row = this.getRowByUniqueId(uniqueId)
+
+        if (!row) {
+            return
+        }
+
+        this.expandRow(this.data.indexOf(row))
+    }
+
+    collapseRow(index) {
+        const row = this.data[index]
+        const $tr = this.$body.find(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf('> tr[data-index="%s"][data-has-detail-view]', index))
+
+        if (!$tr.next().is('tr.detail-view')) {
+            return
+        }
+
+        if (this.options.detailViewIcon) {
+            $tr.find('a.detail-icon').html(_utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].sprintf(this.constants.html.icon, this.options.iconsPrefix, this.options.icons.detailOpen))
+        }
+
+        this.trigger('collapse-row', index, row, $tr.next())
+        $tr.next().remove()
+    }
+
+    collapseRowByUniqueId(uniqueId) {
+        const row = this.getRowByUniqueId(uniqueId)
+
+        if (!row) {
+            return
+        }
+
+        this.collapseRow(this.data.indexOf(row))
+    }
+
+    expandAllRows() {
+        const trs = this.$body.find('> tr[data-index][data-has-detail-view]')
+
+        for (let i = 0; i < trs.length; i++) {
+            this.expandRow($(trs[i]).data('index'))
+        }
+    }
+
+    collapseAllRows() {
+        const trs = this.$body.find('> tr[data-index][data-has-detail-view]')
+
+        for (let i = 0; i < trs.length; i++) {
+            this.collapseRow($(trs[i]).data('index'))
+        }
+    }
+
+    updateColumnTitle(params) {
+        if (!params.hasOwnProperty('field') || !params.hasOwnProperty('title')) {
+            return
+        }
+
+        this.columns[this.fieldsColumnsIndex[params.field]].title =
+            this.options.escape && this.options.escapeTitle ? _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].escapeHTML(params.title) : params.title
+
+        if (this.columns[this.fieldsColumnsIndex[params.field]].visible) {
+            this.$header.find('th[data-field]').each((i, el) => {
+                if ($(el).data('field') === params.field) {
+                    $($(el).find('.th-inner')[0]).html(params.title)
+                    return false
+                }
+            })
+
+            this.resetView()
+        }
+    }
+
+    updateFormatText(formatName, text) {
+        if (!/^format/.test(formatName) || !this.options[formatName]) {
+            return
+        }
+        if (typeof text === 'string') {
+            this.options[formatName] = () => text
+        } else if (typeof text === 'function') {
+            this.options[formatName] = text
+        }
+        this.initToolbar()
+        this.initPagination()
+        this.initBody()
+    }
 }
 
 BootstrapTable.VERSION = _constants_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].VERSION
@@ -4352,37 +4855,42 @@ BootstrapTable.EVENTS = _constants_index_js__WEBPACK_IMPORTED_MODULE_0__["defaul
 
 $.BootstrapTable = BootstrapTable
 $.fn.bootstrapTable = function (option, ...args) {
-  let value
+    let value
 
-  this.each((i, el) => {
-    let data = $(el).data('bootstrap.table')
-    const options = $.extend({}, BootstrapTable.DEFAULTS, $(el).data(),
-      typeof option === 'object' && option)
+    this.each((i, el) => {
+        let data = $(el).data('bootstrap.table')
 
-    if (typeof option === 'string') {
-      if (!_constants_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].METHODS.includes(option)) {
-        throw new Error(`Unknown method: ${option}`)
-      }
+        if (typeof option === 'string') {
+            if (!_constants_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].METHODS.includes(option)) {
+                throw new Error(`Unknown method: ${option}`)
+            }
 
-      if (!data) {
-        return
-      }
+            if (!data) {
+                return
+            }
 
-      value = data[option](...args)
+            value = data[option](...args)
 
-      if (option === 'destroy') {
-        $(el).removeData('bootstrap.table')
-      }
-    }
+            if (option === 'destroy') {
+                $(el).removeData('bootstrap.table')
+            }
+            return
+        }
 
-    if (!data) {
-      data = new $.BootstrapTable(el, options)
-      $(el).data('bootstrap.table', data)
-      data.init()
-    }
-  })
+        if (data) {
+            console.warn('You cannot initialize the table more than once!')
+            return
+        }
 
-  return typeof value === 'undefined' ? this : value
+        const options = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["default"].extend(true, {}, BootstrapTable.DEFAULTS, $(el).data(),
+            typeof option === 'object' && option)
+
+        data = new $.BootstrapTable(el, options)
+        $(el).data('bootstrap.table', data)
+        data.init()
+    })
+
+    return typeof value === 'undefined' ? this : value
 }
 
 $.fn.bootstrapTable.Constructor = BootstrapTable
@@ -4399,12 +4907,11 @@ $.fn.bootstrapTable.utils = _utils_index_js__WEBPACK_IMPORTED_MODULE_1__["defaul
 // =======================
 
 $(() => {
-  $('[data-toggle="table"]').bootstrapTable()
+    $('[data-toggle="table"]').bootstrapTable()
 })
 
 /* harmony default export */ __webpack_exports__["default"] = (BootstrapTable);
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")))
 
 /***/ }),
 
@@ -4417,594 +4924,556 @@ $(() => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function($) {const VERSION = '1.18.0'
+/* harmony import */ var _utils_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/index.js */ "./www/js/source/lib/bootstrap-table/utils/index.js");
+/* eslint-disable no-unused-vars */
 
-let bootstrapVersion = 4
-try {
-  const rawVersion = $.fn.dropdown.Constructor.VERSION
 
-  // Only try to parse VERSION if it is defined.
-  // It is undefined in older versions of Bootstrap (tested with 3.1.1).
-  if (rawVersion !== undefined) {
-    bootstrapVersion = parseInt(rawVersion, 10)
-  }
-} catch (e) {
-  // ignore
-}
+const VERSION = '1.23.1'
 
-try {
-  // eslint-disable-next-line no-undef
-  const rawVersion = bootstrap.Tooltip.VERSION
-  if (rawVersion !== undefined) {
-    bootstrapVersion = parseInt(rawVersion, 10)
-  }
-} catch (e) {
-  // ignore
-}
+const bootstrapVersion = _utils_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].getBootstrapVersion()
 
 const CONSTANTS = {
-  3: {
-    iconsPrefix: 'glyphicon',
-    icons: {
-      paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
-      paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
-      refresh: 'glyphicon-refresh icon-refresh',
-      toggleOff: 'glyphicon-list-alt icon-list-alt',
-      toggleOn: 'glyphicon-list-alt icon-list-alt',
-      columns: 'glyphicon-th icon-th',
-      detailOpen: 'glyphicon-plus icon-plus',
-      detailClose: 'glyphicon-minus icon-minus',
-      fullscreen: 'glyphicon-fullscreen',
-      search: 'glyphicon-search',
-      clearSearch: 'glyphicon-trash'
+    3: {
+        classes: {
+            buttonsPrefix: 'btn',
+            buttons: 'default',
+            buttonsGroup: 'btn-group',
+            buttonsDropdown: 'btn-group',
+            pull: 'pull',
+            inputGroup: 'input-group',
+            inputPrefix: 'input-',
+            input: 'form-control',
+            select: 'form-control',
+            paginationDropdown: 'btn-group dropdown',
+            dropup: 'dropup',
+            dropdownActive: 'active',
+            paginationActive: 'active',
+            buttonActive: 'active'
+        },
+        html: {
+            toolbarDropdown: ['<ul class="dropdown-menu" role="menu">', '</ul>'],
+            toolbarDropdownItem: '<li class="dropdown-item-marker" role="menuitem"><label>%s</label></li>',
+            toolbarDropdownSeparator: '<li class="divider"></li>',
+            pageDropdown: ['<ul class="dropdown-menu" role="menu">', '</ul>'],
+            pageDropdownItem: '<li role="menuitem" class="%s"><a href="#">%s</a></li>',
+            dropdownCaret: '<span class="caret"></span>',
+            pagination: ['<ul class="pagination%s">', '</ul>'],
+            paginationItem: '<li class="page-item%s"><a class="page-link" aria-label="%s" href="javascript:void(0)">%s</a></li>',
+            icon: '<i class="%s %s"></i>',
+            inputGroup: '<div class="input-group">%s<span class="input-group-btn">%s</span></div>',
+            searchInput: '<input class="%s%s" type="text" placeholder="%s">',
+            searchButton: '<button class="%s" type="button" name="search" title="%s">%s %s</button>',
+            searchClearButton: '<button class="%s" type="button" name="clearSearch" title="%s">%s %s</button>'
+        }
     },
-    classes: {
-      buttonsPrefix: 'btn',
-      buttons: 'default',
-      buttonsGroup: 'btn-group',
-      buttonsDropdown: 'btn-group',
-      pull: 'pull',
-      inputGroup: 'input-group',
-      inputPrefix: 'input-',
-      input: 'form-control',
-      paginationDropdown: 'btn-group dropdown',
-      dropup: 'dropup',
-      dropdownActive: 'active',
-      paginationActive: 'active',
-      buttonActive: 'active'
+    4: {
+        classes: {
+            buttonsPrefix: 'btn',
+            buttons: 'secondary',
+            buttonsGroup: 'btn-group',
+            buttonsDropdown: 'btn-group',
+            pull: 'float',
+            inputGroup: 'btn-group',
+            inputPrefix: 'form-control-',
+            input: 'form-control',
+            select: 'form-control',
+            paginationDropdown: 'btn-group dropdown',
+            dropup: 'dropup',
+            dropdownActive: 'active',
+            paginationActive: 'active',
+            buttonActive: 'active'
+        },
+        html: {
+            toolbarDropdown: ['<div class="dropdown-menu dropdown-menu-right">', '</div>'],
+            toolbarDropdownItem: '<label class="dropdown-item dropdown-item-marker">%s</label>',
+            pageDropdown: ['<div class="dropdown-menu">', '</div>'],
+            pageDropdownItem: '<a class="dropdown-item %s" href="#">%s</a>',
+            toolbarDropdownSeparator: '<div class="dropdown-divider"></div>',
+            dropdownCaret: '<span class="caret"></span>',
+            pagination: ['<ul class="pagination%s">', '</ul>'],
+            paginationItem: '<li class="page-item%s"><a class="page-link" aria-label="%s" href="javascript:void(0)">%s</a></li>',
+            icon: '<i class="%s %s"></i>',
+            inputGroup: '<div class="input-group">%s<div class="input-group-append">%s</div></div>',
+            searchInput: '<input class="%s%s" type="text" placeholder="%s">',
+            searchButton: '<button class="%s" type="button" name="search" title="%s">%s %s</button>',
+            searchClearButton: '<button class="%s" type="button" name="clearSearch" title="%s">%s %s</button>'
+        }
     },
-    html: {
-      toolbarDropdown: ['<ul class="dropdown-menu" role="menu">', '</ul>'],
-      toolbarDropdownItem: '<li class="dropdown-item-marker" role="menuitem"><label>%s</label></li>',
-      toolbarDropdownSeparator: '<li class="divider"></li>',
-      pageDropdown: ['<ul class="dropdown-menu" role="menu">', '</ul>'],
-      pageDropdownItem: '<li role="menuitem" class="%s"><a href="#">%s</a></li>',
-      dropdownCaret: '<span class="caret"></span>',
-      pagination: ['<ul class="pagination%s">', '</ul>'],
-      paginationItem: '<li class="page-item%s"><a class="page-link" aria-label="%s" href="javascript:void(0)">%s</a></li>',
-      icon: '<i class="%s %s"></i>',
-      inputGroup: '<div class="input-group">%s<span class="input-group-btn">%s</span></div>',
-      searchInput: '<input class="%s%s" type="text" placeholder="%s">',
-      searchButton: '<button class="%s" type="button" name="search" title="%s">%s %s</button>',
-      searchClearButton: '<button class="%s" type="button" name="clearSearch" title="%s">%s %s</button>'
+    5: {
+        classes: {
+            buttonsPrefix: 'btn',
+            buttons: 'secondary',
+            buttonsGroup: 'btn-group',
+            buttonsDropdown: 'btn-group',
+            pull: 'float',
+            inputGroup: 'btn-group',
+            inputPrefix: 'form-control-',
+            input: 'form-control',
+            select: 'form-select',
+            paginationDropdown: 'btn-group dropdown',
+            dropup: 'dropup',
+            dropdownActive: 'active',
+            paginationActive: 'active',
+            buttonActive: 'active'
+        },
+        html: {
+            dataToggle: 'data-bs-toggle',
+            toolbarDropdown: ['<div class="dropdown-menu dropdown-menu-end">', '</div>'],
+            toolbarDropdownItem: '<label class="dropdown-item dropdown-item-marker">%s</label>',
+            pageDropdown: ['<div class="dropdown-menu">', '</div>'],
+            pageDropdownItem: '<a class="dropdown-item %s" href="#">%s</a>',
+            toolbarDropdownSeparator: '<div class="dropdown-divider"></div>',
+            dropdownCaret: '<span class="caret"></span>',
+            pagination: ['<ul class="pagination%s">', '</ul>'],
+            paginationItem: '<li class="page-item%s"><a class="page-link" aria-label="%s" href="javascript:void(0)">%s</a></li>',
+            icon: '<i class="%s %s"></i>',
+            inputGroup: '<div class="input-group">%s%s</div>',
+            searchInput: '<input class="%s%s" type="text" placeholder="%s">',
+            searchButton: '<button class="%s" type="button" name="search" title="%s">%s %s</button>',
+            searchClearButton: '<button class="%s" type="button" name="clearSearch" title="%s">%s %s</button>'
+        }
     }
-  },
-  4: {
-    iconsPrefix: 'fa',
-    icons: {
-      paginationSwitchDown: 'fa-caret-square-down',
-      paginationSwitchUp: 'fa-caret-square-up',
-      refresh: 'fa-sync',
-      toggleOff: 'fa-toggle-off',
-      toggleOn: 'fa-toggle-on',
-      columns: 'fa-th-list',
-      detailOpen: 'fa-plus',
-      detailClose: 'fa-minus',
-      fullscreen: 'fa-arrows-alt',
-      search: 'fa-search',
-      clearSearch: 'fa-trash'
-    },
-    classes: {
-      buttonsPrefix: 'btn',
-      buttons: 'secondary',
-      buttonsGroup: 'btn-group',
-      buttonsDropdown: 'btn-group',
-      pull: 'float',
-      inputGroup: 'btn-group',
-      inputPrefix: 'form-control-',
-      input: 'form-control',
-      paginationDropdown: 'btn-group dropdown',
-      dropup: 'dropup',
-      dropdownActive: 'active',
-      paginationActive: 'active',
-      buttonActive: 'active'
-    },
-    html: {
-      toolbarDropdown: ['<div class="dropdown-menu dropdown-menu-right">', '</div>'],
-      toolbarDropdownItem: '<label class="dropdown-item dropdown-item-marker">%s</label>',
-      pageDropdown: ['<div class="dropdown-menu">', '</div>'],
-      pageDropdownItem: '<a class="dropdown-item %s" href="#">%s</a>',
-      toolbarDropdownSeparator: '<div class="dropdown-divider"></div>',
-      dropdownCaret: '<span class="caret"></span>',
-      pagination: ['<ul class="pagination%s">', '</ul>'],
-      paginationItem: '<li class="page-item%s"><a class="page-link" aria-label="%s" href="javascript:void(0)">%s</a></li>',
-      icon: '<i class="%s %s"></i>',
-      inputGroup: '<div class="input-group">%s<div class="input-group-append">%s</div></div>',
-      searchInput: '<input class="%s%s" type="text" placeholder="%s">',
-      searchButton: '<button class="%s" type="button" name="search" title="%s">%s %s</button>',
-      searchClearButton: '<button class="%s" type="button" name="clearSearch" title="%s">%s %s</button>'
-    }
-  },
-  5: {
-    iconsPrefix: 'fa',
-    icons: {
-      paginationSwitchDown: 'fa-caret-square-down',
-      paginationSwitchUp: 'fa-caret-square-up',
-      refresh: 'fa-sync',
-      toggleOff: 'fa-toggle-off',
-      toggleOn: 'fa-toggle-on',
-      columns: 'fa-th-list',
-      detailOpen: 'fa-plus',
-      detailClose: 'fa-minus',
-      fullscreen: 'fa-arrows-alt',
-      search: 'fa-search',
-      clearSearch: 'fa-trash'
-    },
-    classes: {
-      buttonsPrefix: 'btn',
-      buttons: 'secondary',
-      buttonsGroup: 'btn-group',
-      buttonsDropdown: 'btn-group',
-      pull: 'float',
-      inputGroup: 'btn-group',
-      inputPrefix: 'form-control-',
-      input: 'form-control',
-      paginationDropdown: 'btn-group dropdown',
-      dropup: 'dropup',
-      dropdownActive: 'active',
-      paginationActive: 'active',
-      buttonActive: 'active'
-    },
-    html: {
-      toolbarDropdown: ['<div class="dropdown-menu dropdown-menu-right">', '</div>'],
-      toolbarDropdownItem: '<label class="dropdown-item dropdown-item-marker">%s</label>',
-      pageDropdown: ['<div class="dropdown-menu">', '</div>'],
-      pageDropdownItem: '<a class="dropdown-item %s" href="#">%s</a>',
-      toolbarDropdownSeparator: '<div class="dropdown-divider"></div>',
-      dropdownCaret: '<span class="caret"></span>',
-      pagination: ['<ul class="pagination%s">', '</ul>'],
-      paginationItem: '<li class="page-item%s"><a class="page-link" aria-label="%s" href="javascript:void(0)">%s</a></li>',
-      icon: '<i class="%s %s"></i>',
-      inputGroup: '<div class="input-group">%s<div class="input-group-append">%s</div></div>',
-      searchInput: '<input class="%s%s" type="text" placeholder="%s">',
-      searchButton: '<button class="%s" type="button" name="search" title="%s">%s %s</button>',
-      searchClearButton: '<button class="%s" type="button" name="clearSearch" title="%s">%s %s</button>'
-    }
-  }
 }[bootstrapVersion]
 
 const DEFAULTS = {
-  height: undefined,
-  classes: 'table table-bordered table-hover',
-  buttons: {},
-  theadClasses: '',
-  headerStyle (column) {
-    return {}
-  },
-  rowStyle (row, index) {
-    return {}
-  },
-  rowAttributes (row, index) {
-    return {}
-  },
-  undefinedText: '-',
-  locale: undefined,
-  virtualScroll: false,
-  virtualScrollItemHeight: undefined,
-  sortable: true,
-  sortClass: undefined,
-  silentSort: true,
-  sortName: undefined,
-  sortOrder: undefined,
-  sortReset: false,
-  sortStable: false,
-  rememberOrder: false,
-  serverSort: true,
-  customSort: undefined,
-  columns: [
-    []
-  ],
-  data: [],
-  url: undefined,
-  method: 'get',
-  cache: true,
-  contentType: 'application/json',
-  dataType: 'json',
-  ajax: undefined,
-  ajaxOptions: {},
-  queryParams (params) {
-    return params
-  },
-  queryParamsType: 'limit', // 'limit', undefined
-  responseHandler (res) {
-    return res
-  },
-  totalField: 'total',
-  totalNotFilteredField: 'totalNotFiltered',
-  dataField: 'rows',
-  footerField: 'footer',
-  pagination: false,
-  paginationParts: ['pageInfo', 'pageSize', 'pageList'],
-  showExtendedPagination: false,
-  paginationLoop: true,
-  sidePagination: 'client', // client or server
-  totalRows: 0,
-  totalNotFiltered: 0,
-  pageNumber: 1,
-  pageSize: 10,
-  pageList: [10, 25, 50, 100],
-  paginationHAlign: 'right', // right, left
-  paginationVAlign: 'bottom', // bottom, top, both
-  paginationDetailHAlign: 'left', // right, left
-  paginationPreText: '&lsaquo;',
-  paginationNextText: '&rsaquo;',
-  paginationSuccessivelySize: 5, // Maximum successively number of pages in a row
-  paginationPagesBySide: 1, // Number of pages on each side (right, left) of the current page.
-  paginationUseIntermediate: false, // Calculate intermediate pages for quick access
-  search: false,
-  searchHighlight: false,
-  searchOnEnterKey: false,
-  strictSearch: false,
-  searchSelector: false,
-  visibleSearch: false,
-  showButtonIcons: true,
-  showButtonText: false,
-  showSearchButton: false,
-  showSearchClearButton: false,
-  trimOnSearch: true,
-  searchAlign: 'right',
-  searchTimeOut: 500,
-  searchText: '',
-  customSearch: undefined,
-  showHeader: true,
-  showFooter: false,
-  footerStyle (column) {
-    return {}
-  },
-  searchAccentNeutralise: false,
-  showColumns: false,
-  showColumnsToggleAll: false,
-  showColumnsSearch: false,
-  minimumCountColumns: 1,
-  showPaginationSwitch: false,
-  showRefresh: false,
-  showToggle: false,
-  showFullscreen: false,
-  smartDisplay: true,
-  escape: false,
-  filterOptions: {
-    filterAlgorithm: 'and'
-  },
-  idField: undefined,
-  selectItemName: 'btSelectItem',
-  clickToSelect: false,
-  ignoreClickToSelectOn ({tagName}) {
-    return ['A', 'BUTTON'].includes(tagName)
-  },
-  singleSelect: false,
-  checkboxHeader: true,
-  maintainMetaData: false,
-  multipleSelectRow: false,
-  uniqueId: undefined,
-  cardView: false,
-  detailView: false,
-  detailViewIcon: true,
-  detailViewByClick: false,
-  detailViewAlign: 'left',
-  detailFormatter (index, row) {
-    return ''
-  },
-  detailFilter (index, row) {
-    return true
-  },
-  toolbar: undefined,
-  toolbarAlign: 'left',
-  buttonsToolbar: undefined,
-  buttonsAlign: 'right',
-  buttonsOrder: ['paginationSwitch', 'refresh', 'toggle', 'fullscreen', 'columns'],
-  buttonsPrefix: CONSTANTS.classes.buttonsPrefix,
-  buttonsClass: CONSTANTS.classes.buttons,
-  icons: CONSTANTS.icons,
-  iconSize: undefined,
-  iconsPrefix: CONSTANTS.iconsPrefix, // glyphicon or fa(font-awesome)
-  loadingFontSize: 'auto',
-  loadingTemplate (loadingMessage) {
-    return `<span class="loading-wrap">
+    height: undefined,
+    classes: 'table table-bordered table-hover',
+    buttons: {},
+    theadClasses: '',
+    headerStyle(column) {
+        return {}
+    },
+    rowStyle(row, index) {
+        return {}
+    },
+    rowAttributes(row, index) {
+        return {}
+    },
+    undefinedText: '-',
+    locale: undefined,
+    virtualScroll: false,
+    virtualScrollItemHeight: undefined,
+    sortable: true,
+    sortClass: undefined,
+    silentSort: true,
+    sortEmptyLast: false,
+    sortName: undefined,
+    sortOrder: undefined,
+    sortReset: false,
+    sortStable: false,
+    sortResetPage: false,
+    rememberOrder: false,
+    serverSort: true,
+    customSort: undefined,
+    columns: [
+        []
+    ],
+    data: [],
+    url: undefined,
+    method: 'get',
+    cache: true,
+    contentType: 'application/json',
+    dataType: 'json',
+    ajax: undefined,
+    ajaxOptions: {},
+    queryParams(params) {
+        return params
+    },
+    queryParamsType: 'limit', // 'limit', undefined
+    responseHandler(res) {
+        return res
+    },
+    totalField: 'total',
+    totalNotFilteredField: 'totalNotFiltered',
+    dataField: 'rows',
+    footerField: 'footer',
+    pagination: false,
+    paginationParts: ['pageInfo', 'pageSize', 'pageList'],
+    showExtendedPagination: false,
+    paginationLoop: true,
+    sidePagination: 'client', // client or server
+    totalRows: 0,
+    totalNotFiltered: 0,
+    pageNumber: 1,
+    pageSize: 10,
+    pageList: [10, 25, 50, 100],
+    paginationHAlign: 'right', // right, left
+    paginationVAlign: 'bottom', // bottom, top, both
+    paginationDetailHAlign: 'left', // right, left
+    paginationPreText: '&lsaquo;',
+    paginationNextText: '&rsaquo;',
+    paginationSuccessivelySize: 5, // Maximum successively number of pages in a row
+    paginationPagesBySide: 1, // Number of pages on each side (right, left) of the current page.
+    paginationUseIntermediate: false, // Calculate intermediate pages for quick access
+    paginationLoadMore: false,
+    search: false,
+    searchable: false,
+    searchHighlight: false,
+    searchOnEnterKey: false,
+    strictSearch: false,
+    regexSearch: false,
+    searchSelector: false,
+    visibleSearch: false,
+    showButtonIcons: true,
+    showButtonText: false,
+    showSearchButton: false,
+    showSearchClearButton: false,
+    trimOnSearch: true,
+    searchAlign: 'right',
+    searchTimeOut: 500,
+    searchText: '',
+    customSearch: undefined,
+    showHeader: true,
+    showFooter: false,
+    footerStyle(column) {
+        return {}
+    },
+    searchAccentNeutralise: false,
+    showColumns: false,
+    showColumnsToggleAll: false,
+    showColumnsSearch: false,
+    minimumCountColumns: 1,
+    showPaginationSwitch: false,
+    showRefresh: false,
+    showToggle: false,
+    showFullscreen: false,
+    smartDisplay: true,
+    escape: false,
+    escapeTitle: true,
+    filterOptions: {
+        filterAlgorithm: 'and'
+    },
+    idField: undefined,
+    selectItemName: 'btSelectItem',
+    clickToSelect: false,
+    ignoreClickToSelectOn({ tagName }) {
+        return ['A', 'BUTTON'].includes(tagName)
+    },
+    singleSelect: false,
+    checkboxHeader: true,
+    maintainMetaData: false,
+    multipleSelectRow: false,
+    uniqueId: undefined,
+    cardView: false,
+    detailView: false,
+    detailViewIcon: true,
+    detailViewByClick: false,
+    detailViewAlign: 'left',
+    detailFormatter(index, row) {
+        return ''
+    },
+    detailFilter(index, row) {
+        return true
+    },
+    toolbar: undefined,
+    toolbarAlign: 'left',
+    buttonsToolbar: undefined,
+    buttonsAlign: 'right',
+    buttonsOrder: ['paginationSwitch', 'refresh', 'toggle', 'fullscreen', 'columns'],
+    buttonsPrefix: CONSTANTS.classes.buttonsPrefix,
+    buttonsClass: CONSTANTS.classes.buttons,
+    iconsPrefix: undefined, // init in initConstants
+    icons: {}, // init in initConstants
+    iconSize: undefined,
+    fixedScroll: false,
+    loadingFontSize: 'auto',
+    loadingTemplate(loadingMessage) {
+        return `<span class="loading-wrap">
       <span class="loading-text">${loadingMessage}</span>
       <span class="animation-wrap"><span class="animation-dot"></span></span>
       </span>
     `
-  },
-  onAll (name, args) {
-    return false
-  },
-  onClickCell (field, value, row, $element) {
-    return false
-  },
-  onDblClickCell (field, value, row, $element) {
-    return false
-  },
-  onClickRow (item, $element) {
-    return false
-  },
-  onDblClickRow (item, $element) {
-    return false
-  },
-  onSort (name, order) {
-    return false
-  },
-  onCheck (row) {
-    return false
-  },
-  onUncheck (row) {
-    return false
-  },
-  onCheckAll (rows) {
-    return false
-  },
-  onUncheckAll (rows) {
-    return false
-  },
-  onCheckSome (rows) {
-    return false
-  },
-  onUncheckSome (rows) {
-    return false
-  },
-  onLoadSuccess (data) {
-    return false
-  },
-  onLoadError (status) {
-    return false
-  },
-  onColumnSwitch (field, checked) {
-    return false
-  },
-  onPageChange (number, size) {
-    return false
-  },
-  onSearch (text) {
-    return false
-  },
-  onToggle (cardView) {
-    return false
-  },
-  onPreBody (data) {
-    return false
-  },
-  onPostBody () {
-    return false
-  },
-  onPostHeader () {
-    return false
-  },
-  onPostFooter () {
-    return false
-  },
-  onExpandRow (index, row, $detail) {
-    return false
-  },
-  onCollapseRow (index, row) {
-    return false
-  },
-  onRefreshOptions (options) {
-    return false
-  },
-  onRefresh (params) {
-    return false
-  },
-  onResetView () {
-    return false
-  },
-  onScrollBody () {
-    return false
-  }
+    },
+    onAll(name, args) {
+        return false
+    },
+    onClickCell(field, value, row, $element) {
+        return false
+    },
+    onDblClickCell(field, value, row, $element) {
+        return false
+    },
+    onClickRow(item, $element) {
+        return false
+    },
+    onDblClickRow(item, $element) {
+        return false
+    },
+    onSort(name, order) {
+        return false
+    },
+    onCheck(row) {
+        return false
+    },
+    onUncheck(row) {
+        return false
+    },
+    onCheckAll(rows) {
+        return false
+    },
+    onUncheckAll(rows) {
+        return false
+    },
+    onCheckSome(rows) {
+        return false
+    },
+    onUncheckSome(rows) {
+        return false
+    },
+    onLoadSuccess(data) {
+        return false
+    },
+    onLoadError(status) {
+        return false
+    },
+    onColumnSwitch(field, checked) {
+        return false
+    },
+    onColumnSwitchAll(checked) {
+        return false
+    },
+    onPageChange(number, size) {
+        return false
+    },
+    onSearch(text) {
+        return false
+    },
+    onToggle(cardView) {
+        return false
+    },
+    onPreBody(data) {
+        return false
+    },
+    onPostBody() {
+        return false
+    },
+    onPostHeader() {
+        return false
+    },
+    onPostFooter() {
+        return false
+    },
+    onExpandRow(index, row, $detail) {
+        return false
+    },
+    onCollapseRow(index, row) {
+        return false
+    },
+    onRefreshOptions(options) {
+        return false
+    },
+    onRefresh(params) {
+        return false
+    },
+    onResetView() {
+        return false
+    },
+    onScrollBody() {
+        return false
+    },
+    onTogglePagination(newState) {
+        return false
+    },
+    onVirtualScroll(startIndex, endIndex) {
+        return false
+    }
 }
 
 const EN = {
-  formatLoadingMessage () {
-    return 'Loading, please wait'
-  },
-  formatRecordsPerPage (pageNumber) {
-    return `${pageNumber} rows per page`
-  },
-  formatShowingRows (pageFrom, pageTo, totalRows, totalNotFiltered) {
-    if (totalNotFiltered !== undefined && totalNotFiltered > 0 && totalNotFiltered > totalRows) {
-      return `Showing ${pageFrom} to ${pageTo} of ${totalRows} rows (filtered from ${totalNotFiltered} total rows)`
-    }
+    formatLoadingMessage() {
+        return 'Loading, please wait'
+    },
+    formatRecordsPerPage(pageNumber) {
+        return `${pageNumber} rows per page`
+    },
+    formatShowingRows(pageFrom, pageTo, totalRows, totalNotFiltered) {
+        if (totalNotFiltered !== undefined && totalNotFiltered > 0 && totalNotFiltered > totalRows) {
+            return `Showing ${pageFrom} to ${pageTo} of ${totalRows} rows (filtered from ${totalNotFiltered} total rows)`
+        }
 
-    return `Showing ${pageFrom} to ${pageTo} of ${totalRows} rows`
-  },
-  formatSRPaginationPreText () {
-    return 'previous page'
-  },
-  formatSRPaginationPageText (page) {
-    return `to page ${page}`
-  },
-  formatSRPaginationNextText () {
-    return 'next page'
-  },
-  formatDetailPagination (totalRows) {
-    return `Showing ${totalRows} rows`
-  },
-  formatSearch () {
-    return 'Search'
-  },
-  formatClearSearch () {
-    return 'Clear Search'
-  },
-  formatNoMatches () {
-    return 'No matching records found'
-  },
-  formatPaginationSwitch () {
-    return 'Hide/Show pagination'
-  },
-  formatPaginationSwitchDown () {
-    return 'Show pagination'
-  },
-  formatPaginationSwitchUp () {
-    return 'Hide pagination'
-  },
-  formatRefresh () {
-    return 'Refresh'
-  },
-  formatToggle () {
-    return 'Toggle'
-  },
-  formatToggleOn () {
-    return 'Show card view'
-  },
-  formatToggleOff () {
-    return 'Hide card view'
-  },
-  formatColumns () {
-    return 'Columns'
-  },
-  formatColumnsToggleAll () {
-    return 'Toggle all'
-  },
-  formatFullscreen () {
-    return 'Fullscreen'
-  },
-  formatAllRows () {
-    return 'All'
-  }
+        return `Showing ${pageFrom} to ${pageTo} of ${totalRows} rows`
+    },
+    formatSRPaginationPreText() {
+        return 'previous page'
+    },
+    formatSRPaginationPageText(page) {
+        return `to page ${page}`
+    },
+    formatSRPaginationNextText() {
+        return 'next page'
+    },
+    formatDetailPagination(totalRows) {
+        return `Showing ${totalRows} rows`
+    },
+    formatSearch() {
+        return 'Search'
+    },
+    formatClearSearch() {
+        return 'Clear Search'
+    },
+    formatNoMatches() {
+        return 'No matching records found'
+    },
+    formatPaginationSwitch() {
+        return 'Hide/Show pagination'
+    },
+    formatPaginationSwitchDown() {
+        return 'Show pagination'
+    },
+    formatPaginationSwitchUp() {
+        return 'Hide pagination'
+    },
+    formatRefresh() {
+        return 'Refresh'
+    },
+    formatToggleOn() {
+        return 'Show card view'
+    },
+    formatToggleOff() {
+        return 'Hide card view'
+    },
+    formatColumns() {
+        return 'Columns'
+    },
+    formatColumnsToggleAll() {
+        return 'Toggle all'
+    },
+    formatFullscreen() {
+        return 'Fullscreen'
+    },
+    formatAllRows() {
+        return 'All'
+    }
 }
 
 const COLUMN_DEFAULTS = {
-  field: undefined,
-  title: undefined,
-  titleTooltip: undefined,
-  'class': undefined,
-  width: undefined,
-  widthUnit: 'px',
-  rowspan: undefined,
-  colspan: undefined,
-  align: undefined, // left, right, center
-  halign: undefined, // left, right, center
-  falign: undefined, // left, right, center
-  valign: undefined, // top, middle, bottom
-  cellStyle: undefined,
-  radio: false,
-  checkbox: false,
-  checkboxEnabled: true,
-  clickToSelect: true,
-  showSelectTitle: false,
-  sortable: false,
-  sortName: undefined,
-  order: 'asc', // asc, desc
-  sorter: undefined,
-  visible: true,
-  switchable: true,
-  cardVisible: true,
-  searchable: true,
-  formatter: undefined,
-  footerFormatter: undefined,
-  detailFormatter: undefined,
-  searchFormatter: true,
-  searchHighlightFormatter: false,
-  escape: false,
-  events: undefined
+    field: undefined,
+    title: undefined,
+    titleTooltip: undefined,
+    class: undefined,
+    width: undefined,
+    widthUnit: 'px',
+    rowspan: undefined,
+    colspan: undefined,
+    align: undefined, // left, right, center
+    halign: undefined, // left, right, center
+    falign: undefined, // left, right, center
+    valign: undefined, // top, middle, bottom
+    cellStyle: undefined,
+    radio: false,
+    checkbox: false,
+    checkboxEnabled: true,
+    clickToSelect: true,
+    showSelectTitle: false,
+    sortable: false,
+    sortName: undefined,
+    order: 'asc', // asc, desc
+    sorter: undefined,
+    visible: true,
+    switchable: true,
+    switchableLabel: undefined,
+    cardVisible: true,
+    searchable: true,
+    formatter: undefined,
+    footerFormatter: undefined,
+    footerStyle: undefined,
+    detailFormatter: undefined,
+    searchFormatter: true,
+    searchHighlightFormatter: false,
+    escape: undefined,
+    events: undefined
 }
 
 const METHODS = [
-  'getOptions',
-  'refreshOptions',
-  'getData',
-  'getSelections',
-  'load', 'append', 'prepend',
-  'remove', 'removeAll',
-  'insertRow', 'updateRow',
-  'getRowByUniqueId', 'updateByUniqueId', 'removeByUniqueId',
-  'updateCell', 'updateCellByUniqueId',
-  'showRow', 'hideRow', 'getHiddenRows',
-  'showColumn', 'hideColumn',
-  'getVisibleColumns', 'getHiddenColumns',
-  'showAllColumns', 'hideAllColumns',
-  'mergeCells',
-  'checkAll', 'uncheckAll', 'checkInvert',
-  'check', 'uncheck',
-  'checkBy', 'uncheckBy',
-  'refresh',
-  'destroy',
-  'resetView',
-  'showLoading', 'hideLoading',
-  'togglePagination', 'toggleFullscreen', 'toggleView',
-  'resetSearch',
-  'filterBy',
-  'scrollTo', 'getScrollPosition',
-  'selectPage', 'prevPage', 'nextPage',
-  'toggleDetailView',
-  'expandRow', 'collapseRow', 'expandRowByUniqueId', 'collapseRowByUniqueId',
-  'expandAllRows', 'collapseAllRows',
-  'updateColumnTitle', 'updateFormatText'
+    'getOptions',
+    'refreshOptions',
+    'getData',
+    'getSelections',
+    'load', 'append', 'prepend',
+    'remove', 'removeAll',
+    'insertRow', 'updateRow',
+    'getRowByUniqueId', 'updateByUniqueId', 'removeByUniqueId',
+    'updateCell', 'updateCellByUniqueId',
+    'showRow', 'hideRow', 'getHiddenRows',
+    'showColumn', 'hideColumn',
+    'getVisibleColumns', 'getHiddenColumns',
+    'showAllColumns', 'hideAllColumns',
+    'mergeCells',
+    'checkAll', 'uncheckAll', 'checkInvert',
+    'check', 'uncheck',
+    'checkBy', 'uncheckBy',
+    'refresh',
+    'destroy',
+    'resetView',
+    'showLoading', 'hideLoading',
+    'togglePagination', 'toggleFullscreen', 'toggleView',
+    'resetSearch',
+    'filterBy',
+    'sortBy',
+    'scrollTo', 'getScrollPosition',
+    'selectPage', 'prevPage', 'nextPage',
+    'toggleDetailView',
+    'expandRow', 'collapseRow', 'expandRowByUniqueId', 'collapseRowByUniqueId',
+    'expandAllRows', 'collapseAllRows',
+    'updateColumnTitle', 'updateFormatText'
 ]
 
 const EVENTS = {
-  'all.bs.table': 'onAll',
-  'click-row.bs.table': 'onClickRow',
-  'dbl-click-row.bs.table': 'onDblClickRow',
-  'click-cell.bs.table': 'onClickCell',
-  'dbl-click-cell.bs.table': 'onDblClickCell',
-  'sort.bs.table': 'onSort',
-  'check.bs.table': 'onCheck',
-  'uncheck.bs.table': 'onUncheck',
-  'check-all.bs.table': 'onCheckAll',
-  'uncheck-all.bs.table': 'onUncheckAll',
-  'check-some.bs.table': 'onCheckSome',
-  'uncheck-some.bs.table': 'onUncheckSome',
-  'load-success.bs.table': 'onLoadSuccess',
-  'load-error.bs.table': 'onLoadError',
-  'column-switch.bs.table': 'onColumnSwitch',
-  'page-change.bs.table': 'onPageChange',
-  'search.bs.table': 'onSearch',
-  'toggle.bs.table': 'onToggle',
-  'pre-body.bs.table': 'onPreBody',
-  'post-body.bs.table': 'onPostBody',
-  'post-header.bs.table': 'onPostHeader',
-  'post-footer.bs.table': 'onPostFooter',
-  'expand-row.bs.table': 'onExpandRow',
-  'collapse-row.bs.table': 'onCollapseRow',
-  'refresh-options.bs.table': 'onRefreshOptions',
-  'reset-view.bs.table': 'onResetView',
-  'refresh.bs.table': 'onRefresh',
-  'scroll-body.bs.table': 'onScrollBody'
+    'all.bs.table': 'onAll',
+    'click-row.bs.table': 'onClickRow',
+    'dbl-click-row.bs.table': 'onDblClickRow',
+    'click-cell.bs.table': 'onClickCell',
+    'dbl-click-cell.bs.table': 'onDblClickCell',
+    'sort.bs.table': 'onSort',
+    'check.bs.table': 'onCheck',
+    'uncheck.bs.table': 'onUncheck',
+    'check-all.bs.table': 'onCheckAll',
+    'uncheck-all.bs.table': 'onUncheckAll',
+    'check-some.bs.table': 'onCheckSome',
+    'uncheck-some.bs.table': 'onUncheckSome',
+    'load-success.bs.table': 'onLoadSuccess',
+    'load-error.bs.table': 'onLoadError',
+    'column-switch.bs.table': 'onColumnSwitch',
+    'column-switch-all.bs.table': 'onColumnSwitchAll',
+    'page-change.bs.table': 'onPageChange',
+    'search.bs.table': 'onSearch',
+    'toggle.bs.table': 'onToggle',
+    'pre-body.bs.table': 'onPreBody',
+    'post-body.bs.table': 'onPostBody',
+    'post-header.bs.table': 'onPostHeader',
+    'post-footer.bs.table': 'onPostFooter',
+    'expand-row.bs.table': 'onExpandRow',
+    'collapse-row.bs.table': 'onCollapseRow',
+    'refresh-options.bs.table': 'onRefreshOptions',
+    'reset-view.bs.table': 'onResetView',
+    'refresh.bs.table': 'onRefresh',
+    'scroll-body.bs.table': 'onScrollBody',
+    'toggle-pagination.bs.table': 'onTogglePagination',
+    'virtual-scroll.bs.table': 'onVirtualScroll'
 }
 
 Object.assign(DEFAULTS, EN)
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  VERSION,
+    VERSION,
 
-  THEME: `bootstrap${bootstrapVersion}`,
+    THEME: `bootstrap${bootstrapVersion}`,
 
-  CONSTANTS,
+    CONSTANTS,
 
-  DEFAULTS,
+    DEFAULTS,
 
-  COLUMN_DEFAULTS,
+    COLUMN_DEFAULTS,
 
-  METHODS,
+    METHODS,
 
-  EVENTS,
+    EVENTS,
 
-  LOCALES: {
-    en: EN,
-    'en-US': EN
-  }
+    LOCALES: {
+        en: EN,
+        'en-US': EN
+    }
 });
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")))
 
 /***/ }),
 
@@ -5018,388 +5487,674 @@ Object.assign(DEFAULTS, EN)
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function($) {/* harmony default export */ __webpack_exports__["default"] = ({
+    getBootstrapVersion() {
+        let bootstrapVersion = 5
 
-  getSearchInput (that) {
-    if (typeof that.options.searchSelector === 'string') {
-      return $(that.options.searchSelector)
-    }
-    return that.$toolbar.find('.search input')
-  },
+        try {
+            const rawVersion = $.fn.dropdown.Constructor.VERSION
 
-  // it only does '%s', and return '' when arguments are undefined
-  sprintf (_str, ...args) {
-    let flag = true
-    let i = 0
+            // Only try to parse VERSION if it is defined.
+            // It is undefined in older versions of Bootstrap (tested with 3.1.1).
+            if (rawVersion !== undefined) {
+                bootstrapVersion = parseInt(rawVersion, 10)
+            }
+        } catch (e) {
+            // ignore
+        }
 
-    const str = _str.replace(/%s/g, () => {
-      const arg = args[i++]
+        try {
+            // eslint-disable-next-line no-undef
+            const rawVersion = bootstrap.Tooltip.VERSION
 
-      if (typeof arg === 'undefined') {
-        flag = false
+            if (rawVersion !== undefined) {
+                bootstrapVersion = parseInt(rawVersion, 10)
+            }
+        } catch (e) {
+            // ignore
+        }
+
+        return bootstrapVersion
+    },
+
+    getIconsPrefix(theme) {
+        return {
+            bootstrap3: 'glyphicon',
+            bootstrap4: 'fa',
+            bootstrap5: 'bi',
+            'bootstrap-table': 'icon',
+            bulma: 'fa',
+            foundation: 'fa',
+            materialize: 'material-icons',
+            semantic: 'fa'
+        }[theme] || 'fa'
+    },
+
+    getIcons(prefix) {
+        return {
+            glyphicon: {
+                paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
+                paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
+                refresh: 'glyphicon-refresh icon-refresh',
+                toggleOff: 'glyphicon-list-alt icon-list-alt',
+                toggleOn: 'glyphicon-list-alt icon-list-alt',
+                columns: 'glyphicon-th icon-th',
+                detailOpen: 'glyphicon-plus icon-plus',
+                detailClose: 'glyphicon-minus icon-minus',
+                fullscreen: 'glyphicon-fullscreen',
+                search: 'glyphicon-search',
+                clearSearch: 'glyphicon-trash'
+            },
+            fa: {
+                paginationSwitchDown: 'fa-caret-square-down',
+                paginationSwitchUp: 'fa-caret-square-up',
+                refresh: 'fa-sync',
+                toggleOff: 'fa-toggle-off',
+                toggleOn: 'fa-toggle-on',
+                columns: 'fa-th-list',
+                detailOpen: 'fa-plus',
+                detailClose: 'fa-minus',
+                fullscreen: 'fa-arrows-alt',
+                search: 'fa-search',
+                clearSearch: 'fa-trash'
+            },
+            bi: {
+                paginationSwitchDown: 'bi-caret-down-square',
+                paginationSwitchUp: 'bi-caret-up-square',
+                refresh: 'bi-arrow-clockwise',
+                toggleOff: 'bi-toggle-off',
+                toggleOn: 'bi-toggle-on',
+                columns: 'bi-list-ul',
+                detailOpen: 'bi-plus',
+                detailClose: 'bi-dash',
+                fullscreen: 'bi-arrows-move',
+                search: 'bi-search',
+                clearSearch: 'bi-trash'
+            },
+            icon: {
+                paginationSwitchDown: 'icon-arrow-up-circle',
+                paginationSwitchUp: 'icon-arrow-down-circle',
+                refresh: 'icon-refresh-cw',
+                toggleOff: 'icon-toggle-right',
+                toggleOn: 'icon-toggle-right',
+                columns: 'icon-list',
+                detailOpen: 'icon-plus',
+                detailClose: 'icon-minus',
+                fullscreen: 'icon-maximize',
+                search: 'icon-search',
+                clearSearch: 'icon-trash-2'
+            },
+            'material-icons': {
+                paginationSwitchDown: 'grid_on',
+                paginationSwitchUp: 'grid_off',
+                refresh: 'refresh',
+                toggleOff: 'tablet',
+                toggleOn: 'tablet_android',
+                columns: 'view_list',
+                detailOpen: 'add',
+                detailClose: 'remove',
+                fullscreen: 'fullscreen',
+                sort: 'sort',
+                search: 'search',
+                clearSearch: 'delete'
+            }
+        }[prefix] || {}
+    },
+
+    getSearchInput(that) {
+        if (typeof that.options.searchSelector === 'string') {
+            return $(that.options.searchSelector)
+        }
+        return that.$toolbar.find('.search input')
+    },
+
+    // $.extend: https://github.com/jquery/jquery/blob/3.6.2/src/core.js#L132
+    extend(...args) {
+        let target = args[0] || {}
+        let i = 1
+        let deep = false
+        let clone
+
+        // Handle a deep copy situation
+        if (typeof target === 'boolean') {
+            deep = target
+
+            // Skip the boolean and the target
+            target = args[i] || {}
+            i++
+        }
+
+        // Handle case when target is a string or something (possible in deep copy)
+        if (typeof target !== 'object' && typeof target !== 'function') {
+            target = {}
+        }
+
+        for (; i < args.length; i++) {
+            const options = args[i]
+
+            // Ignore undefined/null values
+            if (typeof options === 'undefined' || options === null) {
+                continue
+            }
+
+            // Extend the base object
+            // eslint-disable-next-line guard-for-in
+            for (const name in options) {
+                const copy = options[name]
+
+                // Prevent Object.prototype pollution
+                // Prevent never-ending loop
+                if (name === '__proto__' || target === copy) {
+                    continue
+                }
+
+                const copyIsArray = Array.isArray(copy)
+
+                // Recurse if we're merging plain objects or arrays
+                if (deep && copy && (this.isObject(copy) || copyIsArray)) {
+                    const src = target[name]
+
+                    if (copyIsArray && Array.isArray(src)) {
+                        if (src.every(it => !this.isObject(it) && !Array.isArray(it))) {
+                            target[name] = copy
+                            continue
+                        }
+                    }
+
+                    if (copyIsArray && !Array.isArray(src)) {
+                        clone = []
+                    } else if (!copyIsArray && !this.isObject(src)) {
+                        clone = {}
+                    } else {
+                        clone = src
+                    }
+
+                    // Never move original objects, clone them
+                    target[name] = this.extend(deep, clone, copy)
+
+                    // Don't bring in undefined values
+                } else if (copy !== undefined) {
+                    target[name] = copy
+                }
+            }
+        }
+
+        return target
+    },
+
+    // it only does '%s', and return '' when arguments are undefined
+    sprintf(_str, ...args) {
+        let flag = true
+        let i = 0
+
+        const str = _str.replace(/%s/g, () => {
+            const arg = args[i++]
+
+            if (typeof arg === 'undefined') {
+                flag = false
+                return ''
+            }
+            return arg
+        })
+
+        return flag ? str : ''
+    },
+
+    isObject(obj) {
+        if (typeof obj !== 'object' || obj === null) {
+            return false
+        }
+
+        let proto = obj
+
+        while (Object.getPrototypeOf(proto) !== null) {
+            proto = Object.getPrototypeOf(proto)
+        }
+
+        return Object.getPrototypeOf(obj) === proto
+    },
+
+    isEmptyObject(obj = {}) {
+        return Object.entries(obj).length === 0 && obj.constructor === Object
+    },
+
+    isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n)
+    },
+
+    getFieldTitle(list, value) {
+        for (const item of list) {
+            if (item.field === value) {
+                return item.title
+            }
+        }
         return ''
-      }
-      return arg
-    })
-    return flag ? str : ''
-  },
+    },
 
-  isObject (val) {
-    return val instanceof Object && !Array.isArray(val)
-  },
+    setFieldIndex(columns) {
+        let totalCol = 0
+        const flag = []
 
-  isEmptyObject (obj = {}) {
-    return Object.entries(obj).length === 0 && obj.constructor === Object
-  },
-
-  isNumeric (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n)
-  },
-
-  getFieldTitle (list, value) {
-    for (const item of list) {
-      if (item.field === value) {
-        return item.title
-      }
-    }
-    return ''
-  },
-
-  setFieldIndex (columns) {
-    let totalCol = 0
-    const flag = []
-
-    for (const column of columns[0]) {
-      totalCol += column.colspan || 1
-    }
-
-    for (let i = 0; i < columns.length; i++) {
-      flag[i] = []
-      for (let j = 0; j < totalCol; j++) {
-        flag[i][j] = false
-      }
-    }
-
-    for (let i = 0; i < columns.length; i++) {
-      for (const r of columns[i]) {
-        const rowspan = r.rowspan || 1
-        const colspan = r.colspan || 1
-        const index = flag[i].indexOf(false)
-
-        r.colspanIndex = index
-
-        if (colspan === 1) {
-          r.fieldIndex = index
-          // when field is undefined, use index instead
-          if (typeof r.field === 'undefined') {
-            r.field = index
-          }
-        } else {
-          r.colspanGroup = r.colspan
+        for (const column of columns[0]) {
+            totalCol += column.colspan || 1
         }
 
-        for (let j = 0; j < rowspan; j++) {
-          for (let k = 0; k < colspan; k++) {
-            flag[i + j][index + k] = true
-          }
-        }
-      }
-    }
-  },
-
-  normalizeAccent (value) {
-    if (typeof value !== 'string') {
-      return value
-    }
-    return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-  },
-
-  updateFieldGroup (columns) {
-    const allColumns = [].concat(...columns)
-
-    for (const c of columns) {
-      for (const r of c) {
-        if (r.colspanGroup > 1) {
-          let colspan = 0
-          for (let i = r.colspanIndex; i < r.colspanIndex + r.colspanGroup; i++) {
-            const column = allColumns.find(col => col.fieldIndex === i)
-            if (column.visible) {
-              colspan++
+        for (let i = 0; i < columns.length; i++) {
+            flag[i] = []
+            for (let j = 0; j < totalCol; j++) {
+                flag[i][j] = false
             }
-          }
-          r.colspan = colspan
-          r.visible = colspan > 0
         }
-      }
-    }
-  },
 
-  getScrollBarWidth () {
-    if (this.cachedWidth === undefined) {
-      const $inner = $('<div/>').addClass('fixed-table-scroll-inner')
-      const $outer = $('<div/>').addClass('fixed-table-scroll-outer')
+        for (let i = 0; i < columns.length; i++) {
+            for (const r of columns[i]) {
+                const rowspan = r.rowspan || 1
+                const colspan = r.colspan || 1
+                const index = flag[i].indexOf(false)
 
-      $outer.append($inner)
-      $('body').append($outer)
+                r.colspanIndex = index
 
-      const w1 = $inner[0].offsetWidth
-      $outer.css('overflow', 'scroll')
-      let w2 = $inner[0].offsetWidth
+                if (colspan === 1) {
+                    r.fieldIndex = index
+                    // when field is undefined, use index instead
+                    if (typeof r.field === 'undefined') {
+                        r.field = index
+                    }
+                } else {
+                    r.colspanGroup = r.colspan
+                }
 
-      if (w1 === w2) {
-        w2 = $outer[0].clientWidth
-      }
-
-      $outer.remove()
-      this.cachedWidth = w1 - w2
-    }
-    return this.cachedWidth
-  },
-
-  calculateObjectValue (self, name, args = [], defaultValue) {
-    let func = name
-
-    if (typeof name === 'string') {
-      // support obj.func1.func2
-      const names = name.split('.')
-
-      if (names.length > 1) {
-        func = window
-        for (const f of names) {
-          func = func[f]
+                for (let j = 0; j < rowspan; j++) {
+                    for (let k = 0; k < colspan; k++) {
+                        flag[i + j][index + k] = true
+                    }
+                }
+            }
         }
-      } else {
-        func = window[name]
-      }
-    }
+    },
 
-    if (func !== null && typeof func === 'object') {
-      return func
-    }
+    normalizeAccent(value) {
+        if (typeof value !== 'string') {
+            return value
+        }
+        return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    },
 
-    if (typeof func === 'function') {
-      return func.apply(self, args || [])
-    }
+    updateFieldGroup(columns, fieldColumns) {
+        const allColumns = [].concat(...columns)
 
-    if (
-      !func &&
-      typeof name === 'string' &&
-      this.sprintf(name, ...args)
-    ) {
-      return this.sprintf(name, ...args)
-    }
+        for (const c of columns) {
+            for (const r of c) {
+                if (r.colspanGroup > 1) {
+                    let colspan = 0
 
-    return defaultValue
-  },
+                    for (let i = r.colspanIndex; i < r.colspanIndex + r.colspanGroup; i++) {
+                        const underColumns = allColumns.filter(col => col.fieldIndex === i)
+                        const column = underColumns[underColumns.length - 1]
 
-  compareObjects (objectA, objectB, compareLength) {
-    const aKeys = Object.keys(objectA)
-    const bKeys = Object.keys(objectB)
+                        if (underColumns.length > 1) {
+                            for (let j = 0; j < underColumns.length - 1; j++) {
+                                underColumns[j].visible = column.visible
+                            }
+                        }
 
-    if (compareLength && aKeys.length !== bKeys.length) {
-      return false
-    }
+                        if (column.visible) {
+                            colspan++
+                        }
+                    }
+                    r.colspan = colspan
+                    r.visible = colspan > 0
+                }
+            }
+        }
 
-    for (const key of aKeys) {
-      if (bKeys.includes(key) && objectA[key] !== objectB[key]) {
+        if (columns.length < 2) {
+            return
+        }
+
+        for (const column of fieldColumns) {
+            const sameColumns = allColumns.filter(col => col.fieldIndex === column.fieldIndex)
+
+            if (sameColumns.length > 1) {
+                for (const c of sameColumns) {
+                    c.visible = column.visible
+                }
+            }
+        }
+    },
+
+    getScrollBarWidth() {
+        if (this.cachedWidth === undefined) {
+            const $inner = $('<div/>').addClass('fixed-table-scroll-inner')
+            const $outer = $('<div/>').addClass('fixed-table-scroll-outer')
+
+            $outer.append($inner)
+            $('body').append($outer)
+
+            const w1 = $inner[0].offsetWidth
+
+            $outer.css('overflow', 'scroll')
+            let w2 = $inner[0].offsetWidth
+
+            if (w1 === w2) {
+                w2 = $outer[0].clientWidth
+            }
+
+            $outer.remove()
+            this.cachedWidth = w1 - w2
+        }
+        return this.cachedWidth
+    },
+
+    calculateObjectValue(self, name, args, defaultValue) {
+        let func = name
+
+        if (typeof name === 'string') {
+            // support obj.func1.func2
+            const names = name.split('.')
+
+            if (names.length > 1) {
+                func = window
+                for (const f of names) {
+                    func = func[f]
+                }
+            } else {
+                func = window[name]
+            }
+        }
+
+        if (func !== null && typeof func === 'object') {
+            return func
+        }
+
+        if (typeof func === 'function') {
+            return func.apply(self, args || [])
+        }
+
+        if (
+            !func &&
+            typeof name === 'string' &&
+            args &&
+            this.sprintf(name, ...args)
+        ) {
+            return this.sprintf(name, ...args)
+        }
+
+        return defaultValue
+    },
+
+    compareObjects(objectA, objectB, compareLength) {
+        const aKeys = Object.keys(objectA)
+        const bKeys = Object.keys(objectB)
+
+        if (compareLength && aKeys.length !== bKeys.length) {
+            return false
+        }
+
+        for (const key of aKeys) {
+            if (bKeys.includes(key) && objectA[key] !== objectB[key]) {
+                return false
+            }
+        }
+
+        return true
+    },
+
+    regexCompare(value, search) {
+        try {
+            const regexpParts = search.match(/^\/(.*?)\/([gim]*)$/)
+
+            if (value.toString().search(regexpParts ? new RegExp(regexpParts[1], regexpParts[2]) : new RegExp(search, 'gim')) !== -1) {
+                return true
+            }
+        } catch (e) {
+            return false
+        }
         return false
-      }
-    }
+    },
 
-    return true
-  },
+    escapeApostrophe(value) {
+        return value.toString()
+            .replace(/'/g, '&#39;')
+    },
 
-  escapeHTML (text) {
-    if (typeof text === 'string') {
-      return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;')
-        .replace(/`/g, '&#x60;')
-    }
-    return text
-  },
-
-  unescapeHTML (text) {
-    if (typeof text === 'string') {
-      return text
-        .replace(/&amp;/g, '&')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&quot;/g, '"')
-        .replace(/&#039;/g, '\'')
-        .replace(/&#x60;/g, '`')
-    }
-    return text
-  },
-
-  getRealDataAttr (dataAttr) {
-    for (const [attr, value] of Object.entries(dataAttr)) {
-      const auxAttr = attr.split(/(?=[A-Z])/).join('-').toLowerCase()
-      if (auxAttr !== attr) {
-        dataAttr[auxAttr] = value
-        delete dataAttr[attr]
-      }
-    }
-    return dataAttr
-  },
-
-  getItemField (item, field, escape) {
-    let value = item
-
-    if (typeof field !== 'string' || item.hasOwnProperty(field)) {
-      return escape ? this.escapeHTML(item[field]) : item[field]
-    }
-
-    const props = field.split('.')
-    for (const p of props) {
-      value = value && value[p]
-    }
-    return escape ? this.escapeHTML(value) : value
-  },
-
-  isIEBrowser () {
-    return navigator.userAgent.includes('MSIE ') ||
-      /Trident.*rv:11\./.test(navigator.userAgent)
-  },
-
-  findIndex (items, item) {
-    for (const it of items) {
-      if (JSON.stringify(it) === JSON.stringify(item)) {
-        return items.indexOf(it)
-      }
-    }
-    return -1
-  },
-
-  trToData (columns, $els) {
-    const data = []
-    const m = []
-
-    $els.each((y, el) => {
-      const $el = $(el)
-      const row = {}
-
-      // save tr's id, class and data-* attributes
-      row._id = $el.attr('id')
-      row._class = $el.attr('class')
-      row._data = this.getRealDataAttr($el.data())
-      row._style = $el.attr('style')
-
-      $el.find('>td,>th').each((_x, el) => {
-        const $el = $(el)
-        const cspan = +$el.attr('colspan') || 1
-        const rspan = +$el.attr('rowspan') || 1
-        let x = _x
-
-        // skip already occupied cells in current row
-        for (; m[y] && m[y][x]; x++) {
-          // ignore
+    escapeHTML(text) {
+        if (!text) {
+            return text
         }
+        return text.toString()
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+    },
 
-        // mark matrix elements occupied by current cell with true
-        for (let tx = x; tx < x + cspan; tx++) {
-          for (let ty = y; ty < y + rspan; ty++) {
-            if (!m[ty]) { // fill missing rows
-              m[ty] = []
+    unescapeHTML(text) {
+        if (typeof text !== 'string' || !text) {
+            return text
+        }
+        return text.toString()
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+    },
+
+    removeHTML(text) {
+        if (!text) {
+            return text
+        }
+        return text.toString()
+            .replace(/(<([^>]+)>)/ig, '')
+            .replace(/&[#A-Za-z0-9]+;/gi, '')
+            .trim()
+    },
+
+    getRealDataAttr(dataAttr) {
+        for (const [attr, value] of Object.entries(dataAttr)) {
+            const auxAttr = attr.split(/(?=[A-Z])/).join('-').toLowerCase()
+
+            if (auxAttr !== attr) {
+                dataAttr[auxAttr] = value
+                delete dataAttr[attr]
             }
-            m[ty][tx] = true
-          }
+        }
+        return dataAttr
+    },
+
+    getItemField(item, field, escape, columnEscape = undefined) {
+        let value = item
+
+        // use column escape if it is defined
+        if (typeof columnEscape !== 'undefined') {
+            escape = columnEscape
         }
 
-        const field = columns[x].field
+        if (typeof field !== 'string' || item.hasOwnProperty(field)) {
+            return escape ? this.escapeHTML(item[field]) : item[field]
+        }
 
-        row[field] = $el.html().trim()
-        // save td's id, class and data-* attributes
-        row[`_${field}_id`] = $el.attr('id')
-        row[`_${field}_class`] = $el.attr('class')
-        row[`_${field}_rowspan`] = $el.attr('rowspan')
-        row[`_${field}_colspan`] = $el.attr('colspan')
-        row[`_${field}_title`] = $el.attr('title')
-        row[`_${field}_data`] = this.getRealDataAttr($el.data())
-        row[`_${field}_style`] = $el.attr('style')
-      })
-      data.push(row)
-    })
-    return data
-  },
+        const props = field.split('.')
 
-  sort (a, b, order, sortStable, aPosition, bPosition) {
-    if (a === undefined || a === null) {
-      a = ''
-    }
-    if (b === undefined || b === null) {
-      b = ''
-    }
+        for (const p of props) {
+            value = value && value[p]
+        }
+        return escape ? this.escapeHTML(value) : value
+    },
 
-    if (sortStable && a === b) {
-      a = aPosition
-      b = bPosition
-    }
+    isIEBrowser() {
+        return navigator.userAgent.includes('MSIE ') ||
+            /Trident.*rv:11\./.test(navigator.userAgent)
+    },
 
-    // If both values are numeric, do a numeric comparison
-    if (this.isNumeric(a) && this.isNumeric(b)) {
-      // Convert numerical values form string to float.
-      a = parseFloat(a)
-      b = parseFloat(b)
-      if (a < b) {
-        return order * -1
-      }
-      if (a > b) {
+    findIndex(items, item) {
+        for (const it of items) {
+            if (JSON.stringify(it) === JSON.stringify(item)) {
+                return items.indexOf(it)
+            }
+        }
+        return -1
+    },
+
+    trToData(columns, $els) {
+        const data = []
+        const m = []
+
+        $els.each((y, el) => {
+            const $el = $(el)
+            const row = {}
+
+            // save tr's id, class and data-* attributes
+            row._id = $el.attr('id')
+            row._class = $el.attr('class')
+            row._data = this.getRealDataAttr($el.data())
+            row._style = $el.attr('style')
+
+            $el.find('>td,>th').each((_x, el) => {
+                const $el = $(el)
+                const colspan = +$el.attr('colspan') || 1
+                const rowspan = +$el.attr('rowspan') || 1
+                let x = _x
+
+                // skip already occupied cells in current row
+                for (; m[y] && m[y][x]; x++) {
+                    // ignore
+                }
+
+                // mark matrix elements occupied by current cell with true
+                for (let tx = x; tx < x + colspan; tx++) {
+                    for (let ty = y; ty < y + rowspan; ty++) {
+                        if (!m[ty]) { // fill missing rows
+                            m[ty] = []
+                        }
+                        m[ty][tx] = true
+                    }
+                }
+
+                const field = columns[x].field
+
+                row[field] = this.escapeApostrophe($el.html().trim())
+                // save td's id, class and data-* attributes
+                row[`_${field}_id`] = $el.attr('id')
+                row[`_${field}_class`] = $el.attr('class')
+                row[`_${field}_rowspan`] = $el.attr('rowspan')
+                row[`_${field}_colspan`] = $el.attr('colspan')
+                row[`_${field}_title`] = $el.attr('title')
+                row[`_${field}_data`] = this.getRealDataAttr($el.data())
+                row[`_${field}_style`] = $el.attr('style')
+            })
+            data.push(row)
+        })
+        return data
+    },
+
+    sort(a, b, order, options, aPosition, bPosition) {
+        if (a === undefined || a === null) {
+            a = ''
+        }
+        if (b === undefined || b === null) {
+            b = ''
+        }
+
+        if (options.sortStable && a === b) {
+            a = aPosition
+            b = bPosition
+        }
+
+        // If both values are numeric, do a numeric comparison
+        if (this.isNumeric(a) && this.isNumeric(b)) {
+            // Convert numerical values form string to float.
+            a = parseFloat(a)
+            b = parseFloat(b)
+            if (a < b) {
+                return order * -1
+            }
+            if (a > b) {
+                return order
+            }
+            return 0
+        }
+
+        if (options.sortEmptyLast) {
+            if (a === '') {
+                return 1
+            }
+
+            if (b === '') {
+                return -1
+            }
+        }
+
+        if (a === b) {
+            return 0
+        }
+
+        // If value is not a string, convert to string
+        if (typeof a !== 'string') {
+            a = a.toString()
+        }
+
+        if (a.localeCompare(b) === -1) {
+            return order * -1
+        }
+
         return order
-      }
-      return 0
-    }
+    },
 
-    if (a === b) {
-      return 0
-    }
+    getEventName(eventPrefix, id = '') {
+        id = id || `${+new Date()}${~~(Math.random() * 1000000)}`
+        return `${eventPrefix}-${id}`
+    },
 
-    // If value is not a string, convert to string
-    if (typeof a !== 'string') {
-      a = a.toString()
-    }
+    hasDetailViewIcon(options) {
+        return options.detailView && options.detailViewIcon && !options.cardView
+    },
 
-    if (a.localeCompare(b) === -1) {
-      return order * -1
-    }
+    getDetailViewIndexOffset(options) {
+        return this.hasDetailViewIcon(options) && options.detailViewAlign !== 'right' ? 1 : 0
+    },
 
-    return order
-  },
-
-  getEventName (eventPrefix, id = '') {
-    id = id || `${+new Date()}${~~(Math.random() * 1000000)}`
-    return `${eventPrefix}-${id}`
-  },
-
-  hasDetailViewIcon (options) {
-    return options.detailView && options.detailViewIcon && !options.cardView
-  },
-
-  getDetailViewIndexOffset (options) {
-    return this.hasDetailViewIcon(options) && options.detailViewAlign !== 'right' ? 1 : 0
-  },
-
-  checkAutoMergeCells (data) {
-    for (const row of data) {
-      for (const key of Object.keys(row)) {
-        if (key.startsWith('_') && (key.endsWith('_rowspan') || key.endsWith('_colspan'))) {
-          return true
+    checkAutoMergeCells(data) {
+        for (const row of data) {
+            for (const key of Object.keys(row)) {
+                if (key.startsWith('_') && (key.endsWith('_rowspan') || key.endsWith('_colspan'))) {
+                    return true
+                }
+            }
         }
-      }
-    }
-    return false
-  },
+        return false
+    },
 
-  deepCopy (arg) {
-    if (arg === undefined) {
-      return arg
+    deepCopy(arg) {
+        if (arg === undefined) {
+            return arg
+        }
+        return this.extend(true, Array.isArray(arg) ? [] : {}, arg)
+    },
+
+    debounce(func, wait, immediate) {
+        let timeout
+
+        return function executedFunction() {
+            const context = this
+            const args = arguments
+
+            const later = function () {
+                timeout = null
+                if (!immediate) func.apply(context, args)
+            }
+
+            const callNow = immediate && !timeout
+
+            clearTimeout(timeout)
+
+            timeout = setTimeout(later, wait)
+
+            if (callNow) func.apply(context, args)
+        }
     }
-    return $.extend(true, Array.isArray(arg) ? [] : {}, arg)
-  }
 });
-
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed")))
 
 /***/ }),
@@ -5417,131 +6172,139 @@ const BLOCK_ROWS = 50
 const CLUSTER_BLOCKS = 4
 
 class VirtualScroll {
+    constructor(options) {
+        this.rows = options.rows
+        this.scrollEl = options.scrollEl
+        this.contentEl = options.contentEl
+        this.callback = options.callback
+        this.itemHeight = options.itemHeight
 
-  constructor (options) {
-    this.rows = options.rows
-    this.scrollEl = options.scrollEl
-    this.contentEl = options.contentEl
-    this.callback = options.callback
-    this.itemHeight = options.itemHeight
+        this.cache = {}
+        this.scrollTop = this.scrollEl.scrollTop
 
-    this.cache = {}
-    this.scrollTop = this.scrollEl.scrollTop
+        this.initDOM(this.rows, options.fixedScroll)
 
-    this.initDOM(this.rows, options.fixedScroll)
+        this.scrollEl.scrollTop = this.scrollTop
+        this.lastCluster = 0
 
-    this.scrollEl.scrollTop = this.scrollTop
-    this.lastCluster = 0
+        const onScroll = () => {
+            if (this.lastCluster !== (this.lastCluster = this.getNum())) {
+                this.initDOM(this.rows)
+                this.callback(this.startIndex, this.endIndex)
+            }
+        }
 
-    const onScroll = () => {
-      if (this.lastCluster !== (this.lastCluster = this.getNum())) {
-        this.initDOM(this.rows)
-        this.callback()
-      }
+        this.scrollEl.addEventListener('scroll', onScroll, false)
+        this.destroy = () => {
+            this.contentEl.innerHtml = ''
+            this.scrollEl.removeEventListener('scroll', onScroll, false)
+        }
     }
 
-    this.scrollEl.addEventListener('scroll', onScroll, false)
-    this.destroy = () => {
-      this.contentEl.innerHtml = ''
-      this.scrollEl.removeEventListener('scroll', onScroll, false)
-    }
-  }
+    initDOM(rows, fixedScroll) {
+        if (typeof this.clusterHeight === 'undefined') {
+            this.cache.scrollTop = this.scrollEl.scrollTop
+            this.cache.data = this.contentEl.innerHTML = rows[0] + rows[0] + rows[0]
+            this.getRowsHeight(rows)
+        } else if (this.blockHeight === 0) {
+            this.getRowsHeight(rows)
+        }
 
-  initDOM (rows, fixedScroll) {
-    if (typeof this.clusterHeight === 'undefined') {
-      this.cache.scrollTop = this.scrollEl.scrollTop
-      this.cache.data = this.contentEl.innerHTML = rows[0] + rows[0] + rows[0]
-      this.getRowsHeight(rows)
+        const data = this.initData(rows, this.getNum(fixedScroll))
+        const thisRows = data.rows.join('')
+        const dataChanged = this.checkChanges('data', thisRows)
+        const topOffsetChanged = this.checkChanges('top', data.topOffset)
+        const bottomOffsetChanged = this.checkChanges('bottom', data.bottomOffset)
+        const html = []
+
+        if (dataChanged && topOffsetChanged) {
+            if (data.topOffset) {
+                html.push(this.getExtra('top', data.topOffset))
+            }
+            html.push(thisRows)
+            if (data.bottomOffset) {
+                html.push(this.getExtra('bottom', data.bottomOffset))
+            }
+            this.startIndex = data.start
+            this.endIndex = data.end
+            this.contentEl.innerHTML = html.join('')
+
+            if (fixedScroll) {
+                this.contentEl.scrollTop = this.cache.scrollTop
+            }
+        } else if (bottomOffsetChanged) {
+            this.contentEl.lastChild.style.height = `${data.bottomOffset}px`
+        }
     }
 
-    const data = this.initData(rows, this.getNum(fixedScroll))
-    const thisRows = data.rows.join('')
-    const dataChanged = this.checkChanges('data', thisRows)
-    const topOffsetChanged = this.checkChanges('top', data.topOffset)
-    const bottomOffsetChanged = this.checkChanges('bottom', data.bottomOffset)
-    const html = []
+    getRowsHeight() {
+        if (typeof this.itemHeight === 'undefined' || this.itemHeight === 0) {
+            const nodes = this.contentEl.children
+            const node = nodes[Math.floor(nodes.length / 2)]
 
-    if (dataChanged && topOffsetChanged) {
-      if (data.topOffset) {
-        html.push(this.getExtra('top', data.topOffset))
-      }
-      html.push(thisRows)
-      if (data.bottomOffset) {
-        html.push(this.getExtra('bottom', data.bottomOffset))
-      }
-      this.contentEl.innerHTML = html.join('')
+            this.itemHeight = node.offsetHeight
+        }
+        this.blockHeight = this.itemHeight * BLOCK_ROWS
+        this.clusterRows = BLOCK_ROWS * CLUSTER_BLOCKS
+        this.clusterHeight = this.blockHeight * CLUSTER_BLOCKS
+    }
 
-      if (fixedScroll) {
-        this.contentEl.scrollTop = this.cache.scrollTop
-      }
-    } else if (bottomOffsetChanged) {
-      this.contentEl.lastChild.style.height = `${data.bottomOffset}px`
+    getNum(fixedScroll) {
+        this.scrollTop = fixedScroll ? this.cache.scrollTop : this.scrollEl.scrollTop
+        return Math.floor(this.scrollTop / (this.clusterHeight - this.blockHeight)) || 0
     }
-  }
 
-  getRowsHeight () {
-    if (typeof this.itemHeight === 'undefined') {
-      const nodes = this.contentEl.children
-      const node = nodes[Math.floor(nodes.length / 2)]
-      this.itemHeight = node.offsetHeight
-    }
-    this.blockHeight = this.itemHeight * BLOCK_ROWS
-    this.clusterRows = BLOCK_ROWS * CLUSTER_BLOCKS
-    this.clusterHeight = this.blockHeight * CLUSTER_BLOCKS
-  }
+    initData(rows, num) {
+        if (rows.length < BLOCK_ROWS) {
+            return {
+                topOffset: 0,
+                bottomOffset: 0,
+                rowsAbove: 0,
+                rows
+            }
+        }
+        const start = Math.max((this.clusterRows - BLOCK_ROWS) * num, 0)
+        const end = start + this.clusterRows
+        const topOffset = Math.max(start * this.itemHeight, 0)
+        const bottomOffset = Math.max((rows.length - end) * this.itemHeight, 0)
+        const thisRows = []
+        let rowsAbove = start
 
-  getNum (fixedScroll) {
-    this.scrollTop = fixedScroll ? this.cache.scrollTop : this.scrollEl.scrollTop
-    return Math.floor(this.scrollTop / (this.clusterHeight - this.blockHeight)) || 0
-  }
+        if (topOffset < 1) {
+            rowsAbove++
+        }
+        for (let i = start; i < end; i++) {
+            rows[i] && thisRows.push(rows[i])
+        }
+        return {
+            start,
+            end,
+            topOffset,
+            bottomOffset,
+            rowsAbove,
+            rows: thisRows
+        }
+    }
 
-  initData (rows, num) {
-    if (rows.length < BLOCK_ROWS) {
-      return {
-        topOffset: 0,
-        bottomOffset: 0,
-        rowsAbove: 0,
-        rows
-      }
-    }
-    const start = Math.max((this.clusterRows - BLOCK_ROWS) * num, 0)
-    const end = start + this.clusterRows
-    const topOffset = Math.max(start * this.itemHeight, 0)
-    const bottomOffset = Math.max((rows.length - end) * this.itemHeight, 0)
-    const thisRows = []
-    let rowsAbove = start
-    if (topOffset < 1) {
-      rowsAbove++
-    }
-    for (let i = start; i < end; i++) {
-      rows[i] && thisRows.push(rows[i])
-    }
-    return {
-      topOffset,
-      bottomOffset,
-      rowsAbove,
-      rows: thisRows
-    }
-  }
+    checkChanges(type, value) {
+        const changed = value !== this.cache[type]
 
-  checkChanges (type, value) {
-    const changed = value !== this.cache[type]
-    this.cache[type] = value
-    return changed
-  }
-
-  getExtra (className, height) {
-    const tag = document.createElement('tr')
-    tag.className = `virtual-scroll-${className}`
-    if (height) {
-      tag.style.height = `${height}px`
+        this.cache[type] = value
+        return changed
     }
-    return tag.outerHTML
-  }
+
+    getExtra(className, height) {
+        const tag = document.createElement('tr')
+
+        tag.className = `virtual-scroll-${className}`
+        if (height) {
+            tag.style.height = `${height}px`
+        }
+        return tag.outerHTML
+    }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (VirtualScroll);
-
 
 /***/ }),
 
@@ -6773,7 +7536,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"), __webpack_require__(/*! ./commgroup */ "./www/js/source/pages/customer/customercomm/commgroup.js"), __webpack_require__(/*! lib/numberformat */ "./www/js/source/lib/numberformat.js"),
-    __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js"), __webpack_require__(/*! lib/bootstrap-table/bootstrap-table */ "./www/js/source/lib/bootstrap-table/bootstrap-table.js"), __webpack_require__(/*! lib/bootstrap-table/bootstrap-table-fixed-columns */ "./www/js/source/lib/bootstrap-table/bootstrap-table-fixed-columns.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, Popup, CustomerCommGroup, NumberFormatter) {
+    __webpack_require__(/*! lib/jquery.multiselect.nlevel */ "./www/js/source/lib/jquery.multiselect.nlevel.js"),
+    __webpack_require__(/*! lib/bootstrap-table/bootstrap-table */ "./www/js/source/lib/bootstrap-table/bootstrap-table.js"),
+    __webpack_require__(/*! lib/bootstrap-table/bootstrap-table-sticky-header */ "./www/js/source/lib/bootstrap-table/bootstrap-table-sticky-header.js"),
+    __webpack_require__(/*! lib/bootstrap-table/bootstrap-table-fixed-columns */ "./www/js/source/lib/bootstrap-table/bootstrap-table-fixed-columns.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, Site, Popup, CustomerCommGroup, NumberFormatter) {
         'use strict';
 
         const deleteGroupData = {
@@ -7118,6 +7884,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             let gridOptions = {
                 columns: columns,
                 data: rows,
+                stickyHeader: true,
                 fixedColumns: true,
                 fixedNumber: 5,
                 fixedRightNumber: 2,
