@@ -96,8 +96,7 @@
             var result = AmendmentTicketListing.Empty();
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
-                objectDb.SetParameterValue("AgentList", "<ROOT><Agent AgentId=\"20121327\"/></ROOT>");
-                //objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+                objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
                 objectDb.SetParameterValue("NotiID", metaModel.SessionId);
                 objectDb.SetParameterValue("FEventDate", metaModel.DateTime);
                 objectDb.SetParameterValue("TEventDate", metaModel.DateTime);
@@ -138,8 +137,7 @@
 
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
-                objectDb.SetParameterValue("AgentList", "<ROOT><Agent AgentId=\"20121327\"/></ROOT>");
-                //objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+                objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
                 objectDb.SetParameterValue("FEventDate", metaModel.FromDate);
                 objectDb.SetParameterValue("TEventDate", metaModel.ToDate);
 
@@ -195,8 +193,7 @@
                     objectDb.SetParameterValue("TEventDate", metaModel.ToDate);
                     objectDb.SetParameterValue("PageSize", metaModel.PageSize);
                     objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
-                    //objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
-                    objectDb.SetParameterValue("AgentList", "<ROOT><Agent AgentId=\"20121327\"/></ROOT>");
+                    objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
 
                     using (var reader = objectDb.ExecuteReader())
                     {
