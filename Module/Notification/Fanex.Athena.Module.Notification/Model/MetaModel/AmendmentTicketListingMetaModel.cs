@@ -13,6 +13,8 @@
 
         public DateTime DateTime { get; set; }
 
+        public string Language { get; set; }
+
         public bool IsExcludedTestData { get; set; }
     }
 }

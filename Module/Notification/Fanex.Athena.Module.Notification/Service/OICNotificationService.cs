@@ -170,7 +170,8 @@
                     Source = amendment.Source,
                     SessionId = amendment.SessionId,
                     DateTime = amendment.DateTime,
-                    AgentListXml = metaModel.AgentListXml
+                    AgentListXml = metaModel.AgentListXml,
+                    Language = metaModel.Language
                 };
                 var data = GetAmendmentTicketListing(param);
                 result.Add(data);

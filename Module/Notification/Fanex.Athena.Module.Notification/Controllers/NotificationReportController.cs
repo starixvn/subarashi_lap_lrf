@@ -89,6 +89,7 @@
         [AutoBindMetaModel(BindAgent = true)]
         public ActionResult GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
         {
+            UpdateAmendmentMetaModel(metaModel);
             var data = _notificationManagerService.GetAmendmentTicketListing(metaModel);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
@@ -97,6 +98,7 @@
         [AutoBindMetaModel(BindAgent = true)]
         public ActionResult ExportAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
         {
+            UpdateAmendmentMetaModel(metaModel);
             var data = _notificationManagerService.GetAmendmentTicketListing(metaModel);
             if (data.Data.IsPresent())
             {
@@ -144,6 +146,12 @@
             metaModel.LicenseeName = SessionServiceInstance.LicenseeSession.LicenseeName;
             metaModel.Language = Util.MapLanguages.GetValueOrDefault(userSession.Language, "en");
             metaModel.MessageTypes = NotificationHelper.GetMessageTypesByPermission(permissionKeys, userSession.IsSuperAdmin);
+        }
+
+        private void UpdateAmendmentMetaModel(AmendmentTicketListingMetaModel metaModel)
+        {
+            var userSession = SessionServiceInstance.UserSession;
+            metaModel.Language = Util.MapLanguages.GetValueOrDefault(userSession.Language, "en");
         }
     }
 }

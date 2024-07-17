@@ -113,12 +113,15 @@
         {
             const string SpKey = "Lrf_AdmTicketListSel";
             var result = AmendmentTicketListing.Empty();
+            var langCode = NotificationHelper.GetSupportedLanguage(metaModel.Language);
+
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
                 objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
                 objectDb.SetParameterValue("NotiID", metaModel.SessionId);
                 objectDb.SetParameterValue("FEventDate", metaModel.DateTime);
                 objectDb.SetParameterValue("TEventDate", metaModel.DateTime);
+                objectDb.SetParameterValue("LanguageCode", langCode);
 
                 using (var reader = objectDb.ExecuteReader())
                 {
@@ -153,12 +156,14 @@
             const string SpKey = "Lrf_AdmTicketListSel";
             var info = new List<AmendmentTicketListing>();
             var detail = new List<AmendmentTicket>();
+            var langCode = NotificationHelper.GetSupportedLanguage(metaModel.Language);
 
             using (var objectDb = _dbFactory.GetObjectDb(SpKey))
             {
                 objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
                 objectDb.SetParameterValue("FEventDate", metaModel.FromDate);
                 objectDb.SetParameterValue("TEventDate", metaModel.ToDate);
+                objectDb.SetParameterValue("LanguageCode", langCode);
 
                 using (var reader = objectDb.ExecuteReader())
                 {
@@ -205,6 +210,7 @@
             if (NotificationHelper.IsValidMessageTypeByPermission(metaModel.MessageTypes, PermissionList))
             {
                 const string SpKey = "Lrf_AdmNotificationSel";
+                var langCode = NotificationHelper.GetSupportedLanguage(metaModel.Language);
 
                 using (var objectDb = _dbFactory.GetObjectDb(SpKey))
                 {
@@ -213,6 +219,7 @@
                     objectDb.SetParameterValue("PageSize", metaModel.PageSize);
                     objectDb.SetParameterValue("PageIndex", metaModel.PageIndex);
                     objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+                    objectDb.SetParameterValue("LanguageCode", langCode);
 
                     using (var reader = objectDb.ExecuteReader())
                     {
