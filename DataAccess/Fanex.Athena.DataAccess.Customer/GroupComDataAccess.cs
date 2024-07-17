@@ -154,7 +154,7 @@
                 db.SetParameterValue("StrCustID", null);
                 AddResultParam(db);
                 await db.ExecuteNonQueryAsync().ConfigureAwait(false);
-                newItem.GroupCommId = Converter.ToInt(db.GetParameterValue("GroupDiscountID"));
+                newItem.GroupCommId = Converter.ToInt(db.GetParameterValue("GroupCommID"));
                 var resultInfo = GetResult(db);
                 resultInfo.ExtendedData = Converter.ToString2(db.GetParameterValue("StrCustID"));
                 return resultInfo;

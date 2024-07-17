@@ -1,11 +1,19 @@
-﻿namespace Fanex.Athena.Api.CustomerLog
+﻿// --------------------------------------------------------------------------
+// <copyright file="LogController.GroupCommission.cs" company="">
+// Copyright (c) . All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+
+namespace Fanex.Athena.Api.CustomerLog
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
     using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Customer.MetaModel;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
+    using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
 
     public partial class LogController
     {
@@ -14,8 +22,11 @@
         {
             LogHelper.SetTemplateServiceConfiguration();
 
+            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
             var productAccess = _productService.GetProductAccess(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language);
-            var actionTypes = LogHelper.GroupLogAttributes();
+            var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
+            ActionViewModel.SetProductPermissions(permissions);
+
             var metaModel = new CustomerLogMetaModel
             {
                 Year = year,
@@ -36,8 +47,8 @@
             }
 
             var dataList = await _customerLogDataAccess.GetGroupCommList(metaModel).ConfigureAwait(false);
-
-            var details = GetDetails(dataList, actionTypes, commSettings);
+            var dataAfterRemoveHTMLTag = RemoveHtmlTag(dataList);
+            var details = GetDetails(dataAfterRemoveHTMLTag, commSettings);
 
             return new { rows = details };
         }

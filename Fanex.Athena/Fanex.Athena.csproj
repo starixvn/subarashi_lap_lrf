@@ -799,6 +799,9 @@
     <Content Include="Views\Desktop\Customer\CustomerLog\Action\2612.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\Action\2407.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\Action\2201.cshtml" />
+    <Content Include="Views\Desktop\Customer\CustomerLog\Action\2609.cshtml" />
+    <Content Include="Views\Desktop\Customer\CustomerLog\Action\2610.cshtml" />
+    <Content Include="Views\Desktop\Customer\CustomerLog\Action\2611.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\Action\2801.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\GroupCommLog\Main.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\GroupCommLog\Filter.cshtml" />

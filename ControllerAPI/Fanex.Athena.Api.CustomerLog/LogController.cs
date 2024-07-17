@@ -1,10 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LogController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Api.CustomerLog
+﻿namespace Fanex.Athena.Api.CustomerLog
 {
     using System;
     using System.Collections;
@@ -39,14 +33,17 @@ namespace Fanex.Athena.Api.CustomerLog
     public partial class LogController : BaseApiController
     {
         private static readonly int[] ActionIdListForBA = new[] { 2401, 2403, 2801 };
+        private static readonly int[] LicenseeGroupDiscountActionIds = new[] { 2615, 2616, 2617 };
 
         private static readonly Dictionary<int[], string> ActionIdMapper = new Dictionary<int[], string>
         {
-            { new int[] { 2609, 2610, 2611 }, "LicenseeGroupComm" }
+            { LicenseeGroupDiscountActionIds, "LicenseeGroupComm" }
         };
 
         private readonly ICustomerLogDataAccess _customerLogDataAccess;
+
         private readonly ILogInLogDataAccess _logInLogDataAccess;
+
         private readonly IFileSystem _fileSystem;
         private readonly IProductService _productService;
         private readonly IGroupComService _groupComService;
@@ -72,25 +69,15 @@ namespace Fanex.Athena.Api.CustomerLog
 
         #region Remove HTML tag
 
-        /// <summary>
-        /// Remove HTML tag inside tracking value.
-        /// </summary>
-        /// <param name="source">Tracking Value.</param>
-        /// <returns>Tracking Value has been removed HTML Tag.</returns>
         private static string RemoveHtmlTags(string source)
         {
             var regex = new Regex("[/<>]");
             return regex.Replace(source, string.Empty);
         }
 
-        /// <summary>
-        /// Remove HTML Tag.
-        /// </summary>
-        /// <param name="datalist">A list of Customer Log.</param>
-        /// <returns>A list of customer log has been removed HTML tag.</returns>
         private static IList<CustomerLog> RemoveHtmlTag(IList<CustomerLog> datalist)
         {
-            foreach (var item in datalist)
+            foreach (var item in datalist.Where(_ => !LicenseeGroupDiscountActionIds.Contains(_.ActionId)))
             {
                 var trackingCharCount = item.TrackingValue.Length;
                 var trackingOldCharCount = item.TrackingValueOld.Length;
@@ -114,7 +101,7 @@ namespace Fanex.Athena.Api.CustomerLog
 
         #region Get XML attribute
 
-        private static IDictionary<string, string> GetXmlAttr(string trackingValue, string trackingValueOld, string[] actionTypes, IEnumerable<GroupCommSettingMetaModel> commSettings)
+        private static IDictionary<string, string> GetXmlAttr(string trackingValue, string trackingValueOld, string[] actionTypes, IEnumerable<GroupCommSettingMetaModel> commSettings = null)
         {
             var dictonary = new Dictionary<string, string>();
 
@@ -152,27 +139,23 @@ namespace Fanex.Athena.Api.CustomerLog
             var rootCommElements = root.GetElementsByTagName("r");
             var rootOldCommNElements = rootOld.GetElementsByTagName("r");
 
-            foreach (XmlNode element in rootCommElements)
-            {
-                GetCommValuesXmlAttr(dictionary, element, commSettings);
-            }
-
-            foreach (XmlNode element in rootOldCommNElements)
-            {
-                GetCommValuesXmlAttr(dictionary, element, commSettings, "Old");
-            }
+            GetCommValuesXmlAttr(dictionary, rootCommElements, commSettings);
+            GetCommValuesXmlAttr(dictionary, rootOldCommNElements, commSettings, "Old");
         }
 
-        private static void GetCommValuesXmlAttr(Dictionary<string, string> dictionary, XmlNode element, IEnumerable<GroupCommSettingMetaModel> commSettings, string suffix = "")
+        private static void GetCommValuesXmlAttr(Dictionary<string, string> dictionary, XmlNodeList elements, IEnumerable<GroupCommSettingMetaModel> commSettings, string suffix = "")
         {
-            var sportType = Convert.ToInt32(element.Attributes["SportType"]?.Value);
-            var betType = Convert.ToInt32(element.Attributes["BetType"]?.Value);
-            var discount = element.Attributes["Discount"]?.Value;
-            var key = commSettings.FirstOrDefault(_ => _.Sporttype == sportType && _.Bettype == betType)?.ProductCode + suffix;
-
-            if (!string.IsNullOrEmpty(key) && !dictionary.ContainsKey(key))
+            foreach (XmlNode element in elements)
             {
-                dictionary.Add(key, discount);
+                var sportType = Convert.ToInt32(element.Attributes["SportType"]?.Value);
+                var betType = Convert.ToInt32(element.Attributes["BetType"]?.Value);
+                var discount = element.Attributes["Discount"]?.Value;
+                var key = commSettings.FirstOrDefault(_ => _.Sporttype == sportType && _.Bettype == betType)?.ProductCode + suffix;
+
+                if (!string.IsNullOrEmpty(key) && !dictionary.ContainsKey(key))
+                {
+                    dictionary.Add(key, discount);
+                }
             }
         }
 
@@ -208,7 +191,7 @@ namespace Fanex.Athena.Api.CustomerLog
 
         #region Get detail data
 
-        private IList<CustomerLog> GetDetails(IList<CustomerLog> dataList, string[] actionTypes = null, IEnumerable<GroupCommSettingMetaModel> commSettings = null)
+        private IList<CustomerLog> GetDetails(IList<CustomerLog> dataList, IEnumerable<GroupCommSettingMetaModel> commSettings = null)
         {
             var resourcesMap = new Dictionary<string, string>
             {
@@ -218,13 +201,14 @@ namespace Fanex.Athena.Api.CustomerLog
                 { "GroupId", ViewResources.GroupId },
                 { "GroupName", ViewResources.GroupName },
                 { "GroupColor", ViewResources.GroupColor },
+                { "SBComm", ViewResources.SBComm },
+                { "NGComm", ViewResources.NGComm },
+                { "CSComm", ViewResources.CSComm },
                 { "Yes", ViewResources.Yes },
                 { "No", ViewResources.No },
                 { "OldColor", ViewResources.OldColor },
                 { "Comm", ViewResources.Comm }
             };
-
-            var productCodeList = GetProductCodeList(commSettings);
 
             foreach (var item in dataList)
             {
@@ -233,14 +217,25 @@ namespace Fanex.Athena.Api.CustomerLog
                 {
                     item.Details = string.Empty;
                 }
-                else
+                else if (LicenseeGroupDiscountActionIds.Contains(item.ActionId))
                 {
-                    var dictionary = GetXmlAttr(item.TrackingValue, item.TrackingValueOld, actionTypes, commSettings);
+                    var dictionary = GetXmlAttr(item.TrackingValue, item.TrackingValueOld, LogHelper.LicenseeGroupDiscountLogAttributes(), commSettings);
                     var action = new ActionViewModel
                     {
                         Data = dictionary,
                         Resource = resourcesMap,
-                        ProductList = productCodeList
+                        ProductList = GetProductCodeList(commSettings)
+                    };
+
+                    item.Details = GenerateDetailedValue(item.ActionId, action);
+                }
+                else
+                {
+                    var dictionary = GetXmlAttr(item.TrackingValue, item.TrackingValueOld, LogHelper.GroupLogAttributes());
+                    var action = new ActionViewModel
+                    {
+                        Data = dictionary,
+                        Resource = resourcesMap
                     };
 
                     item.Details = GenerateDetailedValue(item.ActionId, action);

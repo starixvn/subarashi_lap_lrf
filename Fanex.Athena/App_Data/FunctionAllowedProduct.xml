@@ -36,4 +36,8 @@
 	<Group Name="API">
 		<Function Name="CustomerAPI_RemoveFromGroupCom" Product="SB,BA,NG,VS,CS,AB"></Function>
 	</Group>
+
+	<Group Name="CommissionGroups">
+		<Function Name="CommissionGroups" Product="SB,Parlay,NG,CS,VB,PP,SXG,SG,KN,LT,TG,VS,VRG,CC,SBC,SAG,PGS,AB,WM,BGG,JK,HB,VGA,CG,AP,APM,FGGL,MXG,JIG,YB,MGRNG"></Function>
+	</Group>
 </Root>

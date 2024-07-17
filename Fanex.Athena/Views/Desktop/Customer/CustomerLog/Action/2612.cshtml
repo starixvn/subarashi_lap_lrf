@@ -4,61 +4,60 @@
 @using Fanex.Common;
 @model ActionViewModel
 @{
-    Model.Resource = LogHelper.GetGroupCommissionLogResources(Model.ProductList);
+    Model.Resource = LogHelper.GetGroupCommissionLogResources(ActionViewModel.ProductPermissions);
     var groupNameOld = Model.Data["GroupNameOld"];
     const int nameLength = LogHelper.MaxCommissionGroupNameShownLength;
     var groupNameOldTitle = groupNameOld.Length > nameLength ? "title='" + groupNameOld + "'" : "";
 
-    var numberOfTable = Math.Ceiling(((decimal)(Model.ProductList.Count() - 3)) / 7);
+    var columnNames = CommissionGroupHelper.MapHardcodedNameFromDB(ActionViewModel.ProductPermissions, false);
+    var numberOfTable = Math.Ceiling(((decimal)(ActionViewModel.ProductPermissions.Count - 6)) / 7);
     var productInFirstRow = 6;
     var productIndex = productInFirstRow;
 }
-@helper RenderCommValue(int index)
+@helper RenderCommValue(int index, IDictionary<string, string> columnNames)
 {
-    var p = @Model.ProductList.ElementAt(index);
-    var tempValue = string.Empty;
-    var tempOldValue = string.Empty;
-    Model.Data.TryGetValue(p, out tempValue);
-    Model.Data.TryGetValue(p + "Old", out tempOldValue);
+    var p = ActionViewModel.ProductPermissions.ElementAt(index);
 
-    var value = Converter.ToDecimal(tempValue);
-    var oldValue = Converter.ToDecimal(tempOldValue);
+    var fieldName = columnNames[p.Key] + "Comm";
+    var fieldNameOld = fieldName + "Old";
 
-    <td title="@Model.TitleOfChange(p, LogHelper.CommFormat)">
+    var value = Converter.ToDecimal(Model.Data[fieldName]);
+    var oldValue = Converter.ToDecimal(Model.Data[fieldNameOld]);
+
+    <td title="@Model.TitleOfChange(fieldName, LogHelper.CommFormat)">
         <p>@value.ToString(LogHelper.CommFormat)</p>
-        <p class="@Model.GetClassName(p)">@oldValue.ToString(LogHelper.CommFormat)</p>
+        <p class="@Model.GetClassName(fieldName)">@oldValue.ToString(LogHelper.CommFormat)</p>
     </td>
 }
 <table class="nested-table tbl-group-comm">
     <tbody>
         <tr class="row-title">
             <td class="col-commission">@Model.Resource["GroupId"]</td>
-            @for (var i = 0; i < productInFirstRow && i < Model.ProductList.Count(); i++)
+            @for (var i = 0; i < productInFirstRow && i < ActionViewModel.ProductPermissions.Count; i++)
             {
-                var p = Model.ProductList.ElementAt(i);
-                <td class="col-commission">@Model.Resource[p]</td>
+                var p = ActionViewModel.ProductPermissions.ElementAt(i);
+                <td class="col-commission">@Model.Resource[p.Key + "Comm"]</td>
             }
         </tr>
         <tr>
             <td>
-                @Model.Data["GroupDiscountID"]
-                <p class="@Model.GetClassName("GroupDiscountID")">@Model.Data["GroupDiscountID"]</p>
+                @Model.Data["GroupCommID"]
+                <p class="@Model.GetClassName("GroupCommID")">@Model.Data["GroupCommIDOld"]</p>
             </td>
-            @for (var i = 0; i < productInFirstRow && i < Model.ProductList.Count(); i++)
+            @for (var i = 0; i < productInFirstRow && i < ActionViewModel.ProductPermissions.Count; i++)
             {
-                @RenderCommValue(i)
+                @RenderCommValue(i, columnNames)
             }
         </tr>
         @for (var t = 0; t < numberOfTable; t++)
         {
             var i = 0;
             <tr class="row-title">
-                @for (i = 0; i < 7 && productIndex + i < Model.ProductList.Count(); i++)
+                @for (i = 0; i < 7 && productIndex + i < ActionViewModel.ProductPermissions.Count; i++)
                 {
-                    var p = Model.ProductList.ElementAt(i + productIndex);
+                    var p = ActionViewModel.ProductPermissions.ElementAt(productIndex + i);
 
-                    <
-                    <td>@Model.Resource[p]</td>
+                    <td>@Model.Resource[p.Key + "Comm"]</td>
                 }
                 @if (i < 7)
                 {
@@ -66,9 +65,9 @@
                 }
             </tr>
             <tr>
-                @for (i = 0; i < 7 && productIndex + i < Model.ProductList.Count(); i++)
+                @for (i = 0; i < 7 && productIndex + i < ActionViewModel.ProductPermissions.Count; i++)
                 {
-                    @RenderCommValue(i + productIndex)
+                    @RenderCommValue(productIndex + i, columnNames)
                 }
                 @if (i < 7)
                 {
