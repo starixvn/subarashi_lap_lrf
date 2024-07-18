@@ -592,9 +592,11 @@ table tbody tr.row-group-level1 td {
 
 .wrapper {
   overflow-y: unset !important; }
+  .wrapper .fixed-columns-right .sticky-header-container.fixed-table-container {
+    right: 1.5rem !important; }
 
-.fixed-columns-right .sticky-header-container.fixed-table-container {
-  right: 1.5rem !important; }
+.flat-popup {
+  position: fixed !important; }
 
 .table > thead > tr > th {
   background: #4C6375;

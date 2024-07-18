@@ -2,12 +2,16 @@
 
 .wrapper {
     overflow-y: unset !important;
+
+    .fixed-columns-right {
+        .sticky-header-container.fixed-table-container {
+            right: 1.5rem !important;
+        }
+    }
 }
 
-.fixed-columns-right {
-    .sticky-header-container.fixed-table-container {
-        right: 1.5rem !important;
-    }
+.flat-popup {
+    position: fixed !important;
 }
 
 .table > thead > tr > th {

@@ -232,7 +232,7 @@
         function initTableComm() {
             freezeTableCommColumns();
 
-            $('#comm-group-list .delete-comm-group').on('click', function (e) {
+            $('.delete-comm-group').on('click', function (e) {
                 _me.confirmDeleteCommGroup($(e.target).data('id'));
             });
         }

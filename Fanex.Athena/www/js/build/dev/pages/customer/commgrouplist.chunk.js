@@ -1190,7 +1190,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
         super.renderStickyHeader()
 
         if (this.needFixedColumns && this.options.fixedNumber) {
-            this.$fixedColumns.css('z-index', 101)
+            this.$fixedColumns.css('z-index', 100)
                 .find('.sticky-header-container')
                 .css('right', '')
                 .width(this.$fixedColumns.outerWidth())
@@ -1199,7 +1199,7 @@ $.BootstrapTable = class extends $.BootstrapTable {
         if (this.needFixedColumns && this.options.fixedRightNumber) {
             const $stickyHeaderContainerRight = this.$fixedColumnsRight.find('.sticky-header-container')
 
-            this.$fixedColumnsRight.css('z-index', 101)
+            this.$fixedColumnsRight.css('z-index', 100)
             $stickyHeaderContainerRight.css('left', '')
                 .width(this.$fixedColumnsRight.outerWidth())
                 .scrollLeft($stickyHeaderContainerRight.find('.table').outerWidth());
@@ -7768,7 +7768,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         function initTableComm() {
             freezeTableCommColumns();
 
-            $('#comm-group-list .delete-comm-group').on('click', function (e) {
+            $('.delete-comm-group').on('click', function (e) {
                 _me.confirmDeleteCommGroup($(e.target).data('id'));
             });
         }
