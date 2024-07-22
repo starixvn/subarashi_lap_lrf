@@ -12,6 +12,8 @@ import PlatformFilter from '../filters/PlatformFilter'
 import LiveStatusFilter from '../filters/LiveStatusFilter'
 import StickyIcon from '../filters/StickyIcon'
 import useFilterAction from '../hooks/useFilterAction'
+import SportFilter from '../filters/SportFilter';
+import BetTypeFilter from '../filters/BetTypeFilter';
 
 export const MobileFormFilter = () => {
     const isValidModel = useValidParam();
@@ -38,25 +40,31 @@ export const MobileFormFilter = () => {
                     <DateRangeFilter isMobile={true}/>
                 </div>
                 <div className="col-12 col-xs-6">
+                    <ProductFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style}>
+                    <SportFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style} >
+                    <BetTypeFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style} >
+                    <StatusFilter />
+                </div>               
+                <div className="col-12 col-xs-6" style={style} >
+                    <LiveStatusFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style} >
                     <UserNameFilter />
                 </div>
-                <div className="col-12 col-xs-6">
-                    <StatusFilter />
-                </div>
-                <div className="col-12 col-xs-6">
-                    <ProductFilter />
+                <div className="col-12 col-xs-6" style={style} >
+                    <PlatformFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style} >
                     <BaseCurrencyFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style} >
                     <ConvertAllCheckBoxFilter />
-                </div>
-                <div className="col-12 col-xs-6" style={style} >
-                    <PlatformFilter />
-                </div>
-                <div className="col-12 col-xs-6" style={style} >
-                    <LiveStatusFilter />
                 </div>
                 
                 <div className="col-12">

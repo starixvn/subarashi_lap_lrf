@@ -48,7 +48,7 @@ export const tabKeys = {
 export const tabList = [
     {
         key: tabKeys.singleCustomer,
-        label: LangHelper.getSingleResource("SingleCustomer"),
+        label: LangHelper.getSingleResource("SinglePlayer"),
         url: Site.resolveClientUrl("BettingTicketCenter/SingleCustomer"),
         displayOrder: 0
     },
@@ -77,3 +77,5 @@ export const tabList = [
         displayOrder: 5
     }
 ]
+
+export const ALL_SELECTED_TEXT = 'ALL';

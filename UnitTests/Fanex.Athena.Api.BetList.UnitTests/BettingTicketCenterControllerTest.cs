@@ -78,7 +78,7 @@
             {
                 // Arrange
                 const string ApiPath = "/BettingTicketCenter/GetByRunning";
-                var metaModel = new BaseBettingTicketMetaModel
+                var metaModel = new RunningBetListMetaModel
                 {
                     FromDate = DateTimeHelper.Today,
                     ToDate = DateTimeHelper.Today,

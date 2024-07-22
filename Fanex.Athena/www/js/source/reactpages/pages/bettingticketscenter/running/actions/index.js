@@ -10,6 +10,15 @@ import * as statusAction from '@jsroot/actions/statusAction'
 import * as convertAllAction from '@jsroot/actions/convertAllAction'
 import * as userGuideAction from '@jsroot/actions/userGuideAction'
 import * as subsidiaryAction from '@jsroot/actions/subsidiaryAction'
+import * as liveStatusAction from '@jsroot/actions/liveStatusAction'
+import * as sportAction from './sportAction'
+import * as bettypeAction from './bettypeAction'
+import * as leagueAction from './leagueAction'
+import * as matchAction from './matchAction'
+import * as platformAction from './platformAction'
+import * as oddsGroupsAction from './oddsGroupsAction'
+import * as customerClassAction from './customerClassAction'
+import * as ipAction from './ipAction.js'
 
 export const ActionCreators = Object.assign({},
     gridDataAction,
@@ -21,7 +30,16 @@ export const ActionCreators = Object.assign({},
     requestParamAction,
     reportTitleAction,
     statusAction,
+    liveStatusAction,
     convertAllAction,
     userGuideAction,
-    subsidiaryAction
+    subsidiaryAction,
+    sportAction,
+    bettypeAction,
+    leagueAction,
+    matchAction,
+    platformAction,
+    oddsGroupsAction,
+    customerClassAction,
+    ipAction
 );

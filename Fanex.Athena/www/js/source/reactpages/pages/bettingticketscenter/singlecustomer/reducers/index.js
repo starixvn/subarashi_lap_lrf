@@ -13,6 +13,8 @@ import * as requestParamReducer from '@jsroot/reducers/requestParamReducer'
 import * as reportTitleReducer from '@jsroot/reducers/reportTitleReducer'
 import * as userGuideReducer from '@jsroot/reducers/userGuideReducer'
 import * as commonReducer from '../../common/components/reducer'
+import * as sportReducer from './sportReducer'
+import * as bettypeReducer from './bettypeReducer'
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -28,5 +30,7 @@ export default combineReducers(Object.assign(
     requestParamReducer,
     reportTitleReducer,
     userGuideReducer,
-    commonReducer
+    commonReducer,
+    sportReducer,
+    bettypeReducer
 ));

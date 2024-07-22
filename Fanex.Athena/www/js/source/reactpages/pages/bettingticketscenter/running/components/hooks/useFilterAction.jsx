@@ -1,6 +1,5 @@
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
-import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import useBaseCurrencyForMultiSelectCurrency from '@jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency'
@@ -14,7 +13,8 @@ import { saveAs } from 'file-saver';
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
     const dispatch = useDispatch();
-    const {requestParam, username, isConvertAll, selectedBaseCurrency, selectedProduct, selectedCurrency, selectedStatus, selectedSubsidiary} = useSelector( state => state, shallowEqual);
+    const {requestParam, username, isConvertAll, selectedBaseCurrency, selectedProduct, selectedCurrency, selectedStatus, selectedSubsidiary, 
+        selectedLiveStatus, selectedPlatform, selectedSport, selectedBettype, selectedLeague, selectedMatch, ip, selectedOddsGroup, selectedCustomerClass, sportList, isEnableLeague, isEnableMatch } = useSelector( state => state, shallowEqual);
     const {isSubsidiarySearch} = useSubsidiarySearch();
     const { baseCurrencyList } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
     const { setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
@@ -35,6 +35,15 @@ export const useFilterAction = () => {
             CurrencyIdList: selectedCurrency,
             BaseCurrency: selectedBaseCurrency,
             Status: selectedStatus,
+            LiveStatus: selectedLiveStatus,
+            SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
+            BetTypeIds: Service.getSelectedBettype(selectedBettype),
+            LeagueIds: isEnableLeague ? selectedLeague : 0,
+            MatchId: isEnableMatch ? selectedMatch : 0,
+            Ip: ip,
+            Platform: selectedPlatform,
+            OddsGroup: selectedOddsGroup,
+            CustomerClass: selectedCustomerClass,
             SortBy: SortBy,
             SortOrder: SortOrder,
             IsConvertAll: isConvertAll,

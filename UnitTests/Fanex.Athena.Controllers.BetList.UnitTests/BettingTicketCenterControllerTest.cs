@@ -196,7 +196,7 @@
         }
 
         [Test]
-        public void Running_WhenCall_ReturnCorrectView()
+        public async void Running_WhenCall_ReturnCorrectView()
         {
             using (var controller = CreateController())
             {
@@ -207,7 +207,7 @@
                 MockProductService();
 
                 // Action
-                var result = controller.Running() as ViewResult;
+                var result = await controller.Running() as ViewResult;
 
                 // Assert
                 Assert.That(result.ViewName, Is.EqualTo("~/Views/Desktop/BetList/BettingTicketCenter/Running.cshtml"));
@@ -216,7 +216,7 @@
 
         [TestCase(true)]
         [TestCase(false)]
-        public void Running_WhenCall_ReturnCorrectViewModel(bool hasExchangePermission)
+        public async Task Running_WhenCall_ReturnCorrectViewModelAsync(bool hasExchangePermission)
         {
             using (var controller = CreateController(hasExchangePermission))
             {
@@ -225,7 +225,7 @@
                 var productCodes = MockProductService();
 
                 // Action
-                var result = controller.Running() as ViewResult;
+                var result = await controller.Running() as ViewResult;
                 var viewModel = result.Model as BettingTicketCenterViewModel;
 
                 // Assert

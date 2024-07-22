@@ -1,5 +1,5 @@
-import React, { memo } from 'react'
-import {  useDispatch } from 'react-redux'
+import React, { useEffect, memo } from 'react'
+import { batch, useDispatch, useSelector } from 'react-redux'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
@@ -8,10 +8,21 @@ import AppData from '@jsroot/lib/AppData'
 
 export const ProductFilter = () => {
     const dispatch = useDispatch();
-    const {setSelectedProduct} = ActionCreators;
+    const selectedProduct = useSelector(state => state.selectedProduct);
+    const {setSelectedProduct, getSportList, getBetTypeList, setEnableLeague, setLeagueList, setEnableMatch, setSelectedMatch} = ActionCreators;
+
+    useEffect(() => {
+        _productChangeHandler(null, selectedProduct);
+      }, []);
 
     const  _productChangeHandler = (currentItem, selectedItemsKey) => {
-        dispatch(setSelectedProduct(selectedItemsKey));
+        batch(() => {
+            dispatch(setSelectedProduct(selectedItemsKey));
+            dispatch(getSportList(selectedItemsKey));
+            dispatch(getBetTypeList(selectedItemsKey));
+            dispatch(setEnableLeague(false));
+            dispatch(setEnableMatch(false));
+        })
     }
 
     const _renderProductSelectList = () => {

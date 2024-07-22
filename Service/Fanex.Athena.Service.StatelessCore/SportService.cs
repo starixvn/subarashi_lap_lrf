@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using Fanex.Athena.DataAccess.Core.Common.Interfaces;
 using Fanex.Athena.Extension.Helper;
 using Fanex.Athena.Extension.Utility.Interfaces;
@@ -88,9 +91,9 @@ namespace Fanex.Athena.Service.StatelessCore
         public SabaSport GetSabaSport(int id, bool isHideSaba = false)
             => GetSabaSports(isHideSaba).FirstOrDefault(t => t.Id == id);
 
-        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(int licenseeId, string languageCode, string productCodes = "", bool isHideSaba = false)
+        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(int licenseeId, string languageCode, string productCodes = "", bool isHideSaba = false, bool includeSabaSport = false)
         {
-            var cacheKey = CacheKey.MemorycacheSportListForTreeView + licenseeId + languageCode + productCodes;
+            var cacheKey = CacheKey.MemorycacheSportListForTreeView + licenseeId + languageCode + productCodes + includeSabaSport.ToString();
             var sportList = _cache.Get<IEnumerable<CheckedItem>>(cacheKey);
 
             if (sportList != null)
@@ -156,6 +159,33 @@ namespace Fanex.Athena.Service.StatelessCore
                 Name = GetSportNameForTreeView(sport.SportType, isHideSaba),
                 Value = sport.SportType.ToString()
             };
+
+        public static string BuildSportTypeXML(string sportIds)
+        {
+            if (string.Equals(sportIds, "All", StringComparison.OrdinalIgnoreCase))
+            {
+                return sportIds;
+            }
+
+            var result = new StringBuilder("<ROOT>");
+
+            foreach (var sport in sportIds.Split(','))
+            {
+                Int32.TryParse(sport, out int sportId);
+                var leagueGroupIds = "0";
+
+                if (SabaVirtualSports.Any(_ => _.Id == sportId))
+                {
+                    var sabaSport = SabaVirtualSports.FirstOrDefault(_ => _.Id == sportId);
+                    leagueGroupIds = string.Join(",", sabaSport.LeagueGroupIds);
+                }
+
+                result.AppendFormat("<Sport SportType=\"{0}\" LeagueGroupIds=\"{1}\"/>", sportId, leagueGroupIds);
+            }
+
+            result.Append("</ROOT>");
+            return result.ToString();
+        }
 
 #pragma warning disable S1541 // Methods and properties should not be too complex
 

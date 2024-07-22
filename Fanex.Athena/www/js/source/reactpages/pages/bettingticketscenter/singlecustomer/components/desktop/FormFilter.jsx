@@ -12,6 +12,8 @@ import PlatformFilter from '../filters/PlatformFilter'
 import LiveStatusFilter from '../filters/LiveStatusFilter'
 import StickyIcon from '../filters/StickyIcon'
 import useFilterAction from '../hooks/useFilterAction'
+import SportFilter from '../filters/SportFilter';
+import BetTypeFilter from '../filters/BetTypeFilter';
 
 export const FormFilter = () => {
 
@@ -28,29 +30,36 @@ export const FormFilter = () => {
                     <ProductFilter />
                 </div>
 
+                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <SportFilter />
+                </div>
+
+                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <BetTypeFilter />
+                </div>
+
+                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <StatusFilter />
+                </div>
+                
+                <div className="col-12 col-md-2 col-sm-3 col-lg-2 col-xl-2">
+                    <LiveStatusFilter />
+                </div>
+                
+                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <UserNameFilter />
+                </div>
+
+                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                    <PlatformFilter />
+                </div>
+               
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <BaseCurrencyFilter />
                 </div>
 
                 <div className="col-12 col-md-4 col-sm-3 col-lg-2 col-xl-3">
                     <ConvertAllCheckBoxFilter />
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                    <UserNameFilter />
-                </div>
-
-                <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                    <StatusFilter />
-                </div>
-
-                <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
-                    <PlatformFilter />
-                </div>
-
-                <div className="col-12 col-md-2 col-sm-3 col-lg-2 col-xl-2">
-                    <LiveStatusFilter />
                 </div>
 
                 <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
@@ -63,7 +72,6 @@ export const FormFilter = () => {
             </div>
         </CollapsiblePanel>
     )
-
 }
 
 export default memo(FormFilter);

@@ -70,7 +70,7 @@
             }
             else if (tabList.Any(x => PermissionKeys.BtcRunning == x))
             {
-                return Running();
+                return await Running();
             }
             else if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
             {
@@ -165,7 +165,7 @@
         }
 
         [FunctionAuthorization(PermissionKeys.BtcRunning)]
-        public ActionResult Running()
+        public async Task<ActionResult> Running()
         {
             var tabList = GetEnableTabList();
             var licenseeSession = SessionServiceInstance.LicenseeSession;
@@ -177,6 +177,10 @@
                 StatusList = GetRunningStatusList(),
                 CurrencyList = GetCurrencyList(),
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterRunning),
+                LiveStatusList = GetLiveStatusList(),
+                RiskLevels = await _customerClassService.GetAllRiskLevel(),
+                PlatformList = PlatformHelper.GetPlatformList(licenseeSession.SpecialPlatform),
+                OddsGroup = licenseeSession.OfferedOddsGroupsList,
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
                 SubsidiaryViewType = IsOneworksMaster ? (byte)SubsidiaryViewType.MasterManagement : userSession.SubsidiaryViewType,

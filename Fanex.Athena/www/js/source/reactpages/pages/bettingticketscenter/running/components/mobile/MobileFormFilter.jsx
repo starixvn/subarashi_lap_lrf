@@ -13,6 +13,15 @@ import SubsidiaryCheckBoxFilter from '../filters/SubsidiaryCheckBoxFilter.jsx'
 import StickyIcon from '../filters/StickyIcon.jsx'
 import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 import useFilterAction from '../hooks/useFilterAction.jsx'
+import SportFilter from '../filters/SportFilter';
+import BetTypeFilter from '../filters/BetTypeFilter';
+import LeagueFilter from '../filters/LeagueFilter';
+import MatchFilter from '../filters/MatchFilter';
+import LiveStatusFilter from '../filters/LiveStatusFilter';
+import CustomerClassFilter from '../filters/CustomerClassFilter';
+import OddsGroupFilter from '../filters/OddsGroupFilter';
+import PlatformFilter from '../filters/PlatformFilter';
+import IpFilter from '../filters/IpFilter';
 
 export const MobileFormFilter = () => {
     const isValidModel = useValidParam();
@@ -44,13 +53,40 @@ export const MobileFormFilter = () => {
                     <ProductFilter />
                 </div>
                 <div className="col-12 col-xs-6">
+                    <SportFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style}>
+                    <BetTypeFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style}>
+                    <LeagueFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style}>
+                    <MatchFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style}>
+                    <PlatformFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style}>
                     <UserNameFilter />
                 </div>
-                <div className="col-12 col-xs-6" style={style} >
-                    <CurrecyFilter />
+                <div className="col-12 col-xs-6" style={style}>
+                    <IpFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style} >
                     <StatusFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style} >
+                    <LiveStatusFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style} >
+                    <CustomerClassFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style} >
+                    <OddsGroupFilter />
+                </div>
+                <div className="col-12 col-xs-6" style={style} >
+                    <CurrecyFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style} >
                     <BaseCurrencyFilter />

@@ -4,10 +4,12 @@
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @using Fanex.Athena.Service.Core.Common.Interfaces
+@using Fanex.Athena.Service.Core.Users.Interfaces
 @model Fanex.Athena.Model.BetList.ViewModel.BettingTicketCenterViewModel
 @{
     var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
     var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
+    var session = DependencyResolver.Current.GetService<ISessionService>();
 
     var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
     var productOptions = Model.ProductOptionList;
@@ -38,6 +40,10 @@
     selectedStatus: '@(selectedStatus)',
     selectedLiveStatus: '@(selectedLiveStatus)',
     selectedPlatform: '@(selectedPlatform)',
+    sportList: [],
+    selectedSport: 0,
+    bettypeList: [],
+    selectedBettype: 0,
     isConvertAll: true,
     hasExchange: '@Model.HasExchange.ToString()' === 'True'
     };
@@ -50,6 +56,7 @@
     productOptions: @Html.Raw(productOptions.ToJson()),
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     dateConstraint: { minDate: '1/1/2017', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 6 },
+    licenseeName: '@session.LicenseeSession.LicenseeName',
     tabList: @Html.Raw(Model.TabList.ToJson())
     };
 }
