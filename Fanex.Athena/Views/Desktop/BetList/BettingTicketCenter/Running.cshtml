@@ -11,17 +11,17 @@
 
     var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
     var productOptions = Model.ProductOptionList;
-    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
 
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
     var baseCurrencyList = currencyService.GetBaseCurrencyList(true).Select(c => new { value = c.Value, label = c.Value }).ToList();
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
+    var selectedLiveStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
+    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
 
     var whitelabelList = Model.SubsidiaryList;
     var subsidiaryList = Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct();
     var selectedSubsidiary = string.Join(",", subsidiaryList);
 
-    var selectedLiveStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
     var riskLevels = Model.RiskLevels.Select(r => new
     {
         id = r.Id,
@@ -56,9 +56,9 @@
     selectedLeague: 0,
     bettypeList: [],
     selectedBettype: 0,
-    selectedCustomerClass: '@(string.Join(",", riskLevels.Select(_=>_.customerClassList)))',
-    selectedOddsGroup: '@(string.Join(",", oddsGroup))',
-    selectedPlatform: '@(string.Join(",",platformList.Select(_=>_.Key)))',
+    selectedCustomerClass: 'ALL',
+    selectedOddsGroup: 'ALL',
+    selectedPlatform: 'ALL',
     isLoading: false,
     selectedStatus: '@(selectedStatus)',
     selectedLiveStatus: '@(selectedLiveStatus)',

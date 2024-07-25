@@ -4,7 +4,7 @@ import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import useBaseCurrencyForMultiSelectCurrency from '@jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency'
 import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
-import { ApiUrl } from '../../../common/lib/constants'
+import { ApiUrl, ALL_SELECTED_TEXT } from '../../../common/lib/constants'
 import Service from '../../../common/lib/Service'
 import { useValidParam } from './useValidParam.jsx'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
@@ -15,7 +15,8 @@ export const useFilterAction = () => {
     const isValidModel = useValidParam();
     const dispatch = useDispatch();
     const {requestParam, username, isConvertAll, selectedBaseCurrency, selectedProduct, selectedCurrency, selectedStatus, selectedSubsidiary, 
-        selectedLiveStatus, selectedPlatform, selectedSport, selectedBettype, selectedLeague, selectedMatch, ip, selectedOddsGroup, selectedCustomerClass, sportList } = useSelector( state => state, shallowEqual);
+        selectedLiveStatus, selectedPlatform, selectedSport, selectedBettype, selectedLeague, selectedMatch, ip, selectedOddsGroup, 
+        selectedCustomerClass, sportList, bettypeList } = useSelector( state => state, shallowEqual);
     const {isSubsidiarySearch} = useSubsidiarySearch();
     const { baseCurrencyList } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
     const { setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
@@ -40,8 +41,8 @@ export const useFilterAction = () => {
             Status: selectedStatus,
             LiveStatus: selectedLiveStatus,
             SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
-            BetTypeIds: Service.getSelectedBettype(selectedBettype),
-            LeagueIds: isEnableLeague ? selectedLeague : 0,
+            BetTypeIds: Service.getSelectedBettype(selectedBettype, bettypeList),
+            LeagueIds: isEnableLeague ? selectedLeague : ALL_SELECTED_TEXT,
             MatchId: isEnableMatch ? selectedMatch : 0,
             Ip: ip,
             Platform: selectedPlatform,

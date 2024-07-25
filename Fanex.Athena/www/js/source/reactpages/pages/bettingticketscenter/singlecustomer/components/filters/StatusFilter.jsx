@@ -5,7 +5,6 @@ import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
 
-
 export const StatusFilter = () => {
     const dispatch = useDispatch();
     const {setSelectedStatus} = ActionCreators;
@@ -20,7 +19,7 @@ export const StatusFilter = () => {
                 keyField={"Id"}
                 valueField={"Value"}
                 statusField={"Status"}
-                onChange={(currentItem, selectedItemsKey) => dispatch(setSelectedStatus(selectedItemsKey))} />);
+                onChange={(currentItem, selectedItemsKey) => dispatch(setSelectedStatus(selectedItemsKey))}/>);
     }
 
     return (

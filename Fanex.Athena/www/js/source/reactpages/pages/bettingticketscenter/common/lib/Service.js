@@ -54,12 +54,12 @@ export default class Service {
         return selectedValue === allSelected ? ALL_SELECTED_TEXT : selectedValue;
     }
 
-    static getSelectedBettype = (seletedBetTypeIds) => {
-        if(seletedBetTypeIds === 0 || seletedBetTypeIds ===  ALL_SELECTED_TEXT) {
+    static getSelectedBettype = (selectedValue, dataList) => {
+        if(!selectedValue || selectedValue ===  ALL_SELECTED_TEXT || selectedValue === this.getSelectedItemFromTreeListItem(dataList)) {
             return ALL_SELECTED_TEXT;
         }
 
-        var bettypeList = seletedBetTypeIds.split(",").map((elem) => {
+        var bettypeList = selectedValue.split(",").map((elem) => {
             return elem.substring(0, elem.indexOf("_"))
         });
 

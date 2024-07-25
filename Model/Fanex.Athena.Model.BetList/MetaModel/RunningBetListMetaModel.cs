@@ -12,7 +12,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string BetTypeIds { get; set; }
 
-        public int LeagueIds { get; set; }
+        public string LeagueIds { get; set; }
 
         public int MatchId { get; set; }
 

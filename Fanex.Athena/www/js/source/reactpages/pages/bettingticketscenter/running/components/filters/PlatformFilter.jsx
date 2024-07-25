@@ -4,7 +4,7 @@ import MultipleSelect from '@legion-lib/react-multiselect'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
-
+import { ALL_SELECTED_TEXT } from './../../../common/lib/constants'
 
 export const ProductFilter = () => {
     const dispatch = useDispatch();
@@ -22,7 +22,8 @@ export const ProductFilter = () => {
                 keyField={"Id"}
                 valueField={"Value"}
                 statusField={"Status"}
-                onChange={(currentItem, selectedItemsKey) => dispatch(setSelectedPlatform(selectedItemsKey))} />
+                onChange={(currentItem, selectedItemsKey) => dispatch(setSelectedPlatform(selectedItemsKey))} 
+                allOptionValue={ALL_SELECTED_TEXT}/>
         );
     }
 

@@ -4,6 +4,7 @@ import { ActionCreators } from '../../actions/index.js'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
+import { ALL_SELECTED_TEXT } from './../../../common/lib/constants'
 
 export const OddsGroupFilter = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,8 @@ export const OddsGroupFilter = () => {
                 valueField={"Value"}
                 statusField={"Status"}
                 onChange={(currentItem, selectedItemsKey) => dispatch(setSelectedOddsGroup(selectedItemsKey))}
-                />);
+                allOptionValue={ALL_SELECTED_TEXT}/>
+        );
     }
 
     return (

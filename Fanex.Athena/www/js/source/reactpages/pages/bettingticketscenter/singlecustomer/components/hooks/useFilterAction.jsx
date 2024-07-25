@@ -24,7 +24,8 @@ export const useFilterAction = () => {
         selectedPlatform,
         selectedSport,
         selectedBettype,
-        sportList} 
+        sportList,
+        bettypeList} 
         = useSelector( state => state, shallowEqual);
         
     const {setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
@@ -44,7 +45,7 @@ export const useFilterAction = () => {
             ToDate: Site.convertDateToString(toDate),
             ProductCodeList: selectedProduct,
             SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
-            BetTypeIds: Service.getSelectedBettype(selectedBettype),
+            BetTypeIds: Service.getSelectedBettype(selectedBettype, bettypeList),
             Username: username,
             BaseCurrency: isConvertAll ? selectedBaseCurrency : '',
             Status: selectedStatus,

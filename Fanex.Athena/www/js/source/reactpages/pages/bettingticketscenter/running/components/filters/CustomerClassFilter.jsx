@@ -4,16 +4,21 @@ import { ActionCreators } from '../../actions/index.js'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
+import { ALL_SELECTED_TEXT } from './../../../common/lib/constants'
 
 export const CustomerClassFilter = () => {
     const dispatch = useDispatch();
     const {setSelectedCustomerClass} = ActionCreators;
     
     const _customerClassChangeHandler = (currentItem, selectedItemsKey) => {
-        const customerClass = AppData.riskLevels.filter( r => selectedItemsKey.includes(r.id)).map( r => r.customerClassList).join(',');
+        let customerClass = selectedItemsKey;
+
+        if(customerClass !== ALL_SELECTED_TEXT) {
+            customerClass = AppData.riskLevels.filter( r => selectedItemsKey.includes(r.id)).map( r => r.customerClassList).join(',');
+        }
+
         dispatch(setSelectedCustomerClass(customerClass));
     }
-
 
     const _renderCustomerClassSelectList = () => {
         const riskLevels = AppData.riskLevels;
@@ -26,7 +31,8 @@ export const CustomerClassFilter = () => {
                 valueField={"value"}
                 statusField={"status"}
                 onChange={_customerClassChangeHandler}
-                />);
+                allOptionValue={ALL_SELECTED_TEXT}/>
+        );
     }
 
     return (

@@ -37,7 +37,7 @@ export const ProductFilter = () => {
                 keyField={"Code"}
                 valueField={"Name"}
                 statusField={"Status"}
-                onChange={_productChangeHandler} />
+                onChange={_productChangeHandler}/>
         ) : null;
     }
 

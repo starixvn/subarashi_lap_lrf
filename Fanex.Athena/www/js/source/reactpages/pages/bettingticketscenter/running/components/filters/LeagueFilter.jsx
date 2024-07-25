@@ -3,6 +3,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
+import { ALL_SELECTED_TEXT } from './../../../common/lib/constants'
 
 export const LeagueFilter = () => {
     const dispatch = useDispatch();
@@ -41,7 +42,8 @@ export const LeagueFilter = () => {
                 valueField={"Value"}
                 statusField={"Status"}
                 onChange={_leagueChangeHandler}
-                disabled={true} />
+                disabled={true} 
+                allOptionValue={ALL_SELECTED_TEXT}/>
             )
         }
 

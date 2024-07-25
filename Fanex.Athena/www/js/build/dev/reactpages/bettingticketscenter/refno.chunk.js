@@ -3281,6 +3281,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+var _class;
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -3306,6 +3307,7 @@ class Service {
     return selectedValue === allSelected ? _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"] : selectedValue;
   }
 }
+_class = Service;
 _defineProperty(Service, "getHeaderName", column => {
   if (column === 'LicenseeWL') {
     return `${_constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"].LicenseeWL}/${_constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"].Comm}`;
@@ -3328,11 +3330,11 @@ _defineProperty(Service, "isSingleDate", dateRange => {
   } = dateRange;
   return moment__WEBPACK_IMPORTED_MODULE_4___default()(fromDate, "MM/DD/YYYY", true).isSame(moment__WEBPACK_IMPORTED_MODULE_4___default()(toDate, "MM/DD/YYYY", true), 'day');
 });
-_defineProperty(Service, "getSelectedBettype", seletedBetTypeIds => {
-  if (seletedBetTypeIds === 0 || seletedBetTypeIds === _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"]) {
+_defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
+  if (!selectedValue || selectedValue === _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"] || selectedValue === _class.getSelectedItemFromTreeListItem(dataList)) {
     return _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"];
   }
-  var bettypeList = seletedBetTypeIds.split(",").map(elem => {
+  var bettypeList = selectedValue.split(",").map(elem => {
     return elem.substring(0, elem.indexOf("_"));
   });
   return bettypeList.toString();

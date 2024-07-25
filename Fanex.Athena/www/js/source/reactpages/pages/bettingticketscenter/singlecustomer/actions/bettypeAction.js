@@ -4,6 +4,7 @@ import Site from '@jsroot/lib/site'
 import Cache from '@jsroot/lib/Cache'
 import AppData from '@jsroot/lib/AppData'
 import * as types from './types'
+import { ALL_SELECTED_TEXT } from './../../common/lib/constants'
 
 const BETTYPE_CACHE_KEY = "BTC_SINGLEPLAYER_BETTYPE_CACHE_KEY";
 const Url = Site.resolveClientUrl('api/CommonDataApi/GetBetTypeInTreeList');
@@ -11,9 +12,8 @@ const Url = Site.resolveClientUrl('api/CommonDataApi/GetBetTypeInTreeList');
 let currentCancellationTokenSource = null;
 
 const dispatchBettypeList = (dispatch, data) => {
-    const selectedSports = Service.getSelectedItemFromTreeListItem(data);
     dispatch(setBettypeList(data));
-    dispatch(setSelectedBettype(selectedSports));
+    dispatch(setSelectedBettype(ALL_SELECTED_TEXT));
 }
 
 export const setSelectedBettype = (betTypeIds) => {

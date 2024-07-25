@@ -3,6 +3,7 @@ import DataService from '@jsroot/lib/DataService.js'
 import Site from '@jsroot/lib/site'
 import Cache from '@jsroot/lib/Cache'
 import * as types from './types'
+import { ALL_SELECTED_TEXT } from './../../common/lib/constants'
 
 const Url = Site.resolveClientUrl('api/CommonDataApi/GetLeagues');
 const LEAGUE_CACHE_KEY = "LEAGUE_CACHE_KEY";
@@ -16,7 +17,7 @@ export const setSelectedLeague = (leagueid) => {
 
 function dispatchLeagueList(dispatch, data) {
     dispatch(setLeagueList(data));
-    dispatch(setSelectedLeague(data.map(l=>l.Id).toString()));
+    dispatch(setSelectedLeague(ALL_SELECTED_TEXT));
 }
 
 export const setLeagueList = (list) => {

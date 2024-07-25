@@ -20,7 +20,8 @@ export const LiveStatusFilter = () => {
                 keyField={"Id"}
                 valueField={"Value"}
                 statusField={"Status"}
-                onChange={(currentItem, selectedItemsKey) => dispatch(setSelectedLiveStatus(selectedItemsKey))} />);
+                onChange={(currentItem, selectedItemsKey) => dispatch(setSelectedLiveStatus(selectedItemsKey))}/>
+        );
     }
 
 
