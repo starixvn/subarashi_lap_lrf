@@ -4431,23 +4431,29 @@ __webpack_require__.r(__webpack_exports__);
 
 const LeagueFilter = () => {
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
-  const [selectedSport, leagueList, isEnableLeague] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedSport, state.leagueList, state.isEnableLeague], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const [selectedLeague, selectedSport, leagueList] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedLeague, state.selectedSport, state.leagueList], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
   const {
     setSelectedLeague,
     getMatchList,
-    setEnableMatch
+    setMatchList
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    getMatchByLeague(selectedSport, selectedLeague);
+  }, [selectedSport]);
   const _leagueChangeHandler = (currentItem, selectedItemsKey) => {
     dispatch(setSelectedLeague(selectedItemsKey));
-    const isSingleLeague = !!selectedItemsKey && selectedItemsKey.split(",").length === 1;
-    const isEnableMatch = isEnableLeague && isSingleLeague;
-    dispatch(setEnableMatch(isEnableMatch));
-    if (isEnableMatch) {
-      dispatch(getMatchList(selectedSport, selectedItemsKey));
+    getMatchByLeague(selectedSport, selectedItemsKey);
+  };
+  const getMatchByLeague = (selectedSport, selectedLeague) => {
+    const isSingleLeague = !leagueList || leagueList.length > 0 && !!selectedLeague && selectedLeague.split(",").length === 1;
+    if (isSingleLeague) {
+      dispatch(getMatchList(selectedSport, selectedLeague));
+    } else {
+      dispatch(setMatchList([]));
     }
   };
   const _renderLeagueSelectList = () => {
-    if (!leagueList || !leagueList.length || !isEnableLeague) {
+    if (!leagueList || !leagueList.length) {
       var dataSource = [{
         Id: 0,
         Value: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('All'),
@@ -4471,8 +4477,7 @@ const LeagueFilter = () => {
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
-      onChange: _leagueChangeHandler,
-      disabled: !isEnableLeague
+      onChange: _leagueChangeHandler
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4559,12 +4564,12 @@ __webpack_require__.r(__webpack_exports__);
 
 const MatchFilter = () => {
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
-  const [selectedMatch, matchList, isEnableMatch] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedMatch, state.matchList, state.isEnableMatch], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const [selectedMatch, matchList] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedMatch, state.matchList], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
   const {
     setSelectedMatch
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   const _renderMatchSelectList = () => {
-    if (!matchList || !matchList.length || !isEnableMatch) {
+    if (!matchList || !matchList.length) {
       var dataSource = [{
         value: 0,
         label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('All')
@@ -4577,7 +4582,6 @@ const MatchFilter = () => {
       });
     }
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      disabled: !isEnableMatch,
       value: selectedMatch,
       options: matchList,
       onChange: item => dispatch(setSelectedMatch(item.value)),
@@ -4729,23 +4733,20 @@ const ProductFilter = () => {
   const {
     setSelectedProduct,
     getSportList,
-    getBetTypeList,
-    setEnableLeague,
-    setLeagueList,
-    setEnableMatch,
-    setSelectedMatch
+    getBetTypeList
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    _productChangeHandler(null, selectedProduct);
+    getSportAndBettypeListByProduct(selectedProduct);
   }, []);
   const _productChangeHandler = (currentItem, selectedItemsKey) => {
     Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["batch"])(() => {
       dispatch(setSelectedProduct(selectedItemsKey));
-      dispatch(getSportList(selectedItemsKey));
-      dispatch(getBetTypeList(selectedItemsKey));
-      dispatch(setEnableLeague(false));
-      dispatch(setEnableMatch(false));
+      getSportAndBettypeListByProduct(selectedItemsKey);
     });
+  };
+  const getSportAndBettypeListByProduct = selectedProduct => {
+    dispatch(getSportList(selectedProduct));
+    dispatch(getBetTypeList(selectedProduct));
   };
   const _renderProductSelectList = () => {
     const productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productOptions;
@@ -4800,22 +4801,22 @@ const SportFilter = () => {
   const {
     setSelectedSport,
     getLeagueList,
-    setEnableLeague,
-    setLeagueList,
-    setEnableMatch,
-    setSelectedMatch
+    setLeagueList
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_4__["ActionCreators"];
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    getLeagueListByProductAndSport(selectedProduct, selectedSport);
+  }, [selectedProduct]);
   const _sportChangeHandler = (currentItem, selectedItemsKey) => {
     dispatch(setSelectedSport(selectedItemsKey));
-    const isSingleSport = !!selectedItemsKey && selectedItemsKey.split(",").length === 1;
+    getLeagueListByProductAndSport(selectedProduct, selectedItemsKey);
+  };
+  const getLeagueListByProductAndSport = (selectedProduct, selectedSport) => {
+    const isSingleSport = !!selectedSport && selectedSport.split(",").length === 1;
     const isEnableLeague = (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
-    dispatch(setEnableLeague(isEnableLeague));
-    dispatch(setEnableMatch(false));
     if (isEnableLeague) {
-      dispatch(getLeagueList(selectedItemsKey));
+      dispatch(getLeagueList(selectedSport));
     } else {
       dispatch(setLeagueList([]));
-      dispatch(setSelectedMatch(0));
     }
   };
   const _renderSportSelectList = () => {
@@ -5152,6 +5153,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../hooks/useIsEnableLeagueMatch */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useIsEnableLeagueMatch.jsx");
+
 
 
 
@@ -5184,9 +5187,7 @@ const useFilterAction = () => {
     ip,
     selectedOddsGroup,
     selectedCustomerClass,
-    sportList,
-    isEnableLeague,
-    isEnableMatch
+    sportList
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_9__["useSelector"])(state => state, react_redux__WEBPACK_IMPORTED_MODULE_9__["shallowEqual"]);
   const {
     isSubsidiarySearch
@@ -5200,6 +5201,8 @@ const useFilterAction = () => {
     toggleLoader,
     getGridData
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_0__["ActionCreators"];
+  const isEnableLeague = Object(_hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_11__["useIsEnableLeague"])();
+  const isEnableMatch = Object(_hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_11__["useIsEnableMatch"])();
   const _getParams = () => {
     if (!isValidModel) {
       return null;
@@ -5279,6 +5282,33 @@ const useFilterAction = () => {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useIsEnableLeagueMatch.jsx":
+/*!*****************************************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useIsEnableLeagueMatch.jsx ***!
+  \*****************************************************************************************************************/
+/*! exports provided: useIsEnableLeague, useIsEnableMatch */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useIsEnableLeague", function() { return useIsEnableLeague; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useIsEnableMatch", function() { return useIsEnableMatch; });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+const useIsEnableLeague = () => {
+  const [selectedProduct, selectedSport] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedProduct, state.selectedSport], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
+  const isSingleSport = !!selectedSport && selectedSport.split(",").length === 1;
+  return (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
+};
+const useIsEnableMatch = () => {
+  const [selectedLeague] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedLeague, state.isEnableLeague], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
+  const isEnableLeague = useIsEnableLeague();
+  const isSingleLeague = !!selectedLeague && selectedLeague.split(",").length === 1;
+  return isEnableLeague && isSingleLeague;
+};
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useValidParam.jsx":
 /*!********************************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useValidParam.jsx ***!
@@ -5292,14 +5322,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/validationHelper */ "./www/js/source/reactpages/lib/validationHelper.js");
 /* harmony import */ var _jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/customHooks/useSubsidiarySearch */ "./www/js/source/reactpages/customHooks/useSubsidiarySearch.jsx");
+/* harmony import */ var _hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../hooks/useIsEnableLeagueMatch */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useIsEnableLeagueMatch.jsx");
+
 
 
 
 const useValidParam = () => {
-  const [selectedProduct, selectedStatus, selectedCurrency, selectedBaseCurrency, selectedSubsidiary, selectedPlatform, selectedLiveStatus, selectedCustomerClass, selectedOddsGroup, selectedBettype, selectedSport, selectedLeague, isEnableLeague] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedProduct, state.selectedStatus, state.selectedCurrency, state.selectedBaseCurrency, state.selectedSubsidiary, state.selectedPlatform, state.selectedLiveStatus, state.selectedCustomerClass, state.selectedOddsGroup, state.selectedBettype, state.selectedSport, state.selectedLeague, state.isEnableLeague], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
+  const [selectedProduct, selectedStatus, selectedCurrency, selectedBaseCurrency, selectedSubsidiary, selectedPlatform, selectedLiveStatus, selectedCustomerClass, selectedOddsGroup, selectedBettype, selectedSport, selectedLeague] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedProduct, state.selectedStatus, state.selectedCurrency, state.selectedBaseCurrency, state.selectedSubsidiary, state.selectedPlatform, state.selectedLiveStatus, state.selectedCustomerClass, state.selectedOddsGroup, state.selectedBettype, state.selectedSport, state.selectedLeague], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
   const {
     isSubsidiarySearch
   } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_2__["default"])();
+  const isEnableLeague = Object(_hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_3__["useIsEnableLeague"])();
   return !!selectedProduct && !!selectedStatus && !!selectedCurrency && !!selectedLiveStatus && !!selectedCustomerClass && !!selectedOddsGroup && !!selectedPlatform && !!selectedBettype && !!selectedSport && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__["validateBaseCurrency"])(selectedBaseCurrency) && (!isSubsidiarySearch || selectedSubsidiary) && (!isEnableLeague || selectedLeague);
 };
 

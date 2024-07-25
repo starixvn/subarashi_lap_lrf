@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { useEffect, memo } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { TreeViewSelect } from '@legion-lib/react-multiselect'
 import { TreeViewOption } from '@jsroot/constants/report';
@@ -8,24 +8,29 @@ import LangHelper from '@jsroot/lib/langHelper'
 export const SportFilter = () => {
     const dispatch = useDispatch();
     const [selectedProduct, selectedSport, sportList ] = useSelector(state => [state.selectedProduct, state.selectedSport, state.sportList], shallowEqual);
-    const { setSelectedSport, getLeagueList, setEnableLeague, setLeagueList, setEnableMatch, setSelectedMatch } = ActionCreators;
+    const { setSelectedSport, getLeagueList, setLeagueList } = ActionCreators;
+
+    useEffect(() => {
+        getLeagueListByProductAndSport(selectedProduct, selectedSport);
+    }, [selectedProduct]);
+
 
     const _sportChangeHandler = ((currentItem, selectedItemsKey) => {
         dispatch(setSelectedSport(selectedItemsKey));
+        getLeagueListByProductAndSport(selectedProduct, selectedItemsKey);
+    });
 
-        const isSingleSport = !!selectedItemsKey && selectedItemsKey.split(",").length === 1;
+    const getLeagueListByProductAndSport = (selectedProduct, selectedSport) => {
+        const isSingleSport = !!selectedSport && selectedSport.split(",").length === 1;
         const isEnableLeague = (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
 
-        dispatch(setEnableLeague(isEnableLeague));
-        dispatch(setEnableMatch(false));
         if (isEnableLeague) {
-            dispatch(getLeagueList(selectedItemsKey));
+            dispatch(getLeagueList(selectedSport));
         }
         else {
             dispatch(setLeagueList([]));
-            dispatch(setSelectedMatch(0));
         }
-    });
+    }
 
     const _renderSportSelectList = () => {
         if(!sportList || !sportList.length){

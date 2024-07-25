@@ -5845,14 +5845,17 @@ const ProductFilter = () => {
     getBetTypeList
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_3__["ActionCreators"];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    _productChangeHandler(null, selectedProduct);
+    getSportAndBettypeListByProduct(selectedProduct);
   }, []);
   const _productChangeHandler = (currentItem, selectedItemsKey) => {
     Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["batch"])(() => {
       dispatch(setSelectedProduct(selectedItemsKey));
-      dispatch(getSportList(selectedItemsKey));
-      dispatch(getBetTypeList(selectedItemsKey));
+      getSportAndBettypeListByProduct(selectedItemsKey);
     });
+  };
+  const getSportAndBettypeListByProduct = selectedProduct => {
+    dispatch(getSportList(selectedProduct));
+    dispatch(getBetTypeList(selectedProduct));
   };
   const _renderProductSelectList = () => {
     const productOptions = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productOptions;

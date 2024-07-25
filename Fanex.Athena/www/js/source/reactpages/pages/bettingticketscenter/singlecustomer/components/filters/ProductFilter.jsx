@@ -12,16 +12,19 @@ export const ProductFilter = () => {
     const {setSelectedProduct, getSportList, getBetTypeList} = ActionCreators;
 
     useEffect(() => {
-        _productChangeHandler(null, selectedProduct);
-      }, []);
+        getSportAndBettypeListByProduct(selectedProduct);
+    }, []);
 
     const  _productChangeHandler = (currentItem, selectedItemsKey) => {
         batch(() => {
             dispatch(setSelectedProduct(selectedItemsKey));
-            dispatch(getSportList(selectedItemsKey));
-            dispatch(getBetTypeList(selectedItemsKey));
+            getSportAndBettypeListByProduct(selectedItemsKey);
         })
+    }
 
+    const getSportAndBettypeListByProduct = (selectedProduct) => {
+        dispatch(getSportList(selectedProduct));
+        dispatch(getBetTypeList(selectedProduct));
     }
 
     const _renderProductSelectList = () => {

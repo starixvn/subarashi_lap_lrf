@@ -5,24 +5,25 @@ import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
 
-
 export const ProductFilter = () => {
     const dispatch = useDispatch();
     const selectedProduct = useSelector(state => state.selectedProduct);
-    const {setSelectedProduct, getSportList, getBetTypeList, setEnableLeague, setLeagueList, setEnableMatch, setSelectedMatch} = ActionCreators;
+    const {setSelectedProduct, getSportList, getBetTypeList} = ActionCreators;
 
     useEffect(() => {
-        _productChangeHandler(null, selectedProduct);
-      }, []);
+        getSportAndBettypeListByProduct(selectedProduct);
+    }, []);
 
     const  _productChangeHandler = (currentItem, selectedItemsKey) => {
         batch(() => {
             dispatch(setSelectedProduct(selectedItemsKey));
-            dispatch(getSportList(selectedItemsKey));
-            dispatch(getBetTypeList(selectedItemsKey));
-            dispatch(setEnableLeague(false));
-            dispatch(setEnableMatch(false));
+            getSportAndBettypeListByProduct(selectedItemsKey);
         })
+    }
+
+    const getSportAndBettypeListByProduct = (selectedProduct) => {
+        dispatch(getSportList(selectedProduct));
+        dispatch(getBetTypeList(selectedProduct));
     }
 
     const _renderProductSelectList = () => {

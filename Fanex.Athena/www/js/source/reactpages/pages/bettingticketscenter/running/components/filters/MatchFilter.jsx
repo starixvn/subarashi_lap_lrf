@@ -6,11 +6,11 @@ import LangHelper from '@jsroot/lib/langHelper'
 
 export const MatchFilter = () => {
     const dispatch = useDispatch();
-    const [selectedMatch, matchList, isEnableMatch ] = useSelector(state => [state.selectedMatch, state.matchList, state.isEnableMatch], shallowEqual);
+    const [selectedMatch, matchList ] = useSelector(state => [state.selectedMatch, state.matchList], shallowEqual);
     const {setSelectedMatch} = ActionCreators;
 
     const _renderMatchSelectList = () => {
-        if(!matchList || !matchList.length || !isEnableMatch){
+        if(!matchList || !matchList.length){
             var dataSource = [{ value: 0, label: LangHelper.getSingleResource('All') }];
             return(
                 <Select 
@@ -23,7 +23,6 @@ export const MatchFilter = () => {
 
         return (
             <Select 
-                disabled={!isEnableMatch} 
                 value={selectedMatch} 
                 options={matchList} 
                 onChange={(item) => dispatch(setSelectedMatch(item.value))} 
