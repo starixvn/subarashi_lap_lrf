@@ -160,33 +160,6 @@ namespace Fanex.Athena.Service.StatelessCore
                 Value = sport.SportType.ToString()
             };
 
-        public static string BuildSportTypeXML(string sportIds)
-        {
-            if (string.Equals(sportIds, "All", StringComparison.OrdinalIgnoreCase))
-            {
-                return sportIds;
-            }
-
-            var result = new StringBuilder("<ROOT>");
-
-            foreach (var sport in sportIds.Split(','))
-            {
-                Int32.TryParse(sport, out int sportId);
-                var leagueGroupIds = "0";
-
-                if (SabaVirtualSports.Any(_ => _.Id == sportId))
-                {
-                    var sabaSport = SabaVirtualSports.FirstOrDefault(_ => _.Id == sportId);
-                    leagueGroupIds = string.Join(",", sabaSport.LeagueGroupIds);
-                }
-
-                result.AppendFormat("<Sport SportType=\"{0}\" LeagueGroupIds=\"{1}\"/>", sportId, leagueGroupIds);
-            }
-
-            result.Append("</ROOT>");
-            return result.ToString();
-        }
-
 #pragma warning disable S1541 // Methods and properties should not be too complex
 
         private string GetSportNameForTreeView(int sportType, bool isHideSaba = false)
