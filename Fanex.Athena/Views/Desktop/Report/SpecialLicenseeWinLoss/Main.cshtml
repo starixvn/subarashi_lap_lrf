@@ -46,7 +46,7 @@
     window._AppData = {
     currencyList: @Html.Raw(currencyList.ToJson()),
     productOptions: @Html.Raw(productOptions.ToJson()),
-    dateConstraint: {minDate: '@Model.ReportSetting.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.ReportSetting.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 1},
+    dateConstraint: {minDate: '1/1/2023', maxDate: '@Model.ReportSetting.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 1},
     isShowPayout: '@Model.IsShowPayout' === "True"
     };
 }
