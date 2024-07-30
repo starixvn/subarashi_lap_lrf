@@ -1,13 +1,15 @@
-import React, { memo } from 'react'
+import React, { useEffect, memo } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import Select from 'react-select'
 import LangHelper from '@jsroot/lib/langHelper'
+import { useIsEnableMatch } from '../hooks/useIsEnableLeagueMatch'
 
 export const MatchFilter = () => {
     const dispatch = useDispatch();
-    const [selectedMatch, matchList ] = useSelector(state => [state.selectedMatch, state.matchList], shallowEqual);
+    const [selectedMatch, matchList, selectedLeague ] = useSelector(state => [state.selectedMatch, state.matchList, state.selectedLeague], shallowEqual);
     const {setSelectedMatch} = ActionCreators;
+    const isEnableMatch = useIsEnableMatch();
 
     const _renderMatchSelectList = () => {
         if(!matchList || !matchList.length){

@@ -38,6 +38,7 @@
         {
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.SpecialPlatform = LicenseeSession.SpecialPlatform;
+            metaModel.SportListXML = BettingTicketCenterSportService.BuildSportTypeXML(metaModel.SportIds);
 
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetBySingleCustomer",
                 metaModel,
@@ -68,6 +69,7 @@
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.SpecialPlatform = LicenseeSession.SpecialPlatform;
             metaModel.FullCustomerClass = string.Join(",", await _customerClassService.GetAllCustomerClassId());
+            metaModel.SportListXML = BettingTicketCenterSportService.BuildSportTypeXML(metaModel.SportIds);
 
             return await _betListApiClient.PostAsync("/BettingTicketCenter/GetByRunning",
                 metaModel,

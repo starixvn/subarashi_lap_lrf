@@ -103,7 +103,7 @@
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(string productCodes, bool includeSabaSport = false)
+        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(string productCodes)
         {
             if (String.IsNullOrWhiteSpace(productCodes))
             {

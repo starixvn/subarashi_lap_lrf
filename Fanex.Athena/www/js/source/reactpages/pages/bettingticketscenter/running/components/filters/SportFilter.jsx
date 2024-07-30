@@ -4,11 +4,12 @@ import { TreeViewSelect } from '@legion-lib/react-multiselect'
 import { TreeViewOption } from '@jsroot/constants/report';
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
+import { ALL_SELECTED_TEXT } from './../../../common/lib/constants'
 
 export const SportFilter = () => {
     const dispatch = useDispatch();
     const [selectedProduct, selectedSport, sportList ] = useSelector(state => [state.selectedProduct, state.selectedSport, state.sportList], shallowEqual);
-    const { setSelectedSport, getLeagueList, setLeagueList } = ActionCreators;
+    const { setSelectedSport, getLeagueList, setLeagueList, setSelectedLeague } = ActionCreators;
 
     useEffect(() => {
         getLeagueListByProductAndSport(selectedProduct, selectedSport);
@@ -21,7 +22,7 @@ export const SportFilter = () => {
     });
 
     const getLeagueListByProductAndSport = (selectedProduct, selectedSport) => {
-        const isSingleSport = !!selectedSport && selectedSport.split(",").length === 1;
+        const isSingleSport = !!selectedSport && selectedSport !== ALL_SELECTED_TEXT && selectedSport.split(",").length === 1;
         const isEnableLeague = (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
 
         if (isEnableLeague) {
@@ -29,6 +30,7 @@ export const SportFilter = () => {
         }
         else {
             dispatch(setLeagueList([]));
+            dispatch(setSelectedLeague(ALL_SELECTED_TEXT));
         }
     }
 

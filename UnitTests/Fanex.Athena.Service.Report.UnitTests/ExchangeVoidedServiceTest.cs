@@ -36,7 +36,7 @@ namespace Fanex.Athena.Service.Report.UnitTests
         }
 
         [TestCase("abc")]
-        [TestCase("3147483647")]
+        [TestCase("312112147483645756767567567")]
         public async Task GetData_InValidRefNo_ReturnEmptyResult(string refNo)
         {
             // Arrange

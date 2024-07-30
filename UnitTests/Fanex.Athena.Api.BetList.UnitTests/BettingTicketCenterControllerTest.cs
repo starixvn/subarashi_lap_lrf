@@ -6,6 +6,7 @@
 
     using Base.UnitTests;
     using Fanex.Athena.Extension.Helper;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
     using Model.BetList.MetaModel;
@@ -19,6 +20,7 @@
     public class BettingTicketCenterControllerTest : BaseApiControllerHelperTest
     {
         private IBetListApiClient _betListApiClient;
+        private ICustomerClassService _customerClassService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -26,6 +28,7 @@
             base.FixtureSetUp();
 
             _betListApiClient = Substitute.For<IBetListApiClient>();
+            _customerClassService = Substitute.For<ICustomerClassService>();
 
             MockSessionData();
         }
@@ -36,6 +39,7 @@
             base.FixtureTearDown();
 
             _betListApiClient = null;
+            _customerClassService = null;
         }
 
         [TearDown]
@@ -157,7 +161,7 @@
 
         private BettingTicketCenterController CreateController()
         {
-            return new BettingTicketCenterController(LangService, _betListApiClient)
+            return new BettingTicketCenterController(LangService, _betListApiClient, _customerClassService)
             {
                 SessionService = SessionService,
                 ProductService = ProductService

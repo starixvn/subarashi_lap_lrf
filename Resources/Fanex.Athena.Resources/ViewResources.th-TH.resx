@@ -3375,4 +3375,7 @@
   <data name="RiskLevelSpreadSetting" xml:space="preserve">
     <value>การตั้งค่าระดับความเสี่ยง</value>
   </data>
+  <data name="SinglePlayer" xml:space="preserve">
+    <value>นักเดิมพันเดี่ยว</value>
+  </data>
 </root>

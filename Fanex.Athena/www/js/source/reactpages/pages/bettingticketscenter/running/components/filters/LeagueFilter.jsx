@@ -4,11 +4,13 @@ import { ActionCreators } from '../../actions/index.js'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
 import { ALL_SELECTED_TEXT } from './../../../common/lib/constants'
+import { useIsEnableLeague } from '../hooks/useIsEnableLeagueMatch'
 
 export const LeagueFilter = () => {
     const dispatch = useDispatch();
     const [selectedLeague, selectedSport, leagueList ] = useSelector(state => [state.selectedLeague, state.selectedSport, state.leagueList], shallowEqual);
     const {setSelectedLeague, getMatchList, setMatchList } = ActionCreators;
+    const isEnableLeague = useIsEnableLeague();
     
     useEffect(() => {
         getMatchByLeague(selectedSport, selectedLeague);
@@ -21,7 +23,8 @@ export const LeagueFilter = () => {
     }
 
     const getMatchByLeague = (selectedSport, selectedLeague) => {
-        const isSingleLeague = !leagueList || leagueList.length > 0 && !!selectedLeague && selectedLeague.split(",").length === 1;
+        const isSingleLeague = !leagueList || leagueList.length > 0 
+            && !!selectedLeague && selectedLeague !== ALL_SELECTED_TEXT && selectedLeague.split(",").length === 1;
 
         if (isSingleLeague) {  
             dispatch(getMatchList(selectedSport, selectedLeague));        
@@ -32,7 +35,7 @@ export const LeagueFilter = () => {
     }
     
     const _renderLeagueSelectList = () => {
-        if(!leagueList || !leagueList.length){
+        if(!leagueList || !leagueList.length ) {
             var dataSource = [{ Id: 0, Value: LangHelper.getSingleResource('All'), Status: true }];
             return(
                 <MultipleSelect id="StatusListAll"
@@ -41,9 +44,10 @@ export const LeagueFilter = () => {
                 keyField={"Id"}
                 valueField={"Value"}
                 statusField={"Status"}
-                onChange={_leagueChangeHandler}
-                disabled={true} 
-                allOptionValue={ALL_SELECTED_TEXT}/>
+                disabled={true}
+                hasAllOption={false}
+                allOptionValue={ALL_SELECTED_TEXT}
+                onChange={_leagueChangeHandler} />
             )
         }
 
@@ -54,7 +58,8 @@ export const LeagueFilter = () => {
                 keyField={"Id"}
                 valueField={"Value"}
                 statusField={"Status"}
-                onChange={_leagueChangeHandler} />
+                onChange={_leagueChangeHandler} 
+                allOptionValue={ALL_SELECTED_TEXT}/>
         );
     }
 

@@ -1,11 +1,10 @@
-import moment from 'moment'
 import DataService from '@jsroot/lib/DataService.js'
 import Site from '@jsroot/lib/site'
 import LangHelper from '@jsroot/lib/langHelper'
 import Cache from '@jsroot/lib/Cache'
 import * as types from './types'
 
-const Url = Site.resolveClientUrl('api/CommonDataApi/GetMatches');
+const Url = Site.resolveClientUrl('api/RunningCommonDataApi/GetRunningMatchList');
 const MATCH_CACHE_KEY = "MATCH_CACHE_KEY";
 
 function dispatchMatchList(dispatch, data){
@@ -32,8 +31,7 @@ export const setMatchList = (list) => {
 }
 
 export function getMatchList(sportId, leagueId) {
-    const dateString = moment().format("YYYY-MM-DD");
-    const cacheKey = MATCH_CACHE_KEY + sportId + "_" + leagueId + "_" + dateString;
+    const cacheKey = MATCH_CACHE_KEY + sportId + "_" + leagueId;
 
     return (dispatch) => {
         var cacheData = Cache.get(cacheKey);
@@ -46,9 +44,7 @@ export function getMatchList(sportId, leagueId) {
         DataService.getData(Url, 
             { 
                 sportId: sportId, 
-                leagueId: leagueId, 
-                fromDate: dateString, 
-                toDate: dateString
+                leagueId: leagueId
             })
             .then(response => {
                 var data = response.data;

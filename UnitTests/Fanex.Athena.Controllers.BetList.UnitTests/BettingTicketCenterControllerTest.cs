@@ -196,7 +196,7 @@
         }
 
         [Test]
-        public async void Running_WhenCall_ReturnCorrectView()
+        public async Task Running_WhenCall_ReturnCorrectView()
         {
             using (var controller = CreateController())
             {

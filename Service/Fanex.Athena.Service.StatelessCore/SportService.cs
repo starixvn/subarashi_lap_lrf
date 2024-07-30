@@ -91,9 +91,9 @@ namespace Fanex.Athena.Service.StatelessCore
         public SabaSport GetSabaSport(int id, bool isHideSaba = false)
             => GetSabaSports(isHideSaba).FirstOrDefault(t => t.Id == id);
 
-        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(int licenseeId, string languageCode, string productCodes = "", bool isHideSaba = false, bool includeSabaSport = false)
+        public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(int licenseeId, string languageCode, string productCodes = "", bool isHideSaba = false)
         {
-            var cacheKey = CacheKey.MemorycacheSportListForTreeView + licenseeId + languageCode + productCodes + includeSabaSport.ToString();
+            var cacheKey = CacheKey.MemorycacheSportListForTreeView + licenseeId + languageCode + productCodes;
             var sportList = _cache.Get<IEnumerable<CheckedItem>>(cacheKey);
 
             if (sportList != null)

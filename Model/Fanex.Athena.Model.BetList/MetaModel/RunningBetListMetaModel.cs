@@ -8,6 +8,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string SportIds { get; set; }
 
+        public string SportListXML { get; set; }
+
         public string BetTypeIds { get; set; }
 
         public string LeagueIds { get; set; }

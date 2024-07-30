@@ -72,6 +72,7 @@
     <Compile Include="DataDomain\LogActionDetailId.cs" />
     <Compile Include="DataDomain\LogActionId.cs" />
     <Compile Include="DataDomain\LogText.cs" />
+    <Compile Include="DataDomain\BettingTicketCenterSportType.cs" />
     <Compile Include="DataDomain\SubsidiaryViewType.cs" />
     <Compile Include="DataDomain\UserControlLogType.cs" />
     <Compile Include="DataDomain\BusinessLogType.cs" />

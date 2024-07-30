@@ -3586,64 +3586,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLeagueList", function() { return setLeagueList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLeagueList", function() { return getLeagueList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEnableMatch", function() { return setEnableMatch; });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/Cache */ "./www/js/source/reactpages/lib/Cache.js");
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/types.js");
-/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/Cache */ "./www/js/source/reactpages/lib/Cache.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/types.js");
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
 
 
 
 
 
-
-const Url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('api/CommonDataApi/GetLeagues');
+const Url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/RunningCommonDataApi/GetRunningLeagueList');
 const LEAGUE_CACHE_KEY = "LEAGUE_CACHE_KEY";
 const setSelectedLeague = leagueid => {
   return {
-    type: _types__WEBPACK_IMPORTED_MODULE_4__["SET_SELECTED_LEAGUE"],
+    type: _types__WEBPACK_IMPORTED_MODULE_3__["SET_SELECTED_LEAGUE"],
     data: leagueid
   };
 };
 function dispatchLeagueList(dispatch, data) {
   dispatch(setLeagueList(data));
-  dispatch(setSelectedLeague(_common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"]));
+  dispatch(setSelectedLeague(_common_lib_constants__WEBPACK_IMPORTED_MODULE_4__["ALL_SELECTED_TEXT"]));
 }
 const setLeagueList = list => {
   return {
-    type: _types__WEBPACK_IMPORTED_MODULE_4__["SET_LEAGUE_LIST"],
+    type: _types__WEBPACK_IMPORTED_MODULE_3__["SET_LEAGUE_LIST"],
     data: list
   };
 };
 function getLeagueList(sportId) {
-  var dateString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD");
-  const cacheKey = LEAGUE_CACHE_KEY + sportId + "_" + dateString;
+  const cacheKey = LEAGUE_CACHE_KEY + sportId;
   return dispatch => {
-    var cacheData = _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_3__["default"].get(cacheKey);
+    var cacheData = _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_2__["default"].get(cacheKey);
     if (cacheData) {
       dispatchLeagueList(dispatch, cacheData);
       return;
     }
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].getData(Url, {
-      sportId: sportId,
-      fromDate: dateString,
-      toDate: dateString
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
+      sportId: sportId
     }).then(response => {
-      var data = response.data.map(l => ({
-        Id: l.value,
-        Value: l.label,
-        Status: true
-      }));
-      _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_3__["default"].set(cacheKey, data);
+      var data = response.data;
+      _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_2__["default"].set(cacheKey, data);
       dispatchLeagueList(dispatch, data);
     });
   };
 }
 const setEnableMatch = value => {
   return {
-    type: _types__WEBPACK_IMPORTED_MODULE_4__["SET_ENABLE_MATCH"],
+    type: _types__WEBPACK_IMPORTED_MODULE_3__["SET_ENABLE_MATCH"],
     data: value
   };
 };
@@ -3662,26 +3652,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedMatch", function() { return setSelectedMatch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setMatchList", function() { return setMatchList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMatchList", function() { return getMatchList; });
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
-/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/Cache */ "./www/js/source/reactpages/lib/Cache.js");
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/types.js");
+/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/Cache */ "./www/js/source/reactpages/lib/Cache.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./types */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/types.js");
 
 
 
 
 
-
-const Url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('api/CommonDataApi/GetMatches');
+const Url = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/RunningCommonDataApi/GetRunningMatchList');
 const MATCH_CACHE_KEY = "MATCH_CACHE_KEY";
 function dispatchMatchList(dispatch, data) {
   if (data.length == 0 || data[0].value != 0) {
     data.unshift({
       value: 0,
-      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('All')
+      label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource('All')
     });
   }
   dispatch(setMatchList(data));
@@ -3689,33 +3676,30 @@ function dispatchMatchList(dispatch, data) {
 }
 const setSelectedMatch = matchid => {
   return {
-    type: _types__WEBPACK_IMPORTED_MODULE_5__["SET_SELECTED_MATCH"],
+    type: _types__WEBPACK_IMPORTED_MODULE_4__["SET_SELECTED_MATCH"],
     data: matchid
   };
 };
 const setMatchList = list => {
   return {
-    type: _types__WEBPACK_IMPORTED_MODULE_5__["SET_MATCH_LIST"],
+    type: _types__WEBPACK_IMPORTED_MODULE_4__["SET_MATCH_LIST"],
     data: list
   };
 };
 function getMatchList(sportId, leagueId) {
-  const dateString = moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD");
-  const cacheKey = MATCH_CACHE_KEY + sportId + "_" + leagueId + "_" + dateString;
+  const cacheKey = MATCH_CACHE_KEY + sportId + "_" + leagueId;
   return dispatch => {
-    var cacheData = _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_4__["default"].get(cacheKey);
+    var cacheData = _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_3__["default"].get(cacheKey);
     if (cacheData) {
       dispatchMatchList(dispatch, cacheData);
       return;
     }
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].getData(Url, {
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__["default"].getData(Url, {
       sportId: sportId,
-      leagueId: leagueId,
-      fromDate: dateString,
-      toDate: dateString
+      leagueId: leagueId
     }).then(response => {
       var data = response.data;
-      _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_4__["default"].set(cacheKey, data);
+      _jsroot_lib_Cache__WEBPACK_IMPORTED_MODULE_3__["default"].set(cacheKey, data);
       dispatchMatchList(dispatch, data);
     });
   };
@@ -4436,6 +4420,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+/* harmony import */ var _hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hooks/useIsEnableLeagueMatch */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useIsEnableLeagueMatch.jsx");
+
 
 
 
@@ -4450,6 +4436,7 @@ const LeagueFilter = () => {
     getMatchList,
     setMatchList
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const isEnableLeague = Object(_hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_6__["useIsEnableLeague"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     getMatchByLeague(selectedSport, selectedLeague);
   }, [selectedSport]);
@@ -4458,7 +4445,7 @@ const LeagueFilter = () => {
     getMatchByLeague(selectedSport, selectedItemsKey);
   };
   const getMatchByLeague = (selectedSport, selectedLeague) => {
-    const isSingleLeague = !leagueList || leagueList.length > 0 && !!selectedLeague && selectedLeague.split(",").length === 1;
+    const isSingleLeague = !leagueList || leagueList.length > 0 && !!selectedLeague && selectedLeague !== _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"] && selectedLeague.split(",").length === 1;
     if (isSingleLeague) {
       dispatch(getMatchList(selectedSport, selectedLeague));
     } else {
@@ -4479,9 +4466,10 @@ const LeagueFilter = () => {
         keyField: "Id",
         valueField: "Value",
         statusField: "Status",
-        onChange: _leagueChangeHandler,
         disabled: true,
-        allOptionValue: _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"]
+        hasAllOption: false,
+        allOptionValue: _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"],
+        onChange: _leagueChangeHandler
       });
     }
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_3___default.a, {
@@ -4491,7 +4479,8 @@ const LeagueFilter = () => {
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
-      onChange: _leagueChangeHandler
+      onChange: _leagueChangeHandler,
+      allOptionValue: _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"]
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4571,6 +4560,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useIsEnableLeagueMatch */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useIsEnableLeagueMatch.jsx");
+
 
 
 
@@ -4578,10 +4569,11 @@ __webpack_require__.r(__webpack_exports__);
 
 const MatchFilter = () => {
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
-  const [selectedMatch, matchList] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedMatch, state.matchList], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const [selectedMatch, matchList, selectedLeague] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedMatch, state.matchList, state.selectedLeague], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
   const {
     setSelectedMatch
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
+  const isEnableMatch = Object(_hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_5__["useIsEnableMatch"])();
   const _renderMatchSelectList = () => {
     if (!matchList || !matchList.length) {
       var dataSource = [{
@@ -4809,6 +4801,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_constants_report__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/constants/report */ "./www/js/source/reactpages/constants/report.js");
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+
 
 
 
@@ -4821,7 +4815,8 @@ const SportFilter = () => {
   const {
     setSelectedSport,
     getLeagueList,
-    setLeagueList
+    setLeagueList,
+    setSelectedLeague
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_4__["ActionCreators"];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     getLeagueListByProductAndSport(selectedProduct, selectedSport);
@@ -4831,12 +4826,13 @@ const SportFilter = () => {
     getLeagueListByProductAndSport(selectedProduct, selectedItemsKey);
   };
   const getLeagueListByProductAndSport = (selectedProduct, selectedSport) => {
-    const isSingleSport = !!selectedSport && selectedSport.split(",").length === 1;
+    const isSingleSport = !!selectedSport && selectedSport !== _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ALL_SELECTED_TEXT"] && selectedSport.split(",").length === 1;
     const isEnableLeague = (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
     if (isEnableLeague) {
       dispatch(getLeagueList(selectedSport));
     } else {
       dispatch(setLeagueList([]));
+      dispatch(setSelectedLeague(_common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ALL_SELECTED_TEXT"]));
     }
   };
   const _renderSportSelectList = () => {
@@ -5315,16 +5311,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useIsEnableLeague", function() { return useIsEnableLeague; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useIsEnableMatch", function() { return useIsEnableMatch; });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+
 
 const useIsEnableLeague = () => {
   const [selectedProduct, selectedSport] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedProduct, state.selectedSport], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
-  const isSingleSport = !!selectedSport && selectedSport.split(",").length === 1;
+  const isSingleSport = !!selectedSport && selectedSport !== _common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["ALL_SELECTED_TEXT"] && selectedSport.split(",").length === 1;
   return (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
 };
 const useIsEnableMatch = () => {
   const [selectedLeague] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedLeague, state.isEnableLeague], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
   const isEnableLeague = useIsEnableLeague();
-  const isSingleLeague = !!selectedLeague && selectedLeague.split(",").length === 1;
+  const isSingleLeague = !!selectedLeague && selectedLeague !== _common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["ALL_SELECTED_TEXT"] && selectedLeague.split(",").length === 1;
   return isEnableLeague && isSingleLeague;
 };
 

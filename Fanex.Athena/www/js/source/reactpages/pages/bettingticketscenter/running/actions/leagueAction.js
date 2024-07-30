@@ -1,11 +1,10 @@
-import moment from 'moment'
 import DataService from '@jsroot/lib/DataService.js'
 import Site from '@jsroot/lib/site'
 import Cache from '@jsroot/lib/Cache'
 import * as types from './types'
 import { ALL_SELECTED_TEXT } from './../../common/lib/constants'
 
-const Url = Site.resolveClientUrl('api/CommonDataApi/GetLeagues');
+const Url = Site.resolveClientUrl('api/RunningCommonDataApi/GetRunningLeagueList');
 const LEAGUE_CACHE_KEY = "LEAGUE_CACHE_KEY";
 
 export const setSelectedLeague = (leagueid) => {
@@ -28,9 +27,7 @@ export const setLeagueList = (list) => {
 }
 
 export function getLeagueList(sportId) {
-    var dateString = moment().format("YYYY-MM-DD");
-
-    const cacheKey = LEAGUE_CACHE_KEY + sportId + "_" + dateString
+    const cacheKey = LEAGUE_CACHE_KEY + sportId
     return (dispatch) => {
         var cacheData = Cache.get(cacheKey);
         if (cacheData) {
@@ -38,12 +35,9 @@ export function getLeagueList(sportId) {
             return;
         }
 
-        DataService.getData(Url, { sportId: sportId, fromDate: dateString, toDate: dateString })
+        DataService.getData(Url, { sportId: sportId })
             .then(response => {
-                var data = response.data.map(l => ({ 
-                    Id : l.value,
-                    Value : l.label, 
-                    Status : true }));
+                var data = response.data;
                 Cache.set(cacheKey, data);
                 dispatchLeagueList(dispatch, data);
             });

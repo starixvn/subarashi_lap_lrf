@@ -3346,4 +3346,7 @@
   <data name="ProductFS" xml:space="preserve">
     <value>FS电子</value>
   </data>
+  <data name="SinglePlayer" xml:space="preserve">
+    <value>单一玩家</value>
+  </data>
 </root>
