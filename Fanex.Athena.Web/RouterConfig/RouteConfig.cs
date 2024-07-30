@@ -108,6 +108,12 @@
                 new { Controller = "Proxy", Action = "ReportViews", report = "WinLossAnalysis", url = "Index" });
             winlossAnalysisReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
             
+            var sabaVirtualSportsWinLossReportRoute = routes.MapHttpRoute(
+                name: "sabaVirtualSportsWinLossReportRoute",
+                routeTemplate: "SabaVirtualSportsWinLossReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "SabaVirtualSportsWinLoss", url = "Index" });
+            sabaVirtualSportsWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+            
             var winLossByTimeZoneReportRoute = routes.MapHttpRoute(
                 name: "winLossByTimeZoneReportRoute",
                 routeTemplate: "LicenseeWinLossByTimeZoneReport/{*url}",
