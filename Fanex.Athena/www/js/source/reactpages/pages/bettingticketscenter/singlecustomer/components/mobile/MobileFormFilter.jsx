@@ -39,7 +39,16 @@ export const MobileFormFilter = () => {
                 <div className="col-12 col-xs-6">
                     <DateRangeFilter isMobile={true}/>
                 </div>
-                <div className="col-12 col-xs-6">
+                {isCollapsed && <>
+                    <div className="col-12 col-xs-6">
+                        <UserNameFilter />
+                    </div>
+                    <div className="col-12 col-xs-6">
+                        <StatusFilter />
+                    </div>
+                    </>
+                }
+                 <div className="col-12 col-xs-6" >
                     <ProductFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style}>
@@ -50,7 +59,7 @@ export const MobileFormFilter = () => {
                 </div>
                 <div className="col-12 col-xs-6" style={style} >
                     <StatusFilter />
-                </div>               
+                </div>           
                 <div className="col-12 col-xs-6" style={style} >
                     <LiveStatusFilter />
                 </div>

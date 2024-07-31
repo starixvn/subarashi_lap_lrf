@@ -52,7 +52,7 @@ export const MobileFormFilter = () => {
                 <div className="col-12 col-xs-6">
                     <ProductFilter />
                 </div>
-                <div className="col-12 col-xs-6">
+                <div className="col-12 col-xs-6" style={style}>
                     <SportFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style}>
@@ -67,7 +67,7 @@ export const MobileFormFilter = () => {
                 <div className="col-12 col-xs-6" style={style}>
                     <PlatformFilter />
                 </div>
-                <div className="col-12 col-xs-6" style={style}>
+                <div className="col-12 col-xs-6">
                     <UserNameFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style}>
