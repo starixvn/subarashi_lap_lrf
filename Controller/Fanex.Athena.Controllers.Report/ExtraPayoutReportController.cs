@@ -173,6 +173,15 @@ namespace Fanex.Athena.Controllers.Report
                 });
             }
 
+            if (productCodeList.IsPresent(_ => _ == Product.FS))
+            {
+                promotionTypeList.AddRange(new List<CheckedItem>
+                {
+                    new CheckedItem { ID = ExtraPayoutMapType.FastSpinPromotion,
+                        Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.FS)} - {_cacheRefAdapter.GetBettype((int)BetType.FastSpinPromotion)}", Checked = true }
+                });
+            }
+
             return promotionTypeList;
         }
 

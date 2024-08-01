@@ -3791,4 +3791,7 @@
   <data name="RiskLevelSpreadSetting" xml:space="preserve">
     <value>Risk Level Spread Setting</value>
   </data>
+  <data name="ProductFS" xml:space="preserve">
+    <value>FastSpin</value>
+  </data>
 </root>
