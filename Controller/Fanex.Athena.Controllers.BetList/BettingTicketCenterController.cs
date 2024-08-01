@@ -260,7 +260,7 @@
                 FunctionNames.BettingTicketCenter);
 
             var licProductsRequire = productAccess.ProductList
-                    .Where(product => (isExclude && !productCode.Contains(product.ProductCode) || productCode.Contains(product.ProductCode)))
+                    .Where(product => (isExclude && !productCode.Contains(product.ProductCode) || (!isExclude && productCode.Contains(product.ProductCode))))
                     .Select(x => x.ProductName).ToList();
 
             var offeredSubProductList = SessionServiceInstance.LicenseeSession.OfferedSubProductList;
