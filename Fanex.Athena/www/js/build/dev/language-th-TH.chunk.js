@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 7/12/2024 1:55:31 PM
+﻿// Generated at: 8/8/2024 4:38:36 PM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -214,7 +214,7 @@ BettingTicketCenter_BookedBetNote:"แสดงข้อมูลได้มา
 BettingTicketCenter_Exchange_Note_1:"สนับสนุนการค้นหาตั๋วว่างเท่านั้น",
 BettingTicketCenter_Exchange_Note_2:"ป้อนชื่อผู้ใช้เพื่อรับผลลัพธ์ที่เร็วขึ้น.",
 BettingTicketCenter_Exchange_Note_3:"สนับสนุนข้อมูลสูงสุด 1 เดือน.",
-BettingTicketCenter_RefnoTabNote_TxIDSearch:"ระบบรองรับการค้นหา Txรหัส จาก {0}",
+BettingTicketCenter_RefnoTabNote_TxIDSearch:"ระบบรองรับการค้นหา รหัสLicTx จาก {0}",
 BettingTicketCenter_RefnoTabNote_TxIDSearch2:"ระบบรองรับการค้นหา รหัสLicTx ของตั๋วที่ชำระแล้วเท่านั้น",
 BettingTicketCenter_RefnoTabNote1:"สำหรับสปอร์ตบุ๊ค ผลการค้นหาจะรวมตั๋วโบนัส/เงินสดที่เกี่ยวข้อง",
 BettingTicketCenter_RefnoTabNote2:"สำหรับ {0}: โปรดระบุชื่อผู้ใช้เพื่อค้นหาตั๋วหลังจาก {1}",
@@ -602,7 +602,7 @@ LicenseeContactEditErrorMsg_102:"มีคนเปลี่ยนผู้ต�
 LicenseeContacts:"ติดต่อผู้ได้รับอนุญาต",
 LicenseeIsNotExisted:"ไม่พบผู้ได้รับอนุญาต",
 LicenseeNetWL:"ผู้ได้รับอนุญาต แพ้ชนะสุทธิ",
-LicenseeTxId:"รหัสTx",
+LicenseeTxId:"รหัสLicTx",
 LicenseeW_L:"ผู้ได้รับอนุญาต แพ้ชนะ",
 LicenseeWinLoss:"ผู้ได้รับอนุญาต แพ้ชนะ",
 LicenseeWL:"ผู้ได้รับอนุญาต แพ้ชนะ",
@@ -961,6 +961,7 @@ ShowAllLeagues:"แสดงลีกทั้งหมด",
 ShowOldValue:"แสดงค่าเก่า",
 Sincelastmonth:"ตั้งแต่เดือนที่แล้ว",
 SingleCustomer:"ลูกค้าเดี่ยว",
+SinglePlayer:"นักเดิมพันเดี่ยว",
 Skype:"Skype",
 SLTDateRangeNote:"ข้อมูลลอตเตอรี กีฬามีให้ตั้งแต่วันที่ 22/11/2021",
 Soccer:"ฟุตบอล",

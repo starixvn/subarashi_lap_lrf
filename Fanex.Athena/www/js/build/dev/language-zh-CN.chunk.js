@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 7/12/2024 1:55:31 PM
+﻿// Generated at: 8/8/2024 4:38:36 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -780,6 +780,7 @@ ProductCC:"乐卡迪亚",
 ProductCG:"CG电子",
 ProductCO:"实时兑现",
 ProductCS:"娱乐城",
+ProductFAC:"发财电子",
 ProductFS:"FS电子",
 ProductHB:"HB电子",
 ProductJIG:"吉利电子",
@@ -900,6 +901,7 @@ ShowAllLeagues:"显示所有联赛",
 ShowOldValue:"显示旧值",
 Sincelastmonth:"自上个月",
 SingleCustomer:"单一会员",
+SinglePlayer:"单一玩家",
 Skype:"Skype",
 SLTDateRangeNote:"体育时时彩仅提供11/22/2021之后的数据",
 Soccer:"足球",

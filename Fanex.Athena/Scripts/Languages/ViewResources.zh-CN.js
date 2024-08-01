@@ -1,4 +1,4 @@
-﻿// Generated at: 8/1/2024 4:40:29 PM
+﻿// Generated at: 8/8/2024 4:38:36 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -691,6 +691,7 @@ ProductCC:"乐卡迪亚",
 ProductCG:"CG电子",
 ProductCO:"实时兑现",
 ProductCS:"娱乐城",
+ProductFAC:"发财电子",
 ProductFS:"FS电子",
 ProductHB:"HB电子",
 ProductJIG:"吉利电子",
