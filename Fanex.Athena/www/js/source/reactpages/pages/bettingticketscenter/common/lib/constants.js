@@ -79,3 +79,14 @@ export const tabList = [
 ]
 
 export const ALL_SELECTED_TEXT = 'ALL';
+
+export const CashOutMode = {
+    IncludeCOFromSB: 0,
+    ExcludeCOFromSB: 1,
+    ViewCOOnly: 2,
+}
+
+export const ProductCode = {
+    SportsBook: "SB",
+    BA: "BA"
+}

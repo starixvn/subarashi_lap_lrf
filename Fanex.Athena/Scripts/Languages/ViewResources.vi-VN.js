@@ -1,4 +1,4 @@
-﻿// Generated at: 7/12/2024 1:55:31 PM
+﻿// Generated at: 8/1/2024 4:40:29 PM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -868,6 +868,7 @@ ShowAllLeagues:"Hiển thị Tất cả Giải đấu",
 ShowOldValue:"Hiển thị giá trị cũ",
 Sincelastmonth:"Từ tháng trước",
 SingleCustomer:"Khách hàng cá nhân",
+SinglePlayer:"Người chơi cá nhân",
 Skype:"Skype",
 SLTDateRangeNote:"Dữ liệu Xổ Số Thể Thao có sẵn từ ngày 22/11/2021",
 Soccer:"Bóng đá",

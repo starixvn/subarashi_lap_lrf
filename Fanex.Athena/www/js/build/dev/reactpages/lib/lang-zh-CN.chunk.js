@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/12/2024 1:55:31 PM
+// Generated at: 8/1/2024 4:40:29 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -900,6 +900,7 @@ window._language_zh_CN = {
   ShowOldValue: "显示旧值",
   Sincelastmonth: "自上个月",
   SingleCustomer: "单一会员",
+  SinglePlayer: "单一玩家",
   Skype: "Skype",
   SLTDateRangeNote: "体育时时彩仅提供11/22/2021之后的数据",
   Soccer: "足球",

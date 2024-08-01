@@ -14,11 +14,14 @@ import StickyIcon from '../filters/StickyIcon'
 import useFilterAction from '../hooks/useFilterAction'
 import SportFilter from '../filters/SportFilter';
 import BetTypeFilter from '../filters/BetTypeFilter';
+import CashOutModeFilter from '../filters/CashOutModeFilter.jsx';
+import AppData from '@jsroot/lib/AppData';
 
 export const FormFilter = () => {
 
     const isValidModel = useValidParam();
     const {submit} = useFilterAction();
+    const isOfferCashOutProduct = AppData.isOfferCashOutProduct;
 
     return (
         <CollapsiblePanel className="page-filter" stickyFooter={<StickyIcon />}>
@@ -49,6 +52,12 @@ export const FormFilter = () => {
                 <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                     <UserNameFilter />
                 </div>
+
+                {isOfferCashOutProduct &&
+                    <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+                        <CashOutModeFilter />
+                    </div>
+                }
 
                 <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                     <PlatformFilter />

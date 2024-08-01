@@ -3,22 +3,23 @@ import { batch, useDispatch, useSelector } from 'react-redux'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
-import AppData from '@jsroot/lib/AppData'
-
+import Service from '../../../common/lib/Service'
 
 export const ProductFilter = () => {
     const dispatch = useDispatch();
-    const selectedProduct = useSelector(state => state.selectedProduct);
-    const {setSelectedProduct, getSportList, getBetTypeList} = ActionCreators;
+    const [selectedProduct, productList] = useSelector(state => [state.selectedProduct, state.productList]);
+    const {setSelectedProduct, getSportList, getBetTypeList, setEnableCashOutFilter, setSelectedCashOutMode} = ActionCreators;
 
     useEffect(() => {
         getSportAndBettypeListByProduct(selectedProduct);
+        updateCashOutMode(selectedProduct);
     }, []);
 
     const  _productChangeHandler = (currentItem, selectedItemsKey) => {
         batch(() => {
             dispatch(setSelectedProduct(selectedItemsKey));
             getSportAndBettypeListByProduct(selectedItemsKey);
+            updateCashOutMode(selectedItemsKey);
         })
     }
 
@@ -27,17 +28,23 @@ export const ProductFilter = () => {
         dispatch(getBetTypeList(selectedProduct));
     }
 
-    const _renderProductSelectList = () => {
-        const productOptions = AppData.productOptions;
+    const updateCashOutMode = (selectedProduct) => {
+        const isEnableCashOutFilter = Service.isContainProductSportBookOrBa(selectedProduct);
+        if (!isEnableCashOutFilter) {
+            dispatch(setSelectedCashOutMode(0));
+        }
+        dispatch(setEnableCashOutFilter(isEnableCashOutFilter));
+    }
 
-        return productOptions?.length ? (
+    const _renderProductSelectList = () => {
+        return productList?.length ? (
             <MultipleSelect id="ProductList"
                 hasSearchBox={true}
                 language={LangHelper.currentLanguage}
-                dataSource={productOptions}
-                keyField={"Code"}
-                valueField={"Name"}
-                statusField={"Status"}
+                dataSource={productList}
+                valueField={"value"}
+                keyField={"id"}
+                statusField={"status"}
                 onChange={_productChangeHandler}/>
         ) : null;
     }

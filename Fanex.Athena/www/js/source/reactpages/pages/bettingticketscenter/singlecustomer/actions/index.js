@@ -13,6 +13,8 @@ import * as reportTitleAction from '@jsroot/actions/reportTitleAction'
 import * as userGuideAction from '@jsroot/actions/userGuideAction'
 import * as sportAction from './sportAction'
 import * as bettypeAction from './bettypeAction'
+import * as appDataAction from './appDataAction'
+import * as filterAction from './filterAction'
 
 export const ActionCreators = Object.assign({},
     gridDataAction,
@@ -29,5 +31,7 @@ export const ActionCreators = Object.assign({},
     reportTitleAction,
     userGuideAction,
     sportAction,
-    bettypeAction
+    bettypeAction,
+    appDataAction,
+    filterAction
 );

@@ -3299,6 +3299,10 @@ _defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
   });
   return bettypeList.toString();
 });
+_defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
+  var listSelectedProduct = selectedItemsKey.split(",");
+  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].BA) >= 0;
+});
 
 /***/ }),
 
@@ -3306,7 +3310,7 @@ _defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
 /*!*************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js ***!
   \*************************************************************************************/
-/*! exports provided: ApiUrl, HeaderText, DefaultPageSize, tabKeys, tabList, ALL_SELECTED_TEXT */
+/*! exports provided: ApiUrl, HeaderText, DefaultPageSize, tabKeys, tabList, ALL_SELECTED_TEXT, CashOutMode, ProductCode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3317,6 +3321,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabKeys", function() { return tabKeys; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabList", function() { return tabList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ALL_SELECTED_TEXT", function() { return ALL_SELECTED_TEXT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CashOutMode", function() { return CashOutMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductCode", function() { return ProductCode; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 
@@ -3388,6 +3394,15 @@ const tabList = [{
   displayOrder: 5
 }];
 const ALL_SELECTED_TEXT = 'ALL';
+const CashOutMode = {
+  IncludeCOFromSB: 0,
+  ExcludeCOFromSB: 1,
+  ViewCOOnly: 2
+};
+const ProductCode = {
+  SportsBook: "SB",
+  BA: "BA"
+};
 
 /***/ }),
 

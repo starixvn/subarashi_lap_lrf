@@ -25,6 +25,7 @@ export const useFilterAction = () => {
         selectedSport,
         selectedBettype,
         sportList,
+        selectedCashOutMode,
         bettypeList} 
         = useSelector( state => state, shallowEqual);
         
@@ -51,6 +52,7 @@ export const useFilterAction = () => {
             Status: selectedStatus,
             LiveStatus: selectedLiveStatus,
             Platform: selectedPlatform,
+            CashOutMode: selectedCashOutMode,
             SortBy: SortBy,
             SortOrder: SortOrder,
             IsConvertAll: isConvertAll

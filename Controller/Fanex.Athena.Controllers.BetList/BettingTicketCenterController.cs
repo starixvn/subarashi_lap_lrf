@@ -127,9 +127,10 @@
                 LiveStatusList = GetLiveStatusList(),
                 StatusList = GetStatusList(),
                 PlatformList = PlatformHelper.GetPlatformList(licenseeSession.SpecialPlatform),
-                ProductOptionList = GetProductOptionList(),
+                ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterSingleCustomer),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
+                IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language),
                 HasExchange = tabList.Any() && HasExchange(),
                 TabList = tabList
             };

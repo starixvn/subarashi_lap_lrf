@@ -982,8 +982,10 @@ label.risk-level {
 .table {
   line-height: inherit; }
 
-.caret-block div {
-  display: inherit; }
+.caret-block {
+  position: sticky !important; }
+  .caret-block div {
+    display: inherit; }
 
 .search-option.dropdown .dropdown-menu .dropdown-item {
   padding: 0; }

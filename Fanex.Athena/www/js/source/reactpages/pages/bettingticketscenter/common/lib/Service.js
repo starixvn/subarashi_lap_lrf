@@ -1,6 +1,6 @@
 ﻿import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
-import { HeaderText, ALL_SELECTED_TEXT } from './constants';
+import { HeaderText, ALL_SELECTED_TEXT, ProductCode } from './constants';
 import AppData from '@jsroot/lib/AppData';
 import moment from 'moment'
 
@@ -64,5 +64,10 @@ export default class Service {
         });
 
         return bettypeList.toString();
+    }
+
+    static isContainProductSportBookOrBa = (selectedItemsKey) =>{
+        var listSelectedProduct = selectedItemsKey.split(",");
+        return listSelectedProduct.indexOf(ProductCode.SportsBook) >=0 || listSelectedProduct.indexOf(ProductCode.BA) >=0
     }
 }

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/12/2024 1:55:31 PM
+// Generated at: 8/1/2024 4:40:29 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -994,6 +994,7 @@ window._language_en_US = {
   ShowOldValue: "Show old value",
   Sincelastmonth: "Since last month",
   SingleCustomer: "Single Customer",
+  SinglePlayer: "Single Player",
   Skype: "Skype",
   SLTDateRangeNote: "Sports Lottery data is available from 11/22/2021",
   Soccer: "Soccer",

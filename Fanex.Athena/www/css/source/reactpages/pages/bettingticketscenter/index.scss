@@ -23,6 +23,7 @@
 }
 
 .caret-block {
+    position: sticky !important;
     div {
         display: inherit;
     }
