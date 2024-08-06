@@ -254,6 +254,8 @@ namespace Fanex.Athena.Controllers.Report
                 {
                     new CheckedItem { ID = ExtraPayoutMapType.VgamingFreeBets,
                         Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.VGA)} - {ViewResources.FreeBets}", Checked = true },
+                    new CheckedItem { ID = ExtraPayoutMapType.VgamingPromotionPrize,
+                        Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.VGA)} - {_cacheRefAdapter.GetBettype((int)BetType.VgamingPromotionPrize)}", Checked = true },
                     new CheckedItem { ID = ExtraPayoutMapType.VgamingFreeBetsJackpotPrize,
                         Name = $"{ViewResources.ResourceManager.GetString(productResource + Product.VGA)} - {_cacheRefAdapter.GetBettype((int)BetType.VgamingFreeBetsJackpotPrize)}", Checked = true },
                     new CheckedItem { ID = ExtraPayoutMapType.VgamingFreeBetsJackpotContribution,
