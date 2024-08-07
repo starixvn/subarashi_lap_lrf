@@ -12,6 +12,13 @@ export const leagueList = createReducer({}, {
         return action.data;
     }
 });
+
+export const isOutRightLeauge = createReducer({}, {
+    [types.SET_IS_OUTRIGHT](state, action) {
+        return action.data;
+    }
+});
+
 export const isEnableMatch = createReducer({}, {
     [types.SET_ENABLE_MATCH](state, action) {
         return action.data;

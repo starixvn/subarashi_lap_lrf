@@ -983,7 +983,7 @@ label.risk-level {
   line-height: inherit; }
 
 .caret-block {
-  position: sticky !important; }
+  position: static !important; }
   .caret-block div {
     display: inherit; }
 

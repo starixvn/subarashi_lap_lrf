@@ -3592,7 +3592,7 @@ const setIp = value => {
 /*!*********************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/actions/leagueAction.js ***!
   \*********************************************************************************************/
-/*! exports provided: setSelectedLeague, setLeagueList, getLeagueList, setEnableMatch */
+/*! exports provided: setSelectedLeague, setLeagueList, getLeagueList, setIsOutRightLeauge, setEnableMatch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3600,6 +3600,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSelectedLeague", function() { return setSelectedLeague; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLeagueList", function() { return setLeagueList; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLeagueList", function() { return getLeagueList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIsOutRightLeauge", function() { return setIsOutRightLeauge; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setEnableMatch", function() { return setEnableMatch; });
 /* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
@@ -3622,6 +3623,7 @@ const setSelectedLeague = leagueid => {
 function dispatchLeagueList(dispatch, data) {
   dispatch(setLeagueList(data));
   dispatch(setSelectedLeague(_common_lib_constants__WEBPACK_IMPORTED_MODULE_4__["ALL_SELECTED_TEXT"]));
+  dispatch(setIsOutRightLeauge(false));
 }
 const setLeagueList = list => {
   return {
@@ -3646,6 +3648,12 @@ function getLeagueList(sportId) {
     });
   };
 }
+const setIsOutRightLeauge = value => {
+  return {
+    type: _types__WEBPACK_IMPORTED_MODULE_3__["SET_IS_OUTRIGHT"],
+    data: value
+  };
+};
 const setEnableMatch = value => {
   return {
     type: _types__WEBPACK_IMPORTED_MODULE_3__["SET_ENABLE_MATCH"],
@@ -3822,7 +3830,7 @@ function getSportList(productCodes) {
 /*!**************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/actions/types.js ***!
   \**************************************************************************************/
-/*! exports provided: SET_SELECTED_SPORT, SET_SPORT_LIST, SET_ENABLE_LEAGUE, SET_ENABLE_MATCH, SET_SELECTED_BETTYPE, SET_BETTYPE_LIST, SET_SELECTED_LEAGUE, SET_LEAGUE_LIST, SET_SELECTED_MATCH, SET_MATCH_LIST, SET_IP, SET_PLATFORM, SET_OODS_GROUP, SET_CUSTOMER_CLASS */
+/*! exports provided: SET_SELECTED_SPORT, SET_SPORT_LIST, SET_ENABLE_LEAGUE, SET_ENABLE_MATCH, SET_SELECTED_BETTYPE, SET_BETTYPE_LIST, SET_SELECTED_LEAGUE, SET_IS_OUTRIGHT, SET_LEAGUE_LIST, SET_SELECTED_MATCH, SET_MATCH_LIST, SET_IP, SET_PLATFORM, SET_OODS_GROUP, SET_CUSTOMER_CLASS */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3834,6 +3842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_BETTYPE", function() { return SET_SELECTED_BETTYPE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_BETTYPE_LIST", function() { return SET_BETTYPE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_LEAGUE", function() { return SET_SELECTED_LEAGUE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_IS_OUTRIGHT", function() { return SET_IS_OUTRIGHT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_LEAGUE_LIST", function() { return SET_LEAGUE_LIST; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SELECTED_MATCH", function() { return SET_SELECTED_MATCH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_MATCH_LIST", function() { return SET_MATCH_LIST; });
@@ -3848,6 +3857,7 @@ const SET_ENABLE_MATCH = "SET_ENABLE_MATCH";
 const SET_SELECTED_BETTYPE = "SET_SELECTED_BETTYPE";
 const SET_BETTYPE_LIST = "SET_BETTYPE_LIST";
 const SET_SELECTED_LEAGUE = "SET_SELECTED_LEAGUE";
+const SET_IS_OUTRIGHT = "SET_IS_OUTRIGHT";
 const SET_LEAGUE_LIST = "SET_LEAGUE_LIST";
 const SET_SELECTED_MATCH = "SET_SELECTED_MATCH";
 const SET_MATCH_LIST = "SET_MATCH_LIST";
@@ -4435,8 +4445,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_legion_lib_react_multiselect__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
-/* harmony import */ var _hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../hooks/useIsEnableLeagueMatch */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useIsEnableLeagueMatch.jsx");
-
 
 
 
@@ -4449,9 +4457,10 @@ const LeagueFilter = () => {
   const {
     setSelectedLeague,
     getMatchList,
-    setMatchList
+    setMatchList,
+    setIsOutRightLeauge,
+    setSelectedMatch
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
-  const isEnableLeague = Object(_hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_6__["useIsEnableLeague"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     getMatchByLeague(selectedSport, selectedLeague);
   }, [selectedSport]);
@@ -4461,10 +4470,13 @@ const LeagueFilter = () => {
   };
   const getMatchByLeague = (selectedSport, selectedLeague) => {
     const isSingleLeague = !leagueList || leagueList.length > 0 && !!selectedLeague && selectedLeague !== _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"] && selectedLeague.split(",").length === 1;
-    if (isSingleLeague) {
+    const isOutRightLeauge = isSingleLeague && leagueList.filter(league => league.Id === +selectedLeague)[0].IsOutRight;
+    dispatch(setIsOutRightLeauge(isOutRightLeauge));
+    if (isSingleLeague && !isOutRightLeauge) {
       dispatch(getMatchList(selectedSport, selectedLeague));
     } else {
       dispatch(setMatchList([]));
+      dispatch(setSelectedMatch(0));
     }
   };
   const _renderLeagueSelectList = () => {
@@ -4491,6 +4503,7 @@ const LeagueFilter = () => {
       id: "LeagueList",
       language: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].currentLanguage,
       dataSource: leagueList,
+      hasSearchBox: true,
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
@@ -4575,8 +4588,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/index.js */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/index.js");
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.es.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../hooks/useIsEnableLeagueMatch */ "./www/js/source/reactpages/pages/bettingticketscenter/running/components/hooks/useIsEnableLeagueMatch.jsx");
-
 
 
 
@@ -4584,11 +4595,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const MatchFilter = () => {
   const dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useDispatch"])();
-  const [selectedMatch, matchList, selectedLeague] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedMatch, state.matchList, state.selectedLeague], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
+  const [selectedMatch, matchList, isOutRightLeauge] = Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["useSelector"])(state => [state.selectedMatch, state.matchList, state.isOutRightLeauge], react_redux__WEBPACK_IMPORTED_MODULE_1__["shallowEqual"]);
   const {
     setSelectedMatch
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
-  const isEnableMatch = Object(_hooks_useIsEnableLeagueMatch__WEBPACK_IMPORTED_MODULE_5__["useIsEnableMatch"])();
   const _renderMatchSelectList = () => {
     if (!matchList || !matchList.length) {
       var dataSource = [{
@@ -4596,7 +4606,7 @@ const MatchFilter = () => {
         label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('All')
       }];
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        disabled: true,
+        disabled: isOutRightLeauge ? false : true,
         value: 0,
         options: dataSource,
         instanceId: "MatchListAll"
@@ -5824,13 +5834,14 @@ const ip = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
 /*!***********************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/reducers/leagueReducer.js ***!
   \***********************************************************************************************/
-/*! exports provided: selectedLeague, leagueList, isEnableMatch */
+/*! exports provided: selectedLeague, leagueList, isOutRightLeauge, isEnableMatch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectedLeague", function() { return selectedLeague; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "leagueList", function() { return leagueList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOutRightLeauge", function() { return isOutRightLeauge; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEnableMatch", function() { return isEnableMatch; });
 /* harmony import */ var _actions_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/types */ "./www/js/source/reactpages/pages/bettingticketscenter/running/actions/types.js");
 /* harmony import */ var _jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/createReducer.js */ "./www/js/source/reactpages/lib/createReducer.js");
@@ -5843,6 +5854,11 @@ const selectedLeague = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MOD
 });
 const leagueList = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
   [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_LEAGUE_LIST"]](state, action) {
+    return action.data;
+  }
+});
+const isOutRightLeauge = Object(_jsroot_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["default"])({}, {
+  [_actions_types__WEBPACK_IMPORTED_MODULE_0__["SET_IS_OUTRIGHT"]](state, action) {
     return action.data;
   }
 });

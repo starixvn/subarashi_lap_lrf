@@ -3,20 +3,18 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../actions/index.js'
 import Select from 'react-select'
 import LangHelper from '@jsroot/lib/langHelper'
-import { useIsEnableMatch } from '../hooks/useIsEnableLeagueMatch'
 
 export const MatchFilter = () => {
     const dispatch = useDispatch();
-    const [selectedMatch, matchList, selectedLeague ] = useSelector(state => [state.selectedMatch, state.matchList, state.selectedLeague], shallowEqual);
+    const [selectedMatch, matchList, isOutRightLeauge ] = useSelector(state => [state.selectedMatch, state.matchList, state.isOutRightLeauge], shallowEqual);
     const {setSelectedMatch} = ActionCreators;
-    const isEnableMatch = useIsEnableMatch();
 
     const _renderMatchSelectList = () => {
         if(!matchList || !matchList.length){
             var dataSource = [{ value: 0, label: LangHelper.getSingleResource('All') }];
             return(
                 <Select 
-                disabled={true} 
+                disabled={isOutRightLeauge ? false : true} 
                 value={0} 
                 options={dataSource}
                 instanceId="MatchListAll" />

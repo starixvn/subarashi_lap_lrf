@@ -17,6 +17,7 @@ export const setSelectedLeague = (leagueid) => {
 function dispatchLeagueList(dispatch, data) {
     dispatch(setLeagueList(data));
     dispatch(setSelectedLeague(ALL_SELECTED_TEXT));
+    dispatch(setIsOutRightLeauge(false));
 }
 
 export const setLeagueList = (list) => {
@@ -41,6 +42,13 @@ export function getLeagueList(sportId) {
                 Cache.set(cacheKey, data);
                 dispatchLeagueList(dispatch, data);
             });
+    };
+}
+
+export const setIsOutRightLeauge = (value) => {
+    return {
+        type: types.SET_IS_OUTRIGHT,
+        data: value
     };
 }
 

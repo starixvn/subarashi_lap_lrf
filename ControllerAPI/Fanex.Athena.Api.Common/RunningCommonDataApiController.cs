@@ -78,7 +78,7 @@
                 }
             }
 
-            return leagueList.Select(x => new { Id = x.LeagueId, Value = x.LeagueName, Status = true }).OrderBy(i => i.Value);
+            return leagueList.Select(x => new { Id = x.LeagueId, Value = x.LeagueName, x.IsOutRight, Status = true }).OrderBy(i => i.Value);
         }
 
         private async Task<IEnumerable<Match>> GetMatchList(int sportId)
