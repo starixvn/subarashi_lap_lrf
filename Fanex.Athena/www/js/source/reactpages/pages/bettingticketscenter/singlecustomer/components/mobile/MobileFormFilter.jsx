@@ -14,11 +14,14 @@ import StickyIcon from '../filters/StickyIcon'
 import useFilterAction from '../hooks/useFilterAction'
 import SportFilter from '../filters/SportFilter';
 import BetTypeFilter from '../filters/BetTypeFilter';
+import CashOutModeFilter from '../filters/CashOutModeFilter.jsx';
+import AppData from '@jsroot/lib/AppData';
 
 export const MobileFormFilter = () => {
     const isValidModel = useValidParam();
     const { submit } = useFilterAction();
     const [isCollapsed, setIsCollapse] = useState(true)
+    const isOfferCashOutProduct = AppData.isOfferCashOutProduct;
 
     const onCollapse = () => {
         setIsCollapse(true);
@@ -39,15 +42,6 @@ export const MobileFormFilter = () => {
                 <div className="col-12 col-xs-6">
                     <DateRangeFilter isMobile={true}/>
                 </div>
-                {isCollapsed && <>
-                    <div className="col-12 col-xs-6">
-                        <UserNameFilter />
-                    </div>
-                    <div className="col-12 col-xs-6">
-                        <StatusFilter />
-                    </div>
-                    </>
-                }
                  <div className="col-12 col-xs-6" >
                     <ProductFilter />
                 </div>
@@ -57,13 +51,18 @@ export const MobileFormFilter = () => {
                 <div className="col-12 col-xs-6" style={style} >
                     <BetTypeFilter />
                 </div>
-                <div className="col-12 col-xs-6" style={style} >
+                <div className="col-12 col-xs-6" >
                     <StatusFilter />
                 </div>           
                 <div className="col-12 col-xs-6" style={style} >
                     <LiveStatusFilter />
                 </div>
-                <div className="col-12 col-xs-6" style={style} >
+                {isOfferCashOutProduct &&
+                    <div className="col-12 col-xs-6" style={style} >
+                        <CashOutModeFilter />
+                    </div>
+                }
+                <div className="col-12 col-xs-6"  >
                     <UserNameFilter />
                 </div>
                 <div className="col-12 col-xs-6" style={style} >

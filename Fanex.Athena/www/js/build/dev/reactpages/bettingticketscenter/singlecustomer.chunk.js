@@ -6497,6 +6497,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../hooks/useFilterAction */ "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/hooks/useFilterAction.jsx");
 /* harmony import */ var _filters_SportFilter__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../filters/SportFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/filters/SportFilter.jsx");
 /* harmony import */ var _filters_BetTypeFilter__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../filters/BetTypeFilter */ "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/filters/BetTypeFilter.jsx");
+/* harmony import */ var _filters_CashOutModeFilter_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../filters/CashOutModeFilter.jsx */ "./www/js/source/reactpages/pages/bettingticketscenter/singlecustomer/components/filters/CashOutModeFilter.jsx");
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
+
+
 
 
 
@@ -6519,6 +6523,7 @@ const MobileFormFilter = () => {
     submit
   } = Object(_hooks_useFilterAction__WEBPACK_IMPORTED_MODULE_13__["default"])();
   const [isCollapsed, setIsCollapse] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true);
+  const isOfferCashOutProduct = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_17__["default"].isOfferCashOutProduct;
   const onCollapse = () => {
     setIsCollapse(true);
   };
@@ -6540,11 +6545,7 @@ const MobileFormFilter = () => {
     className: "col-12 col-xs-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_DateRangeFilter__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isMobile: true
-  })), isCollapsed && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-xs-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-xs-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StatusFilter__WEBPACK_IMPORTED_MODULE_9__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_ProductFilter__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6",
@@ -6553,14 +6554,15 @@ const MobileFormFilter = () => {
     className: "col-12 col-xs-6",
     style: style
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_BetTypeFilter__WEBPACK_IMPORTED_MODULE_15__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 col-xs-6",
-    style: style
+    className: "col-12 col-xs-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_StatusFilter__WEBPACK_IMPORTED_MODULE_9__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6",
     style: style
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_LiveStatusFilter__WEBPACK_IMPORTED_MODULE_11__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_LiveStatusFilter__WEBPACK_IMPORTED_MODULE_11__["default"], null)), isOfferCashOutProduct && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6",
     style: style
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_CashOutModeFilter_jsx__WEBPACK_IMPORTED_MODULE_16__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-xs-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_UserNameFilter__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-xs-6",
     style: style
