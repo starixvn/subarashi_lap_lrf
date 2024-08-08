@@ -3,20 +3,25 @@
     " - " + "Betting Tickets Center";
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
+@using Fanex.Athena.Model.Core.DataDomain
 @using Fanex.Athena.Service.Core.Common.Interfaces
+@using Fanex.Athena.Service.Core.Users.Interfaces
 @model Fanex.Athena.Model.BetList.ViewModel.BettingTicketCenterViewModel
 @{
     var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
     var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
+    var session = DependencyResolver.Current.GetService<ISessionService>();
 
     var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
     var productOptions = Model.ProductOptionList;
-
-    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
     var selectedLiveStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
-    var selectedPlatform = string.Join(",", Model.PlatformList.Select(x => x.Key).ToArray());
+    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
+
     var baseCurrencyList = currencyService.GetBaseCurrencyList().Select(c => new { value = c.Value, label = c.Value }).ToList();
+
+    var cashOutModeList = SystemConstants.CashOutModeList
+    .Select(c => new { value = c.Key, label = c.Value }).ToList();
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
@@ -37,7 +42,12 @@
     isLoading: false,
     selectedStatus: '@(selectedStatus)',
     selectedLiveStatus: '@(selectedLiveStatus)',
-    selectedPlatform: '@(selectedPlatform)',
+    selectedPlatform: 'ALL',
+    sportList: [],
+    selectedSport: 0,
+    bettypeList: [],
+    selectedBettype: 0,
+    selectedCashOutMode: 0,
     isConvertAll: true,
     hasExchange: '@Model.HasExchange.ToString()' === 'True'
     };
@@ -47,9 +57,12 @@
     platformList: @Html.Raw(Model.PlatformList.Select(x => new { value = x.Key, label = x.Value, Status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
-    productOptions: @Html.Raw(productOptions.ToJson()),
+    productList: @Html.Raw(Model.ProductOptionList.Select(x => new { id = x.Code, value = x.Name, status = true }).ToJson()),
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
     dateConstraint: { minDate: '1/1/2017', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 6 },
+    licenseeName: '@session.LicenseeSession.LicenseeName',
+    isOfferCashOutProduct: '@Model.IsOfferCashOutProduct' === "True",
+    cashOutModeList: @Html.Raw(cashOutModeList.ToJson()),
     tabList: @Html.Raw(Model.TabList.ToJson())
     };
 }

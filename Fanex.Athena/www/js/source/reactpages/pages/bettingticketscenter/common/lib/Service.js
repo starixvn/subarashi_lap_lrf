@@ -1,6 +1,6 @@
 ﻿import LangHelper from '@jsroot/lib/langHelper'
 import Site from '@jsroot/lib/site'
-import { HeaderText } from './constants';
+import { HeaderText, ALL_SELECTED_TEXT, ProductCode } from './constants';
 import AppData from '@jsroot/lib/AppData';
 import moment from 'moment'
 
@@ -43,5 +43,31 @@ export default class Service {
         }
         const { fromDate, toDate } = dateRange;
         return moment(fromDate, "MM/DD/YYYY", true).isSame(moment(toDate, "MM/DD/YYYY", true), 'day');
+    }
+
+    static getSelectedItemFromTreeListItem(items){
+        return items.reduce((accum, elem) => accum.concat(elem.Children), []).map(elem => elem.Value).join(",");
+    }
+
+    static getNormalizedSelectedParamValueForTreeListFilter(selectedValue, dataList){
+        const allSelected = this.getSelectedItemFromTreeListItem(dataList);
+        return selectedValue === allSelected ? ALL_SELECTED_TEXT : selectedValue;
+    }
+
+    static getSelectedBettype = (selectedValue, dataList) => {
+        if(!selectedValue || selectedValue ===  ALL_SELECTED_TEXT || selectedValue === this.getSelectedItemFromTreeListItem(dataList)) {
+            return ALL_SELECTED_TEXT;
+        }
+
+        var bettypeList = selectedValue.split(",").map((elem) => {
+            return elem.substring(0, elem.indexOf("_"))
+        });
+
+        return bettypeList.toString();
+    }
+
+    static isContainProductSportBookOrBa = (selectedItemsKey) =>{
+        var listSelectedProduct = selectedItemsKey.split(",");
+        return listSelectedProduct.indexOf(ProductCode.SportsBook) >=0 || listSelectedProduct.indexOf(ProductCode.BA) >=0
     }
 }

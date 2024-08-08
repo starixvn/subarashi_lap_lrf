@@ -53,5 +53,7 @@
         public IEnumerable<RiskLevel> RiskLevels { get; set; }
 
         public IEnumerable<string> OddsGroup { get; set; }
+
+        public bool IsOfferCashOutProduct { get; set; }
     }
 }

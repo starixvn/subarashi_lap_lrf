@@ -1,31 +1,51 @@
-import React, { memo } from 'react'
-import {  useDispatch } from 'react-redux'
+import React, { useEffect, memo } from 'react'
+import { batch, useDispatch, useSelector } from 'react-redux'
 import MultipleSelect from '@legion-lib/react-multiselect'
 import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
-import AppData from '@jsroot/lib/AppData'
+import Service from '../../../common/lib/Service'
 
-
-export const PlatformFiler = () => {
+export const ProductFilter = () => {
     const dispatch = useDispatch();
-    const {setSelectedProduct} = ActionCreators;
+    const [selectedProduct, productList] = useSelector(state => [state.selectedProduct, state.productList]);
+    const {setSelectedProduct, getSportList, getBetTypeList, setEnableCashOutFilter, setSelectedCashOutMode} = ActionCreators;
+
+    useEffect(() => {
+        getSportAndBettypeListByProduct(selectedProduct);
+        updateCashOutMode(selectedProduct);
+    }, []);
 
     const  _productChangeHandler = (currentItem, selectedItemsKey) => {
-        dispatch(setSelectedProduct(selectedItemsKey));
+        batch(() => {
+            dispatch(setSelectedProduct(selectedItemsKey));
+            getSportAndBettypeListByProduct(selectedItemsKey);
+            updateCashOutMode(selectedItemsKey);
+        })
+    }
+
+    const getSportAndBettypeListByProduct = (selectedProduct) => {
+        dispatch(getSportList(selectedProduct));
+        dispatch(getBetTypeList(selectedProduct));
+    }
+
+    const updateCashOutMode = (selectedProduct) => {
+        const isEnableCashOutFilter = Service.isContainProductSportBookOrBa(selectedProduct);
+        if (!isEnableCashOutFilter) {
+            dispatch(setSelectedCashOutMode(0));
+        }
+        dispatch(setEnableCashOutFilter(isEnableCashOutFilter));
     }
 
     const _renderProductSelectList = () => {
-        const productOptions = AppData.productOptions;
-
-        return productOptions?.length ? (
+        return productList?.length ? (
             <MultipleSelect id="ProductList"
                 hasSearchBox={true}
                 language={LangHelper.currentLanguage}
-                dataSource={productOptions}
-                keyField={"Code"}
-                valueField={"Name"}
-                statusField={"Status"}
-                onChange={_productChangeHandler} />
+                dataSource={productList}
+                valueField={"value"}
+                keyField={"id"}
+                statusField={"status"}
+                onChange={_productChangeHandler}/>
         ) : null;
     }
 
@@ -36,4 +56,4 @@ export const PlatformFiler = () => {
     </div>)
 }
 
-export default memo(PlatformFiler);
+export default memo(ProductFilter);

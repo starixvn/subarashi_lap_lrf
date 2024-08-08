@@ -11,15 +11,27 @@
 
     var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
     var productOptions = Model.ProductOptionList;
-    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
 
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
     var baseCurrencyList = currencyService.GetBaseCurrencyList(true).Select(c => new { value = c.Value, label = c.Value }).ToList();
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
+    var selectedLiveStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
+    var selectedProductCode = string.Join(",", productOptions.Where(x => x.Status).Select(x => x.Code).ToArray());
 
     var whitelabelList = Model.SubsidiaryList;
     var subsidiaryList = Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct();
     var selectedSubsidiary = string.Join(",", subsidiaryList);
+
+    var riskLevels = Model.RiskLevels.Select(r => new
+    {
+        id = r.Id,
+        value = r.Name,
+        valueDecoration = "risk-level " + r.Key,
+        customerClassList = string.Join(",", r.CustomerClassList),
+        status = true
+    });
+    var oddsGroup = Model.OddsGroup;
+    var platformList = Model.PlatformList;
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
@@ -38,10 +50,22 @@
     selectedCurrency: '@(selectedCurrency)',
     selectedBaseCurrency: '@(Model.SelectedBaseCurrency)',
     selectedSubsidiary: '@(selectedSubsidiary)',
+    sportList: [],
+    selectedSport: 0,
+    selectedMatch: 0,
+    selectedLeague: 0,
+    bettypeList: [],
+    selectedBettype: 0,
+    selectedCustomerClass: 'ALL',
+    selectedOddsGroup: 'ALL',
+    selectedPlatform: 'ALL',
     isLoading: false,
     selectedStatus: '@(selectedStatus)',
+    selectedLiveStatus: '@(selectedLiveStatus)',
     isConvertAll: true,
-    hasExchange: '@Model.HasExchange.ToString()' === 'True'
+    hasExchange: '@Model.HasExchange.ToString()' === 'True',
+    isEnableLeague: false,
+    isEnableMatch: false
     };
     window._AppData = {
     isAllowTxIDColumn: '@ViewBag.IsAllowTxIDColumn.ToString()' === 'True',
@@ -54,6 +78,10 @@
     whitelabelList: @Html.Raw(whitelabelList.ToJsonWithServiceStack()),
     subsidiaryList: @Html.Raw(subsidiaryList.ToJsonWithServiceStack()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
+    riskLevels: @Html.Raw(riskLevels.ToJson()),
+    liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
+    oddsGroups: @Html.Raw(Model.OddsGroup.Select(x => new { Id = x, Value = x, Status = true }).ToJson()),
+    platformList: @Html.Raw(Model.PlatformList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     tabList: @Html.Raw(Model.TabList.ToJson())
     };
 }

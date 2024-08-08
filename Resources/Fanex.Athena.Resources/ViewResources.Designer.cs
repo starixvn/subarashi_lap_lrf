@@ -8206,6 +8206,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Single Player.
+        /// </summary>
+        public static string SinglePlayer {
+            get {
+                return ResourceManager.GetString("SinglePlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Skype.
         /// </summary>
         public static string Skype {

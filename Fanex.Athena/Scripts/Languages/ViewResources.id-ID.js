@@ -1,4 +1,4 @@
-﻿// Generated at: 7/12/2024 1:55:31 PM
+﻿// Generated at: 8/1/2024 4:40:28 PM
 var _language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -848,6 +848,7 @@ ShowAllLeagues:"Tampilkan Semua Liga",
 ShowOldValue:"Tampilkan nilai lama",
 Sincelastmonth:"Sejak bulan lalu",
 SingleCustomer:"Pelanggan Individu",
+SinglePlayer:"Pemain Tunggal",
 Skype:"Skype",
 SLTDateRangeNote:"Data Lotere Olahraga tersedia mulai 22/11/2021",
 Soccer:"Sepak Bola",

@@ -21,7 +21,12 @@ export const useFilterAction = () => {
         selectedStatus, 
         dateRange, 
         selectedLiveStatus, 
-        selectedPlatform} 
+        selectedPlatform,
+        selectedSport,
+        selectedBettype,
+        sportList,
+        selectedCashOutMode,
+        bettypeList} 
         = useSelector( state => state, shallowEqual);
         
     const {setReportTitle, setRequestParam, toggleLoader, getGridData} = ActionCreators;
@@ -40,11 +45,14 @@ export const useFilterAction = () => {
             FromDate: Site.convertDateToString(fromDate),
             ToDate: Site.convertDateToString(toDate),
             ProductCodeList: selectedProduct,
+            SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
+            BetTypeIds: Service.getSelectedBettype(selectedBettype, bettypeList),
             Username: username,
             BaseCurrency: isConvertAll ? selectedBaseCurrency : '',
             Status: selectedStatus,
             LiveStatus: selectedLiveStatus,
             Platform: selectedPlatform,
+            CashOutMode: selectedCashOutMode,
             SortBy: SortBy,
             SortOrder: SortOrder,
             IsConvertAll: isConvertAll
@@ -85,7 +93,7 @@ export const useFilterAction = () => {
                 alert(LangHelper.getSingleResource("NoInfo"));
             } else {
                 const blob = new Blob([response.data], {type: "application/vnd.ms-excel"});
-                saveAs(blob, 'BettingTicketsCenter_SingleCustomer.xls');
+                saveAs(blob, 'BettingTicketsCenter_SinglePlayer.xls');
             }
             dispatch(toggleLoader(false));
         });

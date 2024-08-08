@@ -3381,4 +3381,7 @@
   <data name="RiskLevelSpreadSetting" xml:space="preserve">
     <value>Chênh lệch tỷ lệ cược theo Mức Độ Rủi Ro</value>
   </data>
+  <data name="SinglePlayer" xml:space="preserve">
+    <value>Người chơi cá nhân</value>
+  </data>
 </root>

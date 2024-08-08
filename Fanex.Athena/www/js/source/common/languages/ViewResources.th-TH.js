@@ -1,4 +1,4 @@
-﻿// Generated at: 7/12/2024 1:55:31 PM
+﻿// Generated at: 8/1/2024 4:40:29 PM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -866,6 +866,7 @@ ShowAllLeagues:"แสดงลีกทั้งหมด",
 ShowOldValue:"แสดงค่าเก่า",
 Sincelastmonth:"ตั้งแต่เดือนที่แล้ว",
 SingleCustomer:"ลูกค้าเดี่ยว",
+SinglePlayer:"นักเดิมพันเดี่ยว",
 Skype:"Skype",
 SLTDateRangeNote:"ข้อมูลลอตเตอรี กีฬามีให้ตั้งแต่วันที่ 22/11/2021",
 Soccer:"ฟุตบอล",

@@ -8061,6 +8061,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
+var _class;
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -8078,7 +8079,15 @@ class Service {
     const baseCurrencyText = baseCurrency ? `, ${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BaseCurrency")}: ${baseCurrency}` : '';
     return _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("BettingTicketCenter") + dateRangeText + baseCurrencyText;
   }
+  static getSelectedItemFromTreeListItem(items) {
+    return items.reduce((accum, elem) => accum.concat(elem.Children), []).map(elem => elem.Value).join(",");
+  }
+  static getNormalizedSelectedParamValueForTreeListFilter(selectedValue, dataList) {
+    const allSelected = this.getSelectedItemFromTreeListItem(dataList);
+    return selectedValue === allSelected ? _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"] : selectedValue;
+  }
 }
+_class = Service;
 _defineProperty(Service, "getHeaderName", column => {
   if (column === 'LicenseeWL') {
     return `${_constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"].LicenseeWL}/${_constants__WEBPACK_IMPORTED_MODULE_2__["HeaderText"].Comm}`;
@@ -8101,6 +8110,19 @@ _defineProperty(Service, "isSingleDate", dateRange => {
   } = dateRange;
   return moment__WEBPACK_IMPORTED_MODULE_4___default()(fromDate, "MM/DD/YYYY", true).isSame(moment__WEBPACK_IMPORTED_MODULE_4___default()(toDate, "MM/DD/YYYY", true), 'day');
 });
+_defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
+  if (!selectedValue || selectedValue === _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"] || selectedValue === _class.getSelectedItemFromTreeListItem(dataList)) {
+    return _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"];
+  }
+  var bettypeList = selectedValue.split(",").map(elem => {
+    return elem.substring(0, elem.indexOf("_"));
+  });
+  return bettypeList.toString();
+});
+_defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
+  var listSelectedProduct = selectedItemsKey.split(",");
+  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].BA) >= 0;
+});
 
 /***/ }),
 
@@ -8108,7 +8130,7 @@ _defineProperty(Service, "isSingleDate", dateRange => {
 /*!*************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js ***!
   \*************************************************************************************/
-/*! exports provided: ApiUrl, HeaderText, DefaultPageSize, tabKeys, tabList */
+/*! exports provided: ApiUrl, HeaderText, DefaultPageSize, tabKeys, tabList, ALL_SELECTED_TEXT, CashOutMode, ProductCode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8118,6 +8140,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DefaultPageSize", function() { return DefaultPageSize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabKeys", function() { return tabKeys; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tabList", function() { return tabList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ALL_SELECTED_TEXT", function() { return ALL_SELECTED_TEXT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CashOutMode", function() { return CashOutMode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductCode", function() { return ProductCode; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 
@@ -8164,7 +8189,7 @@ const tabKeys = {
 };
 const tabList = [{
   key: tabKeys.singleCustomer,
-  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SingleCustomer"),
+  label: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__["default"].getSingleResource("SinglePlayer"),
   url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/SingleCustomer"),
   displayOrder: 0
 }, {
@@ -8188,6 +8213,16 @@ const tabList = [{
   url: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("BettingTicketCenter/BookedBet"),
   displayOrder: 5
 }];
+const ALL_SELECTED_TEXT = 'ALL';
+const CashOutMode = {
+  IncludeCOFromSB: 0,
+  ExcludeCOFromSB: 1,
+  ViewCOOnly: 2
+};
+const ProductCode = {
+  SportsBook: "SB",
+  BA: "BA"
+};
 
 /***/ }),
 
