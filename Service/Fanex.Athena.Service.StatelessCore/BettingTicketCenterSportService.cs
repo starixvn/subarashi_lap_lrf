@@ -37,7 +37,7 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             const int Parlay = -1;
 
-            if (string.Equals(sportIds, "All", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(sportIds) || string.Equals(sportIds, "All", StringComparison.OrdinalIgnoreCase))
             {
                 return sportIds;
             }
