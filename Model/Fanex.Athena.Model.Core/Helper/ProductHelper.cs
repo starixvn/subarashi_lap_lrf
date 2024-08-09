@@ -79,7 +79,8 @@
                 { Product.L22, nameof(ViewResources.ProductL22) },
                 { Product.UUSL, nameof(ViewResources.ProductUUSL) },
                 { Product.FS, nameof(ViewResources.ProductFS) },
-                { Product.FAC, nameof(ViewResources.ProductFAC) }
+                { Product.FAC, nameof(ViewResources.ProductFAC) },
+                { Product.NS, nameof(ViewResources.ProductNS) }
             };
 
         public static string GetProductCode(int productId)
