@@ -466,10 +466,10 @@
     <value>Untuk {0}: Harap berikan nama pengguna juga untuk mencari tiket setelah {1}</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch" xml:space="preserve">
-    <value>Sistem mendukung pencarian TxID dari {0}</value>
+    <value>Sistem mendukung pencarian LicTxID dari {0}</value>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote_TxIDSearch2" xml:space="preserve">
-    <value>Untuk {0}: Sistem ini hanya mendukung pencarian TxID untuk tiket-tiket yang sudah diselesaikan.</value>
+    <value>Sistem ini hanya mendukung pencarian LicTxID untuk tiket-tiket yang sudah diselesaikan.</value>
   </data>
   <data name="BetTradeCommission" xml:space="preserve">
     <value>Komisi Perdagangan Taruhan</value>

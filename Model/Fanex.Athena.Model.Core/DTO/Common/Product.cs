@@ -114,6 +114,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string FS = "FS";
 
+        public const string FAC = "FAC";
+
         #endregion Field
 
         #region Constructor

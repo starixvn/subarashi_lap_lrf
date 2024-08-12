@@ -3797,4 +3797,7 @@
   <data name="SinglePlayer" xml:space="preserve">
     <value>Single Player</value>
   </data>
+  <data name="ProductFAC" xml:space="preserve">
+    <value>FA CHAI</value>
+  </data>
 </root>

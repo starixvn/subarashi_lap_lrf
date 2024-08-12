@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 8/1/2024 4:40:29 PM
+// Generated at: 8/8/2024 4:38:36 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -780,6 +780,7 @@ window._language_zh_CN = {
   ProductCG: "CG电子",
   ProductCO: "实时兑现",
   ProductCS: "娱乐城",
+  ProductFAC: "发财电子",
   ProductFS: "FS电子",
   ProductHB: "HB电子",
   ProductJIG: "吉利电子",

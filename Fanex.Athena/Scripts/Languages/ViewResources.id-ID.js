@@ -1,4 +1,4 @@
-﻿// Generated at: 8/1/2024 4:40:28 PM
+﻿// Generated at: 8/8/2024 4:38:36 PM
 var _language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -116,8 +116,8 @@ BettingTicketCenter_BookedBetNote:"Data tersedia hingga 7 hari",
 BettingTicketCenter_Exchange_Note_1:"Dukung pencarian tiket kosong saja",
 BettingTicketCenter_Exchange_Note_2:"Masukkan nama pengguna untuk mendapatkan hasil lebih cepat.",
 BettingTicketCenter_Exchange_Note_3:"Mendukung data hingga 1 bulan.",
-BettingTicketCenter_RefnoTabNote_TxIDSearch:"Sistem mendukung pencarian TxID dari {0}",
-BettingTicketCenter_RefnoTabNote_TxIDSearch2:"Untuk {0}: Sistem ini hanya mendukung pencarian TxID untuk tiket-tiket yang sudah diselesaikan.",
+BettingTicketCenter_RefnoTabNote_TxIDSearch:"Sistem mendukung pencarian LicTxID dari {0}",
+BettingTicketCenter_RefnoTabNote_TxIDSearch2:"Sistem ini hanya mendukung pencarian LicTxID untuk tiket-tiket yang sudah diselesaikan.",
 BettingTicketCenter_RefnoTabNote1:"Untuk Sportsbook, hasil pencarian termasuk tiket Bonus/Uang tunai terkait.",
 BettingTicketCenter_RefnoTabNote2:"Untuk {0}: Harap berikan nama pengguna juga untuk mencari tiket setelah {1}",
 BetTradeCommission:"Komisi Perdagangan Taruhan",

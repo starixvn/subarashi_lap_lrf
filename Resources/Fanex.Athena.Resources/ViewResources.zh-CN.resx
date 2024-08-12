@@ -3349,4 +3349,7 @@
   <data name="SinglePlayer" xml:space="preserve">
     <value>单一玩家</value>
   </data>
+  <data name="ProductFAC" xml:space="preserve">
+    <value>发财电子</value>
+  </data>
 </root>
