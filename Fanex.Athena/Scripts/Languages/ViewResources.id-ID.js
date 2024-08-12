@@ -1,4 +1,4 @@
-﻿// Generated at: 8/8/2024 4:38:36 PM
+﻿// Generated at: 8/12/2024 3:47:58 PM
 var _language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
