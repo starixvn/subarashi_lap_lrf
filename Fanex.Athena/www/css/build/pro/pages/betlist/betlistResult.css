@@ -156,6 +156,16 @@ body {
     width: 50%; }
   .result-container table.popup {
     min-width: 650px !important; }
+  .result-container table.fn-rs.baseball .cl-ko-time {
+    width: 110px; }
+  .result-container table.fn-rs.baseball .cl-match {
+    min-width: 150px; }
+  .result-container table.fn-rs.baseball .cl-s, .result-container table.fn-rs.baseball .cl-ei {
+    width: 4%; }
+  .result-container table.fn-rs.baseball .cl-ht-score {
+    width: 5%; }
+  .result-container table.fn-rs.baseball .cl-f-score {
+    width: 5%; }
   .result-container table.fn-rs.number-game {
     line-height: 15px; }
   .result-container table.fn-rs thead th.cl-title {
