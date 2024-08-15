@@ -36,11 +36,12 @@
 
         [CLSCompliant(false)]
         [AcceptVerbs("Get")]
-        public async Task<HttpResponseMessage> ReportViews([FromUri] string report, [FromUri] string url)
+        public async Task<HttpResponseMessage> ReportViews()
         {
-            const string apiKey = "ReportClientApp";
-            var apiUrl = $"{report}_{url}";
-            var result = await _proxyService.HandleRequest(apiKey, apiUrl).ConfigureAwait(false);
+            const string ApiKey = "ReportClientApp";
+            const string ApiUrl = "Home_Index";
+
+            var result = await _proxyService.HandleRequest(ApiKey, ApiUrl).ConfigureAwait(false);
 
             return result;
         }

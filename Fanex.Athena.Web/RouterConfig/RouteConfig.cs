@@ -3,6 +3,7 @@
     using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Fanex.Athena.Model.Core.DataDomain;
 
     public static class RouteConfig
     {
@@ -51,104 +52,110 @@
             var agCasinoWinLossReportRoute = routes.MapHttpRoute(
                 "agCasinoWinLossReportRoute",
                 "AgCasinoWinLossReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "AgCasinoWinLoss", url = "Index" });
+                new { Controller = "Proxy", Action = "ReportViews", });
             agCasinoWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+            
+            var agCasinoBalanceReportRoute = routes.MapHttpRoute(
+                "agCasinoBalanceReportRoute",
+                "AgCasinoBalanceReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
+            agCasinoBalanceReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var subsidiaryPerformanceReportRoute = routes.MapHttpRoute(
-                name: "subsidiaryPerformanceReportRoute",
-                routeTemplate: "SubsidiaryPerformanceReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "SubsidiaryPerformance", url = "Index" });
+                "subsidiaryPerformanceReportRoute",
+                "SubsidiaryPerformanceReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             subsidiaryPerformanceReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var turnoverReportRoute = routes.MapHttpRoute(
-                name: "turnoverReportRoute",
-                routeTemplate: "TurnoverReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "Turnover", url = "Index" });
+                "turnoverReportRoute",
+                "TurnoverReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             turnoverReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var customerTurnoverReportRoute = routes.MapHttpRoute(
-                name: "customerTurnoverReportRoute",
-                routeTemplate: "CustomerTurnoverReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerTurnover", url = "Index" });
+                "customerTurnoverReportRoute",
+                "CustomerTurnoverReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             customerTurnoverReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var settledMatchCountReportRoute = routes.MapHttpRoute(
-                   name: "settledMatchCountReportRoute",
-                   routeTemplate: "SettledMatchCountReport/{*url}",
-                   new { Controller = "Proxy", Action = "ReportViews", report = "SettledMatchCount", url = "Index" });
+                "settledMatchCountReportRoute",
+                "SettledMatchCountReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             settledMatchCountReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var weeklyLiveMatchReportRoute = routes.MapHttpRoute(
-                   name: "weeklyLiveMatchReportRoute",
-                   routeTemplate: "WeeklyLiveMatchReport/{*url}",
-                   new { Controller = "Proxy", Action = "ReportViews", report = "WeeklyLiveMatch", url = "Index" });
+                "weeklyLiveMatchReportRoute",
+                "WeeklyLiveMatchReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             weeklyLiveMatchReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var customerBalanceReportRoute = routes.MapHttpRoute(
-                name: "customerBalanceReportRoute",
-                routeTemplate: "customerBalanceReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerBalance", url = "Index" });
+                "customerBalanceReportRoute",
+                "customerBalanceReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             customerBalanceReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var customerSupportTaskReportRoute = routes.MapHttpRoute(
-                name: "customerSupportTaskReportRoute",
-                routeTemplate: "CustomerSupportTaskReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerSupportTask", url = "Index" });
+                "customerSupportTaskReportRoute",
+                "CustomerSupportTaskReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             customerSupportTaskReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
-            
+
             var customerPendingFundsReportRoute = routes.MapHttpRoute(
-                name: "customerPendingFundsReportRoute",
-                routeTemplate: "CustomerPendingFundsReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "CustomerPendingFunds", url = "Index" });
+                "customerPendingFundsReportRoute",
+                "CustomerPendingFundsReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             customerPendingFundsReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var extraPayoutReportRoute = routes.MapHttpRoute(
-                name: "extraPayoutReportRoute",
-                routeTemplate: "ExtraPayoutReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "ExtraPayout", url = "Index" });
+                "extraPayoutReportRoute",
+                "ExtraPayoutReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             extraPayoutReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var leagueWinLossReportRoute = routes.MapHttpRoute(
-                name: "leagueWinLossReportRoute",
-                routeTemplate: "LeagueWinLossReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "LeagueWinLoss", url = "Index" });
+                "leagueWinLossReportRoute",
+                "LeagueWinLossReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             leagueWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
-            
+
             var winlossAnalysisReportRoute = routes.MapHttpRoute(
-                name: "winlossAnalysisReportRoute",
-                routeTemplate: "WinlossAnalysisReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "WinLossAnalysis", url = "Index" });
+                "winlossAnalysisReportRoute",
+                "WinlossAnalysisReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             winlossAnalysisReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
-            
+
             var sabaVirtualSportsWinLossReportRoute = routes.MapHttpRoute(
-                name: "sabaVirtualSportsWinLossReportRoute",
-                routeTemplate: "SabaVirtualSportsWinLossReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "SabaVirtualSportsWinLoss", url = "Index" });
+                "sabaVirtualSportsWinLossReportRoute",
+                "SabaVirtualSportsWinLossReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             sabaVirtualSportsWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
-            
+
             var winLossByTimeZoneReportRoute = routes.MapHttpRoute(
-                name: "winLossByTimeZoneReportRoute",
-                routeTemplate: "LicenseeWinLossByTimeZoneReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "WinLossByTimeZone", url = "Index" });
+                "winLossByTimeZoneReportRoute",
+                "LicenseeWinLossByTimeZoneReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             winLossByTimeZoneReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var matchWinLossReportRoute = routes.MapHttpRoute(
-                name: "matchWinLossReportRoute",
-                routeTemplate: "MatchWinLossReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "MatchWinLoss", url = "Index" });
+                "matchWinLossReportRoute",
+                "MatchWinLossReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             matchWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var liveReportRoute = routes.MapHttpRoute(
-                name: "liveReportRoute",
-                routeTemplate: "LiveReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "LiveReport", url = "Index" });
+                "liveReportRoute",
+                "LiveReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", });
             liveReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
-            var betListReportRoute = routes.MapHttpRoute(
-                name: "betListReportRoute",
-                routeTemplate: "BetList/Report/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", report = "BetList", url = "Index" });
-            betListReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+            var betListRoute = routes.MapHttpRoute(
+                "betListRoute",
+                "BetList/Report/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews" });
+            betListRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
     }
 }
