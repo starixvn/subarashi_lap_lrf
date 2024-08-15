@@ -13,6 +13,7 @@ using Autofac.Core;
 using Autofac.Features.AttributeFilters;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using Fanex.Athena.Api.Base;
 using Fanex.Athena.Api.StatelessBase.Logger;
 using Fanex.Athena.DataAccess.Report;
 using Fanex.Athena.DataAccess.Report.Interfaces;
@@ -20,6 +21,7 @@ using Fanex.Athena.Extension;
 using Fanex.Athena.Extension.Utility.Internal;
 using Fanex.Athena.Service.Core.OAuth;
 using Fanex.Athena.Service.Core.Proxy;
+using Fanex.Athena.Service.Core.Proxy.Interfaces;
 using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Customer;
@@ -190,6 +192,7 @@ namespace Fanex.Athena
             builder.RegisterType<PortalApiService>().As<IPortalApiService>().SingleInstance();
             builder.RegisterType<SubsidiaryService>().As<ISubsidiaryService>().SingleInstance();
 
+            builder.RegisterType<ProxyViewService>().As<IProxyViewService>().SingleInstance();
             builder.Register(x => new ProxyService(
                new ProxyOptions(Convert.ToInt16(ConfigurationManager.AppSettings["Proxy_Timeout"])))
                ).As<IProxyService>().SingleInstance();

@@ -5,16 +5,23 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Fanex.Athena.Api.Base.Attributes;
+    using Fanex.Athena.Api.StatelessBase.Utility;
     using Fanex.Athena.Service.Core.Proxy;
+    using Fanex.Athena.Service.Core.Proxy.Interfaces;
 
     [ApiUMFilter]
     public class ProxyController : ApiController
     {
+        private const string AccessDeniedPath = "~/Utility/AccessDenied";
+
         private readonly IProxyService _proxyService;
 
-        public ProxyController(IProxyService proxyService)
+        private readonly IProxyViewService _proxyViewService;
+
+        public ProxyController(IProxyService proxyService, IProxyViewService proxyViewService)
         {
             _proxyService = proxyService;
+            _proxyViewService = proxyViewService;
         }
 
         [HttpGet]
@@ -34,10 +41,17 @@
             return result;
         }
 
+        [HttpGet]
         [CLSCompliant(false)]
-        [AcceptVerbs("Get")]
-        public async Task<HttpResponseMessage> ReportViews([FromUri] string report, [FromUri] string url)
+        public async Task<HttpResponseMessage> ReportViews([FromUri] string report, [FromUri] string url = "Index")
         {
+            var success = _proxyViewService.PrepareViewRequest(report);
+
+            if (!success)
+            {
+                return RequestHelper.HostRedirectResponse(AccessDeniedPath);
+            }
+
             const string apiKey = "ReportClientApp";
             var apiUrl = $"{report}_{url}";
             var result = await _proxyService.HandleRequest(apiKey, apiUrl).ConfigureAwait(false);

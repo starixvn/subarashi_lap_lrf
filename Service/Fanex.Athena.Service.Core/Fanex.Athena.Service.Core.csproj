@@ -126,8 +126,10 @@
     <Compile Include="OAuth\OAuthOptions.cs" />
     <Compile Include="Proxy\Interfaces\IProxyOptions.cs" />
     <Compile Include="Proxy\Interfaces\IProxyService.cs" />
+    <Compile Include="Proxy\Interfaces\IProxyViewService.cs" />
     <Compile Include="Proxy\ProxyOptions.cs" />
     <Compile Include="Proxy\ProxyService.cs" />
+    <Compile Include="Proxy\ProxyViewService.cs" />
     <Compile Include="Users\Interfaces\ISubsidiaryService.cs" />
     <Compile Include="OAuth\OAuthService.cs" />
     <Compile Include="Users\SubsidiaryService.cs" />
