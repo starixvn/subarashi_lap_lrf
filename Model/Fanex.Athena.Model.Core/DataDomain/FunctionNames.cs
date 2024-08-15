@@ -6,11 +6,15 @@
 
         public const string SabaVirtualSportsWinLoss = "SabaVirtualSportsWinLoss";
 
+        public const string CustomerBalance = "CustomerBalance";
+
         public const string CustomerPendingFunds = "CustomerPendingFunds";
 
         public const string CustomerWinLoss = "CustomerWinLoss";
 
         public const string LicenseeWinLoss = "LicenseeWinLoss";
+
+        public const string MatchWinLoss = "MatchWinLoss";
 
         public const string PlatformWinloss = "PlatformWinloss";
 
@@ -38,6 +42,8 @@
 
         public const string DailyBets = "DailyBets";
 
+        public const string LeagueWinLoss = "LeagueWinLoss";
+
         public const string ExtraPayout = "ExtraPayout";
 
         public const string NewCashOutWinLoss = "NewCashOutWinLoss";
@@ -45,5 +51,17 @@
         public const string GrossGamingRevenue = "GrossGamingRevenue";
 
         public const string WinlossAnalysis = "WinlossAnalysis";
+
+        public const string SettledMatchCount = "SettledMatchCount";
+
+        public const string WeeklyLiveMatches = "WeeklyLiveMatches";
+
+        public const string CustomerSupportTask = "CustomerSupportTask";
+
+        public const string AgCasinoWinLoss = "AgCasinoWinLoss";
+
+        public const string AgCasinoBalance = "AgCasinoBalance";
+
+        public const string CustomerTurnover = "CustomerTurnover";
     }
 }
