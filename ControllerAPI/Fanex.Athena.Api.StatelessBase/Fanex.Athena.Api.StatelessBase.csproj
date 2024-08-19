@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ApiOneAuthorizationAttribute.cs" />
     <Compile Include="Attributes\Extensions\DependencyScopeExtension.cs" />
+    <Compile Include="Attributes\ExternalApiAutoBindMetaModelAttribute.cs" />
     <Compile Include="ExternalApiBaseController.cs" />
     <Compile Include="Logger\ApiExceptionLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,7 +107,7 @@
       <Name>Fanex.Athena.Extension</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Auth\Fanex.Athena.Model.Auth.csproj">
-      <Project>{794c0345-2ddd-4ffd-a605-bb96fbb37de8}</Project>
+      <Project>{794C0345-2DDD-4FFD-A605-BB96FBB37DE8}</Project>
       <Name>Fanex.Athena.Model.Auth</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Model\Fanex.Athena.Model.Core\Fanex.Athena.Model.Core.csproj">

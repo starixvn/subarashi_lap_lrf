@@ -3643,8 +3643,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"), __webpack_require__(/*! common/popup */ "./www/js/source/common/popup.js"), __webpack_require__(/*! extensions/jquery.extension */ "./www/js/source/extensions/jquery.extension.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (Site, moment, Popup) {
         const NOTIFICATION_ITEM = '<li class="notification-item" id="notification-item-{0}" title="{1}">' +
-                                '<a href="javascript:void(0)">{2}</a><span class="type">{3}</span><span class="date-time">{4}</span>' +
-                                '</li>';
+            '<a href="javascript:void(0)">{2}</a><span class="type">{3}</span><span class="date-time">{4}</span>' +
+            '</li>';
         const GET_NOTIFICATION_URL = 'NotificationReport/GetNotificationMessages';
         const MARK_NOTIFICATION = 'NotificationReport/MarkNotificationAsRead';
         const POPUP_ID = 'view-notification';
@@ -3680,7 +3680,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 onClose: function () {
                     const postData = {
                         MessageType: message.Type,
-                        MessageId: message.Id
+                        MessageId: message.Id,
+                        Source: message.Source
                     };
 
                     markMessageAsRead(postData, index);
@@ -3696,10 +3697,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }];
 
             const popupContent = '<div class="view-notification">'
-                                + '<p class="subject">' + Site.getSingleResource('Subject') + ': ' + message.Subject + '</p>'
-                                + '<p class="date-time">' + moment(message.DateTime).format('MM/DD/YYYY') + '</p>'
-                                + '<div class="content">' + (message.Content || '') + '</div>'
-                                + '</div>';
+                + '<p class="subject">' + Site.getSingleResource('Subject') + ': ' + message.Subject + '</p>'
+                + '<p class="date-time">' + moment(message.DateTime).format('MM/DD/YYYY') + '</p>'
+                + '<div class="content">' + (message.Content || '') + '</div>'
+                + '</div>';
 
             Popup.openPopupWithButton(popupContent, options, buttons);
         }
@@ -3808,9 +3809,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                         addNotificationItems(data);
                     },
                     statusCode: {
-                        400: function() {},
-                        403: function () {},
-                        500: function() {}
+                        400: function () { },
+                        403: function () { },
+                        500: function () { }
                     }
                 });
             };

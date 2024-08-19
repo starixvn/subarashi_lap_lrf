@@ -78,15 +78,15 @@
             }
         }
 
-        public string ResultAmendmentApiUrl
+        public string OICApiUrl
         {
-            get { return GetValue(nameof(ResultAmendmentApiUrl)); }
+            get { return GetValue(nameof(OICApiUrl)); }
         }
 
-        public string MarkNotificationAsReadApiUrl
-        {
-            get { return GetValue(nameof(MarkNotificationAsReadApiUrl)); }
-        }
+        //public string MarkNotificationAsReadApiUrl
+        //{
+        //    get { return GetValue(nameof(MarkNotificationAsReadApiUrl)); }
+        //}
 
         public string ResultAmendmentAttachmentApiUrl
         {

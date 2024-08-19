@@ -4,29 +4,28 @@ import NoDataTitle from '@jsroot/components/NoDataTitle'
 import LangHelper from '@jsroot/lib/langHelper'
 import Service from '../../lib/resultAmendmentService';
 
-const TicketListingGrid = ({ sessionId }) => {
+const TicketListingGrid = ({ sessionId, source, dateTime }) => {
     const [data, setData] = useState({});
 
     const { Data, MatchInfo } = data;
 
     const _fetchData = async () => {
-        const response = await Service.fetchTicketListing(sessionId);
+        const response = await Service.fetchTicketListing(sessionId, source, dateTime);
         setData(response);
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         _fetchData();
     }, [])
 
-    if(!Data) 
-    { 
-        return null 
-    } 
+    if (!Data) {
+        return null
+    }
 
-    if(!Data.length) {
+    if (!Data.length) {
         return <NoDataTitle />;
     }
-   
+
 
     const _renderCaption = () => {
         return <div className="ticket-listing-caption">
@@ -34,7 +33,7 @@ const TicketListingGrid = ({ sessionId }) => {
                 {MatchInfo}
             </span>
             <span className="caret-block">
-                <span className="icon-excel-wrapper" onClick={() => Service.exportTicketListing(sessionId)}>
+                <span className="icon-excel-wrapper" onClick={() => Service.exportTicketListing(sessionId, source, dateTime)}>
                     <i className="icon-excel" title={LangHelper.getSingleResource('ExportToExcel')}></i>
                 </span>
             </span>
@@ -58,18 +57,18 @@ const TicketListingGrid = ({ sessionId }) => {
         </Row>)
 
         return <Table
-                minWidth={600}
-                maxWidth={650}
-                bodyHeight={400}
-                autoWidth={true}
-                autoHeight={false}
-                header={header}
-                body={body}
-            />
+            minWidth={600}
+            maxWidth={650}
+            bodyHeight={400}
+            autoWidth={true}
+            autoHeight={false}
+            header={header}
+            body={body}
+        />
     }
 
     return (
-        <div className="ticket-listing-popup">   
+        <div className="ticket-listing-popup">
             {_renderCaption()}
             {_renderData()}
         </div>

@@ -1,6 +1,7 @@
 import LangHelper from '../../../lib/langHelper'
 import Site from '../../../lib/site'
 import DataService from '@jsroot/lib/DataService';
+import moment from 'moment';
 
 const headerText = {
     index: "#",
@@ -20,22 +21,23 @@ export default class Service {
         return headerText;
     }
 
-    static async fetchTicketListing(sessionId) {
+    static async fetchTicketListing(sessionId, source, dateTime) {
         try {
-
-            const response = await DataService.postData('NotificationReport/GetAmendmentTicketListing', { sessionId });
-            if(response.status === 200) {
+            const dateTimeString = moment(dateTime).format("MM/DD/YYYY")
+            const response = await DataService.postData('NotificationReport/GetAmendmentTicketListing', { sessionId, source, dateTime: dateTimeString });
+            if (response.status === 200) {
                 return response.data;
             }
         }
-        catch(e) {
+        catch (e) {
             alert(LangHelper.getSingleResource('ErrorProcessingMsg'))
         }
         return {};
     }
 
-    static async exportTicketListing(sessionId) {
-        const response = await DataService.getFile('NotificationReport/ExportAmendmentTicketListing', { sessionId })
+    static async exportTicketListing(sessionId, source, dateTime) {
+        const dateTimeString = moment(dateTime).format("MM/DD/YYYY")
+        const response = await DataService.getFile('NotificationReport/ExportAmendmentTicketListing', { sessionId, source, dateTime: dateTimeString })
         const noContentStatusCode = 204;
         if (response.status === noContentStatusCode) {
             alert(LangHelper.getSingleResource("NoInfo"));

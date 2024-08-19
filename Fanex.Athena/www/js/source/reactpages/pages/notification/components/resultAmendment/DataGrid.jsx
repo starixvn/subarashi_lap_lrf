@@ -58,6 +58,7 @@ export class DataGrid extends Component {
                 Index: index,
                 Id: item.Id,
                 Type: item.Type,
+                Source: item.Source,
                 Data: Data,
                 Total: Total
             });
@@ -136,7 +137,7 @@ export class DataGrid extends Component {
         if (!!Site.asNull(item.DataFilePath)) {
             return <Cell title={LangHelper.getSingleResource("ExportToExcel")} className="center-align"><a onClick={() => this.exportExcel(item)} className="icon-excel"></a></Cell>
         }
-        return  <Cell />
+        return <Cell />
     }
 
     _renderNodata() {
@@ -149,13 +150,15 @@ export class DataGrid extends Component {
     }
 
     async exportExcelAll() {
-        const params = {...this.props.param,
-                        PageIndex : 0,
-                        PageSize : 0};
+        const params = {
+            ...this.props.param,
+            PageIndex: 0,
+            PageSize: 0
+        };
 
         this.props.toggleLoader(true);
         await service.exportAllTicketListing(params);
-        this.props.toggleLoader(false);              
+        this.props.toggleLoader(false);
     }
 
     _buildExportExcelAll() {
@@ -182,7 +185,7 @@ export class DataGrid extends Component {
 
         return (
             <div className="result-content">
-                <ReportTitle content={this.reportTitle} extendContent={this._buildExportExcelAll()}/>
+                <ReportTitle content={this.reportTitle} extendContent={this._buildExportExcelAll()} />
 
                 <Table minWidth={650}
                     autoWidth={true}

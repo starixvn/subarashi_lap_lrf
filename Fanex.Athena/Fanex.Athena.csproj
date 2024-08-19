@@ -4130,17 +4130,13 @@
       <Name>Fanex.Athena.Model.Report</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Module\Fanex.Athena.Module.Notification.Api\Fanex.Athena.Module.Notification.Api.csproj">
-      <Project>{43a8ee11-7aa4-4af2-a77f-fa4ebc32298c}</Project>
-      <Name>Fanex.Athena.Module.Notification.Api</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Module\Fanex.Athena.Module.Notification.Report\Fanex.Athena.Module.Notification.Report.csproj">
-      <Project>{eaa832b4-1501-4a05-b459-aeef528b521f}</Project>
-      <Name>Fanex.Athena.Module.Notification.Report</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Module\LicenseeContact\Fanex.Athena.Module.LicenseeContact\Fanex.Athena.Module.LicenseeContact.csproj">
       <Project>{50bb0320-2c39-47e3-bc6b-2c54834103de}</Project>
       <Name>Fanex.Athena.Module.LicenseeContact</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Module\Notification\Fanex.Athena.Module.Notification\Fanex.Athena.Module.Notification.csproj">
+      <Project>{0110a9bd-5ee9-4222-9503-58bf070c3377}</Project>
+      <Name>Fanex.Athena.Module.Notification</Name>
     </ProjectReference>
     <ProjectReference Include="..\Resources\Fanex.Athena.Resources\Fanex.Athena.Resources.csproj">
       <Project>{17b0022c-4902-4c61-908a-5db81568dc3a}</Project>

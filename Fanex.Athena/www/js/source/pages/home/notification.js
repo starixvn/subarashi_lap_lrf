@@ -3,8 +3,8 @@
 define(['common/site', 'moment', 'common/popup', 'extensions/jquery.extension'],
     function (Site, moment, Popup) {
         const NOTIFICATION_ITEM = '<li class="notification-item" id="notification-item-{0}" title="{1}">' +
-                                '<a href="javascript:void(0)">{2}</a><span class="type">{3}</span><span class="date-time">{4}</span>' +
-                                '</li>';
+            '<a href="javascript:void(0)">{2}</a><span class="type">{3}</span><span class="date-time">{4}</span>' +
+            '</li>';
         const GET_NOTIFICATION_URL = 'NotificationReport/GetNotificationMessages';
         const MARK_NOTIFICATION = 'NotificationReport/MarkNotificationAsRead';
         const POPUP_ID = 'view-notification';
@@ -40,7 +40,8 @@ define(['common/site', 'moment', 'common/popup', 'extensions/jquery.extension'],
                 onClose: function () {
                     const postData = {
                         MessageType: message.Type,
-                        MessageId: message.Id
+                        MessageId: message.Id,
+                        Source: message.Source
                     };
 
                     markMessageAsRead(postData, index);
@@ -56,10 +57,10 @@ define(['common/site', 'moment', 'common/popup', 'extensions/jquery.extension'],
                 }];
 
             const popupContent = '<div class="view-notification">'
-                                + '<p class="subject">' + Site.getSingleResource('Subject') + ': ' + message.Subject + '</p>'
-                                + '<p class="date-time">' + moment(message.DateTime).format('MM/DD/YYYY') + '</p>'
-                                + '<div class="content">' + (message.Content || '') + '</div>'
-                                + '</div>';
+                + '<p class="subject">' + Site.getSingleResource('Subject') + ': ' + message.Subject + '</p>'
+                + '<p class="date-time">' + moment(message.DateTime).format('MM/DD/YYYY') + '</p>'
+                + '<div class="content">' + (message.Content || '') + '</div>'
+                + '</div>';
 
             Popup.openPopupWithButton(popupContent, options, buttons);
         }
@@ -168,9 +169,9 @@ define(['common/site', 'moment', 'common/popup', 'extensions/jquery.extension'],
                         addNotificationItems(data);
                     },
                     statusCode: {
-                        400: function() {},
-                        403: function () {},
-                        500: function() {}
+                        400: function () { },
+                        403: function () { },
+                        500: function () { }
                     }
                 });
             };
