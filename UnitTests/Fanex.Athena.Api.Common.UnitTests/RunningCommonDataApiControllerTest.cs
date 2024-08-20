@@ -6,6 +6,7 @@
     using Fanex.Athena.Api.Base;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Common.Interfaces;
     using Fanex.Athena.Service.Core.Users.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
@@ -88,8 +89,8 @@
                 };
                 var expectedRunningLeagues = new List<dynamic>
                 {
-                    new {Id = 1, Value = "league a", Status = true},
-                    new {Id = 2, Value = "league b", Status = true}
+                    new {Id = 1, Value = "league a", IsOutRight = false, Status = true},
+                    new {Id = 2, Value = "league b", IsOutRight = true, Status = true}
                 };
 
                 _portalApiService.GetSpecialLeaguesAsync(_sessionService.LicenseeSession.LicenseeName).Returns(specialLeaguesIds);
@@ -98,21 +99,18 @@
                 _cacheRefAdapter.GetLeagueName(2).Returns("league b");
 
                 // action
-                var result = await controller.GetRunningLeagueList(sportId).ConfigureAwait(false); ;
+                var result = await controller.GetRunningLeagueList(sportId).ConfigureAwait(false);
 
-                // assert
-                Assert.Multiple(() =>
+                int index = 0;
+                foreach (var resultLeague in result)
                 {
-                    for (int i = 0; i < expectedRunningLeagues.Count; i++)
-                    {
-                        var resultLeague = result.ElementAt(i);
-                        var expectedLeague = expectedRunningLeagues.ElementAt(i);
-
-                        Assert.That(resultLeague.GetType().GetProperty("Id").GetValue(resultLeague, null), Is.EqualTo(expectedLeague.Id));
-                        Assert.That(resultLeague.GetType().GetProperty("Value").GetValue(resultLeague, null), Is.EqualTo(expectedLeague.Value));
-                        Assert.That(resultLeague.GetType().GetProperty("Status").GetValue(resultLeague, null), Is.EqualTo(expectedLeague.Status));
-                    }
-                });
+                    var expectedLeague = expectedRunningLeagues.ElementAt(index);
+                    Assert.That(resultLeague.GetType().GetProperty("Id").GetValue(resultLeague, null), Is.EqualTo(expectedLeague.Id));
+                    Assert.That(resultLeague.GetType().GetProperty("Value").GetValue(resultLeague, null), Is.EqualTo(expectedLeague.Value));
+                    Assert.That(resultLeague.GetType().GetProperty("IsOutRight").GetValue(resultLeague, null), Is.EqualTo(expectedLeague.IsOutRight));
+                    Assert.That(resultLeague.GetType().GetProperty("Status").GetValue(resultLeague, null), Is.EqualTo(expectedLeague.Status));
+                    index++;
+                }
             }
         }
     }

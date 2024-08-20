@@ -175,7 +175,8 @@
 
                 _productService.GetSingleWalletProductAccess(
                     DefaultLicenseeSession.LicenseeId,
-                    DefaultUserSession.Language).Returns(offerProducts);
+                    DefaultUserSession.Language,
+                    FunctionNames.BettingTicketCenter).Returns(offerProducts);
 
                 var expectedProductsNote = string.Format(
                     ViewResources.BettingTicketCenter_RefnoTabNote2,
@@ -353,7 +354,9 @@
                 string.IsNullOrEmpty(x) ||
                 x == FunctionNames.BettingTicketCenterAdvancedSearch ||
                 x == FunctionNames.BettingTicketCenterRunning ||
+                x == FunctionNames.BettingTicketCenterSingleCustomer ||
                 x == FunctionNames.BettingTicketCenter)).Returns(new ProductAccess(productCodes));
+            _productService.IsOfferCashOutProduct(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language).Returns(false);
 
             return productCodes;
         }
