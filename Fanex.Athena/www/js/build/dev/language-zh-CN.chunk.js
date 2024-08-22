@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/12/2024 3:47:58 PM
+﻿// Generated at: 8/21/2024 10:19:07 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -788,6 +788,7 @@ ProductKN:"快乐彩",
 ProductLG:"虚拟运动3",
 ProductLT:"彩票",
 ProductNG:"百练赛",
+ProductNS:"虎游",
 ProductParlay:"体育串关",
 ProductPP:"PP王者电子",
 ProductSAG:"SA真人娱乐场",

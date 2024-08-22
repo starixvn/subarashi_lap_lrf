@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/12/2024 3:47:58 PM
+﻿// Generated at: 8/21/2024 10:19:07 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -866,6 +866,7 @@ ProductLT:"Lottery",
 ProductMGRNG:"MG-RNG",
 ProductMXG:"MaxGame",
 ProductNG:"Number Game",
+ProductNS:"Nextspin",
 ProductParlay:"Sportsbook Parlay",
 ProductPGS:"PG Soft",
 ProductPP:"PP",
