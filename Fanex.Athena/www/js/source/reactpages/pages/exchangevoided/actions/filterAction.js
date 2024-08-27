@@ -6,3 +6,10 @@ export const setSelectedTimeZone = (value) => {
         data: value
     }
 }
+
+export const setSelectedExchangeMode = (value) =>{
+    return{
+        type: types.EXCHANGE_MODE,
+        data: value
+    }
+}

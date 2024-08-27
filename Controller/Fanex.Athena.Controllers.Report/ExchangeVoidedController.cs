@@ -9,6 +9,7 @@ using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
+using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Report.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.Web.ActionFilter;
@@ -23,15 +24,18 @@ namespace Fanex.Athena.Controllers.Report
         private readonly IAuthorizationService _authService;
 
         private readonly IExchangeVoidedService _exchangeService;
+        private readonly ICurrencyService _currencyService;
 
         public ExchangeVoidedController(
                   IAppSettings appSetting,
                   IAuthorizationService authService,
-                  IExchangeVoidedService exchangeService)
+                  IExchangeVoidedService exchangeService,
+                  ICurrencyService currencyService)
         {
             _appSetting = appSetting;
             _authService = authService;
             _exchangeService = exchangeService;
+            _currencyService = currencyService;
         }
 
         [HttpGet]
@@ -40,6 +44,9 @@ namespace Fanex.Athena.Controllers.Report
             var tabList = GetEnableTabList();
             var hasPermission = HasPermission(tabList.Any());
             ViewBag.TabList = tabList;
+            ViewBag.CurrencyList = SessionServiceInstance.UserSession.CurrencyList.OrderBy(_ => _.Value);
+            ViewBag.BaseCurrencyList = _currencyService.GetBaseCurrencyList(true);
+            ViewBag.SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
 
             return View("~/Views/Desktop/Report/ExchangeVoided/Index.cshtml", model: hasPermission);
         }
