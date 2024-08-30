@@ -331,6 +331,8 @@
 
         PromotionCashPrize = 17010,
 
-        FastSpinPromotion = 11295
+        FastSpinPromotion = 11295,
+
+        FACHAIPromotion = 11399
     }
 }
