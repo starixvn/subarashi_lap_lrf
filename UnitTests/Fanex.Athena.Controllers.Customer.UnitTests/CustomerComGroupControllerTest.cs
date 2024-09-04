@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Base.UnitTests;
     using Customer;
+    using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
     using Model.Customer.MetaModel;
@@ -19,6 +20,7 @@
         private IGroupComService _groupComService;
         private IProductService _productService;
         private IFunctionUMService _functionUMService;
+        private ICustomMemoryCacheService _cacheService;
 
         [SetUp]
         public override void FixtureSetUp()
@@ -28,6 +30,7 @@
             _groupComService = Substitute.For<IGroupComService>();
             _productService = Substitute.For<IProductService>();
             _functionUMService = Substitute.For<IFunctionUMService>();
+            _cacheService = Substitute.For<ICustomMemoryCacheService>();
         }
 
         [TearDown]
@@ -100,7 +103,8 @@
             var controller = Substitute.ForPartsOf<CustomerComGroupController>(
                _groupComService,
                _productService,
-               _functionUMService);
+               _functionUMService,
+               _cacheService);
 
             controller.LangService = LangService;
             controller.SessionServiceInstance = SessionService;

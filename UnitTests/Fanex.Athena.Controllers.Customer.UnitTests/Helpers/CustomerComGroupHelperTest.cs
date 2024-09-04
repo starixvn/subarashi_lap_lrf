@@ -2,6 +2,7 @@
 using Fanex.Athena.Model.Customer.MetaModel;
 
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Fanex.Athena.Controllers.Customer.UnitTests.Helpers
 {
@@ -38,12 +39,26 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests.Helpers
             // Arrange
             var currentGroup = new GroupCommMetaModel
             {
-                SBComm = 1
+                GroupColor = "sdf",
+                GroupCommId = 99,
+                GroupName = "sd;ljsdf",
+                IsDefaultGroup = true,
+                CommValues = new List<GroupCommSettingMetaModel>
+                {
+                    new GroupCommSettingMetaModel()
+                }
             };
 
             var editedGroup = new GroupCommMetaModel
             {
-                SBComm = 2
+                GroupColor = "sdf",
+                GroupCommId = 100,
+                GroupName = "sd;ljsdf2",
+                IsDefaultGroup = true,
+                CommValues = new List<GroupCommSettingMetaModel>
+                {
+                    new GroupCommSettingMetaModel()
+                }
             };
 
             // Action
@@ -67,18 +82,68 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests.Helpers
             Assert.That(result, Is.True);
         }
 
+        [TestCase(-1)]
+        [TestCase(0.16)]
+        public void IsValidCommissions_InvalidCommValue_ReturnFalse(decimal discount)
+        {
+            var editGroup = new GroupCommMetaModel
+            {
+                GroupName = "Test",
+                CommValues = new List<GroupCommSettingMetaModel>
+                {
+                    new GroupCommSettingMetaModel
+                    {
+                        Discount = discount,
+                        Sporttype = 1,
+                        ProductCode = "SB"
+                    }
+                }
+            };
+
+            // Action
+            var result = CustomerComGroupHelper.IsValidCommissions(editGroup);
+
+            // Assert
+            Assert.That(result, Is.False);
+        }
+
+        [TestCase(0)]
+        [TestCase(0.15)]
+        public void IsValidCommissions_ValidCommValue_ReturnTrue(decimal discount)
+        {
+            var editGroup = new GroupCommMetaModel
+            {
+                GroupName = "Test",
+                CommValues = new List<GroupCommSettingMetaModel>
+                {
+                    new GroupCommSettingMetaModel
+                    {
+                        Discount = discount,
+                        Sporttype = 1,
+                        ProductCode = "SB"
+                    }
+                }
+            };
+
+            // Action
+            var result = CustomerComGroupHelper.IsValidCommissions(editGroup);
+
+            // Assert
+            Assert.That(result, Is.True);
+        }
+
         private static GroupCommMetaModel CreateSampleGroupComm()
         {
             return new GroupCommMetaModel
             {
-                SBComm = 1,
-                ParlayComm = 2,
-                NGComm = 3,
-                CSComm = 4,
                 GroupColor = "sdf",
                 GroupCommId = 99,
                 GroupName = "sd;ljsdf",
-                IsDefaultGroup = true
+                IsDefaultGroup = true,
+                CommValues = new List<GroupCommSettingMetaModel>
+                {
+                    new GroupCommSettingMetaModel()
+                }
             };
         }
     }

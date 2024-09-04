@@ -1,5 +1,8 @@
 ﻿define(['jquery', 'common/site', 'common/popup', './commgroup', 'lib/numberformat',
-    'lib/jquery.multiselect.nlevel', 'lib/bootstrap-table/bootstrap-table', 'lib/bootstrap-table/bootstrap-table-fixed-columns'],
+    'lib/jquery.multiselect.nlevel',
+    'lib/bootstrap-table/bootstrap-table',
+    'lib/bootstrap-table/bootstrap-table-sticky-header',
+    'lib/bootstrap-table/bootstrap-table-fixed-columns'],
     function ($, Site, Popup, CustomerCommGroup, NumberFormatter) {
         'use strict';
 
@@ -229,7 +232,7 @@
         function initTableComm() {
             freezeTableCommColumns();
 
-            $('#comm-group-list .delete-comm-group').on('click', function (e) {
+            $('.delete-comm-group').on('click', function (e) {
                 _me.confirmDeleteCommGroup($(e.target).data('id'));
             });
         }
@@ -336,7 +339,7 @@
                 let commValues = item.CommValues;
                 for (var j = 0; j < products.length; j++) {
                     var key = products[j];
-                    row['Col-' + key] = commValues[key];
+                    row['Col-' + key] = !commValues[j] ? 0 : commValues[j].Discount;
                 }
 
                 rows.push(row);
@@ -345,6 +348,7 @@
             let gridOptions = {
                 columns: columns,
                 data: rows,
+                stickyHeader: true,
                 fixedColumns: true,
                 fixedNumber: 5,
                 fixedRightNumber: 2,

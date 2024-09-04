@@ -5,14 +5,14 @@ namespace Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList
 {
     public class CommissionGroupListViewModel
     {
-        public CommissionGroupListViewModel(IList<GroupCommMetaModel> groups, IDictionary<string, bool> productPermissions)
+        public CommissionGroupListViewModel(IList<GroupCommMetaModel> groups, IEnumerable<string> productList)
         {
             Groups = groups;
-            ProductPermissions = productPermissions;
+            ProductList = productList;
         }
 
         public IList<GroupCommMetaModel> Groups { get; set; }
 
-        public IDictionary<string, bool> ProductPermissions { get; }
+        public IEnumerable<string> ProductList { get; set; }
     }
 }

@@ -1,5 +1,19 @@
 ﻿@import "../common/reportcommon.main";
 
+.wrapper {
+    overflow-y: unset !important;
+
+    .fixed-columns-right {
+        .sticky-header-container.fixed-table-container {
+            right: 1.5rem !important;
+        }
+    }
+}
+
+.flat-popup {
+    position: fixed !important;
+}
+
 .table > thead > tr > th {
     background: $bgHeaderTableLevel1;
     color: $white;
@@ -84,7 +98,6 @@ div {
     }
 }
 
-
 @media only screen and (min-width: 993px) {
     .no-customer-border {
         width: 70%;
@@ -104,10 +117,6 @@ div {
 .table > tbody tr td.col-frozen {
     background-color: #dfe1df;
     border-color: #ffffff;
-}
-
-.fixed-table-container {
-    min-width: 1100px;
 }
 
 .input-field {

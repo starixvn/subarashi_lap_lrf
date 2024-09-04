@@ -97,6 +97,17 @@
 
 /***/ }),
 
+/***/ "./www/css/source/components/bootstrap-table/bootstrap-table-sticky-header.scss":
+/*!**************************************************************************************!*\
+  !*** ./www/css/source/components/bootstrap-table/bootstrap-table-sticky-header.scss ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "./www/css/source/components/bootstrap-table/bootstrap-table.scss":
 /*!************************************************************************!*\
   !*** ./www/css/source/components/bootstrap-table/bootstrap-table.scss ***!
@@ -109,13 +120,14 @@
 /***/ }),
 
 /***/ 82:
-/*!*************************************************************************************************************************************************************!*\
-  !*** multi ./www/css/source/components/bootstrap-table/bootstrap-table.scss ./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss ***!
-  \*************************************************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./www/css/source/components/bootstrap-table/bootstrap-table.scss ./www/css/source/components/bootstrap-table/bootstrap-table-sticky-header.scss ./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./www/css/source/components/bootstrap-table/bootstrap-table.scss */"./www/css/source/components/bootstrap-table/bootstrap-table.scss");
+__webpack_require__(/*! ./www/css/source/components/bootstrap-table/bootstrap-table-sticky-header.scss */"./www/css/source/components/bootstrap-table/bootstrap-table-sticky-header.scss");
 module.exports = __webpack_require__(/*! ./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss */"./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss");
 
 

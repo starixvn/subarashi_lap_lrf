@@ -8,15 +8,15 @@
 
     public interface IGroupComDataAccess
     {
-        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions);
+        Task<IEnumerable<GroupCommSettingMetaModel>> GetAllCommSettingAsync();
 
-        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId, IDictionary<string, bool> permissions);
+        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId);
 
-        IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
+        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, int userId);
 
-        Task<DataTable> GetDataForExcelAsync(int licenseeId);
+        Task<(IList<GroupCommMetaModel>, IList<GroupCommSettingMetaModel>)> GetAllAsync(int licenseeId);
 
-        GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions);
+        Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId);
 
         bool CheckByName(int licenseeId, string groupName);
 

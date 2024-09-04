@@ -8,9 +8,8 @@ namespace Fanex.Athena.Excel.Customer.UnitTests.TestableClasses
     {
         public CustomerCommGroupExcelTestable(
             string templatePath,
-            DataTable exportData,
             CommissionGroupListViewModel viewModel)
-            : base(templatePath, exportData, viewModel)
+            : base(templatePath, viewModel)
         {
         }
 

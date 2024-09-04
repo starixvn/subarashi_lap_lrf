@@ -45,6 +45,22 @@ namespace Fanex.Athena.Api.CustomerLog
             return result.ToArray();
         }
 
+        public static string[] LicenseeGroupDiscountLogAttributes()
+        {
+            var result = new List<string>
+            {
+                "GroupDiscountID",
+                "GroupName",
+                "GroupColor",
+                "IsDefault",
+                "Closed",
+                "Suspended",
+                "SpecialLevel"
+            };
+
+            return result.ToArray();
+        }
+
         public static Dictionary<string, string> GetGroupCommissionLogResources(IDictionary<string, bool> productPermissions)
         {
             var resource = new Dictionary<string, string>
@@ -61,6 +77,27 @@ namespace Fanex.Athena.Api.CustomerLog
             foreach (var p in productPermissions)
             {
                 resource.Add(p.Key + "Comm", ViewResources.ResourceManager.GetString("Product" + p.Key));
+            }
+
+            return resource;
+        }
+
+        public static Dictionary<string, string> GetGroupCommissionLogResources(IEnumerable<string> productCode)
+        {
+            var resource = new Dictionary<string, string>
+            {
+                ["GroupId"] = ViewResources.GroupId,
+                ["GroupName"] = ViewResources.GroupName,
+                ["GroupColor"] = ViewResources.GroupColor,
+                ["DefaultGroup"] = ViewResources.DefaultGroup,
+                ["Yes"] = ViewResources.Yes,
+                ["No"] = ViewResources.No,
+                ["OldColor"] = ViewResources.OldColor
+            };
+
+            foreach (var p in productCode)
+            {
+                resource.Add(p, ViewResources.ResourceManager.GetString("Product" + p));
             }
 
             return resource;

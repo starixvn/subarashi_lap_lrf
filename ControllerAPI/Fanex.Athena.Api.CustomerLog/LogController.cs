@@ -1,11 +1,7 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LogController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
-namespace Fanex.Athena.Api.CustomerLog
+﻿namespace Fanex.Athena.Api.CustomerLog
 {
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -20,8 +16,11 @@ namespace Fanex.Athena.Api.CustomerLog
     using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.DTO.CustomerLog;
+    using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
+    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using RazorEngine;
     using RazorEngine.Templating;
@@ -34,53 +33,51 @@ namespace Fanex.Athena.Api.CustomerLog
     public partial class LogController : BaseApiController
     {
         private static readonly int[] ActionIdListForBA = new[] { 2401, 2403, 2801 };
+        private static readonly int[] LicenseeGroupDiscountActionIds = new[] { 2615, 2616, 2617 };
+
+        private static readonly Dictionary<int[], string> ActionIdMapper = new Dictionary<int[], string>
+        {
+            { LicenseeGroupDiscountActionIds, "LicenseeGroupComm" }
+        };
 
         private readonly ICustomerLogDataAccess _customerLogDataAccess;
 
         private readonly ILogInLogDataAccess _logInLogDataAccess;
 
-        private readonly IAppSettings _appSettings;
-
         private readonly IFileSystem _fileSystem;
         private readonly IProductService _productService;
+        private readonly IGroupComService _groupComService;
+        private readonly ICustomMemoryCacheService _cacheService;
 
         public LogController(
             ILanguageService languageService,
             ICustomerLogDataAccess customerLogDataAccess,
             ILogInLogDataAccess logInLogDataAccess,
-            IAppSettings appSettings,
             IFileSystem fileSystem,
-            IProductService productService)
+            IProductService productService,
+            IGroupComService groupComService,
+            ICustomMemoryCacheService cacheService)
             : base(languageService)
         {
             _customerLogDataAccess = customerLogDataAccess;
             _logInLogDataAccess = logInLogDataAccess;
-            _appSettings = appSettings;
             _fileSystem = fileSystem;
             _productService = productService;
+            _groupComService = groupComService;
+            _cacheService = cacheService;
         }
 
         #region Remove HTML tag
 
-        /// <summary>
-        /// Remove HTML tag inside tracking value.
-        /// </summary>
-        /// <param name="source">Tracking Value.</param>
-        /// <returns>Tracking Value has been removed HTML Tag.</returns>
         private static string RemoveHtmlTags(string source)
         {
             var regex = new Regex("[/<>]");
             return regex.Replace(source, string.Empty);
         }
 
-        /// <summary>
-        /// Remove HTML Tag.
-        /// </summary>
-        /// <param name="datalist">A list of Customer Log.</param>
-        /// <returns>A list of customer log has been removed HTML tag.</returns>
         private static IList<CustomerLog> RemoveHtmlTag(IList<CustomerLog> datalist)
         {
-            foreach (var item in datalist)
+            foreach (var item in datalist.Where(_ => !LicenseeGroupDiscountActionIds.Contains(_.ActionId)))
             {
                 var trackingCharCount = item.TrackingValue.Length;
                 var trackingOldCharCount = item.TrackingValueOld.Length;
@@ -104,7 +101,7 @@ namespace Fanex.Athena.Api.CustomerLog
 
         #region Get XML attribute
 
-        private static IDictionary<string, string> GetXmlAttr(string trackingValue, string trackingValueOld, string[] actionTypes)
+        private static IDictionary<string, string> GetXmlAttr(string trackingValue, string trackingValueOld, string[] actionTypes, IEnumerable<GroupCommSettingMetaModel> commSettings = null)
         {
             var dictonary = new Dictionary<string, string>();
 
@@ -122,13 +119,44 @@ namespace Fanex.Athena.Api.CustomerLog
 
             var root = doc.DocumentElement;
             var rootOld = docOld.DocumentElement;
+
             foreach (var attr in actionTypes)
             {
                 dictonary.Add(attr, GetAttributeValue(root, attr));
                 dictonary.Add(attr + "Old", GetAttributeValue(rootOld, attr));
             }
 
+            if (commSettings != null && commSettings.Any())
+            {
+                ReadCommValuesElement(root, rootOld, dictonary, commSettings);
+            }
+
             return dictonary;
+        }
+
+        private static void ReadCommValuesElement(XmlElement root, XmlElement rootOld, Dictionary<string, string> dictionary, IEnumerable<GroupCommSettingMetaModel> commSettings)
+        {
+            var rootCommElements = root.GetElementsByTagName("r");
+            var rootOldCommNElements = rootOld.GetElementsByTagName("r");
+
+            GetCommValuesXmlAttr(dictionary, rootCommElements, commSettings);
+            GetCommValuesXmlAttr(dictionary, rootOldCommNElements, commSettings, "Old");
+        }
+
+        private static void GetCommValuesXmlAttr(Dictionary<string, string> dictionary, XmlNodeList elements, IEnumerable<GroupCommSettingMetaModel> commSettings, string suffix = "")
+        {
+            foreach (XmlNode element in elements)
+            {
+                var sportType = Convert.ToInt32(element.Attributes["SportType"]?.Value);
+                var betType = Convert.ToInt32(element.Attributes["BetType"]?.Value);
+                var discount = element.Attributes["Discount"]?.Value;
+                var key = commSettings.FirstOrDefault(_ => _.Sporttype == sportType && _.Bettype == betType)?.ProductCode + suffix;
+
+                if (!string.IsNullOrEmpty(key) && !dictionary.ContainsKey(key))
+                {
+                    dictionary.Add(key, discount);
+                }
+            }
         }
 
         private static string GetAttributeValue(XmlElement root, string attribute)
@@ -142,16 +170,28 @@ namespace Fanex.Athena.Api.CustomerLog
 
         private string GenerateDetailedValue(int actionId, ActionViewModel viewModel)
         {
-            var viewPath = $"~/Views/Desktop/Customer/CustomerLog/Action/{actionId}.cshtml";
+            var viewPath = $"~/Views/Desktop/Customer/CustomerLog/Action/{GetActionIdMappedValue(actionId)}.cshtml";
 
             var templatePath = HostingEnvironment.MapPath(viewPath);
             var template = _fileSystem.ReadFile(templatePath);
             return Engine.Razor.RunCompile(template, viewPath, model: viewModel);
         }
 
+        public static string GetActionIdMappedValue(int actionId)
+        {
+            foreach (var key in ActionIdMapper.Keys)
+            {
+                if (key.Contains(actionId))
+                {
+                    return ActionIdMapper[key];
+                }
+            }
+            return actionId.ToString();
+        }
+
         #region Get detail data
 
-        private IList<CustomerLog> GetDetails(IList<CustomerLog> dataList, string[] actionTypes = null)
+        private IList<CustomerLog> GetDetails(IList<CustomerLog> dataList, IEnumerable<GroupCommSettingMetaModel> commSettings = null)
         {
             var resourcesMap = new Dictionary<string, string>
             {
@@ -166,7 +206,8 @@ namespace Fanex.Athena.Api.CustomerLog
                 { "CSComm", ViewResources.CSComm },
                 { "Yes", ViewResources.Yes },
                 { "No", ViewResources.No },
-                { "OldColor", ViewResources.OldColor }
+                { "OldColor", ViewResources.OldColor },
+                { "Comm", ViewResources.Comm }
             };
 
             foreach (var item in dataList)
@@ -176,9 +217,21 @@ namespace Fanex.Athena.Api.CustomerLog
                 {
                     item.Details = string.Empty;
                 }
+                else if (LicenseeGroupDiscountActionIds.Contains(item.ActionId))
+                {
+                    var dictionary = GetXmlAttr(item.TrackingValue, item.TrackingValueOld, LogHelper.LicenseeGroupDiscountLogAttributes(), commSettings);
+                    var action = new ActionViewModel
+                    {
+                        Data = dictionary,
+                        Resource = resourcesMap,
+                        ProductList = GetProductCodeList(commSettings)
+                    };
+
+                    item.Details = GenerateDetailedValue(item.ActionId, action);
+                }
                 else
                 {
-                    var dictionary = GetXmlAttr(item.TrackingValue, item.TrackingValueOld, actionTypes);
+                    var dictionary = GetXmlAttr(item.TrackingValue, item.TrackingValueOld, LogHelper.GroupLogAttributes());
                     var action = new ActionViewModel
                     {
                         Data = dictionary,
@@ -190,6 +243,16 @@ namespace Fanex.Athena.Api.CustomerLog
             }
 
             return dataList;
+        }
+
+        private static IEnumerable<string> GetProductCodeList(IEnumerable<GroupCommSettingMetaModel> commSettings)
+        {
+            if (commSettings != null && commSettings.Any())
+            {
+                return commSettings.Select(_ => _.ProductCode).Distinct().OrderBy(_ => CommissionGroupHelper.ProductListComparer(_)).ThenBy(_ => _);
+            }
+
+            return new List<string>();
         }
 
         #endregion Get detail data

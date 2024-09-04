@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IGroupComService.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.Customer.Interfaces
+﻿namespace Fanex.Athena.Service.Customer.Interfaces
 {
     using System.Collections.Generic;
     using System.Data;
@@ -16,15 +10,15 @@ namespace Fanex.Athena.Service.Customer.Interfaces
 
     public interface IGroupComService
     {
-        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions);
+        Task<IEnumerable<GroupCommSettingMetaModel>> InitCommValues(ProductAccess productAccess);
 
-        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions);
+        Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId);
 
-        IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions);
+        Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user);
 
-        Task<DataTable> GetDataForExcelAsync(int licenseeId);
+        Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId);
 
-        GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions);
+        Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId);
 
         bool CheckExistingGroupByName(int licenseeId, string groupName);
 

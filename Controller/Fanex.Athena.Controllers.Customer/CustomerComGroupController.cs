@@ -1,7 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers.Customer
 {
     using System;
-    using System.Data;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -9,10 +9,11 @@
     using System.Web.Mvc;
     using System.Web.SessionState;
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Core.Enum;
-    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
     using Fanex.Athena.Service.Customer.Interfaces;
@@ -35,31 +36,29 @@
         private readonly IGroupComService _groupComService;
         private readonly IProductService _productService;
         private readonly IFunctionUMService _functionUMService;
-        private readonly string[] supportedProducts;
+        private readonly ICustomMemoryCacheService _cacheService;
 
         public CustomerComGroupController(
             IGroupComService groupComService,
             IProductService productService,
-            IFunctionUMService functionUMService)
+            IFunctionUMService functionUMService,
+            ICustomMemoryCacheService cacheService)
         {
             _groupComService = groupComService;
             _productService = productService;
             _functionUMService = functionUMService;
-
-            supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
+            _cacheService = cacheService;
         }
 
         #region Get data
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
-            var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-            var model = new CommissionGroupListViewModel(
-                groups: _groupComService.GetAllAsync(licenseeId, permissions),
-                productPermissions: permissions);
+            var (groups, productList) = await _groupComService.GetAllAsync(licenseeId).ConfigureAwait(false);
+
+            var model = new CommissionGroupListViewModel(groups, productList);
 
             return View("~/Views/Desktop/Customer/CustomerComm/GroupCommList.cshtml", model);
         }
@@ -69,11 +68,26 @@
         #region Create group
 
         [HttpGet]
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            var model = new GroupCommMetaModel();
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
-            CreateMetaModel(model);
+            var cacheKey = $"{CacheKey.MemorycacheCommSettingsByLicensee}_{licenseeId}";
+            var commSettings = _cacheService.Get<IEnumerable<GroupCommSettingMetaModel>>(cacheKey);
+
+            if (commSettings == null)
+            {
+                var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
+                commSettings = await _groupComService.InitCommValues(productAccess);
+                _cacheService.Set(cacheKey, commSettings);
+            }
+
+            var model = new GroupCommMetaModel
+            {
+                CommValues = commSettings
+            };
+
+            await CreateMetaModel(model);
 
             return View("~/Views/Desktop/Customer/CustomerComm/CreateNewGroup.cshtml", model);
         }
@@ -84,9 +98,6 @@
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             metaModel.LicenseeId = licenseeSession.LicenseeId;
-
-            var productAccess = _productService.GetProductAccess(metaModel.LicenseeId, SessionServiceInstance.UserSession.Language);
-            metaModel.ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
 
             var userSession = SessionServiceInstance.UserSession;
             IResultInfo result = new ResultInfo();
@@ -100,7 +111,7 @@
                     Ip = Request.UserHostAddress
                 };
 
-                result = await _groupComService.InsertGroupAsync(metaModel, request, userSession.UserId, metaModel.ProductPermissions);
+                result = await _groupComService.InsertGroupAsync(metaModel, request, userSession.UserId);
                 result.Message = CustomerComGroupHelper.GetCreateGroupErrorMessage(result.Code);
 
                 if (result.IsSuccessful)
@@ -127,18 +138,16 @@
         #region Update group
 
         [HttpGet]
-        public ActionResult Update(int groupId)
+        public async Task<ActionResult> Update(int groupId)
         {
-            var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
-            var productPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
+            var model = await _groupComService.GetById(groupId, SessionServiceInstance.LicenseeSession.LicenseeId);
 
-            var model = _groupComService.GetById(groupId, SessionServiceInstance.LicenseeSession.LicenseeId, productPermissions);
             if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
 
-            CreateMetaModel(model);
+            await CreateMetaModel(model);
 
             return View("~/Views/Desktop/Customer/CustomerComm/UpdateGroup.cshtml", model);
         }
@@ -147,10 +156,6 @@
         [CustomValidateAntiForgery]
         public async Task<ActionResult> Update(GroupCommMetaModel metaModel)
         {
-            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
-            metaModel.ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-
             IResultInfo result = new ResultInfo();
             metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
 
@@ -205,11 +210,10 @@
         #region Group Comm API
 
         [HttpGet]
-        public JsonResult GetDefaultGroup()
+        public async Task<JsonResult> GetDefaultGroup()
         {
             var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
-            var productPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-            var groupList = _groupComService.GetAllAsync(SessionServiceInstance.LicenseeSession.LicenseeId, productPermissions);
+            var (groupList, _) = await _groupComService.GetAllAsync(SessionServiceInstance.LicenseeSession.LicenseeId).ConfigureAwait(false);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             return Json(new { id = defaultGroupId }, JsonRequestBehavior.AllowGet);
@@ -227,11 +231,11 @@
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/CustomerGroup/CustomerCommGroup.xls");
 
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
-            var mainTable = await _groupComService.GetDataForExcelAsync(licenseeId);
-            var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
-            var viewModel = new CommissionGroupListViewModel(null, permissions);
-            var excel = CreateExcel(templatePath, mainTable, viewModel);
+            var (groups, productList) = await _groupComService.GetAllAsync(licenseeId).ConfigureAwait(false);
+
+            var model = new CommissionGroupListViewModel(groups, productList);
+
+            var excel = CreateExcel(templatePath, model);
 
             excel.Export();
 
@@ -239,9 +243,9 @@
         }
 
         protected internal virtual CustomerCommGroupExcel CreateExcel(
-            string templatePath, DataTable mainTable, CommissionGroupListViewModel viewModel)
+            string templatePath, CommissionGroupListViewModel viewModel)
         {
-            return new CustomerCommGroupExcel(templatePath, mainTable, viewModel);
+            return new CustomerCommGroupExcel(templatePath, viewModel);
         }
 
         #endregion Export Excel
@@ -269,13 +273,12 @@
             }
         }
 
-        private void CreateMetaModel(GroupCommMetaModel metaModel)
+        private async Task CreateMetaModel(GroupCommMetaModel metaModel)
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
-            metaModel.ProductPermissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
 
-            var groupList = _groupComService.GetAllAsync(licenseeId, metaModel.ProductPermissions);
+            var (groupList, _) = await _groupComService.GetAllAsync(licenseeId).ConfigureAwait(false);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             metaModel.LicenseeId = licenseeId;
@@ -287,7 +290,7 @@
         {
             var userSession = SessionServiceInstance.UserSession;
 
-            var currentGroup = _groupComService.GetById(metaModel.GroupCommId, metaModel.LicenseeId, metaModel.ProductPermissions);
+            var currentGroup = await _groupComService.GetById(metaModel.GroupCommId, metaModel.LicenseeId).ConfigureAwait(false);
             if (currentGroup == null || CustomerComGroupHelper.IsSameGroup(currentGroup, metaModel))
             {
                 return new ResultInfo
@@ -302,7 +305,8 @@
                 Ip = Request.UserHostAddress
             };
 
-            var result = await _groupComService.UpdateGroupAsync(metaModel, request, userSession, metaModel.ProductPermissions);
+            var result = await _groupComService.UpdateGroupAsync(metaModel, request, userSession).ConfigureAwait(false);
+
             if (string.IsNullOrWhiteSpace(result.Message))
             {
                 result.Message = CustomerComGroupHelper.GetUpdateGroupErrorMessage(result.Code);

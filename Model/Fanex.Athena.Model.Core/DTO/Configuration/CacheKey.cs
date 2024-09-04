@@ -34,5 +34,7 @@ namespace Fanex.Athena.Model.Core.DTO.Configuration
         public static readonly string MemorycacheBetTypeForTreeView = "MemoryCache_Bettype_TreeView";
 
         public static readonly string MemorycacheBaseCurrencyListByLicensee = "MemoryCache_BaseCurrencyList_{0}_{1}_{2}_{3}";
+
+        public static readonly string MemorycacheCommSettingsByLicensee = "MemoryCache_CommSettings";
     }
 }

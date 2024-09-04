@@ -26,7 +26,7 @@ namespace Fanex.Athena.Controllers.Customer.Helpers
 
         public static bool IsValidCommissions(GroupCommMetaModel metaModel)
         {
-            var comms = metaModel.CommValues.Select(p => p.Value).ToArray();
+            var comms = metaModel.CommValues.Select(p => p.Discount).ToArray();
             return GroupCommHelper.IsAllValid(comms);
         }
 
@@ -64,7 +64,7 @@ namespace Fanex.Athena.Controllers.Customer.Helpers
 
             foreach (var c in currentComm)
             {
-                if (!editedComm.ContainsKey(c.Key) || c.Value != editedComm[c.Key])
+                if (!editedComm.Any(_ => _.ProductCode == c.ProductCode) || c.Discount != editedComm.FirstOrDefault(_ => _.ProductCode == c.ProductCode).Discount)
                 {
                     return false;
                 }

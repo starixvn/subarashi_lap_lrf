@@ -141,27 +141,29 @@ namespace Fanex.Athena.Excel.Customer.UnitTests
 
         private static CustomerCommGroupExcelTestable CreateExcel(ShowingOption showingOption = null)
         {
-            var table = CreateDataTable();
+            var group = new GroupCommMetaModel
+            {
+                GroupCommId = 1,
+                GroupName = "GroupA",
+                IsDefaultGroup = true,
+                NumberOfCustomer = 100,
+                CommValues = new List<GroupCommSettingMetaModel>
+                {
+                    new GroupCommSettingMetaModel
+                    {
+                        Discount = 1,
+                        Bettype = 1,
+                        ProductCode = "SB",
+                        Sporttype = 1
+                    }
+                }
+            };
+
             var excel = Substitute.ForPartsOf<CustomerCommGroupExcelTestable>(
                 string.Empty,
-                table,
-                new CommissionGroupListViewModel(new List<GroupCommMetaModel>(), new Dictionary<string, bool>()));
+                new CommissionGroupListViewModel(new List<GroupCommMetaModel> { group }, new List<string>()));
             excel.TemplateSheet.Returns(Substitute.For<ISheet>());
             return excel;
-        }
-
-        private static DataTable CreateDataTable()
-        {
-            var table = new DataTable();
-            table.Columns.Add("IsDefault", typeof(bool));
-            table.Columns.Add("SBComm", typeof(decimal));
-            table.Columns.Add("NGComm", typeof(decimal));
-            table.Columns.Add("RNGComm", typeof(decimal));
-
-            table.Columns.Add("GroupName", typeof(string));
-            table.Columns.Add("NumberOfCustomer", typeof(int));
-            table.Rows.Add(true, 1, 2, 3, "GroupA", 100);
-            return table;
         }
     }
 }

@@ -51,7 +51,7 @@ var cssPaths = {
     customerClass: ["./www/css/source/pages/customer/customer-class.scss"],
     risklevel: ["./www/css/source/pages/customer/risklevel.scss"],
     sabavirtualsettinginformation: ["./www/css/source/pages/customer/sabavirtualsettinginformation.scss"],
-    fixedColumnsTable: ["./www/css/source/components/bootstrap-table/bootstrap-table.scss", "./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss"]
+    fixedColumnsTable: ["./www/css/source/components/bootstrap-table/bootstrap-table.scss", "./www/css/source/components/bootstrap-table/bootstrap-table-sticky-header.scss", "./www/css/source/components/bootstrap-table/bootstrap-table-fixed-columns.scss",]
 };
 
 var scriptPaths = {

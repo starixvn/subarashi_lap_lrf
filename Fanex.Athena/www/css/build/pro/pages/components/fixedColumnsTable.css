@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.18.0
+ * version: 1.23.1
  * https://github.com/wenzhixin/bootstrap-table/
  */
 .bootstrap-table .fixed-table-toolbar::after {
@@ -244,6 +244,24 @@ div.fixed-table-scroll-outer {
     opacity: 1; }
   to {
     opacity: 0; } }
+
+/**
+ * @author vincent loh <vincent.ml@gmail.com>
+ * @update zhixin wen <wenzhixin2010@gmail.com>
+ */
+.fix-sticky {
+  position: fixed !important;
+  overflow: hidden;
+  z-index: 100; }
+
+.fix-sticky table thead {
+  background: #fff; }
+
+.fix-sticky table thead.thead-light {
+  background: #e9ecef; }
+
+.fix-sticky table thead.thead-dark {
+  background: #212529; }
 
 .fixed-columns,
 .fixed-columns-right {

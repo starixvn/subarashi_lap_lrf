@@ -25,7 +25,6 @@ namespace Fanex.Athena.Api.CustomerLog
             var productAccess = _productService.GetProductAccess(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language);
             var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
             ActionViewModel.SetProductPermissions(permissions);
-            var actionTypes = LogHelper.GroupLogAttributes();
 
             var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
@@ -47,7 +46,7 @@ namespace Fanex.Athena.Api.CustomerLog
                 var dataList = (await _customerLogDataAccess.GetCustomerSettingList(metaModel).ConfigureAwait(false))
                     .OrderByDescending(x => x.LogId).ToList();
                 var dataAfterRemoveHTMLTag = RemoveHtmlTag(dataList);
-                var details = GetDetails(dataAfterRemoveHTMLTag, actionTypes);
+                var details = GetDetails(dataAfterRemoveHTMLTag);
                 return new { rows = details };
             }
 

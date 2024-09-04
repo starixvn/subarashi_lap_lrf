@@ -7,6 +7,8 @@
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
 
@@ -19,30 +21,53 @@
             _groupDataAccess = groupDataAccess;
         }
 
-        public IList<GroupCommMetaModel> GetAllAsync(int licenseeId, IDictionary<string, bool> permissions)
-            => _groupDataAccess.GetAllAsync(licenseeId, permissions).OrderBy(_ => _.GroupCommId).ToList();
-
-        public async Task<DataTable> GetDataForExcelAsync(int licenseeId)
+        public async Task<IEnumerable<GroupCommSettingMetaModel>> InitCommValues(ProductAccess productAccess)
         {
-            var dt = await _groupDataAccess.GetDataForExcelAsync(licenseeId).ConfigureAwait(false);
-            dt.DefaultView.Sort = "GroupCommID ASC";
-            dt = dt.DefaultView.ToTable();
-            return dt;
+            var commSettings = await _groupDataAccess.GetAllCommSettingAsync().ConfigureAwait(false);
+
+            return commSettings.Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
+                .OrderBy(_ => CommissionGroupHelper.ProductListComparer(_.ProductCode)).ThenBy(_ => _.ProductCode); ;
         }
 
-        public GroupCommMetaModel GetById(int groupCommId, int licenseeId, IDictionary<string, bool> permissions)
+        public async Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId)
         {
-            return _groupDataAccess.GetById(groupCommId, licenseeId, permissions);
+            var (comms, commValues) = await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
+            var productList = commValues.Select(_ => _.ProductCode).Distinct().OrderBy(_ => CommissionGroupHelper.ProductListComparer(_)).ThenBy(_ => _);
+
+            return (MergeCommSetting(comms, commValues), productList);
         }
 
-        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId, IDictionary<string, bool> permissions)
+        private static IList<GroupCommMetaModel> MergeCommSetting(IEnumerable<GroupCommMetaModel> comms, IEnumerable<GroupCommSettingMetaModel> commValues)
         {
-            return await _groupDataAccess.InsertGroupAsync(item, request, userId, permissions).ConfigureAwait(false);
+            return comms.GroupJoin(commValues, c => c.GroupCommId, d => d.GroupCommId,
+                (c, ds) => new GroupCommMetaModel
+                {
+                    GroupCommId = c.GroupCommId,
+                    GroupColor = c.GroupColor,
+                    GroupName = c.GroupName,
+                    IsDefaultGroup = c.IsDefaultGroup,
+                    DefaultGroupId = c.DefaultGroupId,
+                    NumberOfCustomer = c.NumberOfCustomer,
+                    CommValues = ds.OrderBy(_ => _, new GroupCommSettingComparer()).ThenBy(_ => _.ProductCode),
+                }).ToList();
         }
 
-        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user, IDictionary<string, bool> permissions)
+        public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId)
         {
-            var resultInfo = await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId, permissions).ConfigureAwait(false);
+            var result = await _groupDataAccess.GetById(groupCommId, licenseeId);
+            result.CommValues = result.CommValues.OrderBy(_ => _, new GroupCommSettingComparer()).ThenBy(_ => _.ProductCode);
+
+            return result;
+        }
+
+        public async Task<IResultInfo> InsertGroupAsync(GroupCommMetaModel item, IRequest request, int userId)
+        {
+            return await _groupDataAccess.InsertGroupAsync(item, request, userId).ConfigureAwait(false);
+        }
+
+        public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user)
+        {
+            var resultInfo = await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId).ConfigureAwait(false);
             return resultInfo;
         }
 

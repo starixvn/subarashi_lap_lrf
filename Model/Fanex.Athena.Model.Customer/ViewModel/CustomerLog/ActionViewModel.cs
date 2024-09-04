@@ -11,6 +11,8 @@
 
         public IDictionary<string, string> Resource { get; set; }
 
+        public IEnumerable<string> ProductList { get; set; }
+
         public string GetClassName(string fieldName)
         {
             return IsChanged(fieldName) ? "old-value red-text" : "hide";
