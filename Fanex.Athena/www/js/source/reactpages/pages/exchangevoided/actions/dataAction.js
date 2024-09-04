@@ -4,7 +4,7 @@ import { setGridData } from '@jsroot/actions/gridDataAction';
 import Site from '@jsroot/lib/site';
 import DataService from '@jsroot/lib/DataService';
 import ReportExcel from '../lib/reportExcel';
-import { param } from 'jquery';
+import { saveAs } from 'file-saver'
 
 const SUCCESS_CODE = 1;
 const UM_ERR_CODE = 1041;
@@ -18,6 +18,8 @@ const dispatchResult = (dispatch, data) => {
 
 const apiUrl = Site.resolveClientUrl('ExchangeVoided/Index');
 const runningUrl = 'api/Exchange/GetRunningTickets'
+const runningExportExcelUrl =  'api/Exchange/ExportRunningTickets';
+
 export const getData = (param) => (dispatch) => {
     dispatch(toggleLoader(true));
     DataService.postData(apiUrl, param)
@@ -61,4 +63,25 @@ export const getRunningTicketData = (param) => (dispatch) =>{
 export const exportExcel = (dataList, title) => () => {
     const service = new ReportExcel(dataList, title);
     service.export();
+}
+
+export const exportRunningTicketExcel = (param) => (dispatch) => {
+    if (!param) {
+        return;
+    }
+
+    const proxyUrl = DataService.buildProxyUrl(DataService.apiKeys.report, runningExportExcelUrl)
+    dispatch(toggleLoader(true));
+    DataService.getFile(proxyUrl, param)
+        .then((response) => {
+            const fileName = "ExchangeRunningTicket.xls";
+            const blob = new Blob([response.data], { type: response.headers["content-type"] });
+            saveAs(blob, fileName);
+        })
+        .catch(() => {
+            alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
+        })
+        .finally(() => {
+            dispatch(toggleLoader(false));
+        });
 }

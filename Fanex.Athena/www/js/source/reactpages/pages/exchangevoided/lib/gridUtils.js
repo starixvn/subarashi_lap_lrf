@@ -15,30 +15,8 @@ export const renderHeader = () => {
         </HeaderRow>
     )
 }
-export const renderRunningHeader = () =>{
-    return (
-    <HeaderRow style={{ height: 32 }}>
-        <HeaderCell colWidth={30}>#</HeaderCell>
-        <HeaderCell colWidth={100}>{headerText[fields.externalId]}</HeaderCell>
-        <HeaderCell colWidth={100}>{headerText[fields.systemId]}</HeaderCell>
-        <HeaderCell colWidth={100}>{headerText[fields.betId]}</HeaderCell>
-        <HeaderCell colWidth={100}>{headerText[fields.betPlaced]}</HeaderCell>
-        <HeaderCell colWidth={300}>{headerText[fields.market]}</HeaderCell>
-        <HeaderCell colWidth={100}>{headerText[fields.selection]}</HeaderCell>
-        <HeaderCell colWidth={70}>{headerText[fields.type]}</HeaderCell>
-        <HeaderCell colWidth={100}>{headerText[fields.oddsAvg]}</HeaderCell>
-        <HeaderCell colWidth={100}>{headerText[fields.stake]}</HeaderCell>
-    </HeaderRow>
-    )
-}
 
-export const renderDataFooter = (sumStake, baseCurrency) =>{
-    return(
-    <Row className="grant-total-row" key="grantTotal-row">
-        <Cell className="right-align" colSpan={9}>{LangHelper.getSingleResource("Totalin")} {baseCurrency}</Cell>
-        <Cell className="right-align">{NumberFormat.formatDecimal(sumStake)}</Cell>
-    </Row>);
-}
+
 
 export const renderDataSection = (dataList, mode) => {
     const dataRows = [];
@@ -70,21 +48,3 @@ const buildDataRow = (index, dataItem) => {
     )
 }
 
-const buildRunningDataRow = (index, dataItem) => {
-    const { nickName, username, userId, betId, betPlacedString, marketName, selectionName, type, oddsAvg, stake } = dataItem;
-
-    return (
-        <Row key={index}>
-            <Cell className="center-align">{index}</Cell>
-            <Cell className="left-align" title={nickName}>{nickName}</Cell>
-            <Cell className="left-align" title={username}>{username}</Cell>
-            <Cell className="center-align" title={betId}>{betId}</Cell>
-            <Cell className="center-align" title={betPlacedString}>{betPlacedString}</Cell>
-            <Cell className="right-align" title={marketName}>{marketName}</Cell>
-            <Cell className="right-align text-bold" title={selectionName}>{selectionName}</Cell>
-            <Cell className="right-align text-bold" title={type}>{type}</Cell>
-            <Cell className="right-align text-bold" title={NumberFormat.formatDecimal(oddsAvg)}>{NumberFormat.formatDecimal(oddsAvg)}</Cell>
-            <Cell className="right-align text-bold" title={NumberFormat.formatDecimal(stake)}>{NumberFormat.formatDecimal(stake)}</Cell>
-        </Row>
-    )
-}

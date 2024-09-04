@@ -10,6 +10,12 @@
 @import "../../components/_popup-content";
 @import "../../components/autocomplete";
 
+
+.table > tbody tr td{
+    &.text-red{
+        color: red;
+    }
+}
 .text-red{
     color: red;
 }

@@ -42,15 +42,15 @@ const RunningDataGrid = (props) => {
 
     const { requestParam } = props;
 
-    const baseCurrency = requestParam.baseCurrency;
+    const { baseCurrency, isConvertAllToBaseCurrency } = requestParam;
     const currenPagingOption = {
-        PageIndex: requestParam.PageIndex,
-        PageSize: requestParam.PageSize,
+        PageIndex: requestParam.pageIndex,
+        PageSize: requestParam.pageSize,
         TotalItem: totalPage,
         PageList: DefaultPagingOption.PageList
     }
 
-    const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}`;
+    const reportTitle = `${LangHelper.getSingleResource('BettingTicketCenter')}, GMT+8, ${LangHelper.getSingleResource('BaseCurrency')}: ${baseCurrency}`;
 
     const renderRunningHeader = () => {
         return (
@@ -60,27 +60,29 @@ const RunningDataGrid = (props) => {
                 <HeaderCell colWidth={100}>{headerText[fields.systemId]}</HeaderCell>
                 <HeaderCell colWidth={100}>{headerText[fields.betId]}</HeaderCell>
                 <HeaderCell colWidth={100}>{headerText[fields.betPlaced]}</HeaderCell>
-                <HeaderCell colWidth={300}>{headerText[fields.market]}</HeaderCell>
-                <HeaderCell colWidth={100}>{headerText[fields.selection]}</HeaderCell>
-                <HeaderCell colWidth={70}>{headerText[fields.type]}</HeaderCell>
-                <HeaderCell colWidth={100}>{headerText[fields.oddsAvg]}</HeaderCell>
-                <HeaderCell colWidth={100} sortBy={SortBy.Stake}>{headerText[fields.stake]}</HeaderCell>
+                <HeaderCell colWidth={310}>{headerText[fields.market]}</HeaderCell>
+                <HeaderCell colWidth={120}>{headerText[fields.selection]}</HeaderCell>
+                <HeaderCell colWidth={40}>{headerText[fields.type]}</HeaderCell>
+                <HeaderCell colWidth={50}>{headerText[fields.oddsAvg]}</HeaderCell>
+                <HeaderCell colWidth={80} sortBy={SortBy.Stake}>{headerText[fields.stake]}</HeaderCell>
             </HeaderRow>
         )
     }
 
     const renderBody = () => {
         const dataRows = [];
+        const skipIndex = (requestParam.pageIndex - 1) * requestParam.pageSize;
         for (let i = 0; i < dataList.length; i++) {
-            dataRows.push(buildRunningDataRow(i + 1, dataList[i]));
+            dataRows.push(buildRunningDataRow(i + skipIndex + 1, dataList[i]));
         }
         return dataRows;
     }
 
-    const showTicketDetail = (betId, type, custId) => {
+    const showTicketDetail = (betId, type, custId, currencyId) => {
         const url = "api/ExchangeWinLossBetList/Detail";
+        const paramBaseCurrency = isConvertAllToBaseCurrency ? baseCurrency : "";
         const params = {
-            data: { custId, baseCurrency, excludeTestData: true, betId, type }
+            data: { currencyId ,custId, baseCurrency: paramBaseCurrency, excludeTestData: false, betId, type }
         }
 
         props.toggleLoader(true);
@@ -97,19 +99,23 @@ const RunningDataGrid = (props) => {
     }
 
     const buildRunningDataRow = (index, dataItem) => {
-        const { nickName, username, custId, betId, betPlacedString, marketName, selectionName, type, oddsAvg, stake } = dataItem;
+        const { nickName, username, custId, betId, betPlacedString, eventTypeName, eventName, marketName, selectionName, type, oddsAvg, stake, currency, fancyBetRuns, categoryType } = dataItem;
         let classType = type == "Lay" || type == "No" ? " text-red" : ""
+        const isFancyBet = categoryType == 2;
+        const oddsAvgString = isFancyBet ?
+            NumberFormat.formatInteger(fancyBetRuns) + '/' + NumberFormat.formatInteger(oddsAvg) :
+            NumberFormat.formatDecimal(oddsAvg);
         return (
             <Row key={index}>
                 <Cell className="center-align">{index}</Cell>
                 <Cell className="left-align" title={nickName}>{nickName}</Cell>
                 <Cell className="left-align" title={username}>{username}</Cell>
-                <Cell className="center-align" title={betId}><a href="javascript:;" onClick={() => showTicketDetail(betId, type, custId)}>{betId}</a></Cell>
+                <Cell className="center-align" title={betId}><a href="javascript:;" onClick={() => showTicketDetail(betId, type, custId, currency)}>{betId}</a></Cell>
                 <Cell className="center-align" title={betPlacedString}>{betPlacedString}</Cell>
-                <Cell className="right-align" title={marketName}>{marketName}</Cell>
+                <Cell className="right-align" title={marketName}>{`${eventTypeName} > ${eventName} > ${marketName}`}</Cell>
                 <Cell className="right-align text-bold" title={selectionName}>{selectionName}</Cell>
                 <Cell className={`right-align text-bold${classType}`} title={type}>{type}</Cell>
-                <Cell className="right-align text-bold" title={NumberFormat.formatDecimal(oddsAvg)}>{NumberFormat.formatDecimal(oddsAvg)}</Cell>
+                <Cell className="right-align text-bold" title={oddsAvgString}>{oddsAvgString}</Cell>
                 <Cell className="right-align text-bold" title={NumberFormat.formatDecimal(stake)}>{NumberFormat.formatDecimal(stake)}</Cell>
             </Row>
         )
@@ -139,7 +145,7 @@ const RunningDataGrid = (props) => {
     return (
         <div className='result-content'>
             <ReportTitle content={reportTitle} tag='div' />
-            <Table key={`RunningTicket-Grid`} minWidth={650}
+            <Table key={`RunningTicket-Grid-${requestParam.submitTime}`} minWidth={650}
                 autoWidth={true}
                 autoHeight={true}
                 header={renderRunningHeader()}

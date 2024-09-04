@@ -47,7 +47,10 @@
         timeZoneList: @Html.Raw(SystemConstants.TimeZoneList.Select(x => new { value = x.Key, label = x.Value }).ToJson()),
         baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
         currencyList: @Html.Raw(currencyList.ToJson()),
-        defaultBaseCurrency: '@(ViewBag.SelectedBaseCurrency)'
+        defaultBaseCurrency: '@(ViewBag.SelectedBaseCurrency)',
+        defaultCurrency: '@(selectedCurrency)',
+        defaultTimeZone: @selectedTimeZone,
+        defaultDate: '@today.ToString("MM/dd/yyyy")',
         };
     }
     <div id="app-container"></div>

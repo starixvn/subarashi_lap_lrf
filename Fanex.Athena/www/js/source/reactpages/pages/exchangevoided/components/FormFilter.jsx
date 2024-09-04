@@ -34,7 +34,8 @@ export class FormFilter extends React.PureComponent {
                 isConvertAllToBaseCurrency: this.props.isConvertAll,
                 pageSize: DefaultPagingOption.PageSize,
                 sortBy: SortBy.BetPlaced,
-                sortOrder: SortOrder.DESC
+                sortOrder: SortOrder.DESC,
+                submitTime: new Date().getTime()
             }
         }
         else
@@ -42,18 +43,34 @@ export class FormFilter extends React.PureComponent {
             params = {
                 ...inputParam,
                 pageIndex: 1,
-                timeZone: this.props.selectedTimeZone
+                timeZone: this.props.selectedTimeZone,
+                submitTime: new Date().getTime()
             };
         }
-
-
         this.props.setRequestParam(params);
     }
 
     exportExcel = (event) => {
         event.preventDefault();
-        const { gridData } = this.props;
+        
+        const { selectedExchangeMode } = this.props;
 
+        if (selectedExchangeMode == ExchangeMode.Running){
+            this.exportRunningExcel()
+        }
+        else{
+            this.exportVoidExcel();
+        }
+
+    }
+
+    exportRunningExcel = () =>{
+        const {exportRunningTicketExcel, requestParam} = this.props;
+        exportRunningTicketExcel(requestParam);
+    }
+
+    exportVoidExcel = () => {
+        const { gridData } = this.props;
         if (!gridData.dataList) {
             window.alert(LangHelper.getSingleResource("NoInfo"));
             return;
@@ -78,7 +95,17 @@ export class FormFilter extends React.PureComponent {
     }
 
     handleChangeViewMode = (value) => {
-        this.setState({ viewInMode: value })
+        this.setState(
+            { 
+                viewInMode: value, 
+                userName: "", 
+                refNo: "",  
+                selectedDate: AppData.defaultDate, 
+             });
+        this.props.setSelectedBaseCurrency(AppData.defaultBaseCurrency);
+        this.props.setSelectedCurrency(AppData.defaultCurrency);
+        this.props.setSelectedTimeZone(AppData.defaultTimeZone);
+        this.props.changeIsConvertAll(true);
     }
 
     _renderSelectedTimeZone = () => {
@@ -222,12 +249,13 @@ export class FormFilter extends React.PureComponent {
 
     render() {
 
-        const { selectedDate, isFilterCollapsing, viewInMode } = this.state;
+        const { isFilterCollapsing, viewInMode } = this.state;
         const iconToggle = {
             tag: 'div',
             className: isFilterCollapsing ? 'chevron down' : 'chevron up',
             style: {}
         }
+        const isDisableSubmitBtn = viewInMode == ExchangeMode.Running ? this.props.selectedCurrency == "" : false;
 
         return (
             <CollapsiblePanel className="page-filter" iconToggle={iconToggle}
@@ -246,7 +274,7 @@ export class FormFilter extends React.PureComponent {
                     <div className="col-12 col-md-2 col-sm-2 col-lg-2 col-xl-1">
                         <div className="form-group">
                             <div className="button-group">
-                                <button type="button" className="btn btn-submit"
+                                <button type="button" className="btn btn-submit" disabled={isDisableSubmitBtn}
                                     onClick={this.submit}>{LangHelper.getSingleResource("Submit")}</button>
                             </div>
                         </div>
@@ -263,13 +291,13 @@ export class FormFilter extends React.PureComponent {
 }
 
 function mapDispatchToProps(dispatch) {
-    const { setRequestParam, exportExcel, setSelectedTimeZone, changeIsConvertAll, setSelectedBaseCurrency, setSelectedCurrency, setSelectedExchangeMode  } = ActionCreators;
-    return bindActionCreators({ setRequestParam, exportExcel, setSelectedTimeZone, changeIsConvertAll, setSelectedBaseCurrency, setSelectedCurrency, setSelectedExchangeMode  }, dispatch);
+    const { setRequestParam, exportExcel, exportRunningTicketExcel, setSelectedTimeZone, changeIsConvertAll, setSelectedBaseCurrency, setSelectedCurrency, setSelectedExchangeMode  } = ActionCreators;
+    return bindActionCreators({ setRequestParam, exportExcel, exportRunningTicketExcel, setSelectedTimeZone, changeIsConvertAll, setSelectedBaseCurrency, setSelectedCurrency, setSelectedExchangeMode  }, dispatch);
 }
 
 function mapStateToProps(state) {
-    const { requestParam, dateConstraint, gridData, selectedTimeZone, selectedBaseCurrency, selectedCurrency, isConvertAll } = state;
-    return Object.assign({}, { requestParam, dateConstraint, gridData, selectedTimeZone, selectedBaseCurrency, selectedCurrency, isConvertAll  });
+    const { requestParam, dateConstraint, gridData, selectedTimeZone, selectedBaseCurrency, selectedCurrency, isConvertAll, selectedExchangeMode } = state;
+    return Object.assign({}, { requestParam, dateConstraint, gridData, selectedTimeZone, selectedBaseCurrency, selectedCurrency, isConvertAll, selectedExchangeMode  });
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormFilter);
