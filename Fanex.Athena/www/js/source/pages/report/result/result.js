@@ -43,7 +43,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
                     const url = Site.resolveClientUrl('ResultReport/ResultDetail')
                         + '?matchid=' + $(this).attr('data-match-id') + '&SportType=' + param.SportId;
 
-                    const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
+                    const popupOption = { id: 'result-popup', width: 950, height: 520, title: Site.getSingleResource('Result') };
                     Popup.openPopupWithIframe(url, popupOption);
                 });
 
@@ -192,7 +192,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
 
                 $.get(url, function (result) {
                     if (result !== '') {
-                        const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
+                        const popupOption = { id: 'result-popup', width: 950, height: 520, title: Site.getSingleResource('Result') };
                         Popup.openPopupWithIframe(result, popupOption);
                     }
                 });

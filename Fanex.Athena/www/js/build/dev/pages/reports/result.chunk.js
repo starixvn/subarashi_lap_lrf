@@ -1277,7 +1277,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     const url = Site.resolveClientUrl('ResultReport/ResultDetail')
                         + '?matchid=' + $(this).attr('data-match-id') + '&SportType=' + param.SportId;
 
-                    const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
+                    const popupOption = { id: 'result-popup', width: 950, height: 520, title: Site.getSingleResource('Result') };
                     Popup.openPopupWithIframe(url, popupOption);
                 });
 
@@ -1426,7 +1426,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                 $.get(url, function (result) {
                     if (result !== '') {
-                        const popupOption = { id: 'result-popup', width: 775, height: 520, title: Site.getSingleResource('Result') };
+                        const popupOption = { id: 'result-popup', width: 950, height: 520, title: Site.getSingleResource('Result') };
                         Popup.openPopupWithIframe(result, popupOption);
                     }
                 });
