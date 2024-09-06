@@ -14,7 +14,12 @@ namespace Fanex.Athena.Model.Core.Helper
             Product.SG, Product.KN, Product.LT, Product.TG, Product.VS, Product.VRG, Product.CC, Product.SBC, Product.SAG, Product.PGS, Product.AB, Product.WM,
             Product.BGG, Product.JK, Product.HB, Product.VGA, Product.CG, Product.AP, Product.APM, Product.FGGL, Product.MXG, Product.JIG, Product.YB, Product.MGRNG };
 
-        public static int ProductListComparer(string productCode) => Array.IndexOf(ProductSettingOrder, productCode);
+        public static int ProductListComparer(string productCode)
+        {
+            var index = Array.IndexOf(ProductSettingOrder, productCode);
+
+            return index >= 0 ? index : int.MaxValue;
+        }
 
         private static readonly Dictionary<string, string> FollowPermissions = new Dictionary<string, string>
         {
