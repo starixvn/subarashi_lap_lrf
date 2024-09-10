@@ -32,7 +32,7 @@ export class FormFilter extends React.PureComponent {
                 baseCurrency: this.props.selectedBaseCurrency,
                 currencyIdList: this.props.selectedCurrency,
                 isConvertAllToBaseCurrency: this.props.isConvertAll,
-                pageSize: DefaultPagingOption.PageSize,
+                pageSize: this.props.requestParam.pageSize ||  DefaultPagingOption.PageSize,
                 sortBy: SortBy.BetPlaced,
                 sortOrder: SortOrder.DESC,
                 submitTime: new Date().getTime()

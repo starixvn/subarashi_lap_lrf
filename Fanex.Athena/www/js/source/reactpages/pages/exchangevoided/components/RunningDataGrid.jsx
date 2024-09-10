@@ -99,24 +99,24 @@ const RunningDataGrid = (props) => {
     }
 
     const buildRunningDataRow = (index, dataItem) => {
-        const { nickName, username, custId, betId, betPlacedString, eventTypeName, eventName, marketName, selectionName, type, oddsAvg, stake, currency, fancyBetRuns, categoryType } = dataItem;
-        let classType = type == "Lay" || type == "No" ? " text-red" : ""
-        const isFancyBet = categoryType == 2;
+        const { NickName, Username, CustId, BetId, BetPlacedString, EventTypeName, EventName, MarketName, SelectionName, Type, OddsAvg, Stake, Currency, FancyBetRuns, CategoryType } = dataItem;
+        let classType = Type == "Lay" || Type == "No" ? " text-red" : ""
+        const isFancyBet = CategoryType == 2;
         const oddsAvgString = isFancyBet ?
-            NumberFormat.formatInteger(fancyBetRuns) + '/' + NumberFormat.formatInteger(oddsAvg) :
-            NumberFormat.formatDecimal(oddsAvg);
+            NumberFormat.formatInteger(FancyBetRuns) + '/' + NumberFormat.formatInteger(OddsAvg) :
+            NumberFormat.formatDecimal(OddsAvg);
         return (
             <Row key={index}>
                 <Cell className="center-align">{index}</Cell>
-                <Cell className="left-align" title={nickName}>{nickName}</Cell>
-                <Cell className="left-align" title={username}>{username}</Cell>
-                <Cell className="center-align" title={betId}><a href="javascript:;" onClick={() => showTicketDetail(betId, type, custId, currency)}>{betId}</a></Cell>
-                <Cell className="center-align" title={betPlacedString}>{betPlacedString}</Cell>
-                <Cell className="right-align" title={marketName}>{`${eventTypeName} > ${eventName} > ${marketName}`}</Cell>
-                <Cell className="right-align text-bold" title={selectionName}>{selectionName}</Cell>
-                <Cell className={`right-align text-bold${classType}`} title={type}>{type}</Cell>
+                <Cell className="left-align" title={NickName}>{NickName}</Cell>
+                <Cell className="left-align" title={Username}>{Username}</Cell>
+                <Cell className="center-align" title={BetId}><a href="javascript:;" onClick={() => showTicketDetail(BetId, Type, CustId, Currency)}>{BetId}</a></Cell>
+                <Cell className="center-align" title={BetPlacedString}>{BetPlacedString}</Cell>
+                <Cell className="right-align" title={MarketName}>{`${EventTypeName} > ${EventName} > ${MarketName}`}</Cell>
+                <Cell className="right-align text-bold" title={SelectionName}>{SelectionName}</Cell>
+                <Cell className={`right-align text-bold${classType}`} title={Type}>{Type}</Cell>
                 <Cell className="right-align text-bold" title={oddsAvgString}>{oddsAvgString}</Cell>
-                <Cell className="right-align text-bold" title={NumberFormat.formatDecimal(stake)}>{NumberFormat.formatDecimal(stake)}</Cell>
+                <Cell className="right-align text-bold" title={NumberFormat.formatDecimal(Stake)}>{NumberFormat.formatDecimal(Stake)}</Cell>
             </Row>
         )
     }

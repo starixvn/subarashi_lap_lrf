@@ -17,8 +17,8 @@ const dispatchResult = (dispatch, data) => {
 }
 
 const apiUrl = Site.resolveClientUrl('ExchangeVoided/Index');
-const runningUrl = 'api/Exchange/GetRunningTickets'
-const runningExportExcelUrl =  'api/Exchange/ExportRunningTickets';
+const runningUrl = 'api/ExchangeBetlist/GetRunningTickets'
+const runningExportExcelUrl =  'api/ExchangeBetlist/ExportRunningTickets';
 
 export const getData = (param) => (dispatch) => {
     dispatch(toggleLoader(true));
@@ -43,13 +43,13 @@ export const getData = (param) => (dispatch) => {
 
 export const getRunningTicketData = (param) => (dispatch) =>{
     dispatch(toggleLoader(true));
-    DataService.postProxyData(DataService.apiKeys.report, runningUrl , param)
+    DataService.postData( runningUrl , param)
         .then(response => {
-            const { dataList, totalRows, sumStake } = response.data;
+            const { DataList, TotalRows, SumStake } = response.data;
             const data = {
-                dataList: dataList,
-                totalPage: totalRows,
-                sumStake: sumStake
+                dataList: DataList,
+                totalPage: TotalRows,
+                sumStake: SumStake
             };
             dispatchResult(dispatch, data);
         })
@@ -72,7 +72,7 @@ export const exportRunningTicketExcel = (param) => (dispatch) => {
 
     const proxyUrl = DataService.buildProxyUrl(DataService.apiKeys.report, runningExportExcelUrl)
     dispatch(toggleLoader(true));
-    DataService.getFile(proxyUrl, param)
+    DataService.getFile(runningExportExcelUrl, param)
         .then((response) => {
             const fileName = "ExchangeRunningTicket.xls";
             const blob = new Blob([response.data], { type: response.headers["content-type"] });
