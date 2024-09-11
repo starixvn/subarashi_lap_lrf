@@ -3,3 +3,19 @@
 @import "../../components/tab";
 @import "../../components/simple-pagingation";
 @import "../../components/pureicon";
+@import "../../components/forms/radio-buttons";
+@import "../../components/forms/checkbox";
+@import '../../components/react-multiselect';
+@import "../../components/popup";
+@import "../../components/_popup-content";
+@import "../../components/autocomplete";
+
+
+.table > tbody tr td{
+    &.text-red{
+        color: red;
+    }
+}
+.text-red{
+    color: red;
+}

@@ -3,17 +3,14 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Http;
-
     using Base;
     using Base.Attributes;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
-
     using Model.BetList.DTO;
     using Model.BetList.MetaModel;
     using Model.BetList.ViewModel;
-
     using Service.Core.Common.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportExchangeWinLoss)]

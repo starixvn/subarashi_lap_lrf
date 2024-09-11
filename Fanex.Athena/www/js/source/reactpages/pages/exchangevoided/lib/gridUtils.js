@@ -1,6 +1,8 @@
 import React from 'react';
 import { Row, Cell, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
-import { headerText, VOIDED_STATUS } from './constants';
+import { ExchangeMode, fields, headerText, VOIDED_STATUS } from './constants';
+import LangHelper from '@jsroot/lib/langHelper';
+import NumberFormat from '@jsroot/lib/numberFormat';
 
 export const renderHeader = () => {
     return (
@@ -14,10 +16,19 @@ export const renderHeader = () => {
     )
 }
 
-export const renderDataSection = (dataList) => {
+
+
+export const renderDataSection = (dataList, mode) => {
     const dataRows = [];
-    for (let i = 0; i < dataList.length; i++) {
-        dataRows.push(buildDataRow(i + 1, dataList[i]));
+    if (mode == ExchangeMode.Running){
+        for (let i = 0; i < dataList.length; i++) {
+            dataRows.push(buildRunningDataRow(i + 1, dataList[i]));
+        } 
+    }
+    else{
+        for (let i = 0; i < dataList.length; i++) {
+            dataRows.push(buildDataRow(i + 1, dataList[i]));
+        }   
     }
 
     return dataRows;
@@ -36,3 +47,4 @@ const buildDataRow = (index, dataItem) => {
         </Row>
     )
 }
+

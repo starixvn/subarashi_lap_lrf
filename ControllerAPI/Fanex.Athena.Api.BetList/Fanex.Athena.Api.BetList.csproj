@@ -146,6 +146,7 @@
     <Compile Include="ApiBetListBaseController.cs" />
     <Compile Include="BettingTicketCenterAdvancedSearchController.cs" />
     <Compile Include="BettingTicketCenterController.cs" />
+    <Compile Include="ExchangeBetlistController.cs" />
     <Compile Include="LiveCasinoController.cs" />
     <Compile Include="ExchangeWinLossBetListController.cs" />
     <Compile Include="GodOfFortuneWinLossBetListController.cs" />

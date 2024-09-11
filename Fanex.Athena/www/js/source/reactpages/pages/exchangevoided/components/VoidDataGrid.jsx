@@ -9,17 +9,12 @@ import ReportTitle from '@jsroot/components/ReportTitle';
 import LangHelper from '@jsroot/lib/langHelper';
 import SimplePagination from '@jsroot/components/SimplePagination';
 import AppData from '@jsroot/lib/AppData';
+import { ExchangeMode } from '../lib/constants';
 
-const DataGrid = (props) => {
-    const isFirstRun = useRef(true);
+const VoidDataGrid = (props) => {
     const [pagingOption, setPagingOption] = useState({pageIndex: 1, totalPage: 0});
 
     useEffect(() => {
-        if (isFirstRun.current) {
-            isFirstRun.current = false;
-            return;
-        }
-
         const { getData } = props;
         const param = { ...props.requestParam };
         getData(param);
@@ -61,7 +56,7 @@ const DataGrid = (props) => {
                 autoWidth={true}
                 autoHeight={true}
                 header={renderHeader()}
-                body={renderDataSection(dataList)}
+                body={renderDataSection(dataList, ExchangeMode.Void)}
                 containerPadding={30} />
             {totalPage > 1 && <SimplePagination pageIndex={pageIndex} totalPage={totalPage} 
                 onPageChanged={handleChangePaging} />}
@@ -79,4 +74,4 @@ function mapStateToProps(state) {
     return Object.assign({}, { gridData, requestParam, selectedTimeZone});
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DataGrid);
+export default connect(mapStateToProps, mapDispatchToProps)(VoidDataGrid);

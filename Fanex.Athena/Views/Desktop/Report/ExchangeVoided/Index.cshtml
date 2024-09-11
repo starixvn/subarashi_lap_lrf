@@ -9,6 +9,9 @@
 
 @{
     var hasPermission = Model;
+    var baseCurrencyList = ((IDictionary<int, string>)ViewBag.BaseCurrencyList).Select(c => new { value = c.Value, label = c.Value }).ToList();
+    var currencyList = ((IEnumerable<KeyValuePair<int, string>>)ViewBag.CurrencyList).Select(x => new { id = x.Key, value = x.Value, status = true });
+    var selectedCurrency = string.Join(",", ((IEnumerable<KeyValuePair<int, string>>)ViewBag.CurrencyList).Select(x => x.Key).ToArray());
 }
 
 @if (hasPermission)
@@ -26,6 +29,9 @@
 
     @section globaljscode{
         window.initialState = {
+        selectedCurrency:  '@(selectedCurrency)',
+        selectedBaseCurrency: '@(ViewBag.SelectedBaseCurrency)',
+        isConvertAll: 'true',
         requestParam: {
         refNo: '',
         userName: '',
@@ -33,12 +39,18 @@
         },
         dateConstraint: {minDate: '@minDate.ToString("MM/dd/yyyy")', maxDate: '@today.AddDays(2).ToString("MM/dd/yyyy")'},
         isLoading: false,
-        selectedTimeZone: @selectedTimeZone
+        selectedTimeZone: @selectedTimeZone,
         };
 
         window._AppData = {
         tabList: @Html.Raw((ViewBag.TabList as IEnumerable<string>).ToJson()),
-        timeZoneList: @Html.Raw(SystemConstants.TimeZoneList.Select(x => new { value = x.Key, label = x.Value }).ToJson())
+        timeZoneList: @Html.Raw(SystemConstants.TimeZoneList.Select(x => new { value = x.Key, label = x.Value }).ToJson()),
+        baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
+        currencyList: @Html.Raw(currencyList.ToJson()),
+        defaultBaseCurrency: '@(ViewBag.SelectedBaseCurrency)',
+        defaultCurrency: '@(selectedCurrency)',
+        defaultTimeZone: @selectedTimeZone,
+        defaultDate: '@today.ToString("MM/dd/yyyy")',
         };
     }
     <div id="app-container"></div>
