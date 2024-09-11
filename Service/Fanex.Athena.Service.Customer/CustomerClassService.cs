@@ -4,31 +4,31 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Fanex.Athena.DataAccess.Customer;
-    using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Model.Customer.DTO;
-    using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Logging;
+    using DataAccess.Customer;
+    using Extension.Helpers;
+    using Extension.Utility;
+    using Extension.Utility.Interfaces;
+    using Interfaces;
+    using Logging;
+    using Model.Core.DTO.Common;
+    using Model.Core.DTO.Configuration;
+    using Model.Customer.DTO;
+    using Model.Customer.MetaModel;
     using Newtonsoft.Json;
+    using Resources;
+    using StatelessCore.Interfaces;
 
     public class CustomerClassService : ICustomerClassService
     {
         private const string DefaultTextValue = "-";
         private const string ChineseCulture = "zh-CN";
-
-        private readonly ICustomerClassDataAccess _dataAccess;
-        private readonly IWebClientService _webClientService;
-        private readonly IPortalApiService _portalApiService;
         private readonly IAppSettings _appSettings;
         private readonly ICustomMemoryCacheService _cache;
+
+        private readonly ICustomerClassDataAccess _dataAccess;
         private readonly ILogger _logger;
+        private readonly IPortalApiService _portalApiService;
+        private readonly IWebClientService _webClientService;
 
         public CustomerClassService(
             ICustomerClassDataAccess dataAccess,
@@ -53,13 +53,13 @@
                 return new RiskLevelModel();
             }
 
-            var customerClassLimitPolicies = (await GetSettingPolicy(metaModel)).FirstOrDefault(p => p.Id == metaModel.CustomerClass)?.Policies;
-            var siteMemberPolicies = await _dataAccess.GetCustomerClassSitePolicyMember(metaModel);
+            var customerClassLimitPolicies = (await _dataAccess.GetSettingPoliciesMember(metaModel)).ToList();
+            await MapLicLeagueGroup(customerClassLimitPolicies, metaModel.Language);
+            MapCurrencyName(metaModel, customerClassLimitPolicies);
 
             return new RiskLevelModel
             {
-                CustomerClassLimitPolicies = customerClassLimitPolicies ?? Enumerable.Empty<CustomerClassLimitPolicyModel>(),
-                SiteMemberPolicies = siteMemberPolicies ?? Enumerable.Empty<CustomerClassSitePolicyMemberModel>()
+                CustomerClassLimitPolicies = customerClassLimitPolicies
             };
         }
 
@@ -86,12 +86,49 @@
             var customerClassCategories = await GetCustomerClassCategories();
             return customerClassCategories.Select(_ =>
             {
-                var translatedCategory = string.Equals(language, ChineseCulture, StringComparison.OrdinalIgnoreCase) ? _.CategoryNameCN : _.CategoryName;
+                var translatedCategory = string.Equals(language, ChineseCulture, StringComparison.OrdinalIgnoreCase)
+                    ? _.CategoryNameCN
+                    : _.CategoryName;
                 return new CustomerClassModel(_.CustomerClass.ToString())
                 {
-                    Category = translatedCategory,
+                    Category = translatedCategory
                 };
             });
+        }
+
+        public async Task<IEnumerable<string>> GetAllCustomerClassId()
+        {
+            var result = new List<string> { "0" };
+            var listCategory = await GetCustomerClassCategories();
+            result.AddRange(listCategory
+                .OrderBy(_ => _.CustomerClass)
+                .Select(_ => _.CustomerClass.ToString())
+            );
+            return result.Distinct();
+        }
+
+        public async Task<IEnumerable<RiskLevel>> GetAllRiskLevel()
+        {
+            var customerClassCategories = await GetCustomerClassCategories();
+
+            customerClassCategories.Add(
+                new CustomerClassCategoryModel
+                {
+                    CustomerClass = 0,
+                    CustomerClassName = RiskLevel.Uncategorized,
+                    SabaRiskLevel = RiskLevel.Uncategorized
+                }
+            );
+
+            var riskLevelList = customerClassCategories.GroupBy(_ => _.SabaRiskLevel).Select((_, index) => new RiskLevel
+            {
+                Id = index.ToString(),
+                Key = _.Key,
+                Name = ViewResources.ResourceManager.GetString(_.Key) ?? _.Key,
+                CustomerClassList = _.OrderBy(cc => cc.CustomerClass).Select(cc => cc.CustomerClass.ToString()).Distinct()
+            }).OrderBy(_ => _, new RiskLevelComparer());
+
+            return riskLevelList;
         }
 
         private async Task MapLicLeagueGroup(IEnumerable<CustomerClassLimitPolicyModel> policies, string langCode)
@@ -102,11 +139,13 @@
                 var isAllLeagueGroup = string.Equals(policy.LeagueGroupId, "-1", StringComparison.OrdinalIgnoreCase);
                 var defaultLeagueGroups = new List<LeagueGroup> { new LeagueGroup { LeagueGroupName = DefaultTextValue } };
 
-                if (hasLeagueGroup && int.TryParse(policy.SportType, out int sportType))
+                if (hasLeagueGroup && int.TryParse(policy.SportType, out var sportType))
                 {
                     var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode);
                     var leagueGroupIdList = policy.LeagueGroupId.Split(',');
-                    var leagueGroupListByPolicy = (isAllLeagueGroup ? leagueGroups : leagueGroups.Where(_ => leagueGroupIdList.Contains(_.InHouseLeagueGroupID.ToString())))
+                    var leagueGroupListByPolicy = (isAllLeagueGroup
+                            ? leagueGroups
+                            : leagueGroups.Where(_ => leagueGroupIdList.Contains(_.InHouseLeagueGroupID.ToString())))
                         .Select(x => new LeagueGroup { LeagueGroupId = x.LicLeagueGroupID, LeagueGroupName = x.LicGroupName })
                         .GroupBy(elem => elem.LeagueGroupId).Select(group => group.First()).ToList(); //get distinct by LeagueGroupId
 
@@ -119,31 +158,24 @@
             }
         }
 
-        private List<CustomerClassModel> GroupPolicies(GetCustomerClassInformationMetaModel metaModel, IEnumerable<CustomerClassLimitPolicyModel> policies)
+        private List<CustomerClassModel> GroupPolicies(
+            GetCustomerClassInformationMetaModel metaModel,
+            IEnumerable<CustomerClassLimitPolicyModel> policies)
         {
             var result = policies.GroupBy(
-                    source => source.Id,
-                    source =>
-                    {
-                        source.Currency = metaModel.CurrencyList.ContainsKey(source.CurrencyId) ? metaModel.CurrencyList[source.CurrencyId] : DefaultTextValue;
-                        return source;
-                    },
-                    (key, source) => new CustomerClassModel(key)
-                    {
-                        Policies = source.ToList()
-                    }).ToList();
+                source => source.Id,
+                source =>
+                {
+                    source.Currency = metaModel.CurrencyList.ContainsKey(source.CurrencyId)
+                        ? metaModel.CurrencyList[source.CurrencyId]
+                        : DefaultTextValue;
+                    return source;
+                },
+                (key, source) => new CustomerClassModel(key)
+                {
+                    Policies = source.ToList()
+                }).ToList();
             return result;
-        }
-
-        public async Task<IEnumerable<string>> GetAllCustomerClassId()
-        {
-            var result = new List<string> { "0" };
-            var listCategory = await GetCustomerClassCategories();
-            result.AddRange(listCategory
-                .OrderBy(_ => _.CustomerClass)
-                .Select(_ => _.CustomerClass.ToString())
-                );
-            return result.Distinct();
         }
 
         private async Task<List<CustomerClassCategoryModel>> GetCustomerClassCategories()
@@ -180,32 +212,9 @@
             return new List<CustomerClassCategoryModel>();
         }
 
-        public async Task<IEnumerable<RiskLevel>> GetAllRiskLevel()
-        {
-            var customerClassCategories = await GetCustomerClassCategories();
-
-            customerClassCategories.Add(
-                new CustomerClassCategoryModel
-                {
-                    CustomerClass = 0,
-                    CustomerClassName = RiskLevel.Uncategorized,
-                    SabaRiskLevel = RiskLevel.Uncategorized
-                }
-            );
-
-            var riskLevelList = customerClassCategories.GroupBy(_ => _.SabaRiskLevel).Select((_, index) => new RiskLevel
-            {
-                Id = index.ToString(),
-                Key = _.Key,
-                Name = ViewResources.ResourceManager.GetString(_.Key) ?? _.Key,
-                CustomerClassList = _.OrderBy(cc => cc.CustomerClass).Select(cc => cc.CustomerClass.ToString()).Distinct()
-            }).OrderBy(_ => _, new RiskLevelComparer());
-
-            return riskLevelList;
-        }
-
         private async Task MapCustomerClassCategories(
-            GetCustomerClassInformationMetaModel metaModel, List<CustomerClassModel> groups)
+            GetCustomerClassInformationMetaModel metaModel,
+            List<CustomerClassModel> groups)
         {
             var categories = await GetCustomerClassCategories();
             var isChinese = string.Equals(metaModel.Language, ChineseCulture, StringComparison.OrdinalIgnoreCase);
@@ -215,6 +224,11 @@
                     .Select(c => isChinese ? c.CategoryNameCN : c.CategoryName);
                 g.Category = category.Any() ? string.Join(", ", category) : DefaultTextValue;
             }
+        }
+
+        private static void MapCurrencyName(GetCustomerClassInformationMetaModel metaModel, IEnumerable<CustomerClassLimitPolicyModel> policies)
+        {
+            policies.ToList().ForEach(policy => policy.Currency = metaModel.CurrencyList.GetValueOrDefault(policy.CurrencyId, DefaultTextValue));
         }
     }
 }

@@ -1,21 +1,19 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-
-using Fanex.Athena.Model.Core;
-using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Resources;
-using Fanex.Athena.VendorAdapter.Interfaces;
-using Fanex.RemotingRef;
-
-namespace Fanex.Athena.VendorAdapter
+﻿namespace Fanex.Athena.VendorAdapter
 {
+    using System;
+    using System.Globalization;
+    using System.Linq;
+    using System.Threading;
+    using Interfaces;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using RemotingRef;
+    using Resources;
+
     public class CacheRefAdapter : ICacheRefAdapter
     {
-        private static readonly string[] SabaBetTypeMap = new[]
-{
+        private static readonly string[] SabaBetTypeMap =
+        {
             "228",
             "229"
         };
@@ -40,7 +38,7 @@ namespace Fanex.Athena.VendorAdapter
         }
 
         /// <summary>
-        /// Get bet type text by bet type and live indicator.
+        ///     Get bet type text by bet type and live indicator.
         /// </summary>
         /// <param name="betType">Bet type value.</param>
         /// <param name="liveIndicator">Live or NonLive.</param>
@@ -128,7 +126,26 @@ namespace Fanex.Athena.VendorAdapter
 
         public string[] GetCombinationTypeCombo(string betTeam, string betCheck, decimal handicap1, decimal handicap2)
         {
-            return RemotingRefService.GetCombinationTypeCombo(betTeam, betCheck, Convert.ToInt32(handicap1), Convert.ToInt32(handicap2), GetCurrentIBCLanguageCode());
+            return RemotingRefService.GetCombinationTypeCombo(
+                betTeam,
+                betCheck,
+                Convert.ToInt32(handicap1),
+                Convert.ToInt32(handicap2),
+                GetCurrentIBCLanguageCode());
+        }
+
+        public string GetSportNameByResourceData(object refId, object sportId, string languageCode = null)
+        {
+            if (!IsValidId(sportId))
+            {
+                return string.Empty;
+            }
+
+            return RemotingRefService.GetResourceDataByRefIdAndResourceId(
+                refId.ToString(),
+                sportId.ToString(),
+                GetCurrentIBCLanguageCode(languageCode),
+                string.Empty);
         }
 
         private static string GetNumberGameBettypeName(int betType, bool liveIndicator, string betTypeName)

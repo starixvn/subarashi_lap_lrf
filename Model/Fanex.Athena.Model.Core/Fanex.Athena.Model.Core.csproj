@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDomain\SabaSportType.cs" />
     <Compile Include="DataDomain\SpecialPlatform.cs" />
     <Compile Include="Constants\TimeZoneType.cs" />
     <Compile Include="Constants\HardCodeSportType.cs" />

@@ -20,6 +20,8 @@ using NUnit.Framework;
 
 namespace Fanex.Athena.Controllers.Report.UnitTests
 {
+    using Service.Core.Common.Interfaces;
+
     [TestFixture]
     public class ExchangeVoidedControllerTest : CultureBaseControllerHelperTest
     {
@@ -31,6 +33,8 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
 
         private IExchangeVoidedService _exchangeService;
 
+        private ICurrencyService _currencyService;
+
         [SetUp]
         public override void FixtureSetUp()
         {
@@ -39,6 +43,7 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             _lgAPIClient = Substitute.For<ILGAPIClient>();
             _authService = Substitute.For<IAuthorizationService>();
             _exchangeService = Substitute.For<IExchangeVoidedService>();
+            _currencyService = Substitute.For<ICurrencyService>();
 
             SetUpDefaultFakeData();
         }
@@ -154,7 +159,8 @@ namespace Fanex.Athena.Controllers.Report.UnitTests
             return new ExchangeVoidedController(
                 appSetting,
                 _authService,
-                _exchangeService
+                _exchangeService,
+                _currencyService
                 )
             {
                 SessionServiceInstance = SessionService

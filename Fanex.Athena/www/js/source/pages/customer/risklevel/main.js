@@ -43,6 +43,7 @@ define(
                     let data = new URLSearchParams();
                     data.append('customerClass', $('#CustomerClass').val());
                     data.append('currencyId', $('#CurrencyId').val());
+                    data.append('custId', $('#CustId').val());
 
                     fetch(Site.resolveClientUrl(URL_EXCEL), {
                         body: data,
