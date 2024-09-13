@@ -6,7 +6,6 @@
     using Common.Extensions;
     using Core;
     using Core.Extensions;
-    using Model.Core;
     using Model.Core.DataDomain;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
@@ -200,22 +199,32 @@
                 return string.Empty;
             }
 
-            if (IsVirtualSport(id))
+            var prefixText = isHideSaba ? ViewResources.Virtual : ViewResources.Saba;
+
+            if (id == SabaSportType.SabaSoccer)
             {
-                var prefixText = isHideSaba ? ViewResources.Virtual : ViewResources.Saba;
-                var sportName = _cacheRefAdapter.GetSportNameByResourceData("DummySport", id.ToString());
-                return $"{prefixText} {SabaHelper.RemoveSabaText(sportName)}";
+                var sportName = _cacheRefAdapter.GetSportName((int)SportType.Soccer);
+                return $"{prefixText}{sportName}";
             }
 
-            return _cacheRefAdapter.GetSportName(id.ToString());
-        }
+            if (id == SabaSportType.SabaBasketBall)
+            {
+                var sportName = _cacheRefAdapter.GetSportName((int)SportType.BasketBall);
+                return $"{prefixText}{sportName}";
+            }
 
-        private static bool IsVirtualSport(int sportId)
-        {
-            return sportId == SabaSportType.SabaBasketBall
-                   || sportId == SabaSportType.SabaSoccer
-                   || sportId == SabaSportType.VirtualSports
-                   || sportId == SabaSportType.SabaCricket;
+            if (id == SabaSportType.SabaCricket)
+            {
+                var sportName = _cacheRefAdapter.GetSportName((int)SportType.Cricket);
+                return $"{prefixText}{sportName}";
+            }
+
+            if (id == SabaSportType.VirtualSports)
+            {
+                return _cacheRefAdapter.GetDummySportName(id);
+            }
+
+            return _cacheRefAdapter.GetSportName(id);
         }
     }
 }

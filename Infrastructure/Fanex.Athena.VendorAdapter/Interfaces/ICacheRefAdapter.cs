@@ -23,7 +23,7 @@
 
         string GetSportName(object sportId, string languageCode = null);
 
-        string GetSportNameByResourceData(object refId, object sportId, string languageCode = null);
+        string GetDummySportName(object sportId, string languageCode = null);
 
         string GetTeamName(object teamId);
     }

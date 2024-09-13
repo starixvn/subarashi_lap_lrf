@@ -134,7 +134,7 @@
                 GetCurrentIBCLanguageCode());
         }
 
-        public string GetSportNameByResourceData(object refId, object sportId, string languageCode = null)
+        public string GetDummySportName(object sportId, string languageCode = null)
         {
             if (!IsValidId(sportId))
             {
@@ -142,7 +142,7 @@
             }
 
             return RemotingRefService.GetResourceDataByRefIdAndResourceId(
-                refId.ToString(),
+                "DummySport",
                 sportId.ToString(),
                 GetCurrentIBCLanguageCode(languageCode),
                 string.Empty);
