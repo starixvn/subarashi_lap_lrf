@@ -1706,6 +1706,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                     let data = new URLSearchParams();
                     data.append('customerClass', $('#CustomerClass').val());
                     data.append('currencyId', $('#CurrencyId').val());
+                    data.append('custId', $('#CustId').val());
 
                     fetch(Site.resolveClientUrl(URL_EXCEL), {
                         body: data,
