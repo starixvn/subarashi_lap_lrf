@@ -21,6 +21,15 @@
     .sort-icon-desc.light {
       border-top-color: #fff; }
 
+.icon-voucherid {
+  background: url("images/Icon_voucher.png") no-repeat center center/100%;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  position: relative;
+  margin-right: 2px;
+  top: 4px; }
+
 .booked-icon {
   padding: 0px 10px;
   background-color: #F27C06;
