@@ -31,9 +31,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel
 
         public static int GetComparerValue(GroupCommSettingMetaModel setting)
         {
-            var sortValue = Array.IndexOf(CommissionGroupHelper.ProductSettingOrder, setting.ProductCode);
-
-            return sortValue >= 0 ? sortValue : int.MaxValue;
+            return CommissionGroupHelper.ProductListComparer(setting.ProductCode);
         }
     }
 

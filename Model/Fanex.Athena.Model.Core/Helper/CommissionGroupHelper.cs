@@ -8,9 +8,9 @@ namespace Fanex.Athena.Model.Core.Helper
 {
     public static class CommissionGroupHelper
     {
-        public const string ParlayName = "Parlay";
+        private const string ParlayName = "Parlay";
 
-        public static readonly string[] ProductSettingOrder = new string[] {Product.SB, ParlayName, Product.NG, Product.CS, Product.VB, Product.PP, Product.SXG,
+        private static readonly string[] ProductSettingOrder = new string[] {Product.SB, ParlayName, Product.NG, Product.CS, Product.VB, Product.PP, Product.SXG,
             Product.SG, Product.KN, Product.LT, Product.TG, Product.VS, Product.VRG, Product.CC, Product.SBC, Product.SAG, Product.PGS, Product.AB, Product.WM,
             Product.BGG, Product.JK, Product.HB, Product.VGA, Product.CG, Product.AP, Product.APM, Product.FGGL, Product.MXG, Product.JIG, Product.YB, Product.MGRNG };
 
