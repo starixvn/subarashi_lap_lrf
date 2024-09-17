@@ -54,7 +54,7 @@
             }
 
             var customerClassLimitPolicies = (await _dataAccess.GetSettingPoliciesMember(metaModel)).ToList();
-            await MapLicLeagueGroup(customerClassLimitPolicies, metaModel.Language);
+            await MapLicLeagueGroup(customerClassLimitPolicies, metaModel.Language, metaModel.IsHideSaba);
             MapCurrencyName(metaModel, customerClassLimitPolicies);
 
             return new RiskLevelModel
@@ -66,7 +66,7 @@
         public async Task<IEnumerable<CustomerClassModel>> GetSettingPolicy(GetCustomerClassInformationMetaModel metaModel)
         {
             var policies = await _dataAccess.GetSettingPolicies(metaModel);
-            await MapLicLeagueGroup(policies, metaModel.Language);
+            await MapLicLeagueGroup(policies, metaModel.Language, metaModel.IsHideSaba);
 
             var result = GroupPolicies(metaModel, policies);
             await MapCustomerClassCategories(metaModel, result);
@@ -131,7 +131,7 @@
             return riskLevelList;
         }
 
-        private async Task MapLicLeagueGroup(IEnumerable<CustomerClassLimitPolicyModel> policies, string langCode)
+        private async Task MapLicLeagueGroup(IEnumerable<CustomerClassLimitPolicyModel> policies, string langCode, bool isHideSaba)
         {
             foreach (var policy in policies)
             {
@@ -141,7 +141,7 @@
 
                 if (hasLeagueGroup && int.TryParse(policy.SportType, out var sportType))
                 {
-                    var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode);
+                    var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode, isHideSaba);
                     var leagueGroupIdList = policy.LeagueGroupId.Split(',');
                     var leagueGroupListByPolicy = (isAllLeagueGroup
                             ? leagueGroups

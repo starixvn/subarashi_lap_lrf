@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Fanex.Athena.Extension.Utility.Interfaces;
-using Fanex.Athena.Model.Core.DTO.External;
-using Fanex.Athena.Service.StatelessCore;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Logging;
-using NSubstitute;
-using NUnit.Framework;
-
-namespace Fanex.Athena.ServiceStatelessCore.UnitTests
+﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Extension.Utility.Interfaces;
+    using Logging;
+    using Model.Core.DTO.External;
+    using NSubstitute;
+    using NUnit.Framework;
+    using Service.StatelessCore;
+    using Service.StatelessCore.Interfaces;
+
     public class PortalApiServiceTestAble : PortalApiService
     {
         public PortalApiServiceTestAble(ILGAPIClient lgApiClient, ICustomMemoryCacheService cache, ILogger logger)
@@ -29,11 +29,6 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
     [TestFixture]
     public class PortalApiServiceTest
     {
-        private ILGAPIClient _lgApiClient;
-        private ILogger _logger;
-        private ICustomMemoryCacheService _cache;
-        private PortalApiServiceTestAble _portalApiService;
-
         [SetUp]
         public void SetUp()
         {
@@ -51,6 +46,11 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             _cache = null;
             _portalApiService = null;
         }
+
+        private ILGAPIClient _lgApiClient;
+        private ILogger _logger;
+        private ICustomMemoryCacheService _cache;
+        private PortalApiServiceTestAble _portalApiService;
 
         [Test]
         public async Task TryGetOrAddFromCache_WhenCall_CallSetAndGetMethod()
@@ -89,7 +89,8 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             _cache.Get<IEnumerable<int>>(Arg.Any<string>()).Returns(null as IEnumerable<int>);
             _lgApiClient.PostAsync<PortalApiReponse<IEnumerable<int>>>(ApiPath, payload, "en-US")
                 .Returns(Task.FromResult(portalResponse));
-            var expectedErrorMsgLog = $"An error occurred while calling LGAPI {ApiPath} - ErrorMsg: {portalResponse.ErrorMsg} - ErrorCode: {portalResponse.ErrorCoode}";
+            var expectedErrorMsgLog =
+                $"An error occurred while calling LGAPI {ApiPath} - ErrorMsg: {portalResponse.ErrorMsg} - ErrorCode: {portalResponse.ErrorCoode}";
 
             // Action
             var result = await _portalApiService.HandleTestable(ApiPath, payload, defaultData);
@@ -165,11 +166,12 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             };
 
             _cache.Get<IEnumerable<PortalApiLeagueResponse>>(Arg.Any<string>()).Returns(null as IEnumerable<PortalApiLeagueResponse>);
-            _lgApiClient.PostAsync<PortalApiReponse<IEnumerable<PortalApiLeagueResponse>>>("Portal/GetLimitLeagues", Arg.Is<object>(x => x != null), "en-US")
+            _lgApiClient.PostAsync<PortalApiReponse<IEnumerable<PortalApiLeagueResponse>>>("Portal/GetLimitLeagues", Arg.Is<object>(x => x != null),
+                    "en-US")
                 .Returns(Task.FromResult(portalResponse));
 
             // Action
-            var result = await _portalApiService.GetLimitLeaguesAsync(SiteName, SportType, LeagueGroupId, LangCode);
+            var result = await _portalApiService.GetLimitLeaguesAsync(SiteName, SportType, LeagueGroupId, LangCode, false);
 
             // Assert
             Assert.AreEqual(portalResponse.Data, result);
@@ -187,17 +189,21 @@ namespace Fanex.Athena.ServiceStatelessCore.UnitTests
             const int CacheTimeOut = 30 * 60;
             var portalResponse = new PortalApiReponse<IEnumerable<PortalApiLeagueGroupResponse>>
             {
-                Data = new[] { new PortalApiLeagueGroupResponse { LicLeagueGroupID = 1, LicGroupName = "league group name", InHouseLeagueGroupID = 2 } },
+                Data = new[]
+                {
+                    new PortalApiLeagueGroupResponse { LicLeagueGroupID = 1, LicGroupName = "league group name", InHouseLeagueGroupID = 2 }
+                },
                 ErrorCoode = 0,
                 ErrorMsg = string.Empty
             };
 
             _cache.Get<IEnumerable<PortalApiLeagueGroupResponse>>(Arg.Any<string>()).Returns(null as IEnumerable<PortalApiLeagueGroupResponse>);
-            _lgApiClient.PostAsync<PortalApiReponse<IEnumerable<PortalApiLeagueGroupResponse>>>("Portal/GetLeagueGroups", Arg.Is<object>(x => x != null), "en-US")
+            _lgApiClient.PostAsync<PortalApiReponse<IEnumerable<PortalApiLeagueGroupResponse>>>("Portal/GetLeagueGroups",
+                    Arg.Is<object>(x => x != null), "en-US")
                 .Returns(Task.FromResult(portalResponse));
 
             // Action
-            var result = await _portalApiService.GetLeagueGroupsAsync(SportType, LangCode);
+            var result = await _portalApiService.GetLeagueGroupsAsync(SportType, LangCode, false);
 
             // Assert
             Assert.AreEqual(portalResponse.Data, result);

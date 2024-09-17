@@ -4,17 +4,17 @@
     using System.Threading.Tasks;
     using System.Web.Http.Controllers;
     using System.Web.Script.Serialization;
-    using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Module.Notification.ControllersAPI;
-    using Fanex.Athena.Module.Notification.DTO;
-    using Fanex.Athena.Module.Notification.MetaModel;
-    using Fanex.Athena.Module.Notification.Service.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.UnitTest.Common.Helpers;
+    using Athena.Service.StatelessCore.Interfaces;
+    using ControllersAPI;
+    using DTO;
+    using MetaModel;
+    using Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.ResultModel;
     using NSubstitute;
     using NUnit.Framework;
+    using Service.Interfaces;
+    using UnitTest.Common.Helpers;
 
     public class NotificationApiControllerTest
     {
@@ -24,13 +24,13 @@
 
         private const string Language = "Cs";
 
-        private INotificationManagerService _notificationManagerService;
-
-        private ILicenseeSettingService _licenseeSettingService;
+        private readonly JavaScriptSerializer _serializer = new JavaScriptSerializer();
 
         private NotificationApiController _apiController;
 
-        private readonly JavaScriptSerializer _serializer = new JavaScriptSerializer();
+        private ILicenseeSettingService _licenseeSettingService;
+
+        private INotificationManagerService _notificationManagerService;
 
         [SetUp]
         public void SetUp()
@@ -91,12 +91,10 @@
                 Language = "en",
                 MessageTypes = "1,2"
             };
+
             var expectedMetaModel = new NotificationMetaModel
             {
                 Language = "en",
-                IsOnlyUnread = true,
-                PageSize = 10,
-                PageIndex = 1,
                 UserName = UserName,
                 LicenseeName = SiteName,
                 MessageTypes = "1,2"
@@ -105,7 +103,7 @@
             NotificationMetaModel passedParam = null;
 
             _notificationManagerService.GetNotificationMessages(Arg.Do<NotificationMetaModel>(x => passedParam = x))
-                                .Returns(new ReportResultModel<NotificationMessage>());
+                .Returns(new ReportResultModel<NotificationMessage>());
 
             var expectedResult = _serializer.Serialize(expectedMetaModel);
 
@@ -126,7 +124,8 @@
                 MessageId = 1,
                 MessageType = "Amendment",
                 UserName = UserName,
-                LicenseeName = SiteName
+                LicenseeName = SiteName,
+                Source = "Test"
             };
 
             var resultModel = new ResultInfo
@@ -138,18 +137,25 @@
 
             var expectedResultModel = new
             {
-                Code = resultModel.Code,
-                Message = resultModel.Message,
-                IsSuccessful = resultModel.IsSuccessful
+                resultModel.Code,
+                resultModel.Message,
+                resultModel.IsSuccessful,
+                resultModel.ExtendedData
             };
-            var expectedResult = _serializer.Serialize(expectedResultModel);
 
             // Action
             var markNotificationAsReadResult = _apiController.MarkNotificationAsRead(metaModel);
-            var result = _serializer.Serialize(markNotificationAsReadResult);
+            var result = markNotificationAsReadResult.Content;
 
             // Assert
-            Assert.That(result, Is.EqualTo(expectedResult));
+            // Asset
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Code, Is.EqualTo(expectedResultModel.Code));
+                Assert.That(result.Message, Is.EqualTo(expectedResultModel.Message));
+                Assert.That(result.IsSuccessful, Is.EqualTo(expectedResultModel.IsSuccessful));
+                Assert.That(result.ExtendedData, Is.EqualTo(expectedResultModel.ExtendedData));
+            });
         }
 
         [Test]
@@ -172,7 +178,7 @@
 
             NotificationMarkAsReadMetaModel passedParam = null;
             _notificationManagerService.MarkNotificationAsRead(Arg.Do<NotificationMarkAsReadMetaModel>(x => passedParam = x))
-                                .Returns(new ResultInfo());
+                .Returns(new ResultInfo());
 
             var expectedResult = _serializer.Serialize(expectedMetaModel);
 
@@ -194,11 +200,13 @@
                     { "username", UserName },
                     { "sitename", SiteName },
                     { "language", Language },
-                    { "permissions", new List<PortalFunction>
                     {
-                        new PortalFunction { FunctionKey = "ResultAmendment_Recalculation75" },
-                        new PortalFunction{ FunctionKey = "AbnormalBet"}
-                    }}
+                        "permissions", new List<PortalFunction>
+                        {
+                            new PortalFunction { FunctionKey = "ResultAmendment_Recalculation75" },
+                            new PortalFunction { FunctionKey = "AbnormalBet" }
+                        }
+                    }
                 }
             };
 

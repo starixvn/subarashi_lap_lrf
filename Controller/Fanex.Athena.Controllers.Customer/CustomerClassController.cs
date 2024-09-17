@@ -5,24 +5,24 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Excel.Base;
-    using Fanex.Athena.Excel.Base.Helpers;
-    using Fanex.Athena.Excel.Customer.CustomerClass;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Customer.DTO;
-    using Fanex.Athena.Model.Customer.Enum;
-    using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Web.ActionFilter;
-    using Fanex.Athena.Web.ResultExtension;
+    using Excel.Base;
+    using Excel.Base.Helpers;
+    using Excel.Customer.CustomerClass;
+    using Extension.Helper;
+    using Model.Core.DTO.Common;
+    using Model.Customer.DTO;
+    using Model.Customer.Enum;
+    using Model.Customer.MetaModel;
+    using Resources;
+    using Service.Customer.Interfaces;
+    using Service.StatelessCore.Interfaces;
+    using Web.ActionFilter;
+    using Web.ResultExtension;
 
     public class CustomerClassController : CultureBaseController
     {
-        private readonly ICustomerClassService _service;
         private readonly IPortalApiService _portalApiService;
+        private readonly ICustomerClassService _service;
 
         public CustomerClassController(ICustomerClassService service, IPortalApiService portalApiService)
         {
@@ -47,7 +47,9 @@
         {
             var metaModel = BuildMetaModel();
 
-            var viewModel = await (tabKey == (byte)CustomerClassTabType.SettingPolicy ? _service.GetSettingPolicy(metaModel) : _service.GetSpreadSettingPolicy(metaModel));
+            var viewModel = await (tabKey == (byte)CustomerClassTabType.SettingPolicy
+                ? _service.GetSettingPolicy(metaModel)
+                : _service.GetSpreadSettingPolicy(metaModel));
             var model = viewModel;
             if (customerClassIds != null && customerClassIds.Any())
             {
@@ -67,7 +69,9 @@
         public async Task<ActionResult> ExportExcel(byte tabKey = 1, IEnumerable<string> customerClassIds = null)
         {
             var metaModel = BuildMetaModel();
-            var dataSource = await (tabKey == (byte)CustomerClassTabType.SettingPolicy ? _service.GetSettingPolicy(metaModel) : _service.GetSpreadSettingPolicy(metaModel));
+            var dataSource = await (tabKey == (byte)CustomerClassTabType.SettingPolicy
+                ? _service.GetSettingPolicy(metaModel)
+                : _service.GetSpreadSettingPolicy(metaModel));
 
             if (customerClassIds != null && customerClassIds.Any())
             {
@@ -105,15 +109,16 @@
             foreach (var leagueGroup in metaModel.LeagueGroups)
             {
                 var limitLeagues = await _portalApiService.GetLimitLeaguesAsync(
-                SessionServiceInstance.LicenseeSession.LicenseeName,
-                metaModel.SportType, leagueGroup.LeagueGroupId,
-                SessionServiceInstance.UserSession.Language);
+                    SessionServiceInstance.LicenseeSession.LicenseeName,
+                    metaModel.SportType, leagueGroup.LeagueGroupId,
+                    SessionServiceInstance.UserSession.Language,
+                    IsHideSaba);
 
                 result.Add(new LeagueGroup
                 {
                     LeagueGroupId = leagueGroup.LeagueGroupId,
                     LeagueGroupName = leagueGroup.LeagueGroupName,
-                    LimitLeagues = limitLeagues,
+                    LimitLeagues = limitLeagues
                 });
             }
 
@@ -126,10 +131,8 @@
             {
                 return new CustomerClassSettingPolicyExcel(templatePath, reportTitle, source);
             }
-            else
-            {
-                return new CustomerClassSpreadSettingPolicyExcel(templatePath, reportTitle, source);
-            }
+
+            return new CustomerClassSpreadSettingPolicyExcel(templatePath, reportTitle, source);
         }
 
         private async Task<IEnumerable<CustomerClassModel>> GetModelForTabAsync(byte tabKey)
@@ -145,13 +148,13 @@
                     return await _service.GetSpreadSettingPolicy(metaModel);
 
                 case (byte)CustomerClassTabType.AllCustomerClass:
+                {
+                    var result = await _service.GetAllCustomerClass(metaModel.Language);
+                    return result.GroupBy(_ => _.Id).Select(_ => new CustomerClassModel(_.Key)
                     {
-                        var result = await _service.GetAllCustomerClass(metaModel.Language);
-                        return result.GroupBy(_ => _.Id).Select(_ => new CustomerClassModel(_.Key)
-                        {
-                            Category = String.Join(", ", _.Select(c => c.Category))
-                        });
-                    }
+                        Category = string.Join(", ", _.Select(c => c.Category))
+                    });
+                }
                 default:
                     return await _service.GetSettingPolicy(metaModel);
             }
