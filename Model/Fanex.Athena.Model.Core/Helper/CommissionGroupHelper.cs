@@ -10,9 +10,10 @@ namespace Fanex.Athena.Model.Core.Helper
     {
         private const string ParlayName = "Parlay";
 
-        private static readonly string[] ProductSettingOrder = new string[] {Product.SB, ParlayName, Product.NG, Product.CS, Product.VB, Product.PP, Product.SXG,
+        private static readonly string[] ProductSettingOrder = new string[] { Product.SB, ParlayName, Product.NG, Product.CS, Product.VB, Product.PP, Product.SXG,
             Product.SG, Product.KN, Product.LT, Product.TG, Product.VS, Product.VRG, Product.CC, Product.SBC, Product.SAG, Product.PGS, Product.AB, Product.WM,
-            Product.BGG, Product.JK, Product.HB, Product.VGA, Product.CG, Product.AP, Product.APM, Product.FGGL, Product.MXG, Product.JIG, Product.YB, Product.MGRNG };
+            Product.BGG, Product.JK, Product.HB, Product.VGA, Product.CG, Product.AP, Product.APM, Product.FGGL, Product.MXG, Product.JIG, Product.YB, Product.MGRNG,
+            Product.WE, Product.SEA, Product.L22, Product.UUSL, Product.FS, Product.FAC, Product.NS  };
 
         public static int ProductListComparer(string productCode)
         {
