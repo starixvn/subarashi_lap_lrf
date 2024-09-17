@@ -8,7 +8,6 @@
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;
-    using Fanex.Athena.Model.Customer.DTO;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Athena.Service.Customer.Interfaces;
 
@@ -29,10 +28,14 @@
                 .OrderBy(_ => CommissionGroupHelper.ProductListComparer(_.ProductCode)).ThenBy(_ => _.ProductCode); ;
         }
 
-        public async Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId)
+        public async Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId, ProductAccess productAccess)
         {
             var (comms, commValues) = await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
-            var productList = commValues.Select(_ => _.ProductCode).Distinct().OrderBy(_ => CommissionGroupHelper.ProductListComparer(_)).ThenBy(_ => _);
+            var productList = commValues
+                .Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
+                .Select(_ => _.ProductCode).Distinct()
+                .OrderBy(_ => CommissionGroupHelper.ProductListComparer(_))
+                .ThenBy(_ => _);
 
             return (MergeCommSetting(comms, commValues), productList);
         }
@@ -48,14 +51,17 @@
                     IsDefaultGroup = c.IsDefaultGroup,
                     DefaultGroupId = c.DefaultGroupId,
                     NumberOfCustomer = c.NumberOfCustomer,
-                    CommValues = ds.OrderBy(_ => _, new GroupCommSettingComparer()).ThenBy(_ => _.ProductCode),
+                    CommValues = ds,
                 }).ToList();
         }
 
-        public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId)
+        public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId, ProductAccess productAccess)
         {
             var result = await _groupDataAccess.GetById(groupCommId, licenseeId);
-            result.CommValues = result.CommValues.OrderBy(_ => _, new GroupCommSettingComparer()).ThenBy(_ => _.ProductCode);
+            result.CommValues = result.CommValues
+                .Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
+                .OrderBy(_ => _, new GroupCommSettingComparer())
+                .ThenBy(_ => _.ProductCode);
 
             return result;
         }

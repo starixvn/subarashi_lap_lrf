@@ -16,9 +16,9 @@
 
         Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user);
 
-        Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId);
+        Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId, ProductAccess productAccess);
 
-        Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId);
+        Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId, ProductAccess productAccess);
 
         bool CheckExistingGroupByName(int licenseeId, string groupName);
 

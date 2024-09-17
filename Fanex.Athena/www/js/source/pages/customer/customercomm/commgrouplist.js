@@ -336,10 +336,11 @@
                     ...item
                 };
 
-                let commValues = item.CommValues;
                 for (var j = 0; j < products.length; j++) {
                     var key = products[j];
-                    row['Col-' + key] = !commValues[j] ? 0 : commValues[j].Discount;
+                    var commValue = item.CommValues.find(_ => _.ProductCode === key);
+
+                    row['Col-' + key] = !commValue ? 0 : commValue.Discount;
                 }
 
                 rows.push(row);

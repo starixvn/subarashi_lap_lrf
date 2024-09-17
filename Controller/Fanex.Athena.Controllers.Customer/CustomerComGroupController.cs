@@ -56,7 +56,9 @@
         public async Task<ActionResult> Index()
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var (groups, productList) = await _groupComService.GetAllAsync(licenseeId).ConfigureAwait(false);
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
+
+            var (groups, productList) = await _groupComService.GetAllAsync(licenseeId, productAccess).ConfigureAwait(false);
 
             var model = new CommissionGroupListViewModel(groups, productList);
 
@@ -140,7 +142,9 @@
         [HttpGet]
         public async Task<ActionResult> Update(int groupId)
         {
-            var model = await _groupComService.GetById(groupId, SessionServiceInstance.LicenseeSession.LicenseeId);
+            var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
+            var model = await _groupComService.GetById(groupId, licenseeId, productAccess);
 
             if (model == null)
             {
@@ -213,7 +217,7 @@
         public async Task<JsonResult> GetDefaultGroup()
         {
             var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
-            var (groupList, _) = await _groupComService.GetAllAsync(SessionServiceInstance.LicenseeSession.LicenseeId).ConfigureAwait(false);
+            var (groupList, _) = await _groupComService.GetAllAsync(SessionServiceInstance.LicenseeSession.LicenseeId, productAccess).ConfigureAwait(false);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             return Json(new { id = defaultGroupId }, JsonRequestBehavior.AllowGet);
@@ -229,9 +233,10 @@
         {
             const string FileName = "CustomerCommGroup";
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/CustomerGroup/CustomerCommGroup.xls");
+            var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
 
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var (groups, productList) = await _groupComService.GetAllAsync(licenseeId).ConfigureAwait(false);
+            var (groups, productList) = await _groupComService.GetAllAsync(licenseeId, productAccess).ConfigureAwait(false);
 
             var model = new CommissionGroupListViewModel(groups, productList);
 
@@ -278,7 +283,7 @@
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
 
-            var (groupList, _) = await _groupComService.GetAllAsync(licenseeId).ConfigureAwait(false);
+            var (groupList, _) = await _groupComService.GetAllAsync(licenseeId, productAccess).ConfigureAwait(false);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
             metaModel.LicenseeId = licenseeId;
@@ -289,8 +294,9 @@
         private async Task<IResultInfo> UpdateGroupComm(GroupCommMetaModel metaModel)
         {
             var userSession = SessionServiceInstance.UserSession;
+            var productAccess = _productService.GetProductAccess(metaModel.LicenseeId, SessionServiceInstance.UserSession.Language);
 
-            var currentGroup = await _groupComService.GetById(metaModel.GroupCommId, metaModel.LicenseeId).ConfigureAwait(false);
+            var currentGroup = await _groupComService.GetById(metaModel.GroupCommId, metaModel.LicenseeId, productAccess).ConfigureAwait(false);
             if (currentGroup == null || CustomerComGroupHelper.IsSameGroup(currentGroup, metaModel))
             {
                 return new ResultInfo
