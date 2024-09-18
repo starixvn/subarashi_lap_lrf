@@ -10,6 +10,7 @@
     using Logging;
     using Model.Core;
     using Model.Core.DTO.External;
+    using Newtonsoft.Json;
 
     [CLSCompliant(false)]
     public class PortalApiService : IPortalApiService
@@ -91,19 +92,20 @@
             try
             {
                 var response = await _lgApiClient
-                    .PostAsync<PortalApiReponse<T>>(path, payload, DefaultLanguage)
+                    .PostAsync<PortalApiResponse<T>>(path, payload, DefaultLanguage)
                     .ConfigureAwait(false);
 
-                if (response.ErrorCoode != 0)
+                if (response.ErrCode != 0)
                 {
-                    _logger.Error($"An error occurred while calling LGAPI {path} - ErrorMsg: {response.ErrorMsg} - ErrorCode: {response.ErrorCoode}");
+                    _logger.Error($"An error occurred while calling LGAPI {path} - Payload: {JsonConvert.SerializeObject(payload)} - ErrCode: {response.ErrCode} - ErrMsg: {response.ErrMsg}");
+                    return defaultData;
                 }
 
                 return response.Data;
             }
             catch (Exception ex)
             {
-                _logger.Error($"An error occurred while calling LGAPI {path} - {LogMessageHelper.GenerateMessage(ex)}", ex);
+                _logger.Error($"An error occurred while calling LGAPI {path} - Payload: {JsonConvert.SerializeObject(payload)} - {LogMessageHelper.GenerateMessage(ex)}", ex);
                 return defaultData;
             }
         }
