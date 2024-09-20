@@ -1,7 +1,7 @@
-﻿using Fanex.RemotingRef;
-
-namespace Fanex.Athena.VendorAdapter.Interfaces
+﻿namespace Fanex.Athena.VendorAdapter.Interfaces
 {
+    using RemotingRef;
+
     public interface ICacheRefAdapter
     {
 #pragma warning disable CS3003 // Type is not CLS-compliant
@@ -22,6 +22,8 @@ namespace Fanex.Athena.VendorAdapter.Interfaces
         string GetLeagueName(object leagueId);
 
         string GetSportName(object sportId, string languageCode = null);
+
+        string GetDummySportName(object sportId, string languageCode = null);
 
         string GetTeamName(object teamId);
     }

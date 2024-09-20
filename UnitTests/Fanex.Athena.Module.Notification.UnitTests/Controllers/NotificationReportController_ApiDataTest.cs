@@ -3,21 +3,20 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.Controllers.Base.UnitTests;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.ResultModel;
-    using Fanex.Athena.Module.Notification.Controller;
-    using Fanex.Athena.Module.Notification.DTO;
-    using Fanex.Athena.Module.Notification.MetaModel;
-    using Fanex.Athena.Module.Notification.Service.Interfaces;
+    using Controller;
+    using Controllers.Base.UnitTests;
+    using DTO;
+    using MetaModel;
+    using Model.Core.DTO.Common;
+    using Model.Core.ResultModel;
     using NSubstitute;
     using NUnit.Framework;
+    using Service.Interfaces;
 
     public class NotificationReportController_ApiDataTest : CultureBaseControllerHelperTest
     {
-        private INotificationManagerService _service;
-
         private NotificationReportController _controller;
+        private INotificationManagerService _service;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -45,6 +44,7 @@
         public async Task GetNotificationMessages_WhenCall_CallServiceWithCorrectParameter()
         {
             // Arrange
+            const string expectedLanguage = "en";
             var metaModel = new NotificationMetaModel();
             _service.GetNotificationMessages(Arg.Do<NotificationMetaModel>(x => metaModel = x));
 
@@ -54,10 +54,10 @@
             // Asset
             Assert.Multiple(() =>
             {
-                _service.Received().GetNotificationMessages(Arg.Any<NotificationMetaModel>());
-                Assert.That(metaModel.IsOnlyUnread, Is.True);
-                Assert.That(metaModel.PageIndex, Is.EqualTo(1));
-                Assert.That(metaModel.PageSize, Is.EqualTo(10));
+                _service.Received().GetNotificationMessages(metaModel);
+                Assert.That(metaModel.UserName, Is.EqualTo(DefaultUserSession.UserName));
+                Assert.That(metaModel.Language, Is.EqualTo(expectedLanguage));
+                Assert.That(metaModel.LicenseeName, Is.EqualTo(DefaultLicenseeSession.LicenseeName));
             });
         }
 
@@ -80,7 +80,7 @@
             // Asset
             Assert.Multiple(() =>
             {
-                _service.Received().GetResultAmendment(Arg.Any<NotificationMetaModel>());
+                _service.Received().GetResultAmendment(metaModel);
                 Assert.That(metaModel.UserName, Is.EqualTo(DefaultUserSession.UserName));
                 Assert.That(metaModel.Language, Is.EqualTo(expectedLanguage));
                 Assert.That(metaModel.LicenseeName, Is.EqualTo(DefaultLicenseeSession.LicenseeName));

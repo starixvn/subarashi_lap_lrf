@@ -16,10 +16,12 @@
     var currency = "MYR";
     var customerClas = @ViewBag.CustomerClass;
     var currencyId = @ViewBag.CurrencyId;
+    var custId = @ViewBag.CustId;
 }
 @section Content{
     @Html.Hidden("CustomerClass", (string)customerClas)
     @Html.Hidden("CurrencyId", (string)currencyId)
+    @Html.Hidden("CustId", (string)custId)
     @if (string.IsNullOrEmpty(customerClas) || customerClas.Equals("0"))
     {
         <div class="page-results">
@@ -28,57 +30,14 @@
     }
     else
     {
-        <div class="col right right-filter-menu">
-            <i class="icon-excel right" title="Export to Excel" id="ExportToExcel"></i>
-        </div>
-
-        <div class="page-results risk-level-info-spread-setting">
-            <div class="result-content">
-                <div class="panel-heading active">
-                    <div class="panel-title">
-                        <span class="report-title">@ViewResources.RiskLevelSpreadSetting</span>
-                    </div>
-                </div>
-                <div class="main-content" id="main-content">
-                    <table id="info-spread-setting" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="note" colspan="3">@ViewResources.RiskLevelSpreadSettingNote</th>
-                            </tr>
-                            <tr>
-                                <th class="col-large">@ViewResources.SportType</th>
-                                <th class="col-large">@ViewResources.Platform</th>
-                                <th class="col-medium large">@ViewResources.Spread</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model.SiteMemberPolicies.Count() == 0)
-                            {
-                                <tr>
-                                    <td class="center-align" colspan="3">@ViewResources.NoInfo</td>
-                                </tr>
-                            }
-                            else
-                            {
-                                foreach (var m in Model.SiteMemberPolicies)
-                                {
-                                    <tr>
-                                        <td class="left-align">@m.SportTypeName</td>
-                                        <td class="left-align">@m.Platform</td>
-                                        <td class="right-align">@m.Spread</td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
         <div class="page-results risk-level-policy-setting">
             <div class="result-content">
                 <div class="panel-heading active">
                     <div class="panel-title">
                         <span class="report-title">@ViewResources.RiskLevelBetSetting</span>
+                        <div class="col right right-filter-menu excel-container">
+                            <i class="icon-excel" title="Export to Excel" id="ExportToExcel"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="main-content" id="main-content">

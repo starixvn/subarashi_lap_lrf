@@ -119,13 +119,13 @@
 	</Function>
 
 	<Function Name="GroupComm">
-		<Setting Key="Lrf_LicenseeCommProductList" SpName="Lrf_LicenseeCommProductList_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" />
-		<Setting Key="Lrf_LicenseeGroupCommSel" SpName="Lrf_LicenseeGroupCommSel_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" />
-		<Setting Key="Lrf_LicenseeGroupCommIns" SpName="Lrf_LicenseeGroupCommIns_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" />
-		<Setting Key="Lrf_LicenseeGroupCommDel" SpName="Lrf_LicenseeGroupCommDel_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" TimeOut="300" />
-		<Setting Key="Lrf_LicenseeGroupCommUpd" SpName="Lrf_LicenseeGroupCommUpd_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" TimeOut="300" />
-		<Setting Key="Lrf_GroupCommGetById" SpName="Lrf_GroupCommGetById_xpre" DbName="DBCUST.bodb_Licensee.wsv_lap" />
-		<Setting Key="Lrf_GroupCommCheckByName" SpName="Lrf_GroupCommCheckByName_xpre" DbName="DBLIC.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_LicenseeCommProductList" SpName="Lrf_LicenseeCommProductList" DbName="DBCUST.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_LicenseeGroupCommSel" SpName="Lrf_LicenseeGroupCommSel" DbName="DBCUST.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_LicenseeGroupCommIns" SpName="Lrf_LicenseeGroupCommIns" DbName="DBCUST.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_LicenseeGroupCommDel" SpName="Lrf_LicenseeGroupCommDel" DbName="DBCUST.bodb_Licensee.wsv_lap" TimeOut="300" />
+		<Setting Key="Lrf_LicenseeGroupCommUpd" SpName="Lrf_LicenseeGroupCommUpd" DbName="DBCUST.bodb_Licensee.wsv_lap" TimeOut="300" />
+		<Setting Key="Lrf_GroupCommGetById" SpName="Lrf_GroupCommGetById" DbName="DBCUST.bodb_Licensee.wsv_lap" />
+		<Setting Key="Lrf_GroupCommCheckByName" SpName="Lrf_GroupCommCheckByName" DbName="DBLIC.bodb_Licensee.wsv_lap" />
 	</Function>
 
 	<Function Name="TotalBets">
@@ -179,6 +179,7 @@
 		<Setting Key="Lrf_CustomerClassPolicySel" SpName="Lrf_CustomerClassPolicySel" DbName="DBCUST.CustDB.wsv_lap" />
 		<Setting Key="Lrf_CustomerClassSitePolicySel" SpName="Lrf_CustomerClassSitePolicySel" DbName="DBCUST.CustDB.wsv_lap" />
 		<Setting Key="Lrf_CustomerClassSitePolicyMemberSel" SpName="Lrf_CustomerClassSitePolicyMemberSel" DbName="DBCUST.CustDB.wsv_lap" />
+		<Setting Key="Lrf_MemberCustomerClassPolicySel" SpName="Lrf_MemberCustomerClassPolicySel" DbName="DBACC.bodb02.wsv_lap" />
 	</Function>
 	<Function Name="Notification">
 		<Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DBEXT.bodb02.wsv_lap" />

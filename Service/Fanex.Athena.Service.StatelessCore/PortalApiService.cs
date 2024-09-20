@@ -4,20 +4,22 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Fanex.Athena.Extension.Helpers;
-    using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Core.DTO.External;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Logging;
+    using Extension.Helpers;
+    using Extension.Utility.Interfaces;
+    using Interfaces;
+    using Logging;
+    using Model.Core;
+    using Model.Core.DTO.External;
+    using Newtonsoft.Json;
 
     [CLSCompliant(false)]
     public class PortalApiService : IPortalApiService
     {
         private const string DefaultLanguage = "en-US";
         private const int ThirtyMinutes = 30 * 60;
+        private readonly ICustomMemoryCacheService _cache;
         private readonly ILGAPIClient _lgApiClient;
         private readonly ILogger _logger;
-        private readonly ICustomMemoryCacheService _cache;
 
         public PortalApiService(ILGAPIClient lgApiClient, ICustomMemoryCacheService cache, ILogger logger)
         {
@@ -35,7 +37,32 @@
                 ThirtyMinutes);
         }
 
-        public async Task<IEnumerable<PortalApiLeagueResponse>> GetLimitLeaguesAsync(string licenseeName, int sportType, int leagueGroupId, string langCode)
+        public async Task<IEnumerable<PortalApiLeagueGroupResponse>> GetLeagueGroupsAsync(int sportType, string langCode, bool isHideSaba)
+        {
+            const string path = "Portal/GetLeagueGroups";
+            var payload = new
+            {
+                SportType = sportType,
+                LangCode = MapLangCode(langCode)
+            };
+            var result = await TryGetOrAddFromCache($"LeagueGroups_{sportType}_{langCode}",
+                () => Handle(path, payload, Enumerable.Empty<PortalApiLeagueGroupResponse>()),
+                ThirtyMinutes);
+
+            if (isHideSaba)
+            {
+                result.ToList().ForEach(l => l.LicGroupName = SabaHelper.RemoveSabaText(l.LicGroupName));
+            }
+
+            return result;
+        }
+
+        public async Task<IEnumerable<PortalApiLeagueResponse>> GetLimitLeaguesAsync(
+            string licenseeName,
+            int sportType,
+            int leagueGroupId,
+            string langCode,
+            bool isHideSaba)
         {
             const string path = "Portal/GetLimitLeagues";
             var payload = new
@@ -50,20 +77,14 @@
                 () => Handle(path, payload, Enumerable.Empty<PortalApiLeagueResponse>()),
                 ThirtyMinutes).ConfigureAwait(false);
 
-            return result.OrderBy(_ => _.LeagueName);
-        }
+            result = result.OrderBy(_ => _.LeagueName);
 
-        public Task<IEnumerable<PortalApiLeagueGroupResponse>> GetLeagueGroupsAsync(int sportType, string langCode)
-        {
-            const string path = "Portal/GetLeagueGroups";
-            var payload = new
+            if (isHideSaba)
             {
-                SportType = sportType,
-                LangCode = MapLangCode(langCode)
-            };
-            return TryGetOrAddFromCache($"LeagueGroups_{sportType}_{langCode}",
-                () => Handle(path, payload, Enumerable.Empty<PortalApiLeagueGroupResponse>()),
-                ThirtyMinutes);
+                result.ToList().ForEach(l => l.LeagueName = SabaHelper.RemoveSabaText(l.LeagueName));
+            }
+
+            return result;
         }
 
         protected async Task<T> Handle<T>(string path, object payload, T defaultData)
@@ -71,19 +92,20 @@
             try
             {
                 var response = await _lgApiClient
-                .PostAsync<PortalApiReponse<T>>(path, payload, DefaultLanguage)
-                .ConfigureAwait(false);
+                    .PostAsync<PortalApiResponse<T>>(path, payload, DefaultLanguage)
+                    .ConfigureAwait(false);
 
-                if (response.ErrorCoode != 0)
+                if (response.ErrCode != 0)
                 {
-                    _logger.Error($"An error occurred while calling LGAPI {path} - ErrorMsg: {response.ErrorMsg} - ErrorCode: {response.ErrorCoode}");
+                    _logger.Error($"An error occurred while calling LGAPI {path} - Payload: {JsonConvert.SerializeObject(payload)} - ErrCode: {response.ErrCode} - ErrMsg: {response.ErrMsg}");
+                    return defaultData;
                 }
 
                 return response.Data;
             }
             catch (Exception ex)
             {
-                _logger.Error($"An error occurred while calling LGAPI {path} - {LogMessageHelper.GenerateMessage(ex)}", ex);
+                _logger.Error($"An error occurred while calling LGAPI {path} - Payload: {JsonConvert.SerializeObject(payload)} - {LogMessageHelper.GenerateMessage(ex)}", ex);
                 return defaultData;
             }
         }
@@ -102,6 +124,6 @@
         }
 
         private static string MapLangCode(string langCode)
-           => string.Equals(langCode, "zh-CN", StringComparison.OrdinalIgnoreCase) ? "cs" : "en";
+            => string.Equals(langCode, "zh-CN", StringComparison.OrdinalIgnoreCase) ? "cs" : "en";
     }
 }

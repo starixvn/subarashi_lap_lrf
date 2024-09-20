@@ -3,13 +3,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Fanex.Athena.DataAccess.Customer;
-    using Fanex.Athena.Model.Core;
-    using Fanex.Athena.Model.Customer.DTO;
-    using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using DataAccess.Customer;
+    using Interfaces;
+    using Model.Core;
+    using Model.Customer.DTO;
+    using Model.Customer.MetaModel;
+    using Resources;
+    using StatelessCore.Interfaces;
 
     public class SabaVirtualSettingService : ISabaVirtualSettingService
     {
@@ -45,9 +45,9 @@
         {
             foreach (var setting in settings)
             {
-                if (setting.LeagueGroupId > 0 && int.TryParse(setting.SportType, out int sportType))
+                if (setting.LeagueGroupId > 0 && int.TryParse(setting.SportType, out var sportType))
                 {
-                    var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode);
+                    var leagueGroups = await _portalApiService.GetLeagueGroupsAsync(sportType, langCode, isHideSaba);
                     var matchedLeagueGroup = leagueGroups.FirstOrDefault(_ => _.InHouseLeagueGroupID == setting.LeagueGroupId);
                     setting.LicLeagueGroupId = matchedLeagueGroup?.LicLeagueGroupID ?? 0;
                     setting.LicLeagueGroupName = matchedLeagueGroup?.LicGroupName ?? DefaultTextValue;

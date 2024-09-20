@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDomain\SabaSportType.cs" />
     <Compile Include="DataDomain\SpecialPlatform.cs" />
     <Compile Include="Constants\TimeZoneType.cs" />
     <Compile Include="Constants\HardCodeSportType.cs" />
@@ -132,7 +133,7 @@
     <Compile Include="DTO\Configuration\MoveBetNotification.cs" />
     <Compile Include="DTO\External\PortalApiLeagueGroupResponse.cs" />
     <Compile Include="DTO\External\PortalApiLeagueResponse.cs" />
-    <Compile Include="DTO\External\PortalApiReponse.cs" />
+    <Compile Include="DTO\External\PortalApiResponse.cs" />
     <Compile Include="DTO\Users\GroupSubsidiary.cs" />
     <Compile Include="DTO\Users\Subsidiary.cs" />
     <Compile Include="DTO\Users\User.cs" />

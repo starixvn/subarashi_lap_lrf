@@ -3830,7 +3830,7 @@ function getSportList(productCodes) {
 /*!**************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/running/actions/types.js ***!
   \**************************************************************************************/
-/*! exports provided: SET_SELECTED_SPORT, SET_SPORT_LIST, SET_ENABLE_LEAGUE, SET_ENABLE_MATCH, SET_SELECTED_BETTYPE, SET_BETTYPE_LIST, SET_SELECTED_LEAGUE, SET_IS_OUTRIGHT, SET_LEAGUE_LIST, SET_SELECTED_MATCH, SET_MATCH_LIST, SET_IP, SET_PLATFORM, SET_OODS_GROUP, SET_CUSTOMER_CLASS */
+/*! exports provided: SET_SELECTED_SPORT, SET_SPORT_LIST, SET_ENABLE_LEAGUE, SET_ENABLE_MATCH, SET_SELECTED_BETTYPE, SET_BETTYPE_LIST, SET_SELECTED_LEAGUE, SET_IS_OUTRIGHT, SET_LEAGUE_LIST, SET_SELECTED_MATCH, SET_MATCH_LIST, SET_IP, SET_PLATFORM, SET_OODS_GROUP, SET_CUSTOMER_CLASS, SET_ORIGINAL_BETTYPE_LIST */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3850,6 +3850,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_PLATFORM", function() { return SET_PLATFORM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_OODS_GROUP", function() { return SET_OODS_GROUP; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_CUSTOMER_CLASS", function() { return SET_CUSTOMER_CLASS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_ORIGINAL_BETTYPE_LIST", function() { return SET_ORIGINAL_BETTYPE_LIST; });
 const SET_SELECTED_SPORT = "SET_SELECTED_SPORT";
 const SET_SPORT_LIST = "SET_SPORT_LIST";
 const SET_ENABLE_LEAGUE = "SET_ENABLE_LEAGUE";
@@ -3865,6 +3866,7 @@ const SET_IP = "SET_IP";
 const SET_PLATFORM = "SET_PLATFORM";
 const SET_OODS_GROUP = "SET_OODS_GROUP";
 const SET_CUSTOMER_CLASS = "SET_CUSTOMER_CLASS";
+const SET_ORIGINAL_BETTYPE_LIST = "SET_ORIGINAL_BETTYPE_LIST";
 
 /***/ }),
 
