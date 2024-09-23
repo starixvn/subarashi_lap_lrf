@@ -1,50 +1,50 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="PendingFundsBetListController.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
+﻿//// --------------------------------------------------------------------------
+//// <copyright file="PendingFundsBetListController.cs" company="">
+//// Copyright (c) . All rights reserved.
+//// </copyright>
+//// --------------------------------------------------------------------------
 
-namespace Fanex.Athena.Api.BetList
-{
-    #region Using
+//namespace Fanex.Athena.Api.BetList
+//{
+//    #region Using
 
-    using System.Threading.Tasks;
-    using System.Web.Http;
+//    using System.Threading.Tasks;
+//    using System.Web.Http;
 
-    using Base.Attributes;
+//    using Base.Attributes;
 
-    using DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Model.BetList.MetaModel;
+//    using DataAccess.Core.Configuration.Interfaces;
+//    using Fanex.Athena.Extension.Helper;
+//    using Fanex.Athena.Model.Auth.DataDomain;
+//    using Model.BetList.MetaModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.StatelessCore.Interfaces;
+//    using Service.Core.Common.Interfaces;
+//    using Service.StatelessCore.Interfaces;
 
-    #endregion Using
+//    #endregion Using
 
-    [ApiFunctionAuthorization(PermissionKeys.ReportCustomerPendingFunds)]
-    public class PendingFundsBetListController : ApiBetListBaseController
-    {
-        public PendingFundsBetListController(
-            ILanguageService languageService,
-            IAuthorizationService authorizationService,
-            IBetListApiClient betListApiClient,
-            IBalanceUpDataAccess balanceUpDataAccess)
-        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
-        {
-        }
+//    [ApiFunctionAuthorization(PermissionKeys.ReportCustomerPendingFunds)]
+//    public class PendingFundsBetListController : ApiBetListBaseController
+//    {
+//        public PendingFundsBetListController(
+//            ILanguageService languageService,
+//            IAuthorizationService authorizationService,
+//            IBetListApiClient betListApiClient,
+//            IBalanceUpDataAccess balanceUpDataAccess)
+//        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
+//        {
+//        }
 
-        [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true)]
-        public async Task<dynamic> Index(BetListMetaModel metaModel)
-        {
-            const string UspKey = "Shard_Lrf_BetList_SelRunningByDate_Mem";
+//        [HttpPost]
+//        [ValidationApiRequest(IsValidCurrency = true)]
+//        public async Task<dynamic> Index(BetListMetaModel metaModel)
+//        {
+//            const string UspKey = "Shard_Lrf_BetList_SelRunningByDate_Mem";
 
-            metaModel.FromDate = DateTimeHelper.Today.AddYears(-1);
-            metaModel.ToDate = DateTimeHelper.Today.AddYears(1);
+//            metaModel.FromDate = DateTimeHelper.Today.AddYears(-1);
+//            metaModel.ToDate = DateTimeHelper.Today.AddYears(1);
 
-            return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
-        }
-    }
-}
+//            return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
+//        }
+//    }
+//}

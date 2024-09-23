@@ -12,6 +12,7 @@ import NumberFormat from '@jsroot/lib/numberFormat';
 import Report from '@jsroot/lib/report'
 import Popup from '@jsroot/components/popup';
 import BetListDetail from './BetListDetail';
+import DataService from '@jsroot/lib/DataService';
 
 const RunningDataGrid = (props) => {
     const isFirstRun = useRef(true);
@@ -79,7 +80,7 @@ const RunningDataGrid = (props) => {
     }
 
     const showTicketDetail = (betId, type, custId, currencyId) => {
-        const url = "api/ExchangeWinLossBetList/Detail";
+        const url = DataService.buildProxyUrl(DataService.apiKeys.betlist,"api/ExchangeWinLossBetList/Detail");
         const paramBaseCurrency = isConvertAllToBaseCurrency ? baseCurrency : "";
         const params = {
             data: { currencyId ,custId, baseCurrency: paramBaseCurrency, excludeTestData: false, betId, type }

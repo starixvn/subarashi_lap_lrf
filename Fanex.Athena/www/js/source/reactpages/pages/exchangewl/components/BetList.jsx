@@ -13,6 +13,7 @@ import { Service } from '../lib/service'
 import { toggleLoader } from '../../../actions/loaderAction'
 import LangHelper from '../../../lib/langHelper'
 import NumberFormat from '../../../lib/numberFormat'
+import DataService from '@jsroot/lib/DataService'
 
 export class BetList extends Component {
     constructor(props) {
@@ -108,7 +109,7 @@ export class BetList extends Component {
 
     _showTicketDetail = (betId, type) => {
         const { CustId, CurrencyId, BaseCurrency, ExcludeTestData } = this.props.params;
-        const url = "api/ExchangeWinLossBetList/Detail";
+        const url = DataService.buildProxyUrl(DataService.apiKeys.betlist, "api/ExchangeWinLossBetList/Detail");
         const params = {
             data: { CustId, CurrencyId, BaseCurrency, ExcludeTestData, betId, type }
         }

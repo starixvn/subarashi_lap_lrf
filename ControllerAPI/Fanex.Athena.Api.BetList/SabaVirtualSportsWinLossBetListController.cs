@@ -1,62 +1,62 @@
-﻿namespace Fanex.Athena.Api.BetList
-{
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Http;
+﻿//namespace Fanex.Athena.Api.BetList
+//{
+//    using System;
+//    using System.Threading.Tasks;
+//    using System.Web.Http;
 
-    using Base.Attributes;
+//    using Base.Attributes;
 
-    using DataAccess.Core.Configuration.Interfaces;
+//    using DataAccess.Core.Configuration.Interfaces;
 
-    using Extension.Helper;
-    using Fanex.Athena.Model.Auth.DataDomain;
+//    using Extension.Helper;
+//    using Fanex.Athena.Model.Auth.DataDomain;
 
-    using Model.BetList.MetaModel;
+//    using Model.BetList.MetaModel;
 
-    using Service.Core.Common.Interfaces;
-    using Service.StatelessCore.Interfaces;
+//    using Service.Core.Common.Interfaces;
+//    using Service.StatelessCore.Interfaces;
 
-    [ApiFunctionAuthorization(PermissionKeys.ReportSabaVirtualSportsWinLoss)]
-    [ApiBetListAuthorization]
-    public class SabaVirtualSportsWinLossBetListController : ApiBetListBaseController
-    {
-        private readonly IReportSettingService _reportSettingService;
+//    [ApiFunctionAuthorization(PermissionKeys.ReportSabaVirtualSportsWinLoss)]
+//    [ApiBetListAuthorization]
+//    public class SabaVirtualSportsWinLossBetListController : ApiBetListBaseController
+//    {
+//        private readonly IReportSettingService _reportSettingService;
 
-        public SabaVirtualSportsWinLossBetListController(
-            ILanguageService languageService,
-            IAuthorizationService authorizationService,
-            IBetListApiClient betListApiClient,
-            IBalanceUpDataAccess balanceUpDataAccess,
-            IReportSettingService reportSettingService)
-        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
-        {
-            _reportSettingService = reportSettingService;
-        }
+//        public SabaVirtualSportsWinLossBetListController(
+//            ILanguageService languageService,
+//            IAuthorizationService authorizationService,
+//            IBetListApiClient betListApiClient,
+//            IBalanceUpDataAccess balanceUpDataAccess,
+//            IReportSettingService reportSettingService)
+//        : base(languageService, authorizationService, betListApiClient, balanceUpDataAccess)
+//        {
+//            _reportSettingService = reportSettingService;
+//        }
 
-        [HttpPost]
-        [ValidationApiRequest(IsValidCurrency = true)]
-        public async Task<dynamic> Index(BetListMetaModel metaModel)
-        {
-            if (!IsValidDateRange(metaModel.FromDate, metaModel.ToDate))
-            {
-                return null;
-            }
+//        [HttpPost]
+//        [ValidationApiRequest(IsValidCurrency = true)]
+//        public async Task<dynamic> Index(BetListMetaModel metaModel)
+//        {
+//            if (!IsValidDateRange(metaModel.FromDate, metaModel.ToDate))
+//            {
+//                return null;
+//            }
 
-            const string UspKey = "Lrf_BetList_SabaVirtualSports_Mem";
-            return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
-        }
+//            const string UspKey = "Lrf_BetList_SabaVirtualSports_Mem";
+//            return await GetBetListResult(metaModel, UspKey).ConfigureAwait(false);
+//        }
 
-        private bool IsValidDateRange(DateTime fromDate, DateTime toDate)
-        {
-            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
-                SessionService.LicenseeSession.LicenseeName);
-            if (setting == null)
-            {
-                return true;
-            }
+//        private bool IsValidDateRange(DateTime fromDate, DateTime toDate)
+//        {
+//            var setting = _reportSettingService.GetSetting(PermissionKeys.ReportLicenseeWinLoss,
+//                SessionService.LicenseeSession.LicenseeName);
+//            if (setting == null)
+//            {
+//                return true;
+//            }
 
-            return DateTimeHelper.IsBetween(fromDate, setting.MinDate, setting.MaxDate) &&
-                DateTimeHelper.IsBetween(toDate, setting.MinDate, setting.MaxDate);
-        }
-    }
-}
+//            return DateTimeHelper.IsBetween(fromDate, setting.MinDate, setting.MaxDate) &&
+//                DateTimeHelper.IsBetween(toDate, setting.MinDate, setting.MaxDate);
+//        }
+//    }
+//}

@@ -1,14 +1,15 @@
 ﻿import LangHelper from '@jsroot/lib/langHelper';
 import Site from '@jsroot/lib/site';
+import DataService from '@jsroot/lib/DataService';
 
 export const ApiUrl = {
     CUSTOMER_SEARCH_URL: Site.resolveClientUrl("SearchCustomerAPI/SearchCustomer"),
-    RUNNING_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
-    REFNO_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
-    SINGLECUSTOMER_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
-    ADVANCEDSEARCH_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData'),
-    ADVANCEDSEARCH_EXPORTSTATUS_URL: Site.resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetExportStatus'),
-    BOOKEDBET_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByBookedBet')
+    RUNNING_DATA_URL: Site.resolveClientUrl(DataService.buildProxyUrl(DataService.apiKeys.betlist, 'api/BettingTicketCenter/GetByRunning')),
+    REFNO_DATA_URL: Site.resolveClientUrl(DataService.buildProxyUrl(DataService.apiKeys.betlist, 'api/BettingTicketCenter/GetByRefNo')),
+    SINGLECUSTOMER_DATA_URL: Site.resolveClientUrl(DataService.buildProxyUrl(DataService.apiKeys.betlist, 'api/BettingTicketCenter/GetBySingleCustomer')),
+    ADVANCEDSEARCH_DATA_URL: Site.resolveClientUrl(DataService.buildProxyUrl(DataService.apiKeys.betlist, 'api/BettingTicketCenterAdvancedSearch/GetData')),
+    BOOKEDBET_DATA_URL: Site.resolveClientUrl(DataService.buildProxyUrl(DataService.apiKeys.betlist, 'api/BettingTicketCenter/GetByBookedBet')),
+    ADVANCEDSEARCH_EXPORTSTATUS_URL: Site.resolveClientUrl(DataService.buildProxyUrl(DataService.apiKeys.betlist, 'api/BettingTicketCenterAdvancedSearch/GetExportStatus')),
 }
 
 export const HeaderText = {

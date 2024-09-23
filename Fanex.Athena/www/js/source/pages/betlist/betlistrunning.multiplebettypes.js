@@ -42,7 +42,7 @@ define(
             submit: function () {
                 const actionName = Site.getLocation().pathname.split('/').pop();
                 const params = Site.setLicenseeOptionParam();
-                const url = Site.resolveClientUrl('api/RunningBettypesBetList/' + actionName);
+                const url = Site.buildBetListProxyUrl('api/RunningBettypesBetList/' + actionName);
 
                 BetList.loadData(params, url);
             }

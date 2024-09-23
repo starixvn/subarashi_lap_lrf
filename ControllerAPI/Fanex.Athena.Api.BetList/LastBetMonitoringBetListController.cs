@@ -90,76 +90,76 @@
             };
         }
 
-        [HttpPost]
-        [ValidationApiRequest(ObjectName = "metaModel")]
-        [ApiAutoBindMetaModel(BindShowingBetFromIP = true, BindProductCodeList = true)]
-        public async Task<HttpResponseMessage> Index(LastBetsMonitoringMetaModel metaModel)
-        {
-            var userSession = SessionService.UserSession;
-            var licenseeSession = SessionService.LicenseeSession;
-            var riskLevels = await _customerClassService.GetAllRiskLevel();
-            if (string.IsNullOrWhiteSpace(metaModel.Currency))
-            {
-                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
-            }
-            else
-            {
-                var currencyIdList = metaModel.Currency.Split(',').Select(int.Parse);
-                metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyIdList);
-            }
+        //[HttpPost]
+        //[ValidationApiRequest(ObjectName = "metaModel")]
+        //[ApiAutoBindMetaModel(BindShowingBetFromIP = true, BindProductCodeList = true)]
+        //public async Task<HttpResponseMessage> Index(LastBetsMonitoringMetaModel metaModel)
+        //{
+        //    var userSession = SessionService.UserSession;
+        //    var licenseeSession = SessionService.LicenseeSession;
+        //    var riskLevels = await _customerClassService.GetAllRiskLevel();
+        //    if (string.IsNullOrWhiteSpace(metaModel.Currency))
+        //    {
+        //        metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList);
+        //    }
+        //    else
+        //    {
+        //        var currencyIdList = metaModel.Currency.Split(',').Select(int.Parse);
+        //        metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, currencyIdList);
+        //    }
 
-            metaModel.SportTypeList = BuildSportTypeList(metaModel.SportIds);
-            metaModel.RiskLevels = riskLevels.ToList();
-            metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
+        //    metaModel.SportTypeList = BuildSportTypeList(metaModel.SportIds);
+        //    metaModel.RiskLevels = riskLevels.ToList();
+        //    metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
 
-            return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData", metaModel, userSession.Language).ConfigureAwait(false);
-        }
+        //    return await _betListApiClient.PostAsync("/LastBetMonitoringBetList/GetData", metaModel, userSession.Language).ConfigureAwait(false);
+        //}
 
-        private string BuildSportTypeList(string sportIds)
-        {
-            if (string.IsNullOrWhiteSpace(sportIds))
-            {
-                return string.Empty;
-            }
+        //private string BuildSportTypeList(string sportIds)
+        //{
+        //    if (string.IsNullOrWhiteSpace(sportIds))
+        //    {
+        //        return string.Empty;
+        //    }
 
-            if (string.Equals(sportIds, ALL, System.StringComparison.OrdinalIgnoreCase))
-            {
-                return ALL;
-            }
+        //    if (string.Equals(sportIds, ALL, System.StringComparison.OrdinalIgnoreCase))
+        //    {
+        //        return ALL;
+        //    }
 
-            var listSportId = sportIds.Split(',').Select(int.Parse);
-            XDocument x = new XDocument(new XElement("ROOT"));
-            var root = x.Root;
-            foreach (var id in listSportId)
-            {
-                var elem = BuildSportTypeElement(id);
-                root.Add(elem);
-            }
-            return x.ToString();
-        }
+        //    var listSportId = sportIds.Split(',').Select(int.Parse);
+        //    XDocument x = new XDocument(new XElement("ROOT"));
+        //    var root = x.Root;
+        //    foreach (var id in listSportId)
+        //    {
+        //        var elem = BuildSportTypeElement(id);
+        //        root.Add(elem);
+        //    }
+        //    return x.ToString();
+        //}
 
-        private XElement BuildSportTypeElement(int id)
-        {
-            const string _sport_tag = "Sport";
-            const string _sport_type_attr = "SportType";
-            const string _league_group_id_attr = "LeagueGroupIds";
-            const int _default_league_group_id = 0;
+        //private XElement BuildSportTypeElement(int id)
+        //{
+        //    const string _sport_tag = "Sport";
+        //    const string _sport_type_attr = "SportType";
+        //    const string _league_group_id_attr = "LeagueGroupIds";
+        //    const int _default_league_group_id = 0;
 
-            var elem = new XElement(_sport_tag);
-            if (id > 0)
-            {
-                elem.SetAttributeValue(_sport_type_attr, id);
-                elem.SetAttributeValue(_league_group_id_attr, _default_league_group_id);
-            }
-            else
-            {
-                var sabaSport = _sportService.GetSabaSport(id);
-                var leagueGroupIds = string.Join(",", sabaSport.LeagueGroupIds);
-                elem.SetAttributeValue(_sport_type_attr, sabaSport.SportTypeId);
-                elem.SetAttributeValue(_league_group_id_attr, leagueGroupIds);
-            }
-            return elem;
-        }
+        //    var elem = new XElement(_sport_tag);
+        //    if (id > 0)
+        //    {
+        //        elem.SetAttributeValue(_sport_type_attr, id);
+        //        elem.SetAttributeValue(_league_group_id_attr, _default_league_group_id);
+        //    }
+        //    else
+        //    {
+        //        var sabaSport = _sportService.GetSabaSport(id);
+        //        var leagueGroupIds = string.Join(",", sabaSport.LeagueGroupIds);
+        //        elem.SetAttributeValue(_sport_type_attr, sabaSport.SportTypeId);
+        //        elem.SetAttributeValue(_league_group_id_attr, leagueGroupIds);
+        //    }
+        //    return elem;
+        //}
 
         private async Task<IEnumerable<Match>> GetMatchList(int sportId)
         {
