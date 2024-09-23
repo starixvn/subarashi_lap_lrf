@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Cell, HeaderRow, HeaderCell } from '@9softstudio/react-grid';
-import { headerText } from './constants';
+import { headerText, PayoutPromotionType } from './constants';
 import NumberFormat from '@jsroot/lib/numberFormat';
 import LangHelper from '@jsroot/lib/langHelper';
 import { v4 as uuidv4 } from 'uuid';
@@ -70,22 +70,14 @@ export const renderFooter = (data, drilldownLevel) => {
 
 const buildDataRow = (dataItem, drilldownLevel, handleDrilldown, handleDrilldownBetlist) => {
     const { index, indexRowSpan, curencyRowSpan, productRowSpan, date, dateString, productName, betCount, turnover, amount, sharingAmount, custId, username, nickname, 
-        promotionName, currency, currencyName, productCode} = dataItem;
+        promotionName, currency, currencyName, productCode, promotionType} = dataItem;
 
     return (
         <Row key={`row-${uuidv4()}`}>
             {indexRowSpan > 0  && <Cell className="center-align" rowSpan={indexRowSpan}>{index}</Cell>}       
             {indexRowSpan > 0 && drilldownLevel === 0 && <Cell className="center-align" rowSpan={indexRowSpan}>{dateString}</Cell>}
-            {indexRowSpan > 0  && drilldownLevel === 1 && <Cell className="center-align" rowSpan={indexRowSpan}>
-                <a href="#" onClick={(e)=> handleDrilldownBetlist(e, custId, nickname, username)}>
-                    {nickname}
-                </a>
-            </Cell>}
-            {indexRowSpan > 0  && drilldownLevel === 1 && <Cell className="center-align" rowSpan={indexRowSpan}>
-                <a href="#" onClick={(e)=> handleDrilldownBetlist(e, custId, nickname, username)}>
-                    {username}
-                </a>                
-            </Cell>}
+            {indexRowSpan > 0  && drilldownLevel === 1 && BuildAccountText(promotionType, nickname, indexRowSpan, (e)=> handleDrilldownBetlist(e, custId, nickname, username))}
+            {indexRowSpan > 0  && drilldownLevel === 1 && BuildAccountText(promotionType, username, indexRowSpan, (e)=> handleDrilldownBetlist(e, custId, nickname, username))}
             {curencyRowSpan > 0  && drilldownLevel === 0 && <Cell className="center-align" rowSpan={curencyRowSpan}>
                 <a href="#" onClick={(e)=> handleDrilldown(e, currency, currencyName, date)}>
                     {currencyName}  
@@ -98,6 +90,18 @@ const buildDataRow = (dataItem, drilldownLevel, handleDrilldown, handleDrilldown
         </Row>
     )
 }
+
+const BuildAccountText = (promotionType, textValue, indexRowSpan, onClickFunc) =>
+    promotionType === PayoutPromotionType.OddsBoostAdjustment 
+        && <Cell className="center-align" rowSpan={indexRowSpan}>
+                {textValue}
+            </Cell> 
+        || <Cell className="center-align" rowSpan={indexRowSpan}>
+                <a href="#" onClick={onClickFunc}>
+                    {textValue}
+                </a>
+            </Cell>
+    
 
 const buildCommonRow = (turnover, betCount, amount, sharingAmount, productCode) => {
     return <>

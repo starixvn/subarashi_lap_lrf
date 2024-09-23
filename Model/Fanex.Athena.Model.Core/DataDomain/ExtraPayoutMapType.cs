@@ -69,5 +69,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int FastSpinPromotion = 8701;
 
         public const int FACHAIPromotion = 8901;
+
+        public const int OddsBoostAdjustment = 101;
     }
 }
