@@ -21,14 +21,17 @@
     .sort-icon-desc.light {
       border-top-color: #fff; }
 
-.icon-voucherid {
-  background: url("images/Icon_voucher.png") no-repeat center center/100%;
-  display: inline-block;
-  height: 16px;
-  width: 16px;
-  position: relative;
-  margin-right: 2px;
-  top: 4px; }
+.voucherid {
+  color: #000;
+  line-height: 15px; }
+  .voucherid .icon-voucherid {
+    background: url("images/Icon_voucher.png") no-repeat center center/100%;
+    display: inline-block;
+    height: 11px;
+    width: 15px;
+    position: relative;
+    margin-right: 2px;
+    top: 2px; }
 
 .booked-icon {
   padding: 0px 10px;
