@@ -1654,6 +1654,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
             renderLeagueFilter: function (leagueList) {
                 if (leagueList !== null && leagueList.length > 0) {
+                    const firstLeague = leagueList[0].LeagueId;
+                    param.LeagueId = firstLeague;
+
                     const $league = $('#ddlLeague');
                     $.each(leagueList, function (index, value) {
                         $league.append('<option value="' + value.LeagueId + '">' + value.LeagueName + '</option>');
@@ -1670,9 +1673,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             },
 
             clearLeagueFilter: function () {
-                const defaultLeague = $('#ddlLeague option[value="0"]').clone();
                 $('#ddlLeague option').remove();
-                $('#ddlLeague').append(defaultLeague);
             },
 
             clearExcelExport: function () {
