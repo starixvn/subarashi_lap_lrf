@@ -196,7 +196,7 @@ namespace Fanex.Athena.Controllers.Report
                 promotionTypeList.AddRange(new List<CheckedItem>
                 {
                     new CheckedItem { ID = ExtraPayoutMapType.OddsBoostAdjustment,
-                        Name = $"{ViewResources.SBPromotion} - {_cacheRefAdapter.GetBettype((int)BetType.OddsBoostAdjustment)}", Checked = true }
+                        Name = $"{ViewResources.ProductSB} - {ViewResources.OddsBoostBonus}", Checked = true }
                 });
             }
 
