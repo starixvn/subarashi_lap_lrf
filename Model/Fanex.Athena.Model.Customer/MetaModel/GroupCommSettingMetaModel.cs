@@ -31,10 +31,7 @@ namespace Fanex.Athena.Model.Customer.MetaModel
 
         public static int GetComparerValue(GroupCommSettingMetaModel setting)
         {
-            const int defaultValue = 999;
-            var sortValue = Array.IndexOf(CommissionGroupHelper.ProductSettingOrder, setting.ProductCode);
-
-            return sortValue == -1 ? defaultValue : sortValue;
+            return CommissionGroupHelper.ProductListComparer(setting.ProductCode);
         }
     }
 

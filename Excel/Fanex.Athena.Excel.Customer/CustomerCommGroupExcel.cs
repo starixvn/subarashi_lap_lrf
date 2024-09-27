@@ -76,9 +76,10 @@
                 row.Cells[currentColumn++].SetCellValue(exportRow.NumberOfCustomer);
 
                 sheet.CopyColumn(TemplateSheet, RowContentTemplate, index + RowContentTemplate, ColumnProductSBIndex, ColumnTemplateCount);
-                foreach (var comm in exportRow.CommValues)
+                foreach (var productCode in _products)
                 {
-                    row.Cells[currentColumn++].SetCellValue(GetCommValue(comm.Discount));
+                    var commValue = exportRow.CommValues.Where(_ => _.ProductCode == productCode).FirstOrDefault()?.Discount ?? 0;
+                    row.Cells[currentColumn++].SetCellValue(GetCommValue(commValue));
                 }
             }
         }
