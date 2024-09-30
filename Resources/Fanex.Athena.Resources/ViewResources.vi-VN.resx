@@ -3384,4 +3384,7 @@
   <data name="SinglePlayer" xml:space="preserve">
     <value>Người chơi cá nhân</value>
   </data>
+  <data name="OddsBoostBonus" xml:space="preserve">
+    <value>Tiền Thưởng Tăng Cường Tỷ Lệ Cược</value>
+  </data>
 </root>

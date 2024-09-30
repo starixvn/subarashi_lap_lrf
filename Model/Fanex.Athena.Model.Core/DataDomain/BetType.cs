@@ -333,6 +333,8 @@
 
         FastSpinPromotion = 11295,
 
-        FACHAIPromotion = 11399
+        FACHAIPromotion = 11399,
+
+        OddsBoostAdjustment = 997
     }
 }

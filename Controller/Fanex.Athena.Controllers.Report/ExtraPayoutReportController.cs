@@ -191,6 +191,15 @@ namespace Fanex.Athena.Controllers.Report
                 });
             }
 
+            if (productCodeList.IsPresent(_ => _ == Product.SB))
+            {
+                promotionTypeList.AddRange(new List<CheckedItem>
+                {
+                    new CheckedItem { ID = ExtraPayoutMapType.OddsBoostAdjustment,
+                        Name = $"{ViewResources.ProductSB} - {ViewResources.OddsBoostBonus}", Checked = true }
+                });
+            }
+
             return promotionTypeList;
         }
 

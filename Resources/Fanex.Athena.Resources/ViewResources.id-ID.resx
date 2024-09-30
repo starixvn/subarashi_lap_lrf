@@ -3318,4 +3318,7 @@
   <data name="SinglePlayer" xml:space="preserve">
     <value>Pemain Tunggal</value>
   </data>
+  <data name="OddsBoostBonus" xml:space="preserve">
+    <value>Penambah Peluang Bonus</value>
+  </data>
 </root>

@@ -3378,4 +3378,7 @@
   <data name="SinglePlayer" xml:space="preserve">
     <value>นักเดิมพันเดี่ยว</value>
   </data>
+  <data name="OddsBoostBonus" xml:space="preserve">
+    <value>ตัวเพิ่มอัตราต่อรอง โบนัส </value>
+  </data>
 </root>
