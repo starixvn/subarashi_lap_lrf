@@ -420,6 +420,9 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
 
             renderLeagueFilter: function (leagueList) {
                 if (leagueList !== null && leagueList.length > 0) {
+                    const firstLeague = leagueList[0].LeagueId;
+                    param.LeagueId = firstLeague;
+
                     const $league = $('#ddlLeague');
                     $.each(leagueList, function (index, value) {
                         $league.append('<option value="' + value.LeagueId + '">' + value.LeagueName + '</option>');
@@ -436,9 +439,7 @@ define(['jquery', 'common/site', 'components/pluginhelper/daterangepicker', 'com
             },
 
             clearLeagueFilter: function () {
-                const defaultLeague = $('#ddlLeague option[value="0"]').clone();
                 $('#ddlLeague option').remove();
-                $('#ddlLeague').append(defaultLeague);
             },
 
             clearExcelExport: function () {
