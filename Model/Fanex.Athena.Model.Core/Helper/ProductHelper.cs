@@ -80,7 +80,8 @@
                 { Product.UUSL, nameof(ViewResources.ProductUUSL) },
                 { Product.FS, nameof(ViewResources.ProductFS) },
                 { Product.FAC, nameof(ViewResources.ProductFAC) },
-                { Product.NS, nameof(ViewResources.ProductNS) }
+                { Product.NS, nameof(ViewResources.ProductNS) },
+                { Product.ON, nameof(ViewResources.ProductON) }
             };
 
         public static string GetProductCode(int productId)
