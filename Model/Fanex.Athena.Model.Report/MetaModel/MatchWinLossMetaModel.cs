@@ -19,6 +19,8 @@
 
         public int LeagueId { get; set; }
 
+        public int EventType { get; set; }
+
         public DateTime Date { get; set; }
 
         public string SubsidiaryList { get; set; }

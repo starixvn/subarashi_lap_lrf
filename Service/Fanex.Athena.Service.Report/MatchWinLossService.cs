@@ -29,13 +29,18 @@ namespace Fanex.Athena.Service.Report
         private const string KickOfTimeFormat = "{0:MM/dd/yyyy hh:mm:ss tt}";
 
         private static readonly IEnumerable<int> VSSportTypes = new List<int>
-                    {
-                        (int)SportType.VirtualHorseRacing,
-                        (int)SportType.VirtualGreyhound,
-                        (int)SportType.VirtualMotoRacing,
-                        (int)SportType.VirtualSpeedway,
-                        (int)SportType.VirtualCycling
-                    };
+        {
+            (int)SportType.VirtualGreyhound,
+            (int)SportType.VirtualMotoRacing,
+            (int)SportType.VirtualSpeedway,
+            (int)SportType.VirtualCycling
+        };
+
+        private static readonly IEnumerable<int> VSBetRadarSportTypes = new List<int>
+        {
+            (int)SportType.VirtualHorseRacing ,
+            (int)SportType.VirtualDogRacing
+        };
 
         private static readonly CultureInfo EnglishCulture = new CultureInfo("en-US");
 
@@ -155,6 +160,11 @@ namespace Fanex.Athena.Service.Report
             if (VSSportTypes.Contains(matchWinLoss.SportType))
             {
                 return string.Format(EnglishCulture, KickOfTimeFormat, matchWinLoss.KickOffTime);
+            }
+
+            if (VSBetRadarSportTypes.Contains(matchWinLoss.SportType))
+            {
+                return ViewResources.Event + " " + matchWinLoss.VendorMatchId;
             }
 
             var homeName = _cacheRefAdapter.GetTeamName(matchWinLoss.HomeId) +
