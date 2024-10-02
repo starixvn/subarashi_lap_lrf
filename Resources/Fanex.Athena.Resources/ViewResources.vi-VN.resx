@@ -3387,4 +3387,7 @@
   <data name="OddsBoostBonus" xml:space="preserve">
     <value>Tiền Thưởng Tăng Cường Tỷ Lệ Cược</value>
   </data>
+  <data name="TopPriority" xml:space="preserve">
+    <value>Ưu Tiên Hàng Đầu</value>
+  </data>
 </root>

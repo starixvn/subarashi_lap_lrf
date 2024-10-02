@@ -16,17 +16,18 @@
         private const int RowCCSettingPolicyContentTemplate = 4;
 
         private const int SportTypeColumn = 0;
-        private const int LivePreMatchColumn = 1;
-        private const int CurrencyColumn = 2;
-        private const int DisableParlay = 3;
-        private const int PlatformColumn = 4;
-        private const int LeagueGroupColumn = 5;
-        private const int BetIntervalColumn = 6;
-        private const int AgentBetIntervalColumn = 7;
-        private const int MinBetColumn = 8;
-        private const int MaxPerBetColumn = 9;
-        private const int MaxPerMatchColumn = 10;
-        private const int RepeatedBetColumn = 11;
+        private const int TopPriorityColumn = 1;
+        private const int LivePreMatchColumn = 2;
+        private const int CurrencyColumn = 3;
+        private const int DisableParlay = 4;
+        private const int PlatformColumn = 5;
+        private const int LeagueGroupColumn = 6;
+        private const int BetIntervalColumn = 7;
+        private const int AgentBetIntervalColumn = 8;
+        private const int MinBetColumn = 9;
+        private const int MaxPerBetColumn = 10;
+        private const int MaxPerMatchColumn = 11;
+        private const int RepeatedBetColumn = 12;
 
         private const string CURRENCY = "MYR";
         private const string DEFAULT_VALUE = "-";
@@ -34,6 +35,7 @@
         private readonly IDictionary<int, string> _CCSettingPolicyGridCommonColumNames = new Dictionary<int, string>
         {
             { SportTypeColumn, "SportTypeName" },
+            { TopPriorityColumn, "TopPriority" },
             { LivePreMatchColumn, "LiveTypeText" },
             { CurrencyColumn, "Currency" },
             { DisableParlay, "DisableParlay" },
@@ -62,6 +64,7 @@
             _CCSettingPolicyHeaderTexts = new List<string>
             {
                 ViewResources.SportType,
+                ViewResources.TopPriority,
                 ViewResources.Live2 + "/" + ViewResources.PreMatch,
                 ViewResources.Currency,
                 ViewResources.DisableParlay,
@@ -125,25 +128,39 @@
             foreach (var columnName in _CCSettingPolicyGridCommonColumNames)
             {
                 var cellValue = itemType.GetProperty(columnName.Value).GetValue(item, null);
-                if (columnName.Value.Equals("DisableParlay"))
+
+                switch (columnName.Value)
                 {
-                    var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
-                    row.Cells[columnName.Key].SetCellValue(text);
-                }
-                else if (columnName.Value.Equals("LeagueGroups"))
-                {
-                    var text = string.Join(", ", item.LeagueGroups.Select(x => x.LeagueGroupName).ToList());
-                    row.Cells[columnName.Key].SetCellValue(text);
-                }
-                else
-                {
-                    if (cellValue == null)
+                    case "DisableParlay":
                     {
-                        row.Cells[columnName.Key].SetCellValue(DEFAULT_VALUE);
+                        var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
+                        row.Cells[columnName.Key].SetCellValue(text);
+                        break;
                     }
-                    else
+                    case "LeagueGroups":
                     {
-                        row.Cells[columnName.Key].SetCellValue(cellValue);
+                        var text = string.Join(", ", item.LeagueGroups.Select(x => x.LeagueGroupName).ToList());
+                        row.Cells[columnName.Key].SetCellValue(text);
+                        break;
+                    }
+                    case "TopPriority":
+                    {
+                        var text = item.TopPriority ? ViewResources.Yes : ViewResources.No;
+                        row.Cells[columnName.Key].SetCellValue(text);
+                        break;
+                    }
+                    default:
+                    {
+                        if (cellValue == null)
+                        {
+                            row.Cells[columnName.Key].SetCellValue(DEFAULT_VALUE);
+                        }
+                        else
+                        {
+                            row.Cells[columnName.Key].SetCellValue(cellValue);
+                        }
+
+                        break;
                     }
                 }
             }

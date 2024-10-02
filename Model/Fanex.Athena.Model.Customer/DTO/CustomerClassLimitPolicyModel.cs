@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Fanex.Athena.Model.Core.DTO.Common;
-
-namespace Fanex.Athena.Model.Customer.DTO
+﻿namespace Fanex.Athena.Model.Customer.DTO
 {
+    using System.Collections.Generic;
+    using Core.DTO.Common;
+
     public class CustomerClassLimitPolicyModel
     {
         public string Id { get; set; }
@@ -46,5 +46,7 @@ namespace Fanex.Athena.Model.Customer.DTO
         public string RuleTitle { get; set; }
 
         public string PolicyTitle { get; set; }
+
+        public bool TopPriority { get; set; }
     }
 }
