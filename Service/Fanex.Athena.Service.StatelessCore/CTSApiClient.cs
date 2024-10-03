@@ -21,7 +21,7 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             try
             {
-                await HealthCheckAsync(path, (response) => Task.FromResult(response), false, timeOut).ConfigureAwait(false);
+                await HealthCheckAsync(path, (response) => Task.FromResult(response), true, timeOut).ConfigureAwait(false);
                 return true;
             }
             catch (Exception baseException)
@@ -39,7 +39,7 @@ namespace Fanex.Athena.Service.StatelessCore
         {
             return await HandleAsync(path, value, language, MediaType.Json,
                  (response) => Task.FromResult(response)
-                , false, timeOut).ConfigureAwait(false);
+                , true, timeOut).ConfigureAwait(false);
         }
 
         protected override async Task HandleUnSucessReponseAsync(HttpResponseMessage response)
