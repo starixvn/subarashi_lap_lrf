@@ -862,7 +862,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         if (newSportId > 0) {
             if (newSportId === 180 || newSportId === 186 || newSportId === 231 || newSportId === 104 ||
                 (newSportId >= 190 && newSportId <= 197) || newSportId === 178 || newSportId === 179
-                || newSportId === 188) {
+                || newSportId === 188 || newSportId === 177 || newSportId === 198) {
                 productOptions.push('VS');
             }
             else if (newSportId === 162) {
@@ -992,15 +992,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
         function viewMatchBetList(target) {
             let url = Site.resolveClientUrl('LiveReportBetList/Match');
-
             const currencyName = $(_selector.CurrencyName).attr('data-original');
             let data = $(target).attr('data-drill-down');
             data = $.parseJSON(data);
+
+            if (data.SportId === 177 || data.SportId === 198) {
+                url = Site.resolveClientUrl('LiveReportBetList/Betradar');
+            }
+
             url = Site.setLicenseeOptionOriginalParam(url);
             url = QueryString.setParam(url, 'FromDate', $(_selector.FromDate).val());
             url = QueryString.setParam(url, 'ToDate', $(_selector.ToDate).val());
             url = QueryString.setParam(url, 'CurrencyName', currencyName);
             url = QueryString.setParam(url, 'MatchId', data.MatchId);
+            url = QueryString.setParam(url, 'SportType', data.SportId);
             url = QueryString.setParam(url, 'HomeId', data.HomeId);
             url = QueryString.setParam(url, 'AwayId', data.AwayId);
             url = QueryString.setParam(url, 'BetType', data.BetType);

@@ -29,6 +29,10 @@ namespace Fanex.Athena.Model.Report.DTO.LiveReports
 
         public int BetCount { get; set; }
 
+        public int EventType { get; set; }
+
+        public string VendorMatchId { get; set; }
+
         public decimal LicenseeComm { get; set; }
 
         public decimal AmountDue { get; set; }
