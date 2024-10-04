@@ -119,11 +119,6 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                     }
                     catch (Exception ex)
                     {
-                        if (!disposeHttpResponse)
-                        {
-                            response?.Dispose();
-                        }
-
                         throw new ServiceException(ex.Message, ApiName, ex);
                     }
                     finally
@@ -163,11 +158,6 @@ namespace Fanex.Athena.Service.StatelessCore.Abstraction
                     }
                     catch (Exception ex)
                     {
-                        if (!disposeHttpResponse)
-                        {
-                            response?.Dispose();
-                        }
-
                         throw new ServiceException(ex.Message, ApiName, ex);
                     }
                     finally
