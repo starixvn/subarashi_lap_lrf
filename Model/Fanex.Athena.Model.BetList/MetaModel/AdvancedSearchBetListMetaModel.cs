@@ -26,6 +26,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string LeagueGroupIds { get; set; }
 
+        public string LicenseeName { get; set; }
+
         public override bool IsValid
         {
             get
