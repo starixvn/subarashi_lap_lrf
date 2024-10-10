@@ -6591,27 +6591,34 @@ const useFilterAction = () => {
     const RowsExceedLimitErrorCode = 1001;
     const ExportMultipleFile = 1002;
     const ExportSingleFile = 1003;
+    const MaxPage = 20;
     if (response.data.StatusCode === RowsExceedLimitErrorCode) {
       return _showExportWarning();
     } else if (response.data.StatusCode === ExportMultipleFile) {
-      const totalPages = response.data.TotalPages;
       exportParams.PageSize = response.data.PageSize;
-      let promises = Promise.resolve();
-      for (let pageIndex = 1; pageIndex <= totalPages; pageIndex++) {
-        promises = promises.then(() => {
-          return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, _objectSpread(_objectSpread({}, exportParams), {}, {
-            PageIndex: pageIndex
-          })).then(response => {
-            _handleExportResponse(response);
-          });
+      const fetchNextPage = pageIndex => {
+        if (pageIndex >= MaxPage) {
+          return Promise.resolve();
+        }
+        return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, _objectSpread(_objectSpread({}, exportParams), {}, {
+          PageIndex: pageIndex
+        })).then(response => {
+          const isNext = _handleExportResponse(response, null, false);
+          if (isNext) {
+            return fetchNextPage(pageIndex + 1);
+          } else {
+            return Promise.resolve();
+          }
+        }).catch(() => {
+          return Promise.reject();
         });
-      }
-      return promises;
+      };
+      return fetchNextPage(1);
     } else {
-      return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, exportParams).then(response => _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch"));
+      return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, exportParams).then(response => _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch", true));
     }
   };
-  const _handleExportResponse = (response, exportName) => {
+  const _handleExportResponse = (response, exportName, showNoInfo) => {
     const contentType = response.headers["content-type"];
     if (contentType && contentType.indexOf('application/json') > -1) {
       _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].readAsJson(response.data, result => {
@@ -6620,8 +6627,11 @@ const useFilterAction = () => {
       });
     } else {
       const NoContentStatusCode = 204;
+      const PartialContentStatusCode = 206;
       if (response.status === NoContentStatusCode) {
-        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("NoInfo"));
+        if (showNoInfo) {
+          alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("NoInfo"));
+        }
       } else {
         exportName = exportName || getFileNameFromHeader(response) || "BettingTicketsCenter_AdvancedSearch";
         const fileName = exportName + "." + (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
@@ -6629,8 +6639,10 @@ const useFilterAction = () => {
           type: response.headers["content-type"]
         });
         Object(file_saver__WEBPACK_IMPORTED_MODULE_14__["saveAs"])(blob, fileName);
+        return response.status === PartialContentStatusCode;
       }
     }
+    return false;
   };
   const getFileNameFromHeader = response => {
     return response.headers["x-file-name"];
