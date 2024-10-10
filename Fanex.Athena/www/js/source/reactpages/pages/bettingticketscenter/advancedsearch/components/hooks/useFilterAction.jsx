@@ -154,17 +154,20 @@ export const useFilterAction = () => {
             const totalPages = response.data.TotalPages;
             exportParams.PageSize = response.data.PageSize;
 
-            const promises = [];
+            let promises = Promise.resolve();
 
             for (let pageIndex = 1; pageIndex <= totalPages; pageIndex++) {
-                promises.push(DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL,{ ...exportParams, PageIndex: pageIndex })); 
-            }
-            
-            return Promise.all(promises).then((responses) => {
-                responses.forEach((response) => {
-                    _handleExportResponse(response); 
+                promises = promises.then(() => {
+                    return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, { 
+                        ...exportParams, 
+                        PageIndex: pageIndex 
+                    }).then((response) => {
+                        _handleExportResponse(response);
+                    });
                 });
-            });
+            }
+
+           return promises;
         }
         else {
             return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL,exportParams).then((response) => _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch"));

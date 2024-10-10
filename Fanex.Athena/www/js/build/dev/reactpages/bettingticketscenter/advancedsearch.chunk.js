@@ -6596,17 +6596,17 @@ const useFilterAction = () => {
     } else if (response.data.StatusCode === ExportMultipleFile) {
       const totalPages = response.data.TotalPages;
       exportParams.PageSize = response.data.PageSize;
-      const promises = [];
+      let promises = Promise.resolve();
       for (let pageIndex = 1; pageIndex <= totalPages; pageIndex++) {
-        promises.push(_jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, _objectSpread(_objectSpread({}, exportParams), {}, {
-          PageIndex: pageIndex
-        })));
-      }
-      return Promise.all(promises).then(responses => {
-        responses.forEach(response => {
-          _handleExportResponse(response);
+        promises = promises.then(() => {
+          return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, _objectSpread(_objectSpread({}, exportParams), {}, {
+            PageIndex: pageIndex
+          })).then(response => {
+            _handleExportResponse(response);
+          });
         });
-      });
+      }
+      return promises;
     } else {
       return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, exportParams).then(response => _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch"));
     }

@@ -48,15 +48,9 @@
         [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetData(AdvancedSearchBetListMetaModel metaModel)
         {
-            if (metaModel.IsExport &&
-                _appSettings.IsDisableExportLargeBetList
-                && _appSettings.LicenseesWithLargeData.Contains(SessionService.LicenseeSession.LicenseeName))
+            if (metaModel.IsExport && IsAllowExportLargeBetList())
             {
-                return new
-                {
-                    ErrorCode = ServerBusyErrorCode,
-                    ErrorMsg = ViewResources.ServerBusyMessage
-                };
+                return ServerBusy();
             }
 
             UpdateMetaModel(metaModel);
@@ -72,14 +66,9 @@
         [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetExportStatus(AdvancedSearchBetListMetaModel metaModel)
         {
-            if (_appSettings.IsDisableExportLargeBetList
-                && _appSettings.LicenseesWithLargeData.Contains(SessionService.LicenseeSession.LicenseeName))
+            if (IsAllowExportLargeBetList())
             {
-                return new
-                {
-                    ErrorCode = ServerBusyErrorCode,
-                    ErrorMsg = ViewResources.ServerBusyMessage
-                };
+                return ServerBusy();
             }
 
             UpdateMetaModel(metaModel);
@@ -89,7 +78,16 @@
                 metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);
         }
 
-        public async void UpdateMetaModel(AdvancedSearchBetListMetaModel metaModel)
+        private object ServerBusy() => new
+        {
+            ErrorCode = ServerBusyErrorCode,
+            ErrorMsg = ViewResources.ServerBusyMessage
+        };
+
+        private bool IsAllowExportLargeBetList() => _appSettings.IsDisableExportLargeBetList
+            && _appSettings.LicenseesWithLargeData.Contains(SessionService.LicenseeSession.LicenseeName);
+
+        private async void UpdateMetaModel(AdvancedSearchBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             var sabaSport = _sportService.GetSabaSport(metaModel.SportId, IsHideSaba);
