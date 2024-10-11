@@ -96,34 +96,6 @@ export const useFilterAction = () => {
         });
     }
 
-    const _handleResponse = (response) => {
-        toast.dismiss();
-        const contentType = response.headers["content-type"];
-        if (contentType && contentType.indexOf('application/json') > -1) {
-            const RowsExceedLimitErrorCode = 1001;
-            Site.readAsJson(response.data, (result) => {
-                if (result.ErrorCode === RowsExceedLimitErrorCode) {
-                    _showExportWarning();
-                }
-                else {
-                    const msg = result.ErrorMsg || LangHelper.getSingleResource("ErrorProcessingMsg");
-                    alert(msg);
-                }
-            });
-        } else {
-            const NoContentStatusCode = 204;
-            if (response.status === NoContentStatusCode) {
-                alert(LangHelper.getSingleResource("NoInfo"));
-            }
-            else {
-                const fileName = "BettingTicketsCenter_AdvancedSearch." +
-                    (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
-                const blob = new Blob([response.data], { type: response.headers["content-type"] });
-                saveAs(blob, fileName);
-            }
-        }
-    }
-
     const submit = (event) => {
         event.preventDefault();
         const params = _getParams();
@@ -150,17 +122,98 @@ export const useFilterAction = () => {
         if (AppData.isAllowTxIDColumn) {
             params.IsAllowTxIDColumn = true;
         }
-
         params.IsExport = true;
         dispatch(toggleLoader(true));
-        DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, params)
-            .then(_handleResponse)
+
+        var exportParams = {
+            ...params,
+            PageIndex : 1,
+            PageSize : 2147483646
+        };
+
+        DataService.postData(ApiUrl.ADVANCEDSEARCH_EXPORTSTATUS_URL, exportParams)
+            .then(response => _handleExportStatusResponse(response, exportParams))
             .catch(() => {
                 alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
             })
             .finally(() => {
+                toast.dismiss();
                 dispatch(toggleLoader(false));
             });
+    }
+
+    const _handleExportStatusResponse = (response, exportParams) => {
+        const RowsExceedLimitErrorCode = 1001;
+        const ExportMultipleFile = 1002;
+        const ExportSingleFile = 1003;
+        const MaxPage = 20;
+    
+        if (response.data.StatusCode === RowsExceedLimitErrorCode) {
+            return _showExportWarning();
+        } else if (response.data.StatusCode === ExportMultipleFile) {
+            exportParams.PageSize = response.data.PageSize;
+    
+            const fetchNextPage = (pageIndex) => {
+                if (pageIndex >= MaxPage) {
+                    return Promise.resolve();
+                }
+
+                return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, {
+                    ...exportParams,
+                    PageIndex: pageIndex
+                }).then((response) => {
+                    const isNext = _handleExportResponse(response, null, false);
+
+                    if (isNext) {
+                        return fetchNextPage(pageIndex + 1);
+                    } else {
+                        return Promise.resolve();
+                    }
+                }).catch(() => {
+                    return Promise.reject();
+                });
+            };
+
+            return fetchNextPage(1);
+    
+        } else {
+            return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, exportParams).then((response) =>
+                _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch", true)
+            );
+        }
+    };
+    
+    const _handleExportResponse = (response, exportName, showNoInfo) => {
+        const contentType = response.headers["content-type"];
+        
+        if (contentType && contentType.indexOf('application/json') > -1) {
+            Site.readAsJson(response.data, (result) => {
+                const msg = result.ErrorMsg || LangHelper.getSingleResource("ErrorProcessingMsg");
+                alert(msg);
+            });
+        } else {
+            const NoContentStatusCode = 204;
+            const PartialContentStatusCode = 206;
+            if (response.status === NoContentStatusCode) {
+                if(showNoInfo) {
+                    alert(LangHelper.getSingleResource("NoInfo"));
+                }
+            } 
+            else {
+                exportName = exportName || getFileNameFromHeader(response) || "BettingTicketsCenter_AdvancedSearch";
+                const fileName = exportName + "." +
+                    (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
+                const blob = new Blob([response.data], { type: response.headers["content-type"] });
+                saveAs(blob, fileName);
+                return response.status === PartialContentStatusCode;
+            }
+        }
+
+        return false;
+    };
+
+    const getFileNameFromHeader = (response) => {
+        return  response.headers["x-file-name"];
     }
 
     return { submit, exportExcel };

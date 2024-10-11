@@ -6447,6 +6447,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_14__);
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -6547,32 +6552,6 @@ const useFilterAction = () => {
       }
     });
   };
-  const _handleResponse = response => {
-    react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].dismiss();
-    const contentType = response.headers["content-type"];
-    if (contentType && contentType.indexOf('application/json') > -1) {
-      const RowsExceedLimitErrorCode = 1001;
-      _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].readAsJson(response.data, result => {
-        if (result.ErrorCode === RowsExceedLimitErrorCode) {
-          _showExportWarning();
-        } else {
-          const msg = result.ErrorMsg || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("ErrorProcessingMsg");
-          alert(msg);
-        }
-      });
-    } else {
-      const NoContentStatusCode = 204;
-      if (response.status === NoContentStatusCode) {
-        alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("NoInfo"));
-      } else {
-        const fileName = "BettingTicketsCenter_AdvancedSearch." + (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
-        const blob = new Blob([response.data], {
-          type: response.headers["content-type"]
-        });
-        Object(file_saver__WEBPACK_IMPORTED_MODULE_14__["saveAs"])(blob, fileName);
-      }
-    }
-  };
   const submit = event => {
     event.preventDefault();
     const params = _getParams();
@@ -6597,11 +6576,76 @@ const useFilterAction = () => {
     }
     params.IsExport = true;
     dispatch(toggleLoader(true));
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, params).then(_handleResponse).catch(() => {
+    var exportParams = _objectSpread(_objectSpread({}, params), {}, {
+      PageIndex: 1,
+      PageSize: 2147483646
+    });
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].postData(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_EXPORTSTATUS_URL, exportParams).then(response => _handleExportStatusResponse(response, exportParams)).catch(() => {
       alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("ErrorProcessingMsg"));
     }).finally(() => {
+      react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].dismiss();
       dispatch(toggleLoader(false));
     });
+  };
+  const _handleExportStatusResponse = (response, exportParams) => {
+    const RowsExceedLimitErrorCode = 1001;
+    const ExportMultipleFile = 1002;
+    const ExportSingleFile = 1003;
+    const MaxPage = 20;
+    if (response.data.StatusCode === RowsExceedLimitErrorCode) {
+      return _showExportWarning();
+    } else if (response.data.StatusCode === ExportMultipleFile) {
+      exportParams.PageSize = response.data.PageSize;
+      const fetchNextPage = pageIndex => {
+        if (pageIndex >= MaxPage) {
+          return Promise.resolve();
+        }
+        return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, _objectSpread(_objectSpread({}, exportParams), {}, {
+          PageIndex: pageIndex
+        })).then(response => {
+          const isNext = _handleExportResponse(response, null, false);
+          if (isNext) {
+            return fetchNextPage(pageIndex + 1);
+          } else {
+            return Promise.resolve();
+          }
+        }).catch(() => {
+          return Promise.reject();
+        });
+      };
+      return fetchNextPage(1);
+    } else {
+      return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, exportParams).then(response => _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch", true));
+    }
+  };
+  const _handleExportResponse = (response, exportName, showNoInfo) => {
+    const contentType = response.headers["content-type"];
+    if (contentType && contentType.indexOf('application/json') > -1) {
+      _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_3__["default"].readAsJson(response.data, result => {
+        const msg = result.ErrorMsg || _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("ErrorProcessingMsg");
+        alert(msg);
+      });
+    } else {
+      const NoContentStatusCode = 204;
+      const PartialContentStatusCode = 206;
+      if (response.status === NoContentStatusCode) {
+        if (showNoInfo) {
+          alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("NoInfo"));
+        }
+      } else {
+        exportName = exportName || getFileNameFromHeader(response) || "BettingTicketsCenter_AdvancedSearch";
+        const fileName = exportName + "." + (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
+        const blob = new Blob([response.data], {
+          type: response.headers["content-type"]
+        });
+        Object(file_saver__WEBPACK_IMPORTED_MODULE_14__["saveAs"])(blob, fileName);
+        return response.status === PartialContentStatusCode;
+      }
+    }
+    return false;
+  };
+  const getFileNameFromHeader = response => {
+    return response.headers["x-file-name"];
   };
   return {
     submit,
@@ -8153,6 +8197,7 @@ const ApiUrl = {
   REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
   SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
   ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData'),
+  ADVANCEDSEARCH_EXPORTSTATUS_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetExportStatus'),
   BOOKEDBET_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByBookedBet')
 };
 const HeaderText = {

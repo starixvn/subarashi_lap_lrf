@@ -48,6 +48,47 @@
         [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
         public async Task<dynamic> GetData(AdvancedSearchBetListMetaModel metaModel)
         {
+            if (metaModel.IsExport && IsAllowExportLargeBetList())
+            {
+                return ServerBusy();
+            }
+
+            UpdateMetaModel(metaModel);
+
+            var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
+            return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetData",
+                metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);
+        }
+
+        [HttpPost]
+        [ApiFunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
+        [ValidationApiRequest(IsValidCurrencyList = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
+        public async Task<dynamic> GetExportStatus(AdvancedSearchBetListMetaModel metaModel)
+        {
+            if (IsAllowExportLargeBetList())
+            {
+                return ServerBusy();
+            }
+
+            UpdateMetaModel(metaModel);
+
+            var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
+            return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetExportStatus",
+                metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);
+        }
+
+        private object ServerBusy() => new
+        {
+            ErrorCode = ServerBusyErrorCode,
+            ErrorMsg = ViewResources.ServerBusyMessage
+        };
+
+        private bool IsAllowExportLargeBetList() => _appSettings.IsDisableExportLargeBetList
+            && _appSettings.LicenseesWithLargeData.Contains(SessionService.LicenseeSession.LicenseeName);
+
+        private async void UpdateMetaModel(AdvancedSearchBetListMetaModel metaModel)
+        {
             var licenseeSession = SessionService.LicenseeSession;
             var sabaSport = _sportService.GetSabaSport(metaModel.SportId, IsHideSaba);
             if (sabaSport != null)
@@ -56,24 +97,10 @@
                 metaModel.SportId = sabaSport.SportTypeId;
             }
 
-            if (metaModel.IsExport &&
-                _appSettings.IsDisableExportLargeBetList
-                && _appSettings.LicenseesWithLargeData.Contains(licenseeSession.LicenseeName))
-            {
-                return new
-                {
-                    ErrorCode = ServerBusyErrorCode,
-                    ErrorMsg = ViewResources.ServerBusyMessage
-                };
-            }
-
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
             metaModel.FullCustomerClass = string.Join(",", await _customerClassService.GetAllCustomerClassId());
-
-            var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
-            return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetData",
-                metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);
+            metaModel.LicenseeName = licenseeSession.LicenseeName;
         }
     }
 }
