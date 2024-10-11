@@ -3358,4 +3358,7 @@
   <data name="OddsBoostBonus" xml:space="preserve">
     <value>特优赔率奬金</value>
   </data>
+  <data name="TopPriority" xml:space="preserve">
+    <value>高优先级</value>
+  </data>
 </root>

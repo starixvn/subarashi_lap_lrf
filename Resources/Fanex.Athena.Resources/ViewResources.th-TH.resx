@@ -3381,4 +3381,7 @@
   <data name="OddsBoostBonus" xml:space="preserve">
     <value>ตัวเพิ่มอัตราต่อรอง โบนัส </value>
   </data>
+  <data name="TopPriority" xml:space="preserve">
+    <value>ลำดับความสำคัญสูงสุด</value>
+  </data>
 </root>
