@@ -30,10 +30,14 @@
     public class MatchWinLossReportController : ReportBaseController
     {
         private const string NewProductIdColumnName = "newproductid";
-
         private const string MatchNameColumn = "matchname";
 
-        private static readonly IList<int> VirtualHrBettypes = new List<int> { 1231, 1232, 1233, 1237, 1238 };
+        private static readonly IEnumerable<int> VSBetRadarSportTypes = new List<int>
+        {
+            (int)SportType.VirtualHorseRacing ,
+            (int)SportType.VirtualDogRacing
+        };
+
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
         private readonly ICacheRefAdapter _cacheRefAdapter;
         private readonly IMatchWinLossService _matchWinLossService;
@@ -310,19 +314,18 @@
             }
             else
             {
-                if (VirtualHrBettypes.Contains(betType))
+                if (VSBetRadarSportTypes.Contains(Converter.ToInt(row["SportType"])))
                 {
-                    var culture = new CultureInfo("en-US");
-                    const string TimeFormatter = "{0:MM/dd/yyyy hh:mm:ss tt}";
-                    var kickOffTime = Converter.ToDateTime(row["KickoffTime"]);
-                    row[MatchNameColumn] = string.Format(culture, TimeFormatter, kickOffTime);
+                    var distance = row["Distance"].ToString();
+                    var id = !string.IsNullOrEmpty(distance) ? $" - ID {distance}" : string.Empty;
+                    row[MatchNameColumn] = $"{ViewResources.Event} {row["VendorMatchId"]}{id}";
                 }
                 else
                 {
                     var homeName = _cacheRefAdapter.GetTeamName(row["homeid"]) +
-                                   (Converter.ToBool(row["isneutral"])
-                                        ? " " + ViewResources.IsNeutral
-                                        : string.Empty);
+                               (Converter.ToBool(row["isneutral"])
+                                    ? " " + ViewResources.IsNeutral
+                                    : string.Empty);
                     var awayName = _cacheRefAdapter.GetTeamName(row["awayid"]);
                     row[MatchNameColumn] = homeName + "-vs-" + awayName;
                 }

@@ -36,6 +36,8 @@ namespace Fanex.Athena.Model.Report.DTO
 
         public string VendorMatchId { get; set; }
 
+        public string Distance { get; set; }
+
         public bool IsLive { get; set; }
 
         public int HomeId { get; set; }

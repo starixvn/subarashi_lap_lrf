@@ -192,6 +192,7 @@ namespace Fanex.Athena.DataAccess.Report
                     SportType = reader.ToShort("sporttype"),
                     KickOffTime = hasKickOffTime ? reader.ToDateTime("KickoffTime") : DateTimeHelper.MinValue,
                     VendorMatchId = reader.ToString("VendorMatchId"),
+                    Distance = reader.ToString("Distance"),
                     EventType = reader.ToInt("EventType")
                 });
             }

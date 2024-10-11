@@ -33,6 +33,8 @@ namespace Fanex.Athena.Model.Report.DTO.LiveReports
 
         public string VendorMatchId { get; set; }
 
+        public string Distance { get; set; }
+
         public decimal LicenseeComm { get; set; }
 
         public decimal AmountDue { get; set; }

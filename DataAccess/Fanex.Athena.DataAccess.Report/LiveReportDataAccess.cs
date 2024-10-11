@@ -155,6 +155,7 @@ namespace Fanex.Athena.DataAccess.Report
                             LicenseeWinLoss = reader.ToDecimal("LicenseeWL"),
                             EventType = reader.ToInt("EventType"),
                             VendorMatchId = reader.ToString("VendorMatchId"),
+                            Distance = reader.ToString("Distance"),
                             SportId = metaModel.SportId
                         });
                     }

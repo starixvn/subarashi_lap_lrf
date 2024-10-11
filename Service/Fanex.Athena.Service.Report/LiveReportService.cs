@@ -13,6 +13,7 @@ namespace Fanex.Athena.Service.Report
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.DTO.LiveReports;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Resources;
@@ -102,7 +103,8 @@ namespace Fanex.Athena.Service.Report
 
                 case (int)SportType.VirtualDogRacing:
                 case (int)SportType.VirtualHorseRacing:
-                    matchName = $"{ViewResources.Event} {data.VendorMatchId}";
+                    var id = !string.IsNullOrEmpty(data.Distance) ? $" - ID {data.Distance}" : string.Empty;
+                    matchName = $"{ViewResources.Event} {data.VendorMatchId}{id}";
                     break;
 
                 default:

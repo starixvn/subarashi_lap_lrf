@@ -110,6 +110,7 @@ namespace Fanex.Athena.Service.Report
                                      AwayId = g.Select(r => r.AwayId).FirstOrDefault(),
                                      BetType = g.Select(r => r.BetType).FirstOrDefault(),
                                      IsNeutral = g.Select(r => r.IsNeutral).FirstOrDefault(),
+                                     EventType = g.Select(r => r.EventType).FirstOrDefault(),
                                      Turnover = g.Sum(r => r.Turnover),
                                      TotalTransaction = g.Sum(r => r.TotalTransaction),
                                      CustomerWL = g.Sum(r => r.CustomerWL),
@@ -164,7 +165,8 @@ namespace Fanex.Athena.Service.Report
 
             if (VSBetRadarSportTypes.Contains(matchWinLoss.SportType))
             {
-                return ViewResources.Event + " " + matchWinLoss.VendorMatchId;
+                var id = !string.IsNullOrEmpty(matchWinLoss.Distance) ? $" - ID {matchWinLoss.Distance}" : string.Empty;
+                return $"{ViewResources.Event} {matchWinLoss.VendorMatchId}{id}";
             }
 
             var homeName = _cacheRefAdapter.GetTeamName(matchWinLoss.HomeId) +
