@@ -3321,4 +3321,7 @@
   <data name="OddsBoostBonus" xml:space="preserve">
     <value>Penambah Peluang Bonus</value>
   </data>
+  <data name="TopPriority" xml:space="preserve">
+    <value>Prioritas Utama</value>
+  </data>
 </root>

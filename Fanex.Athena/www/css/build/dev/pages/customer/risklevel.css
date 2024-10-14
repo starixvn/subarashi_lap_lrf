@@ -41,7 +41,7 @@
   .risk-level-policy-setting .result-content {
     min-width: 1200px; }
   .risk-level-policy-setting .main-content {
-    max-height: 55vh;
+    max-height: 85vh;
     overflow: auto; }
   .risk-level-policy-setting .view-leagues {
     float: right; }
@@ -87,7 +87,8 @@
   text-transform: none; }
 
 .right-filter-menu {
-  margin-right: 15px; }
+  margin-right: 15px;
+  width: 100%; }
 
 
 /*# sourceMappingURL=risklevel.css.map*/

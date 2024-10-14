@@ -30,14 +30,14 @@
     }
     else
     {
+        <div class="col right right-filter-menu">
+            <i class="icon-excel right" title="Export to Excel" id="ExportToExcel"></i>
+        </div>
         <div class="page-results risk-level-policy-setting">
             <div class="result-content">
                 <div class="panel-heading active">
                     <div class="panel-title">
                         <span class="report-title">@ViewResources.RiskLevelBetSetting</span>
-                        <div class="col right right-filter-menu excel-container">
-                            <i class="icon-excel" title="Export to Excel" id="ExportToExcel"></i>
-                        </div>
                     </div>
                 </div>
                 <div class="main-content" id="main-content">
@@ -45,6 +45,7 @@
                         <thead>
                             <tr>
                                 <th class="col-large">@ViewResources.SportType</th>
+                                <th class="col-medium large">@ViewResources.TopPriority</th>
                                 <th class="col-large medium">@ViewResources.Live2/<br />@ViewResources.PreMatch</th>
                                 <th class="col-medium large">@ViewResources.Currency</th>
                                 <th class="col-medium large">@ViewResources.DisableParlay</th>
@@ -71,6 +72,7 @@
                                 {
                                     <tr>
                                         <td class="left-align">@p.SportTypeName</td>
+                                        <td class="center-align">@(p.TopPriority ? ViewResources.Yes : ViewResources.No)</td>
                                         <td class="left-align">@(p.LiveTypeText)</td>
                                         <td class="center-align">@p.Currency</td>
                                         <td class="center-align">@(p.DisableParlay ? ViewResources.Yes : ViewResources.No)</td>
