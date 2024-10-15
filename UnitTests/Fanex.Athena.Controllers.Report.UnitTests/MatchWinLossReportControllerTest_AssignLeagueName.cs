@@ -33,9 +33,10 @@
             {
                 // Arrange
                 var row = CreateDataRow(ProductTypes.NumberGame);
+                var sport = FakeHelper.Create<int>();
 
                 // Action
-                controller.AssignLeagueName(row);
+                controller.AssignLeagueName(row, sport);
 
                 // Assert
                 Assert.That(row["leaguename"], Is.EqualTo(ViewResources.ProductNG));
@@ -53,9 +54,10 @@
                 _cacheRefAdapter.GetLeagueName(leagueId).Returns(leagueName);
                 var row = CreateDataRow(-1);
                 row["leagueid"] = leagueId;
+                var sport = FakeHelper.Create<int>();
 
                 // Action
-                controller.AssignLeagueName(row);
+                controller.AssignLeagueName(row, sport);
 
                 // Assert
                 Assert.That(row["leaguename"], Is.EqualTo(leagueName));

@@ -14,6 +14,7 @@ namespace Fanex.Athena.Service.Report
 
     using DataAccess.Report.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Report.Interfaces;
@@ -34,12 +35,6 @@ namespace Fanex.Athena.Service.Report
             (int)SportType.VirtualMotoRacing,
             (int)SportType.VirtualSpeedway,
             (int)SportType.VirtualCycling
-        };
-
-        private static readonly IEnumerable<int> VSBetRadarSportTypes = new List<int>
-        {
-            (int)SportType.VirtualHorseRacing ,
-            (int)SportType.VirtualDogRacing
         };
 
         private static readonly CultureInfo EnglishCulture = new CultureInfo("en-US");
@@ -147,7 +142,14 @@ namespace Fanex.Athena.Service.Report
 
         private string GetLeagueName(MatchWinLoss matchWinLoss)
         {
-            return _cacheRefAdapter.GetLeagueName(matchWinLoss.LeagueId);
+            if (SportHelper.IsVirtualBetRadarSports(matchWinLoss.SportType))
+            {
+                return _cacheRefAdapter.GetLeague3rdName(matchWinLoss.LeagueId);
+            }
+            else
+            {
+                return _cacheRefAdapter.GetLeagueName(matchWinLoss.LeagueId);
+            }
         }
 
         private string GetMatchName(MatchWinLoss matchWinLoss)
@@ -163,7 +165,7 @@ namespace Fanex.Athena.Service.Report
                 return string.Format(EnglishCulture, KickOfTimeFormat, matchWinLoss.KickOffTime);
             }
 
-            if (VSBetRadarSportTypes.Contains(matchWinLoss.SportType))
+            if (SportHelper.IsVirtualBetRadarSports(matchWinLoss.SportType))
             {
                 var id = !string.IsNullOrEmpty(matchWinLoss.Distance) ? $" - ID {matchWinLoss.Distance}" : string.Empty;
                 return $"{ViewResources.Event} {matchWinLoss.VendorMatchId}{id}";

@@ -97,6 +97,16 @@
             return RemotingRefService.GetLeagueName(leagueId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
         }
 
+        public string GetLeague3rdName(object leagueId)
+        {
+            if (!IsValidId(leagueId))
+            {
+                return string.Empty;
+            }
+
+            return RemotingRefService.GetLeagueName3rd(leagueId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
+        }
+
         public string GetBetTypeName(object bettypeId, string languageCode, bool isHideSaba)
         {
             if (!IsValidId(bettypeId))

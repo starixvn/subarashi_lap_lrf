@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.Report
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Globalization;
@@ -31,12 +32,6 @@
     {
         private const string NewProductIdColumnName = "newproductid";
         private const string MatchNameColumn = "matchname";
-
-        private static readonly IEnumerable<int> VSBetRadarSportTypes = new List<int>
-        {
-            (int)SportType.VirtualHorseRacing ,
-            (int)SportType.VirtualDogRacing
-        };
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
         private readonly ICacheRefAdapter _cacheRefAdapter;
@@ -295,17 +290,17 @@
             foreach (DataRow row in mainTable.Rows)
             {
                 var betType = Converter.ToInt(row["bettype"]);
+                var sport = Converter.ToInt(row["SportType"]);
                 row[NewProductIdColumnName] = ProductHelper.GetProductId(betType);
 
-                AssignMatchName(row, betType);
-
-                AssignLeagueName(row);
+                AssignMatchName(row, betType, sport);
+                AssignLeagueName(row, sport);
             }
 
             return mainTable;
         }
 
-        protected internal virtual void AssignMatchName(DataRow row, int betType)
+        protected internal virtual void AssignMatchName(DataRow row, int betType, int sport)
         {
             if ((int)row[NewProductIdColumnName] == ProductTypes.NumberGame)
             {
@@ -314,11 +309,12 @@
             }
             else
             {
-                if (VSBetRadarSportTypes.Contains(Converter.ToInt(row["SportType"])))
+                if (SportHelper.IsVirtualBetRadarSports(sport))
                 {
                     var distance = row["Distance"].ToString();
+                    var vendorMatchId = row["VendorMatchId"].ToString();
                     var id = !string.IsNullOrEmpty(distance) ? $" - ID {distance}" : string.Empty;
-                    row[MatchNameColumn] = $"{ViewResources.Event} {row["VendorMatchId"]}{id}";
+                    row[MatchNameColumn] = $"{ViewResources.Event} {vendorMatchId}{id}";
                 }
                 else
                 {
@@ -332,11 +328,23 @@
             }
         }
 
-        protected internal virtual void AssignLeagueName(DataRow row)
+        protected internal virtual void AssignLeagueName(DataRow row, int sportType)
         {
             row["leaguename"] = (int)row[NewProductIdColumnName] == ProductTypes.NumberGame ?
                         ViewResources.ProductNG :
-                        _cacheRefAdapter.GetLeagueName(row["leagueid"]);
+                        GetLeagueName(row, sportType);
+        }
+
+        private string GetLeagueName(DataRow row, int sportType)
+        {
+            if (SportHelper.IsVirtualBetRadarSports(sportType))
+            {
+                return _cacheRefAdapter.GetLeague3rdName(row["leagueid"]);
+            }
+            else
+            {
+                return _cacheRefAdapter.GetLeagueName(row["leagueid"]);
+            }
         }
     }
 }
