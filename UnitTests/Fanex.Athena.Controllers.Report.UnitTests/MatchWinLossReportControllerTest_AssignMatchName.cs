@@ -36,9 +36,10 @@
                 // Arrange
                 var row = CreateDataRow(ProductTypes.NumberGame);
                 row["matchcode"] = FakeHelper.Create<string>();
+                var sport = FakeHelper.Create<int>();
 
                 // Action
-                controller.AssignMatchName(row, ProductTypes.NumberGame);
+                controller.AssignLeagueName(row, sport);
 
                 // Assert
                 Assert.That(row["matchname"], Is.EqualTo(ViewResources.NumberGameNo + " " + row["matchcode"]));
@@ -54,9 +55,10 @@
                 const int Bettype = 1231;
                 var row = CreateDataRow(Bettype);
                 row["KickoffTime"] = DateTimeHelper.CreateDateTime(2018, 1, 2, 3, 4, 5);
+                var sport = FakeHelper.Create<int>();
 
                 // Action
-                controller.AssignMatchName(row, Bettype);
+                controller.AssignLeagueName(row, sport);
 
                 // Assert
                 Assert.That(row["matchname"], Is.EqualTo("01/02/2018 03:04:05 AM"));
@@ -76,9 +78,10 @@
                 row["isneutral"] = isNeutral;
                 row["awayid"] = 2;
                 _cacheRefAdapter.GetTeamName(Arg.Any<object>()).Returns(x => "Team " + x[0]);
+                var sport = FakeHelper.Create<int>();
 
                 // Action
-                controller.AssignMatchName(row, Bettype);
+                controller.AssignLeagueName(row, sport);
 
                 // Assert
                 Assert.That(row["matchname"], Is.EqualTo(expectedMatchName));

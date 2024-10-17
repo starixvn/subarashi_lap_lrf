@@ -82,6 +82,7 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
                 let submitData = {
                     LeagueId: matchData.LeagueId,
                     MatchId: matchData.MatchId,
+                    EventType: matchData.EventType,
                     ProductCode: matchData.ProductCode,
                     SubsidiarySearch: $('#SubsidiarySearch').val(),
                     SubsidiaryList: $('#SubsidiaryList').val(),

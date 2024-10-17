@@ -88,15 +88,20 @@
 
         function viewMatchBetList(target) {
             let url = Site.resolveClientUrl('LiveReportBetList/Match');
-
             const currencyName = $(_selector.CurrencyName).attr('data-original');
             let data = $(target).attr('data-drill-down');
             data = $.parseJSON(data);
+
+            if (data.SportId === 177 || data.SportId === 198) {
+                url = Site.resolveClientUrl('LiveReportBetList/Betradar');
+            }
+
             url = Site.setLicenseeOptionOriginalParam(url);
             url = QueryString.setParam(url, 'FromDate', $(_selector.FromDate).val());
             url = QueryString.setParam(url, 'ToDate', $(_selector.ToDate).val());
             url = QueryString.setParam(url, 'CurrencyName', currencyName);
             url = QueryString.setParam(url, 'MatchId', data.MatchId);
+            url = QueryString.setParam(url, 'SportType', data.SportId);
             url = QueryString.setParam(url, 'HomeId', data.HomeId);
             url = QueryString.setParam(url, 'AwayId', data.AwayId);
             url = QueryString.setParam(url, 'BetType', data.BetType);

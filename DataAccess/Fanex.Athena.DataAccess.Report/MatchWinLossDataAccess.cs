@@ -93,6 +93,7 @@ namespace Fanex.Athena.DataAccess.Report
                 SetCommonParam(db, metaModel);
                 db.SetParameterValue("BalanceUpDay", _balanceUpDataAccess.GetBalanceUp().BalanceUpDay);
                 db.SetParameterValue("MatchId", metaModel.MatchId);
+                db.SetParameterValue("EventType", metaModel.EventType);
                 db.SetParameterValue("Date", metaModel.Date);
 
                 var productList = metaModel.ProductCodeList.Split(',').ToList();
@@ -189,7 +190,10 @@ namespace Fanex.Athena.DataAccess.Report
                     IsLive = isLive,
                     IsNeutral = hasIsNeutral && Converter.ToBool(reader["isNeutral"]),
                     SportType = reader.ToShort("sporttype"),
-                    KickOffTime = hasKickOffTime ? reader.ToDateTime("KickoffTime") : DateTimeHelper.MinValue
+                    KickOffTime = hasKickOffTime ? reader.ToDateTime("KickoffTime") : DateTimeHelper.MinValue,
+                    VendorMatchId = reader.ToString("VendorMatchId"),
+                    Distance = reader.ToString("Distance"),
+                    EventType = reader.ToInt("EventType")
                 });
             }
 

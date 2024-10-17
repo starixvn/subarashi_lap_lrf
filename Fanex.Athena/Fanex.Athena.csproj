@@ -1154,6 +1154,7 @@
     <Content Include="Views\Desktop\BetList\BettingTicketCenter\BookedBet.cshtml" />
     <Content Include="Views\Desktop\Report\PlayerSabaCoins\Index.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\Action\LicenseeGroupComm.cshtml" />
+    <Content Include="Views\Desktop\BetList\LiveReport\Betradar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SiteConfig\WebConfigTransforms\SIT.config">

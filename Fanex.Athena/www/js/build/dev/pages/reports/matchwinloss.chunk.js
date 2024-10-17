@@ -2348,6 +2348,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 let submitData = {
                     LeagueId: matchData.LeagueId,
                     MatchId: matchData.MatchId,
+                    EventType: matchData.EventType,
                     ProductCode: matchData.ProductCode,
                     SubsidiarySearch: $('#SubsidiarySearch').val(),
                     SubsidiaryList: $('#SubsidiaryList').val(),

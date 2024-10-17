@@ -16,6 +16,7 @@
             item.MatchId,
             item.HomeId,
             item.AwayId,
+            item.SportId,
             LiveIndicator = Model.Param.LiveIndicator
         };
 
@@ -32,7 +33,7 @@
 
             @DesktopReportRazorHelper.RenderCustomerWinLossData(item, Model.IsAllowedCustomerCommission, true)
 
-            @{ 
+            @{
                 var turnOver = item.TurnOver.ToStringExt();
                 var betCount = item.BetCount.ToStringExt();
                 var licenseeWL = item.LicenseeWinLoss;
@@ -50,7 +51,7 @@
             }
             @if (Model.HasAmountDueToColumn)
             {
-            <td class="right-align" title="@amountDue">@amountDue</td>
+                <td class="right-align" title="@amountDue">@amountDue</td>
             }
         </tr>
     }

@@ -13,8 +13,10 @@ namespace Fanex.Athena.Service.Report
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.DTO.LiveReports;
     using Fanex.Athena.Model.Report.MetaModel;
+    using Fanex.Athena.Resources;
     using Fanex.Athena.Service.Report.Interfaces;
 
     using Model.Core.DataDomain;
@@ -75,9 +77,7 @@ namespace Fanex.Athena.Service.Report
 
                 foreach (var data in dataList)
                 {
-                    data.MatchName = model.SportId == (int)SportType.LiveCasino
-                                         ? string.Format("{0} {1} {2} ", _cacheRefAdapter.GetSportName(model.SportId), _cacheRefAdapter.GetBettype(data.BetType), data.ShowTime)
-                                         : string.Format("{0} vs {1}", _cacheRefAdapter.GetTeamName(data.HomeId), _cacheRefAdapter.GetTeamName(data.AwayId));
+                    data.MatchName = GetMatchName(model, data);
                 }
 
                 if (!string.IsNullOrEmpty(model.SortColumn) && !string.IsNullOrEmpty(model.SortDirection))
@@ -89,6 +89,30 @@ namespace Fanex.Athena.Service.Report
             }
 
             return new SortableList<LiveReportWinLossByMatch>();
+        }
+
+        private string GetMatchName(LiveReportMatchListMetalModel model, LiveReportWinLossByMatch data)
+        {
+            string matchName;
+
+            switch (model.SportId)
+            {
+                case (int)SportType.LiveCasino:
+                    matchName = string.Format("{0} {1} {2} ", _cacheRefAdapter.GetSportName(model.SportId), _cacheRefAdapter.GetBettype(data.BetType), data.ShowTime);
+                    break;
+
+                case (int)SportType.VirtualDogRacing:
+                case (int)SportType.VirtualHorseRacing:
+                    var id = !string.IsNullOrEmpty(data.Distance) ? $" - ID {data.Distance}" : string.Empty;
+                    matchName = $"{ViewResources.Event} {data.VendorMatchId}{id}";
+                    break;
+
+                default:
+                    matchName = string.Format("{0} vs {1}", _cacheRefAdapter.GetTeamName(data.HomeId), _cacheRefAdapter.GetTeamName(data.AwayId));
+                    break;
+            }
+
+            return matchName;
         }
     }
 }

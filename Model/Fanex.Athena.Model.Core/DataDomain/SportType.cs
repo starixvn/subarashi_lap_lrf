@@ -112,7 +112,9 @@
 
         VirtualSport = 180,
 
-        VirtualHorseRacing = 181,
+        VirtualHorseRacing = 198,
+
+        VirtualDogRacing = 177,
 
         VirtualGreyhound = 182,
 

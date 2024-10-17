@@ -111,6 +111,16 @@
             return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
         }
 
+        [HttpGet]
+        [ValidationApiRequest(ObjectName = "metaModel", IsValidCurrency = true)]
+        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true)]
+        public async Task<dynamic> Betradar([FromUri] LiveReportBetListMetaModel metaModel, int page, int rows)
+        {
+            const string UspName = "Lrf_BetList_LiveReport";
+
+            return await GetPagingData(metaModel, UspName, page, rows).ConfigureAwait(false);
+        }
+
         #region Utility
 
         private async Task<HttpResponseMessage> GetData(LiveReportBetListMetaModel metaModel, string uspKey)

@@ -13,7 +13,7 @@
 
 @functions{
     static IList<string> specialProducts = new List<string> { Product.NG };
-    static IList<int> vsSportTypes = new List<int> { 181, 182, 183, 184, 185 };
+    static IList<int> vsSportTypes = new List<int> { 181, 182, 183, 184, 185, 198, 177 };
     static int maxLength = 36;
 
     public static string GetMatchName(MatchWinLoss matchWinLoss)
@@ -81,7 +81,8 @@
             MatchId = matchWinLoss.MatchId,
             ProductCode = productName,
             HomeId = matchWinLoss.HomeId,
-            AwayId = matchWinLoss.AwayId
+            AwayId = matchWinLoss.AwayId,
+            EventType = matchWinLoss.EventType
         };
 
         <tr data-match="@(drilldownParams.ToJson())">
@@ -126,7 +127,7 @@
             <td class="right-align text-bold">
                 @DesktopRazorHelper.NegativeFormat(matchWinLoss.LicenseeWL)
             </td>
-            
+
             @if (Model.ProductAccess.IsAllowBA)
             {
                 <td class="right-align text-bold">

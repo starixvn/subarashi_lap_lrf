@@ -21,6 +21,8 @@
 
         string GetLeagueName(object leagueId);
 
+        string GetLeague3rdName(object leagueId);
+
         string GetSportName(object sportId, string languageCode = null);
 
         string GetDummySportName(object sportId, string languageCode = null);

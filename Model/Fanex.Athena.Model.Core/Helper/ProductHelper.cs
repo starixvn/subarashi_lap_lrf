@@ -113,14 +113,9 @@
                 return ProductTypes.NumberGame;
             }
 
-            if (BetTypeHelper.IsVirtualSports(bettype))
+            if (BetTypeHelper.IsVirtualSports(bettype) || BetTypeHelper.IsVirtualSports2(bettype))
             {
                 return ProductTypes.VirtualSports;
-            }
-
-            if (BetTypeHelper.IsVirtualSports2(bettype))
-            {
-                return ProductTypes.VirtualSports2;
             }
 
             return ProductTypes.Sportsbook;
