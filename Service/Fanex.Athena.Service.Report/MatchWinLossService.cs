@@ -29,14 +29,6 @@ namespace Fanex.Athena.Service.Report
     {
         private const string KickOfTimeFormat = "{0:MM/dd/yyyy hh:mm:ss tt}";
 
-        private static readonly IEnumerable<int> VSSportTypes = new List<int>
-        {
-            (int)SportType.VirtualGreyhound,
-            (int)SportType.VirtualMotoRacing,
-            (int)SportType.VirtualSpeedway,
-            (int)SportType.VirtualCycling
-        };
-
         private static readonly CultureInfo EnglishCulture = new CultureInfo("en-US");
 
         private readonly IMatchWinLossDataAccess _matchWinLossDataAccess;
@@ -160,7 +152,7 @@ namespace Fanex.Athena.Service.Report
                 return prefix + " " + matchWinLoss.MatchCode;
             }
 
-            if (VSSportTypes.Contains(matchWinLoss.SportType))
+            if (SportHelper.IsVSSportTypes(matchWinLoss.SportType))
             {
                 return string.Format(EnglishCulture, KickOfTimeFormat, matchWinLoss.KickOffTime);
             }

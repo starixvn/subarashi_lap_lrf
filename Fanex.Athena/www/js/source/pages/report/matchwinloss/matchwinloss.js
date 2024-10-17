@@ -156,6 +156,12 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
                 url = QueryString.setParam(url, 'awayid', matchData.AwayId);
                 url = QueryString.setParam(url, 'subsidiarySearch', $('#SubsidiarySearch').val());
                 url = QueryString.setParam(url, 'subsidiaryList', $('#SubsidiaryList').val());
+                url = QueryString.setParam(url, 'MatchCode', matchData.MatchCode);
+                url = QueryString.setParam(url, 'VendorMatchId', matchData.VendorMatchId);
+                url = QueryString.setParam(url, 'Distance', matchData.Distance);
+                url = QueryString.setParam(url, 'IsNeutral', matchData.IsNeutral);
+                url = QueryString.setParam(url, 'KickOffTime', matchData.KickOffTime);
+                url = QueryString.setParam(url, 'SportType', matchData.SportType);
 
                 const productCodeList = _me.getProductCodeList(productCode);
                 url = Site.setProductCodeListParam(url, productCodeList);

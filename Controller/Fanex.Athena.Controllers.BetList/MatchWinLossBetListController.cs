@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
+    using System.Globalization;
     using System.Threading.Tasks;
 
     #region Using
@@ -7,7 +8,10 @@
     using System.Web.Mvc;
 
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
+    using Fanex.Athena.VendorAdapter.Interfaces;
     using Model.BetList.MetaModel;
 
     using Resources;
@@ -20,6 +24,14 @@
     public class MatchWinLossBetListController : BetListBaseController
     {
         private static readonly int[] HiddenColumns = new[] { BetEffectiveColumn };
+        private static readonly CultureInfo EnglishCulture = new CultureInfo("en-US");
+        private const string KickOfTimeFormat = "{0:MM/dd/yyyy hh:mm:ss tt}";
+        private readonly ICacheRefAdapter _cacheRefAdapter;
+
+        public MatchWinLossBetListController(ICacheRefAdapter cacheRefAdapter)
+        {
+            _cacheRefAdapter = cacheRefAdapter;
+        }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
@@ -32,6 +44,7 @@
         [ValidationWebRequest(IsValidCurrency = true)]
         public Task<ActionResult> MatchBetType(BetListExcelMetaModel metaModel)
         {
+            metaModel.MatchName = GetMatchName(metaModel);
             return ProcessRequest(metaModel, null, "~/Views/Desktop/BetList/MatchWl/MatchBetType.cshtml");
         }
 
@@ -76,9 +89,7 @@
                 CustomerCommVisible = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
             };
 
-            var matchName = metaModel.HomeId > 0 && metaModel.AwayId > 0
-                  ? CacheRefAdapter.GetTeamName(metaModel.HomeId) + " vs " + CacheRefAdapter.GetTeamName(metaModel.AwayId) + " - "
-                  : string.Empty;
+            var matchName = GetMatchName(metaModel);
             var currencyTitle = GetViewInCurrency(metaModel);
 
             metaModel.Title = ViewResources.BetList
@@ -90,6 +101,30 @@
             metaModel.HiddenColumns = HiddenColumns;
 
             return await ProcessExportExcel(metaModel, "MatchWinLossBetList").ConfigureAwait(false);
+        }
+
+        protected string GetMatchName(BetListExcelMetaModel metaModel)
+        {
+            if (metaModel.ProductCodeList == Product.NG)
+            {
+                var prefix = metaModel.SportType == (int)SportType.NumberGameHappy5 ? ViewResources.No + "." : ViewResources.NumberGameNo;
+                return prefix + " " + metaModel.MatchCode + " - ";
+            }
+
+            if (SportHelper.IsVSSportTypes(metaModel.SportType))
+            {
+                return string.Format(EnglishCulture, KickOfTimeFormat, metaModel.KickOffTime) + " - ";
+            }
+
+            if (SportHelper.IsVirtualBetRadarSports(metaModel.SportType))
+            {
+                var id = !string.IsNullOrEmpty(metaModel.Distance) ? $" - ID {metaModel.Distance}" : string.Empty;
+                return $"{ViewResources.Event} {metaModel.VendorMatchId}{id} - ";
+            }
+
+            return metaModel.HomeId > 0 && metaModel.AwayId > 0
+                ? _cacheRefAdapter.GetTeamName(metaModel.HomeId) + " vs " + _cacheRefAdapter.GetTeamName(metaModel.AwayId) + " - "
+                : string.Empty;
         }
     }
 }

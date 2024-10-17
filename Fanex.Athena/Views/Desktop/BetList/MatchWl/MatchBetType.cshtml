@@ -5,20 +5,18 @@
 
 @using Fanex.Athena.VendorAdapter;
 @using Fanex.Athena.Model.Core.Helper
-@model Fanex.Athena.Model.BetList.MetaModel.BetListMetaModel
+@using Fanex.Athena.Model.BetList.MetaModel
+@model Fanex.Athena.Model.BetList.MetaModel.BetListExcelMetaModel
 @{
     var _cacheRefAdapter = new CacheRefAdapter();
 }
 @section ContentTitle
 {
     @{
-        var matchName = Model.HomeId > 0 && Model.AwayId > 0
-                ? _cacheRefAdapter.GetTeamName(Model.HomeId) + " vs " + _cacheRefAdapter.GetTeamName(Model.AwayId) + " - "
-                : string.Empty;
         var bettypeName = Model.BetType > 0 ? _cacheRefAdapter.GetBettype(Model.BetType) + " - " : string.Empty;
     }
 
-    @ViewResources.BetList - @matchName @bettypeName @Model.FromDate.ToShortDateString()
+    @ViewResources.BetList - @Model.MatchName @bettypeName @Model.FromDate.ToShortDateString()
     - <span class="base-currency">@DesktopRazorHelper.ViewBaseCurrency(Model.CurrencyName, Model.BaseCurrency)</span>
 }
 @section BackButton
