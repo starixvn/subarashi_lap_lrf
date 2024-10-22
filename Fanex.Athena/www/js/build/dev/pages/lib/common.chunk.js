@@ -21519,7 +21519,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿///
         // Rebuild query string, ignore null value
         for (let key1 in args) {
             if (args[key1] != null && args[key1] !== undefined) {
-                queryArray.push(key1.toLowerCase() + '=' + args[key1]);
+                queryArray.push(key1.toLowerCase() + '=' + encodeURIComponent(args[key1]));
             }
         }
 
