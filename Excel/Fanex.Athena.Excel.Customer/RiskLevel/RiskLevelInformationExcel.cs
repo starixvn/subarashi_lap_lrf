@@ -40,7 +40,7 @@
             { CurrencyColumn, "Currency" },
             { DisableParlay, "DisableParlay" },
             { PlatformColumn, "Platform" },
-            { LeagueGroupColumn, "LeagueGroups" },
+            { LeagueGroupColumn, "LeagueGroupName" },
             { BetIntervalColumn, "BetInterval" },
             { AgentBetIntervalColumn, "AgentBetInterval" },
             { MinBetColumn, "MinBet" },
@@ -134,12 +134,6 @@
                     case "DisableParlay":
                     {
                         var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
-                        row.Cells[columnName.Key].SetCellValue(text);
-                        break;
-                    }
-                    case "LeagueGroups":
-                    {
-                        var text = string.Join(", ", item.LeagueGroups.Select(x => x.LeagueGroupName).ToList());
                         row.Cells[columnName.Key].SetCellValue(text);
                         break;
                     }

@@ -60,7 +60,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model.CustomerClassLimitPolicies.Count() == 0)
+                            @if (!Model.CustomerClassLimitPolicies.Any())
                             {
                                 <tr>
                                     <td class="center-align" colspan="12">@ViewResources.NoInfo</td>
@@ -78,13 +78,12 @@
                                         <td class="center-align">@(p.DisableParlay ? ViewResources.Yes : ViewResources.No)</td>
                                         <td class="left-align">@p.Platform</td>
                                         <td class="center-align" style="" data-internal-league-group="@p.LeagueGroupId">
-                                            @{var leagueGroupName = string.Join(", ", p.LeagueGroups.Select(x => x.LeagueGroupName).ToList());}
+                                            <p class="league-group-name">@p.LeagueGroupName</p>
 
-                                            <p class="league-group-name">@leagueGroupName</p>
-
-                                            @if (!leagueGroupName.Equals("-", StringComparison.OrdinalIgnoreCase))
+                                            @if (!p.LeagueGroupName.Equals("-", StringComparison.OrdinalIgnoreCase) &&
+                                                 !p.LeagueGroupName.Equals("None", StringComparison.OrdinalIgnoreCase))
                                             {
-                                                <a href="javascript:;" class="view-leagues" data-sport-type="@p.SportType" data-league-groups='@p.LeagueGroups.ToJson()'>
+                                                <a href="javascript:;" class="view-leagues" data-sport-type="@p.SportType" data-league-group-id='@p.LeagueGroupId' data-league-group-name='@p.LeagueGroupName'>
                                                     <i class="icon-info"></i>
                                                 </a>
                                             }

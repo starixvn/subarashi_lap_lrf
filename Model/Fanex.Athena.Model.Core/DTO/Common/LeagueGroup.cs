@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Fanex.Athena.Model.Core.DTO.External;
-
-namespace Fanex.Athena.Model.Core.DTO.Common
+﻿namespace Fanex.Athena.Model.Core.DTO.Common
 {
+    using System.Collections.Generic;
+    using External;
+
     public class LeagueGroup
     {
         public int LeagueGroupId { get; set; }
@@ -10,5 +10,7 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public string LeagueGroupName { get; set; }
 
         public IEnumerable<PortalApiLeagueResponse> LimitLeagues { get; set; }
+
+        public IEnumerable<League> LimitLeaguesFromSP { get; set; }
     }
 }

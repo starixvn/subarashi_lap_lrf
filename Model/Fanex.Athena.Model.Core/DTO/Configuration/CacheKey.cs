@@ -7,7 +7,7 @@
 namespace Fanex.Athena.Model.Core.DTO.Configuration
 {
     /// <summary>
-    /// Cache key constant.
+    ///     Cache key constant.
     /// </summary>
     public static class CacheKey
     {
@@ -36,5 +36,7 @@ namespace Fanex.Athena.Model.Core.DTO.Configuration
         public static readonly string MemorycacheBaseCurrencyListByLicensee = "MemoryCache_BaseCurrencyList_{0}_{1}_{2}_{3}";
 
         public static readonly string MemorycacheCommSettingsByLicensee = "MemoryCache_CommSettings";
+
+        public static readonly string MemorycacheGetLimitLeagues = "MemoryCache_GetLimitLeagues";
     }
 }

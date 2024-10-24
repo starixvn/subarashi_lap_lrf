@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Model.Core.DTO.Common;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
 
@@ -12,5 +13,7 @@
         Task<IEnumerable<CustomerClassLimitPolicyModel>> GetSpreadSettingPolicies(GetCustomerClassInformationMetaModel metaModel);
 
         Task<IEnumerable<CustomerClassLimitPolicyModel>> GetSettingPoliciesMember(GetCustomerClassInformationMetaModel metaModel);
+
+        Task<IEnumerable<League>> GetLimitLeagues(GetLimitLeaguesV2MetaModel metaModel);
     }
 }

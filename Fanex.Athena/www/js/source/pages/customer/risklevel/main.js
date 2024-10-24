@@ -91,11 +91,13 @@ define(
 
             showLeagues: function (self) {
                 var sportType = self.attr("data-sport-type");
-                var leagueGroups = JSON.parse(self.attr("data-league-groups"));
+                var leagueGroupId = self.attr("data-league-group-id");
+                var leagueGroupName = self.attr("data-league-group-name");
 
                 var param = {
                     sportType,
-                    leagueGroups
+                    leagueGroupId,
+                    leagueGroupName
                 };
 
                 _me.fetchLeagues(param, function (result) {
@@ -103,7 +105,7 @@ define(
 
                     if (result && result.length > 0) {
                         $.each(result, function (index, item) {
-                            var listLeague = item.LimitLeagues.map(x => "<li>" + x.LeagueName + "</li>").join('');
+                            var listLeague = item.LimitLeaguesFromSP.map(x => "<li>" + x.LeagueName + "</li>").join('');
                             var leagueGroupDetail = `
                             <div class="list-leagues-header">
                                 <p>${item.LeagueGroupName}:</p>
@@ -150,7 +152,7 @@ define(
                 $.ajax({
                     type: 'POST',
                     data: param,
-                    url: Site.resolveClientUrl('CustomerClass/GetLimitLeagues'),
+                    url: Site.resolveClientUrl('CustomerClass/GetLimitLeaguesV2'),
                     dataType: 'json',
                     success: function (result) {
                         onSuccess(result);

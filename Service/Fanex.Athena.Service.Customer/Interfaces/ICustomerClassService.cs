@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Fanex.Athena.Model.Customer.DTO;
-    using Fanex.Athena.Model.Customer.MetaModel;
+    using Model.Core.DTO.Common;
+    using Model.Customer.DTO;
+    using Model.Customer.MetaModel;
 
     public interface ICustomerClassService
     {
@@ -18,5 +19,7 @@
         Task<IEnumerable<string>> GetAllCustomerClassId();
 
         Task<IEnumerable<CustomerClassModel>> GetAllCustomerClass(string language);
+
+        Task<IEnumerable<LeagueGroup>> GetLimitLeagues(GetLimitLeaguesV2MetaModel metaModel);
     }
 }
