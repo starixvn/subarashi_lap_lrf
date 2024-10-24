@@ -13,6 +13,7 @@
 
 @functions{
     static IList<string> specialProducts = new List<string> { Product.NG };
+    static IList<string> supportDrilldownMatchProducts = new List<string> { Product.SB, Product.VS, Product.NG };
     static IList<int> vsSportTypes = new List<int> { 181, 182, 183, 184, 185, 198, 177 };
     static int maxLength = 36;
 
@@ -82,7 +83,13 @@
             ProductCode = productName,
             HomeId = matchWinLoss.HomeId,
             AwayId = matchWinLoss.AwayId,
-            EventType = matchWinLoss.EventType
+            EventType = matchWinLoss.EventType,
+            MatchCode = matchWinLoss.MatchCode,
+            VendorMatchId = matchWinLoss.VendorMatchId,
+            Distance = matchWinLoss.Distance,
+            IsNeutral = matchWinLoss.IsNeutral,
+            KickOffTime = matchWinLoss.KickOffTime.ToString("yyyy-MM-dd HH:mm:ss"),
+            SportType = matchWinLoss.SportType
         };
 
         <tr data-match="@(drilldownParams.ToJson())">
@@ -90,9 +97,19 @@
 
             <td>
                 <div class="match-container">
-                    <a class="text-bold cell @(productName.Equals(Product.SB) ? "bet-list-link" : null)" data-islive="@(matchWinLoss.IsLive ? "1" : "0")">
-                        @(new HtmlString(matchName))
-                    </a>
+
+                    @if (supportDrilldownMatchProducts.Contains(productName))
+                    {
+                        <a class="text-bold cell bet-list-link" data-islive="@(matchWinLoss.IsLive ? "1" : "0")">
+                            @(new HtmlString(matchName))
+                        </a>
+                    }
+                    else
+                    {
+                        <p class="text-bold cell" data-islive="@(matchWinLoss.IsLive ? "1" : "0")">
+                            @(new HtmlString(matchName))
+                        </p>
+                    }
 
                     <a href="javascript:;" class="icon-wrapper cell view-match-detail"><i class="icon-arrow"></i></a>
                 </div>
