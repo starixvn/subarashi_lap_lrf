@@ -3,6 +3,7 @@
     using System.Web;
     using System.Web.SessionState;
     using Fanex.Athena.Extension;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.Core.Users.Interfaces;
 
@@ -28,7 +29,7 @@
 
         public string SessionID => CurrentSession.SessionID;
 
-        public string ClientIP => CurrentContext.Request.UserHostAddress;
+        public string ClientIP => ClientHelper.GetClientIp(CurrentContext.Request);
 
         public string FromReferer => CurrentContext.Request.Headers["Referer"];
 

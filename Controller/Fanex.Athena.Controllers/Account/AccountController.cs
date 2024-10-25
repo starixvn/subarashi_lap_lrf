@@ -9,6 +9,7 @@ namespace Fanex.Athena.Controllers.Account
     using System.Linq;
     using System.Web.Mvc;
     using Extension.Utility;
+    using Fanex.Athena.Extension.Helper;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Account;
     using Resources;
@@ -93,7 +94,7 @@ namespace Fanex.Athena.Controllers.Account
                     user.Status = model.Status;
                     user.Request = new Request
                     {
-                        Ip = Request.UserHostAddress,
+                        Ip = ClientHelper.GetClientIp(Request),
                         Language = userSession.Language
                     };
                     user.Licensee = new Licensee { Id = licenseeId };
@@ -158,7 +159,7 @@ namespace Fanex.Athena.Controllers.Account
 
             user.Request = new Request
             {
-                Ip = Request.UserHostAddress,
+                Ip = ClientHelper.GetClientIp(Request),
                 Language = userSession.Language
             };
             user.Password = model.Password;

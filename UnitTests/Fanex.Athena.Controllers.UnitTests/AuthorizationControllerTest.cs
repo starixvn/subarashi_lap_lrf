@@ -297,7 +297,7 @@
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    _userService.Received().ChangePassword(DefaultUserSession.UserName, OldPassword, NewPassword, string.Empty);
+                    _userService.Received().ChangePassword(DefaultUserSession.UserName, OldPassword, NewPassword, Arg.Any<string>());
                     Assert.That(data.errCode, Is.EqualTo(ErrorCode));
                 });
             }

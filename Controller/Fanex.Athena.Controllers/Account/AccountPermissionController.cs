@@ -12,6 +12,7 @@ namespace Fanex.Athena.Controllers.Account
     using System.Text;
     using System.Web.Mvc;
     using DataAccess.Core.Common.Interfaces;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DTO.Common;
@@ -110,7 +111,7 @@ namespace Fanex.Athena.Controllers.Account
             {
                 var licenseeId = licenseeSession.LicenseeId;
                 var userLoginId = userSession.UserId;
-                var ip = Request.UserHostAddress;
+                var ip = ClientHelper.GetClientIp(Request);
                 var langKey = LangService.GetCurrentLanguage();
 
                 var idlist = model.FunctionIdList.Split(',').Select(word => int.Parse(word));
@@ -172,7 +173,7 @@ namespace Fanex.Athena.Controllers.Account
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var userSession = SessionServiceInstance.UserSession;
             model.LicenseeId = licenseeId;
-            model.IP = Request.UserHostAddress;
+            model.IP = ClientHelper.GetClientIp(Request);
             model.LangKey = LangService.GetCurrentLanguage();
             model.ModifyBy = userSession.UserId;
 

@@ -9,6 +9,7 @@
     using System.Web.Mvc;
     using System.Web.SessionState;
     using Fanex.Athena.Excel.Customer;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
@@ -110,7 +111,7 @@
                 var request = new Request
                 {
                     Language = userSession.Language,
-                    Ip = Request.UserHostAddress
+                    Ip = ClientHelper.GetClientIp(Request)
                 };
 
                 result = await _groupComService.InsertGroupAsync(metaModel, request, userSession.UserId);
@@ -194,7 +195,7 @@
                     LicenseeId = licenseeId,
                     UserId = userSession.UserId,
                     UserName = userSession.UserName,
-                    Ip = Request.UserHostAddress,
+                    Ip = ClientHelper.GetClientIp(Request),
                     Language = userSession.Language,
                     IsRemoveCommSetting = isRemovePlayerComm,
                     IsAllowedCSComm = productAccess.IsAllowCS,
@@ -308,7 +309,7 @@
             var request = new Request
             {
                 Language = userSession.Language,
-                Ip = Request.UserHostAddress
+                Ip = ClientHelper.GetClientIp(Request)
             };
 
             var result = await _groupComService.UpdateGroupAsync(metaModel, request, userSession).ConfigureAwait(false);
