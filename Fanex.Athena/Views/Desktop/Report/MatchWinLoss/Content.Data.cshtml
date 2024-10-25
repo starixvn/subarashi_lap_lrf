@@ -84,7 +84,7 @@
             HomeId = matchWinLoss.HomeId,
             AwayId = matchWinLoss.AwayId,
             EventType = matchWinLoss.EventType,
-            MatchCode = matchWinLoss.MatchCode,
+            MatchCode = productName.Equals(Product.NG) ? matchWinLoss.MatchCode : string.Empty,
             VendorMatchId = matchWinLoss.VendorMatchId,
             Distance = matchWinLoss.Distance,
             IsNeutral = matchWinLoss.IsNeutral,
