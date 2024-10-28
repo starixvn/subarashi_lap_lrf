@@ -3812,4 +3812,7 @@
   <data name="TopPriority" xml:space="preserve">
     <value>Top Priority</value>
   </data>
+  <data name="ProductPTRNG" xml:space="preserve">
+    <value>Playtech</value>
+  </data>
 </root>

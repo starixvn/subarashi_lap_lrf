@@ -1,4 +1,4 @@
-﻿// Generated at: 9/18/2024 2:51:27 PM
+﻿// Generated at: 10/28/2024 11:41:12 AM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -654,6 +654,7 @@ OddEven:"Lẻ/Chẵn",
 OddEvenDND:"Lẻ/Chẵn + 1 X 2 + Hòa/Không Hòa",
 Odds:"Tỷ lệ cược",
 OddsAvg:"Tỷ lệ cược trung bình",
+OddsBoostBonus:"Tiền Thưởng Tăng Cường Tỷ Lệ Cược",
 OddsGroup:"Nhóm tỷ lệ cược",
 OddsLower:"Tỉ lệ cược tối thiểu",
 OddsMatched:"Tỷ lệ cược phù hợp",
@@ -933,6 +934,7 @@ ToDowloadTemplate:"để tải mẫu",
 TokenIsInValid:"Token không hợp lệ",
 TokenWasExpired:"Token đã hết hạn",
 ToList:"Danh Sách Nhận",
+TopPriority:"Ưu Tiên Hàng Đầu",
 Total:"Tổng",
 TotalActiveCustomer:"Tổng số khách hàng hoạt động",
 TotalAway:"Tổng Đội Khách",

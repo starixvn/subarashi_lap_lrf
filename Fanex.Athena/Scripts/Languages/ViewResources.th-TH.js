@@ -1,4 +1,4 @@
-﻿// Generated at: 9/18/2024 2:51:27 PM
+﻿// Generated at: 10/28/2024 11:41:12 AM
 var _language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -657,6 +657,7 @@ OddEven:"คี่/คู่",
 OddEvenDND:"คี่/คู่ + 1 X 2 + DND",
 Odds:"อัตราต่อรอง",
 OddsAvg:"อัตราต่อรองเฉลี่ย",
+OddsBoostBonus:"ตัวเพิ่มอัตราต่อรอง โบนัส",
 OddsGroup:"อัตราต่อรองกลุ่ม",
 OddsLower:"อัตราต่อรองต่ำสุด",
 OddsMatched:"อัตราต่อรองการแข่งขัน",
@@ -931,6 +932,7 @@ ToDowloadTemplate:"ดาวน์โหลดเทมเพลต",
 TokenIsInValid:"โทเคนไม่ถูกต้อง",
 TokenWasExpired:"โทเคนหมดอายุ",
 ToList:"ลงรายการ",
+TopPriority:"ลำดับความสำคัญสูงสุด",
 Total:"ทั้งหมด",
 TotalActiveCustomer:"ลูกค้าที่เคลื่อนไหวทั้งหมด",
 TotalAway:"ทีมเยือนทั้งหมด",

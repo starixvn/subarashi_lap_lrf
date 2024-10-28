@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 9/18/2024 2:51:27 PM
+﻿// Generated at: 10/28/2024 11:41:12 AM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -739,6 +739,7 @@ OddEven:"Ganjil/Genap",
 OddEvenDND:"Ganjil/Genap + 1 X 2 + DND",
 Odds:"Odds",
 OddsAvg:"Rata-rata Odds",
+OddsBoostBonus:"Penambah Peluang Bonus",
 OddsGroup:"Kelompok Ganjil",
 OddsLower:"Peluang Terendah",
 OddsMatched:"Jumlah Odds yang Cocok",
@@ -1008,6 +1009,7 @@ ToDowloadTemplate:"untuk mengunduh template",
 TokenIsInValid:"Token tidak valid",
 TokenWasExpired:"Token telah kadaluarsa",
 ToList:"Ke Daftar",
+TopPriority:"Prioritas Utama",
 Total:"Total",
 TotalActiveCustomer:"Total pelanggan aktif",
 TotalAway:"Total Tandang",
