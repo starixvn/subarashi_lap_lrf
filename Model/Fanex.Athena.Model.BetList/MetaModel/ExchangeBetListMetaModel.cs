@@ -9,6 +9,10 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public DateTime ToDate { get; set; }
 
+        public string SystemId { get; set; }
+
+        public string ExternalId { get; set; }
+
         public byte DateOptionType { get; set; }
 
         public bool IsViewResettledTicketOnly { get; set; }

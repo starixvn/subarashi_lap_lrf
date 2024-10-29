@@ -3555,6 +3555,97 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/DataService.js":
+/*!*****************************************************!*\
+  !*** ./www/js/source/reactpages/lib/DataService.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DataService; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+class DataService {
+  static buildProxyUrl(apiKey, apiUrl) {
+    const encodeUrl = apiUrl.replace(new RegExp('/', 'g'), '_');
+    const proxyUrl = `Proxy/${apiKey}/${encodeUrl}`;
+    return proxyUrl;
+  }
+  static getProxyData(apiKey, apiUrl, params) {
+    const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+    return this.getData(proxyUrl, params);
+  }
+  static postProxyData(apiKey, apiUrl, params) {
+    const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+    return this.postData(proxyUrl, params);
+  }
+  static getProxyFile(apiKey, apiUrl, params) {
+    const proxyUrl = this.buildProxyUrl(apiKey, apiUrl);
+    return this.getFile(proxyUrl, params);
+  }
+  static getData(url, params, cancellationTokenSource) {
+    const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url, {
+      params: params,
+      cancelToken: token
+    });
+  }
+  static genCancellationToken() {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.CancelToken.source();
+  }
+  static isCancel(thrown) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.isCancel(thrown);
+  }
+  static postData(url, params) {
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    });
+  }
+  static getFile(url, params, options) {
+    const defaultOptions = {
+      responseType: 'blob',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
+      }
+    };
+    let requestOptions = Object.assign({}, defaultOptions, options);
+    return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, requestOptions);
+  }
+  static postReportData(url, params) {
+    return this.postProxyData(this.apiKeys.report, url, params);
+  }
+  static getReportData(url, params) {
+    return this.getProxyData(this.apiKeys.report, url, params);
+  }
+  static getReportFile(url, params) {
+    return this.getProxyFile(this.apiKeys.report, url, params);
+  }
+  static postBetListData(url, params) {
+    return this.postProxyData(this.apiKeys.betlist, url, params);
+  }
+  static getBetListFile(url, params) {
+    return this.getProxyFile(this.apiKeys.betlist, url, params);
+  }
+}
+_defineProperty(DataService, "apiKeys", {
+  report: 'Report',
+  betlist: 'BetList'
+});
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/lib/createReducer.js":
 /*!*******************************************************!*\
   !*** ./www/js/source/reactpages/lib/createReducer.js ***!
@@ -4594,11 +4685,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_popup__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../components/popup */ "./www/js/source/reactpages/components/popup/index.jsx");
 /* harmony import */ var _lib_report__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../lib/report */ "./www/js/source/reactpages/lib/report.js");
 /* harmony import */ var _lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../lib/langHelper.js */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @jsroot/lib/DataService.js */ "./www/js/source/reactpages/lib/DataService.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_19__);
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
 
 
 
@@ -4639,7 +4735,10 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         FromDate,
         ToDate,
         DateOptionType,
-        IsViewResettledTicketOnly
+        IsViewResettledTicketOnly,
+        ExternalId: externalId,
+        SystemId: systemId,
+        CurrencyName
       };
       const params = {
         data: this.betlistParams
@@ -4647,7 +4746,11 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       const viewIn = _lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("Viewin").replace("{0}", BaseCurrency ? BaseCurrency : CurrencyName);
       this.betlistTitle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, PLAYER_BET_LIST_TEXT, " ", FromDate, " \u2192 ", ToDate, " - ", "(GMT+8)", " - ", externalId, "(", systemId, ") -", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "base-currency-title"
-      }, viewIn));
+      }, viewIn), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "icon-excel right",
+        onClick: event => this.exportDetailExcel(event, this.betlistParams),
+        title: _lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("ExportToExcel")
+      }));
       this.props.toggleLoader(true);
       _lib_report__WEBPACK_IMPORTED_MODULE_16__["default"].fetchGridData(url, params).then(response => {
         this.setState({
@@ -4958,6 +5061,32 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       href: "javascript:;",
       onClick: () => this.showBetListPopup(externalId, systemId, custId)
     }, text);
+  }
+  exportDetailExcel(event, param) {
+    event.preventDefault();
+    if (!param) {
+      return;
+    }
+    const exportRequestParam = _objectSpread(_objectSpread({}, param), {}, {
+      isExportExcel: true
+    });
+    const url = "api/ExchangeWinLossBetList/Index";
+    this.props.toggleLoader(true);
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_18__["default"].getFile(url, exportRequestParam).then(response => {
+      const NoContentStatusCode = 204;
+      if (response.status === NoContentStatusCode) {
+        alert(_lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("NoInfo"));
+      } else {
+        const blob = new Blob([response.data], {
+          type: response.headers["content-type"]
+        });
+        Object(file_saver__WEBPACK_IMPORTED_MODULE_19__["saveAs"])(blob, 'PlayerBetList.xls');
+      }
+      this.props.toggleLoader(false);
+    }).catch(error => {
+      alert(_lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("ErrorProcessingMsg"));
+      this.props.toggleLoader(false);
+    });
   }
   render() {
     const gridData = this.props.gridData;

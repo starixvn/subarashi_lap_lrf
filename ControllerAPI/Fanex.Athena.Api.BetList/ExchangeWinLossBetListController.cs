@@ -47,6 +47,12 @@
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId, metaModel.ExcludeTestData);
 
+            if (metaModel.IsExportExcel)
+            {
+                return await _betListApiClient.PostAsync("/ExchangeWinLossBetList/ExportData",
+                metaModel, userSession.Language).ConfigureAwait(false);
+            }
+
             return await _betListApiClient.PostAsync("/ExchangeWinLossBetList/GetData",
                 metaModel, userSession.Language).ConfigureAwait(false);
         }

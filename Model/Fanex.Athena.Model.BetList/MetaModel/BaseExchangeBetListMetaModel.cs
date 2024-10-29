@@ -15,6 +15,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public bool ExcludeTestData { get; set; }
 
+        public bool IsExportExcel { get; set; }
+
         public string BaseCurrency
         {
             get
