@@ -4443,7 +4443,7 @@ class BetList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         const WinLostDetailString = _lib_numberFormat__WEBPACK_IMPORTED_MODULE_13__["default"].formatDecimal(Details[j].WinLost);
         const typeStyle = Type.toLowerCase() === "lay" || Type.toLowerCase() === "no" ? "negative" : "";
         rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_6__["Row"], {
-          key: `row-${i}-${j}`
+          key: `row-${i}-${j}-${BetId}`
         }, isFirstRow && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_6__["Cell"], {
           title: i + 1,
           rowSpan: dataDetailCount,
@@ -4518,7 +4518,8 @@ class BetList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       bodyHeight: 430,
       header: this._buildHeader(),
       body: this._buildBody(),
-      footer: this._buildFooter()
+      footer: this._buildFooter(),
+      shouldResetScrollPosition: false
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_NoDataTitle__WEBPACK_IMPORTED_MODULE_5__["default"], null)), showDetail && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_popup__WEBPACK_IMPORTED_MODULE_7__["default"], {
       isShow: showDetail,
       title: _lib_langHelper__WEBPACK_IMPORTED_MODULE_12__["default"].getSingleResource("Details"),
@@ -5117,7 +5118,8 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       bodyHeight: 300,
       header: this._buildHeader(reportLevel, reportBy),
       body: this._buildBody(reportLevel, reportBy),
-      footer: this._buildFooter(reportLevel)
+      footer: this._buildFooter(reportLevel),
+      shouldResetScrollPosition: false
     }), reportLevel === _constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER && showBetList && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_popup__WEBPACK_IMPORTED_MODULE_15__["default"], {
       isShow: showBetList,
       title: PLAYER_BET_LIST_TEXT,

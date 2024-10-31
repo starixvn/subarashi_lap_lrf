@@ -13,6 +13,8 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public string ExternalId { get; set; }
 
+        public string CurrencyName { get; set; }
+
         public byte DateOptionType { get; set; }
 
         public bool IsViewResettledTicketOnly { get; set; }

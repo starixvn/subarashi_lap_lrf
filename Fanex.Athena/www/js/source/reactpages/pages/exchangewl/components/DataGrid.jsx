@@ -404,6 +404,7 @@ export class DataGrid extends Component {
                     header={this._buildHeader(reportLevel, reportBy)}
                     body={this._buildBody(reportLevel, reportBy)}
                     footer={this._buildFooter(reportLevel)}
+                    shouldResetScrollPosition={false}
                 />
 
                 {

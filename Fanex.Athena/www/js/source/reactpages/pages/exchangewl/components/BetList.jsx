@@ -77,7 +77,7 @@ export class BetList extends Component {
                     "negative" : "";
 
                 rows.push(
-                    <Row key={`row-${i}-${j}`}>
+                    <Row key={`row-${i}-${j}-${BetId}`}>
                         {isFirstRow && <Cell title={i + 1} rowSpan={dataDetailCount} className="center-align">{i + 1}</Cell>}
                         {isFirstRow && <Cell title={`${EventTypeName} > ${EventName} > ${MarketName}`} rowSpan={dataDetailCount}>{marketText}</Cell>}
                         <Cell title={BetId} className="center-align">
@@ -157,6 +157,7 @@ export class BetList extends Component {
                                 header={this._buildHeader()}
                                 body={this._buildBody()}
                                 footer={this._buildFooter()}
+                                shouldResetScrollPosition={false}
                             />) :
                             <NoDataTitle />
                     }
