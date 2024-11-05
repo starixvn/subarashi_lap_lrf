@@ -10,20 +10,20 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Configuration.Interfaces;
     using Extension.Utility;
-    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Common.Extensions;
+    using Interfaces;
+    using Model.Core.DTO.Common;
+    using Model.Core.MetaModel.Common;
     using VendorAdapter.Interfaces;
 
     public class MatchDataAccess : BaseDataAccess, IMatchDataAccess
     {
-        private readonly ICacheRefAdapter _cacheRefAdapter;
-
         private readonly IAppSettings _appSettings;
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
+        private readonly ICacheRefAdapter _cacheRefAdapter;
 
         public MatchDataAccess(ICacheRefAdapter cacheRefAdapter, IAppSettings appSettings, IBalanceUpDataAccess balanceUpDataAccess)
         {
@@ -54,7 +54,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
                             MatchId = reader.ToInt("matchid"),
                             HomeId = reader.ToInt("homeid"),
                             AwayId = reader.ToInt("awayid"),
-                            IsNeutral = reader.ToBool("IsNeutral"),
+                            IsNeutral = reader.ToBool("IsNeutral")
                         };
                         match.MatchName = GetMatchName(match);
 
@@ -67,7 +67,7 @@ namespace Fanex.Athena.DataAccess.Core.Common
         }
 
         /// <summary>
-        /// Get all running matches.
+        ///     Get all running matches.
         /// </summary>
         /// <param name="sportId">Sport ID value.</param>
         /// <returns>The result value.</returns>
@@ -110,9 +110,9 @@ namespace Fanex.Athena.DataAccess.Core.Common
         }
 
         /// <summary>
-        /// Get matches by league id (only for SB)
+        ///     Get matches by league id (only for SB)
         /// </summary>
-        public async Task<IList<Match>> GetMatchesByLeague(int leagueId, DateTime fromDate, DateTime toDate, int sportId = 0)
+        public async Task<IList<Match>> GetMatchesByLeague(GetMatchMetaModel metaModel)
         {
             var result = new List<Match>();
 
@@ -120,13 +120,14 @@ namespace Fanex.Athena.DataAccess.Core.Common
             {
                 var uspParam = new
                 {
-                    SportId = sportId,
-                    LeagueID = leagueId,
-                    FromDate = fromDate,
-                    ToDate = toDate,
-                    MoveBetsDay = _balanceUpDataAccess.GetBalanceUp().MoveBetsDay,
-                    BalanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay
+                    AgentList = metaModel.AgentListXml,
+                    metaModel.SportId,
+                    metaModel.LeagueId,
+                    metaModel.FromDate,
+                    metaModel.ToDate,
+                    _balanceUpDataAccess.GetBalanceUp().MoveBetsDay
                 };
+
                 using (var reader = await db.ExecuteReaderAsync(uspParam).ConfigureAwait(false))
                 {
                     while (reader.Read())
@@ -150,9 +151,10 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
         private string GetMatchName(Match match)
         {
-            return _cacheRefAdapter.GetTeamName(match.HomeId) + (match.IsNeutral ? " (N)" : string.Empty)
-                                   + " -vs- "
-                               + _cacheRefAdapter.GetTeamName(match.AwayId);
+            var homeTeamText = _cacheRefAdapter.GetTeamName(match.HomeId) + (match.IsNeutral ? " (N)" : string.Empty);
+            var awayTeamText = _cacheRefAdapter.GetTeamName(match.AwayId);
+
+            return $"{homeTeamText} -vs- {awayTeamText}";
         }
     }
 }

@@ -1,28 +1,20 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="MatchService.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.StatelessCore
+﻿namespace Fanex.Athena.Service.StatelessCore
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using DataAccess.Core.Common.Interfaces;
     using Extension.Utility.Interfaces;
-
-    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Interfaces;
+    using Model.Core.DTO.Common;
+    using Model.Core.MetaModel.Common;
 
     public class MatchService : IMatchService
     {
         private const string RunningMatchCacheKey = "RunningMatchCacheKey_";
 
-        private readonly IMatchDataAccess _matchDataAccess;
-
         private readonly ICustomMemoryCacheService _cache;
+
+        private readonly IMatchDataAccess _matchDataAccess;
 
         public MatchService(IMatchDataAccess matchDataAccess, ICustomMemoryCacheService cache)
         {
@@ -38,13 +30,11 @@ namespace Fanex.Athena.Service.StatelessCore
             {
                 return _cache.Get<IList<Match>>(cacheKey);
             }
-            else
-            {
-                var matchList = await _matchDataAccess.GetAllRunningMatch(sportId, specialLeagues).ConfigureAwait(false);
-                _cache.Set(cacheKey, matchList);
 
-                return matchList;
-            }
+            var matchList = await _matchDataAccess.GetAllRunningMatch(sportId, specialLeagues).ConfigureAwait(false);
+            _cache.Set(cacheKey, matchList);
+
+            return matchList;
         }
 
         public async Task<IList<Match>> GetForecastMatchListByLeagueAsync(int leagueId)
@@ -52,9 +42,9 @@ namespace Fanex.Athena.Service.StatelessCore
             return await _matchDataAccess.GetForecastMatchListByLeague(leagueId).ConfigureAwait(false);
         }
 
-        public async Task<IList<Match>> GetMatchesByLeagueAsync(int leagueId, DateTime fromDate, DateTime toDate)
+        public async Task<IList<Match>> GetMatchesByLeagueAsync(GetMatchMetaModel metaModel)
         {
-            return await _matchDataAccess.GetMatchesByLeague(leagueId, fromDate, toDate).ConfigureAwait(false);
+            return await _matchDataAccess.GetMatchesByLeague(metaModel).ConfigureAwait(false);
         }
     }
 }

@@ -1,16 +1,9 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IMatchService.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.Athena.Service.StatelessCore.Interfaces
+﻿namespace Fanex.Athena.Service.StatelessCore.Interfaces
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using Fanex.Athena.Model.Core.DTO.Common;
+    using Model.Core.DTO.Common;
+    using Model.Core.MetaModel.Common;
 
     public interface IMatchService
     {
@@ -18,6 +11,6 @@ namespace Fanex.Athena.Service.StatelessCore.Interfaces
 
         Task<IList<Match>> GetForecastMatchListByLeagueAsync(int leagueId);
 
-        Task<IList<Match>> GetMatchesByLeagueAsync(int leagueId, DateTime fromDate, DateTime toDate);
+        Task<IList<Match>> GetMatchesByLeagueAsync(GetMatchMetaModel metaModel);
     }
 }

@@ -1,22 +1,24 @@
-﻿namespace Fanex.Athena.Api.Base
+﻿namespace Fanex.Athena.Api.Common
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
+    using System.Web.Http.Controllers;
+    using Base;
+    using Base.Attributes;
     using DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.Api.Base.Attributes;
-    using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.DTO.Configuration;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
+    using Extension.Utility.Interfaces;
+    using Model.Auth.DataDomain;
+    using Model.Core;
+    using Model.Core.DTO.Common;
+    using Model.Core.DTO.Configuration;
     using Model.Core.MetaModel.Common;
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
+    using Service.StatelessCore.Interfaces;
+    using Service.StatelessCore.Utility;
     using ServiceStack.Text;
     using Web.ActionFilter;
 
@@ -26,21 +28,20 @@
     [ApiUMFilter]
     public class CommonDataApiController : BaseApiController
     {
+        private readonly IBetTypeService _betTypeService;
+        private readonly ICustomMemoryCacheService _cacheService;
         private readonly ILanguageService _langService;
-
-        private readonly ISportService _sportService;
-
-        private readonly ISessionService _sessionService;
 
         private readonly ILeagueDataAccess _leagueDataAccess;
 
-        private readonly IMatchDataAccess _matchDataAccess;
-
-        private readonly IBetTypeService _betTypeService;
+        private readonly IMatchService _matchService;
         private readonly IPortalApiService _portalApiService;
 
         private readonly IProductService _productService;
-        private readonly ICustomMemoryCacheService _cacheService;
+
+        private readonly ISessionService _sessionService;
+
+        private readonly ISportService _sportService;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
@@ -48,7 +49,7 @@
             ILanguageService langService,
             ISessionService sessionService,
             ILeagueDataAccess leagueDataAccess,
-            IMatchDataAccess matchDataAccess,
+            IMatchService matchService,
             IBetTypeService betTypeService,
             IPortalApiService portalApiService,
             IProductService productService,
@@ -60,19 +61,12 @@
             _langService = langService;
             _sessionService = sessionService;
             _leagueDataAccess = leagueDataAccess;
-            _matchDataAccess = matchDataAccess;
+            _matchService = matchService;
             _betTypeService = betTypeService;
             _portalApiService = portalApiService;
             _productService = productService;
             _sportService = sportService;
             _cacheService = cacheService;
-        }
-
-        protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
-        {
-            base.Initialize(controllerContext);
-            var currentLanguage = _langService.GetCurrentLanguage();
-            _langService.SetPageCulture(currentLanguage);
         }
 
         [HttpGet]
@@ -95,22 +89,27 @@
         [HttpGet]
         public async Task<IEnumerable<object>> GetSportsByProducts(string productCode)
         {
-            if (String.IsNullOrWhiteSpace(productCode))
+            if (string.IsNullOrWhiteSpace(productCode))
             {
                 return new List<SportGame>();
             }
+
             return await _sportService.GetSportForProductAsync(_sessionService.LicenseeSession.LicenseeName, productCode);
         }
 
         [HttpGet]
         public async Task<IEnumerable<CheckedItem>> GetSportsForTreeView(string productCodes)
         {
-            if (String.IsNullOrWhiteSpace(productCodes))
+            if (string.IsNullOrWhiteSpace(productCodes))
             {
                 return new List<CheckedItem>();
             }
 
-            return await _sportService.GetSportsForTreeView(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, IsHideSaba);
+            return await _sportService.GetSportsForTreeView(
+                _sessionService.LicenseeSession.LicenseeId,
+                _sessionService.UserSession.Language,
+                productCodes,
+                IsHideSaba);
         }
 
         [HttpGet]
@@ -120,11 +119,13 @@
                 _sessionService.LicenseeSession.OfferedSubProductList,
                 productCode);
 
-            var bettypes = await _betTypeService.GetBettypesByProduct(
-                _sessionService.LicenseeSession.LicenseeId,
-                productCode,
-                _sessionService.UserSession.Language,
-                IsHideSaba).ConfigureAwait(false);
+            var bettypes = await _betTypeService
+                .GetBettypesByProduct(
+                    _sessionService.LicenseeSession.LicenseeId,
+                    productCode,
+                    _sessionService.UserSession.Language,
+                    IsHideSaba)
+                .ConfigureAwait(false);
 
             return bettypes.Select(x => new { value = x.ID, label = x.Name, status = true });
         }
@@ -145,9 +146,15 @@
             {
                 return JsonNetResult(new List<CheckedItem>());
             }
+
             JsConfig.ExcludeTypeInfo = true;
-            var betTypeList = await _betTypeService.GetBetTypeForProducts(_sessionService.LicenseeSession.LicenseeId, _sessionService.UserSession.Language, productCodes, IsHideSaba);
-            var jsonString = ServiceStack.Text.JsonSerializer.SerializeToString(betTypeList);
+            var betTypeList = await _betTypeService
+                .GetBetTypeForProducts(
+                    _sessionService.LicenseeSession.LicenseeId,
+                    _sessionService.UserSession.Language,
+                    productCodes,
+                    IsHideSaba);
+            var jsonString = JsonSerializer.SerializeToString(betTypeList);
             _cacheService.Set(cacheKey, jsonString, cacheTime);
             return JsonNetResult(jsonString);
         }
@@ -176,7 +183,9 @@
 
             var excludeSabaSport = sabaSports.Where(s => s.SportTypeId == sportId);
 
-            var leagueList = (isSabaSport ? GetSabaSportLeagueList(leagues, selectedSabaSport) : GetLeagueListExcludeSabaSport(leagues, excludeSabaSport));
+            var leagueList = isSabaSport
+                ? GetSabaSportLeagueList(leagues, selectedSabaSport)
+                : GetLeagueListExcludeSabaSport(leagues, excludeSabaSport);
 
             if (isHideSaba)
             {
@@ -193,16 +202,33 @@
         public async Task<IEnumerable<object>> GetMatches(DateTime fromDate, DateTime toDate, int leagueid, int sportId = 0)
         {
             var isSabaSport = sportId < 0;
-            var sabaSports = _sportService.GetSabaSports();
+            var sabaSports = _sportService.GetSabaSports().ToList();
             var selectedSabaSport = isSabaSport ? sabaSports.FirstOrDefault(s => s.Id == sportId) : null;
             var sportTypeId = isSabaSport ? selectedSabaSport?.SportTypeId : sportId;
+            var userSession = _sessionService.UserSession;
 
-            var matches = await _matchDataAccess.GetMatchesByLeague(leagueid, fromDate, toDate, sportTypeId.GetValueOrDefault()).ConfigureAwait(false);
+            var metaModel = new GetMatchMetaModel
+            {
+                FromDate = fromDate,
+                ToDate = toDate,
+                LeagueId = leagueid,
+                SportId = sportTypeId.GetValueOrDefault(),
+                AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList)
+            };
+
+            var matches = await _matchService.GetMatchesByLeagueAsync(metaModel).ConfigureAwait(false);
 
             var excludeSabaSport = sabaSports.Where(s => s.SportTypeId == sportId);
 
             return (isSabaSport ? GetSabaSportMatchList(matches, selectedSabaSport) : GetMatchListExcludeSabaSport(matches, excludeSabaSport))
                 .Select(x => new { value = x.MatchId, label = x.MatchName });
+        }
+
+        protected override void Initialize(HttpControllerContext controllerContext)
+        {
+            base.Initialize(controllerContext);
+            var currentLanguage = _langService.GetCurrentLanguage();
+            _langService.SetPageCulture(currentLanguage);
         }
 
         private static IEnumerable<League> GetSabaSportLeagueList(IEnumerable<League> leagueList, SabaSport selectedSabaSport)

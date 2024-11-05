@@ -1,41 +1,21 @@
 ﻿namespace Fanex.Athena.ServiceStatelessCore.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
     using DataAccess.Core.Common.Interfaces;
-
     using Extension.Utility.Interfaces;
-
-    using Fanex.Athena.Service.StatelessCore;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
     using Model.Core.DTO.Common;
-
+    using Model.Core.MetaModel.Common;
     using NSubstitute;
-
     using NUnit.Framework;
-
+    using Service.StatelessCore;
+    using Service.StatelessCore.Interfaces;
     using UnitTest.Common.Helpers;
 
     [TestFixture]
     public class MatchServiceTest
     {
-        private const string Language = "en-Us";
-
-        private static readonly IList<Match> ExpectedResultDataList = new List<Match>
-            {
-                new Match { MatchId = 1 }
-            };
-
-        private static readonly IEnumerable<int> DefaultSpecialLeauges = new[] { 999 };
-
-        private ICustomMemoryCacheService _cache;
-        private IMatchDataAccess _matchDataAccess;
-        private IMatchService _matchService;
-
         [SetUp]
         public void SetUp()
         {
@@ -50,6 +30,19 @@
             _matchDataAccess = null;
             _matchService = null;
         }
+
+        private const string Language = "en-Us";
+
+        private static readonly IList<Match> ExpectedResultDataList = new List<Match>
+        {
+            new Match { MatchId = 1 }
+        };
+
+        private static readonly IEnumerable<int> DefaultSpecialLeauges = new[] { 999 };
+
+        private ICustomMemoryCacheService _cache;
+        private IMatchDataAccess _matchDataAccess;
+        private IMatchService _matchService;
 
         [Test]
         public async Task GetAllRunningMatch_CacheContainsData_ReturnDataFromCache()
@@ -121,13 +114,11 @@
         public async Task GetMatchesByLeague_WhenCall_ReturnResultFromDataAccess()
         {
             // Arrange
-            var leagueId = FakeHelper.Create<int>();
-            var fromDate = FakeHelper.Create<DateTime>();
-            var toDate = FakeHelper.Create<DateTime>();
-            _matchDataAccess.GetMatchesByLeague(leagueId, fromDate, toDate).Returns(ExpectedResultDataList);
+            var metaModel = FakeHelper.Create<GetMatchMetaModel>();
+            _matchDataAccess.GetMatchesByLeague(metaModel).Returns(ExpectedResultDataList);
 
             // Action
-            var result = await _matchService.GetMatchesByLeagueAsync(leagueId, fromDate, toDate);
+            var result = await _matchService.GetMatchesByLeagueAsync(metaModel);
 
             // Assert
             Assert.That(result[0].MatchId, Is.EqualTo(ExpectedResultDataList[0].MatchId));

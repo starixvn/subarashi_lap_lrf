@@ -6,10 +6,10 @@
 
 namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Fanex.Athena.Model.Core.DTO.Common;
+    using Model.Core.DTO.Common;
+    using Model.Core.MetaModel.Common;
 
     public interface IMatchDataAccess
     {
@@ -17,6 +17,6 @@ namespace Fanex.Athena.DataAccess.Core.Common.Interfaces
 
         Task<IList<Match>> GetAllRunningMatch(int sportId, IEnumerable<int> specialLeagues);
 
-        Task<IList<Match>> GetMatchesByLeague(int leagueId, DateTime fromDate, DateTime toDate, int sportId = 0);
+        Task<IList<Match>> GetMatchesByLeague(GetMatchMetaModel metaModel);
     }
 }
