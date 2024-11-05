@@ -16,6 +16,8 @@ import BetList from './BetList'
 import Popup from '../../../components/popup'
 import Report from '../../../lib/report'
 import LangHelper from '../../../lib/langHelper.js';
+import DataService from '@jsroot/lib/DataService.js';
+import { saveAs } from 'file-saver'
 
 const PLAYER_BET_LIST_TEXT = LangHelper.getSingleResource("PlayerBetList");
 
@@ -294,10 +296,42 @@ export class DataGrid extends Component {
         return (<a href="javascript:;" onClick={() => this.showBetListPopup(externalId, systemId, custId)}>{text}</a>);
     }
 
+    exportDetailExcel(event, param) {
+
+        event.preventDefault();
+
+        if (!param) {
+            return;
+        }
+
+        const exportRequestParam = { 
+            ...param,
+            isExportExcel : true
+        };
+
+        const url = "api/ExchangeWinLossBetList/Index";
+
+        this.props.toggleLoader(true);
+
+        DataService.getFile(url, exportRequestParam).then((response) => {
+            const NoContentStatusCode = 204;
+            if (response.status === NoContentStatusCode) {
+                alert(LangHelper.getSingleResource("NoInfo"));
+            } else {
+                const blob = new Blob([response.data], { type: response.headers["content-type"] });
+                saveAs(blob, 'PlayerBetList.xls');
+            }
+            this.props.toggleLoader(false);
+        }).catch(error => {
+            alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
+            this.props.toggleLoader(false);
+        });
+    }
+
     showBetListPopup = (externalId, systemId, custId) => {
         const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, DateOptionType, IsViewResettledTicketOnly } = this.drillDownParams[ReportLevel.CUSTOMER];
         const url = "api/ExchangeWinLossBetList/Index";
-        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, DateOptionType, IsViewResettledTicketOnly };
+        this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, DateOptionType, IsViewResettledTicketOnly, ExternalId : externalId, SystemId : systemId, CurrencyName  };
 
         const params = {
             data: this.betlistParams
@@ -310,6 +344,7 @@ export class DataGrid extends Component {
                 {PLAYER_BET_LIST_TEXT}{" "}
                 {FromDate} → {ToDate} - {"(GMT+8)"} - {externalId}({systemId}) -{" "}
                 <span className="base-currency-title">{viewIn}</span>
+                <i className="icon-excel right" onClick={(event) => this.exportDetailExcel(event, this.betlistParams)} title={LangHelper.getSingleResource("ExportToExcel")}></i>
             </p>
         )
 
@@ -369,6 +404,7 @@ export class DataGrid extends Component {
                     header={this._buildHeader(reportLevel, reportBy)}
                     body={this._buildBody(reportLevel, reportBy)}
                     footer={this._buildFooter(reportLevel)}
+                    shouldResetScrollPosition={false}
                 />
 
                 {
