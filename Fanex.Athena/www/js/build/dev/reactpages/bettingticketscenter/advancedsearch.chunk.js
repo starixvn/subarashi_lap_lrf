@@ -5886,7 +5886,13 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 const MatchFilter = props => {
   const _renderMatchSelectList = () => {
     const matchList = props.options;
-    return (matchList === null || matchList === void 0 ? void 0 : matchList.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, props, {
+    const filterOptions = {
+      matchPos: 'any',
+      matchProp: 'label',
+      ignoreCase: true,
+      ignoreAccents: false
+    };
+    return (matchList === null || matchList === void 0 ? void 0 : matchList.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, props, filterOptions, {
       instanceId: "MatchList"
     }));
   };
