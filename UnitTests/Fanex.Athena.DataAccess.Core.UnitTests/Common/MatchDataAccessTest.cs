@@ -2,29 +2,21 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
     using Core.Common;
-
+    using Core.Configuration.Interfaces;
+    using Extension.Helper;
     using Extension.Utility;
-    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Model.Core.DTO.Common;
-
+    using Model.Core.DTO.Configuration;
+    using Model.Core.MetaModel.Common;
     using NSubstitute;
-
     using NUnit.Framework;
-
     using TestHelpers;
-
     using VendorAdapter.Interfaces;
 
     public class MatchDataAccessTest : BaseDataAccessHelperTest<MatchDataAccess>
     {
         private static readonly IEnumerable<int> DefaultSpecialLeauges = new[] { 999 };
-
-        private IAppSettings _appSettings;
-        private IBalanceUpDataAccess _balanceUpDataAccess;
 
         private readonly BalanceUp _balance = new BalanceUp
         {
@@ -32,13 +24,8 @@
             BalanceUpDay = DateTimeHelper.CreateDateTime(2016, 8, 31)
         };
 
-        protected override void SetUpDataAccess()
-        {
-            _appSettings = Substitute.For<IAppSettings>();
-            _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
-            _balanceUpDataAccess.GetBalanceUp().Returns(_balance);
-            DataAccess = Substitute.ForPartsOf<MatchDataAccess>(Substitute.For<ICacheRefAdapter>(), _appSettings, _balanceUpDataAccess);
-        }
+        private IAppSettings _appSettings;
+        private IBalanceUpDataAccess _balanceUpDataAccess;
 
         [TestCase(1)]
         [TestCase(2)]
@@ -128,23 +115,28 @@
         public async Task GetMatchesByLeague_WhenCall_ExecuteReaderMethodIsCalled()
         {
             // Arrange
-            var leagueId = 1;
-            var fromDate = DateTimeHelper.CreateDateTime(2016, 8, 10);
-            var toDate = DateTimeHelper.CreateDateTime(2016, 8, 11);
+            var metaModel = new GetMatchMetaModel
+            {
+                LeagueId = 1,
+                SportId = 1,
+                FromDate = DateTimeHelper.CreateDateTime(2016, 8, 10),
+                ToDate = DateTimeHelper.CreateDateTime(2016, 8, 11)
+            };
 
             dynamic param = new { LeagueId = 0 };
             DataAccess.GetObjectDb(Arg.Is("Lrf_SelMatchByLeague")).Returns(ObjectDb);
             ObjectDb.When(x => x.ExecuteReaderAsync(Arg.Any<object>())).Do(x => param = x[0]);
 
             // Action
-            await DataAccess.GetMatchesByLeague(leagueId, fromDate, toDate);
+            await DataAccess.GetMatchesByLeague(metaModel);
 
             // Assert
             Assert.Multiple(() =>
             {
-                Assert.That(param.LeagueID, Is.EqualTo(leagueId));
-                Assert.That(param.FromDate, Is.EqualTo(fromDate));
-                Assert.That(param.ToDate, Is.EqualTo(toDate));
+                Assert.That(param.SportId, Is.EqualTo(metaModel.SportId));
+                Assert.That(param.LeagueId, Is.EqualTo(metaModel.LeagueId));
+                Assert.That(param.FromDate, Is.EqualTo(metaModel.FromDate));
+                Assert.That(param.ToDate, Is.EqualTo(metaModel.ToDate));
             });
         }
 
@@ -152,9 +144,12 @@
         public async Task GetMatchesByLeague_WhenCall_DataReturnedCorrectly()
         {
             // Arrange
-            const int LeagueId = 1;
-            var fromDate = DateTimeHelper.CreateDateTime(2016, 8, 10);
-            var toDate = DateTimeHelper.CreateDateTime(2016, 8, 11);
+            var metaModel = new GetMatchMetaModel
+            {
+                LeagueId = 1,
+                FromDate = DateTimeHelper.CreateDateTime(2016, 8, 10),
+                ToDate = DateTimeHelper.CreateDateTime(2016, 8, 11)
+            };
             var expectedMatch = GetFakeMatch();
 
             DataAccess.GetObjectDb(Arg.Is("Lrf_SelMatchByLeague")).Returns(ObjectDb);
@@ -162,7 +157,7 @@
             Reader.Read().Returns(true, false);
 
             // Action
-            var result = await DataAccess.GetMatchesByLeague(LeagueId, fromDate, toDate);
+            var result = await DataAccess.GetMatchesByLeague(metaModel);
 
             // Assert
             Assert.Multiple(() =>
@@ -171,6 +166,14 @@
                 Assert.That(result[0].HomeId, Is.EqualTo(expectedMatch.HomeId));
                 Assert.That(result[0].AwayId, Is.EqualTo(expectedMatch.AwayId));
             });
+        }
+
+        protected override void SetUpDataAccess()
+        {
+            _appSettings = Substitute.For<IAppSettings>();
+            _balanceUpDataAccess = Substitute.For<IBalanceUpDataAccess>();
+            _balanceUpDataAccess.GetBalanceUp().Returns(_balance);
+            DataAccess = Substitute.ForPartsOf<MatchDataAccess>(Substitute.For<ICacheRefAdapter>(), _appSettings, _balanceUpDataAccess);
         }
 
         private Match GetFakeMatch()

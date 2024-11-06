@@ -2,18 +2,13 @@
 {
     using System.Data;
     using System.Threading.Tasks;
-
     using Base.UnitTests;
-
     using Excel.Base.Entities;
-    using Fanex.Athena.Model.Core.DTO.Common;
     using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
     using Model.Report.MetaModel;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
     using Web.ResultExtension;
 
     [TestFixture]
@@ -50,10 +45,10 @@
                         Arg.Any<string>(),
                         metaModel,
                         Arg.Is<ShowingOption>(x => x.BAVisible == expectedProductVisible &&
-                                            x.NGVisible == expectedProductVisible &&
-                                            x.SBVisible == expectedProductVisible &&
-                                            x.VSVisible == expectedProductVisible &&
-                                            x.KNVisible == expectedProductVisible),
+                                                   x.NGVisible == expectedProductVisible &&
+                                                   x.SBVisible == expectedProductVisible &&
+                                                   x.VSVisible == expectedProductVisible &&
+                                                   x.KNVisible == expectedProductVisible),
                         Arg.Is<ConvertingOption>(x =>
                             x.IsConvert == metaModel.IsConvert &&
                             x.BaseCurrency == metaModel.BaseCurrency &&
@@ -68,7 +63,7 @@
         }
 
         [TestCase(BetType.Ng1StBallOe, "Number Game No abc", "Number Game")]
-        public void Excel_WhenCall_AddColumnsForSortingCorrectly(
+        public async Task Excel_WhenCall_AddColumnsForSortingCorrectly(
             int bettype,
             string expectedMatchName,
             string expectedLeagueName)
@@ -78,6 +73,7 @@
                 // Arrange
                 const string MatchCode = "abc";
                 const string Race = "mmm";
+                const int SportType = 1;
                 MockCreatingExcel(controller);
                 var metaModel = new MatchWinLossMetaModel
                 {
@@ -88,17 +84,24 @@
                 };
                 var expectedData = new DataSet();
                 var mainTable = new DataTable("MainData");
+                mainTable.Columns.Add("SportType", typeof(int));
                 mainTable.Columns.Add("bettype", typeof(int));
                 mainTable.Columns.Add("matchcode", typeof(string));
                 mainTable.Columns.Add("race", typeof(string));
-                mainTable.Rows.Add(bettype, MatchCode, Race);
+                mainTable.Rows.Add(SportType, bettype, MatchCode, Race);
                 expectedData.Tables.Add(mainTable);
                 expectedData.Tables.Add(new DataTable("TotalData"));
 
-                _matchWinLossService.GetDetailDataSet(metaModel).Returns(expectedData);
+                _matchWinLossService
+                    .GetDetailDataSet(Arg.Is<MatchWinLossMetaModel>(x =>
+                        x.BaseCurrencyId == metaModel.BaseCurrencyId
+                        && x.CurrencyName == metaModel.CurrencyName
+                        && x.CurrencyId == metaModel.CurrencyId
+                        && x.IsExportExcel == metaModel.IsExportExcel))
+                    .Returns(expectedData);
 
                 // Action
-                var result = controller.Index(metaModel);
+                var result = await controller.Index(metaModel);
 
                 // Assert
                 Assert.Multiple(() =>

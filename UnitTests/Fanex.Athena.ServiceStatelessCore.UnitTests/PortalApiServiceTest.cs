@@ -7,6 +7,7 @@
     using Extension.Utility.Interfaces;
     using Logging;
     using Model.Core.DTO.External;
+    using Newtonsoft.Json;
     using NSubstitute;
     using NUnit.Framework;
     using Service.StatelessCore;
@@ -90,7 +91,7 @@
             _lgApiClient.PostAsync<PortalApiResponse<IEnumerable<int>>>(ApiPath, payload, "en-US")
                 .Returns(Task.FromResult(portalResponse));
             var expectedErrorMsgLog =
-                $"An error occurred while calling LGAPI {ApiPath} - ErrorMsg: {portalResponse.ErrMsg} - ErrorCode: {portalResponse.ErrCode}";
+                $"An error occurred while calling LGAPI {ApiPath} - Payload: {JsonConvert.SerializeObject(payload)} - ErrCode: {portalResponse.ErrCode} - ErrMsg: {portalResponse.ErrMsg}";
 
             // Action
             var result = await _portalApiService.HandleTestable(ApiPath, payload, defaultData);

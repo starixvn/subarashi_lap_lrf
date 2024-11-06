@@ -4,49 +4,43 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using Base;
-
     using DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Extension.Helper;
+    using Extension.Utility.Interfaces;
+    using Model.Auth;
     using Model.Core.DTO.Common;
     using Model.Core.MetaModel.Common;
-
     using NSubstitute;
-
     using NUnit.Framework;
-
     using Service.Core.Common.Interfaces;
     using Service.Core.Users.Interfaces;
-
+    using Service.StatelessCore.Interfaces;
     using UnitTest.Common.Helpers;
 
     public class CommonDataApiControllerTest
     {
-        private ISportService _sportService = Substitute.For<ISportService>();
+        private readonly IBetTypeService _betTypeService = Substitute.For<IBetTypeService>();
 
-        private ISessionService _sessionService = Substitute.For<ISessionService>();
+        private readonly ICustomMemoryCacheService _memCacheService = Substitute.For<ICustomMemoryCacheService>();
 
         private ILeagueDataAccess _leagueDataAccess = Substitute.For<ILeagueDataAccess>();
 
-        private IMatchDataAccess _matchDataAccess = Substitute.For<IMatchDataAccess>();
-
-        private readonly IBetTypeService _betTypeService = Substitute.For<IBetTypeService>();
+        private IMatchService _matchService = Substitute.For<IMatchService>();
 
         private IPortalApiService _portalApiService;
 
         private IProductService _productService = Substitute.For<IProductService>();
 
-        private ICustomMemoryCacheService _memCacheService = Substitute.For<ICustomMemoryCacheService>();
+        private ISessionService _sessionService = Substitute.For<ISessionService>();
+        private ISportService _sportService = Substitute.For<ISportService>();
 
         [OneTimeSetUp]
         public void FixtureSetUp()
         {
             const string DefaultLicenseeName = "12bet";
 
-            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeId = FakeHelper.Create<int>(), LicenseeName = DefaultLicenseeName, SpecialPlatform = 0 });
+            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
+                { LicenseeId = FakeHelper.Create<int>(), LicenseeName = DefaultLicenseeName, SpecialPlatform = 0 });
             _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 UserId = FakeHelper.Create<int>(),
@@ -65,7 +59,7 @@
             _sportService = null;
             _sessionService = null;
             _leagueDataAccess = null;
-            _matchDataAccess = null;
+            _matchService = null;
             _sessionService = null;
             _productService = null;
         }
@@ -81,13 +75,13 @@
                 var child = new SportProductItem { ParentId = parent.ID, ID = FakeHelper.Create<int>(), Name = FakeHelper.Create<string>() };
 
                 _sportService.GetSportsAndProducts(
-                 _sessionService.LicenseeSession.LicenseeId,
-                 _sessionService.UserSession.Language,
-                 productCode).Returns(new List<SportProductItem> { parent, child });
+                    _sessionService.LicenseeSession.LicenseeId,
+                    _sessionService.UserSession.Language,
+                    productCode).Returns(new List<SportProductItem> { parent, child });
 
                 _productService.GetAllowedSubProductCodeList(
-                    _sessionService.LicenseeSession.OfferedSubProductList,
-                    productCode)
+                        _sessionService.LicenseeSession.OfferedSubProductList,
+                        productCode)
                     .Returns(productCode);
 
                 // action
@@ -113,16 +107,16 @@
                 var item = new CheckedItem { ID = FakeHelper.Create<int>(), Name = FakeHelper.Create<string>() };
 
                 _betTypeService.GetBettypesByProduct(
-                 _sessionService.LicenseeSession.LicenseeId,
-                 productCode,
-                 _sessionService.UserSession.Language,
-                 controller.IsHideSaba)
-                 .Returns(new List<CheckedItem> { item });
+                        _sessionService.LicenseeSession.LicenseeId,
+                        productCode,
+                        _sessionService.UserSession.Language,
+                        controller.IsHideSaba)
+                    .Returns(new List<CheckedItem> { item });
 
                 _productService.GetAllowedSubProductCodeList(
-                   _sessionService.LicenseeSession.OfferedSubProductList,
-                   productCode)
-                   .Returns(productCode);
+                        _sessionService.LicenseeSession.OfferedSubProductList,
+                        productCode)
+                    .Returns(productCode);
 
                 // action
                 var result = (await controller.GetBetTypes(productCode)).ElementAt(0);
@@ -174,7 +168,11 @@
                 var toDate = FakeHelper.Create<DateTime>();
                 var leagueId = FakeHelper.Create<int>();
 
-                _matchDataAccess.GetMatchesByLeague(leagueId, fromDate, toDate)
+                _matchService
+                    .GetMatchesByLeagueAsync(Arg.Is<GetMatchMetaModel>(metaModel =>
+                        metaModel.FromDate == DateTimeHelper.ToBeginOfTheDay(fromDate)
+                        && metaModel.ToDate == DateTimeHelper.ToEndOfTheDay(toDate)
+                        && metaModel.LeagueId == leagueId))
                     .Returns(new List<Match> { match });
 
                 // action
@@ -195,7 +193,7 @@
                 Substitute.For<ILanguageService>(),
                 _sessionService,
                 _leagueDataAccess,
-                _matchDataAccess,
+                _matchService,
                 _betTypeService,
                 _portalApiService,
                 _productService,
