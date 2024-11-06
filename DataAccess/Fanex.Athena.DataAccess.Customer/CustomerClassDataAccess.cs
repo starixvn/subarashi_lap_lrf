@@ -153,7 +153,7 @@
                             SportType = sportType,
                             SportTypeName = GetSportNameText(sportType, metaModel.IsHideSaba),
                             LeagueGroupId = leagueGroupId,
-                            LeagueGroupName = leagueGroupGroupName,
+                            LeagueGroupName = string.IsNullOrWhiteSpace(leagueGroupId) ? DefaultTextValue : leagueGroupGroupName,
                             BetDelay = FormatNumber(betDelay, "{0:#,##0.##}%"),
                             BetInterval = FormatNumber(reader.ToNullableDecimal("NextBetInterval"), NumberStyle),
                             MaxBet = FormatNumber(reader.ToNullableDecimal("MaxBet"), NumberStyle),
