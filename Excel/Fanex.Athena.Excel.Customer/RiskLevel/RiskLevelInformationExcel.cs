@@ -10,7 +10,7 @@
 
     public class RiskLevelInformationExcel : ReportBase
     {
-        private const int ColumnTemplateCount = 12;
+        private const int ColumnTemplateCount = 13;
         private const int RowCCSettingPolicyTitleTemplate = 2;
         private const int RowCCSettingPolicyHeaderTemplate = 3;
         private const int RowCCSettingPolicyContentTemplate = 4;
