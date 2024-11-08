@@ -76,7 +76,7 @@ define(
             if (canRequest) {
                 let sportId = selectedSports[0];
                 $.ajax({
-                    url: Site.resolveClientUrl('api/LastBetMonitoringBetList/GetRunningMatchList'),
+                    url: Site.resolveClientUrl('api/LastBetMonitoringDataApi/GetRunningMatchList'),
                     data: 'sportid=' + sportId,
                     dataType: 'json',
                     type: 'GET',

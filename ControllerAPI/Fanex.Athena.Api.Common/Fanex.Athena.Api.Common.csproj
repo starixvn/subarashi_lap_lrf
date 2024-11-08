@@ -137,6 +137,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LastBetMonitoringDataApiController.cs" />
     <Compile Include="RunningCommonDataApiController.cs" />
     <Compile Include="CommonDataApiController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

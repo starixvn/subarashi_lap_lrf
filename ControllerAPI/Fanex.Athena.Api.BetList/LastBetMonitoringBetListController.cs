@@ -2,10 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using System.Xml.Linq;
     using Base;
     using Base.Attributes;
     using Fanex.Athena.Model.Auth.DataDomain;
@@ -13,42 +11,30 @@
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Service.Core.Common.Interfaces;
-    using Fanex.Athena.Service.Customer.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Utility;
-
-    using Model.BetList.MetaModel;
 
     using VendorAdapter.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLastBetsMonitoring)]
     public class LastBetMonitoringBetListController : BaseApiController
     {
-        private readonly IBetListApiClient _betListApiClient;
         private readonly IMatchService _matchService;
         private readonly ICacheRefAdapter _cacheRefAdapter;
         private readonly IPortalApiService _portalApiService;
         private readonly ISportService _sportService;
-        private readonly ICustomerClassService _customerClassService;
-
-        private const string ALL = "All";
 
         public LastBetMonitoringBetListController(
             ILanguageService languageService,
-            IBetListApiClient betListApiClient,
             IMatchService matchService,
             ICacheRefAdapter cacheRefAdapter,
             IPortalApiService portalApiService,
-            ISportService sportService,
-            ICustomerClassService customerClassService)
+            ISportService sportService)
         : base(languageService)
         {
-            _betListApiClient = betListApiClient;
             _matchService = matchService;
             _cacheRefAdapter = cacheRefAdapter;
             _portalApiService = portalApiService;
             _sportService = sportService;
-            _customerClassService = customerClassService;
         }
 
         [HttpGet]
