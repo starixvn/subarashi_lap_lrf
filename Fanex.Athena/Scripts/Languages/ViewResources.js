@@ -1,4 +1,4 @@
-﻿// Generated at: 11/19/2024 10:37:18 AM
+﻿// Generated at: 11/25/2024 1:35:04 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -768,6 +768,7 @@ ProductCS:"Saba Casino",
 ProductFAC:"FA CHAI",
 ProductFGGL:"FGG",
 ProductFS:"FastSpin",
+ProductGPIRNG:"GPI",
 ProductHB:"Habanero",
 ProductI4D:"Togel 4D",
 ProductJIG:"Jili",
