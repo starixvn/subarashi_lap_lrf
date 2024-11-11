@@ -184,7 +184,8 @@
                 StubGetValueAppSettings("AllowAutomationCaptchaCode", "0");
                 SessionService.CaptchaCode.Returns("OriginalCaptcha");
                 StubGetValueAppSettings("SecretCaptcha", "SecretCaptcha");
-                StubGetValueAppSettings("CompanyIP", controller.ControllerContext.HttpContext.Request.UserHostAddress);
+                controller.HttpContext.Request.ServerVariables.Add("HTTP_X_FORWARDED_FOR", "127.0.0.1");
+                StubGetValueAppSettings("CompanyIP", "127.0.0.1");
 
                 var loginMetaModel = new LoginMetalModel
                 {
