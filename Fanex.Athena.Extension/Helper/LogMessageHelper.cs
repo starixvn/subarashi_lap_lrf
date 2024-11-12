@@ -128,7 +128,7 @@
 
         private static string GetClientIP(NameValueCollection serverVariables)
         {
-            var clientIP = serverVariables["HTTP_X_FORWARDED_FOR"]
+            var clientIP = serverVariables["HTTP_X_FORWARDED_FOR"]?.Split(',').FirstOrDefault()?.Trim()
                 ?? serverVariables["REMOTE_ADDR"]
                 ?? string.Empty;
 

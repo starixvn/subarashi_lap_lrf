@@ -14,6 +14,7 @@
     using System.Web.Mvc;
     using System.Web.Security;
     using System.Web.UI;
+    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Auth.MetaModel;
     using Fanex.Athena.Model.Core.DataDomain;
@@ -244,7 +245,7 @@
                     userSession.UserName,
                     oldPassword,
                     newPassword,
-                    Request.UserHostAddress);
+                    ClientHelper.GetClientIp(Request));
                 return Json(new
                 {
                     errCode = result.Code,
@@ -298,7 +299,7 @@
         {
             var secretCaptcha = AppSettingInstance.GetValue("SecretCaptcha");
             return !string.IsNullOrWhiteSpace(secretCaptcha) && inputCaptcha == secretCaptcha &&
-                 Regex.IsMatch(Request.UserHostAddress, AppSettingInstance.GetValue("CompanyIP"));
+                 Regex.IsMatch(ClientHelper.GetClientIp(Request), AppSettingInstance.GetValue("CompanyIP"));
         }
 
         private void SetErrorForView(int errorCode, string errorMsg)

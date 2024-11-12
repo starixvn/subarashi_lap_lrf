@@ -115,7 +115,7 @@
             message.AppendLine("Url: " + Request.Url);
             message.AppendLine("UrlReferrer: " + Request.UrlReferrer);
             message.AppendLine("UserAgent: " + Request.UserAgent);
-            message.AppendLine("UserHostAddress: " + Request.UserHostAddress);
+            message.AppendLine("UserHostAddress: " + ClientHelper.GetClientIp(Request));
             message.AppendLine("Browser: ");
             message.AppendLine(" - Platform: " + Request.Browser.Platform);
             message.AppendLine(" - Version: " + Request.Browser.Version);

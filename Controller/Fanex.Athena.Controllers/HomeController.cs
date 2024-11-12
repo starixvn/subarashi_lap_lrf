@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Controllers
 {
     using System;
+    using System.Net.Http;
     using System.Text;
     using System.Web.Mvc;
     using System.Web.UI;
@@ -23,6 +24,14 @@
         {
             AssignViewBagData();
             return ReAuthorize("~/Views/Desktop/Home/IndexIpad.cshtml");
+        }
+
+        [AllowAnonymous]
+        public ActionResult WhoAmI()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine($"Client IP: {ClientHelper.GetClientIp(Request)}");
+            return Content(builder.ToString(), "text/plain", Encoding.UTF8);
         }
 
         [HttpGet]

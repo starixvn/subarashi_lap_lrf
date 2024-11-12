@@ -22,6 +22,7 @@ namespace Fanex.Athena.UnitTest.Common.Helpers
 
             var httpContextBase = Substitute.For<HttpContextBase>();
             httpContextBase.Request.Headers.Returns(header ?? new NameValueCollection());
+            httpContextBase.Request.ServerVariables.Returns(header ?? new NameValueCollection());
             httpContextBase.Request.ApplicationPath.Returns("/");
             httpContextBase.Request.Url.Returns(new Uri(string.IsNullOrEmpty(requestDomain) ? TestingRequestDomain : requestDomain));
             httpContextBase.Request.Cookies.Returns(new HttpCookieCollection());
