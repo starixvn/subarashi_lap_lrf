@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 9/18/2024 2:51:27 PM
+// Generated at: 10/28/2024 11:41:12 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -763,6 +763,7 @@ window._language_en_US = {
   OddEvenDND: "Odd/Even + 1 X 2 + DND",
   Odds: "Odds",
   OddsAvg: "Odds Avg",
+  OddsBoostBonus: "Odds Boost Bonus",
   OddsGroup: "Odds Group",
   OddsLower: "Odds Lower",
   OddsMatched: "Odds Matched",
@@ -872,6 +873,7 @@ window._language_en_US = {
   ProductPGS: "PG Soft",
   ProductPP: "PP",
   ProductPTCS: "Playtech Casino",
+  ProductPTRNG: "Playtech",
   ProductSAG: "SA Gaming",
   ProductSB: "Sportsbook",
   ProductSB_BA: "Sportsbook &amp; BA",
@@ -1063,6 +1065,7 @@ window._language_en_US = {
   TokenIsInValid: "Token is invalid",
   TokenWasExpired: "Token was expired",
   ToList: "To List",
+  TopPriority: "Top Priority",
   Total: "Total",
   TotalActiveCustomer: "Total active customers",
   TotalAway: "Total Away",

@@ -120,6 +120,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public const string ON = "ON";
 
+        public const string PTRNG = "PTRNG";
+
         #endregion Field
 
         #region Constructor

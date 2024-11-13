@@ -1,4 +1,4 @@
-﻿// Generated at: 9/18/2024 2:51:27 PM
+﻿// Generated at: 10/28/2024 11:41:12 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -612,6 +612,7 @@ OddEven:"单双盘",
 OddEvenDND:"单双盘 + 独赢盘 + 平局/不是和局",
 Odds:"赔率",
 OddsAvg:"平均赔率",
+OddsBoostBonus:"特优赔率奬金",
 OddsGroup:"水位组别",
 OddsLower:"最低赔率",
 OddsMatched:"匹配赔率",
@@ -867,6 +868,7 @@ Todate:"至日期",
 Today:"今日",
 ToDowloadTemplate:"以下载范本",
 ToList:"To列表",
+TopPriority:"高优先级",
 Total:"总和",
 TotalActiveCustomer:"总活跃会员人数",
 TotalAway:"客队总计",

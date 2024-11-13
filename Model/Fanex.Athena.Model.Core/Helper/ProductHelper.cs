@@ -81,7 +81,8 @@
                 { Product.FS, nameof(ViewResources.ProductFS) },
                 { Product.FAC, nameof(ViewResources.ProductFAC) },
                 { Product.NS, nameof(ViewResources.ProductNS) },
-                { Product.ON, nameof(ViewResources.ProductON) }
+                { Product.ON, nameof(ViewResources.ProductON) },
+                { Product.PTRNG, nameof(ViewResources.ProductPTRNG) }
             };
 
         public static string GetProductCode(int productId)
