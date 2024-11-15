@@ -3334,10 +3334,23 @@ _defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
   if (!selectedValue || selectedValue === _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"] || selectedValue === _class.getSelectedItemFromTreeListItem(dataList)) {
     return _constants__WEBPACK_IMPORTED_MODULE_2__["ALL_SELECTED_TEXT"];
   }
-  var bettypeList = selectedValue.split(",").map(elem => {
-    return elem.substring(0, elem.indexOf("_"));
+  let betTypeList = selectedValue.split(",").map(elem => ({
+    BetType: elem.substring(0, elem.indexOf("_")),
+    ProductPrefix: elem.substring(elem.indexOf("_") + 1)
+  }));
+  let betTypeGroupByProduct = Map.groupBy(betTypeList, elem => elem.ProductPrefix);
+
+  // build XML
+  let xmlDoc = document.implementation.createDocument(null, "ROOT");
+  const keys = [...betTypeGroupByProduct.keys()];
+  keys.forEach(key => {
+    let node = xmlDoc.createElement("BetType");
+    let betTypes = betTypeGroupByProduct.get(key).map(x => x.BetType).join(",");
+    node.setAttribute('ProductPrefix', key);
+    node.setAttribute('BetTypes', betTypes);
+    xmlDoc.documentElement.appendChild(node);
   });
-  return bettypeList.toString();
+  return new XMLSerializer().serializeToString(xmlDoc);
 });
 _defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
   var listSelectedProduct = selectedItemsKey.split(",");
