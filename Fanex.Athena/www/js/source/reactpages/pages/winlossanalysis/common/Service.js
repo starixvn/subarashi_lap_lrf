@@ -3,9 +3,8 @@ import Site from '@jsroot/lib/site'
 import AppData from '@jsroot/lib/AppData'
 import {ExportExcelMode, OneTwoBetLicenseeName} from './constants'
 import { BreakdownByMode, GroupByMode, GroupByList, ALL_SELECTED_TEXT, ProductCode } from './constants';
-import { ApiUrl } from '../common/constants.js';
+import { ApiUrl, ViewInTimeMode } from '../common/constants.js';
 import DataService from '@jsroot/lib/DataService.js';
-import { saveAs } from 'file-saver';
 
 export default class Service {
     static isOneTwoBetLicensee = () => {
@@ -51,10 +50,10 @@ export default class Service {
         xmlDoc.documentElement.appendChild(bettypeElem);
     }
 
-    static buildGroupByOption= () =>{
+    static buildGroupByOption= (selectedViewInTime) =>{
         return this.isOneTwoBetLicensee()
-            ? GroupByList 
-            : GroupByList.filter(item => item.value !== GroupByMode.Agent);
+            ? GroupByList.filter(item => selectedViewInTime === ViewInTimeMode.Settlement ||  item.value !== GroupByMode.Hour)
+            : GroupByList.filter(item => item.value !== GroupByMode.Agent && (selectedViewInTime === ViewInTimeMode.Settlement ||  item.value !== GroupByMode.Hour));
     }
 
     static buildBreakDownOptionFromGroupByMode = (groupByMode) => {

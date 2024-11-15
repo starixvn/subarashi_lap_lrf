@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/28/2024 11:41:12 AM
+// Generated at: 11/15/2024 3:42:59 PM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -448,6 +448,7 @@ window._language_th_TH = {
   FileIsNotReady: "ไฟล์ยังไม่พร้อม โปรดลองอีกครั้งภายหลัง",
   FileUploadExceedSize: "ไฟล์ที่อัปโหลดควรมีขนาดน้อยกว่า",
   FinalScore: "ผลคะแนนสุดท้าย",
+  FinancialDate: "วันที่การเงิน",
   FirstGoal: "ประตูแรก",
   FirstName: "ชื่อตัว",
   Forecast: "ทาย",
@@ -512,6 +513,7 @@ window._language_th_TH = {
   Home: "เจ้าบ้าน",
   HomeDrawAwayNoBet: "เจ้าบ้าน/เสมอ/ทีมเยือนไม่มีการเดิมพัน",
   HomeNoBet: "เจ้าบ้าน ไม่มีการเดิมพัน",
+  Hour: "ชั่วโมง",
   HTFT: "ที่1/เต็มเวลา",
   HttpError_403: "ปฏิเสธการเข้าใช้",
   HttpError_404: "ไม่พบ กรุณาตรวจสอบที่อยู่",
@@ -957,6 +959,7 @@ window._language_th_TH = {
   SettledAndResettledReport: "ชำระและตั้งรายงานใหม่",
   SettledDateOnly: "วันที่ตั้งต้น",
   SettledOnlyReport: "รายงานการตัดสิน",
+  SettlementTime: "เวลาการชำระเงิน",
   Show: "แสดง",
   ShowAllLeagues: "แสดงลีกทั้งหมด",
   ShowOldValue: "แสดงค่าเก่า",

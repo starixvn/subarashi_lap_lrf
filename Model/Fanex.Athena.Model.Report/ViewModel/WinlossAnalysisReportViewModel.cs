@@ -57,5 +57,7 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public IEnumerable<CheckedItem> SportList { get; set; }
 
         public IEnumerable<CheckedItem> BetTypeList { get; set; }
+
+        public IDictionary<int, string> HourList { get; set; }
     }
 }

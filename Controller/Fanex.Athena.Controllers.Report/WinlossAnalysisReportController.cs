@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers.BetList
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -67,6 +68,7 @@
                 OddGroups = licenseeSession.OfferedOddsGroupsList,
                 IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, userSession.Language),
                 RiskLevels = await _customerClassService.GetAllRiskLevel(),
+                HourList = GetHourList()
             };
             return View("~/Views/Desktop/Report/WinlossAnalysis/Index.cshtml", viewModel);
         }
@@ -89,6 +91,11 @@
                 { LiveStatusTypes.Live, ViewResources.Live },
                 { LiveStatusTypes.Mix, ViewResources.MixLiveAndNoneLive }
             };
+        }
+
+        private static IDictionary<int, string> GetHourList()
+        {
+            return Enumerable.Range(0, 24).ToDictionary(_ => _, _ => $"{_:00}:00 - {_:00}:59");
         }
 
         private IEnumerable<KeyValuePair<int, string>> GetCurrencyList()

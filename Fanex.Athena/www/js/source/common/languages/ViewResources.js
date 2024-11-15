@@ -1,4 +1,4 @@
-﻿// Generated at: 10/28/2024 11:41:12 AM
+﻿// Generated at: 11/15/2024 3:42:59 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -361,6 +361,7 @@ FileExtensionIncorrect:"Your file&apos;s extension is incorrect, please select a
 FileIsNotReady:"The file is not ready, please try again later.",
 FileUploadExceedSize:"The uploaded file should be less than",
 FinalScore:"Final Score",
+FinancialDate:"Financial Date",
 FirstGoal:"First Goal",
 FirstName:"First Name",
 Forecast:"Forecast",
@@ -425,6 +426,7 @@ HistoricalReportDateRangeNote:"Data is available from {0:MM/dd/ yyyy}. For more 
 Home:"Home",
 HomeDrawAwayNoBet:"Home/Draw/Away No Bet",
 HomeNoBet:"Home No Bet",
+Hour:"Hour",
 HTFT:"HT/FT",
 HttpError_403:"Access denied",
 HttpError_404:"Page not found, please check the address",
@@ -899,6 +901,7 @@ SettledAndResettledDate:"Settled and Resettled Date",
 SettledAndResettledReport:"Settled and Resettled Report",
 SettledDateOnly:"Settled Date",
 SettledOnlyReport:"Settled Report",
+SettlementTime:"Settlement Time",
 Show:"Show",
 ShowAllLeagues:"Show All Leagues",
 ShowOldValue:"Show old value",

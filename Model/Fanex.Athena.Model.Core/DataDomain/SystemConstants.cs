@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Fanex.Athena.Model.Core.Constants;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Resources;
 
     public static class SystemConstants
@@ -15,6 +16,9 @@
 
         public static readonly ReadOnlyCollection<string> BaseCurrencyListOfSummaryTotalRow = new ReadOnlyCollection<string>(
          new List<string> { "EUR", "USD", "GBP" });
+
+        public static readonly ReadOnlyCollection<string> SettlementTimeSupportProductList = new ReadOnlyCollection<string>(
+         new List<string> { Product.SB, Product.VS, Product.NG });
 
         public static readonly IReadOnlyDictionary<int, string> BaseCurrencyList = new Dictionary<int, string> {
             // flat currency

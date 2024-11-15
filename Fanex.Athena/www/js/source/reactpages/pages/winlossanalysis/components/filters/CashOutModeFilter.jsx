@@ -6,7 +6,7 @@ import AppData from '@jsroot/lib/AppData';
 import { memo } from 'react';
 
 export const CashOutModeFilter = (props) => {
-    const { onChange, value, disabled } = props;
+    const { onChange, value, viewInTime, disabled } = props;
 
     const _renderCashOutFilter = () => {
         const cashOutModeList = AppData.cashOutModeList;
@@ -17,7 +17,9 @@ export const CashOutModeFilter = (props) => {
                 value={value}
                 options={cashOutModeList}
                 disabled={disabled}
-                onChange={onChange} />
+                onChange={(e)=>{
+                    onChange(e,viewInTime);
+                }} />
         );
     }
     return (

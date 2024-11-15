@@ -63,3 +63,16 @@ export const setSearchMode = (value) => {
     }
 }
 
+export const setSelectedViewInTime = (value) => {
+    return {
+        type: types.SET_SELECTED_VIEW_IN_TIME,
+        data: value
+    }
+}
+
+export const setHour = (value) => {
+    return {
+        type: types.SET_SELECTED_HOUR,
+        data: value
+    }
+}

@@ -36,7 +36,8 @@ export const GroupByMode = {
     Currency: 6,
     Platform: 7,
     Player: 8,
-    Agent: 9
+    Agent: 9,
+    Hour: 10
 }
 
 export const BreakdownByMode = {
@@ -54,6 +55,7 @@ export const ProductCode = {
 
 export const GroupByList = [
     { value: GroupByMode.Player, label: LangHelper.getSingleResource("Player") },
+    { value: GroupByMode.Hour, label: LangHelper.getSingleResource("Hour") },
     { value: GroupByMode.Date, label: LangHelper.getSingleResource("Date") },
     { value: GroupByMode.Month, label: LangHelper.getSingleResource("Month") },
     { value: GroupByMode.Product, label: LangHelper.getSingleResource("Product") },
@@ -84,6 +86,8 @@ export const DisplayGroupBreakDownMapping = [
     { groupByMode: GroupByMode.Agent, breakdownMode: BreakdownByMode.Currency, isDisplayBreakDownInCurrency: true },
     { groupByMode: GroupByMode.Agent, breakdownMode: BreakdownByMode.Product, isDisplayBreakDownInCurrency: true },
     { groupByMode: GroupByMode.Agent, breakdownMode: BreakdownByMode.Player, isDisplayBreakDownInCurrency: true },
+    { groupByMode: GroupByMode.Hour, breakdownMode: BreakdownByMode.Product, isDisplayBreakDownInCurrency: true },
+    { groupByMode: GroupByMode.Hour, breakdownMode: BreakdownByMode.Currency, isDisplayBreakDownInCurrency: true },
 ]
 
 export const DefaultPagingOption = {
@@ -132,4 +136,9 @@ export const CashOutMode = {
     IncludeCOFromSB: 0,
     ExcludeCOFromSB: 1,
     ViewCOOnly: 2,
+}
+
+export const ViewInTimeMode = {
+    Financial: 1,
+    Settlement: 2
 }

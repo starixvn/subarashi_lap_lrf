@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/28/2024 11:41:12 AM
+// Generated at: 11/15/2024 3:43:00 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -420,6 +420,7 @@ window._language_zh_CN = {
   FileExtensionIncorrect: "档案的后缀名不正确，请选择Excel档案",
   FileUploadExceedSize: "上传档案大小需小于",
   FinalScore: "最后比分",
+  FinancialDate: "依财务日期时间搜寻",
   FirstGoal: "最先进球",
   FirstName: "名字",
   Forecast: "预测",
@@ -480,6 +481,7 @@ window._language_zh_CN = {
   Home: "主队",
   HomeDrawAwayNoBet: "主队(不获胜球队)/获胜球队(平局退款)/客队(不获胜球队)",
   HomeNoBet: "主队(不获胜球队)",
+  Hour: "小时",
   HTFT: "半场/全场",
   HttpError_403: "访问被拒绝",
   HttpError_404: "页面不存在, 请检查地址",
@@ -898,6 +900,7 @@ window._language_zh_CN = {
   SettledAndResettledReport: "已结算与已重新结算报告",
   SettledDateOnly: "结算日",
   SettledOnlyReport: "已结算报告",
+  SettlementTime: "依注单结算时间搜寻",
   Show: "显示",
   ShowAllLeagues: "显示所有联赛",
   ShowOldValue: "显示旧值",

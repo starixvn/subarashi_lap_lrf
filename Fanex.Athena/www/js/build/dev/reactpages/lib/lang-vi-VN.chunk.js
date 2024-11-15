@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/28/2024 11:41:12 AM
+// Generated at: 11/15/2024 3:43:00 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -445,6 +445,7 @@ window._language_vi_VN = {
   FileIsNotReady: "Tệp chưa sẵn sàng, vui lòng thử lại sau.",
   FileUploadExceedSize: "Tệp tải lên phải nhỏ hơn",
   FinalScore: "Tỷ số chung cuộc",
+  FinancialDate: "Ngày Tài Chính",
   FirstGoal: "Bàn thắng Đầu tiên",
   FirstName: "Tên",
   Forecast: "Dự đoán",
@@ -509,6 +510,7 @@ window._language_vi_VN = {
   Home: "Đội Nhà",
   HomeDrawAwayNoBet: "Nhà/Hoà/Khách Không Tính",
   HomeNoBet: "Đội nhà Không Cược",
+  Hour: "Giờ",
   HTFT: "Hiệp 1/Toàn trận",
   HttpError_403: "Truy cập bị từ chối",
   HttpError_404: "Không tìm thấy trang, vui lòng kiểm tra lại địa chỉ",
@@ -959,6 +961,7 @@ window._language_vi_VN = {
   SettledAndResettledReport: "Báo cáo Tất Toán và Tất Toán Lại",
   SettledDateOnly: "Ngày Tất Toán",
   SettledOnlyReport: "Báo Cáo Tất Toán",
+  SettlementTime: "Thời Gian Tất Toán",
   Show: "Hiển thị",
   ShowAllLeagues: "Hiển thị Tất cả Giải đấu",
   ShowOldValue: "Hiển thị giá trị cũ",

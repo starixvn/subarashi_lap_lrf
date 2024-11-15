@@ -3324,4 +3324,13 @@
   <data name="TopPriority" xml:space="preserve">
     <value>Prioritas Utama</value>
   </data>
+  <data name="FinancialDate" xml:space="preserve">
+    <value>Tanggal Keuangan</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Jam</value>
+  </data>
+  <data name="SettlementTime" xml:space="preserve">
+    <value>Waktu Penyelesaian</value>
+  </data>
 </root>

@@ -3337,6 +3337,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Financial Date.
+        /// </summary>
+        public static string FinancialDate {
+            get {
+                return ResourceManager.GetString("FinancialDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Goal.
         /// </summary>
         public static string FirstGoal {
@@ -3918,6 +3927,15 @@ namespace Fanex.Athena.Resources {
         public static string HomeNoBet {
             get {
                 return ResourceManager.GetString("HomeNoBet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hour.
+        /// </summary>
+        public static string Hour {
+            get {
+                return ResourceManager.GetString("Hour", resourceCulture);
             }
         }
         
@@ -8202,6 +8220,15 @@ namespace Fanex.Athena.Resources {
         public static string SettledOnlyReport {
             get {
                 return ResourceManager.GetString("SettledOnlyReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settlement Time.
+        /// </summary>
+        public static string SettlementTime {
+            get {
+                return ResourceManager.GetString("SettlementTime", resourceCulture);
             }
         }
         

@@ -3815,4 +3815,13 @@
   <data name="ProductPTRNG" xml:space="preserve">
     <value>Playtech</value>
   </data>
+  <data name="Hour" xml:space="preserve">
+    <value>Hour</value>
+  </data>
+  <data name="FinancialDate" xml:space="preserve">
+    <value>Financial Date</value>
+  </data>
+  <data name="SettlementTime" xml:space="preserve">
+    <value>Settlement Time</value>
+  </data>
 </root>
