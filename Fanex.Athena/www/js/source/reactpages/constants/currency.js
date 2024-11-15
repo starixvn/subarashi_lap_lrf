@@ -8,13 +8,14 @@
     { value: -7, text: 'IDR' },
     { value: -8, text: 'INH' },
     { value: -9, text: 'BDT' },
-    { value: -10, text: 'INR'},
-    { value: -11, text: 'PHP'},
+    { value: -10, text: 'INR' },
+    { value: -11, text: 'PHP' },
     { value: -12, text: 'MP' },
     { value: -14, text: 'NPR' },
     { value: -15, text: 'TRY' },
     { value: -16, text: 'JPY' },
     { value: -17, text: 'MXN' },
     { value: -18, text: 'NGN' },
-    { value: -99, text: 'USDT'}
+    { value: -19, text: 'BRL' },
+    { value: -99, text: 'USDT' }
 ]

@@ -6,7 +6,18 @@
 
 var Site = (function ($) {
     var UNBLOCKUI_TIMEOUT = 30000;
-    var BASE_CURRENCY = { 'eur': '-1', 'usd': '-2', 'gbp': '-3', 'myr': '-4', 'cny': '-5', 'thb': '-6', 'idr': '-7', 'inh': '-8', 'bdt': '-9', 'inr': '-10', 'php': '-11', 'mp': '-12', 'npr': '-14', 'try': '-15', 'jpy': '-16', 'mxn': '-17', 'ngn': '-18', 'usdt': '-99' };
+    var BASE_CURRENCY = {
+        'eur': '-1', 'usd': '-2',
+        'gbp': '-3', 'myr': '-4',
+        'cny': '-5', 'thb': '-6',
+        'idr': '-7', 'inh': '-8',
+        'bdt': '-9', 'inr': '-10',
+        'php': '-11', 'mp': '-12',
+        'npr': '-14', 'try': '-15',
+        'jpy': '-16', 'mxn': '-17',
+        'ngn': '-18', 'brl': '-19',
+        'usdt': '-99'
+    };
     var REQUEST_VERIFICATION_TOKEN;
     var _historyDate = null;
     var _licenseeId = null;
