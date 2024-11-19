@@ -1,4 +1,4 @@
-﻿// Generated at: 11/15/2024 3:42:59 PM
+﻿// Generated at: 11/19/2024 10:37:18 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -1119,6 +1119,8 @@ Welcome:"Welcome",
 WhiteLabel:"Whitelabel",
 WinLoss:"Win Loss",
 WinlossAnalysis:"Win Loss Analysis",
+WinlossAnalysis_SettlementTimeModeNote:"Exchange Rate in Settlement Time mode is based on the date which ticket is settled, and it may differ from current reports that are based on the event completion date.",
+WinlossAnalysis_SettlementTimeModeNote2:"Settlement Time mode supports data from 10/01/2024.",
 WinLossByBetType:"Win Loss By Bet Type",
 WinLossByBetTypeTitle:"Win Loss By Bet Type, {0} --&gt; {1} - {2}",
 WinLossByLeague:"Win Loss By Leagues",

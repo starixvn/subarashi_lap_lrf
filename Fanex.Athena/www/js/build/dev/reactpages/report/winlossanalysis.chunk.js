@@ -6488,6 +6488,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filters_CurrencyFilter_jsx__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ../filters/CurrencyFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/CurrencyFilter.jsx");
 /* harmony import */ var _filters_ViewInTimeFilter_jsx__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ../filters/ViewInTimeFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/ViewInTimeFilter.jsx");
 /* harmony import */ var _filters_HourFilter_jsx__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ../filters/HourFilter.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/HourFilter.jsx");
+/* harmony import */ var _filters_Note_jsx__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ../filters/Note.jsx */ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/Note.jsx");
+
 
 
 
@@ -6732,7 +6734,9 @@ const MainFilter = () => {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_SubsidiaryCheckBoxFilter_jsx__WEBPACK_IMPORTED_MODULE_27__["default"], {
     value: isSubsidiarySearch,
     onChange: onSubsidiaryCheckBoxChangeHandler
-  }))));
+  }))), selectedViewInTime == _common_constants__WEBPACK_IMPORTED_MODULE_12__["ViewInTimeMode"].Settlement && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_filters_Note_jsx__WEBPACK_IMPORTED_MODULE_32__["default"], null)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(MainFilter));
 
@@ -7371,6 +7375,30 @@ const defaultProps = {
 LiveStatusFilter.propTypes = propTypes;
 LiveStatusFilter.defaultProps = defaultProps;
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(LiveStatusFilter));
+
+/***/ }),
+
+/***/ "./www/js/source/reactpages/pages/winlossanalysis/components/filters/Note.jsx":
+/*!************************************************************************************!*\
+  !*** ./www/js/source/reactpages/pages/winlossanalysis/components/filters/Note.jsx ***!
+  \************************************************************************************/
+/*! exports provided: Note, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Note", function() { return Note; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+
+
+const Note = props => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-12 col-md-3 col-xl-1 note"
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('WinlossAnalysis_SettlementTimeModeNote'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('WinlossAnalysis_SettlementTimeModeNote2')));
+};
+/* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(Note));
 
 /***/ }),
 

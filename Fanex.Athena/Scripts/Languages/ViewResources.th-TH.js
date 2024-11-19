@@ -1,4 +1,4 @@
-﻿// Generated at: 11/15/2024 3:43:00 PM
+﻿// Generated at: 11/19/2024 10:37:18 AM
 var _language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -1078,6 +1078,8 @@ Welcome:"ยินดีต้อนรับ",
 WhiteLabel:"ป้ายขาว",
 WinLoss:"แพ้ชนะ",
 WinlossAnalysis:"วิเคราะห์ผลแพ้ชนะ",
+WinlossAnalysis_SettlementTimeModeNote:"อัตราแลกเปลี่ยนในโหมดเวลาการชำระเงินจะอิงตามวันที่ตั๋วถูกชำระ และอาจแตกต่างจากรายงานปัจจุบันที่อิงตามวันที่การแข่งขันสิ้นสุด.",
+WinlossAnalysis_SettlementTimeModeNote2:"โหมดการชำระบัญชีรองรับข้อมูลตั้งแต่วันที่ 10/01/2024 เป็นต้นไป.",
 WinLossByBetType:"แพ้ชนะ ตามประเภทการเดิมพัน",
 WinLossByBetTypeTitle:"แพ้ชนะตามประเภทการเดิมพัน {0} --&gt; {1} - {2}",
 WinLossByLeague:"แพ้ชนะตามลีก",

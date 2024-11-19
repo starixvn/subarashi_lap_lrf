@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/15/2024 3:43:00 PM
+// Generated at: 11/19/2024 10:37:18 AM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -1175,6 +1175,8 @@ window._language_vi_VN = {
   WhiteLabel: "Nhóm Chi Nhánh",
   WinLoss: "Thắng Thua",
   WinlossAnalysis: "Phân Tích Thắng Thua",
+  WinlossAnalysis_SettlementTimeModeNote: "Tỷ Giá Hối Đoái trong chế độ Theo Ngày Tất Toán sẽ tính theo ngày mà vé cược được tất toán, và có thể khác với các báo cáo hiện tại đang tính theo ngày kết thúc sự kiện.",
+  WinlossAnalysis_SettlementTimeModeNote2: "Chế độ Theo Ngày Tất Toán hỗ trợ dữ liệu từ 01/10/2024.",
   WinLossByBetType: "Thắng Thua Theo Loại Cược",
   WinLossByBetTypeTitle: "Thắng Thua theo Loại cược, {0} --&gt; {1} - {2}",
   WinLossByLeague: "Thắng Thua Theo Giải Đấu",

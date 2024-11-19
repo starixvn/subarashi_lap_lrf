@@ -1,4 +1,4 @@
-﻿// Generated at: 11/15/2024 3:43:00 PM
+﻿// Generated at: 11/19/2024 10:37:18 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -998,6 +998,8 @@ Welcome:"欢迎",
 WhiteLabel:"包网商",
 WinLoss:"输赢",
 WinlossAnalysis:"输赢分析",
+WinlossAnalysis_SettlementTimeModeNote:"结算时间模式的资料使用票券结算时之汇率换算，资料可能与原报表根据赛事结束日期之汇率计算有些许落差。",
+WinlossAnalysis_SettlementTimeModeNote2:"结算模式仅支援查询10/01/2024后的资料。",
 WinLossByBetType:"投注类别输赢",
 WinLossByBetTypeTitle:"投注类别输赢, {0} --&gt; {1} - {2}",
 WinLossByLeague:"Win Loss By Leagues",

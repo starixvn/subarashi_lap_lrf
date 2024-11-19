@@ -1,4 +1,4 @@
-﻿// Generated at: 11/15/2024 3:42:59 PM
+﻿// Generated at: 11/19/2024 10:37:18 AM
 var _language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -1059,6 +1059,8 @@ Welcome:"Selamat Datang",
 WhiteLabel:"Whitelabel",
 WinLoss:"Menang-Kalah",
 WinlossAnalysis:"Analisis Menang Kalah",
+WinlossAnalysis_SettlementTimeModeNote:"Kurs dalam mode Waktu Penyelesaian didasarkan pada tanggal tiket diselesaikan, dan mungkin berbeda dari laporan saat ini yang didasarkan pada tanggal penyelesaian acara.",
+WinlossAnalysis_SettlementTimeModeNote2:"Mode Waktu Penyelesaian hanya mendukung data dari 10/01/2024.",
 WinLossByBetType:"Kemenangan/Kekalahan Berdasarkan Jenis Taruhan",
 WinLossByBetTypeTitle:"Keuntungan/Kerugian Berdasarkan Jenis Taruhan, {0} --&gt; {1} - {2}",
 WinLossByLeague:"Keuntungan/Kerugian Berdasarkan Liga",

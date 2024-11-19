@@ -30,6 +30,7 @@ import StickyIcon from '../filters/StickyIcon.jsx';
 import CurrencyFilter from '../filters/CurrencyFilter.jsx';
 import ViewInTimeFilter from '../filters/ViewInTimeFilter.jsx';
 import HourFilter from '../filters/HourFilter.jsx';
+import Note from '../filters/Note.jsx';
 
 export const MainFilter = () => {
     const { appUuid, dateRange, selectedProduct, selectedSport, sportList, selectedBettype, bettypeList, selectedPlatform,
@@ -146,6 +147,9 @@ export const MainFilter = () => {
                     </div>
                 )}
             </div>
+            {selectedViewInTime == ViewInTimeMode.Settlement && <div className="row">
+                <Note/>
+            </div>}
         </CollapsiblePanel>
     )
 
