@@ -5,11 +5,12 @@
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
+    using Common;
     using Core;
     using Core.Configuration.Interfaces;
     using Data;
     using Extension.Utility;
-    using Fanex.Athena.DataAccess.Report.Interfaces;
+    using Interfaces;
     using Model.Core.ResultModel;
     using Model.Report.DTO.SubsidiaryPerformance;
     using Model.Report.MetaModel;
@@ -47,7 +48,9 @@
             return dataList;
         }
 
-        public async Task<ReportResultModel<SubsidiaryPerformanceDetail>> GetDetailData(SubsidiaryPerformanceMetaModel metaModel, IDictionary<int, string> currencyList)
+        public async Task<ReportResultModel<SubsidiaryPerformanceDetail>> GetDetailData(
+            SubsidiaryPerformanceMetaModel metaModel,
+            IDictionary<int, string> currencyList)
         {
             const string SpName = "Lrf_Rpt_SubsidiaryWinlossDetail";
             var dataList = new List<SubsidiaryPerformanceDetail>();
@@ -100,9 +103,9 @@
                 BaseCurrencyData = new SubsidiaryPerformanceBase
                 {
                     BetCount = Convert.ToInt32(reader["BetCount"]),
-                    Turnover = Convert.ToDecimal(reader["TurnoverBase"]),
-                    CustomerWinLoss = Convert.ToDecimal(reader["WinlostBase"]),
-                    SubsidiaryWinLoss = Convert.ToDecimal(reader["LicenseeWLBase"])
+                    Turnover = Converter.ToDecimal(reader["TurnoverBase"]),
+                    CustomerWinLoss = Converter.ToDecimal(reader["WinlostBase"]),
+                    SubsidiaryWinLoss = Converter.ToDecimal(reader["LicenseeWLBase"])
                 }
             };
             result.BetCount = result.BaseCurrencyData.BetCount;
@@ -115,9 +118,9 @@
             }
             else
             {
-                result.Turnover = Convert.ToDecimal(reader["Turnover"]);
-                result.CustomerWinLoss = Convert.ToDecimal(reader["Winlost"]);
-                result.SubsidiaryWinLoss = Convert.ToDecimal(reader["LicenseeWL"]);
+                result.Turnover = Converter.ToDecimal(reader["Turnover"]);
+                result.CustomerWinLoss = Converter.ToDecimal(reader["Winlost"]);
+                result.SubsidiaryWinLoss = Converter.ToDecimal(reader["LicenseeWL"]);
             }
 
             return result;
@@ -133,9 +136,9 @@
                 CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
                 CurrencyId = currencyId,
                 BetCount = Convert.ToInt32(reader["BetCount"]),
-                Turnover = Convert.ToDecimal(reader["Turnover" + baseColumnSuffix]),
-                CustomerWinLoss = Convert.ToDecimal(reader["Winlost" + baseColumnSuffix]),
-                SubsidiaryWinLoss = Convert.ToDecimal(reader["LicenseeWL" + baseColumnSuffix])
+                Turnover = Converter.ToDecimal(reader["Turnover" + baseColumnSuffix]),
+                CustomerWinLoss = Converter.ToDecimal(reader["Winlost" + baseColumnSuffix]),
+                SubsidiaryWinLoss = Converter.ToDecimal(reader["LicenseeWL" + baseColumnSuffix])
             };
 
             return result;
@@ -151,9 +154,9 @@
             var total = totalList[currencyName];
 
             total.BetCount += Convert.ToInt32(reader["BetCount"]);
-            total.Turnover += Convert.ToDecimal(reader["TurnoverBase"]);
-            total.CustomerWinLoss += Convert.ToDecimal(reader["WinlostBase"]);
-            total.SubsidiaryWinLoss += Convert.ToDecimal(reader["LicenseeWLBase"]);
+            total.Turnover += Converter.ToDecimal(reader["TurnoverBase"]);
+            total.CustomerWinLoss += Converter.ToDecimal(reader["WinlostBase"]);
+            total.SubsidiaryWinLoss += Converter.ToDecimal(reader["LicenseeWLBase"]);
         }
 
         private void CalculateDetailTotal(SubsidiaryPerformanceDetail detail, IDictionary<string, SubsidiaryPerformanceDetail> totalList)
