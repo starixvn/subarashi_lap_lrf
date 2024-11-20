@@ -2,11 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core;
     using Core.Extensions;
+    using Model.Core;
     using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
     using Model.Customer.DTO;
     using Model.Customer.MetaModel;
     using Resources;
@@ -136,6 +139,7 @@
                         var id = Convert.ToString(reader[CustomerClass]);
                         var betDelay = reader.ToNullableDecimal("BetDelay");
                         var leagueGroupId = Convert.ToString(reader["LeagueGroupId"]);
+                        var leagueGroupGroupName = Convert.ToString(reader["LeagueGroupGroupName"]);
                         var platform = reader.ToNullableInt("Platform");
                         var sportType = Convert.ToString(reader["SportType"]);
                         var liveType = Convert.ToInt16(reader["Liveindicator"]);
@@ -149,7 +153,8 @@
                             SportType = sportType,
                             SportTypeName = GetSportNameText(sportType, metaModel.IsHideSaba),
                             LeagueGroupId = leagueGroupId,
-                            BetDelay = FormatNumber(betDelay.HasValue ? betDelay : null, "{0:#,##0.##}%"),
+                            LeagueGroupName = string.IsNullOrWhiteSpace(leagueGroupId) ? DefaultTextValue : leagueGroupGroupName,
+                            BetDelay = FormatNumber(betDelay, "{0:#,##0.##}%"),
                             BetInterval = FormatNumber(reader.ToNullableDecimal("NextBetInterval"), NumberStyle),
                             MaxBet = FormatNumber(reader.ToNullableDecimal("MaxBet"), NumberStyle),
                             MaxPerMatch = FormatNumber(reader.ToNullableDecimal("MaxPerMatch"), NumberStyle),
@@ -175,8 +180,50 @@
             return result;
         }
 
+        public async Task<IEnumerable<League>> GetLimitLeagues(GetLimitLeaguesV2MetaModel metaModel)
+        {
+            var limitLeagues = new List<League>();
+
+            using (var db = GetObjectDb("Lrf_CustomerClassLeagueGroupSel", 180))
+            {
+                db.SetParameterValue("SportType", metaModel.SportType);
+                db.SetParameterValue("LeagueGroupId", metaModel.LeagueGroupId);
+
+                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
+                {
+                    while (reader.Read())
+                    {
+                        limitLeagues.Add(new League
+                        {
+                            LeagueGroupId = reader.ToNullableInt("LeagueGroupId") ?? 0,
+                            LeagueId = reader.ToNullableInt("LeagueId") ?? 0,
+                            LeagueName = Convert.ToString(reader["LeagueName"])
+                        });
+                    }
+                }
+            }
+
+            MapLeagueName(limitLeagues, metaModel.LangCode, metaModel.IsHideSaba);
+
+            return limitLeagues;
+        }
+
         public static string FormatNumber(decimal? value, string format)
             => value == null ? DefaultTextValue : string.Format(format, value);
+
+        private void MapLeagueName(List<League> leagueList, string langCode, bool isHideSaba)
+        {
+            var options = new ParallelOptions
+            {
+                MaxDegreeOfParallelism = 10
+            };
+
+            Parallel.ForEach(leagueList.Where(x => x.LeagueGroupId != 0), options, league =>
+            {
+                var leagueName = _cacheRefAdapter.GetLeagueName(league.LeagueId, langCode) ?? league.LeagueName;
+                league.LeagueName = isHideSaba ? SabaHelper.RemoveSabaText(leagueName) : leagueName;
+            });
+        }
 
         private string GetLiveTypeText(int type)
         {

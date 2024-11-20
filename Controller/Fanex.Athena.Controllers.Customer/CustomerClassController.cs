@@ -125,6 +125,18 @@
             return Json(result);
         }
 
+        [HttpPost]
+        [AjaxRequest]
+        [CustomValidateAntiForgery]
+        public async Task<JsonResult> GetLimitLeaguesV2(GetLimitLeaguesV2MetaModel metaModel) // Call SP instead of call TW API
+        {
+            metaModel.IsHideSaba = IsHideSaba;
+            metaModel.LangCode = SessionServiceInstance.UserSession.Language;
+            var result = await _service.GetLimitLeagues(metaModel);
+
+            return Json(result);
+        }
+
         private static ReportBase GetExcelExporter(byte tabKey, string templatePath, string reportTitle, IEnumerable<CustomerClassModel> source)
         {
             if (tabKey == 1)

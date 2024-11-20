@@ -131,6 +131,58 @@
             return riskLevelList;
         }
 
+        public async Task<IEnumerable<LeagueGroup>> GetLimitLeagues(GetLimitLeaguesV2MetaModel metaModel)
+        {
+            try
+            {
+                var cacheKey = CacheKey.MemorycacheGetLimitLeagues +
+                               $"_{metaModel.SportType}_{metaModel.LeagueGroupId}_{metaModel.IsHideSaba}_{metaModel.LangCode}";
+                var limitLeagues = _cache.Get<IEnumerable<LeagueGroup>>(cacheKey);
+
+                if (limitLeagues != null)
+                {
+                    return limitLeagues;
+                }
+
+                var allLimitLeagues = await _dataAccess.GetLimitLeagues(metaModel);
+                var result = MapLeagueToLeagueGroup(allLimitLeagues, metaModel).ToList();
+
+                if (result.Any())
+                {
+                    _cache.Set(cacheKey, result);
+                    return result;
+                }
+            }
+            catch (Exception exception)
+            {
+                await _logger.ErrorAsync(LogMessageHelper.GenerateMessage(exception));
+            }
+
+            return new List<LeagueGroup>();
+        }
+
+        private static IEnumerable<LeagueGroup> MapLeagueToLeagueGroup(IEnumerable<League> allLimitLeagues, GetLimitLeaguesV2MetaModel metaModel)
+        {
+            var leagueGroupIds = metaModel.LeagueGroupId.Split(',').ToList();
+            var leagueGroupNames = metaModel.LeagueGroupName.Split(',').ToList();
+            var leagueGroupMapper = new Dictionary<string, string>();
+            for (var i = 0; i < Math.Min(leagueGroupIds.Count, leagueGroupNames.Count); i++)
+            {
+                leagueGroupMapper[leagueGroupIds[i]] = leagueGroupNames[i];
+            }
+
+            var result = allLimitLeagues
+                .GroupBy(elem => elem.LeagueGroupId)
+                .Select(group => new LeagueGroup
+                {
+                    LeagueGroupId = group.Key,
+                    LeagueGroupName = leagueGroupMapper.GetValueOrDefault(group.Key.ToString(), DefaultTextValue),
+                    LimitLeaguesFromSP = group.Key == 0 ? Enumerable.Empty<League>() : group
+                }).ToList();
+
+            return result;
+        }
+
         private async Task MapLicLeagueGroup(IEnumerable<CustomerClassLimitPolicyModel> policies, string langCode, bool isHideSaba)
         {
             foreach (var policy in policies)

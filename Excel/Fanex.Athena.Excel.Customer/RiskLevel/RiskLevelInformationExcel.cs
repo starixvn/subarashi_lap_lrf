@@ -10,7 +10,7 @@
 
     public class RiskLevelInformationExcel : ReportBase
     {
-        private const int ColumnTemplateCount = 12;
+        private const int ColumnTemplateCount = 13;
         private const int RowCCSettingPolicyTitleTemplate = 2;
         private const int RowCCSettingPolicyHeaderTemplate = 3;
         private const int RowCCSettingPolicyContentTemplate = 4;
@@ -40,7 +40,7 @@
             { CurrencyColumn, "Currency" },
             { DisableParlay, "DisableParlay" },
             { PlatformColumn, "Platform" },
-            { LeagueGroupColumn, "LeagueGroups" },
+            { LeagueGroupColumn, "LeagueGroupName" },
             { BetIntervalColumn, "BetInterval" },
             { AgentBetIntervalColumn, "AgentBetInterval" },
             { MinBetColumn, "MinBet" },
@@ -134,12 +134,6 @@
                     case "DisableParlay":
                     {
                         var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
-                        row.Cells[columnName.Key].SetCellValue(text);
-                        break;
-                    }
-                    case "LeagueGroups":
-                    {
-                        var text = string.Join(", ", item.LeagueGroups.Select(x => x.LeagueGroupName).ToList());
                         row.Cells[columnName.Key].SetCellValue(text);
                         break;
                     }

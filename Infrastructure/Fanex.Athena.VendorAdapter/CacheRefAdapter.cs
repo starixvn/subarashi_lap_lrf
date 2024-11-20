@@ -87,16 +87,6 @@
             return RemotingRefService.GetTeamName(teamId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
         }
 
-        public string GetLeagueName(object leagueId)
-        {
-            if (!IsValidId(leagueId))
-            {
-                return string.Empty;
-            }
-
-            return RemotingRefService.GetLeagueName(leagueId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
-        }
-
         public string GetLeague3rdName(object leagueId)
         {
             if (!IsValidId(leagueId))
@@ -156,6 +146,16 @@
                 sportId.ToString(),
                 GetCurrentIBCLanguageCode(languageCode),
                 string.Empty);
+        }
+
+        public string GetLeagueName(object leagueId, string langCode = null)
+        {
+            if (!IsValidId(leagueId))
+            {
+                return string.Empty;
+            }
+
+            return RemotingRefService.GetLeagueName(leagueId.ToString(), GetCurrentIBCLanguageCode(langCode), string.Empty);
         }
 
         private static string GetNumberGameBettypeName(int betType, bool liveIndicator, string betTypeName)

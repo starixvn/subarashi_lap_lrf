@@ -19,6 +19,8 @@
 
         public string LeagueGroupId { get; set; }
 
+        public string LeagueGroupName { get; set; }
+
         public IEnumerable<LeagueGroup> LeagueGroups { get; set; }
 
         public string BetDelay { get; set; }
