@@ -1,33 +1,38 @@
-import React, { memo } from 'react'
-import Select from 'react-select'
-import LangHelper from '@jsroot/lib/langHelper'
-import PropTypes from 'prop-types';
+import React, { memo } from "react";
+import Select from "react-select";
+import LangHelper from "@jsroot/lib/langHelper";
+import PropTypes from "prop-types";
 
 export const BetTypeFilter = (props) => {
-    const {value, onChange, options} = props;
+    const { value, onChange, options } = props;
 
-    const _renderBettypeSelectList = () => {
-        const bettypeList = options;
-
-        return bettypeList?.length && (
-            <Select instanceId="BettypeList"
-                value={value}
-                options={bettypeList}
-                onChange={onChange} />
+    const _renderBetTypeSelectList = () => {
+        return (
+            options?.length && (
+                <Select
+                    instanceId='BettypeList'
+                    value={value}
+                    options={options}
+                    onChange={onChange}
+                />
+            )
         );
-    }
+    };
 
     return (
-    <div className="form-group">
-        <label className="label-text">{LangHelper.getSingleResource("BetType")}</label>
-        {_renderBettypeSelectList()}
-    </div>)
-}
+        <div className='form-group'>
+            <label className='label-text'>
+                {LangHelper.getSingleResource("BetType")}
+            </label>
+            {_renderBetTypeSelectList()}
+        </div>
+    );
+};
 
 const propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     onChange: PropTypes.func,
-    options: PropTypes.array
+    options: PropTypes.array,
 };
 
 BetTypeFilter.propTypes = propTypes;
