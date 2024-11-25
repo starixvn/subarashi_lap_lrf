@@ -1,7 +1,10 @@
 import { shallowEqual, useSelector } from 'react-redux'
+import { ViewInTimeMode } from '../../common/constants'
+import useSubsidiarySearch from '@jsroot/customHooks/useSubsidiarySearch'
 
 export const useValidParam = () => {
-    const [selectedProduct, selectedStatus, selectedPlatform, selectedLiveStatus, selectedCurrency, selectedCustomerClass, selectedOddsGroup, selectedBettype, selectedSport]     
+    const [selectedProduct, selectedStatus, selectedPlatform, selectedLiveStatus, selectedCurrency, selectedCustomerClass, selectedOddsGroup, selectedBettype, selectedSport,
+            selectedHour, selectedViewInTime, selectedSubsidiary]     
         = useSelector(state => 
             [
                 state.selectedProduct, 
@@ -12,8 +15,13 @@ export const useValidParam = () => {
                 state.selectedCustomerClass, 
                 state.selectedOddsGroup, 
                 state.selectedBettype, 
-                state.selectedSport]
+                state.selectedSport, 
+                state.selectedHour,
+                state.selectedViewInTime,
+                state.selectedSubsidiary]
             , shallowEqual)
+    
+    const { isSubsidiarySearch } = useSubsidiarySearch();
 
     return !!selectedProduct
     && !!selectedStatus
@@ -24,4 +32,6 @@ export const useValidParam = () => {
     && !!selectedPlatform
     && !!selectedCustomerClass
     && !!selectedOddsGroup
+    && (selectedViewInTime == ViewInTimeMode.Financial || !!selectedHour)
+    && (!isSubsidiarySearch || !!selectedSubsidiary)
 }

@@ -3,18 +3,23 @@ import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
 import { DateRange } from '@jsroot/components/date-range/index'
 import PropTypes from 'prop-types';
+import { ViewInTimeMode } from '../../common/constants'
 
 export const DateRangeFilter = (props) => {
-    const {onChange, isMobile, dateRange} = props;
+    const {onChange, isMobile, dateRange, viewInTime} = props;
 
     const _renderDateRange = () => {
         const dateConstraint = AppData.dateConstraint;
+        const { limitedMonthRange, minDate } = viewInTime == ViewInTimeMode.Settlement
+            ? { limitedMonthRange: dateConstraint.settlementTimeLimitedMonthRange, minDate: dateConstraint.settlementTimeMinDate }
+            : { limitedMonthRange: dateConstraint.limitedMonthRange, minDate: dateConstraint.minDate };
 
         return (
-            <DateRange startDate={dateRange.fromDate} endDate={dateRange.toDate}
-                minDate={dateConstraint.minDate} maxDate={dateConstraint.maxDate}
-                today={dateConstraint.maxDate} limitedMonthRange={dateConstraint.limitedMonthRange}
-                onChange={onChange} 
+            <DateRange
+                startDate={dateRange.fromDate} endDate={dateRange.toDate}
+                minDate={minDate} maxDate={dateConstraint.maxDate}
+                today={dateConstraint.maxDate} limitedMonthRange={limitedMonthRange}
+                onChange={(date, isValid) => onChange(date, isValid, limitedMonthRange)} 
                 isMobile={isMobile}/>
         )
     }

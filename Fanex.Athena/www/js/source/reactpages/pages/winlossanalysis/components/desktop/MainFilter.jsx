@@ -10,6 +10,7 @@ import SubsidiaryDropDownFilter from '../filters/SubsidiaryDropDownFilter';
 import useSubsidiarySearch from '@jsroot/customHooks/useSubsidiarySearch'
 import DateRangeFilter from '../filters/DateRangeFilter.jsx';
 import Service from '../../common/Service.js';
+import { ViewInTimeMode } from '../../common/constants'
 import ProductFilter from '../filters/ProductFilter.jsx';
 import SportFilter from '../filters/SportFilter.jsx';
 import BetTypeFilter from '../filters/BetTypeFilter.jsx';
@@ -27,18 +28,22 @@ import CashOutModeFilter from '../filters/CashOutModeFilter.jsx';
 import SubsidiaryCheckBoxFilter from '../filters/SubsidiaryCheckBoxFilter.jsx';
 import StickyIcon from '../filters/StickyIcon.jsx';
 import CurrencyFilter from '../filters/CurrencyFilter.jsx';
+import ViewInTimeFilter from '../filters/ViewInTimeFilter.jsx';
+import HourFilter from '../filters/HourFilter.jsx';
+import Note from '../filters/Note.jsx';
 
 export const MainFilter = () => {
     const { appUuid, dateRange, selectedProduct, selectedSport, sportList, selectedBettype, bettypeList, selectedPlatform,
         selectedStatus, selectedLiveStatus, selectedBaseCurrency, selectedVipOnly, selectedCustomerClass, selectedOddsGroup,
-        searchMode, isGroupInOriginalCurrency, isExcludeTestData, selectedCashOutMode, selectedCurrency }
+        searchMode, isGroupInOriginalCurrency, isExcludeTestData, selectedCashOutMode, selectedCurrency, selectedViewInTime,
+        selectedHour, selectedSubsidiary }
         = useSelector(state => state, shallowEqual)
     const { isShowSubsidiaryDropdown, isSubsidiarySearch, isShowSubsidiarySearchCheckBox, } = useSubsidiarySearch();
     const { baseCurrencyList, selectedBaseCurrency: newBaseCurrency } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
     const { onSubsidiaryDropDownChangeHandler, onDateRangeChangeHandler, onProductChangeHandler, onSportChangeHandler, onBetTypeChangeHandler,
         onPlatformChangeHandler, onStatusChangeHandler, onLiveStatusChangeHandler, onBaseCurrencyChangeHandler, onVipOnlyChangeHandler, onRiskLevelChangeHandler,
         onOddsGroupChangeHandler, onSearchModeChangeHandler, onUserNameInputHandler, onGroupInOriginalCurrencyChangeHandler, onExcludeTextDataChangeHandler,
-        onCashOutModeChangeHandler, onSubsidiaryCheckBoxChangeHandler, onCurrencyChangeHandler
+        onCashOutModeChangeHandler, onSubsidiaryCheckBoxChangeHandler, onCurrencyChangeHandler, onViewInTimeChangeHandler, onHourChangeHandler
     } = useFilterHandler();
     const { isOfferCashOutProduct, isHasPermissionViewVip } = AppData;
     const isEnableCashOutFilter = Service.isContainProductSportBookOrBa(selectedProduct);
@@ -51,6 +56,11 @@ export const MainFilter = () => {
     return (
         <CollapsiblePanel className="page-filter" isCollapseMode={false} stickyFooter={<StickyIcon />}>
             <div className="row">
+                <div className="col-md-12">
+                    <ViewInTimeFilter onChange={onViewInTimeChangeHandler} value={selectedViewInTime} />
+                </div>
+            </div>
+            <div className="row">
                 <ToastContainer
                     autoClose={10000}
                     pauseOnFocusLoss={false}
@@ -58,12 +68,16 @@ export const MainFilter = () => {
                     transition={Flip} />
 
                 {isShowSubsidiaryDropdown && isSubsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
-                    <SubsidiaryDropDownFilter key={`subsidiary-${appUuid}`} onChange={onSubsidiaryDropDownChangeHandler} />
+                    <SubsidiaryDropDownFilter key={`subsidiary-${appUuid}`} isValid={!!selectedSubsidiary} onChange={onSubsidiaryDropDownChangeHandler} />
                 </div>}
 
                 <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
-                    <DateRangeFilter key={`date-${appUuid}`} onChange={onDateRangeChangeHandler} dateRange={dateRange} />
+                    <DateRangeFilter key={`date-${appUuid}-${selectedViewInTime}`} onChange={onDateRangeChangeHandler} dateRange={dateRange} viewInTime={selectedViewInTime}/>
                 </div>
+
+                {selectedViewInTime == ViewInTimeMode.Settlement && <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+                    <HourFilter onChange={onHourChangeHandler} isValid={!!selectedHour}/>
+                </div>}
 
                 <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
                     <ProductFilter key={`product-${appUuid}`} onChange={onProductChangeHandler} isValid={!!selectedProduct} value={selectedProduct} />
@@ -115,7 +129,7 @@ export const MainFilter = () => {
 
                 {isOfferCashOutProduct &&
                     <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
-                        <CashOutModeFilter onChange={onCashOutModeChangeHandler} disabled={!isEnableCashOutFilter} value={selectedCashOutMode} />
+                        <CashOutModeFilter onChange={onCashOutModeChangeHandler} disabled={!isEnableCashOutFilter} value={selectedCashOutMode} viewInTime={selectedViewInTime}/>
                     </div>
                 }
 
@@ -133,6 +147,9 @@ export const MainFilter = () => {
                     </div>
                 )}
             </div>
+            {selectedViewInTime == ViewInTimeMode.Settlement && <div className="row">
+                <Note/>
+            </div>}
         </CollapsiblePanel>
     )
 

@@ -2,12 +2,12 @@ import React, {useMemo, memo} from "react";
 import LangHelper from '@jsroot/lib/langHelper'
 import Service from '../../common/Service.js'
 import AppData from '@jsroot/lib/AppData'
-import { useSelector } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import useGroupFilterHandler from '../hooks/useGroupFilterHandler.jsx';
 
 export const GroupByOptionFilter = () => {
-    const selectedGroupByOption = useSelector(state => state.selectedGroupByOption);
-    const groupByList = useMemo(() => Service.buildGroupByOption(), [AppData.licenseeName])
+    const [selectedGroupByOption, selectedViewInTime] = useSelector(state => [state.selectedGroupByOption, state.selectedViewInTime], shallowEqual);
+    const groupByList = useMemo(() => Service.buildGroupByOption(selectedViewInTime), [AppData.licenseeName, selectedViewInTime])
     const {onChangeGroupByOption} = useGroupFilterHandler();
 
     return (

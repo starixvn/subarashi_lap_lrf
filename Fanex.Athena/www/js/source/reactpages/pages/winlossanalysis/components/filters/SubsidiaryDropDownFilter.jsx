@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { memo } from 'react'
 
 const SubsidiaryDropDownFilter = (props) => {
-    const {onChange} = props
+    const {onChange, isValid} = props
     const {isWhiteLabelView} = useSubsidiarySearch();
     const _renderSubsidiaryTreeView = () => {
         return <TreeViewSelect
@@ -21,7 +21,8 @@ const SubsidiaryDropDownFilter = (props) => {
             isAllTextShown={false}
             hasSearchBox={false}
             treeViewOption={TreeViewOption}
-            onChange={onChange} />;
+            onChange={onChange} 
+            isValid={isValid}/>;
     }
 
 

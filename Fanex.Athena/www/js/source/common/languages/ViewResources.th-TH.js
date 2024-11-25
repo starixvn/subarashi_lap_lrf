@@ -1,4 +1,4 @@
-﻿// Generated at: 10/28/2024 11:41:12 AM
+﻿// Generated at: 11/19/2024 10:37:18 AM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -353,6 +353,7 @@ FileExtensionIncorrect:"นามสกุลไฟล์ของคุณไ�
 FileIsNotReady:"ไฟล์ยังไม่พร้อม โปรดลองอีกครั้งภายหลัง",
 FileUploadExceedSize:"ไฟล์ที่อัปโหลดควรมีขนาดน้อยกว่า",
 FinalScore:"ผลคะแนนสุดท้าย",
+FinancialDate:"วันที่การเงิน",
 FirstGoal:"ประตูแรก",
 FirstName:"ชื่อตัว",
 Forecast:"ทาย",
@@ -417,6 +418,7 @@ HistoricalReportDateRangeNote:"ข้อมูลมีตั้งแต่ {0:
 Home:"เจ้าบ้าน",
 HomeDrawAwayNoBet:"เจ้าบ้าน/เสมอ/ทีมเยือนไม่มีการเดิมพัน",
 HomeNoBet:"เจ้าบ้าน ไม่มีการเดิมพัน",
+Hour:"ชั่วโมง",
 HTFT:"ที่1/เต็มเวลา",
 HttpError_403:"ปฏิเสธการเข้าใช้",
 HttpError_404:"ไม่พบ กรุณาตรวจสอบที่อยู่",
@@ -862,6 +864,7 @@ SettledAndResettledDate:"วันที่ตั้งถิ่นฐานแ�
 SettledAndResettledReport:"ชำระและตั้งรายงานใหม่",
 SettledDateOnly:"วันที่ตั้งต้น",
 SettledOnlyReport:"รายงานการตัดสิน",
+SettlementTime:"เวลาการชำระเงิน",
 Show:"แสดง",
 ShowAllLeagues:"แสดงลีกทั้งหมด",
 ShowOldValue:"แสดงค่าเก่า",
@@ -1075,6 +1078,8 @@ Welcome:"ยินดีต้อนรับ",
 WhiteLabel:"ป้ายขาว",
 WinLoss:"แพ้ชนะ",
 WinlossAnalysis:"วิเคราะห์ผลแพ้ชนะ",
+WinlossAnalysis_SettlementTimeModeNote:"อัตราแลกเปลี่ยนในโหมดเวลาการชำระเงินจะอิงตามวันที่ตั๋วถูกชำระ และอาจแตกต่างจากรายงานปัจจุบันที่อิงตามวันที่การแข่งขันสิ้นสุด.",
+WinlossAnalysis_SettlementTimeModeNote2:"โหมดการชำระบัญชีรองรับข้อมูลตั้งแต่วันที่ 10/01/2024 เป็นต้นไป.",
 WinLossByBetType:"แพ้ชนะ ตามประเภทการเดิมพัน",
 WinLossByBetTypeTitle:"แพ้ชนะตามประเภทการเดิมพัน {0} --&gt; {1} - {2}",
 WinLossByLeague:"แพ้ชนะตามลีก",

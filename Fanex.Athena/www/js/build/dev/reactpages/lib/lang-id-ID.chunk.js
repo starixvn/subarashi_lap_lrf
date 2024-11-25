@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 10/28/2024 11:41:12 AM
+// Generated at: 11/19/2024 10:37:18 AM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -441,6 +441,7 @@ window._language_id_ID = {
   FileIsNotReady: "File belum siap, harap coba lagi nanti.",
   FileUploadExceedSize: "File yang diunggah harus lebih kecil dari",
   FinalScore: "Skor Akhir",
+  FinancialDate: "Tanggal Keuangan",
   FirstGoal: "Gol Pertama",
   FirstName: "Nama Depan",
   Forecast: "Ramalan",
@@ -501,6 +502,7 @@ window._language_id_ID = {
   Home: "Rumah",
   HomeDrawAwayNoBet: "Taruhan Rumah/Imbang/Tandang No Bet",
   HomeNoBet: "Tuan Rumah Tanpa Taruhan",
+  Hour: "Jam",
   HTFT: "Pertama/Waktu Penuh",
   HttpError_403: "Akses ditolak",
   HttpError_404: "Halaman tidak ditemukan, harap periksa alamat",
@@ -939,6 +941,7 @@ window._language_id_ID = {
   SettledAndResettledReport: "Laporan Diselesaikan dan Direset",
   SettledDateOnly: "Tanggal Diselesaikan",
   SettledOnlyReport: "Laporan Diselesaikan",
+  SettlementTime: "Waktu Penyelesaian",
   Show: "Tampilkan",
   ShowAllLeagues: "Tampilkan Semua Liga",
   ShowOldValue: "Tampilkan nilai lama",
@@ -1151,6 +1154,8 @@ window._language_id_ID = {
   WhiteLabel: "Whitelabel",
   WinLoss: "Menang-Kalah",
   WinlossAnalysis: "Analisis Menang Kalah",
+  WinlossAnalysis_SettlementTimeModeNote: "Kurs dalam mode Waktu Penyelesaian didasarkan pada tanggal tiket diselesaikan, dan mungkin berbeda dari laporan saat ini yang didasarkan pada tanggal penyelesaian acara.",
+  WinlossAnalysis_SettlementTimeModeNote2: "Mode Waktu Penyelesaian hanya mendukung data dari 10/01/2024.",
   WinLossByBetType: "Kemenangan/Kekalahan Berdasarkan Jenis Taruhan",
   WinLossByBetTypeTitle: "Keuntungan/Kerugian Berdasarkan Jenis Taruhan, {0} --&gt; {1} - {2}",
   WinLossByLeague: "Keuntungan/Kerugian Berdasarkan Liga",

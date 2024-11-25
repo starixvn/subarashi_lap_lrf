@@ -47,6 +47,11 @@
         value = c,
         status = true
     });
+
+    var settlementTimeProductList = Model.ProductOptionList
+        .Where(_ => SystemConstants.SettlementTimeSupportProductList.Contains(_.Code))
+        .Select(x => new { id = x.Code, value = x.Name, status = true });
+    var settlementTimeMinDate = new DateTime(2024, 10, 1);
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/winlossanalysis/index.css")" rel="stylesheet" type="text/css" />
@@ -83,6 +88,8 @@
     username: '',
     isGroupInOriginalCurrency: true,
     isExcludeTestData: true,
+    selectedViewInTime: 1,
+    selectedHour: 'All'
     };
     window._AppData = {
     baseCurrencyList: @Html.Raw(baseCurrencyList.ToJson()),
@@ -94,13 +101,15 @@
     cashOutModeList: @Html.Raw(cashOutModeList.ToJson()),
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { id = x.ID, value = x.Name, status = x.Checked }).ToJson()),
+    hourList: @Html.Raw(Model.HourList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
     productList: @Html.Raw(Model.ProductOptionList.Select(x => new { id = x.Code, value = x.Name, status = true }).ToJson()),
+    settlementTimeProductList: @Html.Raw(settlementTimeProductList.ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
     platformList: @Html.Raw(Model.PlatformList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
     riskLevelList: @Html.Raw(riskLevelList.ToJson()),
     oddsGroupList: @Html.Raw(oddsGroupList.ToJson()),
-    dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3 },
+    dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', settlementTimeMinDate: '@settlementTimeMinDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3, settlementTimeLimitedMonthRange: 1 },
     licenseeName: '@session.LicenseeSession.LicenseeName',
     isOfferCashOutProduct: '@Model.IsOfferCashOutProduct' === "True",
     isHasPermissionViewVip: '@Model.IsHasPermissionViewVip' === "True"

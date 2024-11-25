@@ -9,7 +9,7 @@ import { useValidParam } from './useValidParam'
 import { batch, shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import StringHelper from '@jsroot/lib/stringHelper.js';
-import { ALL_SELECTED_TEXT, SortBy, SortOrder, SearchMode } from '../../common/constants.js'
+import { ALL_SELECTED_TEXT, SortBy, SortOrder, SearchMode, ViewInTimeMode } from '../../common/constants.js'
 import { useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -40,6 +40,8 @@ export const useFilterAction = () => {
         selectedCashOutMode,
         selectedGroupByOption,
         selectedBreakDownByOption,
+        selectedViewInTime,
+        selectedHour
     }
         = useSelector(state => state, shallowEqual);
 
@@ -49,16 +51,17 @@ export const useFilterAction = () => {
     const { setReportTitle, setRequestParam, toggleLoader, getReportData, setDateRange, setSelectedProduct, setSelectedCurrency,
         setSelectedPlatform, setSelectedStatus, setSelectedLiveStatus, setSelectedBaseCurrency, setSelectedVipOnly, setSelectedCustomerClass, setSelectedOddsGroup,
         setUsername, setSearchMode, setGroupInOriginalCurrency, setSelectedCashOutMode, setExcludeTestData, setSelectedGroupByOption, setSelectedBreakDownByOption,
-        setSubsidiarySearch, setSubsidiaryList, setAppUuid, setProductList } = ActionCreators;
+        setSubsidiarySearch, setSubsidiaryList, setAppUuid, setProductList, setSelectedViewInTime, setHour } = ActionCreators;
 
     const _buildTitle = (params) => {
-        const { FromDate, ToDate, ProductCodes, SearchUserName, CurrencyCodes, BaseCurrencyName } = params;
+        const { FromDate, ToDate, ProductCodes, SearchUserName, CurrencyCodes, BaseCurrencyName, ViewInTime } = params;
         const dateRangeText = `, ${Site.convertDateToString(FromDate)} → ${Site.convertDateToString(ToDate)}`;
         const currencyText = `, ${LangHelper.getSingleResource("Currency")}: ${CurrencyCodes}, ${LangHelper.getSingleResource("BaseCurrency")}: ${BaseCurrencyName}`;
         const productText = `, ${LangHelper.getSingleResource("LicenseeW_L")} (${ProductCodes})`;
         const userText = !!SearchUserName ? `, ${LangHelper.getSingleResource("Username")}: ${SearchUserName}` : "";
+        const viewinTimeText = ` - ${ViewInTime == ViewInTimeMode.Settlement ? LangHelper.getSingleResource("SettlementTime") : LangHelper.getSingleResource("FinancialDate")}`;
 
-        return LangHelper.getSingleResource("WinlossAnalysis") + dateRangeText + currencyText + productText + userText;
+        return LangHelper.getSingleResource("WinlossAnalysis") + viewinTimeText + dateRangeText + currencyText + productText + userText;
     }
     const _getParams = () => {
         if (!isValidModel) {
@@ -84,6 +87,8 @@ export const useFilterAction = () => {
             PageIndex: 1,
             FromDate: Site.convertDateToString(fromDate),
             ToDate: Site.convertDateToString(toDate),
+            ViewInTime: selectedViewInTime,
+            HourParts: selectedHour,
             ProductCodes: selectedProduct,
             SearchUserName: username,
             SearchMode: searchMode,
@@ -134,6 +139,8 @@ export const useFilterAction = () => {
         let defaultState = window.initialState;
         batch(() => {
             dispatch(setDateRange({ startDate: defaultState.dateRange.fromDate, endDate: defaultState.dateRange.toDate }));
+            dispatch(setSelectedViewInTime(defaultState.selectedViewInTime));
+            dispatch(setHour(defaultState.selectedHour));
             dispatch(setProductList(AppData.productList));
             dispatch(setSelectedProduct(defaultState.selectedProduct));
             dispatch(setSelectedCurrency(defaultState.selectedCurrency));
