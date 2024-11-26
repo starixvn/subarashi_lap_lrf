@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 10/28/2024 11:41:12 AM
+﻿// Generated at: 11/25/2024 1:35:04 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -420,6 +420,7 @@ FGLG:"最先进球/最后进球",
 FileExtensionIncorrect:"档案的后缀名不正确，请选择Excel档案",
 FileUploadExceedSize:"上传档案大小需小于",
 FinalScore:"最后比分",
+FinancialDate:"依财务日期时间搜寻",
 FirstGoal:"最先进球",
 FirstName:"名字",
 Forecast:"预测",
@@ -480,6 +481,7 @@ HistoricalReportDateRangeNote:"只提供{0:MM/dd/yyyy} 之后的资料。如果�
 Home:"主队",
 HomeDrawAwayNoBet:"主队(不获胜球队)/获胜球队(平局退款)/客队(不获胜球队)",
 HomeNoBet:"主队(不获胜球队)",
+Hour:"小时",
 HTFT:"半场/全场",
 HttpError_403:"访问被拒绝",
 HttpError_404:"页面不存在, 请检查地址",
@@ -898,6 +900,7 @@ SettledAndResettledDate:"结算与已重新结算日",
 SettledAndResettledReport:"已结算与已重新结算报告",
 SettledDateOnly:"结算日",
 SettledOnlyReport:"已结算报告",
+SettlementTime:"依注单结算时间搜寻",
 Show:"显示",
 ShowAllLeagues:"显示所有联赛",
 ShowOldValue:"显示旧值",
@@ -1084,6 +1087,8 @@ Welcome:"欢迎",
 WhiteLabel:"包网商",
 WinLoss:"输赢",
 WinlossAnalysis:"输赢分析",
+WinlossAnalysis_SettlementTimeModeNote:"结算时间模式的资料使用票券结算时之汇率换算，资料可能与原报表根据赛事结束日期之汇率计算有些许落差。",
+WinlossAnalysis_SettlementTimeModeNote2:"结算模式仅支援查询10/01/2024后的资料。",
 WinLossByBetType:"投注类别输赢",
 WinLossByBetTypeTitle:"投注类别输赢, {0} --&gt; {1} - {2}",
 WinLossByLeague:"Win Loss By Leagues",
