@@ -122,26 +122,19 @@ namespace Fanex.Athena.Service.Report
                 return string.Empty;
             }
 
-            return _cacheRefAdapter.GetTeamName(matchWinLoss.HomeId) + (matchWinLoss.IsNeutral ? " " + ViewResources.IsNeutral : string.Empty);
+            return _cacheRefAdapter.GetTeamName(matchWinLoss.HomeId, matchWinLoss.SportType) + (matchWinLoss.IsNeutral ? " " + ViewResources.IsNeutral : string.Empty);
         }
 
         private string GetAwayName(MatchWinLoss matchWinLoss)
         {
             return matchWinLoss.ProductName == Product.NG ?
                     string.Empty :
-                    _cacheRefAdapter.GetTeamName(matchWinLoss.AwayId);
+                    _cacheRefAdapter.GetTeamName(matchWinLoss.AwayId, matchWinLoss.SportType);
         }
 
         private string GetLeagueName(MatchWinLoss matchWinLoss)
         {
-            if (SportHelper.IsVirtualBetRadarSports(matchWinLoss.SportType))
-            {
-                return _cacheRefAdapter.GetLeague3rdName(matchWinLoss.LeagueId);
-            }
-            else
-            {
-                return _cacheRefAdapter.GetLeagueName(matchWinLoss.LeagueId);
-            }
+            return _cacheRefAdapter.GetLeagueName(matchWinLoss.LeagueId, matchWinLoss.SportType);
         }
 
         private string GetMatchName(MatchWinLoss matchWinLoss)
@@ -163,9 +156,9 @@ namespace Fanex.Athena.Service.Report
                 return $"{ViewResources.Event} {matchWinLoss.VendorMatchId}{id}";
             }
 
-            var homeName = _cacheRefAdapter.GetTeamName(matchWinLoss.HomeId) +
+            var homeName = _cacheRefAdapter.GetTeamName(matchWinLoss.HomeId, matchWinLoss.SportType) +
                            (matchWinLoss.IsNeutral ? " " + ViewResources.IsNeutral : string.Empty);
-            var awayName = _cacheRefAdapter.GetTeamName(matchWinLoss.AwayId);
+            var awayName = _cacheRefAdapter.GetTeamName(matchWinLoss.AwayId, matchWinLoss.SportType);
             return homeName + "-vs-" + awayName;
         }
 

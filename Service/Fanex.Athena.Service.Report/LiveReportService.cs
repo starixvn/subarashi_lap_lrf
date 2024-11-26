@@ -108,7 +108,7 @@ namespace Fanex.Athena.Service.Report
                     break;
 
                 default:
-                    matchName = string.Format("{0} vs {1}", _cacheRefAdapter.GetTeamName(data.HomeId), _cacheRefAdapter.GetTeamName(data.AwayId));
+                    matchName = string.Format("{0} vs {1}", _cacheRefAdapter.GetTeamName(data.HomeId, model.SportId), _cacheRefAdapter.GetTeamName(data.AwayId, model.SportId));
                     break;
             }
 

@@ -1,9 +1,11 @@
 ﻿namespace Fanex.Athena.VendorAdapter
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
     using System.Threading;
+    using Fanex.Athena.Model.Core.Helper;
     using Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
@@ -77,11 +79,16 @@
             return RemotingRefService.GetSportName(sportId.ToString(), GetCurrentIBCLanguageCode(languageCode), string.Empty);
         }
 
-        public string GetTeamName(object teamId)
+        public string GetTeamName(object teamId, int sportId = 0)
         {
             if (!IsValidId(teamId))
             {
                 return string.Empty;
+            }
+
+            if (SportHelper.IsMatch3rdSports(sportId))
+            {
+                return RemotingRefService.GetTeamName3rd(teamId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
             }
 
             return RemotingRefService.GetTeamName(teamId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
@@ -148,11 +155,16 @@
                 string.Empty);
         }
 
-        public string GetLeagueName(object leagueId, string langCode = null)
+        public string GetLeagueName(object leagueId, int sportId = 0, string langCode = null)
         {
             if (!IsValidId(leagueId))
             {
                 return string.Empty;
+            }
+
+            if (SportHelper.IsLeague3rdSports(sportId))
+            {
+                return RemotingRefService.GetLeagueName3rd(leagueId.ToString(), GetCurrentIBCLanguageCode(), string.Empty);
             }
 
             return RemotingRefService.GetLeagueName(leagueId.ToString(), GetCurrentIBCLanguageCode(langCode), string.Empty);

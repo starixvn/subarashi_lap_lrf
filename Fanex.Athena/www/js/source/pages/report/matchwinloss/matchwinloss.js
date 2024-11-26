@@ -162,6 +162,7 @@ define(['jquery', 'common/site', 'common/querystring', 'components/pluginhelper/
                 url = QueryString.setParam(url, 'KickOffTime', matchData.KickOffTime);
                 url = QueryString.setParam(url, 'SportType', matchData.SportType);
                 url = QueryString.setParam(url, 'MatchCode', matchData.MatchCode);
+                url = QueryString.setParam(url, 'EventType', matchData.EventType);
 
                 const productCodeList = _me.getProductCodeList(productCode);
                 url = Site.setProductCodeListParam(url, productCodeList);

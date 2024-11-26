@@ -22,6 +22,10 @@
 
         public static bool IsVirtualBetRadarSports(int sportType) => VSBetRadarSportTypes.Contains(sportType);
 
+        public static bool IsLeague3rdSports(int sportType) => VSBetRadarSportTypes.Contains(sportType) || sportType == (int)SportType.BetbyBasketball;
+
+        public static bool IsMatch3rdSports(int sportType) => sportType == (int)SportType.BetbyBasketball;
+
         public static bool IsVSSportTypes(int sportType) => VSSportTypes.Contains(sportType);
     }
 }

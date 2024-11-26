@@ -126,6 +126,8 @@
 
         VirtualCockFighting = 188,
 
+        BetbyBasketball = 134,
+
         Keno = 202,
 
         AllBet = 211,
