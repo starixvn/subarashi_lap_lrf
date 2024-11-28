@@ -5456,12 +5456,11 @@ const BetTypeFilter = props => {
     onChange,
     options
   } = props;
-  const _renderBettypeSelectList = () => {
-    const bettypeList = options;
-    return (bettypeList === null || bettypeList === void 0 ? void 0 : bettypeList.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  const _renderBetTypeSelectList = () => {
+    return (options === null || options === void 0 ? void 0 : options.length) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_1__["default"], {
       instanceId: "BettypeList",
       value: value,
-      options: bettypeList,
+      options: options,
       onChange: onChange
     });
   };
@@ -5469,7 +5468,7 @@ const BetTypeFilter = props => {
     className: "form-group"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
     className: "label-text"
-  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("BetType")), _renderBettypeSelectList());
+  }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("BetType")), _renderBetTypeSelectList());
 };
 const propTypes = {
   value: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.number]),
@@ -6829,12 +6828,14 @@ const useValidParam = () => {
     selectedCurrency,
     selectedCustomerClass,
     selectedOddsGroup,
-    selectedSubsidiary
+    selectedSubsidiary,
+    bettypeList,
+    selectedBettype
   } = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => state, react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
   const {
     isSubsidiarySearch
   } = Object(_jsroot_customHooks_useSubsidiarySearch__WEBPACK_IMPORTED_MODULE_2__["default"])();
-  return !!selectedProduct && !!selectedStatus && !!selectedLiveStatus && !!selectedCurrency && !!selectedCustomerClass && !!selectedOddsGroup && !!selectedPlatform && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__["validateBaseCurrency"])(selectedBaseCurrency) && (!isSubsidiarySearch || !!selectedSubsidiary);
+  return !!selectedProduct && !!selectedStatus && !!selectedLiveStatus && !!selectedCurrency && !!selectedCustomerClass && !!selectedOddsGroup && !!selectedPlatform && Object(_jsroot_lib_validationHelper__WEBPACK_IMPORTED_MODULE_1__["validateBaseCurrency"])(selectedBaseCurrency) && (!isSubsidiarySearch || !!selectedSubsidiary) && bettypeList.some(betType => betType.value === selectedBettype);
 };
 
 /***/ }),

@@ -2,34 +2,28 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using System.Web.Http;
-
     using Base.Attributes;
-
     using DataAccess.Report.Interfaces;
-
+    using Extension.Helper;
     using Extension.Utility;
-
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Report.MetaModel;
-    using Fanex.Athena.Model.Report.ViewModel;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+    using Model.Auth.DataDomain;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Model.Report.DTO;
-
+    using Model.Report.MetaModel;
+    using Model.Report.ViewModel;
     using Service.Core.Common.Interfaces;
+    using Service.StatelessCore.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.ReportLicenseeWinLoss, PermissionKeys.AuditLicenseeWinLoss, PermissionKeys.ReportGrossGamingRevenue)]
     public class SpecialLicenseeWinLossReportController : ApiReportBaseController
     {
-        private readonly IReportSettingService _reportSettingService;
-
         private readonly ISpecialLicenseeWinLossDataAccess _licenseeWinLossDataAccess;
+        private readonly IReportSettingService _reportSettingService;
 
         public SpecialLicenseeWinLossReportController(
             IReportSettingService reportSettingService,
@@ -46,6 +40,12 @@
         public Task<dynamic> Index(SpecialLicenseeWinLossMetaModel metaModel)
         {
             return ProcessRequest(metaModel);
+        }
+
+        protected internal virtual bool IsValidParams(SpecialLicenseeWinLossMetaModel metaModel, ReportSetting setting)
+        {
+            return IsValidDateRange(metaModel, setting) &&
+                   IsValidProduct(metaModel);
         }
 
         private static SpecialLicenseeWinLossGridViewModel MapToGridView(LicenseeWinLoss item)
@@ -65,7 +65,9 @@
             return licenseeWinLossGrid;
         }
 
-        private static void SetLicenseeWinLossProductData(SpecialLicenseeWinLossGridViewModel licenseeWinLoss, IDictionary<string, decimal> licenseeWLProducts)
+        private static void SetLicenseeWinLossProductData(
+            SpecialLicenseeWinLossGridViewModel licenseeWinLoss,
+            IDictionary<string, decimal> licenseeWLProducts)
         {
             licenseeWinLoss.LicenseeWLSB = licenseeWLProducts.GetValueOrDefault(Product.SB, 0);
             licenseeWinLoss.LicenseeWLNG = licenseeWLProducts.GetValueOrDefault(Product.NG, 0);
@@ -84,8 +86,8 @@
         private static bool IsValidDateRange(SpecialLicenseeWinLossMetaModel metaModel, ReportSetting setting)
         {
             return setting != null && metaModel.FromDate <= metaModel.ToDate &&
-                DateTimeHelper.IsBetween(metaModel.FromDate, setting.MinDate, setting.MaxDate) &&
-                DateTimeHelper.IsBetween(metaModel.ToDate, setting.MinDate, setting.MaxDate);
+                   DateTimeHelper.IsBetween(metaModel.FromDate, setting.MinDate, setting.MaxDate) &&
+                   DateTimeHelper.IsBetween(metaModel.ToDate, setting.MinDate, setting.MaxDate);
         }
 
         private async Task<dynamic> ProcessRequest(SpecialLicenseeWinLossMetaModel metaModel)
@@ -126,17 +128,18 @@
 
         private string GenerateCurrencyListXml(SpecialLicenseeWinLossMetaModel metaModel)
         {
+            var result = new StringBuilder("<ROOT>");
             var currencyList = SessionService.UserSession.CurrencyList
-               .Where(i => i.Key == metaModel.CurrencyId || metaModel.CurrencyId <= 0)
-               .Select(i => $"<CR Id=\"{i.Key}\" Code=\"{i.Value}\" />").ToArray();
+                .Where(i => i.Key == metaModel.CurrencyId || metaModel.CurrencyId <= 0)
+                .ToList();
 
-            return $"<ROOT>{string.Join("", currencyList)}</ROOT>";
-        }
+            foreach (var currency in currencyList)
+            {
+                result.AppendFormat("<CR Id=\"{0}\" Code=\"{1}\" />", currency.Key, currency.Value);
+            }
 
-        protected internal virtual bool IsValidParams(SpecialLicenseeWinLossMetaModel metaModel, ReportSetting setting)
-        {
-            return IsValidDateRange(metaModel, setting) &&
-                IsValidProduct(metaModel);
+            result.Append("</ROOT>");
+            return result.ToString();
         }
 
         private bool IsValidProduct(SpecialLicenseeWinLossMetaModel metaModel)
@@ -146,10 +149,10 @@
                 return false;
             }
 
-            var productAccess = this.ProductService.GetSingleWalletProductAccess(
-               SessionService.LicenseeSession.LicenseeId,
-               SessionService.UserSession.Language,
-               FunctionNames.SpecialLicenseeWinLoss);
+            var productAccess = ProductService.GetSingleWalletProductAccess(
+                SessionService.LicenseeSession.LicenseeId,
+                SessionService.UserSession.Language,
+                FunctionNames.SpecialLicenseeWinLoss);
             var productList = productAccess.ProductList.Select(x => x.ProductCode);
 
             return productList.Intersect(metaModel.ProductCodeList).Count() == metaModel.ProductCodeList.Count();
