@@ -170,6 +170,20 @@ namespace Fanex.Athena
 
             // Specify WithAttributeFiltering for the consumer
             builder.RegisterType<PlayerSegmentationService>().As<IPlayerSegmentationService>().WithAttributeFiltering();
+
+            builder.RegisterType<UserLogService>()
+                .WithParameter(
+                    new ResolvedParameter(
+                        (pi, ctx) => pi.ParameterType == typeof(IUserLogBuilderFactory),
+                        (pi, ctx) => ctx.ResolveKeyed<IUserLogBuilderFactory>("OddsGroupLicenseeSettingLogBuilder")))
+                .Keyed<IUserLogService>("OddsGroupLicenseeSettingService");
+
+            builder.RegisterType<OddsGroupLicenseeSettingUserLogBuilderFactory>()
+                .As<IUserLogBuilderFactory>()
+                .Keyed<IUserLogBuilderFactory>("OddsGroupLicenseeSettingLogBuilder");
+
+            // Specify WithAttributeFiltering for the consumer
+            builder.RegisterType<OddsGroupLicenseeSettingService>().As<IOddsGroupLicenseeSettingService>().WithAttributeFiltering();
         }
 
         private static void RegisterSingleton(ContainerBuilder builder)

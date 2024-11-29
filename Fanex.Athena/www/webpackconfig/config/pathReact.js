@@ -25,6 +25,7 @@ var cssPaths = {
     playersegmentation: "./www/css/source/reactpages/pages/customer/player-segmentation/index.scss",
     customeradmin: "./www/css/source/reactpages/pages/customer/customeradmin/index.scss",
     customeradminivorybet: "./www/css/source/reactpages/pages/customer/customeradminivorybet/index.scss",
+    oddsgrouplicenseesetting: "./www/css/source/reactpages/pages/customer/oddsgrouplicenseesetting/index.scss",
     newcashoutwinloss: "./www/css/source/reactpages/pages/newcashoutwinloss/index.scss",
     winlossanalysis: "./www/css/source/reactpages/pages/winlossanalysis/index.scss",
 };
@@ -66,6 +67,7 @@ var scriptPaths = {
     playersegmentation_betlist: "./www/js/source/reactpages/pages/customer/player-segmentation/betlist/index.js",
     customeradmin: "./www/js/source/reactpages/pages/customer/customeradmin/components/index.jsx",
     customeradminivorybet: "./www/js/source/reactpages/pages/customer/customeradminivorybet/components/index.jsx",
+    oddsgrouplicenseesetting: "./www/js/source/reactpages/pages/customer/oddsgrouplicenseesetting/tabs/index.js",
     newcashoutwinloss: "./www/js/source/reactpages/pages/newcashoutwinloss/components/index.jsx",
 
     winlossanalysis: "./www/js/source/reactpages/pages/winlossanalysis/components/index.jsx",

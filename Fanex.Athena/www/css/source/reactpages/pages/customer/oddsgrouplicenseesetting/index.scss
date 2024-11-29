@@ -1,0 +1,108 @@
+@import './base/variables';
+@import '../../../components/react-multiselect';
+@import "../../../components/react-grid";
+@import "../../../components/alert/index";
+@import '../../../components/popup';
+@import '../../../components/forms/checkbox';
+@import '../../../components/_dropdown.scss';
+@import '../../../components/_dropdownlabel.scss';
+@import '../../../components/date-range/styles';
+@import '../../../../pages/common.scss';
+
+.Select-menu-outer {
+    position: absolute;
+}
+
+.result-msg {
+    &.error {
+        color: #F44336;
+    }
+
+    &.success {
+        color: #4CAF50
+    }
+
+    &.wait {
+        color: #48BAB4
+    }
+
+    &.change {
+        color: #4e68b6
+    }
+}
+
+.result-mark {
+    padding-right: 5px;
+}
+
+.icon-async::before {
+    content: "\21CC";
+}
+
+.icon-checkmark:before {
+    content: "\EA10";
+}
+
+.icon-warning:before {
+    content: "\26A0";
+}
+
+.Select-placeholder {
+    padding-right: 42px;
+}
+
+.Select-menu-outer {
+    z-index: 999;
+}
+
+.popup-content {
+    padding: 20px !important;
+
+    .al-button-container {
+        padding-top: 5px;
+    }
+}
+
+.odds-group-cell {
+    overflow: unset !important;
+}
+
+.button-group {
+    margin-top: 1rem;
+}
+
+.odds-group-dropdown {
+    min-width: 100px;
+    text-align: center;
+}
+
+.tab-menu {
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border-bottom: 1px solid #C4C4C4 !important;
+        background-color: $white;
+    }
+
+    li {
+        display: inline-block;
+        font-weight: bold;
+        cursor: pointer;
+
+        a {
+            display: block;
+            color: $text-default-color;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+    }
+
+    .active {
+        border-bottom: 2px solid $orange-color;
+    }
+}

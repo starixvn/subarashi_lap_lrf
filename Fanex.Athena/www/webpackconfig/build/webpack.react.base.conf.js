@@ -45,6 +45,7 @@ function generateConfig(environment) {
             [`${jsPath}/customer/playersegmentation/betlist`]: pathConfig.scriptPaths.playersegmentation_betlist,
             [`${jsPath}/customer/customeradmin`]: pathConfig.scriptPaths.customeradmin,
             [`${jsPath}/customer/customeradminivorybet`]: pathConfig.scriptPaths.customeradminivorybet,
+            [`${jsPath}/customer/oddsgrouplicenseesetting`]: pathConfig.scriptPaths.oddsgrouplicenseesetting,
             [`${jsPath}/report/newcashoutwinloss`]: pathConfig.scriptPaths.newcashoutwinloss,
             [`${jsPath}/report/winlossanalysis`]: pathConfig.scriptPaths.winlossanalysis,
 
@@ -70,6 +71,7 @@ function generateConfig(environment) {
             [`${cssPath}/customer/playersegmentation/index`]: pathConfig.cssPaths.playersegmentation,
             [`${cssPath}/customer/customeradmin/index`]: pathConfig.cssPaths.customeradmin,
             [`${cssPath}/customer/customeradminivorybet/index`]: pathConfig.cssPaths.customeradminivorybet,
+            [`${cssPath}/customer/oddsgrouplicenseesetting/index`]: pathConfig.cssPaths.oddsgrouplicenseesetting,
             [`${cssPath}/newcashoutwinloss/index`]: pathConfig.cssPaths.newcashoutwinloss,
             [`${cssPath}/winlossanalysis/index`]: pathConfig.cssPaths.winlossanalysis,
         },

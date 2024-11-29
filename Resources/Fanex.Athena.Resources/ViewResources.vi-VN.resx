@@ -3405,4 +3405,31 @@
   <data name="WinlossAnalysis_SettlementTimeModeNote2" xml:space="preserve">
     <value>Chế độ Theo Ngày Tất Toán hỗ trợ dữ liệu từ 01/10/2024.</value>
   </data>
+  <data name="LogAction_5598" xml:space="preserve">
+    <value>Cập nhật Nhóm Tỷ Lệ Cược theo Chi Nhánh</value>
+  </data>
+  <data name="LogAction_5599" xml:space="preserve">
+    <value>Cập nhật Nhóm Tỷ Lệ Cược theo Đơn Vị Tiền Tệ</value>
+  </data>
+  <data name="OddsGroupLicenseeSetting" xml:space="preserve">
+    <value>Cài Đặt Nhóm Tỷ Lệ Cược</value>
+  </data>
+  <data name="OddsGroupSettingChangeValueMsg" xml:space="preserve">
+    <value>Đã thay đổi từ {0} thành {1}</value>
+  </data>
+  <data name="OddsGroupSettingErrorMsg" xml:space="preserve">
+    <value>Đã xảy ra lỗi trong quá trình xử lý yêu cầu của bạn.</value>
+  </data>
+  <data name="OddsGroupSettingLimitDownlinesMsg" xml:space="preserve">
+    <value>Chức năng này hiện tại không thể thực hiện do có thể gây ảnh hưởng đến hiệu suất của hệ thống. Vui lòng liên hệ bộ phận kỹ thuật để được hỗ trợ thêm.</value>
+  </data>
+  <data name="OddsGroupSettingSuccessfullyMsg" xml:space="preserve">
+    <value>Cập nhật Cài Đặt Nhóm Tỷ Lệ Cược thành công.</value>
+  </data>
+  <data name="OddsGroupSettingUpdatingMsg" xml:space="preserve">
+    <value>Đang cập nhật…</value>
+  </data>
+  <data name="UpdateOddsGroupConfirmationMsg" xml:space="preserve">
+    <value>Bạn đang cập nhật Nhóm Tỷ Lệ Cược cho cả người chơi mới và cũ. Bạn có chắc muốn tiếp tục?</value>
+  </data>
 </root>

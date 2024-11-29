@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
+}
+@using Fanex.Athena.Extension.Helper
+@model Fanex.Athena.Model.Customer.ViewModel.OddsGroupLicenseeSettingViewModel
+@{
+    var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
+    var whitelabelList = Model.SubsidiaryList;
+    var subsidiaryList = Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct();
+    var selectedSubsidiary = string.Join(",", subsidiaryList);
+    var today = DateTimeHelper.Now;
+
+    var oddsGroupSetting = new
+    {
+        selectedCurrency = selectedCurrency,
+        selectedSubsidiary = selectedSubsidiary,
+        isLoading = false
+    };
+
+    var viewLog = new
+    {
+        dateRange = new { fromDate = today.ToString("MM/dd/yyyy"), toDate = today.ToString("MM/dd/yyyy") },
+        isLoading = false
+    };
+}
+@section pagecss {
+    <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/customer/oddsgrouplicenseesetting/index.css")" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+}
+@section pagejs {
+    <script src="@Url.ContentLinkByEnv("/www/js/build/reactpages/customer/oddsgrouplicenseesetting.chunk.js")"></script>
+}
+
+@section globaljscode{
+    window.initialState = {
+    OddsGroupSetting: @Html.Raw(oddsGroupSetting.ToJson()),
+    ViewLog: @Html.Raw(viewLog.ToJson())
+    };
+    window._AppData = {
+    subsidiaryViewType: @Model.SubsidiaryViewType,
+    isOneworksMaster: '@Model.IsOneworksMaster' === 'True',
+    whitelabelList: @Html.Raw(whitelabelList.ToJsonWithServiceStack()),
+    subsidiaryList: @Html.Raw(subsidiaryList.ToJson()),
+    currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
+    oddsGroups: @Html.Raw(Model.OddsGroup.Select(x => new { value = x, label = x }).ToJson()),
+    dateConstraint: { minDate: '@today.AddYears(-1).ToString("MM/dd/yyyy")', maxDate: '@today.ToString("MM/dd/yyyy")', limitedMonthRange: 3 }
+    };
+}
+<div id="app-container">
+</div>

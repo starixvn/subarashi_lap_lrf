@@ -4912,6 +4912,24 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Odds Group By Subsidiary.
+        /// </summary>
+        public static string LogAction_5598 {
+            get {
+                return ResourceManager.GetString("LogAction_5598", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Odds Group By Currency.
+        /// </summary>
+        public static string LogAction_5599 {
+            get {
+                return ResourceManager.GetString("LogAction_5599", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log Date.
         /// </summary>
         public static string LogDate {
@@ -5551,6 +5569,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modify.
+        /// </summary>
+        public static string Modify {
+            get {
+                return ResourceManager.GetString("Modify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monday.
         /// </summary>
         public static string Monday {
@@ -5754,6 +5781,15 @@ namespace Fanex.Athena.Resources {
         public static string NewGroup {
             get {
                 return ResourceManager.GetString("NewGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Value.
+        /// </summary>
+        public static string NewValue {
+            get {
+                return ResourceManager.GetString("NewValue", resourceCulture);
             }
         }
         
@@ -6163,6 +6199,69 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Odds Group Licensee Setting.
+        /// </summary>
+        public static string OddsGroupLicenseeSetting {
+            get {
+                return ResourceManager.GetString("OddsGroupLicenseeSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odds Group Setting.
+        /// </summary>
+        public static string OddsGroupSetting {
+            get {
+                return ResourceManager.GetString("OddsGroupSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Changed from {0} to {1}.
+        /// </summary>
+        public static string OddsGroupSettingChangeValueMsg {
+            get {
+                return ResourceManager.GetString("OddsGroupSettingChangeValueMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, an error occurred while processing your request..
+        /// </summary>
+        public static string OddsGroupSettingErrorMsg {
+            get {
+                return ResourceManager.GetString("OddsGroupSettingErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This function cannot be performed at this time as it may affect the performance of the whole system. Please contact IT for further assistance..
+        /// </summary>
+        public static string OddsGroupSettingLimitDownlinesMsg {
+            get {
+                return ResourceManager.GetString("OddsGroupSettingLimitDownlinesMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Odds Group Setting successfully..
+        /// </summary>
+        public static string OddsGroupSettingSuccessfullyMsg {
+            get {
+                return ResourceManager.GetString("OddsGroupSettingSuccessfullyMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating....
+        /// </summary>
+        public static string OddsGroupSettingUpdatingMsg {
+            get {
+                return ResourceManager.GetString("OddsGroupSettingUpdatingMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odds Lower.
         /// </summary>
         public static string OddsLower {
@@ -6258,6 +6357,15 @@ namespace Fanex.Athena.Resources {
         public static string OldPassword {
             get {
                 return ResourceManager.GetString("OldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old Value.
+        /// </summary>
+        public static string OldValue {
+            get {
+                return ResourceManager.GetString("OldValue", resourceCulture);
             }
         }
         
@@ -9466,6 +9574,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update for Both Existing and New Players. Are you sure you want to update Odds Group?.
+        /// </summary>
+        public static string UpdateOddsGroupConfirmationMsg {
+            get {
+                return ResourceManager.GetString("UpdateOddsGroupConfirmationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to update all {0} bet settings?.
         /// </summary>
         public static string UpdateProductBetSettings {
@@ -9804,6 +9921,15 @@ namespace Fanex.Athena.Resources {
         public static string ViewInWithNoParam {
             get {
                 return ResourceManager.GetString("ViewInWithNoParam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Log.
+        /// </summary>
+        public static string ViewLog {
+            get {
+                return ResourceManager.GetString("ViewLog", resourceCulture);
             }
         }
         

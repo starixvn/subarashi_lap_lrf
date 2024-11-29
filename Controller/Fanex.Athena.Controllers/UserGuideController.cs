@@ -1,16 +1,16 @@
 ﻿namespace Fanex.Athena.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text.RegularExpressions;
-    using System.Web.Mvc;
-    using System.Web.SessionState;
     using DataAccess.Core.Configuration.Interfaces;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Web.Mvc;
+    using System.Web.SessionState;
     using Web.ActionFilter;
 
     [SessionState(SessionStateBehavior.ReadOnly)]
@@ -30,6 +30,10 @@
         private readonly IFileSystem _fileSystem;
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
         private readonly IAuthorizationService _authrizationService;
+
+        private bool IsOneworksMaster =>
+           SessionServiceInstance.UserSession.UserLevel == UserLevelType.Oneworks
+           && SessionServiceInstance.UserSession.SubsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement;
 
         public UserGuideController(
             IFileSystem fileSystem,
@@ -59,6 +63,7 @@
                 content = RemovePermissionSection(content, PermissionKeys.PlayerVIPManagement);
                 content = RemoveSabaText(content);
                 content = AddLicenseeSection(content, SessionServiceInstance.LicenseeSession.LicenseeName);
+                content = RemoveSubsidairyText(content);
             }
 
             return View("~/Views/UserGuide/Index.cshtml", null, content);
@@ -143,6 +148,40 @@
                 var pattern = $"{openingTag}[\\s\\S]*{closingTag}";
                 customContent = new Regex(pattern).Replace(customContent, string.Empty);
             }
+            return customContent;
+        }
+
+        private string RemoveSubsidairyText(string content)
+        {
+            const int Parts = 3;
+            const string OpeningTag = "{{subsidiary-section-{0}}}";
+            const string ClosingTag = "{{/subsidiary-section-{0}}}";
+            const string NosubsiOpeningTag = "{{no-subsidiary-section-{0}}}";
+            const string NosubsiClosingTag = "{{/no-subsidiary-section-{0}}}";
+
+            var customContent = content;
+            var showSubsidiary = IsOneworksMaster || SessionServiceInstance.UserSession.SubsidiaryViewType != (byte)SubsidiaryViewType.NotManagement;
+
+            for (int i = 1; i <= Parts; i++)
+            {
+                if (showSubsidiary)
+                {
+                    customContent = customContent.Replace(string.Format(OpeningTag, i), string.Empty);
+                    customContent = customContent.Replace(string.Format(ClosingTag, i), string.Empty);
+
+                    var pattern = $"{string.Format(NosubsiOpeningTag, i)}[\\s\\S]*{string.Format(NosubsiClosingTag, i)}";
+                    customContent = new Regex(pattern).Replace(customContent, string.Empty);
+                }
+                else
+                {
+                    customContent = customContent.Replace(string.Format(NosubsiOpeningTag, i), string.Empty);
+                    customContent = customContent.Replace(string.Format(NosubsiClosingTag, i), string.Empty);
+
+                    var pattern = $"{string.Format(OpeningTag, i)}[\\s\\S]*{string.Format(ClosingTag, i)}";
+                    customContent = new Regex(pattern).Replace(customContent, string.Empty);
+                }
+            }
+
             return customContent;
         }
 
