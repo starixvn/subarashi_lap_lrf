@@ -1,15 +1,22 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="Product.cs" company="">
-// Copyright (c) . All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-namespace Fanex.Athena.Model.Core.DTO.Common
+﻿namespace Fanex.Athena.Model.Core.DTO.Common
 {
     using System;
 
     [Serializable]
     public class Product
     {
+        #region Constructor
+
+        public Product()
+        {
+            ProductCode = SB;
+            ProductName = nameof(SB);
+            AllowCommission = true;
+            AllowWinloss = true;
+        }
+
+        #endregion Constructor
+
         #region Field
 
         public const string SB = "SB";
@@ -121,22 +128,12 @@ namespace Fanex.Athena.Model.Core.DTO.Common
         public const string ON = "ON";
 
         public const string PTRNG = "PTRNG";
-        
+
         public const string GPIRNG = "GPIRNG";
 
+        public const string GPILC = "GPILC";
+
         #endregion Field
-
-        #region Constructor
-
-        public Product()
-        {
-            ProductCode = SB;
-            ProductName = nameof(SB);
-            AllowCommission = true;
-            AllowWinloss = true;
-        }
-
-        #endregion Constructor
 
         #region Property
 

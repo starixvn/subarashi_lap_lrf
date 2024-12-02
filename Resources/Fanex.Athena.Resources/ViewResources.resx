@@ -3833,6 +3833,9 @@
   <data name="ProductGPIRNG" xml:space="preserve">
     <value>GPI</value>
   </data>
+  <data name="ProductGPILC" xml:space="preserve">
+    <value>GPI Live Casino</value>
+  </data>
   <data name="LogAction_5598" xml:space="preserve">
     <value>Update Odds Group By Subsidiary</value>
   </data>
