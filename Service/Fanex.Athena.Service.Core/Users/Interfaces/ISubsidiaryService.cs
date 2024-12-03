@@ -21,5 +21,7 @@
         IEnumerable<Subsidiary> GetSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList);
 
         IEnumerable<GroupSubsidiary> GetGroupSubsidiaryList(UserAuthInfo user, string licenseeName, string subsidiaryList, string whiteLabelList);
+
+        int GetSubsidiaryAgentId(string subsidiary, string licenseeName);
     }
 }

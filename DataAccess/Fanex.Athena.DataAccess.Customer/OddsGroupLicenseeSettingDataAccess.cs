@@ -49,7 +49,7 @@ namespace Fanex.Athena.DataAccess.Customer
 
             using (var db = this.GetObjectDb(UspName))
             {
-                db.SetParameterValue("CustID", metaModel.CustIds);
+                db.SetParameterValue("CustID", metaModel.CustId);
                 db.SetParameterValue("Language", metaModel.Language);
                 AddResultParam(db);
 

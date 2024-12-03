@@ -2,13 +2,16 @@
 using Fanex.Athena.Api.Base.Attributes;
 using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
 using Fanex.Athena.Model.Auth.DataDomain;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting;
+using Fanex.Athena.Resources;
 using Fanex.Athena.Service.Core.Common.Interfaces;
-using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Utility;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -40,9 +43,20 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         }
 
         [HttpPost]
+        [ValidationApiRequest(IsValidCurrency = true)]
         public dynamic UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel model)
         {
+            if (!IsValidMetaModel(model))
+            {
+                return new HttpResponseMessage
+                {
+                    StatusCode = HttpStatusCode.Forbidden,
+                    Content = new StringContent(ViewResources.InvalidRequestMsg)
+                };
+            }
+
             UpdateMetaModel(model);
+
             var result = _oddsGroupLicenseeSettingService.UpdateCustomerOddsGroup(model);
 
             if (result.IsSuccessful && !string.IsNullOrEmpty(model.CustIds))
@@ -97,6 +111,15 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
             model.LicenseeCustId = licenseeSession.LicenseeId;
             model.IP = HttpContext.Current.Request.UserHostAddress;
             model.Language = userSession.Language;
+        }
+
+        private bool IsValidMetaModel(UpdateCustomerOddsGroupMetaModel model)
+        {
+            var offeredOddsGroupsList = SessionService.LicenseeSession.OfferedOddsGroupsList;
+
+            return offeredOddsGroupsList.Any(_ => _ == model.NewValue)
+                && (string.IsNullOrEmpty(model.OldValue)
+                || offeredOddsGroupsList.Any(_ => _ == model.OldValue));
         }
     }
 }

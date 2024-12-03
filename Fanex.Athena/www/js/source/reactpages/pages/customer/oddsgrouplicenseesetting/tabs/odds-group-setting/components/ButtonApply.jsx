@@ -60,7 +60,8 @@ export const ButtonApply = (props) => {
                 newValue : updateDataList[key].newValue,
                 oldValue : updateDataList[key].oldValue,
                 subsidiary: updateDataList[key].subsidiary,
-                currency: updateDataList[key].currency
+                currency: updateDataList[key].currency,
+                currencyId: updateDataList[key].currencyId
             };
 
             const data = await UpdateData(params);

@@ -3363,7 +3363,8 @@ const ButtonApply = props => {
         newValue: updateDataList[key].newValue,
         oldValue: updateDataList[key].oldValue,
         subsidiary: updateDataList[key].subsidiary,
-        currency: updateDataList[key].currency
+        currency: updateDataList[key].currency,
+        currencyId: updateDataList[key].currencyId
       };
       const data = await Object(_lib_queryService__WEBPACK_IMPORTED_MODULE_5__["UpdateData"])(params);
       const resultCode = Object.values(_lib_constants__WEBPACK_IMPORTED_MODULE_6__["Code"]).includes(data.Code) ? data.Code : _lib_constants__WEBPACK_IMPORTED_MODULE_6__["Code"].Error;
@@ -3800,7 +3801,8 @@ const OddsGroupOption = props => {
         newValue,
         oldValue,
         subsidiary: dataItem.Subsidiary,
-        currency: dataItem.Currency
+        currency: dataItem.Currency,
+        currencyId: dataItem.CurrencyId
       }
     }));
     var updatedStatusMsg = _lib_constants__WEBPACK_IMPORTED_MODULE_6__["CodeMsg"][_lib_constants__WEBPACK_IMPORTED_MODULE_6__["Code"].Change];
@@ -4174,4 +4176,4 @@ const userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1
 /***/ })
 
 }]);
-//# sourceMappingURL=oddsGroupSetting.acb177203dbf16782ca9.chunk.js.map
+//# sourceMappingURL=oddsGroupSetting.270e5cd091b51e46e46a.chunk.js.map

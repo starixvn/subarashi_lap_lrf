@@ -41,7 +41,7 @@ namespace Fanex.Athena.Service.Customer
         public async Task<IEnumerable<CustomerOddsGroupViewModel>> GetCustomerOddsGroup(GetCustomerOddsGroupMetaModel metaModel, IDictionary<int, string> currencyList)
         {
             var data = await _oddsGroupLicenseeSettingDataAccess.GetCustomerOddsGroup(metaModel).ConfigureAwait(false);
-            var result = MergeOddsGroupInfo(data, currencyList, metaModel.SubsidiaryList);
+            var result = GroupDataList(data, currencyList, metaModel.SubsidiaryList);
 
             return result;
         }
@@ -158,7 +158,7 @@ namespace Fanex.Athena.Service.Customer
             return logs.Skip((pageIndex - 1) * pageSize).Take(pageSize); ;
         }
 
-        private static IEnumerable<CustomerOddsGroupViewModel> MergeOddsGroupInfo(IEnumerable<CustomerOddsGroup> data, IDictionary<int, string> currencyList, string subsidiaryList)
+        private static IEnumerable<CustomerOddsGroupViewModel> GroupDataList(IEnumerable<CustomerOddsGroup> data, IDictionary<int, string> currencyList, string subsidiaryList)
         {
             var subsidiarys = subsidiaryList.Split(',');
 

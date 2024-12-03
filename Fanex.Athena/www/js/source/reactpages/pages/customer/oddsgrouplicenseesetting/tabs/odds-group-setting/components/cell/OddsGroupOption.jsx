@@ -46,7 +46,8 @@ const OddsGroupOption = (props) => {
                 newValue,
                 oldValue,
                 subsidiary: dataItem.Subsidiary,
-                currency: dataItem.Currency
+                currency: dataItem.Currency,
+                currencyId: dataItem.CurrencyId
             }
         });
 

@@ -1252,7 +1252,7 @@ input[type="checkbox"].checkbox {
 .popup-content {
   padding: 20px !important; }
   .popup-content .al-button-container {
-    padding-top: 5px; }
+    padding-top: 10px; }
 
 .odds-group-cell {
   overflow: unset !important; }
