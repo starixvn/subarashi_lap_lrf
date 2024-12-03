@@ -41,7 +41,7 @@ namespace Fanex.Athena.Service.Customer
         public async Task<IEnumerable<CustomerOddsGroupViewModel>> GetCustomerOddsGroup(GetCustomerOddsGroupMetaModel metaModel, IDictionary<int, string> currencyList)
         {
             var data = await _oddsGroupLicenseeSettingDataAccess.GetCustomerOddsGroup(metaModel).ConfigureAwait(false);
-            var result = GroupDataList(data, currencyList, metaModel.SubsidiaryList);
+            var result = GroupDataList(data, currencyList, metaModel);
 
             return result;
         }
@@ -158,13 +158,13 @@ namespace Fanex.Athena.Service.Customer
             return logs.Skip((pageIndex - 1) * pageSize).Take(pageSize); ;
         }
 
-        private static IEnumerable<CustomerOddsGroupViewModel> GroupDataList(IEnumerable<CustomerOddsGroup> data, IDictionary<int, string> currencyList, string subsidiaryList)
+        private static IEnumerable<CustomerOddsGroupViewModel> GroupDataList(IEnumerable<CustomerOddsGroup> data, IDictionary<int, string> currencyList, GetCustomerOddsGroupMetaModel metaModel)
         {
-            var subsidiarys = subsidiaryList.Split(',');
+            var subsidiaries = metaModel.SubsidiaryList.Split(',');
 
             var groupedData = data
-               .Where(_ => string.IsNullOrEmpty(subsidiaryList) || subsidiarys.Contains(_.OperatorID))
-               .GroupBy(_ => new { _.Currency, Subsidiary = string.IsNullOrEmpty(subsidiaryList) ? string.Empty : _.OperatorID })
+               .Where(_ => !metaModel.SubsidiarySearch || subsidiaries.Contains(_.OperatorID))
+               .GroupBy(_ => new { _.Currency, Subsidiary = metaModel.SubsidiarySearch ? _.OperatorID : string.Empty })
                .Select(g => new CustomerOddsGroupViewModel
                {
                    CurrencyId = g.Key.Currency,

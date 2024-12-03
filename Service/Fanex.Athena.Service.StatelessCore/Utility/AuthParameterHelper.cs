@@ -9,20 +9,6 @@ namespace Fanex.Athena.Service.StatelessCore.Utility
 {
     public static class AuthParameterHelper
     {
-        public static string GenerateAgentListStr(IDictionary<int, string> currencyList, IDictionary<int, IEnumerable<int>> currencyAgentList)
-        {
-            var result = new List<int>();
-            foreach (var item in currencyAgentList)
-            {
-                if (currencyList.ContainsKey(item.Key))
-                {
-                    result.AddRange(item.Value);
-                }
-            }
-
-            return String.Join(",", result.Select(_ => _.ToString()));
-        }
-
         public static string GenerateAgentListStr(
             IDictionary<int, int[]> currencyAgentList,
             IEnumerable<int> currencyIdList, bool isExcludeTestData = false)

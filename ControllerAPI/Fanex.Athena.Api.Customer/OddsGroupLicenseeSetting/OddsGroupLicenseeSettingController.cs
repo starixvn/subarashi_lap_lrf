@@ -80,24 +80,16 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         {
             var userSession = SessionService.UserSession;
             var licenseeSession = SessionService.LicenseeSession;
+            var currencyAgentList = userSession.CurrencyAgentList;
+            var currencyIdList = model.CurrencyIdList.Split(',').Select(int.Parse);
 
-            model.LicenseeId = licenseeSession.LicenseeId;
-
-            string agentListXml = string.Empty;
             if (model.SubsidiarySearch)
             {
-                var currencyAgentList = userSession.CurrencyAgentList;
                 currencyAgentList = SubsidiaryService.GetCurrencyAgentList(licenseeSession.LicenseeName, currencyAgentList, model.SubsidiaryList);
+            }
 
-                var currencyIdList = model.CurrencyIdList.Split(',').Select(int.Parse);
-                agentListXml = AuthParameterHelper.GenerateAgentListStr(currencyAgentList, currencyIdList);
-            }
-            else
-            {
-                var agentIdListByCurrency = SubsidiaryService.GetCurrencyAgentList(userSession, licenseeSession.LicenseeName, model.SubsidiaryList);
-                agentListXml = AuthParameterHelper.GenerateAgentListStr(userSession.CurrencyList, agentIdListByCurrency);
-            }
-            model.AgentListXml = agentListXml;
+            model.AgentListXml = AuthParameterHelper.GenerateAgentListStr(currencyAgentList, currencyIdList);
+            model.LicenseeId = licenseeSession.LicenseeId;
         }
 
         private void UpdateMetaModel(UpdateCustomerOddsGroupMetaModel model)
