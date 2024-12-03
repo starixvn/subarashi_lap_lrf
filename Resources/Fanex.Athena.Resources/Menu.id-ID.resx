@@ -261,6 +261,9 @@
   <data name="oddeven1x2dnd9" xml:space="preserve">
     <value>Ganjil/Genap + 1x2 + DND</value>
   </data>
+  <data name="oddsgrouplicenseesetting" xml:space="preserve">
+    <value>Pengaturan Kelompok Ganjil</value>
+  </data>
   <data name="outright13" xml:space="preserve">
     <value>Pemenang Keseluruhan</value>
   </data>

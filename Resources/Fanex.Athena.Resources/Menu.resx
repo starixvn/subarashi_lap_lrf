@@ -350,4 +350,7 @@
   <data name="sabacoins" xml:space="preserve">
     <value>Player Saba Coins</value>
   </data>
+  <data name="oddsgrouplicenseesetting" xml:space="preserve">
+    <value>Odds Group Licensee Setting</value>
+  </data>
 </root>
