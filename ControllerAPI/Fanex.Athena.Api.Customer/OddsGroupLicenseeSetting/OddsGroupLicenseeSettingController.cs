@@ -44,7 +44,7 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
 
         [HttpPost]
         [ValidationApiRequest(IsValidCurrency = true)]
-        public dynamic UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel model)
+        public async Task<dynamic> UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel model)
         {
             if (!IsValidMetaModel(model))
             {
@@ -57,7 +57,7 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
 
             UpdateMetaModel(model);
 
-            var result = _oddsGroupLicenseeSettingService.UpdateCustomerOddsGroup(model);
+            var result = await _oddsGroupLicenseeSettingService.UpdateCustomerOddsGroup(model).ConfigureAwait(false);
 
             if (result.IsSuccessful && !string.IsNullOrEmpty(model.CustIds))
             {

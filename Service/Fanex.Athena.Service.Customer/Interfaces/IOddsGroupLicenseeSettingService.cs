@@ -13,7 +13,7 @@ namespace Fanex.Athena.Service.Customer.Interfaces
     {
         Task<IEnumerable<CustomerOddsGroupViewModel>> GetCustomerOddsGroup(GetCustomerOddsGroupMetaModel metaModel, IDictionary<int, string> currencyList);
 
-        IResultInfo UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel metaModel);
+        Task<IResultInfo> UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel metaModel);
 
         void WriteCustomerOddsGroupLog(UpdateCustomerOddsGroupMetaModel metaModel);
 

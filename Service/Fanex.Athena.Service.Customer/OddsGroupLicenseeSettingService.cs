@@ -14,7 +14,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace Fanex.Athena.Service.Customer
 {
@@ -23,6 +25,7 @@ namespace Fanex.Athena.Service.Customer
         private readonly IOddsGroupLicenseeSettingDataAccess _oddsGroupLicenseeSettingDataAccess;
         private readonly IUserLogDataAccess _userLogDataAccess;
         private readonly IUserLogService _userLogService;
+        private const int MaxParallelExecutions = 20;
 
         private readonly IList<int> _oddsGroupActionIds = new List<int> {
             LogActionId.UpdateCustomerOddsGroupByCurrency,
@@ -46,19 +49,56 @@ namespace Fanex.Athena.Service.Customer
             return result;
         }
 
-        public IResultInfo UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel metaModel)
+        public async Task<IResultInfo> UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel metaModel)
         {
             var custIdList = metaModel.CustIds.Split(',');
+            var semaphore = new SemaphoreSlim(MaxParallelExecutions);
+            var tasks = new List<Task>();
+            var cts = new CancellationTokenSource();
             IResultInfo result = new ResultInfo();
 
             foreach (var custId in custIdList)
             {
-                result = _oddsGroupLicenseeSettingDataAccess.UpdateCustomerOddsGroup(metaModel, Convert.ToInt32(custId));
+                await semaphore.WaitAsync(cts.Token);
 
-                if (!result.IsSuccessful)
+                tasks.Add(Task.Run(async () =>
                 {
-                    return result;
-                }
+                    try
+                    {
+                        cts.Token.ThrowIfCancellationRequested();
+
+                        result = await _oddsGroupLicenseeSettingDataAccess
+                            .UpdateCustomerOddsGroup(metaModel, Convert.ToInt32(custId), cts.Token)
+                            .ConfigureAwait(false);
+
+                        if (!result.IsSuccessful)
+                        {
+                            cts.Cancel();
+                            return;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        cts.Cancel();
+                        throw e;
+                    }
+                    finally
+                    {
+                        semaphore.Release();
+                    }
+                }, cts.Token));
+            }
+
+            try
+            {
+                await Task.WhenAll(tasks).ConfigureAwait(false);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            finally
+            {
+                semaphore.Dispose();
             }
 
             return result;

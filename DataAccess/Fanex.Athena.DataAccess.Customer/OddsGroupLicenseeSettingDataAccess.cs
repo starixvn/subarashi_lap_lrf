@@ -4,7 +4,9 @@ using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Customer.DTO.OddsGroupLicenseeSetting;
 using Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting;
 using Fanex.Data;
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Fanex.Athena.DataAccess.Customer
@@ -24,9 +26,11 @@ namespace Fanex.Athena.DataAccess.Customer
             }
         }
 
-        public IResultInfo UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel metaModel, int custId)
+        public async Task<IResultInfo> UpdateCustomerOddsGroup(UpdateCustomerOddsGroupMetaModel metaModel, int custId, CancellationToken cancellationToken)
         {
             const string UspName = "Lrf_LicenseeOddsGroupUpd";
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             using (var db = this.GetObjectDb(UspName))
             {
@@ -37,7 +41,7 @@ namespace Fanex.Athena.DataAccess.Customer
                 db.SetParameterValue("Language", metaModel.Language);
                 AddResultParam(db);
 
-                db.ExecuteNonQuery();
+                await db.ExecuteNonQueryAsync().ConfigureAwait(false);
 
                 return GetResult(db);
             }
