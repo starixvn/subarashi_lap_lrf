@@ -190,6 +190,8 @@ namespace Fanex.Athena.Service.Customer
                 }
             }
 
+            result = result.OrderByDescending(_ => _.LogId).ToList();
+
             return (result, result.Count());
         }
 
