@@ -37,6 +37,7 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         public async Task<dynamic> GetCustomerOddsGroup(GetCustomerOddsGroupMetaModel model)
         {
             UpdateMetaModel(model);
+
             var result = await _oddsGroupLicenseeSettingService.GetCustomerOddsGroup(model, SessionService.UserSession.CurrencyList).ConfigureAwait(false);
 
             return Ok(result);
@@ -71,6 +72,7 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         public async Task<dynamic> GetLogList(UserLogMetaModel model)
         {
             model.LicenseeId = SessionService.LicenseeSession.LicenseeId;
+
             var result = await _oddsGroupLicenseeSettingService.GetLoglist(model).ConfigureAwait(false);
 
             return Ok(result);

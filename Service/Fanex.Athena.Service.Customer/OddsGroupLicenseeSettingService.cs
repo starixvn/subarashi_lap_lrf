@@ -8,6 +8,8 @@ using Fanex.Athena.Model.Customer.DTO.OddsGroupLicenseeSetting;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting;
 using Fanex.Athena.Resources;
+using Fanex.Athena.Service.Core.Users;
+using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using System;
@@ -16,7 +18,6 @@ using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Schema;
 
 namespace Fanex.Athena.Service.Customer
 {
@@ -25,6 +26,8 @@ namespace Fanex.Athena.Service.Customer
         private readonly IOddsGroupLicenseeSettingDataAccess _oddsGroupLicenseeSettingDataAccess;
         private readonly IUserLogDataAccess _userLogDataAccess;
         private readonly IUserLogService _userLogService;
+        private readonly ISubsidiaryService _subsidiaryService;
+        private readonly ISessionService _sessionService;
         private const int MaxParallelExecutions = 20;
 
         private readonly IList<int> _oddsGroupActionIds = new List<int> {
@@ -34,16 +37,23 @@ namespace Fanex.Athena.Service.Customer
         public OddsGroupLicenseeSettingService(
             IOddsGroupLicenseeSettingDataAccess oddsGroupLicenseeSettingDataAccess,
             IUserLogDataAccess userLogDataAccess,
+            ISubsidiaryService subsidiaryService,
+            ISessionService sessionService,
             [KeyFilter("OddsGroupLicenseeSettingService")] IUserLogService userLogService)
         {
             _oddsGroupLicenseeSettingDataAccess = oddsGroupLicenseeSettingDataAccess;
             _userLogDataAccess = userLogDataAccess;
             _userLogService = userLogService;
+            _subsidiaryService = subsidiaryService;
+            _sessionService = sessionService ?? new SessionService();
         }
 
-        public async Task<IEnumerable<CustomerOddsGroupViewModel>> GetCustomerOddsGroup(GetCustomerOddsGroupMetaModel metaModel, IDictionary<int, string> currencyList)
+        public async Task<IEnumerable<CustomerOddsGroupViewModel>> GetCustomerOddsGroup(
+            GetCustomerOddsGroupMetaModel metaModel,
+            IDictionary<int, string> currencyList)
         {
             var data = await _oddsGroupLicenseeSettingDataAccess.GetCustomerOddsGroup(metaModel).ConfigureAwait(false);
+            BindSubsidiaryName(data, metaModel);
             var result = GroupDataList(data, currencyList, metaModel);
 
             return result;
@@ -198,6 +208,22 @@ namespace Fanex.Athena.Service.Customer
         private static IEnumerable<CustomerOddsGroupLog> PaginateLogs(IEnumerable<CustomerOddsGroupLog> logs, int pageIndex, int pageSize)
         {
             return logs.Skip((pageIndex - 1) * pageSize).Take(pageSize); ;
+        }
+
+        private void BindSubsidiaryName(IEnumerable<CustomerOddsGroup> data, GetCustomerOddsGroupMetaModel metaModel)
+        {
+            if (!metaModel.SubsidiarySearch || string.IsNullOrEmpty(metaModel.SubsidiaryList) || !data.Any())
+            {
+                return;
+            }
+
+            var subsidiaries = _subsidiaryService.GetSubsidiaryList(_sessionService.UserSession, _sessionService.LicenseeSession.LicenseeName, metaModel.SubsidiaryList);
+            var subsidiaryDic = subsidiaries.ToDictionary(_ => _.AgentId, _ => _);
+
+            foreach (var item in data.Where(_ => string.IsNullOrEmpty(_.OperatorID)))
+            {
+                item.OperatorID = subsidiaryDic.ContainsKey(item.Custid) ? subsidiaryDic[item.Custid].OperatorId : string.Empty;
+            }
         }
 
         private static IEnumerable<CustomerOddsGroupViewModel> GroupDataList(IEnumerable<CustomerOddsGroup> data, IDictionary<int, string> currencyList, GetCustomerOddsGroupMetaModel metaModel)
