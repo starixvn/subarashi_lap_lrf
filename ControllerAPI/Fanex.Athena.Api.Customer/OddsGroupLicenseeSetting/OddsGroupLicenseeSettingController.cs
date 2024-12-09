@@ -38,7 +38,8 @@ namespace Fanex.Athena.Api.Customer.CustomerAdmin
         {
             UpdateMetaModel(model);
 
-            var result = await _oddsGroupLicenseeSettingService.GetCustomerOddsGroup(model, SessionService.UserSession.CurrencyList).ConfigureAwait(false);
+            var subsidiaries = SubsidiaryService.GetSubsidiaryList(SessionService.UserSession, SessionService.LicenseeSession.LicenseeName, model.SubsidiaryList);
+            var result = await _oddsGroupLicenseeSettingService.GetCustomerOddsGroup(model, subsidiaries, SessionService.UserSession.CurrencyList).ConfigureAwait(false);
 
             return Ok(result);
         }
