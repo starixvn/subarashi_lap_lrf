@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/25/2024 1:35:04 PM
+// Generated at: 11/29/2024 11:56:38 AM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -610,6 +610,8 @@ window._language_id_ID = {
   LocationRestrictionMsg: "Akses langsung ke situs web ini dibatasi. Harap hubungi {0} untuk pertanyaan lebih lanjut.",
   Locked: "Terkunci",
   Log: "Log",
+  LogAction_5598: "Pembaruan Kelompok Ganjil Berdasarkan Cabang",
+  LogAction_5599: "Pembaruan Kelompok Ganjil Berdasarkan Mata Uang",
   LogDate: "Tanggal Log",
   LogID: "ID Log",
   Login: "Masuk",
@@ -743,6 +745,12 @@ window._language_id_ID = {
   OddsAvg: "Rata-rata Odds",
   OddsBoostBonus: "Penambah Peluang Bonus",
   OddsGroup: "Kelompok Ganjil",
+  OddsGroupLicenseeSetting: "Pengaturan Kelompok Ganjil",
+  OddsGroupSettingChangeValueMsg: "Berubah dari {0} ke {1}",
+  OddsGroupSettingErrorMsg: "Maaf, terjadi kesalahan saat memproses permintaan Anda.",
+  OddsGroupSettingLimitDownlinesMsg: "Fungsi ini tidak dapat dilakukan saat ini karena dapat memengaruhi kinerja seluruh sistem. Silakan hubungi IT untuk bantuan lebih lanjut.",
+  OddsGroupSettingSuccessfullyMsg: "Pengaturan Kelompok Ganjil berhasil diperbarui.",
+  OddsGroupSettingUpdatingMsg: "Memperbarui...",
   OddsLower: "Peluang Terendah",
   OddsMatched: "Jumlah Odds yang Cocok",
   OddsReq: "Permintaan Odds",
@@ -1075,6 +1083,7 @@ window._language_id_ID = {
   UpdateNumberGameBetSettings: "Apakah Anda yakin ingin memperbarui semua pengaturan taruhan Number Game?",
   UpdateNumberGameBetSettingSuccessMsg: "Pengaturan taruhan Permainan Angka {0} berhasil diperbarui",
   UpdateOddsGroup: "Perbarui Grup Odds",
+  UpdateOddsGroupConfirmationMsg: "Pembaruan untuk Pemain yang Ada dan Pemain Baru. Apakah Anda yakin ingin memperbarui Kelompok Ganjil?",
   UpdateProductBetSettings: "Apakah Anda yakin ingin memperbarui semua pengaturan taruhan {0}?",
   UpdateProductBetSettingSuccessMsg: "Pengaturan taruhan {0} dari {1} berhasil diperbarui.",
   UpdateProductStatus: "Apakah Anda yakin ingin memperbarui status {0}?",

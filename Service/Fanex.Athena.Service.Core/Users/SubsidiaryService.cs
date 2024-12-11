@@ -191,5 +191,13 @@
             var userAgentList = currencyAgentList.SelectMany(i => i.Value);
             return subsidiaryList.Where(i => userAgentList.Contains(i.AgentId));
         }
+
+        public int GetSubsidiaryAgentId(string subsidiary, string licenseeName)
+        {
+            var cacheKey = string.Format(CacheKey.MemorycacheSubsidiaryListByLicensee, licenseeName);
+            var subsidiaryList = _cache.Get(cacheKey, () => _subLicenseeDataAccess.GetSubsidiaryList(licenseeName), CacheTimeoutSeconds);
+
+            return subsidiaryList.Where(i => i.OperatorId == subsidiary).FirstOrDefault()?.AgentId ?? 0;
+        }
     }
 }

@@ -520,6 +520,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Odds Group Licensee Setting.
+        /// </summary>
+        public static string oddsgrouplicenseesetting {
+            get {
+                return ResourceManager.GetString("oddsgrouplicenseesetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outright.
         /// </summary>
         public static string outright13 {

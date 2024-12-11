@@ -264,6 +264,9 @@
   <data name="oddeven1x2dnd9" xml:space="preserve">
     <value>Lẻ/Chẵn + 1x2 + Hòa/Không Hòa</value>
   </data>
+  <data name="oddsgrouplicenseesetting" xml:space="preserve">
+    <value>Cài Đặt Nhóm Tỷ Lệ Cược</value>
+  </data>
   <data name="outright13" xml:space="preserve">
     <value>Cược thắng</value>
   </data>

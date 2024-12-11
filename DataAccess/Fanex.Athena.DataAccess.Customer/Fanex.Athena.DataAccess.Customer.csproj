@@ -67,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\BasePlayerSegmentationDataAccess.cs" />
+    <Compile Include="OddsGroupLicenseeSettingDataAccess.cs" />
     <Compile Include="CustomerAdminDataAccess.cs" />
+    <Compile Include="Interfaces\IOddsGroupLicenseeSettingAccess.cs" />
     <Compile Include="Interfaces\ICustomerAdminDataAccess.cs" />
     <Compile Include="SabaVirtualSettingAccess.cs" />
     <Compile Include="CustomerClassDataAccess.cs" />

@@ -3376,4 +3376,31 @@
   <data name="WinlossAnalysis_SettlementTimeModeNote2" xml:space="preserve">
     <value>结算模式仅支援查询10/01/2024后的资料。</value>
   </data>
+  <data name="LogAction_5598" xml:space="preserve">
+    <value>以子网站更新水位组别</value>
+  </data>
+  <data name="LogAction_5599" xml:space="preserve">
+    <value>以币别更新水位组别</value>
+  </data>
+  <data name="OddsGroupLicenseeSetting" xml:space="preserve">
+    <value>设定水位组别</value>
+  </data>
+  <data name="OddsGroupSettingChangeValueMsg" xml:space="preserve">
+    <value>从{0}修改为{1}</value>
+  </data>
+  <data name="OddsGroupSettingErrorMsg" xml:space="preserve">
+    <value>抱歉，执行中发生错误</value>
+  </data>
+  <data name="OddsGroupSettingLimitDownlinesMsg" xml:space="preserve">
+    <value>此功能目前无法</value>
+  </data>
+  <data name="OddsGroupSettingSuccessfullyMsg" xml:space="preserve">
+    <value>更新水位组别成功</value>
+  </data>
+  <data name="OddsGroupSettingUpdatingMsg" xml:space="preserve">
+    <value>更新中...</value>
+  </data>
+  <data name="UpdateOddsGroupConfirmationMsg" xml:space="preserve">
+    <value>此异动将生效于所有玩家，确认要更新水位组别?</value>
+  </data>
 </root>

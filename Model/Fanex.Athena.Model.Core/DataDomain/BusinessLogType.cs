@@ -10,6 +10,8 @@
 
         CustomerBetSetting = 3,
 
-        PlayerSegmentationUpdatePlayer = 5
+        PlayerSegmentationUpdatePlayer = 5,
+
+        OddsGroupLicenseeSettingUpdate = 6
     }
 }

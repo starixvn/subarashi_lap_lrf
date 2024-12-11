@@ -364,4 +364,7 @@
   <data name="sabacoins" xml:space="preserve">
     <value>沙巴币</value>
   </data>
+  <data name="oddsgrouplicenseesetting" xml:space="preserve">
+    <value>设定水位组别</value>
+  </data>
 </root>

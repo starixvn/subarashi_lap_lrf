@@ -3339,4 +3339,31 @@
   <data name="WinlossAnalysis_SettlementTimeModeNote2" xml:space="preserve">
     <value>Mode Waktu Penyelesaian hanya mendukung data dari 10/01/2024.</value>
   </data>
+  <data name="LogAction_5598" xml:space="preserve">
+    <value>Pembaruan Kelompok Ganjil Berdasarkan Cabang</value>
+  </data>
+  <data name="LogAction_5599" xml:space="preserve">
+    <value>Pembaruan Kelompok Ganjil Berdasarkan Mata Uang</value>
+  </data>
+  <data name="OddsGroupLicenseeSetting" xml:space="preserve">
+    <value>Pengaturan Kelompok Ganjil</value>
+  </data>
+  <data name="OddsGroupSettingChangeValueMsg" xml:space="preserve">
+    <value>Berubah dari {0} ke {1}</value>
+  </data>
+  <data name="OddsGroupSettingErrorMsg" xml:space="preserve">
+    <value>Maaf, terjadi kesalahan saat memproses permintaan Anda.</value>
+  </data>
+  <data name="OddsGroupSettingLimitDownlinesMsg" xml:space="preserve">
+    <value>Fungsi ini tidak dapat dilakukan saat ini karena dapat memengaruhi kinerja seluruh sistem. Silakan hubungi IT untuk bantuan lebih lanjut.</value>
+  </data>
+  <data name="OddsGroupSettingSuccessfullyMsg" xml:space="preserve">
+    <value>Pengaturan Kelompok Ganjil berhasil diperbarui.</value>
+  </data>
+  <data name="OddsGroupSettingUpdatingMsg" xml:space="preserve">
+    <value>Memperbarui...</value>
+  </data>
+  <data name="UpdateOddsGroupConfirmationMsg" xml:space="preserve">
+    <value>Pembaruan untuk Pemain yang Ada dan Pemain Baru. Apakah Anda yakin ingin memperbarui Kelompok Ganjil?</value>
+  </data>
 </root>

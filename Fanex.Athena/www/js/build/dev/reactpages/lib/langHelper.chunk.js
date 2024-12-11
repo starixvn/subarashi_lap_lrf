@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/25/2024 1:35:04 PM
+// Generated at: 11/29/2024 11:56:38 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -628,6 +628,8 @@ window._language_en_US = {
   LocationRestrictionMsg: "Direct Access to this website is restricted. Please contact {0} for further enquiries.",
   Locked: "Locked",
   Log: "Log",
+  LogAction_5598: "Update Odds Group By Subsidiary",
+  LogAction_5599: "Update Odds Group By Currency",
   LogDate: "Log Date",
   LogID: "Log ID",
   Login: "Login",
@@ -699,6 +701,7 @@ window._language_en_US = {
   MobileOthers: "Mobile Others",
   MobileStandard: "Mobile Standard",
   Moderate: "Moderate",
+  Modify: "Modify",
   Monday: "Monday",
   MoneyLine: "Money Line",
   MoneyPlay: "Money Play",
@@ -722,6 +725,7 @@ window._language_en_US = {
   NetTurnover: "Net Turnover",
   New: "New",
   NewGroup: "New Group",
+  NewValue: "New Value",
   Next: "Next",
   NextBetInteval: "Next Bet Interval (sec)",
   NG: "NG",
@@ -767,6 +771,13 @@ window._language_en_US = {
   OddsAvg: "Odds Avg",
   OddsBoostBonus: "Odds Boost Bonus",
   OddsGroup: "Odds Group",
+  OddsGroupLicenseeSetting: "Odds Group Licensee Setting",
+  OddsGroupSetting: "Odds Group Setting",
+  OddsGroupSettingChangeValueMsg: "Changed from {0} to {1}",
+  OddsGroupSettingErrorMsg: "Sorry, an error occurred while processing your request.",
+  OddsGroupSettingLimitDownlinesMsg: "This function cannot be performed at this time as it may affect the performance of the whole system. Please contact IT for further assistance.",
+  OddsGroupSettingSuccessfullyMsg: "Update Odds Group Setting successfully.",
+  OddsGroupSettingUpdatingMsg: "Updating...",
   OddsLower: "Odds Lower",
   OddsMatched: "Odds Matched",
   OddsReq: "Odds Req",
@@ -778,6 +789,7 @@ window._language_en_US = {
   OK: "OK",
   OldColor: "Old color",
   OldPassword: "Old Password",
+  OldValue: "Old Value",
   On: "On",
   OneTokenRestrictionDefaultMsg: "Who let you here ?",
   OneXTwo: "1 X 2",
@@ -1134,6 +1146,7 @@ window._language_en_US = {
   UpdateNumberGameBetSettings: "Are you sure you want to update all Number Game bet settings?",
   UpdateNumberGameBetSettingSuccessMsg: "The Number Game bet setting of {0} was updated successfully",
   UpdateOddsGroup: "Update Odds Group",
+  UpdateOddsGroupConfirmationMsg: "Update for Both Existing and New Players. Are you sure you want to update Odds Group?",
   UpdateProductBetSettings: "Are you sure you want to update all {0} bet settings?",
   UpdateProductBetSettingSuccessMsg: "The {0} bet setting of {1} was updated successfully",
   UpdateProductStatus: "Are you sure you want to update {0} status?",
@@ -1172,6 +1185,7 @@ window._language_en_US = {
   ViewinIPSummary: "View in IP Summary",
   ViewinSummary: "View in Summary",
   ViewInWithNoParam: "View in",
+  ViewLog: "View Log",
   ViewNotification: "View Notification",
   ViewResettledTicketOnly: "View Resettled Ticket Only",
   ViewResettledTicketOnlyNote: "&quot;View Resettled Ticket Only&quot; data is available from 01 Sep 2023.",

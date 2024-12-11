@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/25/2024 1:35:04 PM
+// Generated at: 11/29/2024 11:56:38 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -581,6 +581,8 @@ window._language_zh_CN = {
   LocationRestrictionMsg: "限制直接访问此网站。欲知详情请联系{0}。",
   Locked: "锁定",
   Log: "日志",
+  LogAction_5598: "以子网站更新水位组别",
+  LogAction_5599: "以币别更新水位组别",
   LogDate: "登入日期",
   LogID: "登入识别",
   Login: "登入",
@@ -711,6 +713,12 @@ window._language_zh_CN = {
   OddsAvg: "平均赔率",
   OddsBoostBonus: "特优赔率奬金",
   OddsGroup: "水位组别",
+  OddsGroupLicenseeSetting: "设定水位组别",
+  OddsGroupSettingChangeValueMsg: "从{0}修改为{1}",
+  OddsGroupSettingErrorMsg: "抱歉，执行中发生错误",
+  OddsGroupSettingLimitDownlinesMsg: "此功能目前无法",
+  OddsGroupSettingSuccessfullyMsg: "更新水位组别成功",
+  OddsGroupSettingUpdatingMsg: "更新中...",
   OddsLower: "最低赔率",
   OddsMatched: "匹配赔率",
   OddsReq: "投注赔率",
@@ -1024,6 +1032,7 @@ window._language_zh_CN = {
   UpdateNumberGameBetSettings: "您确定您要更新的所有百练赛投注设置吗？",
   UpdateNumberGameBetSettingSuccessMsg: "{0}的百练赛投注设定已成功更新",
   UpdateOddsGroup: "更新水位组别",
+  UpdateOddsGroupConfirmationMsg: "此异动将生效于所有玩家，确认要更新水位组别?",
   UpdateProductBetSettings: "确定更新所有 {0} 的投注设定吗?",
   UpdateRNGCasinoBetSettingFailMsg: "The RNG Casino bet setting of {0} updated is failed",
   UpdateRNGCasinoBetSettings: "Are you sure you want to update RNG Casino bet settings?",

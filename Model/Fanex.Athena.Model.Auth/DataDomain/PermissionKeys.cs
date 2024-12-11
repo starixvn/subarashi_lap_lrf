@@ -112,5 +112,7 @@
 
         /*Saba Coins*/
         public const string SabaCoins = "SabaCoins";
+
+        public const string OddsGroupLicenseeSetting = "OddsGroupLicenseeSetting";
     }
 }

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/25/2024 1:35:04 PM
+// Generated at: 11/29/2024 11:56:38 AM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -618,6 +618,8 @@ window._language_vi_VN = {
   LocationRestrictionMsg: "Truy cập trực tiếp vào trang web này bị hạn chế. Vui lòng liên hệ với {0} để có thêm thông tin.",
   Locked: "Đã khóa",
   Log: "Nhật ký",
+  LogAction_5598: "Cập nhật Nhóm Tỷ Lệ Cược theo Chi Nhánh",
+  LogAction_5599: "Cập nhật Nhóm Tỷ Lệ Cược theo Đơn Vị Tiền Tệ",
   LogDate: "Ngày đăng nhập",
   LogID: "ID Nhật ký",
   Login: "Đăng nhập",
@@ -753,6 +755,12 @@ window._language_vi_VN = {
   OddsAvg: "Tỷ lệ cược trung bình",
   OddsBoostBonus: "Tiền Thưởng Tăng Cường Tỷ Lệ Cược",
   OddsGroup: "Nhóm tỷ lệ cược",
+  OddsGroupLicenseeSetting: "Cài Đặt Nhóm Tỷ Lệ Cược",
+  OddsGroupSettingChangeValueMsg: "Đã thay đổi từ {0} thành {1}",
+  OddsGroupSettingErrorMsg: "Đã xảy ra lỗi trong quá trình xử lý yêu cầu của bạn.",
+  OddsGroupSettingLimitDownlinesMsg: "Chức năng này hiện tại không thể thực hiện do có thể gây ảnh hưởng đến hiệu suất của hệ thống. Vui lòng liên hệ bộ phận kỹ thuật để được hỗ trợ thêm.",
+  OddsGroupSettingSuccessfullyMsg: "Cập nhật Cài Đặt Nhóm Tỷ Lệ Cược thành công.",
+  OddsGroupSettingUpdatingMsg: "Đang cập nhật…",
   OddsLower: "Tỉ lệ cược tối thiểu",
   OddsMatched: "Tỷ lệ cược phù hợp",
   OddsReq: "Yêu cầu tỷ lệ cược",
@@ -1095,6 +1103,7 @@ window._language_vi_VN = {
   UpdateNumberGameBetSettings: "Bạn có muốn cập nhật toàn bộ giới hạn cược của Number Game không?",
   UpdateNumberGameBetSettingSuccessMsg: "Giới hạn cược Number Game của {0} đã được cập nhật thành công",
   UpdateOddsGroup: "Cập nhật Nhóm Tỷ lệ cược",
+  UpdateOddsGroupConfirmationMsg: "Bạn đang cập nhật Nhóm Tỷ Lệ Cược cho cả người chơi mới và cũ. Bạn có chắc muốn tiếp tục?",
   UpdateProductBetSettings: "Bạn có muốn cập nhật toàn bộ giới hạn cược của {0}?",
   UpdateProductBetSettingSuccessMsg: "{0} giới hạn cược của {1} đã được cập nhật thành công",
   UpdateProductStatus: "Bạn có muốn cập nhật trạng thái {0} không?",

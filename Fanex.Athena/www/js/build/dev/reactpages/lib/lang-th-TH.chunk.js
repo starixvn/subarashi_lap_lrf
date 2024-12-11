@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/25/2024 1:35:04 PM
+// Generated at: 11/29/2024 11:56:38 AM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -622,6 +622,8 @@ window._language_th_TH = {
   LocationRestrictionMsg: "การเข้าถึงเว็บไซต์นี้ถูกจำกัด โปรดติดต่อ {0} เพื่อสอบถามเพิ่มเติม",
   Locked: "ล็อค",
   Log: "บันทึก",
+  LogAction_5598: "อัปเดตอัตราต่อรองกลุ่มตามบริษัทย่อย",
+  LogAction_5599: "อัปเดตอัตราต่อรองกลุ่มตามสกุลเงิน",
   LogDate: "วันที่เข้าสู่ระบบ",
   LogID: "บันทึกรหัส",
   Login: "เข้าสู่ระบบ",
@@ -756,6 +758,12 @@ window._language_th_TH = {
   OddsAvg: "อัตราต่อรองเฉลี่ย",
   OddsBoostBonus: "ตัวเพิ่มอัตราต่อรอง โบนัส",
   OddsGroup: "อัตราต่อรองกลุ่ม",
+  OddsGroupLicenseeSetting: "การตั้งค่าอัตราต่อรองกลุ่ม",
+  OddsGroupSettingChangeValueMsg: "เปลี่ยนจาก {0} เป็น {1}",
+  OddsGroupSettingErrorMsg: "ขออภัย เกิดข้อผิดพลาดระหว่างการประมวลผลคำขอของคุณ.",
+  OddsGroupSettingLimitDownlinesMsg: "ฟังก์ชันนี้ไม่สามารถทำได้ในขณะนี้ เนื่องจากอาจส่งผลต่อประสิทธิภาพของระบบทั้งหมด กรุณาติดต่อฝ่าย IT เพื่อขอความช่วยเหลือเพิ่มเติม.",
+  OddsGroupSettingSuccessfullyMsg: "อัปเดตการตั้งค่าอัตราต่อรองกลุ่มสำเร็จ.",
+  OddsGroupSettingUpdatingMsg: "กำลังอัปเดต...",
   OddsLower: "อัตราต่อรองต่ำสุด",
   OddsMatched: "อัตราต่อรองการแข่งขัน",
   OddsReq: "ราคาต่อรองที่ต้องการ",
@@ -1093,6 +1101,7 @@ window._language_th_TH = {
   UpdateNumberGameBetSettings: "คุณแน่ใจหรือไม่ว่าต้องการอัปเดตการตั้งค่าการเดิมพันเกมตัวเลขทั้งหมด?",
   UpdateNumberGameBetSettingSuccessMsg: "อัปเดตการตั้งค่าการเดิมพันเกมตัวเลขของ {0} สำเร็จแล้ว",
   UpdateOddsGroup: "อัปเดต อัตราต่อรองกลุ่ม",
+  UpdateOddsGroupConfirmationMsg: "อัปเดตสำหรับผู้เล่นทั้งที่มีอยู่และผู้เล่นใหม่ คุณแน่ใจหรือว่าต้องการอัปเดตอัตราต่อรองกลุ่ม?",
   UpdateProductBetSettings: "คุณแน่ใจหรือไม่ว่าต้องการอัปเดตการตั้งค่าการเดิมพัน {0} ทั้งหมด?",
   UpdateProductBetSettingSuccessMsg: "อัปเดตการตั้งค่าการเดิมพัน {0} ของ {1} เรียบร้อยแล้ว",
   UpdateProductStatus: "คุณแน่ใจหรือไม่ว่าต้องการอัปเดตสถานะ {0}?",

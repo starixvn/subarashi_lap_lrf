@@ -78,12 +78,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\OddsGroupLicenseeSettingUserLogBuilderFactory.cs" />
     <Compile Include="Builder\PlayerSegmentationBusinessLogBuilderFactory.cs" />
+    <Compile Include="Builder\OddsGroupLicenseeSettingUpdateLogBuilder.cs" />
     <Compile Include="Builder\PlayerSegmentUpdatePlayerLogBuilder.cs" />
     <Compile Include="CustomerAdminAPIService.cs" />
     <Compile Include="CustomerAdminService.cs" />
     <Compile Include="Interfaces\ICustomerAdminAPIService.cs" />
+    <Compile Include="Interfaces\IOddsGroupLicenseeSettingService.cs" />
     <Compile Include="Interfaces\ICustomerAdminService.cs" />
+    <Compile Include="OddsGroupLicenseeSettingService.cs" />
     <Compile Include="SabaVirtualSettingService.cs" />
     <Compile Include="CustomerClassService.cs" />
     <Compile Include="GlobalSuppressions.cs" />

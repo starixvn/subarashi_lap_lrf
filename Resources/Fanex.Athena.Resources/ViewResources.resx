@@ -3833,4 +3833,46 @@
   <data name="ProductGPIRNG" xml:space="preserve">
     <value>GPI</value>
   </data>
+  <data name="LogAction_5598" xml:space="preserve">
+    <value>Update Odds Group By Subsidiary</value>
+  </data>
+  <data name="LogAction_5599" xml:space="preserve">
+    <value>Update Odds Group By Currency</value>
+  </data>
+  <data name="Modify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="NewValue" xml:space="preserve">
+    <value>New Value</value>
+  </data>
+  <data name="OldValue" xml:space="preserve">
+    <value>Old Value</value>
+  </data>
+  <data name="ViewLog" xml:space="preserve">
+    <value>View Log</value>
+  </data>
+  <data name="OddsGroupSettingChangeValueMsg" xml:space="preserve">
+    <value>Changed from {0} to {1}</value>
+  </data>
+  <data name="UpdateOddsGroupConfirmationMsg" xml:space="preserve">
+    <value>Update for Both Existing and New Players. Are you sure you want to update Odds Group?</value>
+  </data>
+  <data name="OddsGroupLicenseeSetting" xml:space="preserve">
+    <value>Odds Group Licensee Setting</value>
+  </data>
+  <data name="OddsGroupSetting" xml:space="preserve">
+    <value>Odds Group Setting</value>
+  </data>
+  <data name="OddsGroupSettingErrorMsg" xml:space="preserve">
+    <value>Sorry, an error occurred while processing your request.</value>
+  </data>
+  <data name="OddsGroupSettingSuccessfullyMsg" xml:space="preserve">
+    <value>Update Odds Group Setting successfully.</value>
+  </data>
+  <data name="OddsGroupSettingUpdatingMsg" xml:space="preserve">
+    <value>Updating...</value>
+  </data>
+  <data name="OddsGroupSettingLimitDownlinesMsg" xml:space="preserve">
+    <value>This function cannot be performed at this time as it may affect the performance of the whole system. Please contact IT for further assistance.</value>
+  </data>
 </root>
