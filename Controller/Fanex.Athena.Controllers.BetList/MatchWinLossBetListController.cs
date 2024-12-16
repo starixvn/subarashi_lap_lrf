@@ -123,7 +123,7 @@
             }
 
             return metaModel.HomeId > 0 && metaModel.AwayId > 0
-                ? _cacheRefAdapter.GetTeamName(metaModel.HomeId) + " vs " + _cacheRefAdapter.GetTeamName(metaModel.AwayId) + " - "
+                ? _cacheRefAdapter.GetTeamName(metaModel.HomeId, metaModel.SportType) + " vs " + _cacheRefAdapter.GetTeamName(metaModel.AwayId, metaModel.SportType) + " - "
                 : string.Empty;
         }
     }

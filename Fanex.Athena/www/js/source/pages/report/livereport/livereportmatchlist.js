@@ -108,6 +108,7 @@
             url = QueryString.setParam(url, 'LiveIndicator', data.LiveIndicator);
             url = QueryString.setParam(url, 'SubsidiarySearch', $(_selector.SubsidiarySearch).val());
             url = QueryString.setParam(url, 'SubsidiaryList', $(_selector.SubsidiaryList).val());
+            url = QueryString.setParam(url, 'EventType', data.EventType);
 
             const productOptions = Helper.getMatchListProductOption($(_selector.SportId).val(), $(_selector.ProductCode).val());
 

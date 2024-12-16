@@ -147,5 +147,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
         public bool SubsidiarySearch { get; set; }
 
         public int SpecialPlatform { get; set; }
+
+        public int EventType { get; set; }
     }
 }

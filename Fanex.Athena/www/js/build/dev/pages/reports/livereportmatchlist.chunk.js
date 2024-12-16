@@ -862,7 +862,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
         if (newSportId > 0) {
             if (newSportId === 180 || newSportId === 186 || newSportId === 231 || newSportId === 104 ||
                 (newSportId >= 190 && newSportId <= 197) || newSportId === 178 || newSportId === 179
-                || newSportId === 188 || newSportId === 177 || newSportId === 198) {
+                || newSportId === 188 || newSportId === 177 || newSportId === 198 || newSportId === 134) {
                 productOptions.push('VS');
             }
             else if (newSportId === 162) {
@@ -1012,6 +1012,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             url = QueryString.setParam(url, 'LiveIndicator', data.LiveIndicator);
             url = QueryString.setParam(url, 'SubsidiarySearch', $(_selector.SubsidiarySearch).val());
             url = QueryString.setParam(url, 'SubsidiaryList', $(_selector.SubsidiaryList).val());
+            url = QueryString.setParam(url, 'EventType', data.EventType);
 
             const productOptions = Helper.getMatchListProductOption($(_selector.SportId).val(), $(_selector.ProductCode).val());
 

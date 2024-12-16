@@ -291,7 +291,8 @@
             {
                 var betType = Converter.ToInt(row["bettype"]);
                 var sport = Converter.ToInt(row["SportType"]);
-                row[NewProductIdColumnName] = ProductHelper.GetProductId(betType);
+                var productCode = row["ProductCode"].ToString();
+                row[NewProductIdColumnName] = ProductHelper.GetProductId(betType, productCode);
 
                 AssignMatchName(row, betType, sport);
                 AssignLeagueName(row, sport);
@@ -318,11 +319,11 @@
                 }
                 else
                 {
-                    var homeName = _cacheRefAdapter.GetTeamName(row["homeid"]) +
+                    var homeName = _cacheRefAdapter.GetTeamName(row["homeid"], sport) +
                                (Converter.ToBool(row["isneutral"])
                                     ? " " + ViewResources.IsNeutral
                                     : string.Empty);
-                    var awayName = _cacheRefAdapter.GetTeamName(row["awayid"]);
+                    var awayName = _cacheRefAdapter.GetTeamName(row["awayid"], sport);
                     row[MatchNameColumn] = homeName + "-vs-" + awayName;
                 }
             }
@@ -337,14 +338,7 @@
 
         private string GetLeagueName(DataRow row, int sportType)
         {
-            if (SportHelper.IsVirtualBetRadarSports(sportType))
-            {
-                return _cacheRefAdapter.GetLeague3rdName(row["leagueid"]);
-            }
-            else
-            {
-                return _cacheRefAdapter.GetLeagueName(row["leagueid"]);
-            }
+            return _cacheRefAdapter.GetLeagueName(row["leagueid"], sportType);
         }
     }
 }

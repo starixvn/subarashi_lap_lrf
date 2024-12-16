@@ -19,7 +19,7 @@
 
         string[] GetCombinationTypeCombo(string betTeam, string betCheck, decimal handicap1, decimal handicap2);
 
-        string GetLeagueName(object leagueId, string langCode = null);
+        string GetLeagueName(object leagueId, int sportId = 0, string langCode = null);
 
         string GetLeague3rdName(object leagueId);
 
@@ -27,6 +27,6 @@
 
         string GetDummySportName(object sportId, string languageCode = null);
 
-        string GetTeamName(object teamId);
+        string GetTeamName(object teamId, int sportId = 0);
     }
 }

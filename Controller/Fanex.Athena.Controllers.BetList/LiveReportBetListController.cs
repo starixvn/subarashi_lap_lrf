@@ -132,7 +132,7 @@
         private string GetMatchName(LiveReportBetListMetaModel model)
         {
             return model.HomeId > 0 && model.AwayId > 0 ?
-                CacheRefAdapter.GetTeamName(model.HomeId) + " vs " + CacheRefAdapter.GetTeamName(model.AwayId) + " " :
+                CacheRefAdapter.GetTeamName(model.HomeId, model.SportType) + " vs " + CacheRefAdapter.GetTeamName(model.AwayId, model.SportType) + " " :
                 string.Empty;
         }
 

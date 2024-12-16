@@ -220,7 +220,7 @@
 
             Parallel.ForEach(leagueList.Where(x => x.LeagueGroupId != 0), options, league =>
             {
-                var leagueName = _cacheRefAdapter.GetLeagueName(league.LeagueId, langCode) ?? league.LeagueName;
+                var leagueName = _cacheRefAdapter.GetLeagueName(league.LeagueId, 0, langCode) ?? league.LeagueName;
                 league.LeagueName = isHideSaba ? SabaHelper.RemoveSabaText(leagueName) : leagueName;
             });
         }
