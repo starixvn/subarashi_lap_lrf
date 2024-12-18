@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using DataDomain;
     using DTO.Common;
-    using Fanex.Athena.Model.Core.DataDomain;
     using Resources;
 
     public static class ProductHelper
@@ -13,7 +13,7 @@
             { ProductTypes.Sportsbook, Product.SB },
             { ProductTypes.VirtualSports, Product.VS },
             { ProductTypes.VirtualSports2, Product.VS2 },
-            { ProductTypes.Lottery, Product.LT },
+            { ProductTypes.Lottery, Product.LT }
         };
 
         private static readonly IDictionary<string, string> ProductNameMap =
@@ -83,7 +83,8 @@
                 { Product.NS, nameof(ViewResources.ProductNS) },
                 { Product.ON, nameof(ViewResources.ProductON) },
                 { Product.PTRNG, nameof(ViewResources.ProductPTRNG) },
-                { Product.GPIRNG, nameof(ViewResources.ProductGPIRNG) }
+                { Product.GPIRNG, nameof(ViewResources.ProductGPIRNG) },
+                { Product.GPILC, nameof(ViewResources.ProductGPILC) }
             };
 
         public static string GetProductCode(int productId)

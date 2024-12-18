@@ -2,7 +2,7 @@
 
 @{
     var appSettings = new AppSettings();
-    var liveReportNoDetailLinkSports = appSettings.LiveReportNoDetailLinkSports;
+    var liveReportNoDetailLinkSports = appSettings.LiveReportNoDetailLinkSports.ToList();
 }
 
 @foreach (var item in Model.BySports)

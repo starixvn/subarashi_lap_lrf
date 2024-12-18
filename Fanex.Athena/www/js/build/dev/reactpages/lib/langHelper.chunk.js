@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 11/29/2024 11:56:38 AM
+// Generated at: 12/11/2024 3:00:51 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -869,6 +869,7 @@ window._language_en_US = {
   ProductFAC: "FA CHAI",
   ProductFGGL: "FGG",
   ProductFS: "FastSpin",
+  ProductGPILC: "GPI Live Casino",
   ProductGPIRNG: "GPI",
   ProductHB: "Habanero",
   ProductI4D: "Togel 4D",
