@@ -73,13 +73,12 @@
 
         public async Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user)
         {
-            var resultInfo = await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId).ConfigureAwait(false);
-            return resultInfo;
+            return await _groupDataAccess.UpdateGroupAsync(newItem, request, user.UserId).ConfigureAwait(false);
         }
 
         public async Task<IResultInfo> DeleteGroupAsync(DeleteGroupMetaModel model)
         {
-            var resultInfo = await _groupDataAccess.DeleteGroupAsync(
+            return await _groupDataAccess.DeleteGroupAsync(
                 model.GroupId,
                 model.LicenseeId,
                 model.UserId,
@@ -87,8 +86,6 @@
                 model.Language,
                 model.IsRemoveCommSetting,
                 model.IsResetDefault).ConfigureAwait(false);
-
-            return resultInfo;
         }
 
         public bool CheckExistingGroupByName(int licenseeId, string groupName)

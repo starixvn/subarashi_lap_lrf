@@ -1,15 +1,16 @@
 ﻿namespace Fanex.Athena.DataAccess.Customer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Common;
+    using Fanex.Data;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
     public class GroupComDataAccess : BaseDataAccess, IGroupComDataAccess
     {
@@ -115,17 +116,8 @@
 
             using (var db = GetObjectDb(UspName))
             {
-                db.SetParameterValue("LicenseeID", item.LicenseeId);
-                db.SetParameterValue("GroupName", item.GroupName);
-                db.SetParameterValue("GroupColor", item.GroupColor);
-                db.SetParameterValue("UserID", userId);
-                db.SetParameterValue("IP", request.Ip);
-                db.SetParameterValue("langkey", request.Language);
-                db.SetParameterValue("IsDefault", item.IsDefaultGroup);
-                db.SetParameterValue("IsResetDefault", item.IsResetDefault);
-                db.SetParameterValue("GroupDiscountID", null);
-                db.SetParameterValue("DiscountSettings", BuildDiscountSettingsXmlString(item));
-
+                AddCommParams(db, item);
+                AddRequestInfoParams(db, userId, request.Ip, request.Language);
                 AddResultParam(db);
                 await db.ExecuteNonQueryAsync().ConfigureAwait(false);
 
@@ -141,22 +133,17 @@
 
             using (var db = GetObjectDb(UspName, 900))
             {
-                db.SetParameterValue("LicenseeID", newItem.LicenseeId);
-                db.SetParameterValue("GroupDiscountID", newItem.GroupCommId);
-                db.SetParameterValue("GroupName", newItem.GroupName);
-                db.SetParameterValue("GroupColor", newItem.GroupColor);
-                db.SetParameterValue("DiscountSettings", BuildDiscountSettingsXmlString(newItem));
-                db.SetParameterValue("UserId", userId);
-                db.SetParameterValue("Ip", request.Ip);
-                db.SetParameterValue("langkey", request.Language);
-                db.SetParameterValue("IsDefault", newItem.IsDefaultGroup);
-                db.SetParameterValue("IsResetDefault", newItem.IsResetDefault);
-                db.SetParameterValue("StrCustID", null);
+                AddCommParams(db, newItem);
+                AddRequestInfoParams(db, userId, request.Ip, request.Language);
                 AddResultParam(db);
+                db.SetParameterValue("StrCustID", null);
+
                 await db.ExecuteNonQueryAsync().ConfigureAwait(false);
+
                 newItem.GroupCommId = Converter.ToInt(db.GetParameterValue("GroupCommID"));
                 var resultInfo = GetResult(db);
                 resultInfo.ExtendedData = Converter.ToString2(db.GetParameterValue("StrCustID"));
+
                 return resultInfo;
             }
         }
@@ -176,16 +163,16 @@
             {
                 db.SetParameterValue("LicenseeId", licenseeId);
                 db.SetParameterValue("GroupDiscountID", groupId);
-                db.SetParameterValue("UserId", userId);
-                db.SetParameterValue("Ip", ip);
-                db.SetParameterValue("langkey", language);
                 db.SetParameterValue("IsRemovePlayercomm", isRemoveCommSetting);
                 db.SetParameterValue("IsResetDefault", isResetDefault);
+                AddRequestInfoParams(db, userId, ip, language);
                 AddResultParam(db);
                 db.SetParameterValue("StrCustID", null);
+
                 await db.ExecuteScalarAsync().ConfigureAwait(false);
                 var resultInfo = GetResult(db);
                 resultInfo.ExtendedData = Converter.ToString2(db.GetParameterValue("StrCustID"));
+
                 return resultInfo;
             }
         }
@@ -201,6 +188,24 @@
 
                 return Converter.ToInt(db.ExecuteScalar()) != 1;
             }
+        }
+
+        private static void AddCommParams(IObjectDb db, GroupCommMetaModel model)
+        {
+            db.SetParameterValue("LicenseeID", model.LicenseeId);
+            db.SetParameterValue("GroupDiscountID", model.GroupCommId);
+            db.SetParameterValue("GroupName", model.GroupName);
+            db.SetParameterValue("GroupColor", model.GroupColor);
+            db.SetParameterValue("DiscountSettings", BuildDiscountSettingsXmlString(model));
+            db.SetParameterValue("IsDefault", model.IsDefaultGroup);
+            db.SetParameterValue("IsResetDefault", model.IsResetDefault);
+        }
+
+        private static void AddRequestInfoParams(IObjectDb db, int userId, string ip, string language)
+        {
+            db.SetParameterValue("UserId", userId);
+            db.SetParameterValue("Ip", ip);
+            db.SetParameterValue("langkey", language);
         }
 
         private static string BuildDiscountSettingsXmlString(GroupCommMetaModel metaModel)
