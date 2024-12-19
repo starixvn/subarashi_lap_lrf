@@ -109,6 +109,7 @@
                 TabList = tabList,
                 RiskLevels = await _customerClassService.GetAllRiskLevel(),
                 PlatformList = PlatformHelper.GetPlatformList(licenseeSession.SpecialPlatform),
+                IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language),
                 OddsGroup = licenseeSession.OfferedOddsGroupsList,
             };
 

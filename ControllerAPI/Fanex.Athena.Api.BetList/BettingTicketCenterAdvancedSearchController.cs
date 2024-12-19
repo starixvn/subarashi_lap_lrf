@@ -1,17 +1,18 @@
 ﻿namespace Fanex.Athena.Api.BetList
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Http;
     using Base;
     using Base.Attributes;
     using Extension.Utility;
     using Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore;
     using Model.BetList.MetaModel;
     using Resources;
     using Service.Core.Common.Interfaces;
     using Service.Customer.Interfaces;
     using Service.StatelessCore.Interfaces;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http;
 
     [ApiFunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
     public class BettingTicketCenterAdvancedSearchController : BaseApiController
@@ -88,13 +89,8 @@
         private async Task UpdateMetaModel(AdvancedSearchBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
-            var sabaSport = _sportService.GetSabaSport(metaModel.SportId, IsHideSaba);
-            if (sabaSport != null)
-            {
-                metaModel.LeagueGroupIds = string.Join(",", sabaSport.LeagueGroupIds);
-                metaModel.SportId = sabaSport.SportTypeId;
-            }
 
+            metaModel.SportListXML = BettingTicketCenterSportService.BuildSportTypeXML(metaModel.SportIds);
             metaModel.HasPlayerCom = SessionService.LicenseeSession.IsAllowedCustomerComm;
             metaModel.SpecialPlatform = licenseeSession.SpecialPlatform;
             metaModel.FullCustomerClass = string.Join(",", await _customerClassService.GetAllCustomerClassId());

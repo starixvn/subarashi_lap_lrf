@@ -5,6 +5,7 @@ import Service from '../../../common/lib/Service'
 import AppData from '@jsroot/lib/AppData'
 import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 import { useCallback } from 'react'
+import { CashOutMode, ProductCode } from './../../../common/lib/constants'
 
 export const useFilterHandler = () =>{
     const dispatch = useDispatch();
@@ -15,7 +16,8 @@ export const useFilterHandler = () =>{
     const {setUsername, setSubsidiaryList, setSelectedStatus, setSelectedProduct, getSportList, 
         getBettypeList, setSelectedSport, getLeagueList, setSelectedBettype, setSelectedLeague, getMatchList,
         setSelectedMatch, setSelectedLiveStatus, setSelectedCustomerClass, setSelectedOddsGroup, setSelectedPlatform,
-        setIp, setSelectedCurrency, setSelectedBaseCurrency, changeIsConvertAll, setSubsidiarySearch} 
+        setIp, setSelectedCurrency, setSelectedBaseCurrency, changeIsConvertAll, setSubsidiarySearch, setEnableCashOutFilter, 
+        setSelectedCashOutMode, setProductList} 
         = ActionCreators;
 
     const onUserNameInputHandler = useCallback((value) => dispatch(setUsername(value)),[]);
@@ -26,22 +28,33 @@ export const useFilterHandler = () =>{
    
     const onLiveStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedLiveStatus(selectedItemsKey)),[]);
     
-    const onProductChangeHandler = useCallback((item) => {
-        const productCode = item.value;
-        dispatch(setSelectedProduct(productCode));
-        dispatch(getSportList(productCode, Service.isSingleDate(dateRange) && dateRange.fromDate));
-        dispatch(getBettypeList(productCode, Service.isSingleDate(dateRange)));
-    },[dateRange])
+    const onProductChangeHandler = useCallback((currentItem, selectedItemsKey) => {
+        dispatch(setSelectedProduct(selectedItemsKey));
+        getSportAndBettypeListByProduct(selectedItemsKey);
+        updateCashOutMode(selectedItemsKey);
+    },[])
+
+    const getSportAndBettypeListByProduct = (selectedProduct) => {
+        dispatch(getSportList(selectedProduct, dateRange.fromDate));
+        dispatch(getBettypeList(selectedProduct));
+    }
+
+    const updateCashOutMode = (selectedProduct) => {
+        const isEnableCashOutFilter = Service.isContainProductSportBookOrBa(selectedProduct);
+        if (!isEnableCashOutFilter) {
+            dispatch(setSelectedCashOutMode(0));
+        }
+        dispatch(setEnableCashOutFilter(isEnableCashOutFilter));
+    }
     
-    const onSportChangeHandler = useCallback((item) => {
-        const sportId = item.value;
-        dispatch(setSelectedSport(sportId));
+    const onSportChangeHandler = useCallback((currentItem, selectedItemsKey) => {
+        dispatch(setSelectedSport(selectedItemsKey));
         if (isEnableLeagueMatch) {
-            dispatch(getLeagueList(sportId, dateRange.fromDate));
+            dispatch(getLeagueList(selectedItemsKey, dateRange.fromDate));
         }
     },[dateRange, isEnableLeagueMatch])
 
-    const onBetTypeChangeHandler = useCallback((item) => dispatch(setSelectedBettype(item.value)),[]);
+    const onBetTypeChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedBettype(selectedItemsKey)),[]);
 
     const onLeagueChangeHandler = useCallback((item) => {
         const leagueId = item.value;
@@ -75,8 +88,21 @@ export const useFilterHandler = () =>{
         checked && dispatch(setSubsidiaryList(defaultSelectedSubsidiary))
     },[])
 
+    const onCashOutModeChangeHandler = useCallback((item) => {
+        if (item.value === CashOutMode.ViewCOOnly) {
+            const selectedProduct = AppData.productList.filter(product => product.id == ProductCode.BA || product.id == ProductCode.SportsBook)
+                .map(product => product.id)
+                .join(',');
+            const productList = AppData.productList.map(product => product.id == ProductCode.SportsBook || product.id == ProductCode.BA ? product : { ...product, status: false });
+            dispatch(setSelectedProduct(selectedProduct));
+            dispatch(setProductList(productList));
+        }
+        dispatch(setSelectedCashOutMode(item.value));
+    },[]);
+
     return {onUserNameInputHandler, onSubsidiaryDropDownChangeHandler, onStatusChangeHandler, onProductChangeHandler,
         onSportChangeHandler, onBetTypeChangeHandler, onLeagueChangeHandler, onMatchChangeHandler, onLiveStatusChangeHandler,
         onCustomerClassChangeHandler, onOddsGroupChangeHandler, onPlatformChangeHandler, onIpChangeHandler,
-        onCurrencyChangeHandler, onBaseCurrencyChangeHandler, onConverAllChangeHandler, onSubsidiaryCheckBoxChangeHandler}
+        onCurrencyChangeHandler, onBaseCurrencyChangeHandler, onConverAllChangeHandler, onSubsidiaryCheckBoxChangeHandler,
+        onCashOutModeChangeHandler}
 }

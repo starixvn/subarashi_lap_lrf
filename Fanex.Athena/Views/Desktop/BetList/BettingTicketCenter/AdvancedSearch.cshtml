@@ -13,9 +13,9 @@
     var session = DependencyResolver.Current.GetService<ISessionService>();
     var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
     var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
-    var productList = Model.ProductOptionList;
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
     var selectedLiveStatus = string.Join(",", Model.LiveStatusList.Select(x => x.Key).ToArray());
+    var selectedProductCode = string.Join(",", Model.ProductOptionList.Where(x => x.Status).Select(x => x.Code).ToArray());
 
     var baseCurrencyList = currencyService.GetBaseCurrencyList(true).Select(c => new { value = c.Value, label = c.Value }).ToList();
     var selectedCurrency = string.Join(",", Model.CurrencyList.Select(x => x.Key).ToArray());
@@ -33,6 +33,9 @@
     });
     var oddsGroup = Model.OddsGroup;
     var platformList = Model.PlatformList;
+
+    var cashOutModeList = SystemConstants.CashOutModeList
+        .Select(c => new { value = c.Key, label = c.Value }).ToList();
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/betlist/index.css")" rel="stylesheet" type="text/css" />
@@ -47,7 +50,7 @@
 @section globaljscode{
     window.initialState = {
     dateRange: { fromDate: '@Model.FromDate.ToString("MM/dd/yyyy")', toDate: '@Model.ToDate.ToString("MM/dd/yyyy")'},
-    selectedProduct: '@Html.Raw(productList.First().Code)',
+    selectedProduct: '@(selectedProductCode)',
     selectedCurrency:  '@(selectedCurrency)',
     selectedBaseCurrency: '@(Model.SelectedBaseCurrency)',
     isLoading: false,
@@ -55,11 +58,12 @@
     selectedLiveStatus: '@(selectedLiveStatus)',
     selectedSubsidiary: '@(selectedSubsidiary)',
     sportList: [],
+    selectedBettype: '',
     selectedSport: 0,
     selectedMatch: 0,
     selectedLeague: 0,
+    selectedCashOutMode: 0,
     bettypeList: [],
-    selectedBettype: 0,
     selectedCustomerClass: '@(string.Join(",", riskLevels.Select(_=>_.customerClassList)))',
     selectedOddsGroup: '@(string.Join(",", oddsGroup))',
     selectedPlatform: '@(string.Join(",",platformList.Select(_=>_.Key)))',
@@ -77,12 +81,14 @@
     liveStatusList: @Html.Raw(Model.LiveStatusList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson()),
     statusList: @Html.Raw(Model.StatusList.Select(x => new { Id = x.ID, Value = x.Name, Status = x.Checked }).ToJson()),
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
-    productList: @Html.Raw(Model.ProductOptionList.Select(x => new { value = x.Code, label = x.Name }).ToJson()),
+    productList: @Html.Raw(Model.ProductOptionList.Select(x => new { id = x.Code, value = x.Name, status = true }).ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
     dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3 },
     tabList: @Html.Raw(Model.TabList.ToJson()),
     riskLevels: @Html.Raw(riskLevels.ToJson()),
     oddsGroups: @Html.Raw(Model.OddsGroup.Select(x => new { Id = x, Value = x, Status = true }).ToJson()),
+    isOfferCashOutProduct: '@Model.IsOfferCashOutProduct' === "True",
+    cashOutModeList: @Html.Raw(cashOutModeList.ToJson()),
     platformList: @Html.Raw(Model.PlatformList.Select(x => new { Id = x.Key, Value = x.Value, Status = true }).ToJson())
     };
 }

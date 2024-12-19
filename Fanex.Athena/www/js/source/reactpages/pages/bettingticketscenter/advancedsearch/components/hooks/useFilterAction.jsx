@@ -35,7 +35,10 @@ export const useFilterAction = () => {
         selectedSubsidiary,
         ip,
         selectedOddsGroup,
-        selectedCustomerClass }
+        selectedCustomerClass,
+        sportList,
+        bettypeList,
+        selectedCashOutMode}
         = useSelector(state => state, shallowEqual);
 
     const { baseCurrencyList } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
@@ -71,8 +74,8 @@ export const useFilterAction = () => {
             BaseCurrency: selectedBaseCurrency,
             Status: selectedStatus,
             LiveStatus: selectedLiveStatus,
-            SportId: selectedSport,
-            BetTypeId: selectedBettype,
+            SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
+            BetTypeIds: Service.getSelectedBettype(selectedBettype, bettypeList),
             LeagueId: isEnableLeagueMatch ? selectedLeague : 0,
             MatchId: isEnableLeagueMatch ? selectedMatch : 0,
             SortBy: SortBy,
@@ -83,6 +86,7 @@ export const useFilterAction = () => {
             SubsidiaryList: isSubsidiarySearch ? selectedSubsidiary : "",
             Ip: ip,
             Platform: selectedPlatform,
+            CashOutMode: selectedCashOutMode,
             OddsGroup: selectedOddsGroup,
             CustomerClass: selectedCustomerClass
         }
@@ -146,18 +150,13 @@ export const useFilterAction = () => {
         const RowsExceedLimitErrorCode = 1001;
         const ExportMultipleFile = 1002;
         const ExportSingleFile = 1003;
-        const MaxPage = 20;
-    
+
         if (response.data.StatusCode === RowsExceedLimitErrorCode) {
             return _showExportWarning();
         } else if (response.data.StatusCode === ExportMultipleFile) {
             exportParams.PageSize = response.data.PageSize;
     
             const fetchNextPage = (pageIndex) => {
-                if (pageIndex >= MaxPage) {
-                    return Promise.resolve();
-                }
-
                 return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, {
                     ...exportParams,
                     PageIndex: pageIndex

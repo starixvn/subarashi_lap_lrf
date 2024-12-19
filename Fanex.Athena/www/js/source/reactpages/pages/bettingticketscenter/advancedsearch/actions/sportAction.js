@@ -1,10 +1,10 @@
 import DataService from '@jsroot/lib/DataService.js'
-import Site from '@jsroot/lib/site'
-import LangHelper from '@jsroot/lib/langHelper'
-import * as types from './types'
+import Service from './../../common/lib/Service'
 import { getLeagueList } from './leagueAction'
+import Site from '@jsroot/lib/site'
+import * as types from './types'
 
-const Url = Site.resolveClientUrl('api/CommonDataApi/GetSports');
+const Url = Site.resolveClientUrl('api/CommonDataApi/GetSportsForTreeView');
 export const setSelectedSport = (sportId) => {
     return {
         type: types.SET_SELECTED_SPORT,
@@ -19,19 +19,15 @@ export const setSportList = (list) => {
     };
 }
 
-export function getSportList(productCode, date) {
-    return (dispatch) => {
-        DataService.getData(Url, { productCode: productCode, includeSabaSport: productCode === 'SB' })
-            .then(response => {
-                let data = response.data;
-
-                let itemAll = { value: 0, label: LangHelper.getSingleResource('All') };
-                data.unshift(itemAll);
-                dispatch(setSportList(data));
-                dispatch(setSelectedSport(itemAll.value));
-                if (date) {
-                    dispatch(getLeagueList(0, date));
-                }
-            });
+export function getSportList(productCodes, date) {
+    return async (dispatch) => {
+        const response = await DataService.getData(Url, { productCodes: productCodes });
+        const data = response.data;
+        const selectedSports = Service.getSelectedItemFromTreeListItem(data);
+        dispatch(setSportList(data));
+        dispatch(setSelectedSport(selectedSports));
+        if (date) {
+            dispatch(getLeagueList(0, date));
+        }
     };
 }

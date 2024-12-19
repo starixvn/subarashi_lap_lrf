@@ -451,7 +451,7 @@
     <value>Trung Tâm Vé Cược</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>Tất cả các loại cược, bộ lọc Giải đấu và Trận đấu chỉ khả dụng khi có 1 ngày được chọn.</value>
+    <value>Bộ lọc Giải Đấu và Trận Đấu chỉ dành cho Sportsbook và chỉ hiển thị dữ liệu của một ngày nhất định</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>Dữ liệu có sẵn từ {0}</value>

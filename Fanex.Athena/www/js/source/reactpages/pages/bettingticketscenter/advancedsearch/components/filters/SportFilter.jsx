@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
-import Select from 'react-select'
+import { TreeViewSelect } from '@legion-lib/react-multiselect'
+import { TreeViewOption } from '@jsroot/constants/report';
 import LangHelper from '@jsroot/lib/langHelper'
 import PropTypes from 'prop-types';
 
@@ -7,11 +8,36 @@ export const SportFilter = (props) => {
     const {value, onChange, options} = props;
 
     const _renderSportSelectList = () => {
-        return options?.length && (
-            <Select instanceId="SportList"
-                value={value}
-                options={options}
-                onChange={onChange} />
+        if(!options || !options.length){
+            return(
+            <TreeViewSelect
+                language={LangHelper.currentLanguage}
+                id="SportList"
+                dataSource={[]}
+                keyField="Value"
+                valueField="Name"
+                statusField="Checked"
+                texts={{ All: LangHelper.getSingleResource("N_A") }}
+                isAllTextShown={true}
+                hasSearchBox={true}
+                treeViewOption={TreeViewOption}
+                isValid={false} />
+            )
+        }
+
+        return (
+            <TreeViewSelect              
+                language={LangHelper.currentLanguage}
+                id="SportList"
+                dataSource={options}
+                keyField="Value"
+                valueField="Name"
+                statusField="Checked"
+                isAllTextShown={true}
+                hasSearchBox={true}
+                treeViewOption={TreeViewOption}
+                onChange={onChange}
+                isValid={!!value}  />
         );
     }
 

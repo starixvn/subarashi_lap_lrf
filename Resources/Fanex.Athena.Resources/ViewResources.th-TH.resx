@@ -454,7 +454,7 @@
     <value>ศูนย์ตั๋วเดิมพัน</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>ประเภทการเดิมพัน ลีก และตัวกรองการแข่งขันทั้งหมด ใช้ได้เมื่อถูกเลือก 1 วัน</value>
+    <value>ตัวกรองลีกและการแข่งขันใช้ได้เฉพาะกับสปอร์ตบุ๊ค ในบางวันเท่านั้น</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>ข้อมูลจาก {0}</value>

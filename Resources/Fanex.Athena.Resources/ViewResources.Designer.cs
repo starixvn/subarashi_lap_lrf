@@ -1078,7 +1078,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All bettypes, League and Match filter available only when 1 day is selected.
+        ///   Looks up a localized string similar to League and Match filters are only available for Sportsbook on a specific day.
         /// </summary>
         public static string BettingTicketCenter_AdvancedSearchTabNote1 {
             get {

@@ -445,7 +445,7 @@
     <value>Pusat Tiket Taruhan</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>Semua jenis taruhan, Liga dan Filter Pertandingan hanya tersedia ketika 1 hari dipilih</value>
+    <value>Filter Liga dan Pertandingan hanya tersedia untuk Sportsbook pada hari tertentu</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>Data tersedia dari {0}</value>

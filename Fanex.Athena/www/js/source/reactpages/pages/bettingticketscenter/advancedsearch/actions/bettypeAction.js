@@ -1,32 +1,25 @@
 import DataService from '@jsroot/lib/DataService.js'
+import Service from './../../common/lib/Service'
 import Site from '@jsroot/lib/site'
-import LangHelper from '@jsroot/lib/langHelper'
 import Cache from '@jsroot/lib/Cache'
+import AppData from '@jsroot/lib/AppData'
 import * as types from './types'
+import { ALL_SELECTED_TEXT } from './../../common/lib/constants'
 
-const Url = Site.resolveClientUrl('api/CommonDataApi/GetBettypes');
-const BETTYPE_CACHE_KEY = "BETTYPE_CACHE_KEY";
+const BETTYPE_CACHE_KEY = "BTC_SINGLEPLAYER_BETTYPE_CACHE_KEY";
+const Url = Site.resolveClientUrl('api/CommonDataApi/GetBetTypeInTreeList');
 
-function dispatchBettypeList(dispatch, data, hasItemAll) {
-    // Remove Item All
-    data.length && data[0].value == 0 && data.shift();
-    const itemAll = { value: 0, label: LangHelper.getSingleResource('All') };
+let currentCancellationTokenSource = null;
 
-    if (hasItemAll) {
-        data.unshift(itemAll);
-    }
-
+const dispatchBettypeList = (dispatch, data) => {
     dispatch(setBettypeList(data));
-    if (data.length > 0) {
-        const bettype = hasItemAll ? itemAll.value : data[0].value;
-        dispatch(setSelectedBettype(bettype || data[0].value));
-    }
+    dispatch(setSelectedBettype(ALL_SELECTED_TEXT));
 }
 
-export const setSelectedBettype = (bettypeId) => {
+export const setSelectedBettype = (betTypeIds) => {
     return {
         type: types.SET_SELECTED_BETTYPE,
-        data: bettypeId
+        data: betTypeIds
     };
 }
 
@@ -37,20 +30,38 @@ export const setBettypeList = (list) => {
     };
 }
 
-export function getBettypeList(productCode, hasItemAll = false) {
-    const cacheKey = BETTYPE_CACHE_KEY + productCode;
-    return (dispatch) => {
+export const setOrginalBetTypeList = (list) => {
+    return {
+        type: types.SET_ORIGINAL_BETTYPE_LIST,
+        data: list
+    }
+}
+
+export const getBettypeList = (productCodes) => {
+    const cacheKey = BETTYPE_CACHE_KEY + productCodes + AppData.licenseeName;
+    return async (dispatch) => {
         var cacheData = Cache.get(cacheKey);
         if (cacheData) {
-            dispatchBettypeList(dispatch, cacheData, hasItemAll);
+            dispatchBettypeList(dispatch, [...cacheData]);
             return;
         }
-
-        DataService.getData(Url, { productCode: productCode })
-            .then(response => {
-                var data = response.data;
-                Cache.set(cacheKey, data);
-                dispatchBettypeList(dispatch, data, hasItemAll);
-            });
-    };
+        if (currentCancellationTokenSource) {
+            currentCancellationTokenSource.cancel('Operation canceled by the user.');
+        }
+        currentCancellationTokenSource = DataService.genCancellationToken();
+        try {
+            const response = await DataService.getData(Url, { productCodes: productCodes }, currentCancellationTokenSource)
+            currentCancellationTokenSource = null;
+            const data = response.data;
+            Cache.set(cacheKey, data, 10);
+            dispatchBettypeList(dispatch, data);
+        }
+        catch (e) {
+            if (DataService.isCancel(e)) {
+                return;
+            } else {
+                // handle error
+            }
+        }
+    }
 }

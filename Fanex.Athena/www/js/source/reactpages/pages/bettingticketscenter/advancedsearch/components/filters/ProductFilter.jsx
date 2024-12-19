@@ -1,21 +1,23 @@
-import React, { memo } from 'react'
-import Select from 'react-select'
+import React, { useEffect, memo } from 'react'
+import MultipleSelect from '@legion-lib/react-multiselect'
 import LangHelper from '@jsroot/lib/langHelper'
-import AppData from '@jsroot/lib/AppData'
 import PropTypes from 'prop-types';
 
 export const ProductFilter = (props) => {
-    const {value, onChange} = props;
+    const {value, options, onChange} = props;
 
     const _renderProductSelectList = () => {
-        const productList = AppData.productList;
-
-        return productList?.length && (
-            <Select instanceId="ProductList"
-                value={value}
-                options={productList}
-                onChange={onChange} />
-        );
+        return options?.length ? (
+            <MultipleSelect id="ProductList"
+                hasSearchBox={true}
+                language={LangHelper.currentLanguage}
+                dataSource={options}
+                valueField={"value"}
+                keyField={"id"}
+                statusField={"status"}
+                onChange={onChange}
+                isValid={!!value} />
+        ) : null;
     }
 
     return (
@@ -26,8 +28,9 @@ export const ProductFilter = (props) => {
 }
 
 const propTypes = {
-    value: PropTypes.string,
-    onChange: PropTypes.func
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    onChange: PropTypes.func,
+    options: PropTypes.array
 };
 
 ProductFilter.propTypes = propTypes;
