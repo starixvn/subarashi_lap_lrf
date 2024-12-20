@@ -3366,4 +3366,7 @@
   <data name="UpdateOddsGroupConfirmationMsg" xml:space="preserve">
     <value>Pembaruan untuk Pemain yang Ada dan Pemain Baru. Apakah Anda yakin ingin memperbarui Kelompok Ganjil?</value>
   </data>
+  <data name="QuickBetWidget" xml:space="preserve">
+    <value>Widget Taruhan Cepat</value>
+  </data>
 </root>

@@ -3878,4 +3878,7 @@
   <data name="OddsGroupSettingLimitDownlinesMsg" xml:space="preserve">
     <value>This function cannot be performed at this time as it may affect the performance of the whole system. Please contact IT for further assistance.</value>
   </data>
+  <data name="QuickBetWidget" xml:space="preserve">
+    <value>Quick Bet Widget</value>
+  </data>
 </root>

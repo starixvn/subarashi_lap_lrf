@@ -3432,4 +3432,7 @@
   <data name="UpdateOddsGroupConfirmationMsg" xml:space="preserve">
     <value>Bạn đang cập nhật Nhóm Tỷ Lệ Cược cho cả người chơi mới và cũ. Bạn có chắc muốn tiếp tục?</value>
   </data>
+  <data name="QuickBetWidget" xml:space="preserve">
+    <value>Công cụ đặt cược nhanh</value>
+  </data>
 </root>

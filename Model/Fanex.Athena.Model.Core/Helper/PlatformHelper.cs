@@ -1,21 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Resources;
-
-namespace Fanex.Athena.Model.Core.Helper
+﻿namespace Fanex.Athena.Model.Core.Helper
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using DataDomain;
+    using Resources;
+
     public static class PlatformHelper
     {
-        public static IDictionary<int, string> GetPlatformList(int specialPlatform)
-        {
-            if (specialPlatform == SpecialPlatform.Jollysports || specialPlatform == SpecialPlatform.JollysportCV)
-            {
-                return JollysportsPlatform;
-            }
-            return NormalPlatform;
-        }
-
         private static IDictionary<int, string> NormalPlatform => new Dictionary<int, string>
         {
             { PlatformType.DesktopNewAsia, ViewResources.DesktopNewAsia },
@@ -36,6 +27,7 @@ namespace Fanex.Athena.Model.Core.Helper
             { PlatformType.Tablet, ViewResources.Tablet },
             { PlatformType.DeepLink, ViewResources.DeepLink },
             { PlatformType.WAP, ViewResources.WAP },
+            { PlatformType.QuickBetWidget, ViewResources.QuickBetWidget },
             { PlatformType.ChatRoom, ViewResources.ChatRoom },
             { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
         };
@@ -44,8 +36,18 @@ namespace Fanex.Athena.Model.Core.Helper
         {
             { PlatformType.Desktop, ViewResources.Desktop },
             { PlatformType.Mobile, ViewResources.Mobile },
-            { PlatformType.Others, ViewResources.BetfromOthers },
+            { PlatformType.Others, ViewResources.BetfromOthers }
         };
+
+        public static IDictionary<int, string> GetPlatformList(int specialPlatform)
+        {
+            if (specialPlatform == SpecialPlatform.Jollysports || specialPlatform == SpecialPlatform.JollysportCV)
+            {
+                return JollysportsPlatform;
+            }
+
+            return NormalPlatform;
+        }
 
         public static string GetPlatformName(int type)
         {
@@ -69,7 +71,8 @@ namespace Fanex.Athena.Model.Core.Helper
                 return false;
             }
 
-            return type == "All" || type.Split(',').Any(x => JollysportsPlatform.ContainsKey(int.Parse(x)) || NormalPlatform.ContainsKey(int.Parse(x)) || int.Parse(x) == PlatformType.All);
+            return type == "All" || type.Split(',').Any(x =>
+                JollysportsPlatform.ContainsKey(int.Parse(x)) || NormalPlatform.ContainsKey(int.Parse(x)) || int.Parse(x) == PlatformType.All);
         }
     }
 }

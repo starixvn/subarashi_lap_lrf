@@ -3426,4 +3426,7 @@
   <data name="UpdateOddsGroupConfirmationMsg" xml:space="preserve">
     <value>อัปเดตสำหรับผู้เล่นทั้งที่มีอยู่และผู้เล่นใหม่ คุณแน่ใจหรือว่าต้องการอัปเดตอัตราต่อรองกลุ่ม?</value>
   </data>
+  <data name="QuickBetWidget" xml:space="preserve">
+    <value>วิดเจ็ตเดิมพันด่วน</value>
+  </data>
 </root>

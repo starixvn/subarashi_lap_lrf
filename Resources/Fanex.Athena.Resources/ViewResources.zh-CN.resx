@@ -3403,4 +3403,7 @@
   <data name="UpdateOddsGroupConfirmationMsg" xml:space="preserve">
     <value>此异动将生效于所有玩家，确认要更新水位组别?</value>
   </data>
+  <data name="QuickBetWidget" xml:space="preserve">
+    <value>快捷投注元件</value>
+  </data>
 </root>
