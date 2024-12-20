@@ -1339,6 +1339,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The number of tickets matching your filter exceeds the system&apos;s processing capacity. Please try filtering by fewer days or selecting a single option on the &quot;Bet type&quot;, the &quot;Product&quot; filter.
+        /// </summary>
+        public static string BTCMaxTicketLimitMsg {
+            get {
+                return ResourceManager.GetString("BTCMaxTicketLimitMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buy Back Amount.
         /// </summary>
         public static string BuyBackAmount {

@@ -3406,4 +3406,7 @@
   <data name="QuickBetWidget" xml:space="preserve">
     <value>快捷投注元件</value>
   </data>
+  <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
+    <value>搜寻结果的数量超过系统限制，请缩减搜寻条件或根据投注类别及运动进行过滤</value>
+  </data>
 </root>

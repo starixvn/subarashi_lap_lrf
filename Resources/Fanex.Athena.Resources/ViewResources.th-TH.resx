@@ -3429,4 +3429,7 @@
   <data name="QuickBetWidget" xml:space="preserve">
     <value>วิดเจ็ตเดิมพันด่วน</value>
   </data>
+  <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
+    <value>จำนวนผลลัพธ์การค้นหาเกินขีดจำกัดของระบบ กรุณาลดเงื่อนไขการค้นหาหรือกรองตามประเภทการเดิมพันและกีฬา</value>
+  </data>
 </root>

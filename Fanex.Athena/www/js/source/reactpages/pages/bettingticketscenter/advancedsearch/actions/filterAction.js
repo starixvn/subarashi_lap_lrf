@@ -20,3 +20,10 @@ export const setProductList = data => {
         data: data
     }
 }
+
+export const setSweetAlertOption = options => {
+    return {
+        type: types.SET_SWEET_ALERT_OPTION,
+        data: options
+    }
+}

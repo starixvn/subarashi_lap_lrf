@@ -19,3 +19,9 @@ export const productList = createReducer(AppData.productList, {
         return action.data;
     }
 });
+
+export const sweetAlertOption = createReducer(null, {
+    [types.SET_SWEET_ALERT_OPTION](prevState, action) {
+        return action.data && {...action.data };
+    }
+})

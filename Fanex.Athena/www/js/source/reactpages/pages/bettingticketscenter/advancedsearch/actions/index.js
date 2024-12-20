@@ -1,4 +1,4 @@
-﻿import * as gridDataAction from '@jsroot/actions/gridDataAction'
+﻿import * as gridDataAction from './gridDataAction'
 import * as productAction from '@jsroot/actions/productAction'
 import * as currencyAction from '@jsroot/actions/currencyAction'
 import * as baseCurrencyAction from '@jsroot/actions/baseCurrencyAction'

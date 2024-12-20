@@ -1,5 +1,5 @@
 ﻿import { combineReducers } from 'redux';
-import * as gridDataReducer from '@jsroot/reducers/gridDataReducer.js'
+import * as gridDataReducer from './gridDataReducer.js'
 import * as productReducer from '@jsroot/reducers/productReducer'
 import * as currencyReducer from '@jsroot/reducers/currencyReducer'
 import * as baseCurrencyReducer from '@jsroot/reducers/baseCurrencyReducer'
