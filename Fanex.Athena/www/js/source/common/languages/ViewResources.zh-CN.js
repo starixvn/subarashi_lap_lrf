@@ -1,4 +1,4 @@
-﻿// Generated at: 12/11/2024 3:00:52 PM
+﻿// Generated at: 12/20/2024 9:33:15 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -728,6 +728,7 @@ Promotion:"促销活动",
 PromotionDetails:"活动详情",
 PromotionPrize:"活动奖金",
 PromotionType:"活动类型",
+QuickBetWidget:"快捷投注元件",
 RB:"赛马",
 ReachedDate:"到达警示值日期",
 RealName:"真实姓名",

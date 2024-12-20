@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/11/2024 3:00:51 PM
+// Generated at: 12/20/2024 9:33:15 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -917,6 +917,7 @@ window._language_en_US = {
   PromotionDetails: "Promotion Details",
   PromotionPrize: "Promotion Prize",
   PromotionType: "Promotion Type",
+  QuickBetWidget: "Quick Bet Widget",
   RB: "RB",
   ReachedDate: "Reached Threshold Date",
   RealName: "Real Name",

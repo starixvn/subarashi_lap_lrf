@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/11/2024 3:00:51 PM
+// Generated at: 12/20/2024 9:33:15 AM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -865,6 +865,7 @@ window._language_id_ID = {
   PromotionDetails: "Rincian Promosi",
   PromotionPrize: "Hadiah Promosi",
   PromotionType: "Jenis Promosi",
+  QuickBetWidget: "Widget Taruhan Cepat",
   ReachedDate: "Tanggal Batas Capai",
   RealName: "Nama Asli",
   RealTimeReport: "Laporan Real Time",

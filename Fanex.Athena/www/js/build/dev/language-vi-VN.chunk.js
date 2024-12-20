@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/11/2024 3:00:52 PM
+﻿// Generated at: 12/20/2024 9:33:15 AM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -881,6 +881,7 @@ Promotion:"Khuyến mãi",
 PromotionDetails:"Chi Tiết Khuyến Mãi",
 PromotionPrize:"Thưởng khuyến mãi",
 PromotionType:"Loại Khuyến mãi",
+QuickBetWidget:"Công cụ đặt cược nhanh",
 RB:"Rút Bỏ",
 ReachedDate:"Ngày đạt Hạn mức",
 RealName:"Tên thật",
