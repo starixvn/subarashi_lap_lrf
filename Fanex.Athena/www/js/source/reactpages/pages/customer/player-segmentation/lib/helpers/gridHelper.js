@@ -1,11 +1,12 @@
 ﻿import React from 'react';
-import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
 import AppData from '@jsroot/lib/AppData';
 import { SortMapper } from '../constants';
 import { SubsidiaryViewType } from '@jsroot/constants/report'
-import CustomerClassCell from '../../tabs/problem-player/components/grid/CustomerClassCell';
+import { HeaderRow, HeaderCell } from '@9softstudio/react-grid';
+import CustomerClassCell from '../../components/CustomerClassCell';
 
 export default class GridHelper {
+
     static renderHeader(dataHeaders) {
         return (
             <HeaderRow style={{ height: 32 }}>
@@ -26,7 +27,6 @@ export default class GridHelper {
 
         return <>{cell.childComponent ? cell.childComponent : cell.text}</>;
     }
-
     static calculateTopPosition(dropdownHeight = 0, currentTop) {
         const innerHeight = window.innerHeight;
         const expectedHeight = dropdownHeight + currentTop + 20;

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import LangHelper from '@jsroot/lib/langHelper';
 import Popup from '@jsroot/components/popup/Popup';
 
@@ -7,7 +7,7 @@ export default class CustomerClassCell extends React.Component {
         super(props);
 
         this.state = { isShowCustomerClassInformation: false }
-    };
+    }
 
     showCustomerClassInformation = (e) => {
         this.setState({ isShowCustomerClassInformation: true });

@@ -4,14 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Fanex.Athena.DataAccess.Customer.Interfaces;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-    using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Common.Extensions;
-    using Fanex.Data;
+    using Data;
+    using Extension.Helper;
+    using Interfaces;
+    using Model.Core.DTO.Common;
+    using Model.Customer.DTO.PlayerSegmentation;
+    using Model.Customer.MetaModel;
 
     public class PlayerSegmentationDataAccess : BasePlayerSegmentationDataAccess, IPlayerSegmentationDataAccess
     {
@@ -21,84 +19,6 @@
         private const string ToDateColumn = "ToDate";
         private const string ErrCodeColumn = "ErrCode";
         private const string LangkeyColumn = "Langkey";
-
-        public async Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel)
-        {
-            const string spName = "Lrf_ProblemAccount_LicenseeProblemPlayerSel";
-            using (var db = GetObjectDb(spName))
-            {
-                AddCommmonParams(db, metaModel);
-                AddPlayerListBaseParams(db, metaModel);
-                AddProblemPlayerListParams(db, metaModel);
-
-                var playerList = await ReadPlayerList(db, (reader, player) =>
-                {
-                    player.LastModifiedDate = reader.ToDateTime("CreatedDate").ToString(FormatKey.DateTimeFormatIn24H);
-                    player.Reason = reader.ToString("Reason");
-                });
-
-                var total = ReadTotal(db);
-
-                var result = new ApiPagingResult<PlayerInfo>(playerList,
-                    metaModel.PageIndex, metaModel.PageSize,
-                    metaModel.OrderCol, metaModel.SortType,
-                    total);
-                return result;
-            }
-        }
-
-        public async Task<ApiPagingResult<SabaVirtualPlayer>> GetSabaVirtualPlayerListAsync(SabaVirtualPlayerListMetaModel metaModel)
-        {
-            const string spName = "Lrf_Licensee_DangerLevelSel";
-
-            using (var db = GetObjectDb(spName))
-            {
-                AddCommmonParams(db, metaModel);
-                db.SetParameterValue(FromDateColumn, metaModel.FromDate);
-                db.SetParameterValue(ToDateColumn, metaModel.ToDate);
-                db.SetParameterValue("UserName", SqlHelper.ToSqlTextSearch(metaModel.UserName));
-                db.SetParameterValue("IsCheckAll", metaModel.IsGetAll);
-                db.SetParameterValue("OrderCol", metaModel.OrderCol);
-                db.SetParameterValue("SortType", metaModel.SortType);
-                db.SetParameterValue("PageIndex", metaModel.PageIndex);
-                db.SetParameterValue("PageSize", metaModel.PageSize);
-                db.SetParameterValue("TotalItems", 0);
-                db.SetParameterValue(LangkeyColumn, metaModel.Language);
-                db.SetParameterValue("Sporttype", metaModel.SportIdList);
-                db.SetParameterValue("Level", metaModel.LevelIdList);
-
-                var playerList = new LinkedList<SabaVirtualPlayer>();
-
-                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
-                {
-                    while (reader.Read())
-                    {
-                        var lastModifiedDate = reader["LastModifiedDate"] != DBNull.Value ? reader.ToDateTime("LastModifiedDate").ToString(FormatKey.DateTimeFormatIn24H) : "-";
-
-                        var player = new SabaVirtualPlayer
-                        {
-                            CustId = Convert.ToInt32(reader["CustId"]),
-                            ExternalId = reader[ExternalIdColumn] as string,
-                            SystemId = reader[SystemIdColumn] as string,
-                            LastModifiedDate = lastModifiedDate,
-                            SoccerLevel = Convert.ToInt16(reader["SoccerLevel"]),
-                            BasketballLevel = Convert.ToInt16(reader["BasketballLevel"]),
-                            AgentId = Convert.ToInt32(reader["AgentID"])
-                        };
-
-                        playerList.AddLast(player);
-                    }
-                }
-
-                var total = ReadTotal(db);
-
-                var result = new ApiPagingResult<SabaVirtualPlayer>(playerList,
-                    metaModel.PageIndex, metaModel.PageSize,
-                    metaModel.OrderCol, metaModel.SortType,
-                    total);
-                return result;
-            }
-        }
 
         public async Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel)
         {
@@ -113,61 +33,15 @@
                 var total = ReadTotal(db);
 
                 var result = new ApiPagingResult<PlayerInfo>(playerList,
-                                   metaModel.PageIndex, metaModel.PageSize,
-                                   metaModel.OrderCol, metaModel.SortType,
-                                   total);
+                    metaModel.PageIndex, metaModel.PageSize,
+                    metaModel.OrderCol, metaModel.SortType,
+                    total);
                 return result;
             }
         }
 
-        public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)
-        {
-            const string spName = "Lrf_ProblemAccount_ReasonGroupSel";
-            using (var db = GetObjectDb(spName))
-            {
-                db.SetParameterValue(LangkeyColumn, langKey);
-                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
-                {
-                    var result = new List<ReasonGroup>();
-                    while (reader.Read())
-                    {
-                        var record = new ReasonGroup
-                        {
-                            ReasonGroupID = Convert.ToInt16(reader["ReasonGroupID"]),
-                            ReasonGroupName = reader["ReasonGroup"] as string,
-                            CustomerClass = Convert.ToInt16(reader["CustomerClass"])
-                        };
-                        result.Add(record);
-                    }
-                    return result;
-                }
-            }
-        }
-
-        public async Task<IEnumerable<SubIssue>> GetAbnormalSubIssueAsync(string langKey)
-        {
-            const string spName = "Lrf_AbnormalBet_SubIssueSel";
-            using (var db = GetObjectDb(spName))
-            {
-                db.SetParameterValue(LangkeyColumn, langKey);
-                using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
-                {
-                    var result = new List<SubIssue>();
-                    while (reader.Read())
-                    {
-                        var record = new SubIssue
-                        {
-                            SubIssueTypeId = Convert.ToInt16(reader["SubIssueTypeId"]),
-                            SubIssueTypeName = reader["SubIssueTypeName"] as string,
-                        };
-                        result.Add(record);
-                    }
-                    return result;
-                }
-            }
-        }
-
-        public async Task<(string ListAffectCustId, IEnumerable<UpdateStatusPlayerResult> ListUpdateStatusPlayerResult)> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel)
+        public async Task<(string ListAffectCustId, IEnumerable<UpdateStatusPlayerResult> ListUpdateStatusPlayerResult)> UpdateVipStatusAsync(
+            UpdateStatusPlayerMetaModel metaModel)
         {
             const string spName = "Lrf_ProblemAccount_LicenseeVipPlayerUpd";
             const int commandTimeout = 180;
@@ -189,6 +63,7 @@
                         result.Add(record);
                     }
                 }
+
                 var listAffectCustId = Convert.ToString(db.GetParameterValue("CustIDList"));
                 return (listAffectCustId, result);
             }
@@ -237,7 +112,9 @@
                         player.AgentId = Convert.ToInt32(reader["recommend"]);
                         player.CurrentWinningThreshold = Convert.ToDecimal(reader["CurrentWinningThreshold"]);
                         player.NoOfReached = int.TryParse(reader["NoOfReached"]?.ToString(), out int noOfReached) ? (int?)noOfReached : null;
-                        player.LastReachedDate = DateTime.TryParse(reader["LastReachedDate"]?.ToString(), out DateTime lastReachedDate) ? (DateTime?)lastReachedDate : null;
+                        player.LastReachedDate = DateTime.TryParse(reader["LastReachedDate"]?.ToString(), out DateTime lastReachedDate)
+                            ? (DateTime?)lastReachedDate
+                            : null;
                         player.ProblemPlayer = Convert.ToBoolean(reader["ProblemPlayer"]);
                         player.VipPlayer = Convert.ToBoolean(reader["VIPPlayer"]);
 
@@ -256,7 +133,8 @@
             }
         }
 
-        public async Task<IEnumerable<MonitoredPlayerReachedHistory>> GetMonitoredPlayerReachedHistoryAsync(MonitoredPlayerReachedHistoryMetaModel metaModel)
+        public async Task<IEnumerable<MonitoredPlayerReachedHistory>> GetMonitoredPlayerReachedHistoryAsync(
+            MonitoredPlayerReachedHistoryMetaModel metaModel)
         {
             const string spName = "Acc_Dep_WLMonitored_Player_ReachDetail_Sel";
             using (var db = GetObjectDb(spName))
@@ -371,6 +249,7 @@
                         commandResult.Add(result);
                     }
                 }
+
                 return commandResult;
             }
         }
@@ -383,18 +262,10 @@
             objectDb.SetParameterValue("CustIDList", null);
         }
 
-        private static void AddProblemPlayerListParams(IObjectDb objectDb, ProblemPlayerListMetaModel metaModel)
-        {
-            objectDb.SetParameterValue(FromDateColumn, metaModel.FromDate);
-            objectDb.SetParameterValue(ToDateColumn, metaModel.ToDate);
-            objectDb.SetParameterValue("IsCheckAll", metaModel.IsGetAll);
-            objectDb.SetParameterValue("ReasonGroupID", metaModel.ReasonGroupIdList);
-            objectDb.SetParameterValue(LangkeyColumn, metaModel.Language);
-        }
-
         private static void AddVipPlayerListParams(IObjectDb objectDb, VipPlayerListMetaModel metaModel)
         {
-            objectDb.SetParameterValue("FullCustomerClass", string.Join(",", metaModel.RiskLevels.Select(_ => string.Join(",", _.CustomerClassList))));
+            objectDb.SetParameterValue("FullCustomerClass",
+                string.Join(",", metaModel.RiskLevels.Select(_ => string.Join(",", _.CustomerClassList))));
             objectDb.SetParameterValue("VipOption", metaModel.VipOption);
             objectDb.SetParameterValue("IsCheckAll", metaModel.IsCheckAll);
             objectDb.SetParameterValue(FromDateColumn, metaModel.FromDate);

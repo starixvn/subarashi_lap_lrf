@@ -3,15 +3,15 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using Fanex.Athena.Api.Base;
-    using Fanex.Athena.Api.Base.Attributes;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Customer.MetaModel;
+    using Base;
+    using Base.Attributes;
+    using Model.Auth.DataDomain;
+    using Model.Customer.MetaModel;
 
     public partial class PlayerSegmentationController : BaseApiController
     {
         [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.PlayerProblemManagement, PermissionKeys.PlayerVIPManagement)]
+        [ApiFunctionAuthorization(PermissionKeys.PlayerVIPManagement)]
         [ValidationApiRequest]
         [ApiAutoBindMetaModel(BindAgent = true, BindShowingBetFromIP = true)]
         public async Task<dynamic> AbnormalBets(AbnormalBetListMetaModel metaModel)
@@ -21,9 +21,9 @@
             BindAbnormalBetsMetaModel(metaModel);
 
             var result = await _betListApiClient.PostAsync(
-                    betlistApi,
-                    metaModel,
-                    SessionService.UserSession.Language).ConfigureAwait(false);
+                betlistApi,
+                metaModel,
+                SessionService.UserSession.Language).ConfigureAwait(false);
 
             return result;
         }

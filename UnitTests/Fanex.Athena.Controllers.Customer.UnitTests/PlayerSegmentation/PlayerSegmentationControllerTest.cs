@@ -1,28 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Fanex.Athena.Controllers.Base.UnitTests;
-using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Auth.DataDomain;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using Fanex.Athena.Model.Customer.ViewModel;
-using Fanex.Athena.Service.Core.Users.Interfaces;
-using Fanex.Athena.Service.Customer.Interfaces;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.UnitTest.Common.Helpers;
-using NSubstitute;
-using NUnit.Framework;
-
-namespace Fanex.Athena.Controllers.Customer.UnitTests
+﻿namespace Fanex.Athena.Controllers.Customer.UnitTests
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Base.UnitTests;
+    using Model.Auth;
+    using Model.Auth.DataDomain;
+    using Model.Customer.ViewModel;
+    using NSubstitute;
+    using NUnit.Framework;
+    using Service.Core.Users.Interfaces;
+    using Service.Customer.Interfaces;
+    using Service.StatelessCore.Interfaces;
+
     [TestFixture]
     public partial class PlayerSegmentationControllerTest : CultureBaseControllerHelperTest
     {
-        private IAuthorizationService _authService;
-        private ISubsidiaryService _subsidiaryService;
-        private IPlayerSegmentationService _playerService;
-        private ICustomerClassService _customerClassService;
-
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -34,7 +26,6 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
         public void SetUp()
         {
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
-            _playerService = Substitute.For<IPlayerSegmentationService>();
             _authService = Substitute.For<IAuthorizationService>();
             _customerClassService = Substitute.For<ICustomerClassService>();
         }
@@ -43,10 +34,13 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
         public void TearDown()
         {
             _subsidiaryService.ClearReceivedCalls();
-            _playerService.ClearReceivedCalls();
             _authService.ClearReceivedCalls();
             _customerClassService.ClearReceivedCalls();
         }
+
+        private IAuthorizationService _authService;
+        private ISubsidiaryService _subsidiaryService;
+        private ICustomerClassService _customerClassService;
 
         [Test]
         public async Task Index_WhenCall_ReturnViewCorrect()
@@ -89,33 +83,33 @@ namespace Fanex.Athena.Controllers.Customer.UnitTests
             }
         }
 
-        [Test]
-        public async Task Index_WhenCall_ReturnReasonListCorrect()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                var fakeReasons = FakeHelper.Create<List<ReasonGroup>>();
-                var fakeLanguage = FakeHelper.Create<string>();
-                LangService.GetCurrentLanguage().Returns(fakeLanguage);
-                _playerService.GetReasonGroupListAsync(fakeLanguage).Returns(Task.FromResult<IEnumerable<ReasonGroup>>(fakeReasons));
-                var expectedReasons = fakeReasons.ToDictionary(_ => _.ReasonGroupID, _ => _.ReasonGroupName);
+        //[Test]
+        //public async Task Index_WhenCall_ReturnReasonListCorrect()
+        //{
+        //    using (var controller = CreateController())
+        //    {
+        //        // Arrange
+        //        var fakeReasons = FakeHelper.Create<List<ReasonGroup>>();
+        //        var fakeLanguage = FakeHelper.Create<string>();
+        //        LangService.GetCurrentLanguage().Returns(fakeLanguage);
+        //        _playerService.GetReasonGroupListAsync(fakeLanguage).Returns(Task.FromResult<IEnumerable<ReasonGroup>>(fakeReasons));
+        //        var expectedReasons = fakeReasons.ToDictionary(_ => _.ReasonGroupID, _ => _.ReasonGroupName);
 
-                // Action
-                var result = await controller.Index();
-                var vm = result.Model as PlayerSegmentationViewModel;
+        //        // Action
+        //        var result = await controller.Index();
+        //        var vm = result.Model as PlayerSegmentationViewModel;
 
-                // Assert
-                Assert.AreEqual(expectedReasons, vm.ProblemPlayerVM.ReasonList);
-            }
-        }
+        //        // Assert
+        //        Assert.AreEqual(expectedReasons, vm.ProblemPlayerVM.ReasonList);
+        //    }
+        //}
 
         private PlayerSegmentationController CreateController()
         {
-            return new PlayerSegmentationController(_authService, _subsidiaryService, _playerService, _customerClassService)
+            return new PlayerSegmentationController(_authService, _subsidiaryService, _customerClassService)
             {
                 LangService = LangService,
-                SessionServiceInstance = SessionService,
+                SessionServiceInstance = SessionService
             };
         }
     }

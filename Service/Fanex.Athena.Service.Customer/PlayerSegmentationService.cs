@@ -1,39 +1,37 @@
-﻿using Autofac.Features.AttributeFilters;
-using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
-
-namespace Fanex.Athena.Service.Customer
+﻿namespace Fanex.Athena.Service.Customer
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Fanex.Athena.DataAccess.Customer.Interfaces;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.Helper;
-    using Fanex.Athena.Model.Customer.DTO;
-    using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-    using Fanex.Athena.Model.Customer.MetaModel;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-    using Fanex.Logging;
+    using Autofac.Features.AttributeFilters;
+    using Core.Users.Interfaces;
+    using DataAccess.Customer.Interfaces;
+    using Interfaces;
+    using Logging;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using Model.Core.Helper;
+    using Model.Customer.DTO;
+    using Model.Customer.DTO.PlayerSegmentation;
+    using Model.Customer.MetaModel;
+    using Model.Customer.MetaModel.CustomerLog;
     using Newtonsoft.Json;
+    using Resources;
+    using StatelessCore.Interfaces;
 
     public class PlayerSegmentationService : IPlayerSegmentationService
     {
-        private readonly IPlayerSegmentationDataAccess _playerDataAccess;
-        private readonly IBusinessLogService _businessLogService;
-        private readonly ISessionService _sessionService;
-        private readonly ISubsidiaryService _subsidiaryService;
-        private readonly ICustomerClassService _customerClassService;
-        private readonly ICTSApiClient _ctsApiClient;
-        private readonly ILogger _logger;
-
         private const string ADD_LIC_VIP_PATH = "/api/cts/AddLicVIP";
         private const string REMOVE_LIC_VIP_PATH = "/api/cts/RemoveLicVIP";
         private const string HEALTH_CHECK_PATH = "/api/cts/HealthCheck";
+        private readonly IBusinessLogService _businessLogService;
+        private readonly ICTSApiClient _ctsApiClient;
+        private readonly ICustomerClassService _customerClassService;
+        private readonly ILogger _logger;
+        private readonly IPlayerSegmentationDataAccess _playerDataAccess;
+        private readonly ISessionService _sessionService;
+        private readonly ISubsidiaryService _subsidiaryService;
 
         public PlayerSegmentationService(
             ISessionService sessionService,
@@ -43,7 +41,7 @@ namespace Fanex.Athena.Service.Customer
             ISubsidiaryService subsidiaryService,
             ICTSApiClient cTSApiClient,
             ILogger logger
-            )
+        )
         {
             _sessionService = sessionService;
             _customerClassService = customerClassService;
@@ -52,22 +50,6 @@ namespace Fanex.Athena.Service.Customer
             _subsidiaryService = subsidiaryService;
             _ctsApiClient = cTSApiClient;
             _logger = logger;
-        }
-
-        public async Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel)
-        {
-            var result = await _playerDataAccess.GetProblemPlayerListAsync(metaModel);
-            BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
-
-            return result;
-        }
-
-        public async Task<ApiPagingResult<SabaVirtualPlayer>> GetSabaVirtualPlayerListAsync(SabaVirtualPlayerListMetaModel metaModel)
-        {
-            var result = await _playerDataAccess.GetSabaVirtualPlayerListAsync(metaModel);
-            BindSubsidiaryName(result.Data, metaModel.SubsidiaryList);
-
-            return result;
         }
 
         public async Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel)
@@ -115,7 +97,7 @@ namespace Fanex.Athena.Service.Customer
                     ActionDetailId = LogActionDetailId.UpdatingVIPPlayer,
                     Status = updateResult.Any(r => r.Code == successCode) ? LogText.Success : LogText.False,
                     NewValue = metaModel.IsVip ? LogText.On : LogText.Off,
-                    OldValue = !metaModel.IsVip ? LogText.On : LogText.Off,
+                    OldValue = !metaModel.IsVip ? LogText.On : LogText.Off
                 };
                 _businessLogService.Write(BusinessLogType.PlayerSegmentationUpdatePlayer, logMetaModel);
 
@@ -127,12 +109,6 @@ namespace Fanex.Athena.Service.Customer
             return updateResult;
         }
 
-        public async Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey)
-            => await _playerDataAccess.GetReasonGroupListAsync(langKey);
-
-        public async Task<IEnumerable<SubIssue>> GetAbnormalSubIssueAsync(string langKey)
-            => await _playerDataAccess.GetAbnormalSubIssueAsync(langKey);
-
         public async Task<ApiPagingResult<MonitoredPlayerInfo>> GetMonitoredPlayerListAsync(MonitoredPlayerListMetaModel metaModel)
         {
             var xmlReachList = await _playerDataAccess.GetXmlPresenterForMonitoredPlayerReachLishtAsync(metaModel);
@@ -143,7 +119,8 @@ namespace Fanex.Athena.Service.Customer
             return result;
         }
 
-        public Task<IEnumerable<MonitoredPlayerReachedHistory>> GetMonitoredPlayerReachedHistoryAsync(MonitoredPlayerReachedHistoryMetaModel metaModel)
+        public Task<IEnumerable<MonitoredPlayerReachedHistory>> GetMonitoredPlayerReachedHistoryAsync(
+            MonitoredPlayerReachedHistoryMetaModel metaModel)
             => _playerDataAccess.GetMonitoredPlayerReachedHistoryAsync(metaModel);
 
         public Task<MonitoredPlayerCommand> InsertMonitoredPlayerAsync(InsertMonitoredPlayerMetaModel metaModel)
@@ -162,14 +139,17 @@ namespace Fanex.Athena.Service.Customer
             return CombineResult(commandResults);
         }
 
+        public bool IsNormalView(BasePlayerListMetaModel metaModel) =>
+            _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, _sessionService.UserSession);
+
         private async Task LogAbnormalRequest(UpdateStatusPlayerMetaModel metaModel, IEnumerable<UpdateStatusPlayerResult> updateResult)
         {
             const int successCode = 0;
             if (updateResult.Any(r => r.Code == successCode))
             {
-                await _logger.ErrorAsync($"Sp return empty list custid when UpdateVipStatus \n" +
-                    $"Sp param: {JsonConvert.SerializeObject(metaModel)} \n" +
-                    $"Return result: {JsonConvert.SerializeObject(updateResult)}");
+                await _logger.ErrorAsync("Sp return empty list custid when UpdateVipStatus \n" +
+                                         $"Sp param: {JsonConvert.SerializeObject(metaModel)} \n" +
+                                         $"Return result: {JsonConvert.SerializeObject(updateResult)}");
             }
         }
 
@@ -188,7 +168,8 @@ namespace Fanex.Athena.Service.Customer
             var index = 0;
             foreach (var player in metaModel.BatchPlayer)
             {
-                body.AppendFormat("<CustList RID=\"{0}\" U1=\"{1}\" U2=\"{2}\" WT=\"{3}\" />", ++index, player.SystemId, player.ExternalId, player.WinningThreshold);
+                body.AppendFormat("<CustList RID=\"{0}\" U1=\"{1}\" U2=\"{2}\" WT=\"{3}\" />", ++index, player.SystemId, player.ExternalId,
+                    player.WinningThreshold);
             }
 
             metaModel.BatchPlayerXml = "<ROOT>" + body + "</ROOT>";
@@ -202,7 +183,8 @@ namespace Fanex.Athena.Service.Customer
                 return;
             }
 
-            var subsidiaries = _subsidiaryService.GetSubsidiaryList(_sessionService.UserSession, _sessionService.LicenseeSession.LicenseeName, subsidiaryList);
+            var subsidiaries =
+                _subsidiaryService.GetSubsidiaryList(_sessionService.UserSession, _sessionService.LicenseeSession.LicenseeName, subsidiaryList);
             if (!subsidiaries.Any())
             {
                 return;
@@ -219,11 +201,9 @@ namespace Fanex.Athena.Service.Customer
         {
             players.ToList().ForEach(player =>
             {
-                player.RiskLevel = riskLevels.FirstOrDefault(_ => _.CustomerClassList.Contains(player.CustomerClass))?.Name ?? ViewResources.Uncategorized;
+                player.RiskLevel = riskLevels.FirstOrDefault(_ => _.CustomerClassList.Contains(player.CustomerClass))?.Name ??
+                                   ViewResources.Uncategorized;
             });
         }
-
-        public bool IsNormalView(BasePlayerListMetaModel metaModel) =>
-            _subsidiaryService.IsIgnoredSubsidiarySearch(metaModel.SubsidiarySearch, metaModel.SubsidiaryList, _sessionService.UserSession);
     }
 }

@@ -1,35 +1,25 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Fanex.Athena.DataAccess.Customer.Interfaces;
-using Fanex.Athena.Model.Auth;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using Fanex.Athena.Model.Customer.MetaModel;
-using Fanex.Athena.Model.Report.DTO;
-using Fanex.Athena.Service.Core.Users.Interfaces;
-using Fanex.Athena.Service.Customer.Interfaces;
-using Fanex.Athena.Service.StatelessCore.Interfaces;
-using Fanex.Athena.UnitTest.Common.Helpers;
-using Fanex.Logging;
-using FluentAssertions;
-using NSubstitute;
-using NUnit.Framework;
-
-namespace Fanex.Athena.Service.Customer.UnitTests
+﻿namespace Fanex.Athena.Service.Customer.UnitTests
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Core.Users.Interfaces;
+    using DataAccess.Customer.Interfaces;
+    using FluentAssertions;
+    using Interfaces;
+    using Logging;
+    using Model.Auth;
+    using Model.Core.DTO.Common;
+    using Model.Customer.DTO.PlayerSegmentation;
+    using Model.Customer.MetaModel;
+    using Model.Report.DTO;
+    using NSubstitute;
+    using NUnit.Framework;
+    using StatelessCore.Interfaces;
+    using UnitTest.Common.Helpers;
+
     [TestFixture]
     public class PlayerSegmentationServiceTest
     {
-        private IPlayerSegmentationDataAccess _playerDataAccess;
-        private ISessionService _sessionService;
-        private IBusinessLogService _businessLogService;
-        private ISubsidiaryService _subsidiaryService;
-        private ICustomerClassService _customerClassService;
-        private ICTSApiClient _ctsApiClient;
-        private ILogger _logger;
-
-        private PlayerSegmentationService _targetService;
-
         [SetUp]
         public void SetUp()
         {
@@ -40,7 +30,8 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             _ctsApiClient = Substitute.For<ICTSApiClient>();
             _logger = Substitute.For<ILogger>();
             _businessLogService = Substitute.For<IBusinessLogService>();
-            _targetService = new PlayerSegmentationService(_sessionService, _customerClassService, _playerDataAccess, _businessLogService, _subsidiaryService, _ctsApiClient, _logger);
+            _targetService = new PlayerSegmentationService(_sessionService, _customerClassService, _playerDataAccess, _businessLogService,
+                _subsidiaryService, _ctsApiClient, _logger);
         }
 
         [TearDown]
@@ -54,65 +45,75 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             _logger = null;
         }
 
-        [Test]
-        public async Task GetProblemPlayerListAsync_WhenCall_ReturnDataCorrectly()
-        {
-            //Arrange
-            var metaModel = FakeHelper.Create<ProblemPlayerListMetaModel>();
+        private IPlayerSegmentationDataAccess _playerDataAccess;
+        private ISessionService _sessionService;
+        private IBusinessLogService _businessLogService;
+        private ISubsidiaryService _subsidiaryService;
+        private ICustomerClassService _customerClassService;
+        private ICTSApiClient _ctsApiClient;
+        private ILogger _logger;
 
-            var rawData = new ApiPagingResult<PlayerInfo>
-            {
-                Data = new List<PlayerInfo>
-                {
-                    new PlayerInfo
-                    {
-                        AgentId = 1
-                    },
-                    new PlayerInfo
-                    {
-                        AgentId = 2
-                    }
-                }
-            };
+        private PlayerSegmentationService _targetService;
 
-            var expectedResult = new ApiPagingResult<PlayerInfo>
-            {
-                Data = new List<PlayerInfo>
-                {
-                    new PlayerInfo
-                    {
-                        AgentId = 1,
-                        Subsidiary = "Sub1"
-                    },
-                    new PlayerInfo
-                    {
-                        AgentId = 2,
-                        Subsidiary = "Sub2"
-                    }
-                }
-            };
+        //[Test]
+        //public async Task GetProblemPlayerListAsync_WhenCall_ReturnDataCorrectly()
+        //{
+        //    //Arrange
+        //    var metaModel = FakeHelper.Create<ProblemPlayerListMetaModel>();
 
-            var subsidiaryList = new List<Subsidiary>
-            {
-                new Subsidiary { AgentId = 1, OperatorId = "Sub1" },
-                new Subsidiary { AgentId = 2, OperatorId = "Sub2" }
-            };
+        //    var rawData = new ApiPagingResult<PlayerInfo>
+        //    {
+        //        Data = new List<PlayerInfo>
+        //        {
+        //            new PlayerInfo
+        //            {
+        //                AgentId = 1
+        //            },
+        //            new PlayerInfo
+        //            {
+        //                AgentId = 2
+        //            }
+        //        }
+        //    };
 
-            var licenseeName = FakeHelper.Create<string>();
-            var user = FakeHelper.Create<UserAuthInfo>();
+        //    var expectedResult = new ApiPagingResult<PlayerInfo>
+        //    {
+        //        Data = new List<PlayerInfo>
+        //        {
+        //            new PlayerInfo
+        //            {
+        //                AgentId = 1,
+        //                Subsidiary = "Sub1"
+        //            },
+        //            new PlayerInfo
+        //            {
+        //                AgentId = 2,
+        //                Subsidiary = "Sub2"
+        //            }
+        //        }
+        //    };
 
-            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
-            _sessionService.UserSession.Returns(user);
+        //    var subsidiaryList = new List<Subsidiary>
+        //    {
+        //        new Subsidiary { AgentId = 1, OperatorId = "Sub1" },
+        //        new Subsidiary { AgentId = 2, OperatorId = "Sub2" }
+        //    };
 
-            _playerDataAccess.GetProblemPlayerListAsync(metaModel).Returns(Task.FromResult(rawData));
-            _subsidiaryService.GetSubsidiaryList(user, licenseeName, metaModel.SubsidiaryList).Returns(subsidiaryList);
+        //    var licenseeName = FakeHelper.Create<string>();
+        //    var user = FakeHelper.Create<UserAuthInfo>();
 
-            //Act
-            var actualResult = await _targetService.GetProblemPlayerListAsync(metaModel);
+        //    _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
+        //    _sessionService.UserSession.Returns(user);
 
-            //Assert
-            actualResult.Should().BeEquivalentTo(expectedResult);
-        }
+        //    _playerDataAccess.GetProblemPlayerListAsync(metaModel).Returns(Task.FromResult(rawData));
+        //    _subsidiaryService.GetSubsidiaryList(user, licenseeName, metaModel.SubsidiaryList).Returns(subsidiaryList);
+
+        //    //Act
+        //    var actualResult = await _targetService.GetProblemPlayerListAsync(metaModel);
+
+        //    //Assert
+        //    actualResult.Should().BeEquivalentTo(expectedResult);
+        //}
 
         [Test]
         public async Task GetVipPlayerListAsync_WhenCall_ReturnDataCorrectly()
@@ -176,80 +177,80 @@ namespace Fanex.Athena.Service.Customer.UnitTests
             actualResult.Should().BeEquivalentTo(expectedResult);
         }
 
-        [Test]
-        public async Task GetReasonGroupListAsync_WhenCall_ReturnDataCorrectly()
-        {
-            //Arrange
-            var langKey = FakeHelper.Create<string>();
-            var expectedResult = FakeHelper.Create<List<ReasonGroup>>();
-            _playerDataAccess.GetReasonGroupListAsync(langKey).Returns(expectedResult);
+        //[Test]
+        //public async Task GetReasonGroupListAsync_WhenCall_ReturnDataCorrectly()
+        //{
+        //    //Arrange
+        //    var langKey = FakeHelper.Create<string>();
+        //    var expectedResult = FakeHelper.Create<List<ReasonGroup>>();
+        //    _playerDataAccess.GetReasonGroupListAsync(langKey).Returns(expectedResult);
 
-            //Act
-            var actualResult = await _targetService.GetReasonGroupListAsync(langKey);
+        //    //Act
+        //    var actualResult = await _targetService.GetReasonGroupListAsync(langKey);
 
-            //Assert
-            Assert.AreEqual(expectedResult, actualResult);
-        }
+        //    //Assert
+        //    Assert.AreEqual(expectedResult, actualResult);
+        //}
 
-        [Test]
-        public async Task GetSabaVirtualPlayerListAsync_WhenCall_ReturnDataCorrectly()
-        {
-            //Arrange
-            var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
+        //[Test]
+        //public async Task GetSabaVirtualPlayerListAsync_WhenCall_ReturnDataCorrectly()
+        //{
+        //    //Arrange
+        //    var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
 
-            var rawData = new ApiPagingResult<SabaVirtualPlayer>
-            {
-                Data = new List<SabaVirtualPlayer>
-                {
-                    new SabaVirtualPlayer
-                    {
-                        AgentId = 1
-                    },
-                    new SabaVirtualPlayer
-                    {
-                        AgentId = 2
-                    }
-                }
-            };
+        //    var rawData = new ApiPagingResult<SabaVirtualPlayer>
+        //    {
+        //        Data = new List<SabaVirtualPlayer>
+        //        {
+        //            new SabaVirtualPlayer
+        //            {
+        //                AgentId = 1
+        //            },
+        //            new SabaVirtualPlayer
+        //            {
+        //                AgentId = 2
+        //            }
+        //        }
+        //    };
 
-            var expectedResult = new ApiPagingResult<SabaVirtualPlayer>
-            {
-                Data = new List<SabaVirtualPlayer>
-                {
-                    new SabaVirtualPlayer
-                    {
-                        AgentId = 1,
-                        Subsidiary = "Sub1"
-                    },
-                    new SabaVirtualPlayer
-                    {
-                        AgentId = 2,
-                        Subsidiary = "Sub2"
-                    }
-                }
-            };
+        //    var expectedResult = new ApiPagingResult<SabaVirtualPlayer>
+        //    {
+        //        Data = new List<SabaVirtualPlayer>
+        //        {
+        //            new SabaVirtualPlayer
+        //            {
+        //                AgentId = 1,
+        //                Subsidiary = "Sub1"
+        //            },
+        //            new SabaVirtualPlayer
+        //            {
+        //                AgentId = 2,
+        //                Subsidiary = "Sub2"
+        //            }
+        //        }
+        //    };
 
-            var subsidiaryList = new List<Subsidiary>
-            {
-                new Subsidiary { AgentId = 1, OperatorId = "Sub1" },
-                new Subsidiary { AgentId = 2, OperatorId = "Sub2" }
-            };
+        //    var subsidiaryList = new List<Subsidiary>
+        //    {
+        //        new Subsidiary { AgentId = 1, OperatorId = "Sub1" },
+        //        new Subsidiary { AgentId = 2, OperatorId = "Sub2" }
+        //    };
 
-            var licenseeName = FakeHelper.Create<string>();
-            var user = FakeHelper.Create<UserAuthInfo>();
+        //    var licenseeName = FakeHelper.Create<string>();
+        //    var user = FakeHelper.Create<UserAuthInfo>();
 
-            _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
-            _sessionService.UserSession.Returns(user);
+        //    _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo { LicenseeName = licenseeName });
+        //    _sessionService.UserSession.Returns(user);
 
-            _playerDataAccess.GetSabaVirtualPlayerListAsync(metaModel).Returns(Task.FromResult(rawData));
-            _subsidiaryService.GetSubsidiaryList(user, licenseeName, metaModel.SubsidiaryList).Returns(subsidiaryList);
+        //    _playerDataAccess.GetSabaVirtualPlayerListAsync(metaModel).Returns(Task.FromResult(rawData));
+        //    _subsidiaryService.GetSubsidiaryList(user, licenseeName, metaModel.SubsidiaryList).Returns(subsidiaryList);
 
-            //Act
-            var actualResult = await _targetService.GetSabaVirtualPlayerListAsync(metaModel);
+        //    //Act
+        //    var actualResult = await _targetService.GetSabaVirtualPlayerListAsync(metaModel);
 
-            //Assert
-            actualResult.Should().BeEquivalentTo(expectedResult);
-        }
+        //    //Assert
+        //    actualResult.Should().BeEquivalentTo(expectedResult);
+        //}
 
         [Test]
         public async Task UpdateVipStatusAsync_WhenCall_ReturnDataCorrectly()

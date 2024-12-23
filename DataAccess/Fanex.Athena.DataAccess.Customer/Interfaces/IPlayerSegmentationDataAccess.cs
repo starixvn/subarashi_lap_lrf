@@ -1,24 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using Fanex.Athena.Model.Customer.MetaModel;
-
-namespace Fanex.Athena.DataAccess.Customer.Interfaces
+﻿namespace Fanex.Athena.DataAccess.Customer.Interfaces
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Model.Core.DTO.Common;
+    using Model.Customer.DTO.PlayerSegmentation;
+    using Model.Customer.MetaModel;
+
     public interface IPlayerSegmentationDataAccess
     {
-        Task<ApiPagingResult<PlayerInfo>> GetProblemPlayerListAsync(ProblemPlayerListMetaModel metaModel);
-
-        Task<ApiPagingResult<SabaVirtualPlayer>> GetSabaVirtualPlayerListAsync(SabaVirtualPlayerListMetaModel metaModel);
-
         Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel);
 
-        Task<(string ListAffectCustId, IEnumerable<UpdateStatusPlayerResult> ListUpdateStatusPlayerResult)> UpdateVipStatusAsync(UpdateStatusPlayerMetaModel metaModel);
-
-        Task<IEnumerable<ReasonGroup>> GetReasonGroupListAsync(string langKey);
-
-        Task<IEnumerable<SubIssue>> GetAbnormalSubIssueAsync(string langKey);
+        Task<(string ListAffectCustId, IEnumerable<UpdateStatusPlayerResult> ListUpdateStatusPlayerResult)> UpdateVipStatusAsync(
+            UpdateStatusPlayerMetaModel metaModel);
 
         Task<ApiPagingResult<MonitoredPlayerInfo>> GetMonitoredPlayerListAsync(MonitoredPlayerListMetaModel metaModel);
 

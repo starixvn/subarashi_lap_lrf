@@ -93,12 +93,8 @@
 	</Function>
 
 	<Function Name="PlayerSegmentation">
-		<Setting Key="Lrf_ProblemAccount_LicenseeProblemPlayerSel" SpName="Lrf_ProblemAccount_LicenseeProblemPlayerSel" DbName="DBACC.bodb02.wsv_lap" />
 		<Setting Key="Lrf_ProblemAccount_LicenseeVIPPlayerSel" SpName="Lrf_ProblemAccount_LicenseeVIPPlayerSel" DbName="DBACC.bodb02.wsv_lap" />
 		<Setting Key="Lrf_ProblemAccount_LicenseeVipPlayerUpd" SpName="Lrf_ProblemAccount_LicenseeVipPlayerUpd" DbName="DBCUST.CustDB.wsv_lap" />
-		<Setting Key="Lrf_ProblemAccount_ReasonGroupSel" SpName="Lrf_ProblemAccount_ReasonGroupSel" DbName="DBACC.bodb02.wsv_lap" />
-		<Setting Key="Lrf_Licensee_DangerLevelSel" SpName="Lrf_Licensee_DangerLevelSel" DbName="DBLOG.bodb_CustomerLog.wsv_lap" />
-		<Setting Key="Lrf_AbnormalBet_SubIssueSel" SpName="Lrf_AbnormalBet_SubIssueSel" DbName="DBWH.bodb_DWRS.wsv_lap" />
 		<Setting Key="Lrf_SabaVirtualSettingSel" SpName="Lrf_SabaVirtualSettingSel" DbName="DBCUST.CustDB.wsv_lap" />
 
 		<Setting Key="Acc_Dep_WLMonitored_Player_Sel" SpName="Acc_Dep_WLMonitored_Player_Sel" DbName="DBCUST.CustDB.wsv_lap" />
