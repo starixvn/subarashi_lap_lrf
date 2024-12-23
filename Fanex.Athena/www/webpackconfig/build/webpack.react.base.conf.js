@@ -127,7 +127,14 @@ function generateConfig(environment) {
                     common: {
                         chunks: 'initial',
                         name: 'lib/common',
-                        test: /(node_modules)/,
+                        test: (module) => {
+                            // Exclude CSS and SCSS files
+                            return (
+                                module.resource &&
+                                !module.resource.match(/\.(css|scss)$/) &&
+                                module.resource.includes('node_modules')
+                            );
+                        },
                         minChunks: 2,
                         priority: -10,
                         filename: jsPath + '/[name].chunk.js',
