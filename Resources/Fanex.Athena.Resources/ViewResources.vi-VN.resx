@@ -3436,6 +3436,6 @@
     <value>Công cụ đặt cược nhanh</value>
   </data>
   <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
-    <value>Số vé cược trùng khớp với bộ lọc của bạn đang vượt khả năng xử lý của hệ thống. Vui lòng giảm bớt số ngày đã chọn hoặc chỉ chọn 1 tùy chọn trong bộ lọc “Loại Cược” hoặc “Sản Phẩm”</value>
+    <value>Số vé cược trùng khớp với bộ lọc của bạn đang vượt khả năng xử lý của hệ thống. Vui lòng giảm bớt số ngày đã chọn hoặc chỉ chọn 1 tùy chọn trong bộ lọc “Loại Cược” hoặc “Sản Phẩm”.</value>
   </data>
 </root>

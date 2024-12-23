@@ -93,11 +93,7 @@ export const useFilterAction = () => {
     }
 
     const _showExportWarning = () => {
-        toast.success(<ToastMsg />, {
-            onClose: () => {
-                toast.dismiss();
-            }
-        });
+        toast.success(<ToastMsg />);
     }
 
     const submit = (event) => {
@@ -141,7 +137,6 @@ export const useFilterAction = () => {
                 alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
             })
             .finally(() => {
-                toast.dismiss();
                 dispatch(toggleLoader(false));
             });
     }

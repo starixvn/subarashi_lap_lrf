@@ -5630,10 +5630,8 @@ const FormFilter = () => {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_2__["ToastContainer"], {
     autoClose: 10000,
+    position: "top-left",
     pauseOnFocusLoss: false,
-    style: {
-      width: "500px"
-    },
     transition: react_toastify__WEBPACK_IMPORTED_MODULE_2__["Flip"]
   }), isShowSubsidiaryDropdown && isSubsidiarySearch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2"
@@ -7030,11 +7028,7 @@ const useFilterAction = () => {
     };
   };
   const _showExportWarning = () => {
-    react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].success( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ToastMsg, null), {
-      onClose: () => {
-        react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].dismiss();
-      }
-    });
+    react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].success( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ToastMsg, null));
   };
   const submit = event => {
     event.preventDefault();
@@ -7067,7 +7061,6 @@ const useFilterAction = () => {
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].postData(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_EXPORTSTATUS_URL, exportParams).then(response => _handleExportStatusResponse(response, exportParams)).catch(() => {
       alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("ErrorProcessingMsg"));
     }).finally(() => {
-      react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].dismiss();
       dispatch(toggleLoader(false));
     });
   };

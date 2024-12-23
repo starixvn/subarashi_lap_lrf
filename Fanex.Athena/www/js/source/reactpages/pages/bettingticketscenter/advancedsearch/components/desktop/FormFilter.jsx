@@ -58,8 +58,8 @@ export const FormFilter = () => {
                 <div className="row">
                     <ToastContainer
                         autoClose={10000}
+                        position="top-left"
                         pauseOnFocusLoss={false}
-                        style={{ width: "500px" }}
                         transition={Flip} />
 
                     { isShowSubsidiaryDropdown && isSubsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">

@@ -3882,6 +3882,6 @@
     <value>Quick Bet Widget</value>
   </data>
   <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
-    <value>The number of tickets matching your filter exceeds the system's processing capacity. Please try filtering by fewer days or selecting a single option on the "Bet type", the "Product" filter</value>
+    <value>The number of tickets matching your filter exceeds the system's processing capacity. Please try filtering by fewer days or selecting a single option on the "Bet type", the "Product" filter.</value>
   </data>
 </root>
