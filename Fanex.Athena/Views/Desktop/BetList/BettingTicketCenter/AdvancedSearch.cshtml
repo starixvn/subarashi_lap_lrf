@@ -64,9 +64,9 @@
     selectedLeague: 0,
     selectedCashOutMode: 0,
     bettypeList: [],
-    selectedCustomerClass: '@(string.Join(",", riskLevels.Select(_=>_.customerClassList)))',
-    selectedOddsGroup: '@(string.Join(",", oddsGroup))',
-    selectedPlatform: '@(string.Join(",",platformList.Select(_=>_.Key)))',
+    selectedCustomerClass: 'ALL',
+    selectedOddsGroup: 'ALL',
+    selectedPlatform: 'ALL',
     username: '',
     isConvertAll: true,
     hasExchange: '@Model.HasExchange.ToString()' === 'True'

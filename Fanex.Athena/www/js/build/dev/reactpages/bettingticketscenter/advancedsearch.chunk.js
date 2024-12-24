@@ -6042,6 +6042,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+
 
 
 
@@ -6061,7 +6063,8 @@ const CustomerClassFilter = props => {
       keyField: "id",
       valueField: "value",
       statusField: "status",
-      onChange: onChange
+      onChange: onChange,
+      allOptionValue: _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"]
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -6411,6 +6414,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+
 
 
 
@@ -6430,7 +6435,8 @@ const OddsGroupFilter = props => {
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
-      onChange: onChange
+      onChange: onChange,
+      allOptionValue: _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"]
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -6465,6 +6471,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../../common/lib/constants */ "./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js");
+
 
 
 
@@ -6484,7 +6492,8 @@ const PlatformFilter = props => {
       keyField: "Id",
       valueField: "Value",
       statusField: "Status",
-      onChange: onChange
+      onChange: onChange,
+      allOptionValue: _common_lib_constants__WEBPACK_IMPORTED_MODULE_5__["ALL_SELECTED_TEXT"]
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -7230,7 +7239,10 @@ const useFilterHandler = () => {
   }, [dateRange, selectedSport]);
   const onMatchChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])(item => dispatch(setSelectedMatch(item.value)), []);
   const onCustomerClassChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => {
-    const customerClass = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].riskLevels.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
+    let customerClass = selectedItemsKey;
+    if (customerClass !== _common_lib_constants__WEBPACK_IMPORTED_MODULE_7__["ALL_SELECTED_TEXT"]) {
+      customerClass = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_4__["default"].riskLevels.filter(r => selectedItemsKey.includes(r.id)).map(r => r.customerClassList).join(',');
+    }
     dispatch(setSelectedCustomerClass(customerClass));
   }, []);
   const onOddsGroupChangeHandler = Object(react__WEBPACK_IMPORTED_MODULE_6__["useCallback"])((currentItem, selectedItemsKey) => dispatch(setSelectedOddsGroup(selectedItemsKey)), []);

@@ -5,7 +5,7 @@ import Service from '../../../common/lib/Service'
 import AppData from '@jsroot/lib/AppData'
 import useSubsidiarySearch  from '@jsroot/customHooks/useSubsidiarySearch'
 import { useCallback } from 'react'
-import { CashOutMode, ProductCode } from './../../../common/lib/constants'
+import { CashOutMode, ProductCode, ALL_SELECTED_TEXT } from './../../../common/lib/constants'
 
 export const useFilterHandler = () =>{
     const dispatch = useDispatch();
@@ -67,7 +67,12 @@ export const useFilterHandler = () =>{
     const onMatchChangeHandler = useCallback((item) => dispatch(setSelectedMatch(item.value)),[]);
     
     const onCustomerClassChangeHandler = useCallback((currentItem, selectedItemsKey) => {
-        const customerClass = AppData.riskLevels.filter( r => selectedItemsKey.includes(r.id)).map( r => r.customerClassList).join(',');
+        let customerClass = selectedItemsKey;
+
+        if(customerClass !== ALL_SELECTED_TEXT) {
+            customerClass = AppData.riskLevels.filter( r => selectedItemsKey.includes(r.id)).map( r => r.customerClassList).join(',');
+        }
+        
         dispatch(setSelectedCustomerClass(customerClass));
     },[])
 
