@@ -18,7 +18,6 @@
         private const string FromDateColumn = "FromDate";
         private const string ToDateColumn = "ToDate";
         private const string ErrCodeColumn = "ErrCode";
-        private const string LangkeyColumn = "Langkey";
 
         public async Task<ApiPagingResult<PlayerInfo>> GetVipPlayerListAsync(VipPlayerListMetaModel metaModel)
         {

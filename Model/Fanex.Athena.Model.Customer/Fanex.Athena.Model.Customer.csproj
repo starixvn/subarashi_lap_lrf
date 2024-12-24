@@ -75,8 +75,6 @@
     <Compile Include="DTO\SabaVirtualSettingInformationModel.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerReachedHistory.cs" />
-    <Compile Include="DTO\PlayerSegmentation\SubIssue.cs" />
-    <Compile Include="DTO\PlayerSegmentation\ReasonGroup.cs" />
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerCommand.cs" />
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
