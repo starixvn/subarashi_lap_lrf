@@ -49,12 +49,12 @@
             using (var controller = CreateController())
             {
                 // Arrange
+                var sport = FakeHelper.Create<int>();
                 var leagueId = FakeHelper.Create<int>();
                 var leagueName = "League " + leagueId;
-                _cacheRefAdapter.GetLeagueName(leagueId).Returns(leagueName);
+                _cacheRefAdapter.GetLeagueName(leagueId, sport).Returns(leagueName);
                 var row = CreateDataRow(-1);
                 row["leagueid"] = leagueId;
-                var sport = FakeHelper.Create<int>();
 
                 // Action
                 controller.AssignLeagueName(row, sport);

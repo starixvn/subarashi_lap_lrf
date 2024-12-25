@@ -26,12 +26,6 @@
         private static readonly int[] HiddenColumns = new[] { BetEffectiveColumn };
         private static readonly CultureInfo EnglishCulture = new CultureInfo("en-US");
         private const string KickOfTimeFormat = "{0:MM/dd/yyyy hh:mm:ss tt}";
-        private readonly ICacheRefAdapter _cacheRefAdapter;
-
-        public MatchWinLossBetListController(ICacheRefAdapter cacheRefAdapter)
-        {
-            _cacheRefAdapter = cacheRefAdapter;
-        }
 
         [HttpGet]
         [ValidationWebRequest(IsValidCurrency = true)]
@@ -123,7 +117,7 @@
             }
 
             return metaModel.HomeId > 0 && metaModel.AwayId > 0
-                ? _cacheRefAdapter.GetTeamName(metaModel.HomeId, metaModel.SportType) + " vs " + _cacheRefAdapter.GetTeamName(metaModel.AwayId, metaModel.SportType) + " - "
+                ? CacheRefAdapter.GetTeamName(metaModel.HomeId, metaModel.SportType) + " vs " + CacheRefAdapter.GetTeamName(metaModel.AwayId, metaModel.SportType) + " - "
                 : string.Empty;
         }
     }

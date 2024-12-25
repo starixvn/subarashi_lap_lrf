@@ -171,9 +171,11 @@
         {
             // Arrange
             var userId = 1;
-            DataAccess.GetObjectDb(Arg.Is("Lrf_LicenseeGroupCommIns")).Returns(ObjectDb);
-            var metaModel = _fixture.Create<GroupCommMetaModel>();
             var request = _fixture.Create<Request>();
+            var metaModel = _fixture.Create<GroupCommMetaModel>();
+
+            ObjectDb.GetParameterValue("GroupDiscountID").Returns(metaModel.GroupCommId);
+            DataAccess.GetObjectDb(Arg.Is("Lrf_LicenseeGroupCommIns")).Returns(ObjectDb);
 
             // Action
             _ = await DataAccess.InsertGroupAsync(metaModel, request, userId).ConfigureAwait(false);
@@ -184,12 +186,12 @@
                 ObjectDb.Received().SetParameterValue("LicenseeID", metaModel.LicenseeId);
                 ObjectDb.Received().SetParameterValue("GroupName", metaModel.GroupName);
                 ObjectDb.Received().SetParameterValue("GroupColor", metaModel.GroupColor);
-                ObjectDb.Received().SetParameterValue("UserID", userId);
-                ObjectDb.Received().SetParameterValue("IP", request.Ip);
+                ObjectDb.Received().SetParameterValue("UserId", userId);
+                ObjectDb.Received().SetParameterValue("Ip", request.Ip);
                 ObjectDb.Received().SetParameterValue("langkey", request.Language);
                 ObjectDb.Received().SetParameterValue("IsDefault", metaModel.IsDefaultGroup);
                 ObjectDb.Received().SetParameterValue("IsResetDefault", metaModel.IsResetDefault);
-                ObjectDb.Received().SetParameterValue("GroupDiscountID", null);
+                ObjectDb.Received().SetParameterValue("GroupDiscountID", metaModel.GroupCommId);
             });
         }
 
