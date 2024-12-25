@@ -171,6 +171,8 @@ export const useFilterAction = () => {
             return fetchNextPage(1);
     
         } else {
+            exportParams.PageSize = response.data.PageSize;
+
             return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, exportParams).then((response) =>
                 _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch", true)
             );

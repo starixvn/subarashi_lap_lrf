@@ -7097,6 +7097,7 @@ const useFilterAction = () => {
       };
       return fetchNextPage(1);
     } else {
+      exportParams.PageSize = response.data.PageSize;
       return _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_5__["default"].getFile(_common_lib_constants__WEBPACK_IMPORTED_MODULE_8__["ApiUrl"].ADVANCEDSEARCH_DATA_URL, exportParams).then(response => _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch", true));
     }
   };
