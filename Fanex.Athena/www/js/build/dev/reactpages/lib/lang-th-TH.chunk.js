@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/11/2024 3:00:52 PM
+// Generated at: 12/20/2024 9:33:15 AM
 window._language_th_TH = {
   AA: "ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
   AbnormalBet: "การเดิมพันที่ผิดปกติ",
@@ -881,6 +881,7 @@ window._language_th_TH = {
   PromotionDetails: "รายละเอียดโปรโมชั่น",
   PromotionPrize: "รางวัลโปรโมชั่น",
   PromotionType: "ประเภทโปรโมชั่น",
+  QuickBetWidget: "วิดเจ็ตเดิมพันด่วน",
   RB: "RB",
   ReachedDate: "ถึงวันที่เกณฑ์",
   RealName: "ชื่อจริง",

@@ -65,6 +65,7 @@
                 '17': Site.getSingleResource('DesktopGalaxy'),
                 '18': Site.getSingleResource('MobileGalaxy'),
                 '19': Site.getSingleResource('DesktopCompact'),
+                '20': Site.getSingleResource('QuickBetWidget'),
                 '88': Site.getSingleResource('BetfromOthers')
             };
 

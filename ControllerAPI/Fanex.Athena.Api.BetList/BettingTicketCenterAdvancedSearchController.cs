@@ -3,17 +3,15 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Http;
-
     using Base;
     using Base.Attributes;
-
     using Extension.Utility;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using Model.Auth.DataDomain;
     using Model.BetList.MetaModel;
     using Resources;
     using Service.Core.Common.Interfaces;
+    using Service.Customer.Interfaces;
+    using Service.StatelessCore.Interfaces;
 
     [ApiFunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
     public class BettingTicketCenterAdvancedSearchController : BaseApiController
@@ -24,9 +22,9 @@
 
         private readonly IBetListApiClient _betListApiClient;
 
-        private readonly ISportService _sportService;
-
         private readonly ICustomerClassService _customerClassService;
+
+        private readonly ISportService _sportService;
 
         public BettingTicketCenterAdvancedSearchController(
             ILanguageService langService,
@@ -53,7 +51,7 @@
                 return ServerBusy();
             }
 
-            UpdateMetaModel(metaModel);
+            await UpdateMetaModel(metaModel);
 
             var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
             return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetData",
@@ -71,7 +69,7 @@
                 return ServerBusy();
             }
 
-            UpdateMetaModel(metaModel);
+            await UpdateMetaModel(metaModel);
 
             var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
             return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetExportStatus",
@@ -85,9 +83,9 @@
         };
 
         private bool IsAllowExportLargeBetList() => _appSettings.IsDisableExportLargeBetList
-            && _appSettings.LicenseesWithLargeData.Contains(SessionService.LicenseeSession.LicenseeName);
+                                                    && _appSettings.LicenseesWithLargeData.Contains(SessionService.LicenseeSession.LicenseeName);
 
-        private async void UpdateMetaModel(AdvancedSearchBetListMetaModel metaModel)
+        private async Task UpdateMetaModel(AdvancedSearchBetListMetaModel metaModel)
         {
             var licenseeSession = SessionService.LicenseeSession;
             var sabaSport = _sportService.GetSabaSport(metaModel.SportId, IsHideSaba);

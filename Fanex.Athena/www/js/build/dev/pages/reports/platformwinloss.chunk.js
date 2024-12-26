@@ -8734,6 +8734,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 '17': Site.getSingleResource('DesktopGalaxy'),
                 '18': Site.getSingleResource('MobileGalaxy'),
                 '19': Site.getSingleResource('DesktopCompact'),
+                '20': Site.getSingleResource('QuickBetWidget'),
                 '88': Site.getSingleResource('BetfromOthers')
             };
 
