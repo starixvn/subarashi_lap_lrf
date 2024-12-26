@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/20/2024 9:33:15 AM
+// Generated at: 12/26/2024 2:22:25 PM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -197,7 +197,7 @@ window._language_zh_CN = {
   BettingLimit: "投注限额",
   BettingStatement: "投注详情",
   BettingTicketCenter: "注单中心",
-  BettingTicketCenter_AdvancedSearchTabNote1: "投注类型，联赛与赛事选单仅支援单日搜寻",
+  BettingTicketCenter_AdvancedSearchTabNote1: "联赛及赛事过滤器仅支持搜寻体育平台内特定日期范围",
   BettingTicketCenter_AdvancedSearchTabNote2: "仅支援{0}以后的注单",
   BettingTicketCenter_BookedBetNote: "最多可以检索七天前的资料",
   BettingTicketCenter_Exchange_Note_1: "支援仅搜寻被取消注单。",
@@ -222,6 +222,7 @@ window._language_zh_CN = {
   BreakdownBy: "依项目细分",
   BTCExportExcelMsg1: "您的搜寻结果超过系统设定的范围.",
   BTCExportExcelMsg2: "请试着缩短日期范围或是分别搜寻个别货币/投注类别等。",
+  BTCMaxTicketLimitMsg: "搜寻结果的数量超过系统限制，请缩减搜寻条件或根据投注类别及运动进行过滤。",
   BuyBackAmount: "回购金额",
   ByBetType: "根据投注类型",
   ByCurrency: "根据货币",

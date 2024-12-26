@@ -1,4 +1,4 @@
-﻿// Generated at: 12/20/2024 9:33:15 AM
+﻿// Generated at: 12/26/2024 2:22:24 PM
 var _language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -113,7 +113,7 @@ BetTaken:"วางเดิมพันแล้ว",
 BettingLimit:"วงเงินเดิมพัน",
 BettingStatement:"คำชี้แจงการเดิมพัน",
 BettingTicketCenter:"ศูนย์ตั๋วเดิมพัน",
-BettingTicketCenter_AdvancedSearchTabNote1:"ประเภทการเดิมพัน ลีก และตัวกรองการแข่งขันทั้งหมด ใช้ได้เมื่อถูกเลือก 1 วัน",
+BettingTicketCenter_AdvancedSearchTabNote1:"ตัวกรองลีกและการแข่งขันใช้ได้เฉพาะกับสปอร์ตบุ๊ค ในบางวันเท่านั้น",
 BettingTicketCenter_AdvancedSearchTabNote2:"ข้อมูลจาก {0}",
 BettingTicketCenter_BookedBetNote:"แสดงข้อมูลได้มากที่สุดภายใน 7 วัน",
 BettingTicketCenter_Exchange_Note_1:"สนับสนุนการค้นหาตั๋วว่างเท่านั้น",
@@ -140,6 +140,7 @@ BoughtTicketsList:"ซื้อตั๋วแล้ว[s]",
 BreakdownBy:"แบ่งตาม",
 BTCExportExcelMsg1:"ผลการค้นหาของคุณเกินขีดจำกัดที่เราตั้งไว้ให้ดาวน์โหลด",
 BTCExportExcelMsg2:"โปรดลองลดช่วงวันที่ เลือกสกุลเงิน/ประเภทการเดิมพัน ฯลฯ",
+BTCMaxTicketLimitMsg:"จำนวนผลลัพธ์การค้นหาเกินขีดจำกัดของระบบ กรุณาลดเงื่อนไขการค้นหาหรือกรองตามประเภทการเดิมพันและกีฬา.",
 BuyBackAmount:"ซื้อคืนจำนวน",
 ByBetType:"ตามประเภทการเดิมพัน",
 ByCurrency:"ตามสกุลเงิน",

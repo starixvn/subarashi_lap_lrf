@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/20/2024 9:33:15 AM
+// Generated at: 12/26/2024 2:22:24 PM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -205,7 +205,7 @@ window._language_id_ID = {
   BettingLimit: "Batas Taruhan",
   BettingStatement: "Rekapan Taruhan",
   BettingTicketCenter: "Pusat Tiket Taruhan",
-  BettingTicketCenter_AdvancedSearchTabNote1: "Semua jenis taruhan, Liga dan Filter Pertandingan hanya tersedia ketika 1 hari dipilih",
+  BettingTicketCenter_AdvancedSearchTabNote1: "Filter Liga dan Pertandingan hanya tersedia untuk Sportsbook pada hari tertentu",
   BettingTicketCenter_AdvancedSearchTabNote2: "Data tersedia dari {0}",
   BettingTicketCenter_BookedBetNote: "Data tersedia hingga 7 hari",
   BettingTicketCenter_Exchange_Note_1: "Dukung pencarian tiket kosong saja",
@@ -232,6 +232,7 @@ window._language_id_ID = {
   BreakdownBy: "Tampilkan berdasarkan",
   BTCExportExcelMsg1: "Hasil pencarian Anda melebihi batas yang ditetapkan untuk mengunduhnya.",
   BTCExportExcelMsg2: "Coba kurangi rentang tanggal, pilih mata uang / jenis taruhan individu, dll.",
+  BTCMaxTicketLimitMsg: "Jumlah tiket yang sesuai dengan filter Anda melebihi kapasitas pemrosesan sistem. Silakan coba filter dengan hari yang lebih sedikit atau pilih satu opsi pada &quot;Jenis Taruhan&quot;, filter &quot;Produk&quot;.",
   BuyBackAmount: "Jumlah Pembelian Kembali",
   ByBetType: "Berdasarkan Jenis Taruhan",
   ByCurrency: "Menurut Mata Uang",
