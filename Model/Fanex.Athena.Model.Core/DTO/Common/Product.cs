@@ -133,6 +133,8 @@
 
         public const string GPILC = "GPILC";
 
+        public const string PS = "PS";
+
         #endregion Field
 
         #region Property
