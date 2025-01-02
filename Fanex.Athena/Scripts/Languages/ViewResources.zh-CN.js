@@ -1,4 +1,4 @@
-﻿// Generated at: 12/26/2024 2:22:25 PM
+﻿// Generated at: 1/2/2025 3:05:23 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -129,7 +129,7 @@ BoughtTicketsList:"买入注单",
 BreakdownBy:"依项目细分",
 BTCExportExcelMsg1:"您的搜寻结果超过系统设定的范围.",
 BTCExportExcelMsg2:"请试着缩短日期范围或是分别搜寻个别货币/投注类别等。",
-BTCMaxTicketLimitMsg:"搜寻结果的数量超过系统限制，请缩减搜寻条件或根据投注类别及运动进行过滤。",
+BTCMaxTicketLimitMsg:"搜寻结果的数量超过系统限制 ({0} 条数据)，请缩减搜寻条件或根据投注类别及运动进行过滤",
 BuyBackAmount:"回购金额",
 ByBetType:"根据投注类型",
 ByCurrency:"根据货币",

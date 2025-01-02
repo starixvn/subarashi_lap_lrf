@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 12/26/2024 2:22:24 PM
+// Generated at: 1/2/2025 3:05:23 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -236,7 +236,7 @@ window._language_en_US = {
   BreakdownBy: "Breakdown By",
   BTCExportExcelMsg1: "Your search result exceeds our set limits to get it downloaded.",
   BTCExportExcelMsg2: "Please try reducing date range, selecting individual currency/ bet type, etc.",
-  BTCMaxTicketLimitMsg: "The number of tickets matching your filter exceeds the system&apos;s processing capacity. Please try filtering by fewer days or selecting a single option on the &quot;Bet type&quot;, the &quot;Product&quot; filter.",
+  BTCMaxTicketLimitMsg: "The number of tickets matching your filter exceeds the system&apos;s processing capacity ({0} data rows). Please try filtering by fewer days or selecting a single option on the &quot;Bet type&quot;, the &quot;Product&quot; filter.",
   BuyBackAmount: "Buy Back Amount",
   ByBetType: "By Bet Type",
   ByCurrency: "By Currency",

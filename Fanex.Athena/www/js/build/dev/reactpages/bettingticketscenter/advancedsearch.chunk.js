@@ -4568,6 +4568,62 @@ class Logger {
 
 /***/ }),
 
+/***/ "./www/js/source/reactpages/lib/numberFormat.js":
+/*!******************************************************!*\
+  !*** ./www/js/source/reactpages/lib/numberFormat.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return NumberFormat; });
+class NumberFormat {
+  static formatDecimal(value) {
+    return this.format(value, 2);
+  }
+  static formatInteger(value) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
+    }
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  static format(value, digits = 0) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
+    }
+    const roundedValue = this.round(value, digits);
+    return roundedValue.toFixed(digits).replace(/^[+-]?\d+/, int => int.replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
+  }
+  static round(value, digits) {
+    const sign = value < 0 ? -1 : 1;
+    const absoluteValue = Math.abs(value);
+    const rounded = Number(Math.round(absoluteValue + 'e' + digits) + 'e-' + digits);
+    return sign * rounded;
+  }
+  static parseToString(number) {
+    return number.toString().replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+  static roundDownFormatDecimal(value) {
+    return this.roundDownFormat(value, 2);
+  }
+  static roundDownFormat(value, digits = 0) {
+    if (typeof value !== "number" || isNaN(value)) {
+      return "";
+    }
+    const roundedValue = this.roundDown(value, digits);
+    return roundedValue.toFixed(digits).replace(/(\d)(?=(\d{3})+(\.|$))/g, "$1,");
+  }
+  static roundDown(value, digits) {
+    const sign = value < 0 ? -1 : 1;
+    const absoluteValue = Math.abs(value);
+    const rounded = Number(Math.floor(absoluteValue + 'e' + digits) + 'e-' + digits);
+    return sign * rounded;
+  }
+}
+
+/***/ }),
+
 /***/ "./www/js/source/reactpages/lib/site.js":
 /*!**********************************************!*\
   !*** ./www/js/source/reactpages/lib/site.js ***!
@@ -4944,6 +5000,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @jsroot/lib/sweetAlert */ "./www/js/source/reactpages/lib/sweetAlert.js");
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4956,12 +5013,13 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
-const _showWarning = dispatch => {
+
+const _showWarning = (dispatch, limitRows) => {
   const handleCloseAlert = () => {
     dispatch(Object(_filterAction__WEBPACK_IMPORTED_MODULE_3__["setSweetAlertOption"])(null));
   };
   const title = _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("Alert");
-  const message = Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("BTCMaxTicketLimitMsg"));
+  const message = Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_6__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_5__["default"].getSingleResource("BTCMaxTicketLimitMsg")).replace("{0}", _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_7__["default"].formatInteger(limitRows));
   const alertOpt = Object(_jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["generateDefaultAlertOption"])(message, handleCloseAlert, null, _jsroot_lib_sweetAlert__WEBPACK_IMPORTED_MODULE_4__["predefinedIcons"].error);
   dispatch(Object(_filterAction__WEBPACK_IMPORTED_MODULE_3__["setSweetAlertOption"])(_objectSpread(_objectSpread({}, alertOpt), {}, {
     title,
@@ -4973,7 +5031,7 @@ function getGridData(url, params) {
   return dispatch => {
     _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_1__["default"].postData(url, params).then(response => {
       if (response.data.StatusCode === 1001) {
-        _showWarning(dispatch);
+        _showWarning(dispatch, response.data.LimitRows);
         dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_2__["toggleLoader"])(false));
         return;
       }
@@ -6934,11 +6992,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
 /* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @jsroot/lib/htmlHelper */ "./www/js/source/reactpages/lib/htmlHelper.js");
+/* harmony import */ var _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @jsroot/lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
 
 
 
@@ -6993,7 +7055,7 @@ const useFilterAction = () => {
     toggleLoader,
     getGridData
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_1__["ActionCreators"];
-  const ToastMsg = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("BTCExportExcelMsg1")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("BTCExportExcelMsg2")));
+  const ToastMsg = props => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object(_jsroot_lib_htmlHelper__WEBPACK_IMPORTED_MODULE_15__["decode"])(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_2__["default"].getSingleResource("BTCMaxTicketLimitMsg")).replace("{0}", _jsroot_lib_numberFormat__WEBPACK_IMPORTED_MODULE_16__["default"].formatInteger(props.limit))));
   const _getParams = () => {
     if (!isValidModel) {
       return null;
@@ -7036,8 +7098,10 @@ const useFilterAction = () => {
       CustomerClass: selectedCustomerClass
     };
   };
-  const _showExportWarning = () => {
-    react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].success( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ToastMsg, null));
+  const _showExportWarning = limitRows => {
+    react_toastify__WEBPACK_IMPORTED_MODULE_13__["toast"].success( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ToastMsg, {
+      limit: limitRows
+    }));
   };
   const submit = event => {
     event.preventDefault();
@@ -7078,7 +7142,7 @@ const useFilterAction = () => {
     const ExportMultipleFile = 1002;
     const ExportSingleFile = 1003;
     if (response.data.StatusCode === RowsExceedLimitErrorCode) {
-      return _showExportWarning();
+      return _showExportWarning(response.data.LimitRows);
     } else if (response.data.StatusCode === ExportMultipleFile) {
       exportParams.PageSize = response.data.PageSize;
       const fetchNextPage = pageIndex => {

@@ -1,4 +1,4 @@
-﻿// Generated at: 12/26/2024 2:22:24 PM
+﻿// Generated at: 1/2/2025 3:05:23 PM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -139,7 +139,7 @@ BoughtTicketsList:"Vé đã mua",
 BreakdownBy:"Phân loại theo",
 BTCExportExcelMsg1:"Kết quả tìm kiếm vượt quá giới hạn cho phép tải xuống",
 BTCExportExcelMsg2:"Hãy thử thu hẹp phạm vi ngày, chọn đơn vị tiền tệ/loại cược riêng lẻ,v.v.",
-BTCMaxTicketLimitMsg:"Số vé cược trùng khớp với bộ lọc của bạn đang vượt khả năng xử lý của hệ thống. Vui lòng giảm bớt số ngày đã chọn hoặc chỉ chọn 1 tùy chọn trong bộ lọc “Loại Cược” hoặc “Sản Phẩm”.",
+BTCMaxTicketLimitMsg:"Số vé cược trùng khớp với bộ lọc của bạn đang vượt khả năng xử lý của hệ thống ({0} dòng dữ liệu). Vui lòng giảm bớt số ngày đã chọn hoặc chỉ chọn 1 tùy chọn trong bộ lọc “Loại Cược” hoặc “Sản Phẩm”.",
 BuyBackAmount:"Số tiền mua lại",
 ByBetType:"Theo Loại Cược",
 ByCurrency:"Theo Đơn vị tiền tệ",

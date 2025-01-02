@@ -1,4 +1,4 @@
-﻿// Generated at: 12/26/2024 2:22:24 PM
+﻿// Generated at: 1/2/2025 3:05:23 PM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -137,7 +137,7 @@ BoughtTicketsList:"Tiket Yang Dibeli",
 BreakdownBy:"Tampilkan berdasarkan",
 BTCExportExcelMsg1:"Hasil pencarian Anda melebihi batas yang ditetapkan untuk mengunduhnya.",
 BTCExportExcelMsg2:"Coba kurangi rentang tanggal, pilih mata uang / jenis taruhan individu, dll.",
-BTCMaxTicketLimitMsg:"Jumlah tiket yang sesuai dengan filter Anda melebihi kapasitas pemrosesan sistem. Silakan coba filter dengan hari yang lebih sedikit atau pilih satu opsi pada &quot;Jenis Taruhan&quot;, filter &quot;Produk&quot;.",
+BTCMaxTicketLimitMsg:"Jumlah tiket yang sesuai dengan filter Anda melebihi kapasitas pemrosesan sistem ({0} baris data). Silakan coba filter dengan hari yang lebih sedikit atau pilih satu opsi pada &quot;Jenis Taruhan&quot;, filter &quot;Produk&quot;.",
 BuyBackAmount:"Jumlah Pembelian Kembali",
 ByBetType:"Berdasarkan Jenis Taruhan",
 ByCurrency:"Menurut Mata Uang",

@@ -13,6 +13,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import useIsEnableLeagueMatch from './useIsEnableLeagueMatch'
 import { toast } from 'react-toastify'
 import { saveAs } from 'file-saver'
+import {decode} from '@jsroot/lib/htmlHelper';
+import NumberFormat from '@jsroot/lib/numberFormat'
 
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
@@ -47,10 +49,9 @@ export const useFilterAction = () => {
 
     const { setReportTitle, setRequestParam, toggleLoader, getGridData } = ActionCreators;
 
-    const ToastMsg = () => (
+    const ToastMsg = (props) => (
         <div>
-            <div>{LangHelper.getSingleResource("BTCExportExcelMsg1")}</div>
-            <div>{LangHelper.getSingleResource("BTCExportExcelMsg2")}</div>
+            <div>{decode(LangHelper.getSingleResource("BTCMaxTicketLimitMsg")).replace("{0}", NumberFormat.formatInteger(props.limit))}</div>
         </div>
     )
 
@@ -92,8 +93,8 @@ export const useFilterAction = () => {
         }
     }
 
-    const _showExportWarning = () => {
-        toast.success(<ToastMsg />);
+    const _showExportWarning = (limitRows) => {
+        toast.success(<ToastMsg limit={limitRows}/>);
     }
 
     const submit = (event) => {
@@ -147,7 +148,7 @@ export const useFilterAction = () => {
         const ExportSingleFile = 1003;
 
         if (response.data.StatusCode === RowsExceedLimitErrorCode) {
-            return _showExportWarning();
+            return _showExportWarning(response.data.LimitRows);
         } else if (response.data.StatusCode === ExportMultipleFile) {
             exportParams.PageSize = response.data.PageSize;
     

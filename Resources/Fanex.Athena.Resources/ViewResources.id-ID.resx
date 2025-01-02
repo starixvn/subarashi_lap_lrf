@@ -3370,6 +3370,6 @@
     <value>Widget Taruhan Cepat</value>
   </data>
   <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
-    <value>Jumlah tiket yang sesuai dengan filter Anda melebihi kapasitas pemrosesan sistem. Silakan coba filter dengan hari yang lebih sedikit atau pilih satu opsi pada "Jenis Taruhan", filter "Produk".</value>
+    <value>Jumlah tiket yang sesuai dengan filter Anda melebihi kapasitas pemrosesan sistem ({0} baris data). Silakan coba filter dengan hari yang lebih sedikit atau pilih satu opsi pada "Jenis Taruhan", filter "Produk".</value>
   </data>
 </root>
