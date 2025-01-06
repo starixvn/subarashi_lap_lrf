@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 12/20/2024 9:33:15 AM
+﻿// Generated at: 1/6/2025 11:03:30 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -207,7 +207,7 @@ BetTaken:"Bet Taken",
 BettingLimit:"Betting Limit",
 BettingStatement:"Betting Statement",
 BettingTicketCenter:"Betting Ticket Center",
-BettingTicketCenter_AdvancedSearchTabNote1:"All bettypes, League and Match filter available only when 1 day is selected",
+BettingTicketCenter_AdvancedSearchTabNote1:"League and Match filters are only available for Sportsbook on a specific day",
 BettingTicketCenter_AdvancedSearchTabNote2:"Data is available from {0}",
 BettingTicketCenter_BookedBetNote:"Data is available within up to 7 days",
 BettingTicketCenter_Exchange_Note_1:"Support searching void tickets only.",
@@ -236,6 +236,7 @@ BoughtTicketsList:"Bought Ticket[s]",
 BreakdownBy:"Breakdown By",
 BTCExportExcelMsg1:"Your search result exceeds our set limits to get it downloaded.",
 BTCExportExcelMsg2:"Please try reducing date range, selecting individual currency/ bet type, etc.",
+BTCMaxTicketLimitMsg:"The number of tickets matching your filter exceeds the system&apos;s processing capacity ({0} data rows). Please try filtering by fewer days or selecting a single option on the &quot;Bet type&quot;, the &quot;Product&quot; filter.",
 BuyBackAmount:"Buy Back Amount",
 ByBetType:"By Bet Type",
 ByCurrency:"By Currency",
