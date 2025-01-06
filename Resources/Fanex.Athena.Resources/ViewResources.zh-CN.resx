@@ -1946,7 +1946,7 @@
     <value>多个会员</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>投注类型，联赛与赛事选单仅支援单日搜寻</value>
+    <value>联赛及赛事过滤器仅支持搜寻体育平台内特定日期范围</value>
   </data>
   <data name="BTCExportExcelMsg1" xml:space="preserve">
     <value>您的搜寻结果超过系统设定的范围.</value>
@@ -3405,5 +3405,8 @@
   </data>
   <data name="QuickBetWidget" xml:space="preserve">
     <value>快捷投注元件</value>
+  </data>
+  <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
+    <value>搜寻结果的数量超过系统限制 ({0} 条数据)，请缩减搜寻条件或根据投注类别及运动进行过滤</value>
   </data>
 </root>

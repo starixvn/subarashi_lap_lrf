@@ -1,5 +1,5 @@
 ﻿import { combineReducers } from 'redux';
-import * as gridDataReducer from '@jsroot/reducers/gridDataReducer.js'
+import * as gridDataReducer from './gridDataReducer.js'
 import * as productReducer from '@jsroot/reducers/productReducer'
 import * as currencyReducer from '@jsroot/reducers/currencyReducer'
 import * as baseCurrencyReducer from '@jsroot/reducers/baseCurrencyReducer'
@@ -22,6 +22,7 @@ import * as subsidiaryReducer from '@jsroot/reducers/subsidiaryReducer';
 import * as platform from './platformReducer';
 import * as oddsGroups from './oddsGroupsReducer';
 import * as customerClass from './customerClassReducer';
+import * as filterReducer from './filterReducer';
 
 export default combineReducers(Object.assign(
     gridDataReducer,
@@ -46,5 +47,6 @@ export default combineReducers(Object.assign(
     subsidiaryReducer,
     platform,
     oddsGroups,
-    customerClass
+    customerClass,
+    filterReducer
 ));

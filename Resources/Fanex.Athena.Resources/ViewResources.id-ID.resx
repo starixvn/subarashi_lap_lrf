@@ -445,7 +445,7 @@
     <value>Pusat Tiket Taruhan</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>Semua jenis taruhan, Liga dan Filter Pertandingan hanya tersedia ketika 1 hari dipilih</value>
+    <value>Filter Liga dan Pertandingan hanya tersedia untuk Sportsbook pada hari tertentu</value>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote2" xml:space="preserve">
     <value>Data tersedia dari {0}</value>
@@ -3368,5 +3368,8 @@
   </data>
   <data name="QuickBetWidget" xml:space="preserve">
     <value>Widget Taruhan Cepat</value>
+  </data>
+  <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
+    <value>Jumlah tiket yang sesuai dengan filter Anda melebihi kapasitas pemrosesan sistem ({0} baris data). Silakan coba filter dengan hari yang lebih sedikit atau pilih satu opsi pada "Jenis Taruhan", filter "Produk".</value>
   </data>
 </root>

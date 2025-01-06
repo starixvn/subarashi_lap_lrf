@@ -1,4 +1,4 @@
-﻿// Generated at: 12/20/2024 9:33:15 AM
+﻿// Generated at: 1/2/2025 3:05:23 PM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -112,7 +112,7 @@ BetTaken:"Đặt cược được chấp nhận",
 BettingLimit:"Giới hạn cược",
 BettingStatement:"Sao kê Cược",
 BettingTicketCenter:"Trung Tâm Vé Cược",
-BettingTicketCenter_AdvancedSearchTabNote1:"Tất cả các loại cược, bộ lọc Giải đấu và Trận đấu chỉ khả dụng khi có 1 ngày được chọn.",
+BettingTicketCenter_AdvancedSearchTabNote1:"Bộ lọc Giải Đấu và Trận Đấu chỉ dành cho Sportsbook và chỉ hiển thị dữ liệu của một ngày nhất định",
 BettingTicketCenter_AdvancedSearchTabNote2:"Dữ liệu có sẵn từ {0}",
 BettingTicketCenter_BookedBetNote:"Hiển thị dữ liệu lên đến 7 ngày",
 BettingTicketCenter_Exchange_Note_1:"Chỉ hỗ trợ tìm kiếm vé cược bị hủy.",
@@ -139,6 +139,7 @@ BoughtTicketsList:"Vé đã mua",
 BreakdownBy:"Phân loại theo",
 BTCExportExcelMsg1:"Kết quả tìm kiếm vượt quá giới hạn cho phép tải xuống",
 BTCExportExcelMsg2:"Hãy thử thu hẹp phạm vi ngày, chọn đơn vị tiền tệ/loại cược riêng lẻ,v.v.",
+BTCMaxTicketLimitMsg:"Số vé cược trùng khớp với bộ lọc của bạn đang vượt khả năng xử lý của hệ thống ({0} dòng dữ liệu). Vui lòng giảm bớt số ngày đã chọn hoặc chỉ chọn 1 tùy chọn trong bộ lọc “Loại Cược” hoặc “Sản Phẩm”.",
 BuyBackAmount:"Số tiền mua lại",
 ByBetType:"Theo Loại Cược",
 ByCurrency:"Theo Đơn vị tiền tệ",

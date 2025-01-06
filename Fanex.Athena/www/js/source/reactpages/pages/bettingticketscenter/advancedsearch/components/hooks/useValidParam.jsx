@@ -13,8 +13,8 @@ export const useValidParam = () => {
         selectedCustomerClass,
         selectedOddsGroup,
         selectedSubsidiary,
-        bettypeList,
         selectedBettype,
+        selectedSport
     } = useSelector((state) => state, shallowEqual);
     const { isSubsidiarySearch } = useSubsidiarySearch();
 
@@ -28,6 +28,7 @@ export const useValidParam = () => {
         !!selectedPlatform &&
         validateBaseCurrency(selectedBaseCurrency) &&
         (!isSubsidiarySearch || !!selectedSubsidiary) &&
-        bettypeList.some((betType) => betType.value === selectedBettype)
+        !!selectedBettype &&
+        !!selectedSport
     );
 };

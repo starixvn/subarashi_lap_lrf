@@ -88,6 +88,7 @@
                 mainTable.Columns.Add("bettype", typeof(int));
                 mainTable.Columns.Add("matchcode", typeof(string));
                 mainTable.Columns.Add("race", typeof(string));
+                mainTable.Columns.Add("ProductCode", typeof(string));
                 mainTable.Rows.Add(SportType, bettype, MatchCode, Race);
                 expectedData.Tables.Add(mainTable);
                 expectedData.Tables.Add(new DataTable("TotalData"));

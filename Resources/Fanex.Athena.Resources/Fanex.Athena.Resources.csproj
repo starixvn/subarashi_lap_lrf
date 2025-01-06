@@ -70,13 +70,17 @@
     <EmbeddedResource Include="Menu.id-ID.resx" />
     <EmbeddedResource Include="Menu.vi-VN.resx" />
     <EmbeddedResource Include="Menu.zh-CN.resx" />
-    <EmbeddedResource Include="ViewResources.th-TH.resx" />
+    <EmbeddedResource Include="ViewResources.th-TH.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>ViewResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewResources.id-ID.resx" />
+    <EmbeddedResource Include="ViewResources.id-ID.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewResources.vi-VN.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

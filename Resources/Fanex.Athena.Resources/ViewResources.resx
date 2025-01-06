@@ -2141,7 +2141,7 @@
     <comment>80941</comment>
   </data>
   <data name="BettingTicketCenter_AdvancedSearchTabNote1" xml:space="preserve">
-    <value>All bettypes, League and Match filter available only when 1 day is selected</value>
+    <value>League and Match filters are only available for Sportsbook on a specific day</value>
     <comment>80941</comment>
   </data>
   <data name="BettingTicketCenter_RefnoTabNote1" xml:space="preserve">
@@ -3880,5 +3880,8 @@
   </data>
   <data name="QuickBetWidget" xml:space="preserve">
     <value>Quick Bet Widget</value>
+  </data>
+  <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
+    <value>The number of tickets matching your filter exceeds the system's processing capacity ({0} data rows). Please try filtering by fewer days or selecting a single option on the "Bet type", the "Product" filter.</value>
   </data>
 </root>

@@ -37,31 +37,13 @@
                 var row = CreateDataRow(ProductTypes.NumberGame);
                 row["matchcode"] = FakeHelper.Create<string>();
                 var sport = FakeHelper.Create<int>();
+                var bettype = FakeHelper.Create<int>();
 
                 // Action
-                controller.AssignLeagueName(row, sport);
+                controller.AssignMatchName(row, bettype, sport);
 
                 // Assert
                 Assert.That(row["matchname"], Is.EqualTo(ViewResources.NumberGameNo + " " + row["matchcode"]));
-            }
-        }
-
-        [Test]
-        public void AssignMatchName_VirtualHrBettypes_AssignCorrectMatchName()
-        {
-            using (var controller = CreateController())
-            {
-                // Arrange
-                const int Bettype = 1231;
-                var row = CreateDataRow(Bettype);
-                row["KickoffTime"] = DateTimeHelper.CreateDateTime(2018, 1, 2, 3, 4, 5);
-                var sport = FakeHelper.Create<int>();
-
-                // Action
-                controller.AssignLeagueName(row, sport);
-
-                // Assert
-                Assert.That(row["matchname"], Is.EqualTo("01/02/2018 03:04:05 AM"));
             }
         }
 
@@ -74,14 +56,14 @@
                 // Arrange
                 const int Bettype = -1;
                 var row = CreateDataRow(Bettype);
+                var sport = FakeHelper.Create<int>();
                 row["homeid"] = 1;
                 row["isneutral"] = isNeutral;
                 row["awayid"] = 2;
-                _cacheRefAdapter.GetTeamName(Arg.Any<object>()).Returns(x => "Team " + x[0]);
-                var sport = FakeHelper.Create<int>();
+                _cacheRefAdapter.GetTeamName(Arg.Any<object>(), sport).Returns(x => "Team " + x[0]);
 
                 // Action
-                controller.AssignLeagueName(row, sport);
+                controller.AssignMatchName(row, Bettype, sport);
 
                 // Assert
                 Assert.That(row["matchname"], Is.EqualTo(expectedMatchName));
@@ -99,6 +81,7 @@
             table.Columns.Add("isneutral", typeof(bool));
             table.Columns.Add("awayid", typeof(int));
             table.Columns.Add("matchname", typeof(string));
+            table.Columns.Add("leaguename", typeof(string));
             var row = table.NewRow();
             row["newproductid"] = newProductId;
             return row;

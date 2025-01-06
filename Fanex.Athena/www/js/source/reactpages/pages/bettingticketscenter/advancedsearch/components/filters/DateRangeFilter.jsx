@@ -4,21 +4,19 @@ import { ActionCreators } from '../../actions/index.js'
 import LangHelper from '@jsroot/lib/langHelper'
 import AppData from '@jsroot/lib/AppData'
 import { DateRange } from '@jsroot/components/date-range/index'
-import Service from '../../../common/lib/Service';
 import useIsEnableLeagueMatch from '../hooks/useIsEnableLeagueMatch.jsx'
 import PropTypes from 'prop-types';
 
 
 export const DateRangeFilter = (props) => {
     const dispatch = useDispatch();
-    const [dateRange, selectedProduct, selectedSport] = useSelector(state => [state.dateRange, state.selectedProduct, state.selectedSport], shallowEqual);
+    const [dateRange, selectedSport] = useSelector(state => [state.dateRange, state.selectedSport], shallowEqual);
     const isEnableLeagueMatch = useIsEnableLeagueMatch();
-    const {setDateRange, getBettypeList, getLeagueList} = ActionCreators;
+    const {setDateRange, getLeagueList} = ActionCreators;
 
     const _onChangeDateRange = (date, isValidMonthRange = true) => {
         if (isValidMonthRange) {
             dispatch(setDateRange(date));
-            dispatch(getBettypeList(selectedProduct, Service.isSingleDate({ fromDate: date.startDate, toDate: date.endDate })));
             if (isEnableLeagueMatch) {
                 dispatch(getLeagueList(selectedSport, date.startDate));
             }

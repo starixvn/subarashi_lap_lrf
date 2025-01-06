@@ -8,12 +8,15 @@ import MobileFormFilter from './mobile/MobileFormFilter'
 import MobileGrid from './mobile/MobileGrid'
 import useMobileVersion from '@jsroot/customHooks/useMobileVersion'
 import { useIsFirstRender } from 'usehooks-ts'
+import SweetAlert from '@jsroot/components/sweet-alert';
 
 export const AppContainer = () => {
     const ref = useRef(false);
     const isMobile = useMobileVersion();
     const isFirstRender = useIsFirstRender();
-    const isLoading = useSelector(state => state.isLoading)
+    const isLoading = useSelector(state => state.isLoading);
+    const sweetAlertOption = useSelector(state => state.sweetAlertOption);
+
     if (isFirstRender){
         ref.current = isMobile;
     }
@@ -23,12 +26,14 @@ export const AppContainer = () => {
             <Loader isLoading={isLoading} />
             <FormFilter />
             <DataGrid />
+            {sweetAlertOption && <SweetAlert {...sweetAlertOption} />}
         </>);
     const mobileLayout = (
         <>
             <Loader isLoading={isLoading} />
             <MobileFormFilter />
             <MobileGrid />
+            {sweetAlertOption && <SweetAlert {...sweetAlertOption} />}
         </>
     );
     const layout = isUseMobileVer ? mobileLayout :destopLayout

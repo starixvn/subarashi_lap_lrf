@@ -9,6 +9,8 @@
 @import "../../components/_popup-content";
 @import "../../components/tab.scss";
 @import "../../components/custom3rd/react-toastify.scss";
+@import "../../components/alert/index";
+@import '../../components/popup';
 
 .datepicker-disabled {
     .daterange-container {
@@ -24,6 +26,7 @@
 
 .caret-block {
     position: static !important;
+
     div {
         display: inherit;
     }

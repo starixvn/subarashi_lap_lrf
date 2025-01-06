@@ -1078,7 +1078,7 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All bettypes, League and Match filter available only when 1 day is selected.
+        ///   Looks up a localized string similar to League and Match filters are only available for Sportsbook on a specific day.
         /// </summary>
         public static string BettingTicketCenter_AdvancedSearchTabNote1 {
             get {
@@ -1335,6 +1335,15 @@ namespace Fanex.Athena.Resources {
         public static string BTCExportExcelMsg2 {
             get {
                 return ResourceManager.GetString("BTCExportExcelMsg2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The number of tickets matching your filter exceeds the system&apos;s processing capacity ({0} data rows). Please try filtering by fewer days or selecting a single option on the &quot;Bet type&quot;, the &quot;Product&quot; filter..
+        /// </summary>
+        public static string BTCMaxTicketLimitMsg {
+            get {
+                return ResourceManager.GetString("BTCMaxTicketLimitMsg", resourceCulture);
             }
         }
         

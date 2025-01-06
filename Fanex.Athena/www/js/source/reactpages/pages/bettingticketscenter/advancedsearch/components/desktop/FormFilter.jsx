@@ -28,6 +28,8 @@ import CurrencyFilter from '../filters/CurrencyFilter';
 import BaseCurrencyFilter from '../filters/BaseCurrencyFilter';
 import ConvertAllCheckBoxFilter from '../filters/ConvertAllCheckBoxFilter';
 import SubsidiaryCheckBoxFilter from '../filters/SubsidiaryCheckBoxFilter';
+import CashOutModeFilter from '../filters/CashOutModeFilter';
+import AppData from '@jsroot/lib/AppData';
 import Note from '../filters/Note';
 
 export const FormFilter = () => {
@@ -35,7 +37,8 @@ export const FormFilter = () => {
     const isEnableLeagueMatch = useIsEnableLeagueMatch();
     const { isShowSubsidiaryDropdown, isSubsidiarySearch, isShowSubsidiarySearchCheckBox, } = useSubsidiarySearch();
     const { selectedProduct, selectedSport, sportList, selectedBettype, bettypeList, selectedLeague, leagueList, 
-        selectedMatch, matchList, selectedPlatform, ip, selectedBaseCurrency, isConvertAll} = useSelector(state => state, shallowEqual);
+        selectedMatch, matchList, selectedPlatform, ip, selectedBaseCurrency, isConvertAll, productList, selectedCashOutMode,
+        isEnableCashOutFilter} = useSelector(state => state, shallowEqual);
 
     const { baseCurrencyList,  selectedBaseCurrency: newBaseCurrency  } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
     const { submit } = useFilterAction();
@@ -43,9 +46,10 @@ export const FormFilter = () => {
     const { onProductChangeHandler, onSportChangeHandler, onBetTypeChangeHandler, onLeagueChangeHandler, onMatchChangeHandler,
         onUserNameInputHandler, onStatusChangeHandler, onLiveStatusChangeHandler, onCustomerClassChangeHandler,
         onOddsGroupChangeHandler, onPlatformChangeHandler, onIpChangeHandler, onCurrencyChangeHandler,
-        onBaseCurrencyChangeHandler, onConverAllChangeHandler, onSubsidiaryDropDownChangeHandler, onSubsidiaryCheckBoxChangeHandler } = useFilterHandler();
+        onBaseCurrencyChangeHandler, onConverAllChangeHandler, onSubsidiaryDropDownChangeHandler, onSubsidiaryCheckBoxChangeHandler,
+        onCashOutModeChangeHandler } = useFilterHandler();
 
-    useEffect(() =>{ onProductChangeHandler({value: selectedProduct}) }, []);
+    useEffect(() =>{ onProductChangeHandler(null, selectedProduct) }, []);
     useEffect(() =>{ onBaseCurrencyChangeHandler({value: newBaseCurrency})}, [newBaseCurrency])
     useEffect(() =>{ onSubsidiaryCheckBoxChangeHandler(!isShowSubsidiarySearchCheckBox && isShowSubsidiaryDropdown) }, []);
 
@@ -54,8 +58,8 @@ export const FormFilter = () => {
                 <div className="row">
                     <ToastContainer
                         autoClose={10000}
+                        position="top-left"
                         pauseOnFocusLoss={false}
-                        style={{ width: "500px" }}
                         transition={Flip} />
 
                     { isShowSubsidiaryDropdown && isSubsidiarySearch && <div className="col-12 col-md-3 col-sm-4 col-lg-3 col-xl-2">
@@ -67,7 +71,7 @@ export const FormFilter = () => {
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                        <ProductFilter value={selectedProduct} onChange={onProductChangeHandler}/>
+                        <ProductFilter value={selectedProduct} options={productList} onChange={onProductChangeHandler}/>
                     </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
@@ -82,15 +86,9 @@ export const FormFilter = () => {
                         <LeagueFilter disabled={!isEnableLeagueMatch} value={selectedLeague} options={leagueList} onChange={onLeagueChangeHandler} />
                     </div>
 
-                    {!(isShowSubsidiaryDropdown && isSubsidiarySearch) && <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <MatchFilter disabled={!isEnableLeagueMatch} value={selectedMatch} options={matchList} onChange={onMatchChangeHandler} />
-                    </div>}
-
-                </div>
-                <div className="row">
-                    {(isShowSubsidiaryDropdown  && isSubsidiarySearch) && <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
-                        <MatchFilter disabled={!isEnableLeagueMatch} value={selectedMatch} options={matchList} onChange={onMatchChangeHandler} />    
-                    </div>}
+                    </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <UserNameFilter onChange={onUserNameInputHandler} />
@@ -112,21 +110,19 @@ export const FormFilter = () => {
                         <OddsGroupFilter onChange={onOddsGroupChangeHandler}/>
                     </div>
 
-                    {!(isShowSubsidiaryDropdown && isSubsidiarySearch) && <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
+                    <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <PlatformFilter value={selectedPlatform} onChange={onPlatformChangeHandler} />
-                    </div>}
-
-                </div>
-
-                <div className="row">
-
-                    {(isShowSubsidiaryDropdown && isSubsidiarySearch) && <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
-                        <PlatformFilter value={selectedPlatform} onChange={onPlatformChangeHandler} />
-                    </div>}
+                    </div>
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-4 col-xl-2">
                         <IpFilter value={ip} onChange={onIpChangeHandler} />
                     </div>
+
+                    {AppData.isOfferCashOutProduct &&
+                        <div className="col-12 col-md-3 col-sm-6 col-lg-4 col-xl-2">
+                            <CashOutModeFilter value={selectedCashOutMode} onChange={onCashOutModeChangeHandler} disabled={!isEnableCashOutFilter}/>
+                        </div>
+                    }
 
                     <div className="col-12 col-md-3 col-sm-3 col-lg-2 col-xl-2">
                         <CurrencyFilter onChange={onCurrencyChangeHandler}/>

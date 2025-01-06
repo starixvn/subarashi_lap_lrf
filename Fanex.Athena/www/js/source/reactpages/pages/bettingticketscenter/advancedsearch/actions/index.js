@@ -1,4 +1,4 @@
-﻿import * as gridDataAction from '@jsroot/actions/gridDataAction'
+﻿import * as gridDataAction from './gridDataAction'
 import * as productAction from '@jsroot/actions/productAction'
 import * as currencyAction from '@jsroot/actions/currencyAction'
 import * as baseCurrencyAction from '@jsroot/actions/baseCurrencyAction'
@@ -20,6 +20,7 @@ import * as subsidiaryAction from '@jsroot/actions/subsidiaryAction'
 import * as platformAction from './platformAction'
 import * as oddsGroupsAction from './oddsGroupsAction'
 import * as customerClassAction from './customerClassAction'
+import * as filterAction from './filterAction'
 
 export const ActionCreators = Object.assign({},
     gridDataAction,
@@ -43,5 +44,6 @@ export const ActionCreators = Object.assign({},
     subsidiaryAction,
     platformAction,
     oddsGroupsAction,
-    customerClassAction
+    customerClassAction,
+    filterAction
 );

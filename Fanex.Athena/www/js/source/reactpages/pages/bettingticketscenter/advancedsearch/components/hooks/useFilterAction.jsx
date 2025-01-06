@@ -13,6 +13,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import useIsEnableLeagueMatch from './useIsEnableLeagueMatch'
 import { toast } from 'react-toastify'
 import { saveAs } from 'file-saver'
+import {decode} from '@jsroot/lib/htmlHelper';
+import NumberFormat from '@jsroot/lib/numberFormat'
 
 export const useFilterAction = () => {
     const isValidModel = useValidParam();
@@ -35,7 +37,10 @@ export const useFilterAction = () => {
         selectedSubsidiary,
         ip,
         selectedOddsGroup,
-        selectedCustomerClass }
+        selectedCustomerClass,
+        sportList,
+        bettypeList,
+        selectedCashOutMode}
         = useSelector(state => state, shallowEqual);
 
     const { baseCurrencyList } = useBaseCurrencyForMultiSelectCurrency(selectedBaseCurrency);
@@ -44,10 +49,9 @@ export const useFilterAction = () => {
 
     const { setReportTitle, setRequestParam, toggleLoader, getGridData } = ActionCreators;
 
-    const ToastMsg = () => (
+    const ToastMsg = (props) => (
         <div>
-            <div>{LangHelper.getSingleResource("BTCExportExcelMsg1")}</div>
-            <div>{LangHelper.getSingleResource("BTCExportExcelMsg2")}</div>
+            <div>{decode(LangHelper.getSingleResource("BTCMaxTicketLimitMsg")).replace("{0}", NumberFormat.formatInteger(props.limit))}</div>
         </div>
     )
 
@@ -71,8 +75,8 @@ export const useFilterAction = () => {
             BaseCurrency: selectedBaseCurrency,
             Status: selectedStatus,
             LiveStatus: selectedLiveStatus,
-            SportId: selectedSport,
-            BetTypeId: selectedBettype,
+            SportIds: Service.getNormalizedSelectedParamValueForTreeListFilter(selectedSport, sportList),
+            BetTypeIds: Service.getSelectedBettype(selectedBettype, bettypeList),
             LeagueId: isEnableLeagueMatch ? selectedLeague : 0,
             MatchId: isEnableLeagueMatch ? selectedMatch : 0,
             SortBy: SortBy,
@@ -83,17 +87,14 @@ export const useFilterAction = () => {
             SubsidiaryList: isSubsidiarySearch ? selectedSubsidiary : "",
             Ip: ip,
             Platform: selectedPlatform,
+            CashOutMode: selectedCashOutMode,
             OddsGroup: selectedOddsGroup,
             CustomerClass: selectedCustomerClass
         }
     }
 
-    const _showExportWarning = () => {
-        toast.success(<ToastMsg />, {
-            onClose: () => {
-                toast.dismiss();
-            }
-        });
+    const _showExportWarning = (limitRows) => {
+        toast.success(<ToastMsg limit={limitRows}/>);
     }
 
     const submit = (event) => {
@@ -137,7 +138,6 @@ export const useFilterAction = () => {
                 alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
             })
             .finally(() => {
-                toast.dismiss();
                 dispatch(toggleLoader(false));
             });
     }
@@ -146,18 +146,13 @@ export const useFilterAction = () => {
         const RowsExceedLimitErrorCode = 1001;
         const ExportMultipleFile = 1002;
         const ExportSingleFile = 1003;
-        const MaxPage = 20;
-    
+
         if (response.data.StatusCode === RowsExceedLimitErrorCode) {
-            return _showExportWarning();
+            return _showExportWarning(response.data.LimitRows);
         } else if (response.data.StatusCode === ExportMultipleFile) {
             exportParams.PageSize = response.data.PageSize;
     
             const fetchNextPage = (pageIndex) => {
-                if (pageIndex >= MaxPage) {
-                    return Promise.resolve();
-                }
-
                 return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, {
                     ...exportParams,
                     PageIndex: pageIndex
@@ -177,6 +172,8 @@ export const useFilterAction = () => {
             return fetchNextPage(1);
     
         } else {
+            exportParams.PageSize = response.data.PageSize;
+
             return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, exportParams).then((response) =>
                 _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch", true)
             );
