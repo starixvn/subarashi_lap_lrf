@@ -75,9 +75,6 @@
     <Compile Include="DTO\SabaVirtualSettingInformationModel.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerReachedHistory.cs" />
-    <Compile Include="DTO\PlayerSegmentation\SabaVirtualPlayer.cs" />
-    <Compile Include="DTO\PlayerSegmentation\SubIssue.cs" />
-    <Compile Include="DTO\PlayerSegmentation\ReasonGroup.cs" />
     <Compile Include="DTO\PlayerSegmentation\PlayerInfo.cs" />
     <Compile Include="DTO\PlayerSegmentation\MonitoredPlayerCommand.cs" />
     <Compile Include="DTO\PlayerSegmentation\UpdateStatusPlayerResult.cs" />
@@ -103,13 +100,11 @@
     <Compile Include="MetaModel\PlayerSegmentation\DeleteMonitoredPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\BatchUpdateMonitoredPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\MonitoredPlayerReachedHistoryMetaModel.cs" />
-    <Compile Include="MetaModel\PlayerSegmentation\SabaVirtualPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\UpdateMonitoredPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\InsertMonitoredPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\MonitoredPlayerListMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\UpdateStatusPlayerMetaModel.cs" />
     <Compile Include="MetaModel\PlayerSegmentation\VipPlayerListMetaModel.cs" />
-    <Compile Include="MetaModel\PlayerSegmentation\ProblemPlayerListMetaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultModel\CustomerOddsGroupLogResultModel.cs" />
     <Compile Include="ViewModel\CommissionGroupList\CommissionGroupListViewModel.cs" />
@@ -121,7 +116,6 @@
     <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationBetListViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\DangerLevelViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\VipPlayerViewModel.cs" />
-    <Compile Include="ViewModel\PlayerSegmentation\ProblemPlayerViewModel.cs" />
     <Compile Include="ViewModel\PlayerSegmentation\PlayerSegmentationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

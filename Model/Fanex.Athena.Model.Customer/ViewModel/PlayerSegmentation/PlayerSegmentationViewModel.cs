@@ -1,8 +1,8 @@
 ﻿namespace Fanex.Athena.Model.Customer.ViewModel
 {
     using System.Collections.Generic;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
+    using Core.DataDomain;
+    using Core.DTO.Common;
 
     public class PlayerSegmentationViewModel
     {
@@ -14,13 +14,9 @@
 
         public bool IsHideSaba { get; set; }
 
-        public ProblemPlayerViewModel ProblemPlayerVM { get; set; }
-
         public VipPlayerViewModel VipPlayerVM { get; set; }
 
         public MonitoredPlayerViewModel MonitoredPlayerVM { get; set; }
-
-        public DangerLevelViewModel DangerLevelVM { get; set; }
 
         public SubsidiaryViewType ViewType { get; set; }
 

@@ -670,7 +670,6 @@
     <Content Include="SiteConfig\WebConfigTransforms\BACKUPMNLStatic.config" />
     <Content Include="SiteConfig\Web.BACKUPMNLStatic.config" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\Main.cshtml" />
-    <Content Include="App_Data\Template\Customers\PlayerSegmentation\ProblemPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />
     <Content Include="Views\Desktop\Customer\CustomerComm\Menu.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerLog\GroupCommLog\Menu.cshtml" />
@@ -729,7 +728,6 @@
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\MonitoredPlayerUploadBySystemIdTemplate.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\MonitoredPlayerList.xls" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\MonitoredPlayerReachedHistory.xls" />
-    <Content Include="App_Data\Template\Customers\PlayerSegmentation\SabaVirtualSetting.xls" />
     <Content Include="Views\Desktop\Customer\SabaVirtualSetting\Index.cshtml" />
     <Content Include="Views\Desktop\Customer\SabaVirtualSetting\SabaVirtualSettingInformationTable.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\SabaVirtualSettingInformation.xls" />

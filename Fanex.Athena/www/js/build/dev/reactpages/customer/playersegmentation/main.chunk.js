@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/SabaVirtualSetting":"customer/playersegmentation/SabaVirtualSetting","customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/problemPlayer":"customer/playersegmentation/problemPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/SabaVirtualSetting":"403da3f393f960a63a34","customer/playersegmentation/monitoredPlayer":"1a6e81d25503bbdd9c5c","customer/playersegmentation/problemPlayer":"181a2924fc4b3e475b06","customer/playersegmentation/vipPlayerManagement":"0cc7a128dd88e6de4ced","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/monitoredPlayer":"abe3a377d795edaf428f","customer/playersegmentation/vipPlayerManagement":"bd40c097c805f40ba730","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -1066,13 +1066,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const tabKeys = {
   monitoredPlayer: 'MonitoredPlayer',
-  sabaVirtualSetting: 'SabaVirtualSetting',
   vipPlayerManagement: 'VipPlayerManagement'
 };
 const newTabs = [];
 const dynamicImports = {
-  [tabKeys.problemPlayer]: () => __webpack_require__.e(/*! import() | customer/playersegmentation/problemPlayer */ "customer/playersegmentation/problemPlayer").then(__webpack_require__.bind(null, /*! ../tabs/problem-player/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/index.js")),
-  [tabKeys.sabaVirtualSetting]: () => __webpack_require__.e(/*! import() | customer/playersegmentation/SabaVirtualSetting */ "customer/playersegmentation/SabaVirtualSetting").then(__webpack_require__.bind(null, /*! ../tabs/saba-virtual-setting/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/saba-virtual-setting/index.js")),
   [tabKeys.vipPlayerManagement]: () => __webpack_require__.e(/*! import() | customer/playersegmentation/vipPlayerManagement */ "customer/playersegmentation/vipPlayerManagement").then(__webpack_require__.bind(null, /*! ../tabs/vip-player-management/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/index.js")),
   [tabKeys.monitoredPlayer]: () => __webpack_require__.e(/*! import() | customer/playersegmentation/monitoredPlayer */ "customer/playersegmentation/monitoredPlayer").then(__webpack_require__.bind(null, /*! ../tabs/monitored-player/index */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/index.js"))
 };
@@ -1132,8 +1129,7 @@ const successResponse = {
 };
 const TabType = {
   MonitoredPlayer: 1,
-  SabaVirtualSetting: 2,
-  VipPlayerManagement: 3
+  VipPlayerManagement: 2
 };
 
 /***/ }),
@@ -1149,11 +1145,9 @@ const TabType = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "queryServiceCommonFactory", function() { return queryServiceCommonFactory; });
 /* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _tabs_problem_player_lib_queryService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tabs/problem-player/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/queryService.js");
-/* harmony import */ var _tabs_vip_player_management_lib_queryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tabs/vip-player-management/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/queryService.js");
-/* harmony import */ var _tabs_monitored_player_lib_queryService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tabs/monitored-player/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
-/* harmony import */ var _tabs_saba_virtual_setting_lib_queryService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../tabs/saba-virtual-setting/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/saba-virtual-setting/lib/queryService.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
+/* harmony import */ var _tabs_vip_player_management_lib_queryService__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tabs/vip-player-management/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/vip-player-management/lib/queryService.js");
+/* harmony import */ var _tabs_monitored_player_lib_queryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tabs/monitored-player/lib/queryService */ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/monitored-player/lib/queryService.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -1163,43 +1157,35 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 
 
 
-
-
 class CommonQueryService {
   static async updateVipStatus(params) {
     try {
       const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/UpdateVipStatus', params);
       if (response.status === 200 && response.data !== null) {
-        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_5__["successResponse"]), {
+        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_3__["successResponse"]), {
           data: response.data
         });
       }
       // Service Maintenance
       if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_5__["errorResponse"]), {}, {
-          errorCode: _constants__WEBPACK_IMPORTED_MODULE_5__["errorCode"].serviceMaintenance
+        return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"]), {}, {
+          errorCode: _constants__WEBPACK_IMPORTED_MODULE_3__["errorCode"].serviceMaintenance
         });
       }
     } catch (e) {
       console.log(e);
     }
-    return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_5__["errorResponse"]), {}, {
-      errorCode: _constants__WEBPACK_IMPORTED_MODULE_5__["errorCode"].serviceError
+    return _objectSpread(_objectSpread({}, _constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"]), {}, {
+      errorCode: _constants__WEBPACK_IMPORTED_MODULE_3__["errorCode"].serviceError
     });
   }
 }
 const queryServiceCommonFactory = {
-  [_constants__WEBPACK_IMPORTED_MODULE_5__["tabKeys"].problemPlayer]: {
-    getPlayerList: _tabs_problem_player_lib_queryService__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerList
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["tabKeys"].vipPlayerManagement]: {
+    getPlayerList: _tabs_vip_player_management_lib_queryService__WEBPACK_IMPORTED_MODULE_1__["default"].getPlayerList
   },
-  [_constants__WEBPACK_IMPORTED_MODULE_5__["tabKeys"].sabaVirtualSetting]: {
-    getPlayerList: _tabs_saba_virtual_setting_lib_queryService__WEBPACK_IMPORTED_MODULE_4__["default"].getPlayerList
-  },
-  [_constants__WEBPACK_IMPORTED_MODULE_5__["tabKeys"].vipPlayerManagement]: {
-    getPlayerList: _tabs_vip_player_management_lib_queryService__WEBPACK_IMPORTED_MODULE_2__["default"].getPlayerList
-  },
-  [_constants__WEBPACK_IMPORTED_MODULE_5__["tabKeys"].monitoredPlayer]: {
-    getPlayerList: _tabs_monitored_player_lib_queryService__WEBPACK_IMPORTED_MODULE_3__["default"].getMontioredPlayerList
+  [_constants__WEBPACK_IMPORTED_MODULE_3__["tabKeys"].monitoredPlayer]: {
+    getPlayerList: _tabs_monitored_player_lib_queryService__WEBPACK_IMPORTED_MODULE_2__["default"].getMontioredPlayerList
   },
   common: {
     updateVipStatus: CommonQueryService.updateVipStatus
@@ -1430,76 +1416,6 @@ class MonitoredPlayerService {
       console.log(e);
     }
     return _lib_constants__WEBPACK_IMPORTED_MODULE_3__["errorResponse"];
-  }
-}
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/queryService.js":
-/*!*************************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/problem-player/lib/queryService.js ***!
-  \*************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ProblemPlayerQueryService; });
-/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-
-
-class ProblemPlayerQueryService {
-  static async getPlayerList(params) {
-    try {
-      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetProblemPlayerList', params);
-      if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"]), response.data);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    return _lib_constants__WEBPACK_IMPORTED_MODULE_1__["errorResponse"];
-  }
-}
-
-/***/ }),
-
-/***/ "./www/js/source/reactpages/pages/customer/player-segmentation/tabs/saba-virtual-setting/lib/queryService.js":
-/*!*******************************************************************************************************************!*\
-  !*** ./www/js/source/reactpages/pages/customer/player-segmentation/tabs/saba-virtual-setting/lib/queryService.js ***!
-  \*******************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ProblemPlayerQueryService; });
-/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
-/* harmony import */ var _lib_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/constants */ "./www/js/source/reactpages/pages/customer/player-segmentation/lib/constants.js");
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-
-
-class ProblemPlayerQueryService {
-  static async getPlayerList(params) {
-    try {
-      const response = await _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_0__["default"].postData('Api/PlayerSegmentation/GetSabaVirtualPlayerList', params);
-      if (response.status === 200) {
-        return _objectSpread(_objectSpread({}, _lib_constants__WEBPACK_IMPORTED_MODULE_1__["successResponse"]), response.data);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    return _lib_constants__WEBPACK_IMPORTED_MODULE_1__["errorResponse"];
   }
 }
 

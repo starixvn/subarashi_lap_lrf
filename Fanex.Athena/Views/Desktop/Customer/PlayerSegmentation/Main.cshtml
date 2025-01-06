@@ -6,13 +6,12 @@
 @model Fanex.Athena.Model.Customer.ViewModel.PlayerSegmentationViewModel
 @{
     var hasVIPManagementPermission = Model.HasVIPManagementPermission;
-    var problemPlayerVM = Model.ProblemPlayerVM;
     var vipPlayerManagementVM = Model.VipPlayerVM;
     var monitoredPlayerVM = Model.MonitoredPlayerVM;
-    var dangerLevelVM = Model.DangerLevelVM;
 
     string selectedSubsidiary = Model.ViewType == SubsidiaryViewType.MasterManagement ?
-string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
+        string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.Value)).Distinct()) 
+        : string.Join(",", Model.SubsidiaryList.Select(x => x.Value));
 
     var vipPlayerManagementInitState = hasVIPManagementPermission ? new
     {
@@ -83,42 +82,6 @@ string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.V
             maxDate = monitoredPlayerVM.MaxReachedDate.ToString("MM/dd/yyyy")
         },
     } : null;
-
-    var sabaVirtualSettingData = dangerLevelVM != null ? new
-    {
-        currencyList = dangerLevelVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }),
-        sportList = dangerLevelVM.SportList.Select(x => new { key = x.Key, value = x.Value, status = true }),
-        levelList = dangerLevelVM.LevelList.Select(x => new { key = x.Key, value = x.Value, status = true }),
-        selectedSport = string.Join(",", dangerLevelVM.SportList.Select(x => x.Key).ToArray()),
-        selectedLevel = string.Join(",", dangerLevelVM.LevelList.Select(x => x.Key).Where(x => x != 0).ToArray()),
-        dateConstraint = new
-        {
-            minDate = dangerLevelVM.MinDate.ToString("MM/dd/yyyy"),
-            maxDate = dangerLevelVM.MaxDate.ToString("MM/dd/yyyy")
-        }
-    } : null;
-
-    var problemSelectedCustomerClass = string.Join(",", problemPlayerVM.CustomerClass);
-    var problemCustomerClassList = problemPlayerVM.CustomerClass.Select(c => new
-    {
-        key = c,
-        value = c == "0" ? ViewResources.None : c
-    });
-
-    var sabaVirtualSettingInitState = dangerLevelVM != null ? new
-    {
-        selectedCurrency = string.Join(",", dangerLevelVM.CurrencyList.Select(x => x.Key).ToArray()),
-        selectedSubsidiary,
-        username = "",
-        isLoading = false,
-        isGetAll = true,
-        dateRange = new
-        {
-            fromDate = dangerLevelVM.FromDate.ToString("MM/dd/yyyy"),
-            toDate = dangerLevelVM.ToDate.ToString("MM/dd/yyyy")
-        }
-    } : null;
-
 }
 @section pagecss {
     <link href="@Url.ContentLinkByEnv("/www/css/build/reactpages/customer/playersegmentation/index.css")" rel="stylesheet" type="text/css" />
@@ -129,22 +92,8 @@ string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.V
 }
 @section globaljscode{
     window.initialState = {
-    ProblemPlayer: {
-    dateRange: { fromDate: '@problemPlayerVM.FromDate.ToString("MM/dd/yyyy")', toDate: '@problemPlayerVM.ToDate.ToString("MM/dd/yyyy")'},
-
-    selectedCurrency: '@string.Join(",", problemPlayerVM.CurrencyList.Select(x => x.Key).ToArray())',
-    selectedReason: '@string.Join(",", problemPlayerVM.ReasonList.Select(x => x.Key).ToArray())',
-    selectedCustomerClass: '@problemSelectedCustomerClass',
-    username: '',
-    isLoading: false,
-    playerList: null,
-    selectedParams: null,
-    isGetAll: true,
-    selectedSubsidiary: '@(selectedSubsidiary)'
-    },
     VipPlayerManagement: @Html.Raw(vipPlayerManagementInitState.ToJson()),
     MonitoredPlayer: @Html.Raw(monitoredPlayerInitState.ToJson()),
-    SabaVirtualSetting: @Html.Raw(sabaVirtualSettingInitState.ToJson())
     }
 
     window._AppData = {
@@ -153,15 +102,8 @@ string.Join(",", Model.SubsidiaryList.SelectMany(x => x.Children.Select(y => y.V
     TabKeys: @Html.Raw(Model.TabKeys.ToJson()),
     subsidiaryList: @Html.Raw(Model.SubsidiaryList.ToJson()),
     viewType: @((byte)Model.ViewType),
-    ProblemPlayer: {
-    customerClassList: @Html.Raw(problemCustomerClassList.ToJson()),
-    currencyList: @Html.Raw(problemPlayerVM.CurrencyList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
-    reasonList: @Html.Raw(problemPlayerVM.ReasonList.Select(x => new { key = x.Key, value = x.Value, status = true }).ToJson()),
-    dateConstraint: { minDate: '@problemPlayerVM.MinDate.ToString("MM/dd/yyyy")', maxDate: '@problemPlayerVM.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: null },
-    },
     VipPlayerManagement: @Html.Raw(vipPlayerManagementData.ToJson()),
     MonitoredPlayer: @Html.Raw(monitoredPlayerData.ToJson()),
-    SabaVirtualSetting: @Html.Raw(sabaVirtualSettingData.ToJson()),
     isHideSaba: '@Model.IsHideSaba.ToString()' === 'True'
     }
 }

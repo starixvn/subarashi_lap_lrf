@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Fanex.Athena.DataAccess.Core.UnitTests.TestHelpers;
-using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Core.MetaModel;
-using Fanex.Athena.Model.Customer.DTO.PlayerSegmentation;
-using Fanex.Athena.Model.Customer.MetaModel;
-using Fanex.Athena.UnitTest.Common.Helpers;
-using Fanex.Data;
-using NSubstitute;
-using NUnit.Framework;
-
-namespace Fanex.Athena.DataAccess.Customer.UnitTests
+﻿namespace Fanex.Athena.DataAccess.Customer.UnitTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Core.UnitTests.TestHelpers;
+    using Data;
+    using Model.Core.MetaModel;
+    using Model.Customer.DTO.PlayerSegmentation;
+    using Model.Customer.MetaModel;
+    using NSubstitute;
+    using NUnit.Framework;
+    using UnitTest.Common.Helpers;
+
     [TestFixture]
     public class PlayerSegmentationTest : BaseDataAccessHelperTest<PlayerSegmentationDataAccess>
     {
@@ -34,67 +33,67 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             DataAccess = Substitute.ForPartsOf<PlayerSegmentationDataAccess>();
         }
 
-        [Test]
-        public async Task GetProblemPlayerListAsync_WhenCall_ParametersPassedCorrectly()
-        {
-            // Arrange
-            var metaModel = FakeHelper.Create<ProblemPlayerListMetaModel>();
-            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeProblemPlayerSel")).Returns(ObjectDb);
+        //[Test]
+        //public async Task GetProblemPlayerListAsync_WhenCall_ParametersPassedCorrectly()
+        //{
+        //    // Arrange
+        //    var metaModel = FakeHelper.Create<ProblemPlayerListMetaModel>();
+        //    DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeProblemPlayerSel")).Returns(ObjectDb);
 
-            // Action
-            await DataAccess.GetProblemPlayerListAsync(metaModel);
+        //    // Action
+        //    await DataAccess.GetProblemPlayerListAsync(metaModel);
 
-            // Assert
-            Assert.Multiple(() =>
-            {
-                AssertCommonParams(ObjectDb, metaModel);
-                AssertPlayerListParams(ObjectDb, metaModel);
+        //    // Assert
+        //    Assert.Multiple(() =>
+        //    {
+        //        AssertCommonParams(ObjectDb, metaModel);
+        //        AssertPlayerListParams(ObjectDb, metaModel);
 
-                ObjectDb.Received().SetParameterValue("FromDate", metaModel.FromDate);
-                ObjectDb.Received().SetParameterValue("ToDate", metaModel.ToDate);
-                ObjectDb.Received().SetParameterValue("IsCheckAll", metaModel.IsGetAll);
-                ObjectDb.Received().SetParameterValue("ReasonGroupID", metaModel.ReasonGroupIdList);
-                ObjectDb.Received().SetParameterValue("Langkey", metaModel.Language);
-            });
-        }
+        //        ObjectDb.Received().SetParameterValue("FromDate", metaModel.FromDate);
+        //        ObjectDb.Received().SetParameterValue("ToDate", metaModel.ToDate);
+        //        ObjectDb.Received().SetParameterValue("IsCheckAll", metaModel.IsGetAll);
+        //        ObjectDb.Received().SetParameterValue("ReasonGroupID", metaModel.ReasonGroupIdList);
+        //        ObjectDb.Received().SetParameterValue("Langkey", metaModel.Language);
+        //    });
+        //}
 
-        [Test]
-        public async Task GetProblemAsync_WhenCall_ReturnResultCorrectly()
-        {
-            //Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeProblemPlayerSel")).Returns(ObjectDb);
-            Reader.Read().Returns(true, false);
+        //[Test]
+        //public async Task GetProblemAsync_WhenCall_ReturnResultCorrectly()
+        //{
+        //    //Arrange
+        //    DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_LicenseeProblemPlayerSel")).Returns(ObjectDb);
+        //    Reader.Read().Returns(true, false);
 
-            var expectedData = new Dictionary<string, object>
-            {
-                { "CustId", FakeHelper.Create<int>() },
-                { "username2", FakeHelper.Create<string>() },
-                { "username", FakeHelper.Create<string>() },
-                { "isVIP", FakeHelper.Create<bool>() },
-                { "CreatedDate", FakeHelper.Create<DateTime>() },
-                { "MaxPerEvent", FakeHelper.Create<decimal?>() },
-                { "MaxBet", FakeHelper.Create<decimal?>() },
-                { "Reason", FakeHelper.Create<string>() },
-                { "AgentID", FakeHelper.Create<int>() },
-                { "IsBA", FakeHelper.Create<bool>() }
-            };
+        //    var expectedData = new Dictionary<string, object>
+        //    {
+        //        { "CustId", FakeHelper.Create<int>() },
+        //        { "username2", FakeHelper.Create<string>() },
+        //        { "username", FakeHelper.Create<string>() },
+        //        { "isVIP", FakeHelper.Create<bool>() },
+        //        { "CreatedDate", FakeHelper.Create<DateTime>() },
+        //        { "MaxPerEvent", FakeHelper.Create<decimal?>() },
+        //        { "MaxBet", FakeHelper.Create<decimal?>() },
+        //        { "Reason", FakeHelper.Create<string>() },
+        //        { "AgentID", FakeHelper.Create<int>() },
+        //        { "IsBA", FakeHelper.Create<bool>() }
+        //    };
 
-            MapReaderData(expectedData);
+        //    MapReaderData(expectedData);
 
-            var metaModel = FakeHelper.Create<ProblemPlayerListMetaModel>();
+        //    var metaModel = FakeHelper.Create<ProblemPlayerListMetaModel>();
 
-            //Action
-            var result = await DataAccess.GetProblemPlayerListAsync(metaModel);
-            var firstData = result.Data.First();
+        //    //Action
+        //    var result = await DataAccess.GetProblemPlayerListAsync(metaModel);
+        //    var firstData = result.Data.First();
 
-            //Assert
-            Assert.Multiple(() =>
-            {
-                AssertCommonPlayerListResult(expectedData, firstData);
-                Assert.AreEqual((expectedData["CreatedDate"] as DateTime?).Value.ToString(FormatKey.DateTimeFormatIn24H), firstData.LastModifiedDate);
-                Assert.AreEqual(expectedData["Reason"], firstData.Reason);
-            });
-        }
+        //    //Assert
+        //    Assert.Multiple(() =>
+        //    {
+        //        AssertCommonPlayerListResult(expectedData, firstData);
+        //        Assert.AreEqual((expectedData["CreatedDate"] as DateTime?).Value.ToString(FormatKey.DateTimeFormatIn24H), firstData.LastModifiedDate);
+        //        Assert.AreEqual(expectedData["Reason"], firstData.Reason);
+        //    });
+        //}
 
         [Test]
         public async Task GetVipPlayerListAsync_WhenCall_ParametersPassedCorrectly()
@@ -141,10 +140,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             var firstData = result.Data.First();
 
             //Assert
-            Assert.Multiple(() =>
-            {
-                AssertCommonPlayerListResult(expectedData, firstData);
-            });
+            Assert.Multiple(() => { AssertCommonPlayerListResult(expectedData, firstData); });
         }
 
         [Test]
@@ -180,7 +176,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             {
                 { "ErrCode", FakeHelper.Create<int>() },
                 { "cnt", FakeHelper.Create<int>() },
-                { "ErrMsg", FakeHelper.Create<string>() },
+                { "ErrMsg", FakeHelper.Create<string>() }
             };
             MapReaderData(expectedData);
             var metaModel = FakeHelper.Create<UpdateStatusPlayerMetaModel>();
@@ -198,115 +194,112 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             });
         }
 
-        [Test]
-        public async Task GetReasonGroupListAsync_WhenCall_ParametersPassedCorrectly()
-        {
-            // Arrange
-            var langKey = FakeHelper.Create<string>();
-            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_ReasonGroupSel")).Returns(ObjectDb);
+        //[Test]
+        //public async Task GetReasonGroupListAsync_WhenCall_ParametersPassedCorrectly()
+        //{
+        //    // Arrange
+        //    var langKey = FakeHelper.Create<string>();
+        //    DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_ReasonGroupSel")).Returns(ObjectDb);
 
-            // Action
-            await DataAccess.GetReasonGroupListAsync(langKey);
+        //    // Action
+        //    await DataAccess.GetReasonGroupListAsync(langKey);
 
-            // Assert
-            Assert.Multiple(() =>
-            {
-                ObjectDb.Received().SetParameterValue("Langkey", langKey);
-            });
-        }
+        //    // Assert
+        //    Assert.Multiple(() => { ObjectDb.Received().SetParameterValue("Langkey", langKey); });
+        //}
 
-        [Test]
-        public async Task GetReasonGroupListAsync_WhenCall_ReturnResultCorrectly()
-        {
-            //Arrange
-            DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_ReasonGroupSel")).Returns(ObjectDb);
-            Reader.Read().Returns(true, false);
+        //[Test]
+        //public async Task GetReasonGroupListAsync_WhenCall_ReturnResultCorrectly()
+        //{
+        //    //Arrange
+        //    DataAccess.GetObjectDb(Arg.Is("Lrf_ProblemAccount_ReasonGroupSel")).Returns(ObjectDb);
+        //    Reader.Read().Returns(true, false);
 
-            var expectedData = new Dictionary<string, object>
-            {
-                { "ReasonGroupID", FakeHelper.Create<int>() },
-                { "ReasonGroup", FakeHelper.Create<string>() },
-                { "CustomerClass", FakeHelper.Create<int>() },
-            };
+        //    var expectedData = new Dictionary<string, object>
+        //    {
+        //        { "ReasonGroupID", FakeHelper.Create<int>() },
+        //        { "ReasonGroup", FakeHelper.Create<string>() },
+        //        { "CustomerClass", FakeHelper.Create<int>() }
+        //    };
 
-            MapReaderData(expectedData);
-            var langKey = FakeHelper.Create<string>();
+        //    MapReaderData(expectedData);
+        //    var langKey = FakeHelper.Create<string>();
 
-            //Action
-            var result = await DataAccess.GetReasonGroupListAsync(langKey);
-            var firstData = result.First();
+        //    //Action
+        //    var result = await DataAccess.GetReasonGroupListAsync(langKey);
+        //    var firstData = result.First();
 
-            //Assert
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual(expectedData["ReasonGroupID"], firstData.ReasonGroupID);
-                Assert.AreEqual(expectedData["ReasonGroup"], firstData.ReasonGroupName);
-                Assert.AreEqual(expectedData["CustomerClass"], firstData.CustomerClass);
-            });
-        }
+        //    //Assert
+        //    Assert.Multiple(() =>
+        //    {
+        //        Assert.AreEqual(expectedData["ReasonGroupID"], firstData.ReasonGroupID);
+        //        Assert.AreEqual(expectedData["ReasonGroup"], firstData.ReasonGroupName);
+        //        Assert.AreEqual(expectedData["CustomerClass"], firstData.CustomerClass);
+        //    });
+        //}
 
-        [Test]
-        public async Task GetSabaVirtualPlayerListAsync_WhenCall_ParametersPassedCorrectly()
-        {
-            // Arrange
-            var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Licensee_DangerLevelSel")).Returns(ObjectDb);
+        //[Test]
+        //public async Task GetSabaVirtualPlayerListAsync_WhenCall_ParametersPassedCorrectly()
+        //{
+        //    // Arrange
+        //    var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
+        //    DataAccess.GetObjectDb(Arg.Is("Lrf_Licensee_DangerLevelSel")).Returns(ObjectDb);
 
-            // Action
-            await DataAccess.GetSabaVirtualPlayerListAsync(metaModel);
+        //    // Action
+        //    await DataAccess.GetSabaVirtualPlayerListAsync(metaModel);
 
-            // Assert
-            Assert.Multiple(() =>
-            {
-                ObjectDb.Received().SetParameterValue("FromDate", metaModel.FromDate);
-                ObjectDb.Received().SetParameterValue("ToDate", metaModel.ToDate);
-                ObjectDb.Received().SetParameterValue("IsCheckAll", metaModel.IsGetAll);
-                ObjectDb.Received().SetParameterValue("OrderCol", metaModel.OrderCol);
-                ObjectDb.Received().SetParameterValue("SortType", metaModel.SortType);
-                ObjectDb.Received().SetParameterValue("PageIndex", metaModel.PageIndex);
-                ObjectDb.Received().SetParameterValue("PageSize", metaModel.PageSize);
-                ObjectDb.Received().SetParameterValue("TotalItems", 0);
-                ObjectDb.Received().SetParameterValue("Sporttype", metaModel.SportIdList);
-                ObjectDb.Received().SetParameterValue("Level", metaModel.LevelIdList);
-                ObjectDb.Received().SetParameterValue("Langkey", metaModel.Language);
-            });
-        }
+        //    // Assert
+        //    Assert.Multiple(() =>
+        //    {
+        //        ObjectDb.Received().SetParameterValue("FromDate", metaModel.FromDate);
+        //        ObjectDb.Received().SetParameterValue("ToDate", metaModel.ToDate);
+        //        ObjectDb.Received().SetParameterValue("IsCheckAll", metaModel.IsGetAll);
+        //        ObjectDb.Received().SetParameterValue("OrderCol", metaModel.OrderCol);
+        //        ObjectDb.Received().SetParameterValue("SortType", metaModel.SortType);
+        //        ObjectDb.Received().SetParameterValue("PageIndex", metaModel.PageIndex);
+        //        ObjectDb.Received().SetParameterValue("PageSize", metaModel.PageSize);
+        //        ObjectDb.Received().SetParameterValue("TotalItems", 0);
+        //        ObjectDb.Received().SetParameterValue("Sporttype", metaModel.SportIdList);
+        //        ObjectDb.Received().SetParameterValue("Level", metaModel.LevelIdList);
+        //        ObjectDb.Received().SetParameterValue("Langkey", metaModel.Language);
+        //    });
+        //}
 
-        [Test]
-        public async Task GetSabaVirtualPlayerListAsync_WhenCall_ReturnResultCorrectly()
-        {
-            //Arrange
-            var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
-            DataAccess.GetObjectDb(Arg.Is("Lrf_Licensee_DangerLevelSel")).Returns(ObjectDb);
-            Reader.Read().Returns(true, false);
+        //[Test]
+        //public async Task GetSabaVirtualPlayerListAsync_WhenCall_ReturnResultCorrectly()
+        //{
+        //    //Arrange
+        //    var metaModel = FakeHelper.Create<SabaVirtualPlayerListMetaModel>();
+        //    DataAccess.GetObjectDb(Arg.Is("Lrf_Licensee_DangerLevelSel")).Returns(ObjectDb);
+        //    Reader.Read().Returns(true, false);
 
-            var expectedData = new Dictionary<string, object>
-            {
-                { "CustId", FakeHelper.Create<int>() },
-                { "username", FakeHelper.Create<string>() },
-                { "username2", FakeHelper.Create<string>() },
-                { "SoccerLevel", FakeHelper.Create<int>() },
-                { "BasketballLevel", FakeHelper.Create<int>() },
-                { "AgentID", FakeHelper.Create<int>() }
-            };
+        //    var expectedData = new Dictionary<string, object>
+        //    {
+        //        { "CustId", FakeHelper.Create<int>() },
+        //        { "username", FakeHelper.Create<string>() },
+        //        { "username2", FakeHelper.Create<string>() },
+        //        { "SoccerLevel", FakeHelper.Create<int>() },
+        //        { "BasketballLevel", FakeHelper.Create<int>() },
+        //        { "AgentID", FakeHelper.Create<int>() }
+        //    };
 
-            MapReaderData(expectedData);
+        //    MapReaderData(expectedData);
 
-            //Action
-            var result = await DataAccess.GetSabaVirtualPlayerListAsync(metaModel);
-            var firstData = result.Data.First();
+        //    //Action
+        //    var result = await DataAccess.GetSabaVirtualPlayerListAsync(metaModel);
+        //    var firstData = result.Data.First();
 
-            //Assert
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual(expectedData["CustId"], firstData.CustId);
-                Assert.AreEqual(expectedData["username2"], firstData.ExternalId);
-                Assert.AreEqual(expectedData["username"], firstData.SystemId);
-                Assert.AreEqual(expectedData["SoccerLevel"], firstData.SoccerLevel);
-                Assert.AreEqual(expectedData["BasketballLevel"], firstData.BasketballLevel);
-                Assert.AreEqual(expectedData["AgentID"], firstData.AgentId);
-            });
-        }
+        //    //Assert
+        //    Assert.Multiple(() =>
+        //    {
+        //        Assert.AreEqual(expectedData["CustId"], firstData.CustId);
+        //        Assert.AreEqual(expectedData["username2"], firstData.ExternalId);
+        //        Assert.AreEqual(expectedData["username"], firstData.SystemId);
+        //        Assert.AreEqual(expectedData["SoccerLevel"], firstData.SoccerLevel);
+        //        Assert.AreEqual(expectedData["BasketballLevel"], firstData.BasketballLevel);
+        //        Assert.AreEqual(expectedData["AgentID"], firstData.AgentId);
+        //    });
+        //}
 
         private static readonly Action<IObjectDb, BasePlayerListMetaModel> AssertPlayerListParams = (objectDB, metaModel) =>
         {
@@ -323,7 +316,7 @@ namespace Fanex.Athena.DataAccess.Customer.UnitTests
             objectDB.Received().SetParameterValue("AgentList", metaModel.AgentListXml);
         };
 
-        private static readonly Action<IDictionary<string, Object>, PlayerInfo> AssertCommonPlayerListResult = (expectedData, acutalData) =>
+        private static readonly Action<IDictionary<string, object>, PlayerInfo> AssertCommonPlayerListResult = (expectedData, acutalData) =>
         {
             Assert.AreEqual(expectedData["CustId"], acutalData.CustId);
             Assert.AreEqual(expectedData["username2"], acutalData.ExternalId);
