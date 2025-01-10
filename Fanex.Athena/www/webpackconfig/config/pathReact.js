@@ -7,8 +7,6 @@ var cssPaths = {
     layout: "./www/css/source/reactpages/main.scss",
     subsidiaryperformance: "./www/css/source/reactpages/pages/subsidiaryperformance/index.scss",
     licenseewlbytimezone: "./www/css/source/reactpages/pages/licenseewl-by-timezone/index.scss",
-    leaguewinloss: "./www/css/source/reactpages/pages/leaguewinloss/index.scss",
-    extrapayout: "./www/css/source/reactpages/pages/extrapayout/index.scss",
     abnormalbet: "./www/css/source/reactpages/pages/abnormalbet/index.scss",
     notification: "./www/css/source/reactpages/pages/notification/index.scss",
     licenseecontact: "./www/css/source/reactpages/pages/licenseecontact/index.scss",
@@ -27,7 +25,6 @@ var cssPaths = {
     customeradminivorybet: "./www/css/source/reactpages/pages/customer/customeradminivorybet/index.scss",
     oddsgrouplicenseesetting: "./www/css/source/reactpages/pages/customer/oddsgrouplicenseesetting/index.scss",
     newcashoutwinloss: "./www/css/source/reactpages/pages/newcashoutwinloss/index.scss",
-    winlossanalysis: "./www/css/source/reactpages/pages/winlossanalysis/index.scss",
 };
 
 var scriptPaths = {
@@ -43,8 +40,6 @@ var scriptPaths = {
     /*React page*/
     subsidiaryperformance: "./www/js/source/reactpages/pages/subsidiaryperformance/components/index.jsx",
     licenseewlbytimezone: "./www/js/source/reactpages/pages/licenseewl-by-timezone/components/index.jsx",
-    leaguewinloss: "./www/js/source/reactpages/pages/leaguewinloss/components/index.jsx",
-    extrapayout: "./www/js/source/reactpages/pages/extrapayout/components/index.jsx",
     abnormalbet: "./www/js/source/reactpages/pages/abnormalbet/components/index.jsx",
     notification: "./www/js/source/reactpages/pages/notification/components/resultAmendment/index.jsx",
     licenseecontact: "./www/js/source/reactpages/pages/licenseecontact/components/index.jsx",
@@ -69,8 +64,6 @@ var scriptPaths = {
     customeradminivorybet: "./www/js/source/reactpages/pages/customer/customeradminivorybet/components/index.jsx",
     oddsgrouplicenseesetting: "./www/js/source/reactpages/pages/customer/oddsgrouplicenseesetting/tabs/index.js",
     newcashoutwinloss: "./www/js/source/reactpages/pages/newcashoutwinloss/components/index.jsx",
-
-    winlossanalysis: "./www/js/source/reactpages/pages/winlossanalysis/components/index.jsx",
 };
 module.exports = {
     projectRoot: projectRoot,

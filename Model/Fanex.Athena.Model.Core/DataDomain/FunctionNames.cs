@@ -12,8 +12,6 @@
 
         public const string LicenseeWinLoss = "LicenseeWinLoss";
 
-        public const string MatchWinLoss = "MatchWinLoss";
-
         public const string PlatformWinloss = "PlatformWinloss";
 
         public const string Turnover = "Turnover";
@@ -39,8 +37,6 @@
         public const string CasinoTurnover = "CasinoTurnover";
 
         public const string DailyBets = "DailyBets";
-
-        public const string LeagueWinLoss = "LeagueWinLoss";
 
         public const string ExtraPayout = "ExtraPayout";
 

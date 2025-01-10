@@ -42,7 +42,6 @@
         public const string AuditLicenseeWinLoss = "AuditLicenseeWinLoss";
         public const string ReportCustomerWinLoss = "CustomerWinLoss29";
         public const string ReportCustomerPendingFunds = "CustomerPendingFunds30";
-        public const string ReportMatchWinLoss = "MatchWinLoss31";
         public const string ReportWinLossByProduct = "WinLossByProducts32";
         public const string ReportWinLossByBetType = "WinLossByBetType33";
         public const string ReportLiveReport = "LiveReport38";
@@ -57,7 +56,6 @@
         public const string ReportExchangeWinLoss = "ExchangeWinloss77";
         public const string ReportCasinoTurnover = "CasinoTurnover80";
         public const string ReportDailyBets = "DailyBets81";
-        public const string ReportLeagueWinLoss = "LeagueWinLoss";
         public const string ReportExtraPayout = "ExtraPayout";
         public const string ReportNewCashOutWinLoss = "NewCashOutWinLoss";
         public const string ReportAbnormalBet = "AbnormalBet";

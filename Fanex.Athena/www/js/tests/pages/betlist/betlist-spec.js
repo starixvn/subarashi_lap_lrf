@@ -51,17 +51,6 @@
                 });
             });
 
-            describe("initialize()", function () {
-                it("updateSortColumn should be called if bet list api url if MatchWinLossBetList", function () {
-                    appendSetFixtures('<input id="ApiUrl" value="api/MatchWinLossBetList/Outright" />');
-
-                    BetList.initialize();
-
-                    expect(BetListOption.columnModel[1].sortable).toBe(true);
-                    expect(BetListOption.columnModel[2].sortable).toBe(true);
-                });
-            });
-
             describe("gridComplete(grid)", function () {
                 var gridOption;
 

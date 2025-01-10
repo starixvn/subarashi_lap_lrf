@@ -55,6 +55,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult RequestAuthorizedInfo(List<string> permissions)
         {
             var functionKeys = new List<ValidatedFunctionKey>();
@@ -66,7 +67,7 @@
                     HasPermission = _authorizationService.HasPermissions(_sessionService.UserSession, permission)
                 }).ToList();
             }
-
+            
             return Json(new RequestInfo
             {
                 FunctionKeys = functionKeys,

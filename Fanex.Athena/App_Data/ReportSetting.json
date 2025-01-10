@@ -16,11 +16,6 @@
     "MaxDateString": "today"
   },
   {
-    "ReportKey": "LeagueWinLoss",
-    "MinDateString": "06/01/2021",
-    "MaxDateString": "tomorrow"
-  },
-  {
     "ReportKey": "ExchangeWinloss77",
     "MinDateString": "",
     "MaxDateString": "today",
@@ -36,11 +31,6 @@
     "ReportKey": "CasinoTurnover80",
     "MinDateString": "08/01/2018",
     "MaxDateString": ""
-  },
-  {
-    "ReportKey": "ExtraPayout",
-    "MinDateString": "",
-    "MaxDateString": "today"
   },
   {
     "ReportKey": "NewCashOutWinLoss",

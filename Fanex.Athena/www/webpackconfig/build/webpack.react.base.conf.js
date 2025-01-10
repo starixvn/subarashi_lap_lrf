@@ -25,8 +25,6 @@ function generateConfig(environment) {
             [`${jsPath}/notification/notification`]: pathConfig.scriptPaths.notification,
             [`${jsPath}/licenseecontact/licenseecontact`]: pathConfig.scriptPaths.licenseecontact,
             [`${jsPath}/report/licenseewlbytimezone`]: pathConfig.scriptPaths.licenseewlbytimezone,
-            [`${jsPath}/report/leaguewinloss`]: pathConfig.scriptPaths.leaguewinloss,
-            [`${jsPath}/report/extrapayout`]: pathConfig.scriptPaths.extrapayout,
             [`${jsPath}/report/abnormalbet`]: pathConfig.scriptPaths.abnormalbet,
             [`${jsPath}/exchangewl/exchangewl`]: pathConfig.scriptPaths.exchangewl,
             [`${jsPath}/report/speciallicenseewl`]: pathConfig.scriptPaths.speciallicenseewl,
@@ -47,14 +45,11 @@ function generateConfig(environment) {
             [`${jsPath}/customer/customeradminivorybet`]: pathConfig.scriptPaths.customeradminivorybet,
             [`${jsPath}/customer/oddsgrouplicenseesetting`]: pathConfig.scriptPaths.oddsgrouplicenseesetting,
             [`${jsPath}/report/newcashoutwinloss`]: pathConfig.scriptPaths.newcashoutwinloss,
-            [`${jsPath}/report/winlossanalysis`]: pathConfig.scriptPaths.winlossanalysis,
 
             /*css*/
             [`${cssPath}/vendor`]: pathConfig.cssPaths.layout,
             [`${cssPath}/subsidiaryperformance/index`]: pathConfig.cssPaths.subsidiaryperformance,
             [`${cssPath}/licenseewlbytimezone/index`]: pathConfig.cssPaths.licenseewlbytimezone,
-            [`${cssPath}/leaguewinloss/index`]: pathConfig.cssPaths.leaguewinloss,
-            [`${cssPath}/extrapayout/index`]: pathConfig.cssPaths.extrapayout,
             [`${cssPath}/abnormalbet/index`]: pathConfig.cssPaths.abnormalbet,
             [`${cssPath}/notification/index`]: pathConfig.cssPaths.notification,
             [`${cssPath}/licenseecontact/index`]: pathConfig.cssPaths.licenseecontact,
@@ -73,7 +68,6 @@ function generateConfig(environment) {
             [`${cssPath}/customer/customeradminivorybet/index`]: pathConfig.cssPaths.customeradminivorybet,
             [`${cssPath}/customer/oddsgrouplicenseesetting/index`]: pathConfig.cssPaths.oddsgrouplicenseesetting,
             [`${cssPath}/newcashoutwinloss/index`]: pathConfig.cssPaths.newcashoutwinloss,
-            [`${cssPath}/winlossanalysis/index`]: pathConfig.cssPaths.winlossanalysis,
         },
         output: {
             path: pathConfig.projectRoot,

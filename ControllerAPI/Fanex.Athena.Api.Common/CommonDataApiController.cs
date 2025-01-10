@@ -20,11 +20,9 @@
     using Service.StatelessCore.Interfaces;
     using Service.StatelessCore.Utility;
     using ServiceStack.Text;
-    using Web.ActionFilter;
 
     [CLSCompliant(false)]
     [XFrameOptionApi]
-    [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     [ApiUMFilter]
     public class CommonDataApiController : BaseApiController
     {

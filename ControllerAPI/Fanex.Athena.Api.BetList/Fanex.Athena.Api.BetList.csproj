@@ -158,9 +158,7 @@
     <Compile Include="RunningBettypesBetListController.cs" />
     <Compile Include="RunningMatchBetListController.cs" />
     <Compile Include="LicenseeWinLossBetListController.cs" />
-    <Compile Include="MatchWinLossBetListController.cs" />
     <Compile Include="CustomerWinLossBetListController.cs" />
-    <Compile Include="LiveReportBetListController.cs" />
     <Compile Include="CorrectScoreBetListController.cs" />
     <Compile Include="PendingFundsBetListController.cs" />
     <Compile Include="LastBetMonitoringBetListController.cs" />

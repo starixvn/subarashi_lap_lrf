@@ -71,7 +71,6 @@
     <Compile Include="AgCasinoBalanceDataAccessTest.cs" />
     <Compile Include="CasinoTurnoverDataAccessTest.cs" />
     <Compile Include="CustomerPendingFundsDataAccessTest.cs" />
-    <Compile Include="CustomerTurnoverDataAccessTest.cs" />
     <Compile Include="ExchangeVoidedDataAccessTest.cs" />
     <Compile Include="ExchangeWinLossDataAccessTest.cs" />
     <Compile Include="LicenseeWinLossByTimeZoneDataAccessTest.cs" />
@@ -80,10 +79,7 @@
     <Compile Include="SubsidiaryPerformanceDataAccessTest.cs" />
     <Compile Include="WinLossByProductDataAccessTest.cs" />
     <Compile Include="WinLossByBetTypeDataAccessTest.cs" />
-    <Compile Include="TurnoverDataAccessTest.cs" />
     <Compile Include="ThirdPartyWinLossDataAccessTest.cs" />
-    <Compile Include="MatchWinLossDataAccessTest.cs" />
-    <Compile Include="LiveReportDataAccessTest.cs" />
     <Compile Include="LicenseeWinLossDataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
