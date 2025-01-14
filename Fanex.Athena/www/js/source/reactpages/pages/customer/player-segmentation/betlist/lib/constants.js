@@ -1,4 +1,5 @@
 import LangHelper from '@jsroot/lib/langHelper';
+import Site from '@jsroot/lib/site';
 
 export const HeaderText = {
     Index: "#",
@@ -34,5 +35,5 @@ export const DefaultPagingOption = {
 }
 
 export const Url = {
-    AbnormalBetList: 'Api/PlayerSegmentation/AbnormalBets'
+    AbnormalBetList:  Site.resolveClientUrl(DataService.buildProxyUrl(DataService.apiKeys.betlist, 'Api/PlayerSegmentation/AbnormalBets'))
 }
