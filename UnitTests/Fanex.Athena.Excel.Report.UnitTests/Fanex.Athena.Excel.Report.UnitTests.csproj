@@ -67,7 +67,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgCasinoBalanceExcelTest.cs" />
     <Compile Include="BaseReportExcelTest.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LicenseeWinLossExcelTest.AssignCommonData.cs" />
@@ -82,7 +81,6 @@
     <Compile Include="ThirdPartyWinLossExcelTest.cs" />
     <Compile Include="TestableClasses\ThirdPartyWinLossExcelTestable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestableClasses\AgCasinoBalanceExcelTestable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Excel\Fanex.Athena.Excel.Base\Fanex.Athena.Excel.Base.csproj">

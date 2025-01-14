@@ -36,7 +36,6 @@
         /* Report */
 
         public const string ReportGodOfFortuneWinLoss = "GodOfFortuneWinLoss";
-        public const string ReportSabaVirtualSportsWinLoss = "SabaVirtualSportsWinLoss";
         public const string ReportLastBetsMonitoring = "LastBetsMonitoring26";
         public const string ReportLicenseeWinLoss = "LicenseeWinLoss27";
         public const string AuditLicenseeWinLoss = "AuditLicenseeWinLoss";
@@ -45,10 +44,7 @@
         public const string ReportWinLossByBetType = "WinLossByBetType33";
         public const string ReportTurnover = "Turnover39";
         public const string ReportResults = "Results41";
-        public const string ReportAGCasinoWinLoss = "AGCasinoWinLoss62";
-        public const string ReportAGCasinoBalance = "AGCasinoBalance63";
         public const string ReportPlatformWinLoss = "MobileWinLoss53";
-        public const string ReportSubsidiaryPerformance = "SubsidiaryPerformance73";
         public const string ReportExchangeWinLoss = "ExchangeWinloss77";
         public const string ReportCasinoTurnover = "CasinoTurnover80";
         public const string ReportDailyBets = "DailyBets81";

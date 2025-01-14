@@ -121,7 +121,6 @@
     <Compile Include="CustomerWinLossBetListController.cs" />
     <Compile Include="GodOfFortuneWinLossBetListController.cs" />
     <Compile Include="LastBetsMonitoringBetListController.cs" />
-    <Compile Include="SabaVirtualSportsWinLossBetListController..cs" />
     <Compile Include="PlatformWinLossBetListController.cs" />
     <Compile Include="RunningBetListController.cs" />
     <Compile Include="RunningBettypesOfMatchBetListController.cs" />

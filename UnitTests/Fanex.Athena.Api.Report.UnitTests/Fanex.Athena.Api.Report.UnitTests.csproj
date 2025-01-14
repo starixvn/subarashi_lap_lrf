@@ -100,16 +100,11 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="AgCasinoWinLossReportControllerTest.cs" />
     <Compile Include="CasinoTurnoverReportControllerTest.cs" />
     <Compile Include="ExchangeWinLossReportControllerTest.cs" />
-    <Compile Include="SabaVirtualSportsWinLossReportControllerTest.cs" />
     <Compile Include="LicenseeWinLossReportControllerTest_IsValidParams.cs" />
     <Compile Include="LicenseeWinLossReportControllerTest.cs" />
-    <Compile Include="AgCasinoBalanceReportControllerTest.cs" />
     <Compile Include="SpecialLicenseeWinLossReportControllerTest.cs" />
-    <Compile Include="SubsidiaryPerformanceReportControllerTest.Detail.cs" />
-    <Compile Include="SubsidiaryPerformanceReportControllerTest.cs" />
     <Compile Include="WinLossByProductReportControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

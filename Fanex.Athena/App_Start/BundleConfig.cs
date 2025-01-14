@@ -4,7 +4,7 @@
     using System.Web.Optimization;
 
     /// <summary>
-    /// Bundle config.
+    ///     Bundle config.
     /// </summary>
     public static class BundleConfig
     {
@@ -38,36 +38,49 @@
             RegisterAccountLayoutStyles(bundles);
 
             RegisterjqGridLayoutStyles(bundles);
-
-            RegisterViewAgCasinoBalance(bundles);
         }
+
+        #region Private Utility Functions
+
+        private static void AddStyleBundle(BundleCollection bundles, string bundleVirtualPath, params string[] virtualPaths)
+        {
+            var styleBundle = new StyleBundle(bundleVirtualPath);
+            foreach (var virtualPath in virtualPaths)
+            {
+                styleBundle.Include(virtualPath, cssRewriteUrlTransform);
+            }
+
+            bundles.Add(styleBundle);
+        }
+
+        #endregion Private Utility Functions
 
         #region JavaScripts Shared Layout
 
         /// <summary>
-        /// Registers the layout scripts.
+        ///     Registers the layout scripts.
         /// </summary>
         /// <param name="bundles">The bundles.</param>
         private static void RegisterLayoutScripts(BundleCollection bundles)
         {
             var bundle = new ScriptBundle("~/bundles/CoreJs").Include(
-                        "~/Scripts/Library/jquery.min.js",
-                        "~/Scripts/Library/jquery-ui.min.js",
-                        "~/Scripts/Library/BigDecimal-all-last.min.js",
-                        "~/Scripts/Library/jquery.cookie.js",
-                        "~/Scripts/Library/jquery.blockUI.js",
-                        "~/Scripts/Library/jquery.balloon.js",
-                        "~/Scripts/Library/jquery.autocomplete.js",
-                        "~/Scripts/Extension/jquery.extension.js",
-                        "~/Scripts/Languages/ViewResources.js",
-                        "~/Scripts/Languages/ViewResources.zh-CN.js",
-                        "~/Scripts/Languages/ViewResources.vi-VN.js",
-                        "~/Scripts/Languages/ViewResources.id-ID.js",
-                        "~/Scripts/Languages/ViewResources.th-TH.js",
-                        "~/Scripts/Global/site.js",
-                        "~/Scripts/Helper/ProductListHelper.js",
-                        "~/Scripts/Global/query.string.js",
-                        "~/Scripts/Plugin/Note/note.js");
+                "~/Scripts/Library/jquery.min.js",
+                "~/Scripts/Library/jquery-ui.min.js",
+                "~/Scripts/Library/BigDecimal-all-last.min.js",
+                "~/Scripts/Library/jquery.cookie.js",
+                "~/Scripts/Library/jquery.blockUI.js",
+                "~/Scripts/Library/jquery.balloon.js",
+                "~/Scripts/Library/jquery.autocomplete.js",
+                "~/Scripts/Extension/jquery.extension.js",
+                "~/Scripts/Languages/ViewResources.js",
+                "~/Scripts/Languages/ViewResources.zh-CN.js",
+                "~/Scripts/Languages/ViewResources.vi-VN.js",
+                "~/Scripts/Languages/ViewResources.id-ID.js",
+                "~/Scripts/Languages/ViewResources.th-TH.js",
+                "~/Scripts/Global/site.js",
+                "~/Scripts/Helper/ProductListHelper.js",
+                "~/Scripts/Global/query.string.js",
+                "~/Scripts/Plugin/Note/note.js");
             AddNewScriptBundle(bundles, bundle);
         }
 
@@ -81,8 +94,8 @@
         {
             var bundle = new ScriptBundle("~/bundles/AccountLayoutScripts")
                 .Include(
-                        "~/Scripts/Plugin/FlatPopup/jquery.custom-scrollbar.js",
-                        "~/Scripts/Plugin/FlatPopup/jquery.flatpopup.js");
+                    "~/Scripts/Plugin/FlatPopup/jquery.custom-scrollbar.js",
+                    "~/Scripts/Plugin/FlatPopup/jquery.flatpopup.js");
             AddNewScriptBundle(bundles, bundle);
         }
 
@@ -90,16 +103,16 @@
         {
             var bundle = new ScriptBundle("~/bundles/jqGridLayoutScripts")
                 .Include(
-                        "~/Scripts/global/jquery.jqgrid.additional.js",
-                        "~/Scripts/Library/jquery.jqGrid.en.js",
-                        "~/Scripts/Library/jquery.jqGrid.min.js",
-                        "~/Scripts/Plugin/DateRangePicker/date.min.js",
-                        "~/Scripts/Plugin/MonthPickr/monpickr.js",
-                        "~/Scripts/Plugin/DateRangePicker/daterangepicker.js",
-                        "~/Scripts/Plugin/MultiSelect/jquery.multiselect.js",
-                        "~/Scripts/Plugin/LinqJs/JSLINQ.js",
-                        "~/Scripts/Report/report.js",
-                        "~/Scripts/global/prototype.js");
+                    "~/Scripts/global/jquery.jqgrid.additional.js",
+                    "~/Scripts/Library/jquery.jqGrid.en.js",
+                    "~/Scripts/Library/jquery.jqGrid.min.js",
+                    "~/Scripts/Plugin/DateRangePicker/date.min.js",
+                    "~/Scripts/Plugin/MonthPickr/monpickr.js",
+                    "~/Scripts/Plugin/DateRangePicker/daterangepicker.js",
+                    "~/Scripts/Plugin/MultiSelect/jquery.multiselect.js",
+                    "~/Scripts/Plugin/LinqJs/JSLINQ.js",
+                    "~/Scripts/Report/report.js",
+                    "~/Scripts/global/prototype.js");
             AddNewScriptBundle(bundles, bundle);
         }
 
@@ -136,27 +149,6 @@
 
         #endregion CSS Shared Layout
 
-        #region Scripts & Styles Views
-
-        private static void RegisterViewAgCasinoBalance(BundleCollection bundles)
-        {
-            var bundle = new ScriptBundle("~/bundles/AgCasinoBalanceScripts")
-                .Include(
-                        "~/Scripts/Global/Paging.js",
-                        "~/Scripts/Report/agcasinobalance.js",
-                        "~/Scripts/Report/agcasinobalance.option.js");
-            AddNewScriptBundle(bundles, bundle);
-
-            AddStyleBundle(
-               bundles,
-               "~/bundles/AgCasinoBalanceStyles",
-               "~/Content/Report/agcasinobalance.css",
-               "~/Content/Plugin/Common/bread-crumb.css",
-               "~/Content/Global/Paging.css");
-        }
-
-        #endregion Scripts & Styles Views
-
         #region CSS Views
 
         private static void RegisterEditAccountViewStyles(BundleCollection bundles)
@@ -184,20 +176,5 @@
         }
 
         #endregion CSS Views
-
-        #region Private Utility Functions
-
-        private static void AddStyleBundle(BundleCollection bundles, string bundleVirtualPath, params string[] virtualPaths)
-        {
-            var styleBundle = new StyleBundle(bundleVirtualPath);
-            foreach (var virtualPath in virtualPaths)
-            {
-                styleBundle.Include(virtualPath, cssRewriteUrlTransform);
-            }
-
-            bundles.Add(styleBundle);
-        }
-
-        #endregion Private Utility Functions
     }
 }

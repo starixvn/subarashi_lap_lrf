@@ -118,15 +118,8 @@
     <Compile Include="DTO\CasinoTurnover.cs" />
     <Compile Include="DTO\ExchangeVoidedItem.cs" />
     <Compile Include="DTO\ExchangeWinLoss.cs" />
-    <Compile Include="DTO\AgCasinoBalance.cs" />
     <Compile Include="DTO\GodOfFortuneWinLoss.cs" />
     <Compile Include="DTO\SabaVirtualSportsWinLoss.cs" />
-    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceGroup.cs" />
-    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceSummary.cs" />
-    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceDetail.cs" />
-    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformance.cs" />
-    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryPerformanceBase.cs" />
-    <Compile Include="DTO\SubsidiaryPerformance\SubsidiaryResultViewModel.cs" />
     <Compile Include="DTO\ThirdPartyWinLoss.cs" />
     <Compile Include="DTO\CustomerWinLoss.cs" />
     <Compile Include="DTO\ICustomerWinLoss.cs" />
@@ -141,7 +134,6 @@
     <Compile Include="MetaModel\ExchangeWinLossMetaModel.cs" />
     <Compile Include="MetaModel\BaseReportMetaModel.cs" />
     <Compile Include="MetaModel\GodOfFortuneWinLossMetaModel.cs" />
-    <Compile Include="MetaModel\SabaVirtualSportsWinLossMetaModel.cs" />
     <Compile Include="MetaModel\PromotionPrizeMetaModel.cs" />
     <Compile Include="MetaModel\Result\GetSportResultMetaModel.cs" />
     <Compile Include="MetaModel\Result\ResultMetaModel.cs" />
@@ -165,9 +157,7 @@
     <Compile Include="ViewModel\ExchangeWinLossViewModel.cs" />
     <Compile Include="ViewModel\AbnormalBetViewModel.cs" />
     <Compile Include="ViewModel\NewCashOutWinLossViewModel.cs" />
-    <Compile Include="ViewModel\SabaVirtualSportsWinLossGridViewModel .cs" />
     <Compile Include="ViewModel\GodOfFortuneWinLossViewModel.cs" />
-    <Compile Include="ViewModel\SabaVirtualSportsWinLossViewModel.cs" />
     <Compile Include="ViewModel\Result\ResultReportViewModel.cs" />
     <Compile Include="ViewModel\SpecialLicenseeWinLossGridViewModel.cs" />
     <Compile Include="ViewModel\GrossGamingRevenueViewModel.cs" />
@@ -175,7 +165,6 @@
     <Compile Include="ViewModel\Note\NoteViewModel.cs" />
     <Compile Include="ViewModel\SubsidiaryPerformanceViewModel.cs" />
     <Compile Include="ViewModel\ThirdPartyWinLossViewModel.cs" />
-    <Compile Include="ViewModel\AgCasinoBalanceViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossGridViewModel.cs" />
     <Compile Include="ViewModel\WinLossByProductViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossViewModel.cs" />
