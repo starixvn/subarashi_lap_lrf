@@ -36,8 +36,10 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
@@ -3989,10 +3991,6 @@
     <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.Report\Fanex.Athena.Api.Report.csproj">
       <Project>{8efb14a8-0a10-4095-a857-c6496e830458}</Project>
       <Name>Fanex.Athena.Api.Report</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.BetList\Fanex.Athena.Api.BetList.csproj">
-      <Project>{0C22899B-6CE0-4187-9BCF-7F503213F207}</Project>
-      <Name>Fanex.Athena.Api.BetList</Name>
     </ProjectReference>
     <ProjectReference Include="..\ControllerAPI\Fanex.Athena.Api.StatelessBase\Fanex.Athena.Api.StatelessBase.csproj">
       <Project>{0054161C-59B0-4CB6-AC5F-4E0F0D0294EC}</Project>
