@@ -3363,7 +3363,7 @@ _defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
 /*!*************************************************************************************!*\
   !*** ./www/js/source/reactpages/pages/bettingticketscenter/common/lib/constants.js ***!
   \*************************************************************************************/
-/*! exports provided: ApiUrl, HeaderText, DefaultPageSize, tabKeys, tabList, ALL_SELECTED_TEXT, CashOutMode, ProductCode */
+/*! exports provided: ApiUrl, HeaderText, DefaultPageSize, tabKeys, tabList, ALL_SELECTED_TEXT, CashOutMode, ProductCode, HttpStatusCode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3376,6 +3376,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ALL_SELECTED_TEXT", function() { return ALL_SELECTED_TEXT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CashOutMode", function() { return CashOutMode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductCode", function() { return ProductCode; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HttpStatusCode", function() { return HttpStatusCode; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
 
@@ -3386,7 +3387,6 @@ const ApiUrl = {
   REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
   SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
   ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData'),
-  ADVANCEDSEARCH_EXPORTSTATUS_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetExportStatus'),
   BOOKEDBET_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByBookedBet')
 };
 const HeaderText = {
@@ -3456,6 +3456,12 @@ const CashOutMode = {
 const ProductCode = {
   SportsBook: "SB",
   BA: "BA"
+};
+const HttpStatusCode = {
+  OK: 200,
+  NoContent: 204,
+  PartialContent: 206,
+  Limit: 209
 };
 
 /***/ }),
@@ -4268,9 +4274,9 @@ const useFilterAction = () => {
         alert(_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource("NoInfo"));
       } else {
         const blob = new Blob([response.data], {
-          type: "application/vnd.ms-excel"
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         });
-        Object(file_saver__WEBPACK_IMPORTED_MODULE_9__["saveAs"])(blob, 'BettingTicketsCenter_RefNo.xls');
+        Object(file_saver__WEBPACK_IMPORTED_MODULE_9__["saveAs"])(blob, 'BettingTicketsCenter_RefNo.xlsx');
       }
       dispatch(toggleLoader(false));
     });

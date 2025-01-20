@@ -7,7 +7,6 @@ export const ApiUrl = {
     REFNO_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
     SINGLECUSTOMER_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
     ADVANCEDSEARCH_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData'),
-    ADVANCEDSEARCH_EXPORTSTATUS_URL: Site.resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetExportStatus'),
     BOOKEDBET_DATA_URL: Site.resolveClientUrl('api/BettingTicketCenter/GetByBookedBet')
 }
 
@@ -90,4 +89,11 @@ export const CashOutMode = {
 export const ProductCode = {
     SportsBook: "SB",
     BA: "BA"
+}
+
+export const HttpStatusCode = {
+    OK: 200,
+    NoContent : 204,
+    PartialContent: 206,
+    Limit: 209
 }

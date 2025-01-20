@@ -59,24 +59,6 @@
                 metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);
         }
 
-        [HttpPost]
-        [ApiFunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
-        [ValidationApiRequest(IsValidCurrencyList = true)]
-        [ApiAutoBindMetaModel(BindAgent = true, ApplySubsidiaryBusiness = true, BindShowingBetFromIP = true, BindProductCodeList = true)]
-        public async Task<dynamic> GetExportStatus(AdvancedSearchBetListMetaModel metaModel)
-        {
-            if (IsAllowExportLargeBetList())
-            {
-                return ServerBusy();
-            }
-
-            await UpdateMetaModel(metaModel);
-
-            var timeOutInSecond = int.Parse(_appSettings.GetValue("BetListApiOutInSecond"));
-            return await _betListApiClient.PostAsync("/BettingTicketCenterAdvancedSearch/GetExportStatus",
-                metaModel, SessionService.UserSession.Language, timeOutInSecond).ConfigureAwait(false);
-        }
-
         private object ServerBusy() => new
         {
             ErrorCode = ServerBusyErrorCode,

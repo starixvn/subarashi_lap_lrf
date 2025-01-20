@@ -6,7 +6,7 @@ import AppData from '@jsroot/lib/AppData'
 import DataService from '@jsroot/lib/DataService.js'
 import useBaseCurrencyForMultiSelectCurrency from '@jsroot/customHooks/useBaseCurrencyForMultiSelectCurrency'
 import useSubsidiarySearch from '@jsroot/customHooks/useSubsidiarySearch'
-import { ApiUrl } from '../../../common/lib/constants'
+import { ApiUrl, HttpStatusCode } from '../../../common/lib/constants'
 import Service from '../../../common/lib/Service'
 import { useValidParam } from './useValidParam'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
@@ -126,14 +126,10 @@ export const useFilterAction = () => {
         params.IsExport = true;
         dispatch(toggleLoader(true));
 
-        var exportParams = {
-            ...params,
-            PageIndex : 1,
-            PageSize : 2147483646
-        };
+        const { PageSize, ...rest } = params;
+        const exportParams = { ...rest };
 
-        DataService.postData(ApiUrl.ADVANCEDSEARCH_EXPORTSTATUS_URL, exportParams)
-            .then(response => _handleExportStatusResponse(response, exportParams))
+        _handleExport(exportParams)
             .catch(() => {
                 alert(LangHelper.getSingleResource("ErrorProcessingMsg"));
             })
@@ -142,71 +138,53 @@ export const useFilterAction = () => {
             });
     }
 
-    const _handleExportStatusResponse = (response, exportParams) => {
-        const RowsExceedLimitErrorCode = 1001;
-        const ExportMultipleFile = 1002;
-        const ExportSingleFile = 1003;
+    const _handleExport = (exportParams) => {
+        const fetchNextPage = (pageIndex) => {
+            return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, {
+                ...exportParams,
+                PageIndex: pageIndex
+            }).then((response) => {
+                const isNext = _handleExportResponse(response, pageIndex);
 
-        if (response.data.StatusCode === RowsExceedLimitErrorCode) {
-            return _showExportWarning(response.data.LimitRows);
-        } else if (response.data.StatusCode === ExportMultipleFile) {
-            exportParams.PageSize = response.data.PageSize;
-    
-            const fetchNextPage = (pageIndex) => {
-                return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, {
-                    ...exportParams,
-                    PageIndex: pageIndex
-                }).then((response) => {
-                    const isNext = _handleExportResponse(response, null, false);
+                if (isNext) {
+                    return fetchNextPage(pageIndex + 1);
+                } else {
+                    return Promise.resolve();
+                }
+            }).catch(() => {
+                return Promise.reject();
+            });
+        };
 
-                    if (isNext) {
-                        return fetchNextPage(pageIndex + 1);
-                    } else {
-                        return Promise.resolve();
-                    }
-                }).catch(() => {
-                    return Promise.reject();
-                });
-            };
+        return fetchNextPage(1);
 
-            return fetchNextPage(1);
-    
-        } else {
-            exportParams.PageSize = response.data.PageSize;
-
-            return DataService.getFile(ApiUrl.ADVANCEDSEARCH_DATA_URL, exportParams).then((response) =>
-                _handleExportResponse(response, "BettingTicketsCenter_AdvancedSearch", true)
-            );
-        }
     };
-    
-    const _handleExportResponse = (response, exportName, showNoInfo) => {
+
+    const _handleExportResponse = (response, pageIndex) => {
         const contentType = response.headers["content-type"];
-        
+        var fileName = "BettingTicketsCenter_AdvancedSearch.xlsx";
+
         if (contentType && contentType.indexOf('application/json') > -1) {
             Site.readAsJson(response.data, (result) => {
                 const msg = result.ErrorMsg || LangHelper.getSingleResource("ErrorProcessingMsg");
-                alert(msg);
+                return alert(msg);
             });
         } else {
-            const NoContentStatusCode = 204;
-            const PartialContentStatusCode = 206;
-            if (response.status === NoContentStatusCode) {
-                if(showNoInfo) {
-                    alert(LangHelper.getSingleResource("NoInfo"));
-                }
-            } 
-            else {
-                exportName = exportName || getFileNameFromHeader(response) || "BettingTicketsCenter_AdvancedSearch";
-                const fileName = exportName + "." +
-                    (response.headers["content-type"] === "application/zip" ? "zip" : "xls");
-                const blob = new Blob([response.data], { type: response.headers["content-type"] });
-                saveAs(blob, fileName);
-                return response.status === PartialContentStatusCode;
+            if (response.status === HttpStatusCode.Limit)
+            {
+                return _showExportWarning(Number(response.statusText));
             }
-        }
 
-        return false;
+            if (response.status === HttpStatusCode.NoContent && pageIndex === 1) {
+                return alert(LangHelper.getSingleResource("NoInfo"));
+            }
+
+            fileName = getFileNameFromHeader(response) || fileName;
+            const blob = new Blob([response.data], { type: response.headers["content-type"] });
+            saveAs(blob, fileName);
+
+            return response.status === HttpStatusCode.PartialContent;
+        }
     };
 
     const getFileNameFromHeader = (response) => {

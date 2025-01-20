@@ -127,7 +127,7 @@
 
         protected internal virtual FileContentResult EmptyExcel()
         {
-            return File(ExcelHelper.ExportEmptyFile(), "application/vnd.ms-excel", "Empty.xls");
+            return File(ExcelHelper.ExportEmptyFile(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Empty.xlsx");
         }
 
         protected virtual Task<ActionResult> ExportExcel(BetListExcelMetaModel metaModel)
@@ -146,7 +146,7 @@
             string apiPath = null)
         {
             var data = await BetListApiClient.PostStreamAsync(apiPath ?? "/BetList/ExportExcel", metaModel, SessionServiceInstance.UserSession.Language).ConfigureAwait(false);
-            return File(data, "application/vnd.ms-excel", fileName + ".xls");
+            return File(data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName + ".xlsx");
         }
 
         protected async Task<ActionResult> ProcessDefaultRequest(BetListExcelMetaModel model, string viewPath, string uspKey)
