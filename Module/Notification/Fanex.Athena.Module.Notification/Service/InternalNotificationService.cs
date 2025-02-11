@@ -1,28 +1,27 @@
 ﻿namespace Fanex.Athena.Module.Notification.Service
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Linq;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.ResultModel;
-    using Fanex.Athena.Module.Notification.Constants;
-    using Fanex.Athena.Module.Notification.DTO;
-    using Fanex.Athena.Module.Notification.Helper;
-    using Fanex.Athena.Module.Notification.MetaModel;
-    using Fanex.Athena.Module.Notification.Service.Interfaces;
-    using Fanex.Athena.Resources;
-    using Fanex.Common;
+    using Common;
+    using Constants;
+    using DTO;
+    using Extension.Helper;
+    using Extension.Utility.Interfaces;
+    using Helper;
+    using Interfaces;
+    using MetaModel;
+    using Model.Auth.DataDomain;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using Model.Core.ResultModel;
+    using Resources;
 
     public class InternalNotificationService : INotificationService
     {
         private const int MAX_MONTH = 2;
-        private readonly string[] PermissionList = new[] { PermissionKeys.ReportAbnormalBet };
 
         private readonly IDbFactory _dbFactory;
+        private readonly string[] PermissionList = { PermissionKeys.ReportAbnormalBet };
 
         public InternalNotificationService(IDbFactory dbFactory)
         {
@@ -123,7 +122,7 @@
                 Language = defaultMetaModel.Language,
                 MaximumMonthRange = MAX_MONTH,
                 FromDate = DateTimeHelper.CreateDateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance),
-                ToDate = today.AddDays(1).AddMilliseconds(-1),
+                ToDate = today.AddDays(1).AddMilliseconds(-1)
             };
         }
 
@@ -133,6 +132,7 @@
             {
                 return type - 1;
             }
+
             return 0;
         }
     }
