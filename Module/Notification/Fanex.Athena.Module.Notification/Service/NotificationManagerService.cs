@@ -3,14 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.ResultModel;
-    using Fanex.Athena.Module.Notification.Constants;
-    using Fanex.Athena.Module.Notification.DTO;
-    using Fanex.Athena.Module.Notification.MetaModel;
-    using Fanex.Athena.Module.Notification.Service.Interfaces;
-    using Fanex.Athena.Module.Notification.Utility.Interfaces;
-    using Fanex.Athena.Resources;
+    using Constants;
+    using DTO;
+    using Interfaces;
+    using MetaModel;
+    using Model.Core.DTO.Common;
+    using Model.Core.ResultModel;
+    using Resources;
+    using Utility.Interfaces;
 
     public class NotificationManagerService : INotificationManagerService
     {
@@ -131,7 +131,10 @@
 
         private ReportResultModel<ResultAmendment> GetPagingData(ReportResultModel<ResultAmendment> data, int pageIndex, int pageSize)
         {
-            if (pageIndex == 0 || pageSize == 0) return data;
+            if (pageIndex == 0 || pageSize == 0)
+            {
+                return data;
+            }
 
             var result = new ReportResultModel<ResultAmendment>
             {

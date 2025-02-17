@@ -4,26 +4,26 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.ResultModel;
-    using Fanex.Athena.Module.Notification.Constants;
-    using Fanex.Athena.Module.Notification.DTO;
-    using Fanex.Athena.Module.Notification.Helper;
-    using Fanex.Athena.Module.Notification.MetaModel;
-    using Fanex.Athena.Module.Notification.Service.Interfaces;
-    using Fanex.Athena.Resources;
-    using Fanex.Common;
+    using Common;
+    using Constants;
+    using DTO;
+    using Extension.Helper;
+    using Extension.Utility.Interfaces;
+    using Helper;
+    using Interfaces;
+    using MetaModel;
+    using Model.Auth.DataDomain;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using Model.Core.ResultModel;
+    using Resources;
 
     public class CRMNotificationService : INotificationService, IResultAmendmentService
     {
         private const int MAX_MONTH = 6;
-        private readonly string[] PermissionList = new[] { PermissionKeys.ResultAmendmentNotificationReport };
 
         private readonly IDbFactory _dbFactory;
+        private readonly string[] PermissionList = { PermissionKeys.ResultAmendmentNotificationReport };
 
         public CRMNotificationService(IDbFactory dbFactory)
         {
@@ -31,11 +31,6 @@
         }
 
         public bool CanHandleMarkAsRead(NotificationMarkAsReadMetaModel metaModel)
-        {
-            return metaModel.Source == NotificationSource.CRM;
-        }
-
-        public bool CanHandleAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
         {
             return metaModel.Source == NotificationSource.CRM;
         }
@@ -82,6 +77,11 @@
             }
 
             return result;
+        }
+
+        public bool CanHandleAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
+        {
+            return metaModel.Source == NotificationSource.CRM;
         }
 
         public ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel)
@@ -131,6 +131,7 @@
                         result.MatchInfo = Converter.ToString2(reader["EventName"]);
                         result.DateTime = Converter.ToDateTime(reader["EventDate"]);
                     }
+
                     reader.NextResult();
 
                     var index = 0;
@@ -173,10 +174,11 @@
                         {
                             Id = Converter.ToString2(reader["NotiID"]),
                             MatchInfo = Converter.ToString2(reader["EventName"]),
-                            DateTime = Converter.ToDateTime(reader["EventDate"]),
+                            DateTime = Converter.ToDateTime(reader["EventDate"])
                         };
                         info.Add(dataInfo);
                     }
+
                     reader.NextResult();
 
                     while (reader.Read())
@@ -199,7 +201,7 @@
                 Id = i.Id,
                 MatchInfo = i.MatchInfo,
                 DateTime = i.DateTime,
-                Data = d.DefaultIfEmpty().ToList(),
+                Data = d.DefaultIfEmpty().ToList()
             }).ToList();
 
             return result;
@@ -282,7 +284,7 @@
                     Type = NotificationHelper.GetNotificationTypeName(MessageType.ResettlementNotification),
                     DateTime = Converter.ToDateTime(reader["EventDate"], DateTimeHelper.Now),
                     Source = NotificationSource.CRM,
-                    SessionId = Converter.ToString2(reader["NotiID"]),
+                    SessionId = Converter.ToString2(reader["NotiID"])
                 });
             }
 
@@ -314,7 +316,7 @@
                 MaximumMonthRange = MAX_MONTH,
                 FromDate = DateTimeHelper.CreateDateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance),
                 ToDate = today.AddDays(1).AddMilliseconds(-1),
-                AgentListXml = defaultMetaModel.AgentListXml,
+                AgentListXml = defaultMetaModel.AgentListXml
             };
         }
 
@@ -332,7 +334,7 @@
                 MaximumMonthRange = MAX_MONTH,
                 FromDate = defaultMetaModel.FromDate,
                 ToDate = defaultMetaModel.ToDate,
-                AgentListXml = defaultMetaModel.AgentListXml,
+                AgentListXml = defaultMetaModel.AgentListXml
             };
         }
     }

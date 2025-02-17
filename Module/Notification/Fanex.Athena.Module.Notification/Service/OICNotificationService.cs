@@ -1,39 +1,36 @@
 ﻿namespace Fanex.Athena.Module.Notification.Service
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Extension.Utility.Interfaces;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.ResultModel;
-    using Fanex.Athena.Module.Notification.Constants;
-    using Fanex.Athena.Module.Notification.DTO;
-    using Fanex.Athena.Module.Notification.Helper;
-    using Fanex.Athena.Module.Notification.MetaModel;
-    using Fanex.Athena.Module.Notification.Service.Interfaces;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.VendorAdapter.Interfaces;
-    using Fanex.Data;
-    using Fanex.Logging;
+    using Constants;
+    using DataAccess.Core.Configuration.Interfaces;
+    using DTO;
+    using Extension.Helper;
+    using Extension.Utility;
+    using Extension.Utility.Interfaces;
+    using Helper;
+    using Interfaces;
+    using Logging;
+    using MetaModel;
+    using Model.Auth.DataDomain;
+    using Model.Core.DataDomain;
+    using Model.Core.DTO.Common;
+    using Model.Core.ResultModel;
     using Newtonsoft.Json.Linq;
+    using Resources;
+    using VendorAdapter.Interfaces;
 
     public class OICNotificationService : INotificationService, IResultAmendmentService
     {
-        private readonly ILogger _logger;
+        private const int MAX_MONTH = 6;
         private readonly IAppSettings _appSetting;
-        private readonly IWebClientService _webClientService;
-        private readonly IDbFactory _dbFactory;
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
         private readonly ICacheRefAdapter _cacheRefAdapter;
-
-        private const int MAX_MONTH = 6;
-        private readonly string[] PermissionList = new[] { PermissionKeys.ResultAmendmentNotificationReport };
+        private readonly IDbFactory _dbFactory;
+        private readonly ILogger _logger;
+        private readonly IWebClientService _webClientService;
+        private readonly string[] PermissionList = { PermissionKeys.ResultAmendmentNotificationReport };
 
         public OICNotificationService(
             ILogger logger,
@@ -50,136 +47,6 @@
             _balanceUpDataAccess = balanceUpDataAccess;
             _cacheRefAdapter = cacheRefAdapter;
         }
-
-        #region Notification
-
-        public bool CanHandleMarkAsRead(NotificationMarkAsReadMetaModel metaModel)
-        {
-            return metaModel.Source == NotificationSource.OIC;
-        }
-
-        public bool CanHandleAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
-        {
-            return metaModel.Source == NotificationSource.OIC;
-        }
-
-        public ReportResultModel<NotificationMessage> GetNotificationMessages(NotificationMetaModel metaModel)
-        {
-            if (NotificationHelper.IsValidMessageTypeByPermission(metaModel.MessageTypes, PermissionList))
-            {
-                var paramModel = CreateNotificationMetaModel(metaModel);
-                var data = GetDataFromAPI(paramModel, MapToNotificationMessage);
-                return data;
-            }
-
-            return new ReportResultModel<NotificationMessage> { TotalRows = 0, DataList = new List<NotificationMessage>() };
-        }
-
-        public IResultInfo MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
-        {
-            const string relativePath = "/Api/MarkNotificationAsRead";
-            var api = new Uri($"{_appSetting.OICApiUrl}{relativePath}");
-            var param = $"MessageType={metaModel.MessageType}&MessageId={metaModel.MessageId}&UserName={metaModel.UserName}&LicenseeName={metaModel.LicenseeName}";
-
-            var result = new ResultInfo
-            {
-                Code = 1,
-                Message = ViewResources.ErrorProcessingMsg
-            };
-            try
-            {
-                var json = _webClientService.UploadString(api, param);
-                if (string.IsNullOrEmpty(json))
-                {
-                    return result;
-                }
-
-                var jobject = JObject.Parse(json);
-
-                if (jobject.HasValues)
-                {
-                    return new ResultInfo
-                    {
-                        Code = jobject["Code"].Value<int>(),
-                        Message = jobject["Message"].Value<string>()
-                    };
-                }
-            }
-            catch (Exception e)
-            {
-                LogError(api + "\nParameter: " + param, e);
-            }
-
-            return result;
-        }
-
-        #endregion Notification
-
-        #region Report
-
-        public ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel)
-        {
-            var param = CreateResultAmendmentMetaModel(metaModel);
-            var data = GetDataFromAPI(param, MapToResultAmendment);
-
-            return data;
-        }
-
-        public AmendmentTicketListing GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
-        {
-            const string SpKey = "Lrf_AmendmentTicketListingSel";
-            var result = AmendmentTicketListing.Empty();
-            using (var objectDb = _dbFactory.GetObjectDb(SpKey))
-            {
-                var balanceUp = _balanceUpDataAccess.GetBalanceUp();
-                objectDb.SetParameterValue("SessionId", metaModel.SessionId);
-                objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
-                objectDb.SetParameterValue("MoveBetsDay", balanceUp.MoveBetsDay);
-                objectDb.SetParameterValue("BalanceUpDay", balanceUp.BalanceUpDay);
-
-                using (var reader = objectDb.ExecuteReader())
-                {
-                    var index = 0;
-                    while (reader.Read())
-                    {
-                        result.Data.Add(new AmendmentTicket
-                        {
-                            Index = ++index,
-                            RefNo = Convert.ToString(reader["RefNo"]),
-                            ExternalId = Convert.ToString(reader["ExternalId"]),
-                            SystemId = Convert.ToString(reader["SystemId"])
-                        });
-                    }
-                }
-
-                result.MatchInfo = ReadMatchInfo(objectDb);
-                result.DateTime = metaModel.DateTime;
-            }
-
-            return result;
-        }
-
-        public List<AmendmentTicketListing> GetAllAmendmentTicketListing(NotificationMetaModel metaModel)
-        {
-            var result = new List<AmendmentTicketListing>();
-            var resultAmendment = GetResultAmendment(metaModel);
-            foreach (var amendment in resultAmendment.DataList)
-            {
-                var param = new AmendmentTicketListingMetaModel
-                {
-                    Source = amendment.Source,
-                    SessionId = amendment.SessionId,
-                    DateTime = amendment.DateTime,
-                    AgentListXml = metaModel.AgentListXml,
-                    Language = metaModel.Language
-                };
-                var data = GetAmendmentTicketListing(param);
-                result.Add(data);
-            }
-            return result;
-        }
-
-        #endregion Report
 
         private ReportResultModel<T> GetDataFromAPI<T>(NotificationMetaModel metaModel, Func<JToken, string, string, T> mapData) where T : class
         {
@@ -305,7 +172,7 @@
                 MaximumMonthRange = MAX_MONTH,
                 FromDate = DateTimeHelper.CreateDateTime(today.Year, today.Month, 1).AddMonths(-maximumMonthDistance),
                 ToDate = today.AddDays(1).AddMilliseconds(-1),
-                AgentListXml = defaultMetaModel.AgentListXml,
+                AgentListXml = defaultMetaModel.AgentListXml
             };
         }
 
@@ -323,34 +190,195 @@
                 MaximumMonthRange = MAX_MONTH,
                 FromDate = defaultMetaModel.FromDate,
                 ToDate = defaultMetaModel.ToDate,
-                AgentListXml = defaultMetaModel.AgentListXml,
+                AgentListXml = defaultMetaModel.AgentListXml
             };
         }
 
-        private string ReadMatchInfo(IObjectDb objectDb)
+        private string ReadMatchInfo(MatchInfoMetaModel metaModel)
         {
-            var outputParams = objectDb.GetOutputParams();
-            if (int.TryParse(outputParams["ProductId"]?.ToString(), out int productId)
-                && DateTime.TryParse(outputParams["EventDate"]?.ToString(), out DateTime eventDate))
+            if (!metaModel.IsValid)
             {
-                const int ProductSB = 1;
-                return productId == ProductSB ? GetSBMatchInfo(outputParams, eventDate) : GetOtherProductMatchInfo(outputParams, eventDate);
+                return string.Empty;
             }
-            return string.Empty;
+
+            const string SpKey = "Lrf_MatchSel";
+            using (var objectDb = _dbFactory.GetObjectDb(SpKey))
+            {
+                var balanceUp = _balanceUpDataAccess.GetBalanceUp();
+                objectDb.SetParameterValue("MatchId", metaModel.MatchId);
+                objectDb.SetParameterValue("EventDate", metaModel.EventDate);
+                objectDb.SetParameterValue("MoveBetsDay", balanceUp.MoveBetsDay);
+                objectDb.SetParameterValue("BalanceUpDay", balanceUp.BalanceUpDay);
+
+                var matchInfo = objectDb.QueryEntity<MatchInfo>();
+                if (matchInfo == null)
+                {
+                    return string.Empty;
+                }
+
+                matchInfo.EventDate = metaModel.EventDate;
+                const int ProductSB = 1;
+                return matchInfo.ProductId == ProductSB ? GetSBMatchInfo(matchInfo) : GetOtherProductMatchInfo(matchInfo);
+            }
         }
 
-        private string GetSBMatchInfo(Hashtable outputParams, DateTime eventDate)
+        private string GetSBMatchInfo(MatchInfo matchInfo)
         {
             const string SBMatchFormat = "{0}{1} -vs- {2} - {3}";
-            return string.Format(SBMatchFormat, _cacheRefAdapter.GetTeamName(outputParams["HomeId"]), (outputParams["IsNeutral"] as bool?).GetValueOrDefault() ? " (N)" : string.Empty,
-              _cacheRefAdapter.GetTeamName(outputParams["AwayId"]),
-              eventDate.ToString("MM/d/yyyy"));
+            return string.Format(
+                SBMatchFormat,
+                _cacheRefAdapter.GetTeamName(matchInfo.HomeId),
+                matchInfo.IsNeutral ? " (N)" : string.Empty,
+                _cacheRefAdapter.GetTeamName(matchInfo.AwayId),
+                matchInfo.EventDate.ToString("MM/d/yyyy"));
         }
 
-        private string GetOtherProductMatchInfo(Hashtable outputParams, DateTime eventDate)
+        private string GetOtherProductMatchInfo(MatchInfo matchInfo)
         {
             const string OtherSportMatchFormat = "{0} No.{1} - {2}";
-            return string.Format(OtherSportMatchFormat, _cacheRefAdapter.GetSportName(outputParams["SportType"]), outputParams["MatchCode"], eventDate.ToString("MM/d/yyyy"));
+            return string.Format(
+                OtherSportMatchFormat,
+                _cacheRefAdapter.GetSportName(matchInfo.SportType),
+                matchInfo.MatchCode,
+                matchInfo.EventDate.ToString("MM/d/yyyy"));
         }
+
+        #region Notification
+
+        public bool CanHandleMarkAsRead(NotificationMarkAsReadMetaModel metaModel)
+        {
+            return metaModel.Source == NotificationSource.OIC;
+        }
+
+        public bool CanHandleAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
+        {
+            return metaModel.Source == NotificationSource.OIC;
+        }
+
+        public ReportResultModel<NotificationMessage> GetNotificationMessages(NotificationMetaModel metaModel)
+        {
+            if (NotificationHelper.IsValidMessageTypeByPermission(metaModel.MessageTypes, PermissionList))
+            {
+                var paramModel = CreateNotificationMetaModel(metaModel);
+                var data = GetDataFromAPI(paramModel, MapToNotificationMessage);
+                return data;
+            }
+
+            return new ReportResultModel<NotificationMessage> { TotalRows = 0, DataList = new List<NotificationMessage>() };
+        }
+
+        public IResultInfo MarkNotificationAsRead(NotificationMarkAsReadMetaModel metaModel)
+        {
+            const string relativePath = "/Api/MarkNotificationAsRead";
+            var api = new Uri($"{_appSetting.OICApiUrl}{relativePath}");
+            var param =
+                $"MessageType={metaModel.MessageType}&MessageId={metaModel.MessageId}&UserName={metaModel.UserName}&LicenseeName={metaModel.LicenseeName}";
+
+            var result = new ResultInfo
+            {
+                Code = 1,
+                Message = ViewResources.ErrorProcessingMsg
+            };
+            try
+            {
+                var json = _webClientService.UploadString(api, param);
+                if (string.IsNullOrEmpty(json))
+                {
+                    return result;
+                }
+
+                var jobject = JObject.Parse(json);
+
+                if (jobject.HasValues)
+                {
+                    return new ResultInfo
+                    {
+                        Code = jobject["Code"].Value<int>(),
+                        Message = jobject["Message"].Value<string>()
+                    };
+                }
+            }
+            catch (Exception e)
+            {
+                LogError(api + "\nParameter: " + param, e);
+            }
+
+            return result;
+        }
+
+        #endregion Notification
+
+        #region Report
+
+        public ReportResultModel<ResultAmendment> GetResultAmendment(NotificationMetaModel metaModel)
+        {
+            var param = CreateResultAmendmentMetaModel(metaModel);
+            var data = GetDataFromAPI(param, MapToResultAmendment);
+
+            return data;
+        }
+
+        public AmendmentTicketListing GetAmendmentTicketListing(AmendmentTicketListingMetaModel metaModel)
+        {
+            const string SpKey = "Lrf_AmendmentTicketListingSel";
+            var result = AmendmentTicketListing.Empty();
+            using (var objectDb = _dbFactory.GetObjectDb(SpKey))
+            {
+                var balanceUp = _balanceUpDataAccess.GetBalanceUp();
+                objectDb.SetParameterValue("SessionId", metaModel.SessionId);
+                objectDb.SetParameterValue("AgentList", metaModel.AgentListXml);
+                objectDb.SetParameterValue("MoveBetsDay", balanceUp.MoveBetsDay);
+                objectDb.SetParameterValue("BalanceUpDay", balanceUp.BalanceUpDay);
+
+                using (var reader = objectDb.ExecuteReader())
+                {
+                    var index = 0;
+                    while (reader.Read())
+                    {
+                        result.Data.Add(new AmendmentTicket
+                        {
+                            Index = ++index,
+                            RefNo = Convert.ToString(reader["RefNo"]),
+                            ExternalId = Convert.ToString(reader["ExternalId"]),
+                            SystemId = Convert.ToString(reader["SystemId"])
+                        });
+                    }
+                }
+
+                var output = objectDb.GetOutputParams();
+                var matchInfoMetaModel = new MatchInfoMetaModel
+                {
+                    MatchId = Convert.ToInt32(output["MatchId"]),
+                    EventDate = Convert.ToDateTime(output["EventDate"])
+                };
+                result.MatchInfo = ReadMatchInfo(matchInfoMetaModel);
+                result.DateTime = metaModel.DateTime;
+            }
+
+            return result;
+        }
+
+        public List<AmendmentTicketListing> GetAllAmendmentTicketListing(NotificationMetaModel metaModel)
+        {
+            var result = new List<AmendmentTicketListing>();
+            var resultAmendment = GetResultAmendment(metaModel);
+            foreach (var amendment in resultAmendment.DataList)
+            {
+                var param = new AmendmentTicketListingMetaModel
+                {
+                    Source = amendment.Source,
+                    SessionId = amendment.SessionId,
+                    DateTime = amendment.DateTime,
+                    AgentListXml = metaModel.AgentListXml,
+                    Language = metaModel.Language
+                };
+                var data = GetAmendmentTicketListing(param);
+                result.Add(data);
+            }
+
+            return result;
+        }
+
+        #endregion Report
     }
 }

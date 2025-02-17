@@ -105,9 +105,11 @@
     <Compile Include="Excels\AmendmentTicketListingExcel.cs" />
     <Compile Include="Helper\NotificationHelper.cs" />
     <Compile Include="Model\DTO\AmendmentTicketListing.cs" />
+    <Compile Include="Model\DTO\MatchInfo.cs" />
     <Compile Include="Model\DTO\NotificationMessage.cs" />
     <Compile Include="Model\DTO\ResultAmendment.cs" />
     <Compile Include="Model\MetaModel\AmendmentTicketListingMetaModel.cs" />
+    <Compile Include="Model\MetaModel\MatchInfoMetaModel.cs" />
     <Compile Include="Model\MetaModel\NotificationAttachmentMetaModel.cs" />
     <Compile Include="Model\MetaModel\NotificationMarkAsReadMetaModel.cs" />
     <Compile Include="Model\MetaModel\NotificationMetaModel.cs" />
