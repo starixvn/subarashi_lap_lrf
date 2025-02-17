@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/7/2025 2:48:45 PM
+﻿// Generated at: 2/17/2025 2:52:10 PM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -576,7 +576,6 @@ lbl7Over:"7Ke Atas",
 League:"Liga",
 LeagueGroup:"Grup Liga",
 LeagueName:"Nama Liga",
-LeagueWinLoss:"Keuntungan/Kerugian Berdasarkan Liga",
 Level:"Level",
 Liability:"Kewajiban",
 Licensee:"Pemegang Lisensi",

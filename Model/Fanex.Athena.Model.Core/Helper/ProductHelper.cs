@@ -85,7 +85,8 @@
                 { Product.PTRNG, nameof(ViewResources.ProductPTRNG) },
                 { Product.GPIRNG, nameof(ViewResources.ProductGPIRNG) },
                 { Product.GPILC, nameof(ViewResources.ProductGPILC) },
-                { Product.PS, nameof(ViewResources.ProductPS) }
+                { Product.PS, nameof(ViewResources.ProductPS) },
+                { Product.ASK, nameof(ViewResources.ProductASK) }
             };
 
         public static string GetProductCode(int productId)

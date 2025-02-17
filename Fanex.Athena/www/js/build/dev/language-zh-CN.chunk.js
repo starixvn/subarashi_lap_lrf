@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 1/7/2025 2:48:46 PM
+﻿// Generated at: 2/17/2025 2:52:10 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -551,7 +551,6 @@ lbl3WayHandicap:"三项让分投注",
 lbl7Over:"7或以上",
 League:"联赛",
 LeagueName:"联赛名称",
-LeagueWinLoss:"联赛输赢",
 Level:"等级",
 Liability:"负债",
 Licensee:"承租公司",
