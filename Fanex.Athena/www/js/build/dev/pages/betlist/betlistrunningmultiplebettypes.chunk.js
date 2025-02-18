@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([10,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
+/******/ 	deferredModules.push([8,"www/js/build/dev/pages/lib/common","www/js/build/dev/pages/lib/jqgrid"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -3604,26 +3604,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             initialize: function () {
                 Site.initialize();
 
-                if (_me.isMatchWLBetList() === true) {
-                    _me.updateSortColumn();
-                }
-
                 _isShowSumStake = $('#IsShowSumStake').val() === '1';
 
                 _sortColumnName = _sortColumnName || $('#SortBy').val();
                 _sortOrder = _sortOrder || $('#SortOrder').val();
 
                 _me.registerBetListGlobalFunctions();
-            },
-
-            updateSortColumn: function () {
-                BetListOption.columnModel[1].sortable = true; // externalId
-                BetListOption.columnModel[2].sortable = true; // systemId
-            },
-
-            isMatchWLBetList: function () {
-                const regex = /MatchWinLossBetList/i;
-                return regex.test($('#ApiUrl').val());
             },
 
             gridComplete: function (grid) {
@@ -4122,7 +4108,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
             submit: function () {
                 const actionName = Site.getLocation().pathname.split('/').pop();
                 const params = Site.setLicenseeOptionParam();
-                const url = Site.resolveClientUrl('api/RunningBettypesBetList/' + actionName);
+                const url = Site.buildBetListProxyUrl('api/RunningBettypesBetList/' + actionName);
 
                 BetList.loadData(params, url);
             }
@@ -4153,7 +4139,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/// <referenc
 
 /***/ }),
 
-/***/ 10:
+/***/ 8:
 /*!***********************************************************************************!*\
   !*** multi ./www/js/source/pages/betlist/main-betlistrunning.multiplebettypes.js ***!
   \***********************************************************************************/
