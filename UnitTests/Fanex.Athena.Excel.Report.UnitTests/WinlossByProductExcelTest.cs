@@ -193,7 +193,6 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             ExcelModel.SystemIdVisible = false;
             ExcelModel.CustomerCommVisible = false;
             ExcelModel.SystemIdVisible = false;
-            ExcelModel.BAVisible = false;
             var excel = CreateExcel(2);
 
             // Action
@@ -215,7 +214,6 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             ExcelModel.SystemIdVisible = true;
             ExcelModel.CustomerCommVisible = true;
             ExcelModel.SystemIdVisible = true;
-            ExcelModel.BAVisible = true;
             ExcelModel.HasAmountDueToColumn = true;
             var excel = CreateExcel(2);
 

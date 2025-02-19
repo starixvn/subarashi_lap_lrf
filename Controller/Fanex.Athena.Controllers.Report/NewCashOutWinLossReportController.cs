@@ -44,8 +44,7 @@ namespace Fanex.Athena.Controllers.Report
                 CurrencyList = userSession.CurrencyList,
                 ViewType = viewType,
                 SubsidiaryList = subsidiaryList,
-                SportList = GetSportList(),
-                IsLicenseeOfferBA = licenseeSession.IsEnableBA && productAccess.IsAllowBA,
+                SportList = GetSportList()
             };
             ViewBag.DefaultSelectedBaseCurrency = userSession.DefaultBaseCurrency;
 

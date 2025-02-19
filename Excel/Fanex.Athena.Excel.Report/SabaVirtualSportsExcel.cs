@@ -20,22 +20,20 @@
         private const int ColumnCurrency = 4;
 
         private const int ColumnTurnoverSportBook = 5;
-        private const int ColumnTurnoverTotal = 8;
+        private const int ColumnTurnoverTotal = 7;
 
-        private const int ColumnTotalTransaction = 9;
+        private const int ColumnTotalTransaction = 8;
 
-        private const int ColumnCustomerWl = 10;
-        private const int ColumnCustomerComm = 11;
-        private const int ColumnCustomerTotal = 12;
+        private const int ColumnCustomerWl = 9;
+        private const int ColumnCustomerComm = 10;
+        private const int ColumnCustomerTotal = 11;
 
-        private const int ColumnLicenseeWlSportsBook = 13;
-        private const int ColumnLicenseeWlTotal = 16;
+        private const int ColumnLicenseeWlSportsBook = 12;
+        private const int ColumnLicenseeWlTotal = 14;
 
-        private const int ColumnCashOutCommission = 17;
-        private const int ColumnBaCommission = 18;
-        private const int ColumnAmtDueToBa = 19;
+        private const int ColumnCashOutCommission = 15;
 
-        private const int ColumnTemplateCount = 20;
+        private const int ColumnTemplateCount = 16;
 
         private const int RowContentTemplate = 3;
         private const int RowGrantTotal = 6;
@@ -43,15 +41,14 @@
         private const int RowTotalNoSolidBorder = 5;
         private const int RowTotalSolidBorder = 4;
 
-        private const int TotalLicenseeWlProductColumn = 3;
-        private const int TotalTurnoverProductColumn = 3;
+        private const int TotalLicenseeWlProductColumn = 2;
+        private const int TotalTurnoverProductColumn = 2;
 
-        private static readonly string[] IgnoredLicenseeWLProducts = new[] { Product.BA };
         private static readonly string[] IgnoredTurnoverProducts = new[] { Product.BT, Product.CO };
 
         private static readonly string[] OfferedProducts = new[]
         {
-            Product.SB,Product.BA, Product.CO
+            Product.SB, Product.CO
         };
 
         private readonly SabaVirtualSportsWinLossExcelModel _excelModel;
@@ -95,8 +92,6 @@
             row.Cells[ColumnLicenseeWlSportsBook].SetCellValue(ViewResources.LicenseeW_L);
             row.Cells[ColumnLicenseeWlTotal].SetCellValue(ViewResources.LicenseeW_L);
             row.Cells[ColumnCashOutCommission].SetCellValue(ViewResources.CashOutCommission);
-            row.Cells[ColumnBaCommission].SetCellValue(ViewResources.BACommission);
-            row.Cells[ColumnAmtDueToBa].SetCellValue(ViewResources.AmtDueToBA);
 
             // row 2
             var row2 = sheet.CopyRow(TemplateSheet, RowHeaderTemplate + 1);
@@ -212,11 +207,6 @@
                 sheet.HideColumn(ColumnCashOutCommission);
             }
 
-            if (!_excelModel.BAVisible)
-            {
-                sheet.HideColumn(ColumnBaCommission, ColumnAmtDueToBa);
-            }
-
             ProcessUITurnover(sheet);
             ProcessUILicenseeWinLoss(sheet);
             HideColumnsByLevel(sheet);
@@ -245,16 +235,11 @@
             for (int i = 0; i < _showProductOptions.Count(); i++)
             {
                 var product = _showProductOptions[i];
-                if (!IgnoredLicenseeWLProducts.Contains(product))
-                {
-                    row.Cells[ColumnLicenseeWlSportsBook + i].SetCellValue(data.LicenseeWL[product]);
-                }
+                row.Cells[ColumnLicenseeWlSportsBook + i].SetCellValue(data.LicenseeWL[product]);
             }
 
             row.Cells[ColumnLicenseeWlTotal].SetCellValue(data.LicenseeWL.Sum(a => a.Value));
             row.Cells[ColumnCashOutCommission].SetCellValue(data.CashOutCommission);
-            row.Cells[ColumnBaCommission].SetCellValue(data.BACommission);
-            row.Cells[ColumnAmtDueToBa].SetCellValue(data.AmtDueToBA);
         }
 
         protected internal virtual int AssignGrandTotalInEurData(ISheet sheet, int rowIndex)
@@ -314,16 +299,9 @@
 
             for (int i = 0; i < showColumns; i++)
             {
-                if (IgnoredLicenseeWLProducts.Contains(_showProductOptions[i]))
-                {
-                    sheet.HideColumn(ColumnLicenseeWlSportsBook + i);
-                }
-                else
-                {
-                    sheet.GetCell(RowHeaderTemplate, ColumnLicenseeWlSportsBook + i)
-                    .SetCellValue(ViewResources.LicenseeW_L);
-                    sheet.MergeCols(ColumnLicenseeWlSportsBook + i, ColumnLicenseeWlTotal, RowHeaderTemplate);
-                }
+                sheet.GetCell(RowHeaderTemplate, ColumnLicenseeWlSportsBook + i)
+                .SetCellValue(ViewResources.LicenseeW_L);
+                sheet.MergeCols(ColumnLicenseeWlSportsBook + i, ColumnLicenseeWlTotal, RowHeaderTemplate);
             }
 
             for (int i = showColumns; i < OfferedProducts.Count(); i++)
@@ -331,7 +309,7 @@
                 sheet.HideColumn(ColumnLicenseeWlSportsBook + i);
             }
 
-            int countStatus = _showProductOptions.Count(x => !IgnoredLicenseeWLProducts.Contains(x));
+            int countStatus = _showProductOptions.Count();
             if (countStatus <= 1)
             {
                 if (countStatus == 1)

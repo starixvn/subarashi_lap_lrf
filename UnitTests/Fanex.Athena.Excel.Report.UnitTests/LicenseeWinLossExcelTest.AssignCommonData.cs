@@ -23,7 +23,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             {
                 TurnOver = new Dictionary<string, decimal>
                 {
-                    { Product.SB, 1 }, { Product.BA, 3 }
+                    { Product.SB, 1 }
                 },
                 LicenseeWL = new Dictionary<string, decimal>
                 {
@@ -32,7 +32,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             };
 
             var row = ExcelTestHelper.MockGetRow(FakeSheet, ColumnTemplateCount, 0);
-            var excelModel = CreateExcelModel(productCodes: new[] { Product.SB, Product.BT, Product.BA });
+            var excelModel = CreateExcelModel(productCodes: new[] { Product.SB, Product.BT });
             var excel = CreateExcel(excelModel);
 
             // Action
@@ -43,8 +43,6 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             {
                 row.Cells[ColumnTurnoverSportBook].Received(1).SetCellValue(item.TurnOver[Product.SB]);
                 row.Cells[ColumnTurnoverSportBook + 1].DidNotReceiveWithAnyArgs().SetCellValue(0);
-                row.Cells[ColumnTurnoverSportBook + 2].Received(1).SetCellValue(item.TurnOver[Product.BA]);
-
                 row.Cells[ColumnLicenseeWlSportsBook].Received(1).SetCellValue(item.LicenseeWL[Product.SB]);
                 row.Cells[ColumnLicenseeWlSportsBook + 1].Received(1).SetCellValue(item.LicenseeWL[Product.BT]);
                 row.Cells[ColumnLicenseeWlSportsBook + 2].DidNotReceiveWithAnyArgs().SetCellValue(0);
@@ -85,9 +83,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
                 row.Cells[ColumnLicenseeWlTotal].Received(1).SetCellValue(dataItem.LicenseeWL.Sum(a => a.Value));
                 row.Cells[ColumnCashOutCommission].Received(1).SetCellValue(dataItem.CashOutCommission);
                 row.Cells[ColumnBetTradeCommission].Received(1).SetCellValue(dataItem.BetTradeCommission);
-                row.Cells[ColumnBaCommission].Received(1).SetCellValue(dataItem.BACommission);
                 row.Cells[ColumnAmtDueToBetTrade].Received(1).SetCellValue(dataItem.AmtDueToBetTrade);
-                row.Cells[ColumnAmtDueToBa].Received(1).SetCellValue(dataItem.AmtDueToBA);
             });
         }
     }

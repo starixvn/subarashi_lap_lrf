@@ -360,12 +360,6 @@
   <data name="BankInformation" xml:space="preserve">
     <value>Informasi Bank</value>
   </data>
-  <data name="BAPlayerNoUpdateVIP" xml:space="preserve">
-    <value>Pemain BA, tanpa perbaruan: {0} ({1})</value>
-  </data>
-  <data name="BAPlayerNoUpdateVIPSingle" xml:space="preserve">
-    <value>Pemain BA, tidak ada pembaruan</value>
-  </data>
   <data name="BaseCurrency" xml:space="preserve">
     <value>Mata Uang Dasar</value>
   </data>

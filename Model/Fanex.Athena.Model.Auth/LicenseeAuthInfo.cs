@@ -12,8 +12,6 @@ namespace Fanex.Athena.Model.Auth
 
         public bool IsAllowedCustomerComm { get; set; }
 
-        public bool IsEnableBA { get; set; }
-
         public bool IsEnableSingleWallet { get; set; }
 
         public IEnumerable<string> OfferedSubProductList { get; set; }

@@ -2806,14 +2806,6 @@
   <data name="Platform_2" xml:space="preserve">
     <value>Mobile</value>
   </data>
-  <data name="BAPlayerNoUpdateVIP" xml:space="preserve">
-    <value>BA player, no update: {0} ({1})</value>
-    <comment>#146508</comment>
-  </data>
-  <data name="BAPlayerNoUpdateVIPSingle" xml:space="preserve">
-    <value>BA player, no update</value>
-    <comment>#146508</comment>
-  </data>
   <data name="NotAllowedBAPlayerTurnonVip" xml:space="preserve">
     <value>For BA player, don't allow turning on VIP</value>
     <comment>#146508</comment>

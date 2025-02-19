@@ -236,7 +236,6 @@
             var productsDoesNotRequireUseName = new[]
             {
                 Product.SB,
-                Product.BA,
                 Product.NG,
                 Product.VS,
                 Product.CO

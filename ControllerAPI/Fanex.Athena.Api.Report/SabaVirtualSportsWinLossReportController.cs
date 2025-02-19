@@ -129,9 +129,7 @@
             var sabaVirtualSportsWinLossGrid = new SabaVirtualSportsWinLossGridViewModel
             {
                 Index = item.Index,
-                AmtDueToBA = item.AmtDueToBA,
                 CashOutCommission = item.CashOutCommission,
-                BACommission = item.BACommission,
                 CurrencyId = item.CurrencyId,
                 SystemId = item.SystemId,
                 CurrencyName = item.CurrencyName,
@@ -151,14 +149,12 @@
         private static void SetLicenseeWinLossProductData(SabaVirtualSportsWinLossGridViewModel licenseeWinLoss, IDictionary<string, decimal> licenseeWLProducts)
         {
             licenseeWinLoss.LicenseeWLSB = licenseeWLProducts.GetValueOrDefault(Product.SB, 0);
-            licenseeWinLoss.LicenseeWLBA = licenseeWLProducts.GetValueOrDefault(Product.BA, 0);
             licenseeWinLoss.LicenseeWLCO = licenseeWLProducts.GetValueOrDefault(Product.CO, 0);
         }
 
         private static void SetTurnOverProductData(SabaVirtualSportsWinLossGridViewModel licenseeWinLoss, IDictionary<string, decimal> turnOverProducts)
         {
             licenseeWinLoss.TurnOverSB = turnOverProducts.GetValueOrDefault(Product.SB, 0);
-            licenseeWinLoss.TurnOverBA = turnOverProducts.GetValueOrDefault(Product.BA, 0);
         }
 
         private static bool IsProductVisible(IEnumerable<ProductOption> productOptions, ProductAccess productAccess, string productCode)
@@ -204,7 +200,6 @@
                 TotalData = data.TotalDataList,
                 SBVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.SB),
                 COVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.CO),
-                BAVisible = IsProductVisible(metaModel.ProductOptions, productAccess, Product.BA),
                 CustomerCommVisible = licenseeSession.IsAllowedCustomerComm
             };
 

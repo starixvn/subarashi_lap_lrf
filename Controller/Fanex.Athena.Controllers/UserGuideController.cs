@@ -84,7 +84,6 @@
         private static string AddSpecialProducts(string content, IEnumerable<Product> products)
         {
             var customcontent = AddCasinoProducts(content, products);
-            customcontent = RemoveProductSection(customcontent, products, ProductTypes.BA, Product.BA);
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.CashOut, Product.CO);
             return customcontent;
         }

@@ -8883,7 +8883,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js-exposed"), __webpack_require__(/*! common/querystring */ "./www/js/source/common/querystring.js"), __webpack_require__(/*! common/site */ "./www/js/source/common/site.js"), __webpack_require__(/*! lib/jqgrid/jquery.jqgrid.additional */ "./www/js/source/lib/jqgrid/jquery.jqgrid.additional.js"), __webpack_require__(/*! lib/linq */ "./www/js/source/lib/linq.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($, QueryString, Site, jqGridAdditional) {
         'use strict';
-        const IGNORED_LICENSEEWL_PRODUCTS = ['BA'];
         const IGNORED_TURNOVER_PRODUCTS = ['BT', 'CO'];
         const _me =
         {
@@ -9112,30 +9111,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
 
-        const baCommissionColumn =
-        {
-            name: 'BACommission',
-            index: 'BACommission',
-            width: 85,
-            align: 'right',
-            sortable: true,
-            resizable: false,
-            formatter: 'currency',
-            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-        };
-
-        const amtDueToBaColumn =
-        {
-            name: 'AmtDueToBA',
-            index: 'AmtDueToBA',
-            width: 85,
-            align: 'right',
-            sortable: true,
-            resizable: false,
-            formatter: 'currency',
-            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-        };
-
         const currencyIdColumn =
         {
             name: 'CurrencyId',
@@ -9184,15 +9159,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             'WinLoss', 'Comm',
             'Total', 'LicenseeW_L',
             'CashOutCommission',
-            'BA<br/>@[Commission]',
-            '@[AmtDueToBA]',
             'CurrencyId',
             'CustomerId'];
 
         const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn,
             turnoverColumn, totalTransColumn, customerWlColumn, playerCommColumn,
-            customerWlTotalColumn, licenseeWlColumn, cashOutCommissionColumn, baCommissionColumn,
-            amtDueToBaColumn, currencyIdColumn, customerIdColumn];
+            customerWlTotalColumn, licenseeWlColumn, cashOutCommissionColumn, currencyIdColumn, customerIdColumn];
 
         function isProductChecked(productOptions, productCode) {
             const length = productOptions.length;
@@ -9210,16 +9182,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             return $.inArray(productCode, IGNORED_TURNOVER_PRODUCTS) >= 0;
         }
 
-        function isIgnoredLicenseeWLProduct(productCode) {
-            return $.inArray(productCode, IGNORED_LICENSEEWL_PRODUCTS) >= 0;
-        }
-
         function turnoverProductsFilter(item) {
             return item.Status === true && isIgnoredTurnoverProduct(item.Code) === false;
         }
 
         function licenseeWLProductsFilter(item) {
-            return item.Status === true && isIgnoredLicenseeWLProduct(item.Code) === false;
+            return item.Status === true;
         }
 
         _me.setGroupHeaderColumns = function (grid, productOptions) {
@@ -9270,10 +9238,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                         licenseeIndex++;
                         customerWLTotalIndex++;
                     }
-                    if (isIgnoredLicenseeWLProduct(item.Code) === false) {
-                        temp.insertAfter(item.Name, customerWLTotalIndex);
-                        licenseeIndex++;
-                    }
+                    temp.insertAfter(item.Name, customerWLTotalIndex);
+                    licenseeIndex++;
                 }
             });
             //add total column
@@ -9300,10 +9266,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             systemIdColumn.hidden = levelNumber === 0;
 
             // Column hidden by product
-            const allowedBa = isProductChecked(productOptions, 'BA');
             const allowedCashOut = isProductChecked(productOptions, 'CO');
-            baCommissionColumn.hidden = !allowedBa;
-            amtDueToBaColumn.hidden = !allowedBa;
             cashOutCommissionColumn.hidden = !allowedCashOut;
 
             if (levelNumber === 2) {
@@ -9323,7 +9286,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                 //insert turn over column
                 if (item.Status === true) {
                     let productCol = Object.assign({}, productColumn);;
-                    if (item.Code === 'BA' || item.Code === 'CO') {
+                    if (item.Code === 'CO') {
                         productCol.width = 80;
                     }
 
@@ -9340,15 +9303,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                         customerWLTotalIndex++;
                     }
 
-                    if (isIgnoredLicenseeWLProduct(item.Code) === false) {
-                        const licenseeWL = Site.clone(productCol);
-                        licenseeWL.name = 'LicenseeWL' + item.Code;
-                        licenseeWL.index = 'LicenseeWL' + item.Code;
-                        licenseeWL.sortable = true;
+                    const licenseeWL = Site.clone(productCol);
+                    licenseeWL.name = 'LicenseeWL' + item.Code;
+                    licenseeWL.index = 'LicenseeWL' + item.Code;
+                    licenseeWL.sortable = true;
 
-                        temp.insertAfter(licenseeWL, customerWLTotalIndex);
-                        licenseeIndex++;
-                    }
+                    temp.insertAfter(licenseeWL, customerWLTotalIndex);
+                    licenseeIndex++;
                 }
             });
 

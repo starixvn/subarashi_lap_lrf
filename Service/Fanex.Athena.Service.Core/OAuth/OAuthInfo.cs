@@ -47,8 +47,6 @@ namespace Fanex.Athena.Service.Core.OAuth
 
         public bool IsAllowedCustomerComm => GetClaimValue<bool>("IsAllowedCustomerComm");
 
-        public bool IsEnableBA => GetClaimValue<bool>("IsEnableBA");
-
         public bool IsEnableSingleWallet => GetClaimValue<bool>("IsEnableSingleWallet");
 
         public byte UserLevel => GetClaimValue<byte>("UserLevel");

@@ -180,7 +180,7 @@
             Reader.Read().Returns(true, false);
             var data = new LicenseeWinLossByTimeZone
             {
-                GroupBy = Product.BA,
+                GroupBy = Product.SB,
             };
             MapReaderData(data);
 

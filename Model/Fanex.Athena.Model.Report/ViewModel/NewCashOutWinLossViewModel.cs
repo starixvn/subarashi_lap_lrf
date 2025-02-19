@@ -27,7 +27,5 @@ namespace Fanex.Athena.Model.Report.ViewModel
         public SubsidiaryViewType ViewType { get; set; }
 
         public IEnumerable<CheckedItem> SubsidiaryList { get; set; }
-
-        public bool IsLicenseeOfferBA { get; set; }
     }
 }

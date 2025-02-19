@@ -2533,14 +2533,6 @@
   <data name="Platform_2" xml:space="preserve">
     <value>手机版</value>
   </data>
-  <data name="BAPlayerNoUpdateVIP" xml:space="preserve">
-    <value>BA玩家，無任何更新: {0} ({1})</value>
-    <comment>#146508</comment>
-  </data>
-  <data name="BAPlayerNoUpdateVIPSingle" xml:space="preserve">
-    <value>BA玩家，無任何更新</value>
-    <comment>#146508</comment>
-  </data>
   <data name="NotAllowedBAPlayerTurnonVip" xml:space="preserve">
     <value>无法将BA玩家设为VIP</value>
     <comment>#146508</comment>

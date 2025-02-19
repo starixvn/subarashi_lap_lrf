@@ -260,7 +260,6 @@
         private bool AssertNewLicenseeSession(LicenseeAuthInfo newLicensee, IOAuthInfo oauthInfo)
         => newLicensee.LicenseeId == oauthInfo.LicenseeId
                 && newLicensee.IsAllowedCustomerComm == oauthInfo.IsAllowedCustomerComm
-                && newLicensee.IsEnableBA == oauthInfo.IsEnableBA
                 && newLicensee.IsEnableSingleWallet == oauthInfo.IsEnableSingleWallet
                 && newLicensee.LicenseeName == oauthInfo.SiteName
                 && newLicensee.OfferedSubProductList == oauthInfo.OfferedSubProductList;
@@ -280,7 +279,6 @@
             oauthInfo.CurrencyList.Returns(new Dictionary<int, string> { { FakeHelper.Create<int>(), FakeHelper.Create<string>() } });
             oauthInfo.LicenseeId.Returns(FakeHelper.Create<int>());
             oauthInfo.IsAllowedCustomerComm.Returns(FakeHelper.Create<bool>());
-            oauthInfo.IsEnableBA.Returns(FakeHelper.Create<bool>());
             oauthInfo.IsEnableSingleWallet.Returns(FakeHelper.Create<bool>());
             oauthInfo.SiteName.Returns(FakeHelper.Create<string>());
             oauthInfo.OfferedSubProductList.Returns(FakeHelper.CreateMany<string>());

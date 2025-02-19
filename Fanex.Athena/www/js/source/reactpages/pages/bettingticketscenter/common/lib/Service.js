@@ -80,8 +80,8 @@ export default class Service {
         return new XMLSerializer().serializeToString(xmlDoc);
     }
 
-    static isContainProductSportBookOrBa = (selectedItemsKey) => {
+    static isContainProductSportBook = (selectedItemsKey) => {
         var listSelectedProduct = selectedItemsKey.split(",");
-        return listSelectedProduct.indexOf(ProductCode.SportsBook) >= 0 || listSelectedProduct.indexOf(ProductCode.BA) >= 0
+        return listSelectedProduct.indexOf(ProductCode.SportsBook) >= 0;
     }
 }

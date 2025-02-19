@@ -24,10 +24,6 @@
 
         public decimal CashOutCommission { get; set; }
 
-        public decimal BACommission { get; set; }
-
-        public decimal AmtDueToBA { get; set; }
-
         #region ICustomerWinLoss Members
 
         public decimal CustomerWinLoss { get; set; }
@@ -48,15 +44,13 @@
 
         public decimal LicenseeWLSB { get; set; }
 
-        public decimal LicenseeWLBA { get; set; }
-
         public decimal LicenseeWLCO { get; set; }
 
         public virtual decimal TotalLicenseeWL
         {
             get
             {
-                return LicenseeWLSB + LicenseeWLBA + LicenseeWLCO;
+                return LicenseeWLSB + LicenseeWLCO;
             }
         }
 
@@ -71,13 +65,11 @@
 
         public decimal TurnOverSB { get; set; }
 
-        public decimal TurnOverBA { get; set; }
-
         public virtual decimal TotalTurnOver
         {
             get
             {
-                return TurnOverSB + TurnOverBA;
+                return TurnOverSB;
             }
         }
 

@@ -826,24 +826,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BA player, no update: {0} ({1}).
-        /// </summary>
-        public static string BAPlayerNoUpdateVIP {
-            get {
-                return ResourceManager.GetString("BAPlayerNoUpdateVIP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to BA player, no update.
-        /// </summary>
-        public static string BAPlayerNoUpdateVIPSingle {
-            get {
-                return ResourceManager.GetString("BAPlayerNoUpdateVIPSingle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Base Currency.
         /// </summary>
         public static string BaseCurrency {

@@ -5838,9 +5838,9 @@ _defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
   });
   return new XMLSerializer().serializeToString(xmlDoc);
 });
-_defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
+_defineProperty(Service, "isContainProductSportBook", selectedItemsKey => {
   var listSelectedProduct = selectedItemsKey.split(",");
-  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].BA) >= 0;
+  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0;
 });
 
 /***/ }),

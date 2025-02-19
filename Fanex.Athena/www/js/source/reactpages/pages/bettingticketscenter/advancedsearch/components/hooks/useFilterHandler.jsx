@@ -13,21 +13,21 @@ export const useFilterHandler = () =>{
     const isEnableLeagueMatch = useIsEnableLeagueMatch();
     const {defaultSelectedSubsidiary} = useSubsidiarySearch();
 
-    const {setUsername, setSubsidiaryList, setSelectedStatus, setSelectedProduct, getSportList, 
+    const {setUsername, setSubsidiaryList, setSelectedStatus, setSelectedProduct, getSportList,
         getBettypeList, setSelectedSport, getLeagueList, setSelectedBettype, setSelectedLeague, getMatchList,
         setSelectedMatch, setSelectedLiveStatus, setSelectedCustomerClass, setSelectedOddsGroup, setSelectedPlatform,
-        setIp, setSelectedCurrency, setSelectedBaseCurrency, changeIsConvertAll, setSubsidiarySearch, setEnableCashOutFilter, 
-        setSelectedCashOutMode, setProductList} 
+        setIp, setSelectedCurrency, setSelectedBaseCurrency, changeIsConvertAll, setSubsidiarySearch, setEnableCashOutFilter,
+        setSelectedCashOutMode, setProductList}
         = ActionCreators;
 
     const onUserNameInputHandler = useCallback((value) => dispatch(setUsername(value)),[]);
 
     const onSubsidiaryDropDownChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSubsidiaryList(selectedItemsKey)),[]);
-   
+
     const onStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedStatus(selectedItemsKey)),[]);
-   
+
     const onLiveStatusChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedLiveStatus(selectedItemsKey)),[]);
-    
+
     const onProductChangeHandler = useCallback((currentItem, selectedItemsKey) => {
         dispatch(setSelectedProduct(selectedItemsKey));
         getSportAndBettypeListByProduct(selectedItemsKey);
@@ -40,13 +40,13 @@ export const useFilterHandler = () =>{
     }
 
     const updateCashOutMode = (selectedProduct) => {
-        const isEnableCashOutFilter = Service.isContainProductSportBookOrBa(selectedProduct);
+        const isEnableCashOutFilter = Service.isContainProductSportBook(selectedProduct);
         if (!isEnableCashOutFilter) {
             dispatch(setSelectedCashOutMode(0));
         }
         dispatch(setEnableCashOutFilter(isEnableCashOutFilter));
     }
-    
+
     const onSportChangeHandler = useCallback((currentItem, selectedItemsKey) => {
         dispatch(setSelectedSport(selectedItemsKey));
         if (isEnableLeagueMatch) {
@@ -65,31 +65,31 @@ export const useFilterHandler = () =>{
     },[dateRange, selectedSport])
 
     const onMatchChangeHandler = useCallback((item) => dispatch(setSelectedMatch(item.value)),[]);
-    
+
     const onCustomerClassChangeHandler = useCallback((currentItem, selectedItemsKey) => {
         let customerClass = selectedItemsKey;
 
         if(customerClass !== ALL_SELECTED_TEXT) {
             customerClass = AppData.riskLevels.filter( r => selectedItemsKey.includes(r.id)).map( r => r.customerClassList).join(',');
         }
-        
+
         dispatch(setSelectedCustomerClass(customerClass));
     },[])
 
     const onOddsGroupChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedOddsGroup(selectedItemsKey)),[]);
-    
+
     const onPlatformChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedPlatform(selectedItemsKey)),[]);
-    
+
     const onIpChangeHandler = useCallback((event) => dispatch(setIp(event.target.value)));
-    
+
     const onCurrencyChangeHandler = useCallback((currentItem, selectedItemsKey) => dispatch(setSelectedCurrency(selectedItemsKey)),[]);
-    
+
     const onBaseCurrencyChangeHandler = useCallback((item) => dispatch(setSelectedBaseCurrency(item.value)),[]);
-    
+
     const onConverAllChangeHandler = useCallback((checked) => dispatch(changeIsConvertAll(checked)),[]);
-    
-    const onSubsidiaryCheckBoxChangeHandler = useCallback(checked => { 
-        dispatch(setSubsidiarySearch(checked)); 
+
+    const onSubsidiaryCheckBoxChangeHandler = useCallback(checked => {
+        dispatch(setSubsidiarySearch(checked));
         checked && dispatch(setSubsidiaryList(defaultSelectedSubsidiary))
     },[])
 

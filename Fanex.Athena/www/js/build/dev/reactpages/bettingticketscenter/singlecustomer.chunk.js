@@ -5022,9 +5022,9 @@ _defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
   });
   return new XMLSerializer().serializeToString(xmlDoc);
 });
-_defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
+_defineProperty(Service, "isContainProductSportBook", selectedItemsKey => {
   var listSelectedProduct = selectedItemsKey.split(",");
-  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].BA) >= 0;
+  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0;
 });
 
 /***/ }),
@@ -5737,8 +5737,8 @@ const CashOutModeFilter = () => {
   } = _actions_index_js__WEBPACK_IMPORTED_MODULE_2__["ActionCreators"];
   const onCashOutModeChangeHandler = item => {
     if (item.value === _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["CashOutMode"].ViewCOOnly) {
-      const selectedProduct = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productList.filter(product => product.id == _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ProductCode"].BA || product.id == _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ProductCode"].SportsBook).map(product => product.id).join(',');
-      const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productList.map(product => product.id == _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ProductCode"].SportsBook || product.id == _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ProductCode"].BA ? product : _objectSpread(_objectSpread({}, product), {}, {
+      const selectedProduct = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productList.filter(product => product.id == _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ProductCode"].SportsBook).map(product => product.id).join(',');
+      const productList = _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].productList.map(product => product.id == _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ProductCode"].SportsBook ? product : _objectSpread(_objectSpread({}, product), {}, {
         status: false
       }));
       dispatch(setSelectedProduct(selectedProduct));
@@ -6034,7 +6034,7 @@ const ProductFilter = () => {
     dispatch(getBetTypeList(selectedProduct));
   };
   const updateCashOutMode = selectedProduct => {
-    const isEnableCashOutFilter = _common_lib_Service__WEBPACK_IMPORTED_MODULE_5__["default"].isContainProductSportBookOrBa(selectedProduct);
+    const isEnableCashOutFilter = _common_lib_Service__WEBPACK_IMPORTED_MODULE_5__["default"].isContainProductSportBook(selectedProduct);
     if (!isEnableCashOutFilter) {
       dispatch(setSelectedCashOutMode(0));
     }
