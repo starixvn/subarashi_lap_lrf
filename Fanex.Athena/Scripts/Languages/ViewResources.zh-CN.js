@@ -1,4 +1,4 @@
-﻿// Generated at: 1/7/2025 2:48:46 PM
+﻿// Generated at: 2/17/2025 2:52:10 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -461,7 +461,6 @@ lbl7Over:"7或以上",
 League:"联赛",
 LeagueGroup:"联赛分类",
 LeagueName:"联赛名称",
-LeagueWinLoss:"联赛输赢",
 Level:"等级",
 Liability:"负债",
 Licensee:"承租公司",

@@ -1,4 +1,4 @@
-﻿// Generated at: 1/7/2025 2:48:45 PM
+﻿// Generated at: 2/17/2025 2:52:10 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -500,7 +500,6 @@ lbl3WayHandicap:"3-Way Handicap",
 lbl7Over:"7Over",
 League:"League",
 LeagueName:"League name",
-LeagueWinLoss:"Win Loss By League",
 Level:"Level",
 Liability:"Liability",
 Licensee:"Licensee",
@@ -763,6 +762,7 @@ ProductAB:"AllBet",
 ProductAGC:"AG Casino",
 ProductAP:"AdvantPlay",
 ProductAPM:"AdvantPlay Mini",
+ProductASK:"ASKMESLOT",
 ProductBA:"BA",
 ProductBGG:"BG",
 ProductBT:"Bet Trade",

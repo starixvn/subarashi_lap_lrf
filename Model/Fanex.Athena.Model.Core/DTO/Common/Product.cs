@@ -135,6 +135,8 @@
 
         public const string PS = "PS";
 
+        public const string ASK = "ASK";
+
         #endregion Field
 
         #region Property
