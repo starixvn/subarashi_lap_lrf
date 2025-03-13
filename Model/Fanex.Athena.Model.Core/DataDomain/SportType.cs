@@ -128,6 +128,8 @@
 
         BetbyBasketball = 134,
 
+        VirtuallySports = 147,
+
         Keno = 202,
 
         AllBet = 211,
