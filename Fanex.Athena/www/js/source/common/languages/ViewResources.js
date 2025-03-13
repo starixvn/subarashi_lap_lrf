@@ -1,4 +1,4 @@
-﻿// Generated at: 2/17/2025 2:52:10 PM
+﻿// Generated at: 3/13/2025 2:33:16 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -773,6 +773,7 @@ ProductCG:"CG",
 ProductCO:"Cash Out",
 ProductCS:"Saba Casino",
 ProductFAC:"FA CHAI",
+ProductFG:"Funky Games",
 ProductFGGL:"FGG",
 ProductFS:"FastSpin",
 ProductGPILC:"GPI Live Casino",

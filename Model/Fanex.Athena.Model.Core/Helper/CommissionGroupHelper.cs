@@ -1,34 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using Fanex.Athena.Model.Core.DTO.Common;
-
-namespace Fanex.Athena.Model.Core.Helper
+﻿namespace Fanex.Athena.Model.Core.Helper
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using DTO.Common;
+
     public static class CommissionGroupHelper
     {
         private const string ParlayName = "Parlay";
 
-        private static readonly string[] ProductSettingOrder = new string[] { Product.SB, ParlayName, Product.NG, Product.CS, Product.VB, Product.PP, Product.SXG,
-            Product.SG, Product.KN, Product.LT, Product.TG, Product.VS, Product.VRG, Product.CC, Product.SBC, Product.SAG, Product.PGS, Product.AB, Product.WM,
-            Product.BGG, Product.JK, Product.HB, Product.VGA, Product.CG, Product.AP, Product.APM, Product.FGGL, Product.MXG, Product.JIG, Product.YB, Product.MGRNG,
-            Product.WE, Product.SEA, Product.L22, Product.UUSL, Product.FS, Product.FAC, Product.NS, Product.ON, Product.GPIRNG, Product.PTRNG, Product.GPILC, Product.PS,
-            Product.ASK };
-
-        public static int ProductListComparer(string productCode)
+        private static readonly string[] ProductSettingOrder =
         {
-            var index = Array.IndexOf(ProductSettingOrder, productCode);
-
-            return index >= 0 ? index : int.MaxValue;
-        }
+            Product.SB,
+            ParlayName,
+            Product.NG,
+            Product.CS,
+            Product.VB,
+            Product.PP,
+            Product.SXG,
+            Product.SG,
+            Product.KN,
+            Product.LT,
+            Product.TG,
+            Product.VS,
+            Product.VRG,
+            Product.CC,
+            Product.SBC,
+            Product.SAG,
+            Product.PGS,
+            Product.AB,
+            Product.WM,
+            Product.BGG,
+            Product.JK,
+            Product.HB,
+            Product.VGA,
+            Product.CG,
+            Product.AP,
+            Product.APM,
+            Product.FGGL,
+            Product.MXG,
+            Product.JIG,
+            Product.YB,
+            Product.MGRNG,
+            Product.WE,
+            Product.SEA,
+            Product.L22,
+            Product.UUSL,
+            Product.FS,
+            Product.FAC,
+            Product.NS,
+            Product.ON,
+            Product.GPIRNG,
+            Product.PTRNG,
+            Product.GPILC,
+            Product.PS,
+            Product.ASK,
+            Product.FG
+        };
 
         private static readonly Dictionary<string, string> FollowPermissions = new Dictionary<string, string>
         {
             [ParlayName] = Product.SB
         };
 
-        public static readonly string[] ExcludeProductsSPParam = new[] { "SB", "Parlay" };
+        public static readonly string[] ExcludeProductsSPParam = { "SB", "Parlay" };
 
         public static readonly IReadOnlyDictionary<string, string> ProductCodeMapper = new Dictionary<string, string>
         {
@@ -61,6 +97,13 @@ namespace Fanex.Athena.Model.Core.Helper
             [Product.YB] = "YeeBet",
             [Product.MGRNG] = "MgRNG"
         };
+
+        public static int ProductListComparer(string productCode)
+        {
+            var index = Array.IndexOf(ProductSettingOrder, productCode);
+
+            return index >= 0 ? index : int.MaxValue;
+        }
 
         public static IDictionary<string, string> MapHardcodedNameFromDB(IDictionary<string, bool> permissions, bool isUpdate)
         {
@@ -104,8 +147,8 @@ namespace Fanex.Athena.Model.Core.Helper
         {
             var columnsInTable = new Dictionary<string, bool>();
             var schema = reader.GetSchemaTable()
-               .Rows
-               .OfType<DataRow>();
+                .Rows
+                .OfType<DataRow>();
 
             foreach (var p in hardcodedColumns)
             {
