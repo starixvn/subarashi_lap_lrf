@@ -309,11 +309,11 @@ export class DataGrid extends Component {
             isExportExcel : true
         };
 
-        const url = "api/ExchangeWinLossBetList/Index";
+        const url = "api/ExchangeWinLossBetList/GetData";
 
         this.props.toggleLoader(true);
 
-        DataService.getFile(url, exportRequestParam).then((response) => {
+        DataService.getBetListFile(url, exportRequestParam).then((response) => {
             const NoContentStatusCode = 204;
             if (response.status === NoContentStatusCode) {
                 alert(LangHelper.getSingleResource("NoInfo"));
@@ -330,7 +330,7 @@ export class DataGrid extends Component {
 
     showBetListPopup = (externalId, systemId, custId) => {
         const { CurrencyId, BaseCurrency, FromDate, ToDate, CurrencyName, DateOptionType, IsViewResettledTicketOnly } = this.drillDownParams[ReportLevel.CUSTOMER];
-        const url = "api/ExchangeWinLossBetList/Index";
+        const url = DataService.buildProxyUrl(DataService.apiKeys.betlist, "api/ExchangeWinLossBetList/GetData");
         this.betlistParams = { CustId: custId, CurrencyId, BaseCurrency, FromDate, ToDate, DateOptionType, IsViewResettledTicketOnly, ExternalId : externalId, SystemId : systemId, CurrencyName  };
 
         const params = {

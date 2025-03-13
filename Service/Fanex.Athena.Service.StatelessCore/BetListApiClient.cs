@@ -25,6 +25,7 @@
         {
             headers.Add(IgnoreShardingHeader, HttpContext.Current?.GetIgnoreSharding());
             headers.Add("X-SiteDBServer", SiteDBServer ?? string.Empty);
+            headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
             return Task.CompletedTask;
         }
 
@@ -50,5 +51,7 @@
         }
 
         protected static string SiteDBServer => (HttpContext.Current?.Session["LicenseeSessionKey"] as LicenseeAuthInfo)?.SiteDBServer;
+
+        public static string AccessToken => (HttpContext.Current?.Session["UserSessionKey"] as UserAuthInfo)?.AccessToken;
     }
 }

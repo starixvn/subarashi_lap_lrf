@@ -8869,16 +8869,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductCode", function() { return ProductCode; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+
 
 
 const ApiUrl = {
   CUSTOMER_SEARCH_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("SearchCustomerAPI/SearchCustomer"),
-  RUNNING_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
-  REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
-  SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
-  ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData'),
-  ADVANCEDSEARCH_EXPORTSTATUS_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetExportStatus'),
-  BOOKEDBET_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByBookedBet')
+  RUNNING_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenter/GetByRunning')),
+  REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenter/GetByRefNo')),
+  SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenter/GetBySingleCustomer')),
+  ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenterAdvancedSearch/GetData')),
+  BOOKEDBET_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenter/GetByBookedBet')),
+  ADVANCEDSEARCH_EXPORTSTATUS_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenterAdvancedSearch/GetExportStatus'))
 };
 const HeaderText = {
   Index: "#",

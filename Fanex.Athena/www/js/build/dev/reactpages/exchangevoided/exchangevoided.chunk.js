@@ -2032,16 +2032,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductCode", function() { return ProductCode; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
+
 
 
 const ApiUrl = {
   CUSTOMER_SEARCH_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl("SearchCustomerAPI/SearchCustomer"),
-  RUNNING_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRunning'),
-  REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByRefNo'),
-  SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetBySingleCustomer'),
-  ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetData'),
-  ADVANCEDSEARCH_EXPORTSTATUS_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenterAdvancedSearch/GetExportStatus'),
-  BOOKEDBET_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl('api/BettingTicketCenter/GetByBookedBet')
+  RUNNING_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenter/GetByRunning')),
+  REFNO_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenter/GetByRefNo')),
+  SINGLECUSTOMER_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenter/GetBySingleCustomer')),
+  ADVANCEDSEARCH_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenterAdvancedSearch/GetData')),
+  BOOKEDBET_DATA_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenter/GetByBookedBet')),
+  ADVANCEDSEARCH_EXPORTSTATUS_URL: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_2__["default"].apiKeys.betlist, 'api/BettingTicketCenterAdvancedSearch/GetExportStatus'))
 };
 const HeaderText = {
   Index: "#",
@@ -2149,8 +2151,8 @@ const dispatchResult = (dispatch, data) => {
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(false));
 };
 const apiUrl = _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_2__["default"].resolveClientUrl('ExchangeVoided/Index');
-const runningUrl = 'api/ExchangeBetlist/GetRunningTickets';
-const runningExportExcelUrl = 'api/ExchangeBetlist/ExportRunningTickets';
+const runningUrl = 'api/ExchangeWinLossBetList/GetRunningTickets';
+const runningExportExcelUrl = 'api/ExchangeWinLossBetList/ExportRunningTickets';
 const getData = param => dispatch => {
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
   _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].postData(apiUrl, param).then(response => {
@@ -2177,7 +2179,7 @@ const getData = param => dispatch => {
 };
 const getRunningTicketData = param => dispatch => {
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
-  _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].postData(runningUrl, param).then(response => {
+  _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].postProxyData(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].apiKeys.betlist, runningUrl, param).then(response => {
     const {
       DataList,
       TotalRows,
@@ -2206,9 +2208,9 @@ const exportRunningTicketExcel = param => dispatch => {
   if (!param) {
     return;
   }
-  const proxyUrl = _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].apiKeys.report, runningExportExcelUrl);
+  const proxyUrl = _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].apiKeys.betlist, runningExportExcelUrl);
   dispatch(Object(_jsroot_actions_loaderAction__WEBPACK_IMPORTED_MODULE_0__["toggleLoader"])(true));
-  _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].getFile(runningExportExcelUrl, param).then(response => {
+  _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_3__["default"].getFile(proxyUrl, param).then(response => {
     const fileName = "ExchangeRunningTicket.xls";
     const blob = new Blob([response.data], {
       type: response.headers["content-type"]
@@ -2952,11 +2954,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jsroot_lib_report__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @jsroot/lib/report */ "./www/js/source/reactpages/lib/report.js");
 /* harmony import */ var _jsroot_components_popup__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @jsroot/components/popup */ "./www/js/source/reactpages/components/popup/index.jsx");
 /* harmony import */ var _BetListDetail__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./BetListDetail */ "./www/js/source/reactpages/pages/exchangevoided/components/BetListDetail.jsx");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -3056,7 +3060,7 @@ const RunningDataGrid = props => {
     return dataRows;
   };
   const showTicketDetail = (betId, type, custId, currencyId) => {
-    const url = "api/ExchangeWinLossBetList/Detail";
+    const url = _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_13__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_13__["default"].apiKeys.betlist, "api/ExchangeWinLossBetList/Detail");
     const paramBaseCurrency = isConvertAllToBaseCurrency ? baseCurrency : "";
     const params = {
       data: {

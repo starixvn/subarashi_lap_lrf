@@ -4318,9 +4318,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_loaderAction__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../actions/loaderAction */ "./www/js/source/reactpages/actions/loaderAction.js");
 /* harmony import */ var _lib_langHelper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
 /* harmony import */ var _lib_numberFormat__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../lib/numberFormat */ "./www/js/source/reactpages/lib/numberFormat.js");
+/* harmony import */ var _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @jsroot/lib/DataService */ "./www/js/source/reactpages/lib/DataService.js");
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
 
 
 
@@ -4345,7 +4347,7 @@ class BetList extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         BaseCurrency,
         ExcludeTestData
       } = this.props.params;
-      const url = "api/ExchangeWinLossBetList/Detail";
+      const url = _jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_14__["default"].buildProxyUrl(_jsroot_lib_DataService__WEBPACK_IMPORTED_MODULE_14__["default"].apiKeys.betlist, "api/ExchangeWinLossBetList/Detail");
       const params = {
         data: {
           CustId,
@@ -4731,7 +4733,7 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         DateOptionType,
         IsViewResettledTicketOnly
       } = this.drillDownParams[_constants_report__WEBPACK_IMPORTED_MODULE_8__["ReportLevel"].CUSTOMER];
-      const url = "api/ExchangeWinLossBetList/Index";
+      const url = _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_18__["default"].buildProxyUrl(_jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_18__["default"].apiKeys.betlist, "api/ExchangeWinLossBetList/GetData");
       this.betlistParams = {
         CustId: custId,
         CurrencyId,
@@ -5074,9 +5076,9 @@ class DataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const exportRequestParam = _objectSpread(_objectSpread({}, param), {}, {
       isExportExcel: true
     });
-    const url = "api/ExchangeWinLossBetList/Index";
+    const url = "api/ExchangeWinLossBetList/GetData";
     this.props.toggleLoader(true);
-    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_18__["default"].getFile(url, exportRequestParam).then(response => {
+    _jsroot_lib_DataService_js__WEBPACK_IMPORTED_MODULE_18__["default"].getBetListFile(url, exportRequestParam).then(response => {
       const NoContentStatusCode = 204;
       if (response.status === NoContentStatusCode) {
         alert(_lib_langHelper_js__WEBPACK_IMPORTED_MODULE_17__["default"].getSingleResource("NoInfo"));

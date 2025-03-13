@@ -15,5 +15,8 @@
 
         public static string GetIgnoreSharding(this HttpContext context)
             => context.Request.Headers[IgnoreShardingHeader] ?? string.Empty;
+
+        public static string GetAccessToken(this HttpContext context)
+            => context.Session["AccessToken"] as string ?? string.Empty;
     }
 }

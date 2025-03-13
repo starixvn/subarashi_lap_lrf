@@ -40,7 +40,7 @@ define(
                 // Site.blockUI();
                 BetList.initialize();
                 const params = Site.setLicenseeOptionParam({});
-                const url = Site.resolveClientUrl('api/CorrectScoreBetList/Index');
+                const url = Site.buildBetListProxyUrl('api/CorrectScoreBetList/GetData');
                 BetList.loadData(params, url);
             }
         };

@@ -141,7 +141,7 @@ define(
             }
 
             $.ajax({
-                url: Site.resolveClientUrl('api/LastBetMonitoringBetList/Index'),
+                url: Site.buildBetListProxyUrl('api/LastBetMonitoringBetList/GetData'),
                 type: 'POST',
                 data: JSON.stringify(_postedParam),
                 contentType: 'application/json; charset=utf-8',

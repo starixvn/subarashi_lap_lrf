@@ -3725,6 +3725,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DefaultPagingOption", function() { return DefaultPagingOption; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Url", function() { return Url; });
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
+/* harmony import */ var _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/site */ "./www/js/source/reactpages/lib/site.js");
+
 
 const HeaderText = {
   Index: "#",
@@ -3749,7 +3751,7 @@ const DefaultPagingOption = {
   TotalItem: null
 };
 const Url = {
-  AbnormalBetList: 'Api/PlayerSegmentation/AbnormalBets'
+  AbnormalBetList: _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].resolveClientUrl(DataService.buildProxyUrl(DataService.apiKeys.betlist, 'Api/PlayerSegmentation/AbnormalBets'))
 };
 
 /***/ }),
