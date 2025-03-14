@@ -16,20 +16,19 @@ module.exports = merge(baseConfigs,
     {
         mode: 'development',
         devtool: 'source-map',
-        watch: true,
+        watch: false,
         plugins: [
             new CleanWebpackPlugin([`${jsRootPath}`], {
                 root: process.cwd(),
                 exclude: excludeOption
             }),
-           
 
-            new CleanWebpackPlugin([`${cssRootPath}/*.css`,`${cssRootPath}/*.map`,`${cssRootPath}/*.js`], {
+            new CleanWebpackPlugin([`${cssRootPath}/*.css`, `${cssRootPath}/*.map`, `${cssRootPath}/*.js`], {
                 root: process.cwd(),
                 exclude: excludeOption
             }),
 
-            new CleanWebpackPlugin([`${cssRootPath}/pages/*/*.css`,`${cssRootPath}/pages/*/*.js`,`${cssRootPath}/pages/*/*.map`], {
+            new CleanWebpackPlugin([`${cssRootPath}/pages/*/*.css`, `${cssRootPath}/pages/*/*.js`, `${cssRootPath}/pages/*/*.map`], {
                 root: process.cwd(),
                 exclude: excludeOption
             })
