@@ -215,6 +215,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             ExcelModel.CustomerCommVisible = true;
             ExcelModel.SystemIdVisible = true;
             ExcelModel.HasAmountDueToColumn = true;
+            ExcelModel.BAVisible = true;
             var excel = CreateExcel(2);
 
             // Action

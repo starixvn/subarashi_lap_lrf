@@ -159,7 +159,8 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             // Arrange
             var excel = CreateExcel(new ShowingOption
             {
-                CustomerCommVisible = true
+                CustomerCommVisible = true,
+                BAVisible = true
             });
 
             // Action

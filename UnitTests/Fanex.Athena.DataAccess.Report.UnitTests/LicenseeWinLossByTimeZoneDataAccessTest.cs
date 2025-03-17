@@ -192,7 +192,7 @@
             var firstItem = result.DataList.ElementAt(0);
 
             // Assert
-            Assert.That(firstItem.GroupBy, Is.EqualTo(ViewResources.ProductBA));
+            Assert.That(firstItem.GroupBy, Is.EqualTo(ViewResources.ProductSB));
         }
 
         private static void AssertData(LicenseeWinLossByTimeZone actual, LicenseeWinLossByTimeZone expected)
