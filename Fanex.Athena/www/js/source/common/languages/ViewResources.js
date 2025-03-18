@@ -1,4 +1,4 @@
-﻿// Generated at: 3/13/2025 2:33:16 PM
+﻿// Generated at: 3/18/2025 4:34:54 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -85,8 +85,6 @@ Balance:"Balance",
 BalanceChange:"Balance Change",
 BankAccountNumber:"Bank Account Number",
 BankInformation:"Bank Information",
-BAPlayerNoUpdateVIP:"BA player, no update: {0} ({1})",
-BAPlayerNoUpdateVIPSingle:"BA player, no update",
 BaseCurrency:"Base Currency",
 Based:"Based",
 Basketball:"Basketball",

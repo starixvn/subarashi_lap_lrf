@@ -1,4 +1,4 @@
-﻿// Generated at: 3/13/2025 2:33:16 PM
+﻿// Generated at: 3/18/2025 4:34:54 PM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -82,8 +82,6 @@ Balance:"Saldo",
 BalanceChange:"Perubahan Saldo",
 BankAccountNumber:"Nomor Rekening Bank",
 BankInformation:"Informasi Bank",
-BAPlayerNoUpdateVIP:"Pemain BA, tanpa perbaruan: {0} ({1})",
-BAPlayerNoUpdateVIPSingle:"Pemain BA, tidak ada pembaruan",
 BaseCurrency:"Mata Uang Dasar",
 Based:"Berdasarkan",
 Basketball:"Bola basket",

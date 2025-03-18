@@ -1,4 +1,4 @@
-﻿// Generated at: 3/13/2025 2:33:16 PM
+﻿// Generated at: 3/18/2025 4:34:54 PM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -84,8 +84,6 @@ Balance:"Số dư",
 BalanceChange:"Thay đổi số dư",
 BankAccountNumber:"Số tài khoản Ngân hàng",
 BankInformation:"Thông tin ngân hàng",
-BAPlayerNoUpdateVIP:"Người chơi BA, không có cập nhật: {0} ({1})",
-BAPlayerNoUpdateVIPSingle:"Người chơi BA, không cập nhật",
 BaseCurrency:"Tiền tệ cơ sở",
 Based:"Dựa trên",
 Basketball:"Bóng rổ",
