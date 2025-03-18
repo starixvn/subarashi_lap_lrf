@@ -1,4 +1,4 @@
-﻿// Generated at: 2/17/2025 2:52:10 PM
+﻿// Generated at: 3/18/2025 5:16:31 PM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -77,8 +77,6 @@ Balance:"余额",
 BalanceChange:"余额变动",
 BankAccountNumber:"银行账号",
 BankInformation:"银行资讯",
-BAPlayerNoUpdateVIP:"BA玩家，無任何更新: {0} ({1})",
-BAPlayerNoUpdateVIPSingle:"BA玩家，無任何更新",
 BaseCurrency:"基础货币",
 Based:"基于",
 Basketball:"篮球",

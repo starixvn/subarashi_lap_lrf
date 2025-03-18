@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 2/17/2025 2:52:10 PM
+﻿// Generated at: 3/18/2025 5:16:31 PM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -177,8 +177,6 @@ Balance:"Saldo",
 BalanceChange:"Perubahan Saldo",
 BankAccountNumber:"Nomor Rekening Bank",
 BankInformation:"Informasi Bank",
-BAPlayerNoUpdateVIP:"Pemain BA, tanpa perbaruan: {0} ({1})",
-BAPlayerNoUpdateVIPSingle:"Pemain BA, tidak ada pembaruan",
 BaseCurrency:"Mata Uang Dasar",
 Based:"Berdasarkan",
 Basketball:"Bola basket",

@@ -1,4 +1,4 @@
-﻿// Generated at: 2/17/2025 2:52:10 PM
+﻿// Generated at: 3/18/2025 5:16:31 PM
 var _language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -85,8 +85,6 @@ Balance:"ยอดคงเหลือ",
 BalanceChange:"เปลี่ยนยอดคงเหลือ",
 BankAccountNumber:"หมายเลขบัญชีธนาคาร",
 BankInformation:"ข้อมูลธนาคาร",
-BAPlayerNoUpdateVIP:"ผู้เล่น BA ไม่มีการอัปเดต: {0} ({1})",
-BAPlayerNoUpdateVIPSingle:"ผู้เล่นBA , ไม่อัปเดต",
 BaseCurrency:"สกุลเงินหลัก",
 Based:"หลัก",
 Basketball:"บาสเกตบอล",

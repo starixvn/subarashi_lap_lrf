@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 2/17/2025 2:52:10 PM
+// Generated at: 3/18/2025 5:16:31 PM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -180,8 +180,6 @@ window._language_en_US = {
   BalanceChange: "Balance Change",
   BankAccountNumber: "Bank Account Number",
   BankInformation: "Bank Information",
-  BAPlayerNoUpdateVIP: "BA player, no update: {0} ({1})",
-  BAPlayerNoUpdateVIPSingle: "BA player, no update",
   BaseCurrency: "Base Currency",
   Based: "Based",
   Basketball: "Basketball",
