@@ -1,4 +1,4 @@
-﻿// Generated at: 3/18/2025 4:34:54 PM
+﻿// Generated at: 3/26/2025 9:39:04 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",

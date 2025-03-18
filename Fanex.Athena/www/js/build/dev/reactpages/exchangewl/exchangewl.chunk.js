@@ -3195,6 +3195,9 @@ const BaseCurrency = [{
   value: -19,
   text: 'BRL'
 }, {
+  value: -20,
+  text: 'PKR'
+}, {
   value: -99,
   text: 'USDT'
 }];
