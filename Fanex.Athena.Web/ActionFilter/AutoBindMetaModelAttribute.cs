@@ -122,7 +122,6 @@ namespace Fanex.Athena.Web.ActionFilter
                     metaModel.FunctionKey);
 
                 metaModel.HasComm = licenseeSession.IsAllowedCustomerComm;
-                metaModel.IsAllowedBA = productAccess.IsAllowBA;
                 metaModel.SystemIdVisible = !LicenseeSettingService.IsFakeLicensee(licenseeSession.LicenseeName);
 
                 filterContext.ActionParameters[item.Key] = metaModel;

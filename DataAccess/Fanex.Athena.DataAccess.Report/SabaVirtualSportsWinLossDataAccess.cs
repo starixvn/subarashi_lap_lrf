@@ -22,7 +22,6 @@
 
     public class SabaVirtualSportsWinLossDataAccess : BaseDataAccess, ISabaVirtualSportsWinLossDataAccess
     {
-        private readonly string[] _ignoredLicenseeWLProducts = new[] { Product.BA };
         private readonly string[] _ignoredTurnoverProducts = new[] { Product.BT, Product.CO };
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
@@ -91,8 +90,6 @@
             data.CustomerComm = reader.ToDecimal("playercomm" + suffixColumn);
             data.TotalTransaction = reader.ToInt("betcount");
             data.CashOutCommission = reader.ToDecimal("cashoutcomm" + suffixColumn);
-            data.BACommission = reader.ToDecimal("bacomm" + suffixColumn);
-            data.AmtDueToBA = reader.ToDecimal("amtduetoba" + suffixColumn);
         }
 
         private static IDictionary<string, decimal> ReadProductDataList(
@@ -107,11 +104,6 @@
             }
 
             return data;
-        }
-
-        private bool IsIgnoredLicenseeWLProduct(string productCode)
-        {
-            return _ignoredLicenseeWLProducts.Contains(productCode);
         }
 
         private bool IsIgnoredTurnoverProduct(string productCode)
@@ -177,9 +169,7 @@
                 CustomerWinLoss = g.Sum(p => p.CustomerWinLoss),
                 CustomerComm = g.Sum(p => p.CustomerComm),
                 LicenseeWL = g.SelectMany(k => k.LicenseeWL).GroupBy(j => j.Key).ToDictionary(p => p.Key, p => p.Sum(j => j.Value)),
-                CashOutCommission = g.Sum(p => p.CashOutCommission),
-                BACommission = g.Sum(p => p.BACommission),
-                AmtDueToBA = g.Sum(p => p.AmtDueToBA)
+                CashOutCommission = g.Sum(p => p.CashOutCommission)
             }).ToList();
         }
 
@@ -253,10 +243,7 @@
             {
                 var licenseeWlColumnName = "LicenseeWL" + product.Code + suffix;
 
-                if (!IsIgnoredLicenseeWLProduct(product.Code) && reader.HasColumn(licenseeWlColumnName))
-                {
-                    licenseeWLColumns.Add(product.Code, licenseeWlColumnName);
-                }
+                licenseeWLColumns.Add(product.Code, licenseeWlColumnName);
             }
 
             return licenseeWLColumns;

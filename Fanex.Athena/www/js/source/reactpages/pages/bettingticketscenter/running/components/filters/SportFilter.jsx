@@ -23,7 +23,7 @@ export const SportFilter = () => {
 
     const getLeagueListByProductAndSport = (selectedProduct, selectedSport) => {
         const isSingleSport = !!selectedSport && selectedSport !== ALL_SELECTED_TEXT && selectedSport.split(",").length === 1;
-        const isEnableLeague = (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
+        const isEnableLeague = selectedProduct === 'SB' && isSingleSport;
 
         if (isEnableLeague) {
             dispatch(getLeagueList(selectedSport));
@@ -53,7 +53,7 @@ export const SportFilter = () => {
         }
 
         return (
-            <TreeViewSelect              
+            <TreeViewSelect
                 language={LangHelper.currentLanguage}
                 id="SportList"
                 dataSource={sportList}

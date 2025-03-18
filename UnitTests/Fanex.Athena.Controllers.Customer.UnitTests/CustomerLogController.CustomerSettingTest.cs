@@ -43,16 +43,12 @@
                 };
                 StubLicenseeSessionData(fakeLicensee);
 
-                var isAllowBA = true;
-                _productService.GetProductAccess(Arg.Any<int>(), Arg.Any<string>()).Returns(new ProductAccess(new List<Product> { new Product { ProductCode = Product.BA } }));
-
                 // Action
                 var result = (CustomerLogViewModel)(controller.CustomerSetting() as ViewResult).Model;
 
                 // Assert
                 Assert.Multiple(() =>
                 {
-                    Assert.That(result.Param.IsAllowBA, Is.EqualTo(isAllowBA));
                     Assert.That(result.Param.IsAllowCustComm, Is.EqualTo(fakeLicensee.IsAllowedCustomerComm));
                 });
             }

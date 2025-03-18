@@ -20,7 +20,6 @@
 			<Mapping DataField="LicenseeID" ObjectProperty="Id" />
 			<Mapping DataField="LicenseeName" ObjectProperty="Name" />
 			<Mapping DataField="IsAllowedMemberComm" ObjectProperty="IsAllowedCustomerComm" />
-			<Mapping DataField="EnableBA" ObjectProperty="IsEnableBA" />
 		</Setting>
 		<Setting Key="Lrf_SyncInternalUser" SpName="Lrf_SyncInternalUser" DbName="DBCUST.bodb_Licensee.wsv_lap" />
 	</Function>

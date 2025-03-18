@@ -29,7 +29,7 @@ export const ProductFilter = () => {
     }
 
     const updateCashOutMode = (selectedProduct) => {
-        const isEnableCashOutFilter = Service.isContainProductSportBookOrBa(selectedProduct);
+        const isEnableCashOutFilter = Service.isContainProductSportBook(selectedProduct);
         if (!isEnableCashOutFilter) {
             dispatch(setSelectedCashOutMode(0));
         }

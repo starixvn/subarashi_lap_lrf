@@ -236,7 +236,6 @@
             {
                 Assert.That(actualExcelModel.DataList.Count(), Is.EqualTo(expectedResult.DataList.Count()));
                 Assert.That(actualExcelModel.SBVisible, Is.True);
-                Assert.That(actualExcelModel.BAVisible, Is.False);
             });
         }
 

@@ -826,24 +826,6 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BA player, no update: {0} ({1}).
-        /// </summary>
-        public static string BAPlayerNoUpdateVIP {
-            get {
-                return ResourceManager.GetString("BAPlayerNoUpdateVIP", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to BA player, no update.
-        /// </summary>
-        public static string BAPlayerNoUpdateVIPSingle {
-            get {
-                return ResourceManager.GetString("BAPlayerNoUpdateVIPSingle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Base Currency.
         /// </summary>
         public static string BaseCurrency {
@@ -6969,6 +6951,15 @@ namespace Fanex.Athena.Resources {
         public static string ProductAPM {
             get {
                 return ResourceManager.GetString("ProductAPM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ASKMESLOT.
+        /// </summary>
+        public static string ProductASK {
+            get {
+                return ResourceManager.GetString("ProductASK", resourceCulture);
             }
         }
         

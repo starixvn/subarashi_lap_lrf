@@ -2,7 +2,6 @@
     ['jquery', 'common/querystring', 'common/site', 'lib/jqgrid/jquery.jqgrid.additional', 'lib/linq'],
     function ($, QueryString, Site, jqGridAdditional) {
         'use strict';
-        const IGNORED_LICENSEEWL_PRODUCTS = ['BA'];
         const IGNORED_TURNOVER_PRODUCTS = ['BT', 'CO'];
         const _me =
         {
@@ -231,30 +230,6 @@
             formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
         };
 
-        const baCommissionColumn =
-        {
-            name: 'BACommission',
-            index: 'BACommission',
-            width: 85,
-            align: 'right',
-            sortable: true,
-            resizable: false,
-            formatter: 'currency',
-            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-        };
-
-        const amtDueToBaColumn =
-        {
-            name: 'AmtDueToBA',
-            index: 'AmtDueToBA',
-            width: 85,
-            align: 'right',
-            sortable: true,
-            resizable: false,
-            formatter: 'currency',
-            formatoptions: jqGridAdditional.DECIMAL_FORMAT_OPTIONS
-        };
-
         const currencyIdColumn =
         {
             name: 'CurrencyId',
@@ -303,15 +278,12 @@
             'WinLoss', 'Comm',
             'Total', 'LicenseeW_L',
             'CashOutCommission',
-            'BA<br/>@[Commission]',
-            '@[AmtDueToBA]',
             'CurrencyId',
             'CustomerId'];
 
         const colModelList = [indexColumn, dateColumn, externalIdColumn, systemIdColumn, currencyColumn,
             turnoverColumn, totalTransColumn, customerWlColumn, playerCommColumn,
-            customerWlTotalColumn, licenseeWlColumn, cashOutCommissionColumn, baCommissionColumn,
-            amtDueToBaColumn, currencyIdColumn, customerIdColumn];
+            customerWlTotalColumn, licenseeWlColumn, cashOutCommissionColumn, currencyIdColumn, customerIdColumn];
 
         function isProductChecked(productOptions, productCode) {
             const length = productOptions.length;
@@ -329,16 +301,12 @@
             return $.inArray(productCode, IGNORED_TURNOVER_PRODUCTS) >= 0;
         }
 
-        function isIgnoredLicenseeWLProduct(productCode) {
-            return $.inArray(productCode, IGNORED_LICENSEEWL_PRODUCTS) >= 0;
-        }
-
         function turnoverProductsFilter(item) {
             return item.Status === true && isIgnoredTurnoverProduct(item.Code) === false;
         }
 
         function licenseeWLProductsFilter(item) {
-            return item.Status === true && isIgnoredLicenseeWLProduct(item.Code) === false;
+            return item.Status === true;
         }
 
         _me.setGroupHeaderColumns = function (grid, productOptions) {
@@ -389,10 +357,8 @@
                         licenseeIndex++;
                         customerWLTotalIndex++;
                     }
-                    if (isIgnoredLicenseeWLProduct(item.Code) === false) {
-                        temp.insertAfter(item.Name, customerWLTotalIndex);
-                        licenseeIndex++;
-                    }
+                    temp.insertAfter(item.Name, customerWLTotalIndex);
+                    licenseeIndex++;
                 }
             });
             //add total column
@@ -419,10 +385,7 @@
             systemIdColumn.hidden = levelNumber === 0;
 
             // Column hidden by product
-            const allowedBa = isProductChecked(productOptions, 'BA');
             const allowedCashOut = isProductChecked(productOptions, 'CO');
-            baCommissionColumn.hidden = !allowedBa;
-            amtDueToBaColumn.hidden = !allowedBa;
             cashOutCommissionColumn.hidden = !allowedCashOut;
 
             if (levelNumber === 2) {
@@ -442,7 +405,7 @@
                 //insert turn over column
                 if (item.Status === true) {
                     let productCol = Object.assign({}, productColumn);;
-                    if (item.Code === 'BA' || item.Code === 'CO') {
+                    if (item.Code === 'CO') {
                         productCol.width = 80;
                     }
 
@@ -459,15 +422,13 @@
                         customerWLTotalIndex++;
                     }
 
-                    if (isIgnoredLicenseeWLProduct(item.Code) === false) {
-                        const licenseeWL = Site.clone(productCol);
-                        licenseeWL.name = 'LicenseeWL' + item.Code;
-                        licenseeWL.index = 'LicenseeWL' + item.Code;
-                        licenseeWL.sortable = true;
+                    const licenseeWL = Site.clone(productCol);
+                    licenseeWL.name = 'LicenseeWL' + item.Code;
+                    licenseeWL.index = 'LicenseeWL' + item.Code;
+                    licenseeWL.sortable = true;
 
-                        temp.insertAfter(licenseeWL, customerWLTotalIndex);
-                        licenseeIndex++;
-                    }
+                    temp.insertAfter(licenseeWL, customerWLTotalIndex);
+                    licenseeIndex++;
                 }
             });
 

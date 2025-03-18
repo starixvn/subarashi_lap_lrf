@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 1/7/2025 2:48:46 PM
+// Generated at: 2/17/2025 2:52:10 PM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -584,7 +584,6 @@ window._language_vi_VN = {
   League: "Giải đấu",
   LeagueGroup: "Nhóm Giải đấu",
   LeagueName: "Tên Giải đấu",
-  LeagueWinLoss: "Thắng Thua Theo Giải Đấu",
   Level: "Cấp độ",
   Liability: "Trách nhiệm",
   Licensee: "Nhà Cái",

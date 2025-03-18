@@ -202,7 +202,7 @@ namespace Fanex.Athena.Excel.Report.UnitTests
         {
             // Arrange
             var cell = ExcelTestHelper.MockGetCell(FakeSheet, ReportBase.RowHeaderTemplate, ColumnLicenseeWlSportsBook);
-            var excelModel = CreateExcelModel(productCodes: new[] { Product.SB, Product.BA });
+            var excelModel = CreateExcelModel(productCodes: new[] { Product.SB });
             var excel = CreateExcel(excelModel);
 
             // Action

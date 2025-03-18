@@ -29,8 +29,7 @@
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("LicenseeID")),
                             Name = reader.GetString(reader.GetOrdinal("LicenseeName")),
-                            IsAllowedCustomerComm = reader.GetBoolean(reader.GetOrdinal("IsAllowedMemberComm")),
-                            IsEnableBA = reader.GetBoolean(reader.GetOrdinal("EnableBA"))
+                            IsAllowedCustomerComm = reader.GetBoolean(reader.GetOrdinal("IsAllowedMemberComm"))
                         };
                         entityList.Add(entity);
                     }

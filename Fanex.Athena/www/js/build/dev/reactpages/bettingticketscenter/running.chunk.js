@@ -3312,9 +3312,9 @@ _defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
   });
   return new XMLSerializer().serializeToString(xmlDoc);
 });
-_defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
+_defineProperty(Service, "isContainProductSportBook", selectedItemsKey => {
   var listSelectedProduct = selectedItemsKey.split(",");
-  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].BA) >= 0;
+  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0;
 });
 
 /***/ }),
@@ -4870,7 +4870,7 @@ const SportFilter = () => {
   };
   const getLeagueListByProductAndSport = (selectedProduct, selectedSport) => {
     const isSingleSport = !!selectedSport && selectedSport !== _common_lib_constants__WEBPACK_IMPORTED_MODULE_6__["ALL_SELECTED_TEXT"] && selectedSport.split(",").length === 1;
-    const isEnableLeague = (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
+    const isEnableLeague = selectedProduct === 'SB' && isSingleSport;
     if (isEnableLeague) {
       dispatch(getLeagueList(selectedSport));
     } else {
@@ -5360,7 +5360,7 @@ __webpack_require__.r(__webpack_exports__);
 const useIsEnableLeague = () => {
   const [selectedProduct, selectedSport] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedProduct, state.selectedSport], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);
   const isSingleSport = !!selectedSport && selectedSport !== _common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["ALL_SELECTED_TEXT"] && selectedSport.split(",").length === 1;
-  return (selectedProduct === 'SB' || selectedProduct === 'BA') && isSingleSport;
+  return selectedProduct === 'SB' && isSingleSport;
 };
 const useIsEnableMatch = () => {
   const [selectedLeague] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedLeague, state.isEnableLeague], react_redux__WEBPACK_IMPORTED_MODULE_0__["shallowEqual"]);

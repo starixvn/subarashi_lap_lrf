@@ -17,7 +17,6 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             excelModel.CustomerCommVisible = false;
             excelModel.COVisible = false;
             excelModel.BTVisible = false;
-            excelModel.BAVisible = false;
 
             var excel = CreateExcel(excelModel);
             excel.WhenForAnyArgs(x => x.ProcessUITurnover(Arg.Any<ISheet>())).DoNotCallBase();
@@ -52,7 +51,6 @@ namespace Fanex.Athena.Excel.Report.UnitTests
             excelModel.CustomerCommVisible = true;
             excelModel.COVisible = true;
             excelModel.BTVisible = true;
-            excelModel.BAVisible = true;
 
             var excel = CreateExcel(excelModel);
             excel.WhenForAnyArgs(x => x.ProcessUITurnover(Arg.Any<ISheet>())).DoNotCallBase();

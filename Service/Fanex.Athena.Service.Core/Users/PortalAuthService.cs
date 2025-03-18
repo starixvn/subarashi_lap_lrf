@@ -147,7 +147,6 @@
                 LicenseeId = oauthInfo.LicenseeId,
                 LicenseeName = oauthInfo.SiteName,
                 IsAllowedCustomerComm = oauthInfo.IsAllowedCustomerComm,
-                IsEnableBA = oauthInfo.IsEnableBA,
                 IsEnableSingleWallet = oauthInfo.IsEnableSingleWallet,
                 OfferedSubProductList = oauthInfo.OfferedSubProductList,
                 OfferedOddsGroupsList = oauthInfo.OfferedOddsGroupList,

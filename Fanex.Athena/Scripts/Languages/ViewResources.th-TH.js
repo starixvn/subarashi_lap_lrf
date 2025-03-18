@@ -1,4 +1,4 @@
-﻿// Generated at: 1/7/2025 2:48:46 PM
+﻿// Generated at: 2/17/2025 2:52:10 PM
 var _language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -493,7 +493,6 @@ lbl7Over:"7สูง",
 League:"ลีก",
 LeagueGroup:"กลุ่มลีก",
 LeagueName:"ชื่อลีก",
-LeagueWinLoss:"แพ้ชนะตามลีก",
 Level:"ระดับ",
 Liability:"หนี้",
 Licensee:"ผู้ได้รับอนุญาต",

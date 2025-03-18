@@ -14,10 +14,10 @@ export const CashOutModeFilter = () => {
 
     const onCashOutModeChangeHandler = (item) => {
         if (item.value === CashOutMode.ViewCOOnly) {
-            const selectedProduct = AppData.productList.filter(product => product.id == ProductCode.BA || product.id == ProductCode.SportsBook)
+            const selectedProduct = AppData.productList.filter(product => product.id == ProductCode.SportsBook)
                 .map(product => product.id)
                 .join(',');
-            const productList = AppData.productList.map(product => product.id == ProductCode.SportsBook || product.id == ProductCode.BA ? product : { ...product, status: false });
+            const productList = AppData.productList.map(product => product.id == ProductCode.SportsBook ? product : { ...product, status: false });
             dispatch(setSelectedProduct(selectedProduct));
             dispatch(setProductList(productList));
         }

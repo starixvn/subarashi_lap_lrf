@@ -180,7 +180,7 @@
             Reader.Read().Returns(true, false);
             var data = new LicenseeWinLossByTimeZone
             {
-                GroupBy = Product.BA,
+                GroupBy = Product.SB,
             };
             MapReaderData(data);
 
@@ -192,7 +192,7 @@
             var firstItem = result.DataList.ElementAt(0);
 
             // Assert
-            Assert.That(firstItem.GroupBy, Is.EqualTo(ViewResources.ProductBA));
+            Assert.That(firstItem.GroupBy, Is.EqualTo(ViewResources.ProductSB));
         }
 
         private static void AssertData(LicenseeWinLossByTimeZone actual, LicenseeWinLossByTimeZone expected)

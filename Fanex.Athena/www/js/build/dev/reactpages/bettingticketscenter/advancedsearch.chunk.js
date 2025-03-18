@@ -7282,7 +7282,7 @@ const useFilterHandler = () => {
     dispatch(getBettypeList(selectedProduct));
   };
   const updateCashOutMode = selectedProduct => {
-    const isEnableCashOutFilter = _common_lib_Service__WEBPACK_IMPORTED_MODULE_3__["default"].isContainProductSportBookOrBa(selectedProduct);
+    const isEnableCashOutFilter = _common_lib_Service__WEBPACK_IMPORTED_MODULE_3__["default"].isContainProductSportBook(selectedProduct);
     if (!isEnableCashOutFilter) {
       dispatch(setSelectedCashOutMode(0));
     }
@@ -7372,7 +7372,7 @@ __webpack_require__.r(__webpack_exports__);
 const useIsEnableLeagueMatch = () => {
   const [selectedProduct, dateRange] = Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["useSelector"])(state => [state.selectedProduct, state.dateRange]);
   const productCode = selectedProduct;
-  return (productCode === 'SB' || productCode === 'BA') && _common_lib_Service__WEBPACK_IMPORTED_MODULE_1__["default"].isSingleDate(dateRange);
+  return productCode === 'SB' && _common_lib_Service__WEBPACK_IMPORTED_MODULE_1__["default"].isSingleDate(dateRange);
 };
 /* harmony default export */ __webpack_exports__["default"] = (useIsEnableLeagueMatch);
 
@@ -8843,9 +8843,9 @@ _defineProperty(Service, "getSelectedBettype", (selectedValue, dataList) => {
   });
   return new XMLSerializer().serializeToString(xmlDoc);
 });
-_defineProperty(Service, "isContainProductSportBookOrBa", selectedItemsKey => {
+_defineProperty(Service, "isContainProductSportBook", selectedItemsKey => {
   var listSelectedProduct = selectedItemsKey.split(",");
-  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0 || listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].BA) >= 0;
+  return listSelectedProduct.indexOf(_constants__WEBPACK_IMPORTED_MODULE_2__["ProductCode"].SportsBook) >= 0;
 });
 
 /***/ }),

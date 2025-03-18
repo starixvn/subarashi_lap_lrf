@@ -44,8 +44,6 @@ namespace Fanex.Athena.Service.Core.OAuth
 
         bool IsAllowedCustomerComm { get; }
 
-        bool IsEnableBA { get; }
-
         bool IsEnableSingleWallet { get; }
 
         IEnumerable<string> OfferedSubProductList { get; }

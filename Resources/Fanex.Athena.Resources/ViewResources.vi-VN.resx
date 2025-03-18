@@ -366,12 +366,6 @@
   <data name="BankInformation" xml:space="preserve">
     <value>Thông tin ngân hàng</value>
   </data>
-  <data name="BAPlayerNoUpdateVIP" xml:space="preserve">
-    <value>Người chơi BA, không có cập nhật: {0} ({1})</value>
-  </data>
-  <data name="BAPlayerNoUpdateVIPSingle" xml:space="preserve">
-    <value>Người chơi BA, không cập nhật</value>
-  </data>
   <data name="BaseCurrency" xml:space="preserve">
     <value>Tiền tệ cơ sở</value>
   </data>

@@ -369,12 +369,6 @@
   <data name="BankInformation" xml:space="preserve">
     <value>ข้อมูลธนาคาร</value>
   </data>
-  <data name="BAPlayerNoUpdateVIP" xml:space="preserve">
-    <value>ผู้เล่น BA ไม่มีการอัปเดต: {0} ({1})</value>
-  </data>
-  <data name="BAPlayerNoUpdateVIPSingle" xml:space="preserve">
-    <value>ผู้เล่นBA , ไม่อัปเดต</value>
-  </data>
   <data name="BaseCurrency" xml:space="preserve">
     <value>สกุลเงินหลัก</value>
   </data>
