@@ -615,10 +615,7 @@
     <Content Include="Scripts\Extension\ajaxBinaryTransporting.js" />
     <Content Include="Scripts\Helper\ProductListHelper.js" />
     <Content Include="Scripts\Library\jquery.marquee.js" />
-    <Content Include="www\js\**" />
-    <Content Include="www\css\**" />
-    <Content Include="www\assets\images\ajax-loader.gif" />
-    <Content Include="www\assets\images\new-system.svg" />
+    <Content Include="www\**\*.*" />
     <Content Include="SiteConfig\Web.AppSettings.UATTW.config">
       <SubType>Designer</SubType>
     </Content>
@@ -718,21 +715,9 @@
     <Content Include="Views\Desktop\BetList\BettingTicketCenter\Running.cshtml" />
     <Content Include="Views\Desktop\BetList\BettingTicketCenter\SingleCustomer.cshtml" />
     <Content Include="Views\Desktop\Report\CasinoTurnover\Main.cshtml" />
-    <Content Include="www\webpackconfig\build\webpack.react.devbypage.conf.js" />
-    <Content Include="www\webpackconfig\config\aliasReact.js" />
-    <Content Include="www\webpackconfig\config\pathReact.js" />
-    <Content Include="www\webpackconfig\config\pluginReact.js" />
     <None Include="bundleconfig.json" />
     <Content Include="Views\Desktop\Report\SubsidiaryPerformance\Main.cshtml" />
     <Content Include="Views\Desktop\Shared\_ReactPageLayout.cshtml" />
-    <Content Include="www\webpackconfig\build\webpack.react.base.conf.js" />
-    <Content Include="www\webpackconfig\build\webpack.react.dev.conf.js" />
-    <Content Include="www\assets\images\15.jpg" />
-    <Content Include="www\assets\images\lap-restriction-page.png" />
-    <Content Include="www\assets\images\location-restriction-page.png" />
-    <Content Include="www\assets\images\logo-text.svg" />
-    <Content Include="www\assets\images\licenseelist-logo.png" />
-    <Content Include="www\assets\images\robot.jpg" />
     <Content Include="Views\Desktop\Customer\CustomerComm\GroupCommList.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerComm\Header.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerComm\Content.cshtml" />
@@ -802,14 +787,6 @@
     <Content Include="Views\Desktop\BetList\PlatformWinLoss\Main.cshtml" />
     <Content Include="Views\Desktop\TotalBets\HandicapOverUnder\Filter.cshtml" />
     <Content Include="Views\Desktop\TotalBets\HandicapOverUnder\Content.cshtml" />
-    <Content Include="www\webpackconfig\build\utils.js" />
-    <Content Include="www\webpackconfig\build\webpack.base.conf.js" />
-    <Content Include="www\webpackconfig\build\webpack.dev.conf.js" />
-    <Content Include="www\webpackconfig\build\webpack.pro.conf.js" />
-    <Content Include="www\webpackconfig\config\alias.js" />
-    <Content Include="www\webpackconfig\config\rule.js" />
-    <Content Include="www\webpackconfig\config\path.js" />
-    <Content Include="www\webpackconfig\config\plugin.js" />
     <Content Include="App_Code\DesktopRazorHelper.cshtml" />
     <Content Include="App_Code\DesktopReportRazorHelper.cshtml" />
     <Content Include="SiteConfig\WebConfigTransforms\KLDR.config" />
@@ -1073,7 +1050,6 @@
     <Content Include="Views\Desktop\Report\Result\Main.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Filter.cshtml" />
     <Content Include="Views\Desktop\Report\Result\Content.cshtml" />
-    <Content Include="www\webpackconfig\build\webpack.react.pro.conf.js" />
     <Content Include="Views\Desktop\Customer\CustomerAdministration\MainIvoryBet.cshtml" />
     <Content Include="Views\Desktop\Report\DailyBetDetails\Index.cshtml" />
     <Content Include="Views\Desktop\BetList\BettingTicketCenter\BookedBet.cshtml" />
