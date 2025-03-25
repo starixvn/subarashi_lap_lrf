@@ -122,8 +122,6 @@
   <ItemGroup>
     <Compile Include="ExchangeVoidedService.cs" />
     <Compile Include="Interfaces\IExchangeVoidedService.cs" />
-    <Compile Include="Interfaces\ISubsidiaryPerformanceService.cs" />
-    <Compile Include="SubsidiaryPerformanceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

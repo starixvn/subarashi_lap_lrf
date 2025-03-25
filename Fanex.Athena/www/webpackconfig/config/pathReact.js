@@ -5,7 +5,6 @@ var projectRoot = path.resolve(__dirname, '../../../');
 var cssPaths = {
     build: "www/css/build",
     layout: "./www/css/source/reactpages/main.scss",
-    subsidiaryperformance: "./www/css/source/reactpages/pages/subsidiaryperformance/index.scss",
     abnormalbet: "./www/css/source/reactpages/pages/abnormalbet/index.scss",
     notification: "./www/css/source/reactpages/pages/notification/index.scss",
     licenseecontact: "./www/css/source/reactpages/pages/licenseecontact/index.scss",
@@ -37,7 +36,6 @@ var scriptPaths = {
     langTH: "./www/js/source/common/languages/ViewResources.th-TH.js",
     langID: "./www/js/source/common/languages/ViewResources.id-ID.js",
     /*React page*/
-    subsidiaryperformance: "./www/js/source/reactpages/pages/subsidiaryperformance/components/index.jsx",
     abnormalbet: "./www/js/source/reactpages/pages/abnormalbet/components/index.jsx",
     notification: "./www/js/source/reactpages/pages/notification/components/resultAmendment/index.jsx",
     licenseecontact: "./www/js/source/reactpages/pages/licenseecontact/components/index.jsx",
