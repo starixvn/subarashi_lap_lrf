@@ -108,7 +108,6 @@
     <Compile Include="LicenseeWinLossReportControllerTest.cs" />
     <Compile Include="AgCasinoBalanceReportControllerTest.cs" />
     <Compile Include="CustomerPendingFundsReportControllerTest.cs" />
-    <Compile Include="LicenseeWinLossByTimeZoneReportControllerTest.cs" />
     <Compile Include="SpecialLicenseeWinLossReportControllerTest.cs" />
     <Compile Include="SubsidiaryPerformanceReportControllerTest.Detail.cs" />
     <Compile Include="SubsidiaryPerformanceReportControllerTest.cs" />

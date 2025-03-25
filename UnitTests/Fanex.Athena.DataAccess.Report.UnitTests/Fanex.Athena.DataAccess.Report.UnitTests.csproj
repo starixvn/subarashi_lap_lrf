@@ -73,7 +73,6 @@
     <Compile Include="CustomerPendingFundsDataAccessTest.cs" />
     <Compile Include="ExchangeVoidedDataAccessTest.cs" />
     <Compile Include="ExchangeWinLossDataAccessTest.cs" />
-    <Compile Include="LicenseeWinLossByTimeZoneDataAccessTest.cs" />
     <Compile Include="SabaVirtualSportsWinLossDataAccessTest.cs" />
     <Compile Include="SpecialLicenseeWinLossDataAccessTest.cs" />
     <Compile Include="SubsidiaryPerformanceDataAccessTest.cs" />
