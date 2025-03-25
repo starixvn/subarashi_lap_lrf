@@ -114,6 +114,12 @@
                 "WinlossAnalysisReport/{*url}",
                 new { Controller = "Proxy", Action = "ReportViews", });
             winlossAnalysisReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+            
+            var winLossByTimeZoneReportRoute = routes.MapHttpRoute(
+                name: "winLossByTimeZoneReportRoute",
+                routeTemplate: "LicenseeWinLossByTimeZoneReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "WinLossByTimeZone", url = "Index" });
+            winLossByTimeZoneReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var matchWinLossReportRoute = routes.MapHttpRoute(
                 "matchWinLossReportRoute",
