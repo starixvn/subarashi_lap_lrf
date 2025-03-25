@@ -49,17 +49,11 @@
 
         private static void RegisterReportProxyRoutes(this RouteCollection routes)
         {
-            var agCasinoWinLossReportRoute = routes.MapHttpRoute(
-                "agCasinoWinLossReportRoute",
-                "AgCasinoWinLossReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", });
-            agCasinoWinLossReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
-            
-            var agCasinoBalanceReportRoute = routes.MapHttpRoute(
-                "agCasinoBalanceReportRoute",
-                "AgCasinoBalanceReport/{*url}",
-                new { Controller = "Proxy", Action = "ReportViews", });
-            agCasinoBalanceReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
+            var subsidiaryPerformanceReportRoute = routes.MapHttpRoute(
+                name: "subsidiaryPerformanceReportRoute",
+                routeTemplate: "SubsidiaryPerformanceReport/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews", report = "SubsidiaryPerformance", url = "Index" });
+            subsidiaryPerformanceReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
 
             var turnoverReportRoute = routes.MapHttpRoute(
                 "turnoverReportRoute",
