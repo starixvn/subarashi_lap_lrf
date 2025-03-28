@@ -96,6 +96,10 @@ namespace Fanex.Athena.Model.Core.DataDomain
 
         public const int WE = 80;
 
+        public const int FG = 177;
+
+        public const int HOT = 139;
+
         public const int Parlay = 999;
     }
 }
