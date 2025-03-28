@@ -130,7 +130,7 @@
 @helper BasedCurrency(string selectedBasedCurrency = "", string CurrencyName = null)
 {
     var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
-    var baseCurrencyList = currencyService.GetBaseCurrencyList();
+    var baseCurrencyList = currencyService.GetBaseCurrencyList(true);
 
     <select class="based-currency hide" name="BaseCurrency" id="BaseCurrency" data-original="@selectedBasedCurrency">
         @foreach (var item in baseCurrencyList)

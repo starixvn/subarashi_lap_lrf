@@ -41,6 +41,7 @@
             { BaseCurrencyType.MXN, "MXN" },
             { BaseCurrencyType.NGN, "NGN" },
             { BaseCurrencyType.BRL, "BRL" },
+            { BaseCurrencyType.PKR, "PKR" },
 
             // crypto currency
             { BaseCurrencyType.USDT, "USDT" }
@@ -64,7 +65,8 @@
             { BaseCurrencyType.JPY, "JPY" },
             { BaseCurrencyType.MXN, "MXN" },
             { BaseCurrencyType.NGN, "NGN" },
-            { BaseCurrencyType.BRL, "BRL" }
+            { BaseCurrencyType.BRL, "BRL" },
+            { BaseCurrencyType.PKR, "PKR" }
         };
 
         public static readonly IReadOnlyDictionary<int, string> JollysportsBaseCurrencyList = new Dictionary<int, string>
@@ -85,7 +87,8 @@
             { BaseCurrencyType.JPY, "JPY" },
             { BaseCurrencyType.MXN, "MXN" },
             { BaseCurrencyType.NGN, "NGN" },
-            { BaseCurrencyType.BRL, "BRL" }
+            { BaseCurrencyType.BRL, "BRL" },
+            { BaseCurrencyType.PKR, "PKR" }
         };
 
         public static readonly IReadOnlyDictionary<int, string> CryptoBaseCurrencyList = new Dictionary<int, string>
@@ -115,14 +118,13 @@
 
 #pragma warning disable S109 // Magic numbers should not be used
 
-        public static IReadOnlyDictionary<int, string> CashOutModeList => new Dictionary<int, string> {
+        public static IReadOnlyDictionary<int, string> CashOutModeList => new Dictionary<int, string>
+        {
             { 0, ViewResources.IncludeCOFromSB },
             { 1, ViewResources.ExcludeCOFromSB },
-            { 2, ViewResources.ViewCOOnly },
+            { 2, ViewResources.ViewCOOnly }
         };
 
 #pragma warning restore S109 // Magic numbers should not be used
-
-
     }
 }

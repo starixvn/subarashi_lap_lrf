@@ -41,7 +41,7 @@ namespace Fanex.Athena.Service.Core.Common
 
             if (supportOnceCurrencyToBase && HasOneCurrencyAndNotBase(currencyList, baseCurrencyList))
             {
-                baseCurrencyList.Add(-currencyList.First().Key, currencyList.First().Value);
+                baseCurrencyList.Add(currencyList.First().Key, currencyList.First().Value);
             }
 
             _cache.Set(cacheKey, baseCurrencyList);
@@ -70,6 +70,8 @@ namespace Fanex.Athena.Service.Core.Common
         }
 
         private static bool HasOneCurrencyAndNotBase(IDictionary<int, string> currencyList, IDictionary<int, string> baseCurrencyList)
-            => currencyList.Count == 1 && !baseCurrencyList.Any(_ => _.Value.Equals(currencyList.First().Value, StringComparison.OrdinalIgnoreCase));
+            => currencyList.Count == 1
+            && !baseCurrencyList.ContainsKey(currencyList.First().Key)
+            && !baseCurrencyList.Any(_ => _.Value.Equals(currencyList.First().Value, StringComparison.OrdinalIgnoreCase));
     }
 }

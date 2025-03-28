@@ -4,9 +4,9 @@ define(
     function ($, Site, LastBetGrid) {
         const _me = {};
 
-        let defaultBasedCurrency ="";
+        let defaultBasedCurrency = "";
         let _highLightSubmitIntervalId = 0;
-        
+
         let _currentMatchList = [];
         let _currentLeagueList = [];
         let _currentSportList = [];
@@ -123,7 +123,7 @@ define(
             }
             $matchDropdown.selectList('update', { isDisabled: true });
             setSportFilterParam();
-            setLeagueFilterParam();
+            LastBetGrid.updateParam(DataType.STRING, 'LeagueList', ALL);
             LastBetGrid.updateParam(DataType.NUMBER, 'MatchId', $matchDropdown.val());
         }
 
@@ -161,24 +161,22 @@ define(
 
         const setSportFilterParam = () => {
             let selectedSports = $('#sport').multiSelect('getCheckedItems');
-            if (selectedSports.length == _currentSportList.length)
-            {
-                LastBetGrid.updateParam(DataType.STRING, 'SportIds',ALL);
+            if (selectedSports.length == _currentSportList.length) {
+                LastBetGrid.updateParam(DataType.STRING, 'SportIds', ALL);
             }
-            else{
+            else {
                 let sportIds = selectedSports.length > 0 ? selectedSports.join(',') : '';
                 LastBetGrid.updateParam(DataType.STRING, 'SportIds', sportIds);
             }
         }
 
         const setLeagueFilterParam = () => {
-            let selectedSports = $('#league').multiSelect('getCheckedItems');
-            if (selectedSports.length == _currentLeagueList.length)
-            {
-                LastBetGrid.updateParam(DataType.STRING, 'LeagueList',ALL);
+            let selecteLeagues = $('#league').multiSelect('getCheckedItems');
+            if (selecteLeagues.length == _currentLeagueList.length) {
+                LastBetGrid.updateParam(DataType.STRING, 'LeagueList', ALL);
             }
-            else{
-                let leagueIds = selectedSports.length > 0 ? selectedSports.join(',') : '';
+            else {
+                let leagueIds = selecteLeagues.length > 0 ? selecteLeagues.join(',') : '';
                 LastBetGrid.updateParam(DataType.STRING, 'LeagueList', leagueIds);
             }
         }
