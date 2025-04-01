@@ -9,7 +9,10 @@
         private static readonly IEnumerable<int> Match3rdSportTypes = new List<int>
         {
             (int)SportType.BetbyBasketball,
-            (int)SportType.VirtuallySports
+            (int)SportType.VirtuallySports,
+            (int)SportType.VirtualSteepleChase,
+            (int)SportType.VirtualHarnessRacing,
+            (int)SportType.VirtualMotorRacing
         };
 
         private static readonly IEnumerable<int> League3rdSportsTypes = new List<int>
@@ -17,7 +20,10 @@
             (int)SportType.VirtualHorseRacing,
             (int)SportType.VirtualDogRacing,
             (int)SportType.BetbyBasketball,
-            (int)SportType.VirtuallySports
+            (int)SportType.VirtuallySports,
+            (int)SportType.VirtualSteepleChase,
+            (int)SportType.VirtualHarnessRacing,
+            (int)SportType.VirtualMotorRacing
         };
 
         public static bool IsLeague3rdSports(int sportType) => League3rdSportsTypes.Contains(sportType);
