@@ -1,4 +1,4 @@
-﻿// Generated at: 4/9/2025 12:19:37 PM
+﻿// Generated at: 4/10/2025 2:43:01 PM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",

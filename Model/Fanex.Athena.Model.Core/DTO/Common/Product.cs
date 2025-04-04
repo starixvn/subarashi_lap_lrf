@@ -141,6 +141,8 @@
 
         public const string HOT = "HOT";
 
+        public const string MGLC = "MGLC";
+
         #endregion Field
 
         #region Property
