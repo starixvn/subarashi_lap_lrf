@@ -36,7 +36,6 @@
         /* Report */
 
         public const string ReportGodOfFortuneWinLoss = "GodOfFortuneWinLoss";
-        public const string ReportSabaVirtualSportsWinLoss = "SabaVirtualSportsWinLoss";
         public const string ReportLastBetsMonitoring = "LastBetsMonitoring26";
         public const string ReportLicenseeWinLoss = "LicenseeWinLoss27";
         public const string AuditLicenseeWinLoss = "AuditLicenseeWinLoss";

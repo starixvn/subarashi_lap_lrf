@@ -72,7 +72,6 @@
     <Compile Include="CasinoTurnoverDataAccessTest.cs" />
     <Compile Include="ExchangeVoidedDataAccessTest.cs" />
     <Compile Include="ExchangeWinLossDataAccessTest.cs" />
-    <Compile Include="SabaVirtualSportsWinLossDataAccessTest.cs" />
     <Compile Include="SpecialLicenseeWinLossDataAccessTest.cs" />
     <Compile Include="WinLossByProductDataAccessTest.cs" />
     <Compile Include="WinLossByBetTypeDataAccessTest.cs" />

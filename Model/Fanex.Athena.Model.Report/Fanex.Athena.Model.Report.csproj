@@ -135,7 +135,6 @@
     <Compile Include="MetaModel\ExchangeWinLossMetaModel.cs" />
     <Compile Include="MetaModel\BaseReportMetaModel.cs" />
     <Compile Include="MetaModel\GodOfFortuneWinLossMetaModel.cs" />
-    <Compile Include="MetaModel\SabaVirtualSportsWinLossMetaModel.cs" />
     <Compile Include="MetaModel\PromotionPrizeMetaModel.cs" />
     <Compile Include="MetaModel\Result\GetSportResultMetaModel.cs" />
     <Compile Include="MetaModel\Result\ResultMetaModel.cs" />
@@ -158,9 +157,7 @@
     <Compile Include="ViewModel\ExchangeWinLossViewModel.cs" />
     <Compile Include="ViewModel\AbnormalBetViewModel.cs" />
     <Compile Include="ViewModel\NewCashOutWinLossViewModel.cs" />
-    <Compile Include="ViewModel\SabaVirtualSportsWinLossGridViewModel .cs" />
     <Compile Include="ViewModel\GodOfFortuneWinLossViewModel.cs" />
-    <Compile Include="ViewModel\SabaVirtualSportsWinLossViewModel.cs" />
     <Compile Include="ViewModel\Result\ResultReportViewModel.cs" />
     <Compile Include="ViewModel\SpecialLicenseeWinLossGridViewModel.cs" />
     <Compile Include="ViewModel\GrossGamingRevenueViewModel.cs" />

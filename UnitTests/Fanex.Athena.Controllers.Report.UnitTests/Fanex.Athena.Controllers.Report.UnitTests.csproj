@@ -99,7 +99,6 @@
     <Compile Include="DailyBetsReportControllerTest.cs" />
     <Compile Include="AbnormalBetReportControllerTest.cs" />
     <Compile Include="NewCashOutWinLossReportControllerTest.cs" />
-    <Compile Include="SabaVirtualSportsWinLossReportControllerTest.cs" />
     <Compile Include="Result\ResultKenoReportControllerTest.cs" />
     <Compile Include="Result\ResultReportControllerTest.cs" />
     <Compile Include="Result\ResultReportControllerTest.GetSports.cs" />

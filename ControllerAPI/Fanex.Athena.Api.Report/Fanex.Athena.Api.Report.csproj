@@ -145,7 +145,6 @@
   <ItemGroup>
     <Compile Include="ExchangeWinLossReportController.cs" />
     <Compile Include="CasinoTurnoverReportController.cs" />
-    <Compile Include="SabaVirtualSportsWinLossReportController.cs" />
     <Compile Include="SpecialLicenseeWinLossReportController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApiReportBaseController.cs" />
