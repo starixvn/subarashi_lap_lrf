@@ -107,7 +107,6 @@
     <Compile Include="LicenseeWinLossReportControllerTest_IsValidParams.cs" />
     <Compile Include="LicenseeWinLossReportControllerTest.cs" />
     <Compile Include="AgCasinoBalanceReportControllerTest.cs" />
-    <Compile Include="CustomerPendingFundsReportControllerTest.cs" />
     <Compile Include="SpecialLicenseeWinLossReportControllerTest.cs" />
     <Compile Include="WinLossByProductReportControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -122,7 +122,6 @@
     <Compile Include="DTO\GodOfFortuneWinLoss.cs" />
     <Compile Include="DTO\SabaVirtualSportsWinLoss.cs" />
     <Compile Include="DTO\ThirdPartyWinLoss.cs" />
-    <Compile Include="DTO\CustPendingFunds.cs" />
     <Compile Include="DTO\CustomerWinLoss.cs" />
     <Compile Include="DTO\ICustomerWinLoss.cs" />
     <Compile Include="DTO\ILicenseeWL.cs" />
@@ -144,7 +143,6 @@
     <Compile Include="MetaModel\ThirdPartyWinLossMetaModel.cs" />
     <Compile Include="MetaModel\ResultPopupMetalModel.cs" />
     <Compile Include="MetaModel\WinLossByProductMetaModel.cs" />
-    <Compile Include="MetaModel\CustomerPendingFundsMetaModel.cs" />
     <Compile Include="MetaModel\CustomerWinlossMetaModel.cs" />
     <Compile Include="MetaModel\LicenseeWinLossMetaModel.cs" />
     <Compile Include="MetaModel\PlatformWinLossMetaModel.cs" />
@@ -172,7 +170,6 @@
     <Compile Include="ViewModel\AgCasinoBalanceViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossGridViewModel.cs" />
     <Compile Include="ViewModel\WinLossByProductViewModel.cs" />
-    <Compile Include="ViewModel\CustomerPendingFundsViewModel.cs" />
     <Compile Include="ViewModel\LicenseeWinLossViewModel.cs" />
     <Compile Include="ViewModel\PlatformWinLossViewModel.cs" />
     <Compile Include="ViewModel\WinLossByBetTypeViewModel.cs" />

@@ -105,12 +105,10 @@
     <Compile Include="ThirdPartyWinLossDataAccess.cs" />
     <Compile Include="Interfaces\IAgCasinoBalanceDataAccess.cs" />
     <Compile Include="Interfaces\IThirdPartyWinLossDataAccess.cs" />
-    <Compile Include="CustomerPendingFundsDataAccess.cs" />
     <Compile Include="WinLossByProductDataAccess.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="WinLossByBetTypeDataAccess.cs" />
-    <Compile Include="Interfaces\ICustPendingFundsDataAccess.cs" />
     <Compile Include="Interfaces\ILicenseeWinLossDataAccess.cs" />
     <Compile Include="LicenseeWinLossDataAccess.cs" />
     <Compile Include="Interfaces\IWinLossByBetTypeDataAccess.cs" />

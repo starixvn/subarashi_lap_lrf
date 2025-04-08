@@ -153,7 +153,6 @@
     <Compile Include="ReportBaseController.cs" />
     <Compile Include="AgCasinoBalanceReportController.cs" />
     <Compile Include="AgCasinoWinLossReportController.cs" />
-    <Compile Include="CustomerPendingFundsReportController.cs" />
     <Compile Include="CustomerWinLossReportController.cs" />
     <Compile Include="PlatformWinLossReportController.cs" />
     <Compile Include="Result\ResultKenoReportController.cs" />

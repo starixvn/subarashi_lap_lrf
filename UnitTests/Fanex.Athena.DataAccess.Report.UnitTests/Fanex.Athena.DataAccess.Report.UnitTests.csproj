@@ -70,7 +70,6 @@
   <ItemGroup>
     <Compile Include="AgCasinoBalanceDataAccessTest.cs" />
     <Compile Include="CasinoTurnoverDataAccessTest.cs" />
-    <Compile Include="CustomerPendingFundsDataAccessTest.cs" />
     <Compile Include="ExchangeVoidedDataAccessTest.cs" />
     <Compile Include="ExchangeWinLossDataAccessTest.cs" />
     <Compile Include="SabaVirtualSportsWinLossDataAccessTest.cs" />
