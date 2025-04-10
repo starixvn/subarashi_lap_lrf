@@ -97,15 +97,11 @@
     <Compile Include="Interfaces\ICasinoTurnoverDataAccess.cs" />
     <Compile Include="Interfaces\IExchangeVoidedDataAccess.cs" />
     <Compile Include="Interfaces\IExchangeWinLossDataAccess.cs" />
-    <Compile Include="Interfaces\ILicenseeWinLossByTimeZoneDataAccess.cs" />
     <Compile Include="Interfaces\ISabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="Interfaces\ISpecialLicenseeWinLossDataAccess.cs" />
-    <Compile Include="Interfaces\ISubsidiaryPerformanceDataAccess.cs" />
     <Compile Include="SabaVirtualSportsWinLossDataAccess.cs" />
     <Compile Include="SpecialLicenseeWinLossDataAccess.cs" />
     <Compile Include="AgCasinoBalanceDataAccess.cs" />
-    <Compile Include="LicenseeWinLossByTimeZoneDataAccess.cs" />
-    <Compile Include="SubsidiaryPerformanceDataAccess.cs" />
     <Compile Include="ThirdPartyWinLossDataAccess.cs" />
     <Compile Include="Interfaces\IAgCasinoBalanceDataAccess.cs" />
     <Compile Include="Interfaces\IThirdPartyWinLossDataAccess.cs" />
