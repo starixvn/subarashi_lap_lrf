@@ -1,4 +1,4 @@
-﻿// Generated at: 3/26/2025 9:39:04 AM
+﻿// Generated at: 3/28/2025 2:27:24 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -783,6 +783,7 @@ ProductFS:"FastSpin",
 ProductGPILC:"GPI Live Casino",
 ProductGPIRNG:"GPI",
 ProductHB:"Habanero",
+ProductHOT:"HOTDOG",
 ProductI4D:"Togel 4D",
 ProductJIG:"Jili",
 ProductJK:"Joker",
