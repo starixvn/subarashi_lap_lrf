@@ -396,9 +396,6 @@
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\id-ID.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\th-TH.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\vi-VN.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\id-ID.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\th-TH.htm" />
     <Content Include="App_Data\UserGuide\TotalBets3WayHandicap\vi-VN.htm" />
@@ -460,8 +457,6 @@
     <Content Include="App_Data\UserGuide\GodOfFortuneWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationMonitored\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\en-US.htm" />
-    <Content Include="App_Data\UserGuide\SabaVirtualSportsWL\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\en-US.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationProblem\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\PlayerSegmentationVIP\en-US.htm" />
@@ -631,11 +626,6 @@
     <Content Include="Views\Desktop\Customer\CustomerLog\GroupCommLog\Menu.cshtml" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\BetList.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerClass\CustomerClassInformation.cshtml" />
-    <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Content.cshtml" />
-    <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Filter.cshtml" />
-    <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Main.cshtml" />
-    <Content Include="App_Data\Template\Reports\SabaVirtualSportsWinLoss.xls" />
-    <Content Include="Views\Desktop\BetList\SabaVirtualSportsWl\Main.cshtml" />
     <Content Include="SiteConfig\WebConfigTransforms\AWS.config" />
     <Content Include="SiteConfig\WebConfigTransforms\AWSStatic.config" />
     <Content Include="SiteConfig\Web.AppSettings.AWSStatic.config" />
@@ -703,7 +693,6 @@
     <Content Include="Views\Desktop\BetList\BettingTicketCenter\SingleCustomer.cshtml" />
     <Content Include="Views\Desktop\Report\CasinoTurnover\Main.cshtml" />
     <None Include="bundleconfig.json" />
-    <Content Include="Views\Desktop\Report\SubsidiaryPerformance\Main.cshtml" />
     <Content Include="Views\Desktop\Shared\_ReactPageLayout.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerComm\GroupCommList.cshtml" />
     <Content Include="Views\Desktop\Customer\CustomerComm\Header.cshtml" />
