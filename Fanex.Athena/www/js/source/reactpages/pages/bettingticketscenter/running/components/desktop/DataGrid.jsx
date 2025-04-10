@@ -14,16 +14,17 @@ var ColumnWidths = [
     70, 110, 110, 80, 80
 ];
 var ColumnAlignments = [
-    'center-align', '', '', 'center-align tooltip', 'center-align', 'right-align', 'right-align',
+    'center-align', '', 'center-align', 'center-align', 'center-align', 'right-align', 'right-align',
     'right-align', 'right-align', 'center-align', 'center-align', 'center-align'
 ];
 const SortableColumns = ['Stake'];
+const TooltipColumns = ['SystemId', 'RefNo', 'LicenseeTxId'];
 
 export const DataGrid = (props) => {
     if (AppData.isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
         Columns.splice(4, 0, 'LicenseeTxId');
         ColumnWidths.splice(4, 0, 110);
-        ColumnAlignments.splice(4, 0, 'center-align tooltip');
+        ColumnAlignments.splice(4, 0, 'center-align');
     }
 
     const { BaseCurrencyName } = props.requestParam;
@@ -38,6 +39,7 @@ export const DataGrid = (props) => {
             totalText={`${LangHelper.getSingleResource('Totalin')} ${BaseCurrencyName}`}
             totalColumns={SortableColumns}
             sortableColumns={SortableColumns}
+            tooltipColumns={TooltipColumns}
         />
     );
 }

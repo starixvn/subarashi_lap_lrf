@@ -575,6 +575,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       columns,
       columnAlignments,
+      tooltipColumns,
       data
     } = this.props;
     let rows = [];
@@ -584,7 +585,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       let cells = [];
       for (let j = 0; j < columns.length; j++) {
         const column = columns[j];
-        let hasTooltip = columnAlignments[j].indexOf('tooltip') !== -1;
+        const hasTooltip = tooltipColumns && tooltipColumns.indexOf(column) !== -1;
         cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], _extends({
           key: `${column}-${i}-${timestamp}`,
           className: columnAlignments[j]

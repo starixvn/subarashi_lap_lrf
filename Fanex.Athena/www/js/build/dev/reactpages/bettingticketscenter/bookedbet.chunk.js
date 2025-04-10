@@ -1211,6 +1211,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       columns,
       columnAlignments,
+      tooltipColumns,
       data
     } = this.props;
     let rows = [];
@@ -1220,7 +1221,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       let cells = [];
       for (let j = 0; j < columns.length; j++) {
         const column = columns[j];
-        let hasTooltip = columnAlignments[j].indexOf('tooltip') !== -1;
+        const hasTooltip = tooltipColumns && tooltipColumns.indexOf(column) !== -1;
         cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], _extends({
           key: `${column}-${i}-${timestamp}`,
           className: columnAlignments[j]
@@ -4545,8 +4546,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var Columns = ['Index', 'ExternalId', 'SystemId', 'BookedId', 'RefNo', 'BookedTime', 'Choice', 'OddsLower', 'OddsUpper', 'OddsType', 'Stake', 'Status', 'Platform'];
 var ColumnWidths = [40, 120, 120, 160, 160, 100, 270, 75, 75, 70, 100, 150, 100];
-var ColumnAlignments = ['center-align', '', '', 'center-align tooltip', 'center-align tooltip', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align'];
+var ColumnAlignments = ['center-align', '', 'center-align', 'center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align'];
 const SortableColumns = ['Stake'];
+const TooltipColumns = ['SystemId', 'BookedId', 'RefNo'];
 const DataGrid = props => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_common_components_BaseDataGrid__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataUrl: _common_lib_constants__WEBPACK_IMPORTED_MODULE_1__["ApiUrl"].BOOKEDBET_DATA_URL,
@@ -4556,7 +4558,8 @@ const DataGrid = props => {
     columnAlignments: ColumnAlignments,
     totalText: _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_3__["default"].getSingleResource('Total'),
     totalColumns: SortableColumns,
-    sortableColumns: SortableColumns
+    sortableColumns: SortableColumns,
+    tooltipColumns: TooltipColumns
   });
 };
 /* harmony default export */ __webpack_exports__["default"] = (/*#__PURE__*/Object(react__WEBPACK_IMPORTED_MODULE_0__["memo"])(DataGrid));
@@ -5529,7 +5532,8 @@ const BaseDataGrid = props => {
     columnAlignments,
     totalText,
     totalColumns,
-    sortableColumns
+    sortableColumns,
+    tooltipColumns
   } = props;
   const pageOption = {
     PageIndex: requestParam.PageIndex,
@@ -5589,6 +5593,7 @@ const BaseDataGrid = props => {
     sortableColumns: sortableColumns,
     totalColumns: totalColumns,
     columnAlignments: columnAlignments,
+    tooltipColumns: tooltipColumns,
     data: gridData.Data,
     total: gridData.Total,
     totalText: totalText,

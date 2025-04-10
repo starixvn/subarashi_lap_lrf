@@ -14,9 +14,10 @@ const defaultColumnWidths = [
     70, 100, 100, 100, 110, 80, 80
 ];
 const defaultColumnAlignments = [
-    'center-align', '', '', 'center-align tooltip', 'center-align', 'right-align', 'right-align',
+    'center-align', '', 'center-align', 'center-align', 'center-align', 'right-align', 'right-align',
     'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'
 ];
+const TooltipColumns = ['SystemId', 'RefNo', 'LicenseeTxId'];
 
 const DataGrid = (props) => {
 
@@ -34,7 +35,7 @@ const DataGrid = (props) => {
     if (AppData.isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
         Columns.splice(4, 0, 'LicenseeTxId');
         ColumnWidths.splice(4, 0, 110);
-        ColumnAlignments.splice(4, 0, 'center-align tooltip');
+        ColumnAlignments.splice(4, 0, 'center-align');
     }
 
     return (
@@ -45,6 +46,7 @@ const DataGrid = (props) => {
             columns={Columns}
             columnWidths={ColumnWidths}
             columnAlignments={ColumnAlignments}
+            tooltipColumns={TooltipColumns}
             totalText=''
             totalColumns={[]}
             sortableColumns={[]}

@@ -52,7 +52,7 @@ class BetListDataGrid extends Component {
     }
 
     _buildBody() {
-        const { columns, columnAlignments, data } = this.props;
+        const { columns, columnAlignments, tooltipColumns, data } = this.props;
         let rows = [];
         const timestamp = new Date().getTime();
 
@@ -62,7 +62,7 @@ class BetListDataGrid extends Component {
 
             for (let j = 0; j < columns.length; j++) {
                 const column = columns[j];
-                let hasTooltip = columnAlignments[j].indexOf('tooltip') !== -1;
+                const hasTooltip = tooltipColumns && tooltipColumns.indexOf(column) !== -1;
 
                 cells.push(
                     <Cell key={`${column}-${i}-${timestamp}`} className={columnAlignments[j]} {...(hasTooltip ? { title: item[column] } : {})} dangerouslySetInnerHTML={{ __html: item[column] }}></Cell>
