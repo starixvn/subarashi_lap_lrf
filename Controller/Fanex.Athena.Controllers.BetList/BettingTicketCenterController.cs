@@ -99,7 +99,7 @@
                 LiveStatusList = GetLiveStatusList(),
                 StatusList = GetStatusList(),
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterAdvancedSearch),
-                MinDate = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay,
+                MinDate = DateTimeHelper.Today.AddMonths(-1),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
                 SubsidiaryViewType = IsOneworksMaster ? (byte)SubsidiaryViewType.MasterManagement : userSession.SubsidiaryViewType,
