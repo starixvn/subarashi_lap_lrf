@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import LangHelper from '@jsroot/lib/langHelper'
-import AppData from '@jsroot/lib/AppData'
 import PropTypes from 'prop-types'
 
 export const Note = (props) => {
@@ -11,8 +10,6 @@ export const Note = (props) => {
             </div>
             <div className={props.contentClass}>
                 * {LangHelper.getSingleResource('BettingTicketCenter_AdvancedSearchTabNote1')}
-                <br />
-                * {LangHelper.getSingleResource('BettingTicketCenter_AdvancedSearchTabNote2').replace("{0}", AppData.dateConstraint.minDate)}
             </div>
         </>)
 }
