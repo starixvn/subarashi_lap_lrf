@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/9/2025 12:19:36 PM
+﻿// Generated at: 4/10/2025 2:43:01 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -881,6 +881,7 @@ ProductL22:"Live22",
 ProductLC:"Live Casino",
 ProductLG:"Virtual Sports 3",
 ProductLT:"Lottery",
+ProductMGLC:"Microgaming Live",
 ProductMGRNG:"MG-RNG",
 ProductMXG:"MaxGame",
 ProductNG:"Number Game",
