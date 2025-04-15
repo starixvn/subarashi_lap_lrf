@@ -1,4 +1,5 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import LangHelper from '@jsroot/lib/langHelper'
 import { useValidParam } from '../hooks/useValidParam.jsx'
@@ -22,12 +23,19 @@ import CustomerClassFilter from '../filters/CustomerClassFilter';
 import OddsGroupFilter from '../filters/OddsGroupFilter';
 import PlatformFilter from '../filters/PlatformFilter';
 import IpFilter from '../filters/IpFilter';
+import { ActionCreators } from '../../actions/index.js'
 
 export const MobileFormFilter = () => {
+    const dispatch = useDispatch();
     const isValidModel = useValidParam();
     const { isShowSubsidiaryDropdown, isSubsidiarySearch, isShowSubsidiarySearchCheckBox } = useSubsidiarySearch();
     const { submit } = useFilterAction();
-    const [isCollapsed, setIsCollapse] = useState(true)
+    const [isCollapsed, setIsCollapse] = useState(true);
+    const { setSubsidiarySearch } = ActionCreators;
+
+    useEffect(() => {
+        dispatch(setSubsidiarySearch(!isShowSubsidiarySearchCheckBox && isShowSubsidiaryDropdown));
+    }, []);
 
     const onCollapse = () => {
         setIsCollapse(true);
@@ -99,7 +107,7 @@ export const MobileFormFilter = () => {
                         <SubsidiaryCheckBoxFilter />
                     </div>
                 )}
-                
+
                 <div className="col-12">
                     <div className="form-group">
                         <div className="button-group">

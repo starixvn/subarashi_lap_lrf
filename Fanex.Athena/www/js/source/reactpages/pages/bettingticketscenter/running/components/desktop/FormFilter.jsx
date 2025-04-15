@@ -1,4 +1,5 @@
-﻿import React, { memo } from 'react'
+﻿import React, { memo, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import CollapsiblePanel from '@jsroot/components/collapsible-panel'
 import LangHelper from '@jsroot/lib/langHelper'
 import { useValidParam } from '../hooks/useValidParam.jsx'
@@ -22,11 +23,18 @@ import CustomerClassFilter from '../filters/CustomerClassFilter';
 import OddsGroupFilter from '../filters/OddsGroupFilter';
 import PlatformFilter from '../filters/PlatformFilter';
 import IpFilter from '../filters/IpFilter';
+import { ActionCreators } from '../../actions/index.js'
 
 export const FormFilter = () => {
+    const dispatch = useDispatch();
     const isValidModel = useValidParam();
     const { isShowSubsidiaryDropdown, isSubsidiarySearch, isShowSubsidiarySearchCheckBox } = useSubsidiarySearch();
-    const {submit} = useFilterAction();
+    const { submit } = useFilterAction();
+    const { setSubsidiarySearch } = ActionCreators;
+
+    useEffect(() => {
+        dispatch(setSubsidiarySearch(!isShowSubsidiarySearchCheckBox && isShowSubsidiaryDropdown));
+    }, []);
 
     return (
         <CollapsiblePanel className="page-filter" stickyFooter={<StickyIcon />}>
