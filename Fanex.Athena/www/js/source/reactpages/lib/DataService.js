@@ -30,28 +30,29 @@ export default class DataService {
 
     static getData(url, params, cancellationTokenSource) {
         const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
-        return axios.get(url, 
-            { 
+        return axios.get(url,
+            {
                 params: params,
                 cancelToken: token
             });
     }
 
-    static genCancellationToken(){
+    static genCancellationToken() {
         return axios.CancelToken.source();
     }
 
-    static isCancel(thrown)
-    {
+    static isCancel(thrown) {
         return axios.isCancel(thrown);
     }
 
-    static postData(url, params) {
+    static postData(url, params, cancellationTokenSource) {
+        const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
         return axios.post(url, params, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 '__RequestVerificationToken': Site.getXsrfToken()
-            }
+            },
+            cancelToken: token
         });
     }
 

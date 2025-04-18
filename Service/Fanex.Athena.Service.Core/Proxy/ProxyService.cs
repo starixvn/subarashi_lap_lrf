@@ -6,12 +6,12 @@
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web;
-    using Fanex.Athena.Service.StatelessCore.CustomException;
+    using StatelessCore.CustomException;
 
     public class ProxyService : IProxyService, IDisposable
     {
-        private readonly IProxyOptions _options;
         private readonly HttpClient _client;
+        private readonly IProxyOptions _options;
 
         public ProxyService(IProxyOptions options)
         {
@@ -22,38 +22,14 @@
             };
         }
 
-        public async Task<HttpResponseMessage> HandleRequest(string apiKey, string apiUrl, HttpRequest originalRequest)
+        public void Dispose()
         {
-            var apiUri = _options.BuildRequestUri(apiKey, apiUrl, originalRequest.QueryString.ToString());
-            using (var requestMessage = CreateHttpRequest(originalRequest, apiUri))
-            {
-                if (_options.PrepareRequest != null)
-                {
-                    await _options.PrepareRequest(originalRequest, requestMessage);
-                }
-
-                var responseMessage = null as HttpResponseMessage;
-                var cancelToken = new CancellationTokenSource(_options.Timeout);
-
-                try
-                {
-                    responseMessage = await SendHttpRequest(requestMessage, cancelToken.Token).ConfigureAwait(false);
-                    return responseMessage;
-                }
-                catch (Exception ex)
-                {
-                    responseMessage?.Dispose();
-                    throw new ProxyException(ex.Message, apiKey, apiUrl, apiUri.ToString(), ex);
-                }
-                finally
-                {
-                    cancelToken.Dispose();
-                }
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        public Task<HttpResponseMessage> HandleRequest(string apiKey, string apiUrl)
-            => HandleRequest(apiKey, apiUrl, HttpContext.Current.Request);
+        public Task<HttpResponseMessage> HandleRequest(string apiKey, string apiUrl, CancellationToken cancellationToken = default)
+            => HandleRequest(apiKey, apiUrl, HttpContext.Current.Request, cancellationToken);
 
         public async Task<HttpResponseMessage> HealthCheck(string apiKey)
         {
@@ -84,14 +60,51 @@
             }
         }
 
+        public async Task<HttpResponseMessage> HandleRequest(string apiKey, string apiUrl, HttpRequest originalRequest, CancellationToken cancellationToken)
+        {
+            var apiUri = _options.BuildRequestUri(apiKey, apiUrl, originalRequest.QueryString.ToString());
+            using (var requestMessage = CreateHttpRequest(originalRequest, apiUri))
+            {
+                if (_options.PrepareRequest != null)
+                {
+                    await _options.PrepareRequest(originalRequest, requestMessage);
+                }
+
+                var responseMessage = null as HttpResponseMessage;
+                var timeoutCts = new CancellationTokenSource(_options.Timeout);
+                var cancelToken = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, timeoutCts.Token);
+
+                try
+                {
+                    responseMessage = await SendHttpRequest(requestMessage, cancelToken.Token).ConfigureAwait(false);
+                    return responseMessage;
+                }
+                catch (Exception ex)
+                {
+                    responseMessage?.Dispose();
+                    throw new ProxyException(ex.Message, apiKey, apiUrl, apiUri.ToString(), ex);
+                }
+                finally
+                {
+                    timeoutCts.Dispose();
+                    cancelToken.Dispose();
+                }
+            }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            _client?.Dispose();
+        }
+
         private static HttpRequestMessage CreateHttpRequest(HttpRequest originalRequest, Uri uri)
         {
             var requestMessage = new HttpRequestMessage();
             var requestMethod = originalRequest.HttpMethod;
             if (requestMethod != HttpMethod.Get.Method &&
-                 requestMethod != HttpMethod.Head.Method &&
-                 requestMethod != HttpMethod.Delete.Method &&
-                 requestMethod != HttpMethod.Trace.Method)
+                requestMethod != HttpMethod.Head.Method &&
+                requestMethod != HttpMethod.Delete.Method &&
+                requestMethod != HttpMethod.Trace.Method)
             {
                 var streamContent = new StreamContent(originalRequest.InputStream);
                 requestMessage.Content = streamContent;
@@ -126,17 +139,6 @@
         ~ProxyService()
         {
             Dispose(false);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            _client?.Dispose();
         }
     }
 }

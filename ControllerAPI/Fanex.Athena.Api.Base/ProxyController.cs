@@ -2,10 +2,11 @@
 {
     using System;
     using System.Net.Http;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http;
-    using Fanex.Athena.Api.Base.Attributes;
-    using Fanex.Athena.Service.Core.Proxy;
+    using Attributes;
+    using Service.Core.Proxy;
 
     [ApiUMFilter]
     public class ProxyController : ApiController
@@ -28,20 +29,20 @@
         [CLSCompliant(false)]
         [AcceptVerbs("Get", "Post")]
         //[ApiValidateAntiForgery]
-        public async Task<HttpResponseMessage> Forward([FromUri] string apiKey, [FromUri] string apiUrl)
+        public async Task<HttpResponseMessage> Forward([FromUri] string apiKey, [FromUri] string apiUrl, CancellationToken cancellationToken = default)
         {
-            var result = await _proxyService.HandleRequest(apiKey, apiUrl).ConfigureAwait(false);
+            var result = await _proxyService.HandleRequest(apiKey, apiUrl, cancellationToken).ConfigureAwait(false);
             return result;
         }
 
         [CLSCompliant(false)]
         [AcceptVerbs("Get")]
-        public async Task<HttpResponseMessage> ReportViews()
+        public async Task<HttpResponseMessage> ReportViews(CancellationToken cancellationToken = default)
         {
             const string ApiKey = "ReportClientApp";
             const string ApiUrl = "Home_Index";
 
-            var result = await _proxyService.HandleRequest(ApiKey, ApiUrl).ConfigureAwait(false);
+            var result = await _proxyService.HandleRequest(ApiKey, ApiUrl, cancellationToken).ConfigureAwait(false);
 
             return result;
         }
