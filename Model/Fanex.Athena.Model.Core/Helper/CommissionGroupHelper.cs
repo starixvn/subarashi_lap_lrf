@@ -58,7 +58,9 @@
             Product.ASK,
             Product.FG,
             Product.HOT,
-            Product.MGLC
+            Product.MGLC,
+            Product.PTLC,
+            Product.RGRNG
         };
 
         private static readonly Dictionary<string, string> FollowPermissions = new Dictionary<string, string>

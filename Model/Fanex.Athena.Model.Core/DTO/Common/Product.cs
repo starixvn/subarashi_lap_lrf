@@ -143,6 +143,10 @@
 
         public const string MGLC = "MGLC";
 
+        public const string PTLC = "PTLC";
+
+        public const string RGRNG = "RGRNG";
+
         #endregion Field
 
         #region Property

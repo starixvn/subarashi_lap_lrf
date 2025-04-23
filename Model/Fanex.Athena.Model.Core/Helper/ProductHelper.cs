@@ -89,7 +89,9 @@
                 { Product.ASK, nameof(ViewResources.ProductASK) },
                 { Product.FG, nameof(ViewResources.ProductFG) },
                 { Product.HOT, nameof(ViewResources.ProductHOT) },
-                { Product.MGLC, nameof(ViewResources.ProductMGLC) }
+                { Product.MGLC, nameof(ViewResources.ProductMGLC) },
+                { Product.PTLC, nameof(ViewResources.ProductPTLC) },
+                { Product.RGRNG, nameof(ViewResources.ProductRGRNG) }
             };
 
         public static string GetProductCode(int productId)
