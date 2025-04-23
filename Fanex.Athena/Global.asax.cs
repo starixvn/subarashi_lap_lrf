@@ -77,8 +77,8 @@
                 DbSettingProviderManager
                     .StartNewSession()
                     .WithSqlServer()
-                    .UseDefaultConnectionStringProvider()
                     .UseShardDbSettingProvider()
+                    .UseDefaultDbSettingProvider("~/SpNameConfig/FanexSpName.xml", true)
                     .Run();
 
                 RefDataTypeContainer
