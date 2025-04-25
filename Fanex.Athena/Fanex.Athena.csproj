@@ -36,10 +36,8 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
     <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication>
-    </IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>
-    </IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <TargetFrameworkProfile />
@@ -640,8 +638,6 @@
     </Content>
     <Content Include="Views\Desktop\Report\DailyBets\Index.cshtml" />
     <Content Include="Views\Desktop\Report\ExchangeVoided\Index.cshtml" />
-    <Content Include="SiteConfig\WebConfigTransforms\BACKUPMNLStatic.config" />
-    <Content Include="SiteConfig\Web.BACKUPMNLStatic.config" />
     <Content Include="Views\Desktop\Customer\PlayerSegmentation\Main.cshtml" />
     <Content Include="App_Data\Template\Customers\PlayerSegmentation\VipPlayerList.xls" />
     <Content Include="Views\Desktop\Customer\CustomerComm\Menu.cshtml" />
@@ -653,12 +649,6 @@
     <Content Include="Views\Desktop\Report\SabaVirtualSportsWinLoss\Main.cshtml" />
     <Content Include="App_Data\Template\Reports\SabaVirtualSportsWinLoss.xls" />
     <Content Include="Views\Desktop\BetList\SabaVirtualSportsWl\Main.cshtml" />
-    <Content Include="SiteConfig\WebConfigTransforms\AWS.config" />
-    <Content Include="SiteConfig\WebConfigTransforms\AWSStatic.config" />
-    <Content Include="SiteConfig\Web.AppSettings.AWSStatic.config" />
-    <Content Include="SiteConfig\Web.AppSettings.AWS.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="SiteConfig\Web.ConnectionStrings.AWSStatic.config">
       <SubType>Designer</SubType>
     </Content>
@@ -706,7 +696,6 @@
     <Content Include="App_Data\FakeLicenseeSetting.json" />
     <Content Include="App_Data\ReportSetting.json" />
     <Content Include="Views\Desktop\Report\SpecialLicenseeWinLoss\Main.cshtml" />
-    <None Include="SiteConfig\Web.AppSettings.BACKUPMNLStatic.config" />
     <Content Include="SiteConfig\Web.AppSettings.KLDR.config">
       <SubType>Designer</SubType>
     </Content>
@@ -887,9 +876,6 @@
       <DependentUpon>Web.config.tt</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="SiteConfig\Web.SANDBOX.config">
-      <DependentUpon>Web.config.tt</DependentUpon>
-    </Content>
     <Content Include="SiteConfig\Web.UAT.config">
       <DependentUpon>Web.config.tt</DependentUpon>
       <SubType>Designer</SubType>
@@ -909,14 +895,6 @@
       <DependentUpon>Web.config.tt</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="SiteConfig\Web.AWS.config">
-      <DependentUpon>Web.config.tt</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="SiteConfig\Web.AWSStatic.config">
-      <DependentUpon>Web.config.tt</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="SiteConfig\Web.DEV.config">
       <DependentUpon>Web.config.tt</DependentUpon>
       <SubType>Designer</SubType>
@@ -933,7 +911,6 @@
     <Content Include="Views\Report\AgCasinoBalance\Content.cshtml" />
     <Content Include="Views\Report\AgCasinoBalance\Filter.cshtml" />
     <Content Include="Views\Report\AgCasinoBalance\Main.cshtml" />
-    <Content Include="SiteConfig\WebConfigTransforms\BACKUPMNL.config" />
     <Content Include="SiteConfig\WebConfigTransforms\LOCAL.config" />
     <Content Include="SiteConfig\WebConfigTransforms\PRO.config" />
     <Content Include="SiteConfig\WebConfigTransforms\SANDBOX.config" />
@@ -959,9 +936,6 @@
     <Content Include="Views\Desktop\Utility\Error.cshtml" />
     <Content Include="Views\Desktop\Utility\LocationRestriction.cshtml" />
     <Content Include="Views\Desktop\Utility\UnderMaintenance.cshtml" />
-    <Content Include="SiteConfig\Web.AppSettings.BACKUPMNL.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="SiteConfig\Web.AppSettings.DEV.config" />
     <Content Include="SiteConfig\Web.AppSettings.LOCAL.config">
       <SubType>Designer</SubType>
@@ -3935,9 +3909,6 @@
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Scripts\Web.config" />
     <Content Include="Views\Authorization\ChangePass.cshtml" />
-    <Content Include="SiteConfig\Web.BACKUPMNL.config">
-      <DependentUpon>Web.config.tt</DependentUpon>
-    </Content>
     <None Include="SiteConfig\Web.config.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Web.config.txt</LastGenOutput>
