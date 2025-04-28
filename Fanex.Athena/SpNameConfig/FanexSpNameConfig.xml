@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
 	<!--Do not delete this-->
-	<SpNameConfig Environment="BACKUPMNL" SpName="Lrf_UserLogout" EnvironmentText="_mnl"></SpNameConfig>
-	<SpNameConfig Environment="BACKUPMNL" SpName="Lrf_UserLogin" EnvironmentText="_mnl"></SpNameConfig>
-	<SpNameConfig Environment="BACKUPMNL" SpName="Lrf_InternalLogin" EnvironmentText="_mnl"></SpNameConfig>
-	<SpNameConfig Environment="BACKUPMNL" SpName="Lrf_ReCheckIn" EnvironmentText="_mnl"></SpNameConfig>
-	<SpNameConfig Environment="BACKUPMNL" SpName="Lrf_CheckIn" EnvironmentText="_mnl"></SpNameConfig>
+	<SpNameConfig Environment="UATTW" SpName="Lrf_SubsidiarySel" EnvironmentText="" DbName="DBCUST.SiteConfig.wsv_lap" DbEnvironmentText="DBCUST_UAT.SiteConfig.wsv_lap"></SpNameConfig>
+	<SpNameConfig Environment="UATTW" SpName="Lrf_MessageListSel" EnvironmentText="" DbName="DBCUST.SiteConfig.wsv_lap" DbEnvironmentText="DBCUST_UAT.SiteConfig.wsv_lap"></SpNameConfig>
+	<SpNameConfig Environment="UATTW" SpName="Lrf_MessageUserIns" EnvironmentText="" DbName="DBCUST.SiteConfig.wsv_lap" DbEnvironmentText="DBCUST_UAT.SiteConfig.wsv_lap"></SpNameConfig>
+	<SpNameConfig Environment="UATTW" SpName="Lrf_MessageUserSel" EnvironmentText="" DbName="DBCUST.SiteConfig.wsv_lap" DbEnvironmentText="DBCUST_UAT.SiteConfig.wsv_lap"></SpNameConfig>
+	<SpNameConfig Environment="UATTW" SpName="Portal_Sub_GetSubsidiaryList" EnvironmentText="" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" DbEnvironmentText="DBCUST_UAT.SiteConfig.Dot_Admin_Portal"></SpNameConfig>
+
+	<SpNameConfig Environment="LOCAL" SpName="Portal_Sub_GetSubsidiaryList" EnvironmentText="" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" DbEnvironmentText="DBCUST.SiteConfig.wsv_lap"></SpNameConfig>
+	<SpNameConfig Environment="DEV" SpName="Portal_Sub_GetSubsidiaryList" EnvironmentText="" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" DbEnvironmentText="DBCUST.SiteConfig.wsv_lap"></SpNameConfig>
 	<!--Do not delete this-->
 </Root>

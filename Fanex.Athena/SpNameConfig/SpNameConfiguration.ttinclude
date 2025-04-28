@@ -36,18 +36,6 @@
         {
             SiteEnvironment = SiteEnvironment.Staging
         },
-		new SiteInfo
-        {
-            SiteEnvironment = SiteEnvironment.BACKUPMNL
-        },
-		new SiteInfo
-        {
-            SiteEnvironment = SiteEnvironment.AWS
-        },
-		new SiteInfo
-        {
-            SiteEnvironment = SiteEnvironment.AWSStatic
-        },
         new SiteInfo
         {
             SiteEnvironment = SiteEnvironment.KLDR
@@ -64,9 +52,6 @@
 		SIT,
         PRO,
 		Staging,
-		BACKUPMNL,
-		AWS,
-		AWSStatic,
 		KLDR
     }
 
@@ -78,6 +63,8 @@
         public SiteEnvironment SiteEnvironment { get; set; }
 
 		public string SpNameTemplate = "SpName=\"{0}\"";
+
+		public string DbNameTemplate = "DbName=\"{0}\"";
 		
 		public string GenerateSpName(string allSpName, IList<SpNameConfig> listOfConfig)
 		{
@@ -89,6 +76,12 @@
 					generateSpNameText, 
 					string.Format(SpNameTemplate, item.SpName), 
 					string.Format(SpNameTemplate, item.SpName + item.EnvironmentText), 
+					RegexOptions.IgnoreCase);
+
+				generateSpNameText = Regex.Replace(
+					generateSpNameText, 
+					string.Format(DbNameTemplate, item.DbName), 
+					string.Format(DbNameTemplate, item.DbEnvironmentText), 
 					RegexOptions.IgnoreCase); 
 			}
 			
@@ -103,6 +96,10 @@
 		public string SpName {get;set;}
 
 		public string EnvironmentText {get;set;}
+
+		public string DbName {get;set;}
+
+		public string DbEnvironmentText {get;set;}
 	}
 
 	static class Helper 
@@ -129,6 +126,8 @@
 						Environment = enviroment.Trim(),
 						SpName = element.Attribute("SpName").Value.Trim(),
 						EnvironmentText = element.Attribute("EnvironmentText").Value.Trim(),
+						DbName = element.Attribute("DbName").Value.Trim(),
+						DbEnvironmentText = element.Attribute("DbEnvironmentText").Value.Trim(),
 					});
 				}
 			}

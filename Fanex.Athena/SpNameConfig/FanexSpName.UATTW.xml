@@ -155,8 +155,8 @@
 	</Function>
 
 	<Function Name="SiteConfig">
-		<Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST.SiteConfig.wsv_lap" />
-		<Setting Key="Portal_Sub_GetSubsidiaryList" SpName="Portal_Sub_GetSubsidiaryList" DbName="DBCUST.SiteConfig.Dot_Admin_Portal" />
+		<Setting Key="Lrf_SubsidiarySel" SpName="Lrf_SubsidiarySel" DbName="DBCUST_UAT.SiteConfig.wsv_lap" />
+		<Setting Key="Portal_Sub_GetSubsidiaryList" SpName="Portal_Sub_GetSubsidiaryList" DbName="DBCUST_UAT.SiteConfig.Dot_Admin_Portal" />
 	</Function>
 	<Function Name="Customer Class">
 		<Setting Key="Lrf_CustomerClassSel" SpName="Lrf_CustomerClassSel" DbName="DBCUST.CustDB.wsv_lap" />
@@ -169,9 +169,9 @@
 	<Function Name="Notification">
 		<Setting Key="Lrf_AmendmentTicketListingSel" SpName="Lrf_AmendmentTicketListingSel" DbName="DBOIC.bodb_OIC.wsv_lap" />
 		<Setting Key="Lrf_MatchSel" SpName="Lrf_MatchSel" DbName="DBACC.bodb02.wsv_lap" />
-		<Setting Key="Lrf_MessageListSel" SpName="Lrf_MessageListSel" DbName="DBCUST.SiteConfig.wsv_lap" />
-		<Setting Key="Lrf_MessageUserIns" SpName="Lrf_MessageUserIns" DbName="DBCUST.SiteConfig.wsv_lap" />
-		<Setting Key="Lrf_MessageUserSel" SpName="Lrf_MessageUserSel" DbName="DBCUST.SiteConfig.wsv_lap" />
+		<Setting Key="Lrf_MessageListSel" SpName="Lrf_MessageListSel" DbName="DBCUST_UAT.SiteConfig.wsv_lap" />
+		<Setting Key="Lrf_MessageUserIns" SpName="Lrf_MessageUserIns" DbName="DBCUST_UAT.SiteConfig.wsv_lap" />
+		<Setting Key="Lrf_MessageUserSel" SpName="Lrf_MessageUserSel" DbName="DBCUST_UAT.SiteConfig.wsv_lap" />
 		<Setting Key="Lrf_AdmNotificationSel" SpName="Lrf_AdmNotificationSel" DbName="DBCRM.MessageNotification.wsv_lap" />
 		<Setting Key="Lrf_AdmTicketListSel" SpName="Lrf_AdmTicketListSel" DbName="DBCRM.MessageNotification.wsv_lap" />
 	</Function>

@@ -494,15 +494,6 @@
     <Content Include="Scripts\Languages\ViewResources.th-TH.js" />
     <Content Include="Scripts\Languages\ViewResources.vi-VN.js" />
     <Content Include="Scripts\Languages\ViewResources.zh-CN.js" />
-    <Content Include="SpNameConfig\FanexSpName.AWS.xml">
-      <DependentUpon>FanexSpName.xml.tt</DependentUpon>
-    </Content>
-    <Content Include="SpNameConfig\FanexSpName.AWSStatic.xml">
-      <DependentUpon>FanexSpName.xml.tt</DependentUpon>
-    </Content>
-    <Content Include="SpNameConfig\FanexSpName.BACKUPMNL.xml">
-      <DependentUpon>FanexSpName.xml.tt</DependentUpon>
-    </Content>
     <Content Include="SpNameConfig\FanexSpName.KLDR.xml">
       <DependentUpon>FanexSpName.xml.tt</DependentUpon>
     </Content>
