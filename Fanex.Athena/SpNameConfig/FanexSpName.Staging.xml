@@ -182,16 +182,16 @@
 	</Function>
 
 	<SiteDB>
-		<Setting Key="SiteDB_Lrf_Rpt_LicWinloss" SpName="SiteDB_Lrf_Rpt_LicWinloss" DbName="DBSID.bodb02.wsv_lap" />
-		<Setting Key="SiteDB_Lrf_Rpt_LicWinlossDetail" SpName="SiteDB_Lrf_Rpt_LicWinlossDetail" DbName="DBSID.bodb02.wsv_lap" />
-		<Setting Key="SiteDB_Lrf_Rpt_LicWinlossDetail_Ag" SpName="SiteDB_Lrf_Rpt_LicWinlossDetail_Ag" DbName="DBSID.bodb02.wsv_lap" />
-		<Setting Key="SiteDB_Lrf_Rpt_Outstanding" SpName="SiteDB_Lrf_Rpt_Outstanding" DbName="DBSID.bodb02.wsv_lap" />
-		<Setting Key="SiteDB_Lrf_Forecast_MatchTotalForecast" SpName="SiteDB_Lrf_Forecast_MatchTotalForecast" DbName="DBSID.bodb02.wsv_lap" />
-		<Setting Key="SiteDB_Lrf_Forecast_SelByLeague" SpName="SiteDB_Lrf_Forecast_SelByLeague" DbName="DBSID.bodb02.wsv_lap"></Setting>
-		<Setting Key="SiteDB_Lrf_Forecast_SelHDP" SpName="SiteDB_Lrf_Forecast_SelHDP" DbName="DBSID.bodb02.wsv_lap"></Setting>
-		<Setting Key="SiteDB_Lrf_Forecast_SelOU" SpName="SiteDB_Lrf_Forecast_SelOU" DbName="DBSID.bodb02.wsv_lap"></Setting>
-		<Setting Key="SiteDB_Lrf_Forecast1x2_SelByLeague" SpName="SiteDB_Lrf_Forecast1x2_SelByLeague" DbName="DBSID.bodb02.wsv_lap"></Setting>
-		<Setting Key="SiteDB_Lrf_Forecast_Sel1X2" SpName="SiteDB_Lrf_Forecast_Sel1X2" DbName="DBSID.bodb02.wsv_lap"></Setting>
-		<Setting Key="SiteDB_Lrf_LeagueSelRunning" SpName="Lrf_LeagueSelRunning" DbName="DBSID.bodb02.wsv_lap"></Setting>
+		<Setting Key="SiteDB_Lrf_Rpt_LicWinloss" SpName="SiteDB_Lrf_Rpt_LicWinloss" DbName="Shard_DBSID.bodb02.wsv_lap" />
+		<Setting Key="SiteDB_Lrf_Rpt_LicWinlossDetail" SpName="SiteDB_Lrf_Rpt_LicWinlossDetail" DbName="Shard_DBSID.bodb02.wsv_lap" />
+		<Setting Key="SiteDB_Lrf_Rpt_LicWinlossDetail_Ag" SpName="SiteDB_Lrf_Rpt_LicWinlossDetail_Ag" DbName="Shard_DBSID.bodb02.wsv_lap" />
+		<Setting Key="SiteDB_Lrf_Rpt_Outstanding" SpName="SiteDB_Lrf_Rpt_Outstanding" DbName="Shard_DBSID.bodb02.wsv_lap" />
+		<Setting Key="SiteDB_Lrf_Forecast_MatchTotalForecast" SpName="SiteDB_Lrf_Forecast_MatchTotalForecast" DbName="Shard_DBSID.bodb02.wsv_lap" />
+		<Setting Key="SiteDB_Lrf_Forecast_SelByLeague" SpName="SiteDB_Lrf_Forecast_SelByLeague" DbName="Shard_DBSID.bodb02.wsv_lap"></Setting>
+		<Setting Key="SiteDB_Lrf_Forecast_SelHDP" SpName="SiteDB_Lrf_Forecast_SelHDP" DbName="Shard_DBSID.bodb02.wsv_lap"></Setting>
+		<Setting Key="SiteDB_Lrf_Forecast_SelOU" SpName="SiteDB_Lrf_Forecast_SelOU" DbName="Shard_DBSID.bodb02.wsv_lap"></Setting>
+		<Setting Key="SiteDB_Lrf_Forecast1x2_SelByLeague" SpName="SiteDB_Lrf_Forecast1x2_SelByLeague" DbName="Shard_DBSID.bodb02.wsv_lap"></Setting>
+		<Setting Key="SiteDB_Lrf_Forecast_Sel1X2" SpName="SiteDB_Lrf_Forecast_Sel1X2" DbName="Shard_DBSID.bodb02.wsv_lap"></Setting>
+		<Setting Key="SiteDB_Lrf_LeagueSelRunning" SpName="Lrf_LeagueSelRunning" DbName="Shard_DBSID.bodb02.wsv_lap"></Setting>
 	</SiteDB>
 </Functions>
