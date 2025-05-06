@@ -1162,5 +1162,6 @@ WrongUserNamePassword:"Wrong username or password.",
 Yes:"Yes",
 Yesterday:"Yesterday",
 YouAreNotAllowToAccessThisPage:"You are not allowed to access this page, please contact your administrator account.",
-YouNotChooseAnyCustomerMsg:"You did not choose any customers."
+YouNotChooseAnyCustomerMsg:"You did not choose any customers.",
+ProductPTLC: "Playtech Live"
 };

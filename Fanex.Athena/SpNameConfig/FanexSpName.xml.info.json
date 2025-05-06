@@ -43,24 +43,6 @@
       "Properties": {}
     },
     {
-      "Filename": "FanexSpName.BACKUPMNL.xml",
-      "Project": null,
-      "Path": "SpNameConfig",
-      "Properties": {}
-    },
-    {
-      "Filename": "FanexSpName.AWS.xml",
-      "Project": null,
-      "Path": "SpNameConfig",
-      "Properties": {}
-    },
-    {
-      "Filename": "FanexSpName.AWSStatic.xml",
-      "Project": null,
-      "Path": "SpNameConfig",
-      "Properties": {}
-    },
-    {
       "Filename": "FanexSpName.KLDR.xml",
       "Project": null,
       "Path": "SpNameConfig",

@@ -404,7 +404,7 @@
             $.each(productOptions, function (index, item) {
                 //insert turn over column
                 if (item.Status === true) {
-                    let productCol = Object.assign({}, productColumn);;
+                    let productCol = Object.assign({}, productColumn);
                     if (item.Code === 'CO') {
                         productCol.width = 80;
                     }
