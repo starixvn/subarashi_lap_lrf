@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 4/10/2025 2:43:01 PM
+﻿// Generated at: 5/7/2025 1:55:14 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -892,7 +892,9 @@ ProductPGS:"PG Soft",
 ProductPP:"PP",
 ProductPS:"PLAYSTAR",
 ProductPTCS:"Playtech Casino",
+ProductPTLC:"Playtech Live",
 ProductPTRNG:"Playtech",
+ProductRGRNG:"RichGaming",
 ProductSAG:"SA Gaming",
 ProductSB:"Sportsbook",
 ProductSB_BA:"Sportsbook &amp; BA",
