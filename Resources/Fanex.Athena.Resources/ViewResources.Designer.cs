@@ -8494,6 +8494,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Soccer Marble.
+        /// </summary>
+        public static string SoccerMarble {
+            get {
+                return ResourceManager.GetString("SoccerMarble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Soccer Parlay.
         /// </summary>
         public static string SoccerParlay {

@@ -21,14 +21,14 @@
         private readonly IPortalApiService _portalApiService;
         private readonly IMatchService _matchService;
         private readonly ICacheRefAdapter _cacheRefAdapter;
-        private readonly IBettingTicketCenterSportService _btcSportService;
+        private readonly ISportService _btcSportService;
 
         public RunningCommonDataApiController(
             ILanguageService langService,
             IPortalApiService portalApiService,
             IMatchService matchService,
             ICacheRefAdapter cacheRefAdapter,
-            IBettingTicketCenterSportService btcSportService)
+            ISportService btcSportService)
             : base(langService)
         {
             _portalApiService = portalApiService;
@@ -83,7 +83,7 @@
 
         private async Task<IEnumerable<Match>> GetMatchList(int sportId)
         {
-            if (sportId == (int)BettingTicketCenterSportType.Parlay)
+            if (sportId == (int)SportType.ParlayTreeView)
             {
                 return new List<Match>();
             }

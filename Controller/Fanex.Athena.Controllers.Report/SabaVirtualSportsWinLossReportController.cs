@@ -27,15 +27,16 @@
 
         private readonly IEnumerable<(int Id, int SportId, string Name, IEnumerable<int> SabaSportIds)> _sportList = new List<(int, int, string, IEnumerable<int>)>
         {
-            (1, (int)SportType.Soccer, ViewResources.Soccer, new[] { (int)SportType.SabaSoccer, (int)SportType.SabaFutsal }),
-            (-1, (int)SportType.Soccer, ViewResources.SoccerPinGoal, new[] { (int)SportType.SabaSoccerPingoal }),
-            (2, (int)SportType.BasketBall, ViewResources.Basketball, new[] { (int)SportType.SabaBasketball }),
-            (-2, (int)SportType.BasketBall, ViewResources.BasketballPinGoal, new[] { (int)SportType.SabaBasketballPinGoal }),
-            (50, (int)SportType.Cricket, ViewResources.Cricket , new[] { (int)SportType.SabaCricket }),
-            (-43, (int)SportType.Esports, ViewResources.ESportsPinGoal, new[] { (int)SportType.SabaESportsPinGoal }),
-            (5, (int)SportType.Tennis, ViewResources.Tennis , new[] { (int)SportType.SabaTennis }),
-            (4, (int)SportType.IceHockey, ViewResources.IceHockey , new[] { (int)SportType.SabaIceHockey }),
-            (47, (int)SportType.Kabaddi, ViewResources.Kabaddi , new[] { (int)SportType.SabaKabaddi }),
+            ((int)SportType.SabaSoccer, (int)SportType.Soccer, ViewResources.Soccer, new[] { (int)SportType.SabaSoccer, (int)SportType.SabaFutsal }),
+            ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, ViewResources.SoccerPinGoal, new[] { (int)SportType.SabaSoccerPingoal }),
+            ((int)SportType.SabaSoccerMarble, (int)SportType.Soccer, ViewResources.SoccerMarble, new[] { (int)SportType.SabaSoccerMarble }),
+            ((int)SportType.SabaBasketball, (int)SportType.BasketBall, ViewResources.Basketball, new[] { (int)SportType.SabaBasketball }),
+            ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, ViewResources.BasketballPinGoal, new[] { (int)SportType.SabaBasketballPinGoal }),
+            ((int)SportType.SabaCricket, (int)SportType.Cricket, ViewResources.Cricket , new[] { (int)SportType.SabaCricket }),
+            ((int)SportType.SabaESportsPinGoal, (int)SportType.Esports, ViewResources.ESportsPinGoal, new[] { (int)SportType.SabaESportsPinGoal }),
+            ((int)SportType.SabaTennis, (int)SportType.Tennis, ViewResources.Tennis , new[] { (int)SportType.SabaTennis }),
+            ((int)SportType.SabaIceHockey, (int)SportType.IceHockey, ViewResources.IceHockey , new[] { (int)SportType.SabaIceHockey }),
+            ((int)SportType.SabaKabaddi, (int)SportType.Kabaddi, ViewResources.Kabaddi , new[] { (int)SportType.SabaKabaddi }),
         };
 
         public SabaVirtualSportsWinLossReportController(

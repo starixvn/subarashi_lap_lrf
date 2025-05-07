@@ -33,6 +33,7 @@ namespace Fanex.Athena.Service.StatelessCore
             ((int)SportType.SabaIceHockey, (int)SportType.IceHockey, new [] { 42 }),
             ((int)SportType.SabaKabaddi, (int)SportType.Kabaddi, new [] { 42 }),
             ((int)SportType.SabaSoccerPingoal, (int)SportType.Soccer, new [] { 113 }),
+            ((int)SportType.SabaSoccerMarble, (int)SportType.Soccer, new [] { 252 }),
             ((int)SportType.SabaBasketballPinGoal, (int)SportType.BasketBall, new [] { 122 }),
             ((int)SportType.SabaESportsPinGoal, (int)SportType.Esports, new [] { 151 })
         };
@@ -127,6 +128,10 @@ namespace Fanex.Athena.Service.StatelessCore
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Futsal);
                     break;
 
+                case (int)SportType.SabaSoccerMarble:
+                    sportName = ViewResources.SoccerMarble;
+                    break;
+
                 default:
                     sportName = _cacheRefAdapter.GetSportName(sportTypeId);
                     break;
@@ -170,51 +175,55 @@ namespace Fanex.Athena.Service.StatelessCore
             {
                 return _cacheRefAdapter.GetSportName(sportType);
             }
-            if (sportType == HardCodeSportType.Parlay)
+            if (sportType == (int)SportType.ParlayTreeView)
             {
                 return ViewResources.Parlay;
             }
             var sportName = string.Empty;
             switch (sportType)
             {
-                case HardCodeSportType.SabaBasketball:
+                case (int)SportType.SabaBasketball:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.BasketBall);
                     break;
 
-                case HardCodeSportType.SabaSoccer:
+                case (int)SportType.SabaSoccer:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Soccer);
                     break;
 
-                case HardCodeSportType.SabaCricket:
+                case (int)SportType.SabaCricket:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Cricket);
                     break;
 
-                case HardCodeSportType.SabaSoccerPinGoal:
+                case (int)SportType.SabaSoccerPingoal:
                     sportName = ViewResources.SoccerPinGoal;
                     break;
 
-                case HardCodeSportType.SabaBasketballPinGoal:
+                case (int)SportType.SabaBasketballPinGoal:
                     sportName = ViewResources.BasketballPinGoal;
                     break;
 
-                case HardCodeSportType.SabaESportPinGoal:
+                case (int)SportType.SabaESportsPinGoal:
                     sportName = ViewResources.ESportsPinGoal;
                     break;
 
-                case HardCodeSportType.SabaFutsal:
+                case (int)SportType.SabaFutsal:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Futsal);
                     break;
 
-                case HardCodeSportType.SabaTennis:
+                case (int)SportType.SabaTennis:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Tennis);
                     break;
 
-                case HardCodeSportType.SabaIceHockey:
+                case (int)SportType.SabaIceHockey:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.IceHockey);
                     break;
 
-                case HardCodeSportType.SabaKabaddi:
+                case (int)SportType.SabaKabaddi:
                     sportName = _cacheRefAdapter.GetSportName((int)SportType.Kabaddi);
+                    break;
+
+                case (int)SportType.SabaSoccerMarble:
+                    sportName = ViewResources.SoccerMarble;
                     break;
 
                 default:
