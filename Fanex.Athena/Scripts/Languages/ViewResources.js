@@ -1,4 +1,4 @@
-﻿// Generated at: 5/7/2025 1:55:14 PM
+﻿// Generated at: 5/13/2025 10:14:01 AM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -827,6 +827,7 @@ ProductVS:"Virtual Sports",
 ProductVS2:"Virtual Sports 2",
 ProductVS3:"Virtual Sports 3 (Old)",
 ProductWE:"WE Live Casino",
+ProductWLC:"W Casino",
 ProductWM:"WM",
 ProductYB:"YeeBet",
 Promotion:"Promotion",

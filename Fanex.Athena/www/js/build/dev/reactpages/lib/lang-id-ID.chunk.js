@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/7/2025 1:55:14 PM
+// Generated at: 5/13/2025 10:14:01 AM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",

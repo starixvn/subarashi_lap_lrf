@@ -147,6 +147,8 @@
 
         public const string RGRNG = "RGRNG";
 
+        public const string WLC = "WLC";
+
         #endregion Field
 
         #region Property
