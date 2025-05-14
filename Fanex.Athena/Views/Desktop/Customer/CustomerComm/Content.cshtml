@@ -14,7 +14,9 @@
             else
             {
                 <table id="comm-group-list" class="table table-bordered comm-group-list"></table>
-                <input type="hidden" id="ProductList" value="@(string.Join(",", Model.ProductList))" />
+                <script type="text/javascript">
+                    var productListData = @Html.Raw(JsonConvert.SerializeObject(Model.ProductList));
+                </script>
                 <input type="hidden" id="CommGroupsData" value="@JsonConvert.SerializeObject(Model.Groups)" />
             }
         </div>
