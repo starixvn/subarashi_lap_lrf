@@ -64,6 +64,7 @@
                 content = RemoveSabaText(content);
                 content = AddLicenseeSection(content, SessionServiceInstance.LicenseeSession.LicenseeName);
                 content = RemoveSubsidairyText(content);
+                content = AddSabaCoinsSection(content);
             }
 
             return View("~/Views/UserGuide/Index.cshtml", null, content);
@@ -86,6 +87,26 @@
             var customcontent = AddCasinoProducts(content, products);
             customcontent = RemoveProductSection(customcontent, products, ProductTypes.CashOut, Product.CO);
             return customcontent;
+        }
+
+        private string AddSabaCoinsSection(string content)
+        {
+            var result = content;
+
+            if (content.Contains("{refno-saba-coins-section}"))
+            {
+                if (_authrizationService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.SabaCoins))
+                {
+                    result = result.Replace("{refno-saba-coins-section}", string.Empty);
+                    result = result.Replace("{/refno-saba-coins-section}", string.Empty);
+                }
+                else
+                {
+                    result = new Regex(@"\{refno-saba-coins-section\}[\s\S]*{/refno-saba-coins-section\}").Replace(result, string.Empty);
+                }
+            }
+
+            return result;
         }
 
         private string AddOpenBalanceInfo(string content)

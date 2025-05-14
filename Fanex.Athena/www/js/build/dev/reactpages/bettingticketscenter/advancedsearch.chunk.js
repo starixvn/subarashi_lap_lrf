@@ -1316,6 +1316,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     const {
       columns,
       columnAlignments,
+      tooltipColumns,
       data
     } = this.props;
     let rows = [];
@@ -1325,7 +1326,7 @@ class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       let cells = [];
       for (let j = 0; j < columns.length; j++) {
         const column = columns[j];
-        let hasTooltip = columnAlignments[j].indexOf('tooltip') !== -1;
+        const hasTooltip = tooltipColumns && tooltipColumns.indexOf(column) !== -1;
         cells.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_9softstudio_react_grid__WEBPACK_IMPORTED_MODULE_1__["Cell"], _extends({
           key: `${column}-${i}-${timestamp}`,
           className: columnAlignments[j]
@@ -5504,13 +5505,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var Columns = ['Index', 'ExternalId', 'SystemId', 'RefNo', 'TransTime', 'Choice', 'Odds', 'OddsType', 'Stake', 'WinLoss', 'LicenseeWL', 'Status', 'Platform', 'Live'];
 var ColumnWidths = [40, 120, 120, 160, 140, 370, 70, 70, 100, 100, 100, 110, 80, 80];
-var ColumnAlignments = ['center-align', '', '', 'center-align tooltip', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
+var ColumnAlignments = ['center-align', '', 'center-align', 'center-align', 'center-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'right-align', 'center-align', 'center-align', 'center-align'];
 const SortableColumns = ['Stake', 'WinLoss', 'LicenseeWL'];
+const TooltipColumns = ['SystemId', 'RefNo', 'LicenseeTxId'];
 const DataGrid = props => {
   if (_jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_5__["default"].isAllowTxIDColumn && !Columns.includes('LicenseeTxId')) {
     Columns.splice(4, 0, 'LicenseeTxId');
     ColumnWidths.splice(4, 0, 110);
-    ColumnAlignments.splice(4, 0, 'center-align tooltip');
+    ColumnAlignments.splice(4, 0, 'center-align');
   }
   const {
     BaseCurrencyName
@@ -5521,6 +5523,7 @@ const DataGrid = props => {
     columns: Columns,
     columnWidths: ColumnWidths,
     columnAlignments: ColumnAlignments,
+    tooltipColumns: TooltipColumns,
     totalText: `${_jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_4__["default"].getSingleResource('Totalin')} ${BaseCurrencyName}`,
     totalColumns: SortableColumns,
     sortableColumns: SortableColumns
@@ -8267,7 +8270,8 @@ const BaseDataGrid = props => {
     columnAlignments,
     totalText,
     totalColumns,
-    sortableColumns
+    sortableColumns,
+    tooltipColumns
   } = props;
   const pageOption = {
     PageIndex: requestParam.PageIndex,
@@ -8327,6 +8331,7 @@ const BaseDataGrid = props => {
     sortableColumns: sortableColumns,
     totalColumns: totalColumns,
     columnAlignments: columnAlignments,
+    tooltipColumns: tooltipColumns,
     data: gridData.Data,
     total: gridData.Total,
     totalText: totalText,

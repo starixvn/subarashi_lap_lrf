@@ -12,10 +12,11 @@ var ColumnWidths = [
     75, 70, 100, 150, 100
 ];
 var ColumnAlignments = [
-    'center-align', '', '', 'center-align tooltip', 'center-align tooltip', 'center-align', 'right-align', 'right-align',
+    'center-align', '', 'center-align', 'center-align', 'center-align', 'center-align', 'right-align', 'right-align',
     'right-align', 'right-align', 'right-align', 'center-align', 'center-align'
 ];
 const SortableColumns = ['Stake'];
+const TooltipColumns = ['SystemId', 'BookedId', 'RefNo'];
 
 const DataGrid = (props) => {
     return (
@@ -28,6 +29,7 @@ const DataGrid = (props) => {
             totalText={LangHelper.getSingleResource('Total')}
             totalColumns={SortableColumns}
             sortableColumns={SortableColumns}
+            tooltipColumns={TooltipColumns}
         />
     );
 }

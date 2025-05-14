@@ -11,7 +11,8 @@ import Service from '../lib/Service.js';
 export const BaseDataGrid = (props) => {
     const {
         gridData, requestParam, reportTitle, toggleLoader, getGridData, setRequestParam,
-        dataUrl, isPaging, columns, columnWidths, columnAlignments, totalText, totalColumns, sortableColumns
+        dataUrl, isPaging, columns, columnWidths, columnAlignments, totalText, totalColumns, sortableColumns,
+        tooltipColumns
     } = props;
     const pageOption = {
         PageIndex: requestParam.PageIndex,
@@ -70,6 +71,7 @@ export const BaseDataGrid = (props) => {
                 sortableColumns={sortableColumns}
                 totalColumns={totalColumns}
                 columnAlignments={columnAlignments}
+                tooltipColumns={tooltipColumns}
                 data={gridData.Data}
                 total={gridData.Total}
                 totalText={totalText}
