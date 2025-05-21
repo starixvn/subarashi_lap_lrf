@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 5/13/2025 10:14:01 AM
+﻿// Generated at: 5/26/2025 1:04:44 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -1027,6 +1027,7 @@ SinglePlayer:"Single Player",
 Skype:"Skype",
 SLTDateRangeNote:"Sports Lottery data is available from 11/22/2021",
 Soccer:"Soccer",
+SoccerMarble:"Soccer Marble",
 SoccerParlay:"Soccer Parlay",
 SoccerPinGoal:"Soccer PinGoal",
 SolutionForRestriction:"1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限",
