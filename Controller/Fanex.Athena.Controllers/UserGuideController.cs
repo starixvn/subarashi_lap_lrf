@@ -65,6 +65,7 @@
                 content = AddLicenseeSection(content, SessionServiceInstance.LicenseeSession.LicenseeName);
                 content = RemoveSubsidairyText(content);
                 content = AddSabaCoinsSection(content);
+                content = AddMatchMonitoringSection(content);
             }
 
             return View("~/Views/UserGuide/Index.cshtml", null, content);
@@ -103,6 +104,25 @@
                 else
                 {
                     result = new Regex(@"\{refno-saba-coins-section\}[\s\S]*{/refno-saba-coins-section\}").Replace(result, string.Empty);
+                }
+            }
+
+            return result;
+        }
+
+        private string AddMatchMonitoringSection(string content)
+        {
+            var result = content;
+            if (content.Contains("{match-monitoring-section}"))
+            {
+                if (_authrizationService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MatchMonitoringCenter))
+                {
+                    result = result.Replace("{match-monitoring-section}", string.Empty);
+                    result = result.Replace("{/match-monitoring-section}", string.Empty);
+                }
+                else
+                {
+                    result = new Regex(@"\{match-monitoring-section\}[\s\S]*{/match-monitoring-section\}").Replace(result, string.Empty);
                 }
             }
 

@@ -27,29 +27,46 @@
     <h4>
         报告指南
     </h4>
-    <ul>
-        <li><b>主队总计:</b> 投注主队的总注单。
-            <br />
-            主队总计 = 主队投注额 * 赔率。 </li>
-        <li><b>客队总计:</b> 投注客队的总注单。
-            <br />
-            客队总计 = 客队投注额 * 赔率。 </li>
-        <li><b>主队预测:</b> 预测若是主队获胜，承租公司的输赢金额。
-            <br />
-            主队预测 = 主队投注额 * 赔率 - 客队投注额。
-            <ul>
-                <li><b>负数金额</b>表示若是主队获胜，承租公司将会获胜。 </li>
-                <li><b>正数金额</b>表示若是主队获胜，承租公司将不会获胜。 </li>
-            </ul>
-        </li>
-        <li><b>客队预测:</b> 预测若是客队获胜，承租公司的输赢金额。
-            <br />
-            客队预测 = 客队投注额 * 赔率 - 主队投注额。
-            <ul>
-                <li><b>负数金额</b>表示若是客队获胜，承租公司将会获胜。 </li>
-                <li><b>正数金额</b>表示若是客队获胜，承租公司将不会获胜。 </li>
-            </ul>
-        </li>
-        <li><b>注:</b> |赔率|< 1，赔率= 1。 </li>
-    </ul>
+	<ul>
+		{match-monitoring-section}
+		<li>
+			<b>Monitor:</b> Click the “+” icon to add the event to the monitoring list.
+			<br />The “+” icon will only be shown for events that have Full Time tickets.
+			<br />If the event has already been added to the monitoring list, the text “Added” will be displayed instead.
+		</li>
+		<li>
+			<b>Event:</b> Click the Event link to add the event to the monitoring list and open the <b>Match Monitoring Center</b> page.
+			<br />The hyperlink will only be displayed for events that have Full Time tickets.
+		</li>
+		{/match-monitoring-section}
+		<li>
+			<b>主队总计:</b> 投注主队的总注单。
+			<br />
+			主队总计 = 主队投注额 * 赔率。
+		</li>
+		<li>
+			<b>客队总计:</b> 投注客队的总注单。
+			<br />
+			客队总计 = 客队投注额 * 赔率。
+		</li>
+		<li>
+			<b>主队预测:</b> 预测若是主队获胜，承租公司的输赢金额。
+			<br />
+			主队预测 = 主队投注额 * 赔率 - 客队投注额。
+			<ul>
+				<li><b>负数金额</b>表示若是主队获胜，承租公司将会获胜。 </li>
+				<li><b>正数金额</b>表示若是主队获胜，承租公司将不会获胜。 </li>
+			</ul>
+		</li>
+		<li>
+			<b>客队预测:</b> 预测若是客队获胜，承租公司的输赢金额。
+			<br />
+			客队预测 = 客队投注额 * 赔率 - 主队投注额。
+			<ul>
+				<li><b>负数金额</b>表示若是客队获胜，承租公司将会获胜。 </li>
+				<li><b>正数金额</b>表示若是客队获胜，承租公司将不会获胜。 </li>
+			</ul>
+		</li>
+		<li><b>注:</b> |赔率|< 1，赔率= 1。 </li>
+	</ul>
 </div>

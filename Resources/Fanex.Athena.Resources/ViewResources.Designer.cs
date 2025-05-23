@@ -5587,6 +5587,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If there are any matches that need to be monitored, please click the “+” icon in the Monitor column or click on the Event of the match — this will also redirect you to the Match Monitoring Center..
+        /// </summary>
+        public static string MoneyLineNote {
+            get {
+                return ResourceManager.GetString("MoneyLineNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Money Play.
         /// </summary>
         public static string MoneyPlay {

@@ -30,4 +30,11 @@
             <i class="icon-book right" id="UserGuide" title="@ViewResources.UserGuide"></i>
         </div>
     </div>
+    if (Model.Param.HasMonitoringPermission)
+    {
+	    <div class="row">
+		    <div class="col l1 m1 s2"><b>@ViewResources.Note:</b></div>
+		    <div class="col l11 m11 s10">@ViewResources.MoneyLineNote</div>
+	    </div>
+    }
 }
