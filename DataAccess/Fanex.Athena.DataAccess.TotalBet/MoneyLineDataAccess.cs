@@ -6,6 +6,7 @@
 
 namespace Fanex.Athena.DataAccess.TotalBet
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
@@ -30,7 +31,8 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     PageSize = metaModel.PageSize,
                     PageIndex = metaModel.PageIndex,
                     TotalRows = metaModel.TotalRows,
-                    BaseCurrency = metaModel.BaseCurrency
+                    BaseCurrency = metaModel.BaseCurrency,
+                    LicenseeId = metaModel.LicenseeId
                 };
                 using (var reader = await db.ExecuteReaderAsync(uspParams).ConfigureAwait(false))
                 {
@@ -74,6 +76,7 @@ namespace Fanex.Athena.DataAccess.TotalBet
                     LiveHomeScore = reader.ToString("livehomescore"),
                     LiveAwayScore = reader.ToString("liveawayscore"),
                     LiveIndicator = reader.ToInt("liveindicator"),
+                    MonitoringStatus = reader.ToInt("monitoringstatus")
                 };
 
                 dataList.Add(item);

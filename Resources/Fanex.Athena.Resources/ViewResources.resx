@@ -3897,7 +3897,13 @@
   <data name="SoccerMarble" xml:space="preserve">
     <value>Soccer Marble</value>
   </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Monitor</value>
+  </data>
   <data name="ProductWLC" xml:space="preserve">
     <value>W Casino</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Added</value>
   </data>
 </root>

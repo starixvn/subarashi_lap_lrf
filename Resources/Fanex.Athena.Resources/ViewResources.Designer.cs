@@ -178,6 +178,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        public static string Added {
+            get {
+                return ResourceManager.GetString("Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New.
         /// </summary>
         public static string AddNew {
@@ -5583,6 +5592,15 @@ namespace Fanex.Athena.Resources {
         public static string MoneyPlay {
             get {
                 return ResourceManager.GetString("MoneyPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitor.
+        /// </summary>
+        public static string Monitor {
+            get {
+                return ResourceManager.GetString("Monitor", resourceCulture);
             }
         }
         

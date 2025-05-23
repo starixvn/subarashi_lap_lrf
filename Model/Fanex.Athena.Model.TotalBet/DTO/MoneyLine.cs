@@ -26,5 +26,7 @@ namespace Fanex.Athena.Model.TotalBet.DTO
         public decimal ForecastHomeFirstHalf { get; set; }
 
         public decimal ForecastAwayFirstHalf { get; set; }
+
+        public int MonitoringStatus { get; set; }
     }
 }

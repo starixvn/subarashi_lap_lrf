@@ -1,23 +1,29 @@
 ﻿@model Fanex.Athena.Model.TotalBet.ViewModel.MoneyLineViewModel
-
+@{
+	var colspan = Model.Param.HasMonitoringPermission ? 4 : 3;
+}
 @helper RenderFirstRow()
 {
-    <tr class="first-row">
-        <td class="col-small"></td>
-        <td class="col-medium small"></td>
-        <td class="col-large small"></td>
-        <td class="col-child small"></td>
-        <td class="col-child small"></td>
-        <td class="col-child small"></td>
-        <td class="col-child small"></td>
-        <td class="col-child small"></td>
-        <td class="col-child small"></td>
-        <td class="col-child small"></td>
-        <td class="col-child small"></td>
-    </tr>
+	<tr class="first-row">
+		@if (Model.Param.HasMonitoringPermission)
+		{
+			<td class="col-small"></td>
+		}
+		<td class="col-small"></td>
+		<td class="col-medium small"></td>
+		<td class="col-large small"></td>
+		<td class="col-child small"></td>
+		<td class="col-child small"></td>
+		<td class="col-child small"></td>
+		<td class="col-child small"></td>
+		<td class="col-child small"></td>
+		<td class="col-child small"></td>
+		<td class="col-child small"></td>
+		<td class="col-child small"></td>
+	</tr>
 }
 
-@if (Model.MainData.Count() == 0)
+@if (!Model.MainData.Any())
 {
     <p class="no-info-row">@ViewResources.NoInfo</p>
 }
@@ -29,6 +35,10 @@ else
                 @RenderFirstRow()
 
                 <tr>
+                    @if (Model.Param.HasMonitoringPermission)
+                    {
+	                    <th rowspan="2">@ViewResources.Monitor</th>
+                    }
                     <th rowspan="2">#</th>
                     <th rowspan="2">@ViewResources.Time</th>
                     <th rowspan="2">@ViewResources.Event</th>
@@ -65,7 +75,7 @@ else
                 @RenderFirstRow()
 
                 <tr class="total total-footer">
-                    <td class="right-align total-label" colspan="3">
+                    <td class="right-align total-label" colspan="@colspan">
                         @ViewResources.Total
                     </td>
                     <td class="right-align no-margin" colspan="2">

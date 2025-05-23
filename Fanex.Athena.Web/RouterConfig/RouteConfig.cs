@@ -132,6 +132,12 @@
                 "BetList/Report/{*url}",
                 new { Controller = "Proxy", Action = "ReportViews" });
             betListRoute.RouteHandler = new ReadonlySessionRouteHandler();
+
+            var matchMonitoringCenterRoute = routes.MapHttpRoute(
+                "matchMonitoringCenterRoute",
+                "MatchMonitoringCenter/{*url}",
+                new { Controller = "Proxy", Action = "ReportViews" });
+            matchMonitoringCenterRoute.RouteHandler = new ReadonlySessionRouteHandler();
         }
     }
 }

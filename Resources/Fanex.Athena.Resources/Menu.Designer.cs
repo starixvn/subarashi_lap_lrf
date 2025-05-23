@@ -457,6 +457,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Match Monitoring Center.
+        /// </summary>
+        public static string matchmonitoringcenter {
+            get {
+                return ResourceManager.GetString("matchmonitoringcenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Match Win Loss.
         /// </summary>
         public static string matchwinloss31 {
