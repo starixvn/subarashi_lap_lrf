@@ -3894,4 +3894,10 @@
   <data name="ProductRGRNG" xml:space="preserve">
     <value>RichGaming</value>
   </data>
+  <data name="SoccerMarble" xml:space="preserve">
+    <value>Soccer Marble</value>
+  </data>
+  <data name="Marble" xml:space="preserve">
+    <value>Marble</value>
+  </data>
 </root>
