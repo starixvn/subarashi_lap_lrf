@@ -1345,10 +1345,15 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     beforeSend: function () {
                         Site.blockUI();
                     },
-                    success: function () {
-                        setTimeout(() => {
-                            RefreshCountDown.refresh();
-                        }, 2000);
+                    success: function (response) {
+                        if (response.isSuccessful && response.code == 0) {
+                            setTimeout(() => {
+                                RefreshCountDown.refresh();
+                            }, 2000);
+                        } else {
+                            alert(response.message);
+                            Site.unBlockUI();
+                        }
                     }
                 });
             },
@@ -1369,18 +1374,23 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
                     beforeSend: function () {
                         Site.blockUI();
                     },
-                    success: function () {
-                        setTimeout(() => {
-                            _me.viewMonitoring(matchId, leagueId);
-                        }, 2000);
+                    success: function (response) {
+                        if (response.isSuccessful && response.code == 0) {
+                            setTimeout(() => {
+                                _me.viewMonitoring(matchId, leagueId);
+                            }, 2000);
+                        } else {
+                            alert(response.message);
+                            Site.unBlockUI();
+                        }
                     }
                 });
             },
             viewMonitoring: function (matchId, leagueId) {
                 Site.unBlockUI();
-                let url = Site.resolveClientUrl('MatchMonitoringCenter/Index');
-                url = QueryString.setParam(url, 'matchid', matchId);
-                url = QueryString.setParam(url, 'leagueid', leagueId);
+                let url = Site.resolveClientUrl('MatchMonitoringCenter');
+                url = QueryString.setParam(url, 'MatchIds', matchId.toString());
+                url = QueryString.setParam(url, 'LeagueIds', leagueId.toString());
 
                 Site.redirect(url);
             }
