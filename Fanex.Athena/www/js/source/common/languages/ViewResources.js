@@ -1,4 +1,4 @@
-﻿// Generated at: 5/7/2025 1:55:14 PM
+﻿// Generated at: 5/26/2025 1:04:44 PM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -821,6 +821,7 @@ ProductVS:"Virtual Sports",
 ProductVS2:"Virtual Sports 2",
 ProductVS3:"Virtual Sports 3 (Old)",
 ProductWE:"WE Live Casino",
+ProductWLC:"W Casino",
 ProductWM:"WM",
 ProductYB:"YeeBet",
 Promotion:"Promotion",
@@ -931,6 +932,7 @@ SinglePlayer:"Single Player",
 Skype:"Skype",
 SLTDateRangeNote:"Sports Lottery data is available from 11/22/2021",
 Soccer:"Soccer",
+SoccerMarble:"Soccer Marble",
 SoccerParlay:"Soccer Parlay",
 SoccerPinGoal:"Soccer PinGoal",
 SolutionForRestriction:"1. Login at Licensee Admin.&lt;br/&gt;2. Access the reports/ functions you want. &lt;br/&gt; 请洽你们的最高管理者替你设置币别权限",

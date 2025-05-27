@@ -188,14 +188,15 @@
         }
 
         function initShowHideProducts() {
-            let products = $('#ProductList').val().split(",");
+            let products = Object.keys(productListData);
             var dataUI = [];
             for (let i = 0; i < products.length; i++) {
-                var product = products[i];
+                var productCode = products[i];
+                var productName = productListData[productCode];
                 dataUI.push({
-                    Id: product,
-                    Value: product,
-                    Text: Site.getSingleResource("Product" + product),
+                    Id: productCode,
+                    Value: productCode,
+                    Text: productName,
                     Checked: true,
                     Enable: true,
                     Css: '',
@@ -283,7 +284,7 @@
                     }
                 }];
 
-            let products = $('#ProductList').val().split(",");
+            let products = Object.keys(productListData);
             let selectedProducts = $("#mult-products").multiSelect("getCheckedItems");
             for (var i = 0; i < products.length; i++) {
                 var key = products[i];
@@ -291,7 +292,7 @@
                     field: 'Col-' + key,
                     valign: 'middle',
                     align: 'center',
-                    title: Site.getSingleResource('Product' + key),
+                    title: productListData[key],
                     class: `col-${key} ${selectedProducts.indexOf(key) != -1 ? "" : "hide"}`,
                     width: ["Parlay", "CC", "KN"].some(x => key.includes(x)) ? 150 : 115,
                     formatter: function (val) {

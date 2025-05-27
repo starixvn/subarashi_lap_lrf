@@ -17,7 +17,7 @@
         private const int RowNoInfoTemplate = 5;
 
         private readonly IList<GroupCommMetaModel> _exportData;
-        private readonly IEnumerable<string> _products;
+        private readonly IDictionary<string, string> _products;
 
         public CustomerCommGroupExcel(
             string templatePath,
@@ -42,7 +42,7 @@
 
             foreach (var p in _products)
             {
-                headerTextList.Add(ViewResources.ResourceManager.GetString("Product" + p));
+                headerTextList.Add(p.Value);
             }
 
             var row = sheet.CopyRow(TemplateSheet, RowHeaderTemplate);
@@ -76,7 +76,7 @@
                 row.Cells[currentColumn++].SetCellValue(exportRow.NumberOfCustomer);
 
                 sheet.CopyColumn(TemplateSheet, RowContentTemplate, index + RowContentTemplate, ColumnProductSBIndex, ColumnTemplateCount);
-                foreach (var productCode in _products)
+                foreach (var productCode in _products.Keys)
                 {
                     var commValue = exportRow.CommValues.Where(_ => _.ProductCode == productCode).FirstOrDefault()?.Discount ?? 0;
                     row.Cells[currentColumn++].SetCellValue(GetCommValue(commValue));
