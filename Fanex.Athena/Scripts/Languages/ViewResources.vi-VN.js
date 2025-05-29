@@ -1,4 +1,4 @@
-﻿// Generated at: 5/27/2025 2:58:35 PM
+﻿// Generated at: 5/29/2025 5:31:53 PM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -13,6 +13,7 @@ ActiveCustomers:"Khách hàng đang hoạt động",
 ActualStake:"Cược thực tế",
 AD:"Đội Khách/Hòa",
 AddContact:"Thêm liên hệ",
+Added:"Đã Thêm",
 AddNew:"Thêm Mới",
 AddSuccess:"Thêm thành công!",
 Adjustment:"Điều chỉnh",
@@ -596,6 +597,7 @@ MobileStandard:"Di động tiêu chuẩn",
 Moderate:"Trung bình",
 Monday:"Thứ Hai",
 MoneyLine:"Cược Đội Thắng",
+MoneyLineNote:"Nếu có trận đấu nào cần theo dõi, bạn có thể nhấn vào biểu tượng “+” trong cột Theo Dõi, hoặc nhấn vào Sự Kiện của trận đấu — thao tác này cũng sẽ chuyển bạn đến Trung Tâm Theo Dõi Trận Đấu.",
 MoneyPlay:"Money Play",
 MonitoredPlayer:"Cài đặt Theo Dõi Giới Hạn Cược",
 MonitoredPlayerList:"Danh sách Theo Dõi Người Chơi",

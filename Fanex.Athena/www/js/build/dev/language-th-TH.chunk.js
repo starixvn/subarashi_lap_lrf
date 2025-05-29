@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 5/27/2025 2:58:35 PM
+﻿// Generated at: 5/29/2025 5:31:53 PM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -108,6 +108,7 @@ ActiveCustomers:"ลูกค้าที่เคลื่อนไหว",
 ActualStake:"เงินเดิมพันจริง",
 AD:"ครึ่งแรกทีมเยือนนำ จบเกม เสมอ",
 AddContact:"เพิ่มผู้ติดต่อ",
+Added:"เพิ่มแล้ว",
 AddNew:"เพิ่มใหม่",
 Address:"ที่อยู่",
 AddSuccess:"เพิ่มสำเร็จ!",
@@ -695,6 +696,7 @@ MobileStandard:"มาตรฐานมือถือ",
 Moderate:"ปานกลาง",
 Monday:"วันจันทร์",
 MoneyLine:"มันนี่ไลน์",
+MoneyLineNote:"หากมีการแข่งขันที่ต้องเฝ้าระวัง กรุณาคลิกไอคอน “+” ในคอลัมน์เฝ้าระวัง, หรือคลิกที่ชื่อรายการแข่งขัน — ระบบจะนำคุณไปยังศูนย์เฝ้าระวังการแข่งขันโดยอัตโนมัติ",
 MoneyPlay:"Money Play",
 MonitoredPlayer:"การตั้งค่าการตรวจสอบเกณฑ์",
 MonitoredPlayerList:"รายชื่อผู้เล่นที่ถูกตรวจสอบ",
