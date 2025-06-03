@@ -3404,4 +3404,7 @@
   <data name="Booked" xml:space="preserve">
     <value>预约</value>
   </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>监控</value>
+  </data>
 </root>

@@ -330,4 +330,7 @@
   <data name="winlossbyproducts32" xml:space="preserve">
     <value>Thắng Thua Theo Sản Phẩm</value>
   </data>
+  <data name="matchmonitoringcenter" xml:space="preserve">
+    <value>Trung Tâm Theo Dõi Trận Đấu</value>
+  </data>
 </root>

@@ -3435,4 +3435,7 @@
   <data name="MoneyLineNote" xml:space="preserve">
     <value>Nếu có trận đấu nào cần theo dõi, bạn có thể nhấn vào biểu tượng “+” trong cột Theo Dõi, hoặc nhấn vào Sự Kiện của trận đấu — thao tác này cũng sẽ chuyển bạn đến Trung Tâm Theo Dõi Trận Đấu.</value>
   </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Theo Dõi</value>
+  </data>
 </root>

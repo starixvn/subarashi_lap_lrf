@@ -3369,4 +3369,7 @@
   <data name="MoneyLineNote" xml:space="preserve">
     <value>Jika ada pertandingan yang perlu dipantau, silakan klik ikon “+” di kolom Monitor, atau klik pada Event pertandingan — ini juga akan mengarahkan Anda ke Pusat Pemantauan Pertandingan.</value>
   </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Pantau</value>
+  </data>
 </root>

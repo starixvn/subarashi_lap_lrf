@@ -3429,4 +3429,7 @@
   <data name="MoneyLineNote" xml:space="preserve">
     <value>หากมีการแข่งขันที่ต้องเฝ้าระวัง กรุณาคลิกไอคอน “+” ในคอลัมน์เฝ้าระวัง, หรือคลิกที่ชื่อรายการแข่งขัน — ระบบจะนำคุณไปยังศูนย์เฝ้าระวังการแข่งขันโดยอัตโนมัติ</value>
   </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>เฝ้าระวัง</value>
+  </data>
 </root>
