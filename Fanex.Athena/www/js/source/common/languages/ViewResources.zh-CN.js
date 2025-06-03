@@ -1,4 +1,4 @@
-﻿// Generated at: 5/29/2025 5:31:53 PM
+﻿// Generated at: 6/3/2025 10:27:21 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -559,6 +559,7 @@ Monday:"星期一",
 MoneyLine:"胜负盘",
 MoneyLineNote:"如果有任何需要监控的比赛，请点击“监控”栏中的“+”图标 或点击该比赛的赛事名称 — 这也会将您重定向到比赛监控中心。",
 MoneyPlay:"普通投注",
+Monitor:"监控",
 MonitoredPlayer:"警示值监控设定",
 MonitoredPlayerList:"观察中玩家名单",
 MonitoredPlayerNotificationHistoryTitle:"通知纪录 {0} -&gt; {1} - {2}",
