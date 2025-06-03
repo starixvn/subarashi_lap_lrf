@@ -1388,9 +1388,18 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿!(__WEBPACK_A
             },
             viewMonitoring: function (matchId, leagueId) {
                 Site.unBlockUI();
+
+                const currencyId = $('#CurrencyId').attr('data-original');
+                let baseCurrency = $('#BaseCurrency').attr('data-original');
+                if (!baseCurrency) {
+                    baseCurrency = $('#CurrencyName').val();
+                }
+
                 let url = Site.resolveClientUrl('MatchMonitoringCenter');
                 url = QueryString.setParam(url, 'MatchIds', matchId.toString());
                 url = QueryString.setParam(url, 'LeagueIds', leagueId.toString());
+                url = QueryString.setParam(url, 'CurrencyId', currencyId);
+                url = QueryString.setParam(url, 'BaseCurrency', baseCurrency);
 
                 Site.redirect(url);
             }
