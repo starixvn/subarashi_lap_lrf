@@ -442,9 +442,15 @@
     <Content Include="App_Data\UserGuide\TotalBetsMixParlay\id-ID.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMixParlay\th-TH.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsMixParlay\vi-VN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\id-ID.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\th-TH.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\vi-VN.htm" />
+    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\id-ID.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\th-TH.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\vi-VN.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\UserGuide\TotalBetsOddEven\id-ID.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsOddEven\th-TH.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsOddEven\vi-VN.htm" />
@@ -569,7 +575,9 @@
     <Content Include="App_Data\UserGuide\TotalBetsHomeDrawAwayNoBet\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsHTFT\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsHTFT\zh-CN.htm" />
-    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\en-US.htm" />
+    <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\en-US.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Data\UserGuide\TotalBetsMoneyLine\zh-CN.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsOddEven\en-US.htm" />
     <Content Include="App_Data\UserGuide\TotalBetsOddEven\zh-CN.htm" />
