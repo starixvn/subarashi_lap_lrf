@@ -59,7 +59,7 @@ namespace Fanex.Athena.Controllers.TotalBets
 
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
             metaModel.UserId = userSession.UserId;
-            metaModel.HasMonitoringPermission = _authService.HasPermissions(userSession, PermissionKeys.MatchMonitoringCenter);
+            metaModel.HasMonitoringPermission = _authService.HasPermissions(userSession, PermissionKeys.MatchMonitoringSetting);
 
             var result = await _moneyLineDataAccess.GetMoneyLineDataList(metaModel).ConfigureAwait(false);
 

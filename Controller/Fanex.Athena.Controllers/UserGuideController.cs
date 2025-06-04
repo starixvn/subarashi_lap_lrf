@@ -115,7 +115,7 @@
             var result = content;
             if (content.Contains("{match-monitoring-section}"))
             {
-                if (_authrizationService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MatchMonitoringCenter))
+                if (_authrizationService.HasPermissions(SessionServiceInstance.UserSession, PermissionKeys.MatchMonitoringSetting))
                 {
                     result = result.Replace("{match-monitoring-section}", string.Empty);
                     result = result.Replace("{/match-monitoring-section}", string.Empty);
