@@ -240,6 +240,7 @@ define(['jquery', 'common/querystring', 'common/popup', 'helpers/htmlHelper', 'e
             $('div.block-body').hide();
             $('div.loading').hide();
         }
+
         function blockUI() {
             $('div.block-body').show();
             $('div.loading').show();

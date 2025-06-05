@@ -11,5 +11,6 @@ namespace Fanex.Athena.Model.TotalBet.MetaModel
     /// </summary>
     public class MoneyLineMetaModel : TotalBetsBaseMetaModel
     {
+        public bool HasMonitoringPermission { get; set; }
     }
 }

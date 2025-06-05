@@ -11,6 +11,7 @@ namespace Fanex.Athena.Controllers.TotalBets
     using System.Web.Mvc;
     using DataAccess.TotalBet.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
+    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Service.StatelessCore.Utility;
     using Fanex.Athena.Web.ActionFilter;
     using Model.TotalBet.MetaModel;
@@ -20,11 +21,14 @@ namespace Fanex.Athena.Controllers.TotalBets
     public class MoneyLineTotalBetController : TotalBetBaseController
     {
         private readonly IMoneyLineDataAccess _moneyLineDataAccess;
+        private readonly IAuthorizationService _authService;
 
         public MoneyLineTotalBetController(
-            IMoneyLineDataAccess moneyLineDataAccess)
+            IMoneyLineDataAccess moneyLineDataAccess,
+            IAuthorizationService authService)
         {
             _moneyLineDataAccess = moneyLineDataAccess;
+            _authService = authService;
         }
 
         [HttpGet]
@@ -36,7 +40,7 @@ namespace Fanex.Athena.Controllers.TotalBets
                 BaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency
             };
 
-            return await this.GetView(param).ConfigureAwait(false);
+            return await GetView(param).ConfigureAwait(false);
         }
 
         [HttpPost]
@@ -45,7 +49,7 @@ namespace Fanex.Athena.Controllers.TotalBets
         public async Task<ActionResult> Index(MoneyLineMetaModel metaModel)
         {
             metaModel.LicenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            return await this.GetView(metaModel).ConfigureAwait(false);
+            return await GetView(metaModel).ConfigureAwait(false);
         }
 
         private async Task<ActionResult> GetView(MoneyLineMetaModel metaModel)
@@ -53,8 +57,10 @@ namespace Fanex.Athena.Controllers.TotalBets
             var userSession = SessionServiceInstance.UserSession;
             var currencies = userSession.CurrencyList;
 
-            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList,
-                metaModel.CurrencyId);
+            metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(userSession.CurrencyAgentList, metaModel.CurrencyId);
+            metaModel.UserId = userSession.UserId;
+            metaModel.HasMonitoringPermission = _authService.HasPermissions(userSession, PermissionKeys.MatchMonitoringSetting);
+
             var result = await _moneyLineDataAccess.GetMoneyLineDataList(metaModel).ConfigureAwait(false);
 
             var model = new MoneyLineViewModel

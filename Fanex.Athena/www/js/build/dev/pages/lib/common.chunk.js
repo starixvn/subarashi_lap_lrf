@@ -21808,6 +21808,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿/*global _lan
             $('div.block-body').hide();
             $('div.loading').hide();
         }
+
         function blockUI() {
             $('div.block-body').show();
             $('div.loading').show();

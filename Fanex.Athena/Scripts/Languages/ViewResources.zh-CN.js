@@ -1,4 +1,4 @@
-﻿// Generated at: 5/26/2025 1:04:44 PM
+﻿// Generated at: 6/3/2025 10:27:21 AM
 var _language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -12,6 +12,7 @@ Active:"活跃",
 ActiveCustomers:"活跃玩家",
 AD:"客和",
 AddContact:"新增联络人",
+Added:"已添加",
 AddNew:"新增",
 AddSuccess:"新增成功",
 Adjustment:"调整",
@@ -562,7 +563,9 @@ MobileStandard:"手机經典版",
 Moderate:"中等",
 Monday:"星期一",
 MoneyLine:"胜负盘",
+MoneyLineNote:"如果有任何需要监控的比赛，请点击“监控”栏中的“+”图标 或点击该比赛的赛事名称 — 这也会将您重定向到比赛监控中心。",
 MoneyPlay:"普通投注",
+Monitor:"监控",
 MonitoredPlayer:"警示值监控设定",
 MonitoredPlayerList:"观察中玩家名单",
 MonitoredPlayerNotificationHistoryTitle:"通知纪录 {0} -&gt; {1} - {2}",

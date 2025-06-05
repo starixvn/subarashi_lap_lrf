@@ -3897,7 +3897,16 @@
   <data name="SoccerMarble" xml:space="preserve">
     <value>Soccer Marble</value>
   </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Monitor</value>
+  </data>
   <data name="ProductWLC" xml:space="preserve">
     <value>W Casino</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="MoneyLineNote" xml:space="preserve">
+    <value>If there are any matches that need to be monitored, please click the “+” icon in the Monitor column or click on the Event of the match — this will also redirect you to the Match Monitoring Center.</value>
   </data>
 </root>

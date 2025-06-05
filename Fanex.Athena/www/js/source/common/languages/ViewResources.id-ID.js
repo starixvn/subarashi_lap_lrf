@@ -1,4 +1,4 @@
-﻿// Generated at: 5/26/2025 1:04:44 PM
+﻿// Generated at: 6/3/2025 10:27:21 AM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -11,6 +11,7 @@ Active:"Aktif",
 ActiveCustomers:"Pelanggan Aktif",
 ActualStake:"Jumlah Taruhan Sebenarnya",
 AddContact:"Tambah Kontak",
+Added:"Ditambahkan",
 AddNew:"Tambah Baru",
 Address:"Alamat",
 AddSuccess:"Berhasil ditambahkan!",
@@ -588,7 +589,9 @@ MobileStandard:"Mobile Standar",
 Moderate:"Sedang",
 Monday:"Senin",
 MoneyLine:"Money Line",
+MoneyLineNote:"Jika ada pertandingan yang perlu dipantau, silakan klik ikon “+” di kolom Monitor, atau klik pada Event pertandingan — ini juga akan mengarahkan Anda ke Pusat Pemantauan Pertandingan.",
 MoneyPlay:"Permainan Uang",
+Monitor:"Pantau",
 MonitoredPlayer:"Pengaturan Pemantauan Ambang Batas",
 MonitoredPlayerList:"Daftar Pemain yang Dipantau",
 MonitoredPlayerNotificationHistoryTitle:"Riwayat Notifikasi {0} -&gt; {1} - {2}",

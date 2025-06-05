@@ -24,35 +24,56 @@
 <div class="rule">
     <h4>
         Panduan Laporan</h4>
-    <ul>
-        <li><b>Total Home:</b> Total bets on home team.
-            <br />
-            Total Home = Home stake * odds </li>
-        <li><b>Total Away:</b> Total bets on away team.
-            <br />
-            Total Away = Away stake * odds </li>
-        <li><b>Forecast Home:</b> The amount that Licensee might win/lose if home team/members
-            win.
-            <br />
-            Forecast Home = Home stake * odds – away stake
-            <ul>
-                <li><b>A negative number</b> (e.g. -10) indicates Licensee will win if home team wins.
-                </li>
-                <li><b>A positive number</b> (e.g. 10) indicates Licensee will lose if home team wins.
-                </li>
-            </ul>
-        </li>
-        <li><b>Forecast Away:</b> The amount that Licensee might win/lose if away team/members
-            win.
-            <br />
-            Forecast Away = Away stake * odds – home stake
-            <ul>
-                <li><b>A negative number</b> (e.g. -10) indicates Licensee will win if away team wins.
-                </li>
-                <li><b>A positive number</b> (e.g. 10) indicates Licensee will lose if away team wins.
-                </li>
-            </ul>
-        </li>
-        <li><b>Notice:</b> if |odds| < 1, odds = 1. </li>
-    </ul>
+	<ul>
+		{match-monitoring-section}
+		<li>
+			<b>Pantau:</b> Klik ikon "+" untuk menambahkan event ke daftar pemantauan.
+			<br />Ikon "+" hanya akan ditampilkan untuk event yang memiliki tiket Full Time.
+			<br />Jika event sudah ditambahkan ke daftar pemantauan, teks "Ditambahkan" akan ditampilkan sebagai gantinya.
+		</li>
+		<li>
+			<b>Event:</b> Klik tautan Event untuk menambahkan event ke daftar pemantauan dan membuka halaman <b>Pusat Pemantauan Pertandingan</b>.
+			<br />Tautan hanya akan ditampilkan untuk event yang memiliki tiket Full Time.
+		</li>
+		{/match-monitoring-section}
+		<li>
+			<b>Total Home:</b> Total bets on home team.
+			<br />
+			Total Home = Home stake * odds
+		</li>
+		<li>
+			<b>Total Away:</b> Total bets on away team.
+			<br />
+			Total Away = Away stake * odds
+		</li>
+		<li>
+			<b>Forecast Home:</b> The amount that Licensee might win/lose if home team/members
+			win.
+			<br />
+			Forecast Home = Home stake * odds – away stake
+			<ul>
+				<li>
+					<b>A negative number</b> (e.g. -10) indicates Licensee will win if home team wins.
+				</li>
+				<li>
+					<b>A positive number</b> (e.g. 10) indicates Licensee will lose if home team wins.
+				</li>
+			</ul>
+		</li>
+		<li>
+			<b>Forecast Away:</b> The amount that Licensee might win/lose if away team/members
+			win.
+			<br />
+			Forecast Away = Away stake * odds – home stake
+			<ul>
+				<li>
+					<b>A negative number</b> (e.g. -10) indicates Licensee will win if away team wins.
+				</li>
+				<li>
+					<b>A positive number</b> (e.g. 10) indicates Licensee will lose if away team wins.
+				</li>
+			</ul>
+		</li>
+		<li><b>Notice:</b> if |odds| < 1, odds = 1. </li>
+	</ul>
 </div>

@@ -367,4 +367,7 @@
   <data name="oddsgrouplicenseesetting" xml:space="preserve">
     <value>设定水位组别</value>
   </data>
+  <data name="matchmonitoringcenter" xml:space="preserve">
+    <value>比赛监控中心</value>
+  </data>
 </root>

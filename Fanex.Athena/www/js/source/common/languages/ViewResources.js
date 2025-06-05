@@ -1,4 +1,4 @@
-﻿// Generated at: 5/26/2025 1:04:44 PM
+﻿// Generated at: 6/3/2025 10:27:21 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -13,6 +13,7 @@ ActiveCustomers:"Active Customers",
 ActualStake:"Actual Stake",
 AD:"AD",
 AddContact:"Add Contact",
+Added:"Added",
 AddNew:"Add New",
 Address:"Address",
 AddSuccess:"Add successfully!",
@@ -607,7 +608,9 @@ Moderate:"Moderate",
 Modify:"Modify",
 Monday:"Monday",
 MoneyLine:"Money Line",
+MoneyLineNote:"If there are any matches that need to be monitored, please click the “+” icon in the Monitor column or click on the Event of the match — this will also redirect you to the Match Monitoring Center.",
 MoneyPlay:"Money Play",
+Monitor:"Monitor",
 MonitoredPlayer:"Threshold Monitoring Setting",
 MonitoredPlayerList:"Monitored Player List",
 MonitoredPlayerNotificationHistoryTitle:"Notification History {0} -&gt; {1} - {2}",

@@ -327,4 +327,7 @@
   <data name="winlossbyproducts32" xml:space="preserve">
     <value>Kemenangan/Kerugian berdasarkan Produk</value>
   </data>
+  <data name="matchmonitoringcenter" xml:space="preserve">
+    <value>Pusat Pemantauan Pertandingan</value>
+  </data>
 </root>

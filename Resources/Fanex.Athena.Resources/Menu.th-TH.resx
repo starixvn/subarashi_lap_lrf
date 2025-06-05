@@ -327,4 +327,7 @@
   <data name="winlossbyproducts32" xml:space="preserve">
     <value>แพ้ชนะ ตามผลิตภัณฑ์</value>
   </data>
+  <data name="matchmonitoringcenter" xml:space="preserve">
+    <value>ศูนย์เฝ้าระวังการแข่งขัน</value>
+  </data>
 </root>

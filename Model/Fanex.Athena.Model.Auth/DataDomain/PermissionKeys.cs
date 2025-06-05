@@ -62,6 +62,7 @@
         public const string ReportGrossGamingRevenue = "GrossGamingRevenue";
         public const string ReportWinlossAnalysis = "WinlossAnalysis";
         public const string ReportDailyBetDetails = "DailyBetDetails";
+        public const string MatchMonitoringSetting = "MatchMonitoringSetting";
 
         /* Customer Info. */
 

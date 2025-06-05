@@ -178,6 +178,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        public static string Added {
+            get {
+                return ResourceManager.GetString("Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New.
         /// </summary>
         public static string AddNew {
@@ -5578,11 +5587,29 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to If there are any matches that need to be monitored, please click the “+” icon in the Monitor column or click on the Event of the match — this will also redirect you to the Match Monitoring Center..
+        /// </summary>
+        public static string MoneyLineNote {
+            get {
+                return ResourceManager.GetString("MoneyLineNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Money Play.
         /// </summary>
         public static string MoneyPlay {
             get {
                 return ResourceManager.GetString("MoneyPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monitor.
+        /// </summary>
+        public static string Monitor {
+            get {
+                return ResourceManager.GetString("Monitor", resourceCulture);
             }
         }
         

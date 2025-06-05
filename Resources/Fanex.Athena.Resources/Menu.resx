@@ -353,4 +353,7 @@
   <data name="oddsgrouplicenseesetting" xml:space="preserve">
     <value>Odds Group Licensee Setting</value>
   </data>
+  <data name="matchmonitoringcenter" xml:space="preserve">
+    <value>Match Monitoring Center</value>
+  </data>
 </root>

@@ -7,14 +7,15 @@
                            .Distinct()
                            .ToList();
     var index = 1;
+    var colspan = Model.Param.HasMonitoringPermission ? 12 : 11;
 }
 @foreach (var league in leagueList)
 {
     // Render League name
     <tr class="league-name">
-        <td colspan="11">
-            @league.LeagueName
-        </td>
+	    <td colspan="@colspan">
+		    @league.LeagueName
+	    </td>
     </tr>
     var matchOfLeague = Model.MainData.Where(x => x.LeagueId == league.LeagueId)
                                     .OrderBy(x => x.HomeTeamName)
@@ -23,69 +24,110 @@
     // Render Match League
     foreach (var match in matchOfLeague)
     {
-        <tr class="@(match.LiveIndicator == 1 ? "live" : string.Empty)">
-            <td class="center-align">
-                @(index++)
-            </td>
-            <td class="center-align">
-                @if (match.LiveIndicator == 1)
-                {
-                    <span>@match.LiveHomeScore - @match.LiveAwayScore</span>
-                    <br />
-                    <i class="live-notice">@ViewResources.Live!</i>
-                }
-                else
-                {
-                    @Html.Raw(match.ShowTime)
-                }
-            </td>
-            <td>
-                @match.HomeTeamName -vs- @match.AwayTeamName
-            </td>
-            <!--Render Fulltime Money Line-->
-            <td class="right-align">
-                <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="20" href="javascript:;">
-                    @DesktopRazorHelper.DecFormat(match.TotalHomeFt, false)
-                </a>
-            </td>
-            <td class="right-align">
-                <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="20" href="javascript:;">
-                    @DesktopRazorHelper.DecFormat(match.TotalAwayFt, false)
-                </a>
-            </td>
-            <td class="right-align">
-                <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="20" href="javascript:;">
-                    @DesktopRazorHelper.PositiveFormat(match.ForecastHomeFt, false)
-                </a>
-            </td>
-            <td class="right-align">
-                <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="20" href="javascript:;">
-                    @DesktopRazorHelper.PositiveFormat(match.ForecastAwayFt, false)
-                </a>
-            </td>
+	    <tr class="@(match.LiveIndicator == 1 ? "live" : string.Empty)">
+			@if (Model.Param.HasMonitoringPermission)
+			{
+				<td class="center-align">
+					@if (match.MonitoringStatus == 1)
+					{
+						@ViewResources.Added
+					}
+					else if (match.MonitoringStatus == 0)
+					{
+						<a class="icon-plus add-monitoring"
+						   data-match-id="@match.MatchId"
+						   data-live-indicator="@match.LiveIndicator"
+						   data-live-home-score="@match.LiveHomeScore"
+						   data-live-away-score="@match.LiveAwayScore"
+						   data-bet-type="20"
+						   href="javascript:;">
+						</a>
+					}
+				</td>
+			}
+		    <td class="center-align">
+			    @(index++)
+		    </td>
+		    <td class="center-align">
+			    @if (match.LiveIndicator == 1)
+			    {
+				    <span>@match.LiveHomeScore - @match.LiveAwayScore</span>
+				    <br/>
+				    <i class="live-notice">@ViewResources.Live!</i>
+			    }
+			    else
+			    {
+				    @Html.Raw(match.ShowTime)
+			    }
+		    </td>
+		    <td>
 
-            <!--Render 1st Half Money Line-->
-            <td class="right-align">
-                <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="21" href="javascript:;">
-                    @DesktopRazorHelper.DecFormat(match.TotalHomeFirstHalf, false)
-                </a>
-            </td>
-            <td class="right-align">
-                <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="21" href="javascript:;">
-                    @DesktopRazorHelper.PositiveFormat(match.TotalAwayFirstHalf, false)
-                </a>
-            </td>
-            <td class="right-align">
-                <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="21" href="javascript:;">
-                    @DesktopRazorHelper.DecFormat(match.ForecastHomeFirstHalf, false)
-                </a>
-            </td>
+			    @{
+				    string eventName = string.Format("{0} -vs- {1}", match.HomeTeamName, match.AwayTeamName);
+			    }
+			    @if (match.MonitoringStatus >= 0 && Model.Param.HasMonitoringPermission)
+			    {
+				    <a class="view-monitoring"
+				       data-monitoring-status="@match.MonitoringStatus"
+				       data-match-id="@match.MatchId"
+				       data-league-id="@league.LeagueId"
+				       data-live-indicator="@match.LiveIndicator"
+				       data-live-home-score="@match.LiveHomeScore"
+				       data-live-away-score="@match.LiveAwayScore"
+				       data-bet-type="20"
+				       href="javascript:;">
+					    @eventName
+				    </a>
+			    }
+			    else
+			    {
+				    @eventName
+			    }
+		    </td>
+		    <!--Render Fulltime Money Line-->
+		    <td class="right-align">
+			    <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="20" href="javascript:;">
+				    @DesktopRazorHelper.DecFormat(match.TotalHomeFt, false)
+			    </a>
+		    </td>
+		    <td class="right-align">
+			    <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="20" href="javascript:;">
+				    @DesktopRazorHelper.DecFormat(match.TotalAwayFt, false)
+			    </a>
+		    </td>
+		    <td class="right-align">
+			    <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="20" href="javascript:;">
+				    @DesktopRazorHelper.PositiveFormat(match.ForecastHomeFt, false)
+			    </a>
+		    </td>
+		    <td class="right-align">
+			    <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="20" href="javascript:;">
+				    @DesktopRazorHelper.PositiveFormat(match.ForecastAwayFt, false)
+			    </a>
+		    </td>
 
-            <td class="right-align">
-                <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="21" href="javascript:;">
-                    @DesktopRazorHelper.PositiveFormat(match.ForecastAwayFirstHalf, false)
-                </a>
-            </td>
-        </tr>
+		    <!--Render 1st Half Money Line-->
+		    <td class="right-align">
+			    <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="21" href="javascript:;">
+				    @DesktopRazorHelper.DecFormat(match.TotalHomeFirstHalf, false)
+			    </a>
+		    </td>
+		    <td class="right-align">
+			    <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="21" href="javascript:;">
+				    @DesktopRazorHelper.PositiveFormat(match.TotalAwayFirstHalf, false)
+			    </a>
+		    </td>
+		    <td class="right-align">
+			    <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="21" href="javascript:;">
+				    @DesktopRazorHelper.DecFormat(match.ForecastHomeFirstHalf, false)
+			    </a>
+		    </td>
+
+		    <td class="right-align">
+			    <a class="forcast-number" data-match-id="@match.MatchId" data-bet-type="21" href="javascript:;">
+				    @DesktopRazorHelper.PositiveFormat(match.ForecastAwayFirstHalf, false)
+			    </a>
+		    </td>
+	    </tr>
     }
 }
