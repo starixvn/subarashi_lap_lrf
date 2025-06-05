@@ -6964,6 +6964,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AI Gaming.
+        /// </summary>
+        public static string ProductAIG {
+            get {
+                return ResourceManager.GetString("ProductAIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AdvantPlay.
         /// </summary>
         public static string ProductAP {
@@ -7059,6 +7068,15 @@ namespace Fanex.Athena.Resources {
         public static string ProductCO {
             get {
                 return ResourceManager.GetString("ProductCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ClotPlay.
+        /// </summary>
+        public static string ProductCPRNG {
+            get {
+                return ResourceManager.GetString("ProductCPRNG", resourceCulture);
             }
         }
         

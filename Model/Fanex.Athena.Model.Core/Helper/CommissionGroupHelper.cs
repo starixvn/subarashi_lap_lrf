@@ -61,7 +61,9 @@
             Product.MGLC,
             Product.PTLC,
             Product.RGRNG,
-            Product.WLC
+            Product.WLC,
+            Product.CPRNG,
+            Product.AIG
         };
 
         private static readonly Dictionary<string, string> FollowPermissions = new Dictionary<string, string>
