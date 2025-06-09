@@ -3360,4 +3360,13 @@
   <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
     <value>Jumlah tiket yang sesuai dengan filter Anda melebihi kapasitas pemrosesan sistem ({0} baris data). Silakan coba filter dengan hari yang lebih sedikit atau pilih satu opsi pada "Jenis Taruhan", filter "Produk".</value>
   </data>
+  <data name="Added" xml:space="preserve">
+    <value>Ditambahkan</value>
+  </data>
+  <data name="MoneyLineNote" xml:space="preserve">
+    <value>Jika ada pertandingan yang perlu dipantau, silakan klik ikon “+” di kolom Monitor, atau klik pada Event pertandingan — ini juga akan mengarahkan Anda ke Pusat Pemantauan Pertandingan.</value>
+  </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Pantau</value>
+  </data>
 </root>

@@ -3426,4 +3426,13 @@
   <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
     <value>Số vé cược trùng khớp với bộ lọc của bạn đang vượt khả năng xử lý của hệ thống ({0} dòng dữ liệu). Vui lòng giảm bớt số ngày đã chọn hoặc chỉ chọn 1 tùy chọn trong bộ lọc “Loại Cược” hoặc “Sản Phẩm”.</value>
   </data>
+  <data name="Added" xml:space="preserve">
+    <value>Đã Thêm</value>
+  </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>Theo Dõi</value>
+  </data>
+  <data name="MoneyLineNote" xml:space="preserve">
+    <value>Nếu có trận đấu nào cần theo dõi, bạn có thể nhấn vào biểu tượng “+” trong cột Theo Dõi, hoặc nhấn vào Sự Kiện của trận đấu — thao tác này cũng sẽ chuyển bạn đến Trung Tâm Theo Dõi Trận Đấu.</value>
+  </data>
 </root>

@@ -3420,4 +3420,13 @@
   <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
     <value>จำนวนผลลัพธ์การค้นหาเกินขีดจำกัดของระบบ ({0} แถวข้อมูล) กรุณาลดเงื่อนไขการค้นหาหรือกรองตามประเภทการเดิมพันและกีฬา</value>
   </data>
+  <data name="Added" xml:space="preserve">
+    <value>เพิ่มแล้ว</value>
+  </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>เฝ้าระวัง</value>
+  </data>
+  <data name="MoneyLineNote" xml:space="preserve">
+    <value>หากมีการแข่งขันที่ต้องเฝ้าระวัง กรุณาคลิกไอคอน “+” ในคอลัมน์เฝ้าระวัง, หรือคลิกที่ชื่อรายการแข่งขัน — ระบบจะนำคุณไปยังศูนย์เฝ้าระวังการแข่งขันโดยอัตโนมัติ</value>
+  </data>
 </root>

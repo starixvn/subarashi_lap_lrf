@@ -3395,4 +3395,13 @@
   <data name="BTCMaxTicketLimitMsg" xml:space="preserve">
     <value>搜寻结果的数量超过系统限制 ({0} 条数据)，请缩减搜寻条件或根据投注类别及运动进行过滤</value>
   </data>
+  <data name="Added" xml:space="preserve">
+    <value>已添加</value>
+  </data>
+  <data name="Monitor" xml:space="preserve">
+    <value>监控</value>
+  </data>
+  <data name="MoneyLineNote" xml:space="preserve">
+    <value>如果有任何需要监控的比赛，请点击“监控”栏中的“+”图标 或点击该比赛的赛事名称 — 这也会将您重定向到比赛监控中心。</value>
+  </data>
 </root>
