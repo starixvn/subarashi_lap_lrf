@@ -149,6 +149,10 @@
 
         public const string WLC = "WLC";
 
+        public const string AIG = "AIG";
+
+        public const string CPRNG = "CPRNG";
+
         #endregion Field
 
         #region Property
