@@ -1,11 +1,11 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Xml" #>
-<#@ assembly name="Microsoft.Web.XmlTransform.dll" #>
+<#@ assembly name="$(SolutionDir)\packages\Microsoft.Web.Xdt.3.1.0\lib\net40\Microsoft.Web.XmlTransform.dll" #>
 <#@ import namespace="System.Xml" #>
 <#@ output extension=".txt" #>
 <#
 string projectPath = Host.ResolveAssemblyReference("$(SolutionDir)") + @"Fanex.Athena\";
-var environments = new string[] {"DEV", "LOCAL", "UAT", "UATTW", "SIT", "PRO","PROStatic", "Staging", "KLDR", "KLDRStatic" };
+var environments = new string[] {"DEV", "LOCAL", "UAT", "UATTW", "SIT", "PRO","PROStatic", "Staging", "KLDR", "KLDRStatic", "KLPROD", "KLPRODStatic" };
 foreach(var environment in environments)
 {
  using(var transform = new Microsoft.Web.XmlTransform.XmlTransformation( projectPath + "SiteConfig\\WebConfigTransforms\\" + environment + ".config"))

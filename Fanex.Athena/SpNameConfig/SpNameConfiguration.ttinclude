@@ -40,6 +40,10 @@
         {
             SiteEnvironment = SiteEnvironment.KLDR
         },
+		new SiteInfo
+        {
+            SiteEnvironment = SiteEnvironment.KLPROD
+        },
     };
 #>
 <#+
@@ -52,7 +56,8 @@
 		SIT,
         PRO,
 		Staging,
-		KLDR
+		KLDR,
+		KLPROD
     }
 
 	class SiteInfo

@@ -47,6 +47,12 @@
       "Project": null,
       "Path": "SpNameConfig",
       "Properties": {}
+    },
+    {
+      "Filename": "FanexSpName.KLPROD.xml",
+      "Project": null,
+      "Path": "SpNameConfig",
+      "Properties": {}
     }
   ]
 }
