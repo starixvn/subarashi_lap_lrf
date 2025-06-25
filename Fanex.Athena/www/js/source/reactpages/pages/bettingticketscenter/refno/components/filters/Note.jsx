@@ -16,7 +16,11 @@ export const Note = (props) => {
                     * {AppData.productsRequireTxIdNote}
                     <br />
                 </>}
-                * {AppData.productsRequireUseNameNote}
+                {AppData.productsRequireUseNameNote && <>
+                    * {LangHelper.getSingleResource('BettingTicketCenter_RefnoTabNote2')
+                        .replace('{0}', AppData.productsRequireUseNameNote)
+                        .replace('{1}', AppData.balanceupDay)}
+                </>}
             </div>
         </>)
 }
