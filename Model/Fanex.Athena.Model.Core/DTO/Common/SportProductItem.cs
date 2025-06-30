@@ -23,6 +23,8 @@ namespace Fanex.Athena.Model.Core.DTO.Common
 
         public int ParentId { get; set; }
 
+        public bool IsParent { get; set; }
+
         public string Name { get; set; }
 
         public bool Checked { get; set; }

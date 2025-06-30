@@ -22,20 +22,21 @@
 
         public async Task<IEnumerable<GroupCommSettingMetaModel>> InitCommValues(ProductAccess productAccess)
         {
-            var commSettings = await _groupDataAccess.GetAllCommSettingAsync().ConfigureAwait(false);
+            var commSettings = await _groupDataAccess.GetAllCommSettingAsync(productAccess).ConfigureAwait(false);
 
             return commSettings.Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
                 .OrderBy(_ => CommissionGroupHelper.ProductListComparer(_.ProductCode)).ThenBy(_ => _.ProductCode); ;
         }
 
-        public async Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId, ProductAccess productAccess)
+        public async Task<(IList<GroupCommMetaModel>, IDictionary<string, string>)> GetAllAsync(int licenseeId, ProductAccess productAccess)
         {
-            var (comms, commValues) = await _groupDataAccess.GetAllAsync(licenseeId).ConfigureAwait(false);
+            var (comms, commValues) = await _groupDataAccess.GetAllAsync(licenseeId, productAccess).ConfigureAwait(false);
             var productList = commValues
                 .Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
                 .Select(_ => _.ProductCode).Distinct()
                 .OrderBy(_ => CommissionGroupHelper.ProductListComparer(_))
-                .ThenBy(_ => _);
+                .ThenBy(_ => _)
+                .ToDictionary(_ => _, _ => productAccess.GetProductName(_));
 
             return (MergeCommSetting(comms, commValues), productList);
         }
@@ -57,7 +58,7 @@
 
         public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId, ProductAccess productAccess)
         {
-            var result = await _groupDataAccess.GetById(groupCommId, licenseeId);
+            var result = await _groupDataAccess.GetById(groupCommId, licenseeId, productAccess);
             result.CommValues = result.CommValues
                 .Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
                 .OrderBy(_ => _, new GroupCommSettingComparer())

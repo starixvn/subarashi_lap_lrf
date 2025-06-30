@@ -3,6 +3,7 @@
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
+    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Common;
     using Fanex.Data;
@@ -14,7 +15,7 @@
 
     public class GroupComDataAccess : BaseDataAccess, IGroupComDataAccess
     {
-        public async Task<IEnumerable<GroupCommSettingMetaModel>> GetAllCommSettingAsync()
+        public async Task<IEnumerable<GroupCommSettingMetaModel>> GetAllCommSettingAsync(ProductAccess productAccess)
         {
             const string UspName = "Lrf_LicenseeCommProductList";
 
@@ -26,7 +27,7 @@
                 {
                     while (reader.Read())
                     {
-                        comSettings.Add(new GroupCommSettingMetaModel(reader));
+                        comSettings.Add(new GroupCommSettingMetaModel(reader, productAccess));
                     }
                 }
             }
@@ -34,7 +35,7 @@
             return comSettings;
         }
 
-        public async Task<(IList<GroupCommMetaModel>, IList<GroupCommSettingMetaModel>)> GetAllAsync(int licenseeId)
+        public async Task<(IList<GroupCommMetaModel>, IList<GroupCommSettingMetaModel>)> GetAllAsync(int licenseeId, ProductAccess productAccess)
         {
             const string UspName = "Lrf_LicenseeGroupCommSel";
 
@@ -62,7 +63,7 @@
 
                     while (comms.Any() && reader.Read())
                     {
-                        commDetails.Add(new GroupCommSettingMetaModel(reader)
+                        commDetails.Add(new GroupCommSettingMetaModel(reader, productAccess)
                         {
                             Discount = Convert.ToDecimal(reader["Discount"]),
                             GroupCommId = Convert.ToInt32(reader["GroupDiscountID"])
@@ -74,7 +75,7 @@
             return (comms, commDetails);
         }
 
-        public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId)
+        public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId, ProductAccess productAccess)
         {
             const string UspName = "Lrf_GroupCommGetById";
             var comm = new GroupCommMetaModel();
@@ -97,7 +98,7 @@
 
                     while (reader.Read())
                     {
-                        commValues.Add(new GroupCommSettingMetaModel(reader)
+                        commValues.Add(new GroupCommSettingMetaModel(reader, productAccess)
                         {
                             Discount = Convert.ToDecimal(reader["Discount"])
                         });

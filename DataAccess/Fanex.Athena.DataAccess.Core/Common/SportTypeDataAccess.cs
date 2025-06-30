@@ -52,14 +52,15 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
                         if (!HiddenSports.Contains(id))
                         {
-                            var name = parentId == ProductType ? DataHelper.GetProductName(reader.ToString("Name")) : _cacheRefAdapter.GetSportName(id, languageCode);
+                            var name = parentId == ProductType ? reader.ToString("Name") : _cacheRefAdapter.GetSportName(id, languageCode);
 
                             result.Add(new SportProductItem
                             {
                                 Checked = true,
                                 ID = id,
                                 Name = name,
-                                ParentId = parentId
+                                ParentId = parentId,
+                                IsParent = parentId == ProductType
                             });
                         }
                     }

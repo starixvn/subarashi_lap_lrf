@@ -18,11 +18,16 @@
     {
         private readonly IBetTypeDataAccess _betTypeDataAccess;
         private readonly ICacheRefAdapter _cacheRefAdapter;
+        private readonly IProductService _productService;
 
-        public BetTypeService(IBetTypeDataAccess betTypeDataAccess, ICacheRefAdapter cacheRefAdapter)
+        public BetTypeService(
+            IBetTypeDataAccess betTypeDataAccess,
+            ICacheRefAdapter cacheRefAdapter,
+            IProductService productService)
         {
             _betTypeDataAccess = betTypeDataAccess;
             _cacheRefAdapter = cacheRefAdapter;
+            _productService = productService;
         }
 
         public async Task<IList<BettypeProductItem>> GetBettypes(IList<SportProductItem> sports, string languageCode, bool isHideSaba)
@@ -79,7 +84,7 @@
                 {
                     Checked = true,
                     Children = items,
-                    Name = DataHelper.GetProductName(key),
+                    Name = _productService.GetProductName(key),
                     Value = key
                 });
             return result;

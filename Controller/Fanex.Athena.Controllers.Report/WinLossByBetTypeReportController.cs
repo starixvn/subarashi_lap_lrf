@@ -75,11 +75,11 @@ namespace Fanex.Athena.Controllers.Report
         {
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var userSession = SessionServiceInstance.UserSession;
+            var productAccess = ProductServiceInstance.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
 
-            var reportData = await _winLossByBetTypeDataAccess.GetDataList(metaModel);
+            var reportData = await _winLossByBetTypeDataAccess.GetDataList(metaModel, productAccess);
 
             reportData.Sort(metaModel.SortColumn, metaModel.SortDirection.Equals("ASC", StringComparison.OrdinalIgnoreCase));
-            var productAccess = ProductServiceInstance.GetProductAccess(licenseeSession.LicenseeId, userSession.Language);
             var total = GetTotal(reportData);
             var model = new WinLossByBetTypeViewModel
             {

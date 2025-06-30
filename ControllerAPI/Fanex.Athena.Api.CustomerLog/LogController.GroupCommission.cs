@@ -22,10 +22,10 @@ namespace Fanex.Athena.Api.CustomerLog
         {
             LogHelper.SetTemplateServiceConfiguration();
 
-            var supportedProducts = _productService.GetAllowedProducts("CommissionGroups");
-            var productAccess = _productService.GetProductAccess(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language);
-            var permissions = CommissionGroupHelper.GetProductPermissions(supportedProducts, productAccess);
+            var productAccess = _productService.GetProductAccess(SessionService.LicenseeSession.LicenseeId, SessionService.UserSession.Language, "CommissionGroups");
+            var permissions = CommissionGroupHelper.GetProductPermissions(productAccess);
             ActionViewModel.SetProductPermissions(permissions);
+            ActionViewModel.ProductAccess = productAccess;
 
             var metaModel = new CustomerLogMetaModel
             {

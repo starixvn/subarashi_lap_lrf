@@ -22,6 +22,7 @@ namespace Fanex.Athena.Service.StatelessCore
         private readonly ISportTypeDataAccess _sportTypeDataAccess;
         private readonly ICacheRefAdapter _cacheRefAdapter;
         private readonly ICustomMemoryCacheService _cache;
+        private readonly IProductService _productService;
 
         private static readonly IEnumerable<(int Id, int SportTypeId, IEnumerable<int> LeagueGroupIds)> SabaVirtualSports = new List<(int, int, IEnumerable<int>)>
         {
@@ -38,11 +39,16 @@ namespace Fanex.Athena.Service.StatelessCore
             ((int)SportType.SabaESportsPinGoal, (int)SportType.Esports, new [] { 151 })
         };
 
-        public SportService(ISportTypeDataAccess sportTypeDataAccess, ICacheRefAdapter cacheRefAdapter, ICustomMemoryCacheService cache)
+        public SportService(
+            ISportTypeDataAccess sportTypeDataAccess,
+            ICacheRefAdapter cacheRefAdapter,
+            ICustomMemoryCacheService cache,
+            IProductService productService)
         {
             _sportTypeDataAccess = sportTypeDataAccess;
             _cacheRefAdapter = cacheRefAdapter;
             _cache = cache;
+            _productService = productService;
         }
 
         public async Task<IEnumerable<SportGame>> GetSportForProductAsync(string siteName, string productCode)
@@ -61,8 +67,17 @@ namespace Fanex.Athena.Service.StatelessCore
         public Task<IDictionary<int, string>> GetAllSports()
             => _sportTypeDataAccess.GetAllSports();
 
-        public Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "")
-            => _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes);
+        public async Task<IEnumerable<SportProductItem>> GetSportsAndProducts(int licenseeId, string languageCode, string productCodes = "")
+        {
+            var result = await _sportTypeDataAccess.GetSportsAndProducts(licenseeId, languageCode, productCodes).ConfigureAwait(false);
+
+            foreach (var item in result.Where(_ => _.IsParent))
+            {
+                item.Name = _productService.GetProductName(item.Name);
+            }
+
+            return result;
+        }
 
         public async Task<IEnumerable<SportProductItem>> GetSportAndProductAndSabaSport(int licenseeId, string languageCode, bool isHideSaba, string productCodes = "")
         {
@@ -148,7 +163,7 @@ namespace Fanex.Athena.Service.StatelessCore
                     ID = key.ProductId,
                     Checked = true,
                     Children = elems,
-                    Name = DataHelper.GetProductName(key.ProductCode),
+                    Name = _productService.GetProductName(key.ProductCode),
                     Value = key.ProductCode
                 }).ToList();
 

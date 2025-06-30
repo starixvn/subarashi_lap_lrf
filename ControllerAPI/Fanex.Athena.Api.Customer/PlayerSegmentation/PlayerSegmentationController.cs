@@ -28,13 +28,11 @@
         private readonly IAuthorizationService _authService;
         private readonly IPlayerSegmentationService _playerService;
         private readonly IBetListApiClient _betListApiClient;
-        private readonly IProductDataAccess _productDataAccess;
         private readonly IAppSettings _appSettings;
 
         public PlayerSegmentationController(ILanguageService languageService,
             IAuthorizationService authService,
             IPlayerSegmentationService playerService,
-            IProductDataAccess productDataAccess,
             IBetListApiClient betListApiClient,
             IAppSettings appSettings
             )
@@ -42,7 +40,6 @@
         {
             _authService = authService;
             _playerService = playerService;
-            _productDataAccess = productDataAccess;
             _betListApiClient = betListApiClient;
             _appSettings = appSettings;
         }

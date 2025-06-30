@@ -66,11 +66,6 @@
             Product.AIG
         };
 
-        private static readonly Dictionary<string, string> FollowPermissions = new Dictionary<string, string>
-        {
-            [ParlayName] = Product.SB
-        };
-
         public static readonly string[] ExcludeProductsSPParam = { "SB", "Parlay" };
 
         public static readonly IReadOnlyDictionary<string, string> ProductCodeMapper = new Dictionary<string, string>
@@ -132,19 +127,16 @@
 
         public static bool GetProductPermissions(ProductAccess productAccess, string productCode)
         {
-            var code = FollowPermissions.ContainsKey(productCode) ? FollowPermissions[productCode] : productCode;
-
-            return productAccess.IsAllow(code);
+            return productAccess.IsAllow(productCode);
         }
 
-        public static IDictionary<string, bool> GetProductPermissions(string[] supportedProducts, ProductAccess productAccess)
+        public static IDictionary<string, bool> GetProductPermissions(ProductAccess productAccess)
         {
             var result = new Dictionary<string, bool>();
 
-            foreach (var p in supportedProducts)
+            foreach (var p in productAccess.ProductList)
             {
-                var code = FollowPermissions.ContainsKey(p) ? FollowPermissions[p] : p;
-                result.Add(p, productAccess.IsAllow(code));
+                result.Add(p.ProductCode, true);
             }
 
             return result;

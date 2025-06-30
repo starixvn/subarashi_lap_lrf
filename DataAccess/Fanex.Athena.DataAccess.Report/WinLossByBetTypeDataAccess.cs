@@ -13,6 +13,7 @@ namespace Fanex.Athena.DataAccess.Report
     using Fanex.Athena.DataAccess.Report.Interfaces;
     using Fanex.Athena.Extension.Utility;
     using Fanex.Athena.Model.Core;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Common.Extensions;
@@ -33,7 +34,7 @@ namespace Fanex.Athena.DataAccess.Report
             _balanceUpDataAccess = balanceUpDataAccess;
         }
 
-        public async Task<SortableList<WinLossByBetType>> GetDataList(WinLossByBetTypeMetaModel metaModel)
+        public async Task<SortableList<WinLossByBetType>> GetDataList(WinLossByBetTypeMetaModel metaModel, ProductAccess productAccess)
         {
             const string UspName = "Lrf_Rpt_WinLossByBettype";
             var balanceUp = _balanceUpDataAccess.GetBalanceUp();
@@ -51,16 +52,16 @@ namespace Fanex.Athena.DataAccess.Report
             {
                 using (var reader = await db.ExecuteReaderAsync(uspParams).ConfigureAwait(false))
                 {
-                    return ReadData(reader);
+                    return ReadData(reader, productAccess);
                 }
             }
         }
 
-        private static string GetSportName(int bettype)
+        private static string GetSportName(int bettype, ProductAccess productAccess)
         {
             if (BetTypeHelper.IsVirtualSports(bettype))
             {
-                return " (" + ViewResources.ProductVS + ")";
+                return " (" + productAccess.GetProductName(Product.VS) + ")";
             }
 
             if (bettype == (int)BetType.NumberGameHappy5OddEven)
@@ -70,13 +71,13 @@ namespace Fanex.Athena.DataAccess.Report
 
             if (bettype == (int)BetType.LotteryPenaltyShootOut || bettype == (int)BetType.LotteryPenaltyShootOut2)
             {
-                return " (" + ViewResources.ProductLT + ")";
+                return " (" + productAccess.GetProductName(Product.LT) + ")";
             }
 
             return string.Empty;
         }
 
-        private SortableList<WinLossByBetType> ReadData(IDataReader reader)
+        private SortableList<WinLossByBetType> ReadData(IDataReader reader, ProductAccess productAccess)
         {
             var dataList = new SortableList<WinLossByBetType>();
 
@@ -88,7 +89,7 @@ namespace Fanex.Athena.DataAccess.Report
                 {
                     LiveIndicator = liveIndicator,
                     BetType = bettype,
-                    BetTypeName = _cacheRefAdapter.GetBettype(bettype, liveIndicator) + GetSportName(bettype),
+                    BetTypeName = _cacheRefAdapter.GetBettype(bettype, liveIndicator) + GetSportName(bettype, productAccess),
                     Turnover = reader.ToDecimal("Turnover"),
                     CustomerWinLoss = reader.ToDecimal("MemberWinLost"),
                     CustomerComm = reader.ToDecimal("PlayerComm"),

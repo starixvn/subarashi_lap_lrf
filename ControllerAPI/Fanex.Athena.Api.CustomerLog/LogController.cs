@@ -174,6 +174,7 @@
 
             var templatePath = HostingEnvironment.MapPath(viewPath);
             var template = _fileSystem.ReadFile(templatePath);
+
             return Engine.Razor.RunCompile(template, viewPath, model: viewModel);
         }
 

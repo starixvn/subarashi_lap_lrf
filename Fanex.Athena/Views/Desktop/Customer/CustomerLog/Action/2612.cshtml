@@ -4,7 +4,7 @@
 @using Fanex.Common;
 @model ActionViewModel
 @{
-    Model.Resource = LogHelper.GetGroupCommissionLogResources(ActionViewModel.ProductPermissions);
+    Model.Resource = LogHelper.GetGroupCommissionLogResources(ActionViewModel.ProductPermissions, ActionViewModel.ProductAccess);
     var groupNameOld = Model.Data["GroupNameOld"];
     const int nameLength = LogHelper.MaxCommissionGroupNameShownLength;
     var groupNameOldTitle = groupNameOld.Length > nameLength ? "title='" + groupNameOld + "'" : "";

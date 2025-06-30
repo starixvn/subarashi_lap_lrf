@@ -21,7 +21,8 @@
     {
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
-        public CasinoTurnoverDataAccess(IBalanceUpDataAccess balanceUpDataAccess)
+        public CasinoTurnoverDataAccess(
+            IBalanceUpDataAccess balanceUpDataAccess)
         {
             _balanceUpDataAccess = balanceUpDataAccess;
         }
@@ -73,7 +74,7 @@
                     Date = reader.ToDateTime("Date"),
                     SystemId = reader.ToString("UserName"),
                     ExternalId = reader.ToString("NickName"),
-                    Product = ProductHelper.GetProductName(productCode),
+                    Product = productCode,
                     BetCount = reader.ToInt("BetCount"),
                     Turnover = reader.ToDecimal(turnoverColumn),
                     ValidBetAmount = reader.ToDecimal(validBetAmountColumn),
