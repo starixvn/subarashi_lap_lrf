@@ -53,11 +53,11 @@ export const DefaultPagingOption = {
 }
 
 export const SortOrder = {
-    ASC: 0,
-    DESC: 1
+    ASC: 1,
+    DESC: 2
 }
 
 export const SortBy = {
-    BetPlaced: 0,
+    BetPlaced: 4,
     Stake: 1
 }

@@ -1138,8 +1138,22 @@ function _toPrimitive(input, hint) { if (typeof input !== "object" || input === 
 class BetListDataGrid extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
-    _defineProperty(this, "onSort", (sortBy, sortOrder) => {
-      this.props.onSort && this.props.onSort(sortBy, sortOrder);
+    _defineProperty(this, "sortOrderMapper", {
+      asc: 1,
+      desc: 2
+    });
+    _defineProperty(this, "sortTypeMapper", {
+      transdate: 0,
+      stake: 1,
+      winloss: 2,
+      licenseewl: 3,
+      betplaced: 4
+    });
+    _defineProperty(this, "onSort", (sortType, sortOrder) => {
+      var _this$sortOrderMapper, _this$sortTypeMapper$;
+      const newSortOrder = (_this$sortOrderMapper = this.sortOrderMapper[sortOrder.toLowerCase()]) !== null && _this$sortOrderMapper !== void 0 ? _this$sortOrderMapper : this.sortOrderMapper.asc;
+      const newSortType = (_this$sortTypeMapper$ = this.sortTypeMapper[sortType.toLowerCase()]) !== null && _this$sortTypeMapper$ !== void 0 ? _this$sortTypeMapper$ : this.sortTypeMapper.transdate;
+      this.props.onSort && this.props.onSort(newSortType, newSortOrder);
     });
     _defineProperty(this, "onPaging", (index, size) => {
       this.props.onPaging && this.props.onPaging(index, size);
@@ -2808,7 +2822,7 @@ const BaseDataGrid = props => {
   };
   const onSort = (sortBy, sortOrder) => {
     const param = Object.assign({}, requestParam, {
-      SortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy,
+      SortType: sortBy,
       SortOrder: sortOrder
     });
     getData(param);
