@@ -6,19 +6,17 @@
     using System.Web.Mvc;
     using Base.UnitTests;
     using DataAccess.TotalBet.Interfaces;
-    using Fanex.Athena.Controllers.TotalBets;
     using Model.Core.ResultModel;
     using Model.TotalBet.DTO;
     using Model.TotalBet.MetaModel;
     using Model.TotalBet.ViewModel;
     using NSubstitute;
     using NUnit.Framework;
+    using Service.StatelessCore.Interfaces;
 
     [TestFixture]
     public class MoneyLineTotalBetControllerTest : CultureBaseControllerHelperTest
     {
-        private IMoneyLineDataAccess _moneyLineDataAccess;
-
         [OneTimeSetUp]
         public override void FixtureSetUp()
         {
@@ -27,6 +25,8 @@
             SetUpDefaultFakeData();
 
             SepUpForService();
+
+            _authService = Substitute.For<IAuthorizationService>();
         }
 
         [OneTimeTearDown]
@@ -35,7 +35,12 @@
             base.FixtureTearDown();
 
             _moneyLineDataAccess = null;
+            _authService = null;
         }
+
+        private IMoneyLineDataAccess _moneyLineDataAccess;
+
+        private IAuthorizationService _authService;
 
         [Test]
         public async Task Index_WhenCall_ReturnCorrectViewName()
@@ -79,7 +84,7 @@
 
         private MoneyLineTotalBetController CreateController()
         {
-            return new MoneyLineTotalBetController(_moneyLineDataAccess)
+            return new MoneyLineTotalBetController(_moneyLineDataAccess, _authService)
             {
                 LangService = LangService,
                 SessionServiceInstance = SessionService

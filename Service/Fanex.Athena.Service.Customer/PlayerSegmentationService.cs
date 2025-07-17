@@ -22,9 +22,9 @@
 
     public class PlayerSegmentationService : IPlayerSegmentationService
     {
-        private const string ADD_LIC_VIP_PATH = "/api/cts/AddLicVIP";
-        private const string REMOVE_LIC_VIP_PATH = "/api/cts/RemoveLicVIP";
-        private const string HEALTH_CHECK_PATH = "/api/cts/HealthCheck";
+        private const string ADD_LIC_VIP_PATH = "api/cts/AddLicVIP";
+        private const string REMOVE_LIC_VIP_PATH = "api/cts/RemoveLicVIP";
+        private const string HEALTH_CHECK_PATH = "api/cts/HealthCheck";
         private readonly IBusinessLogService _businessLogService;
         private readonly ICTSApiClient _ctsApiClient;
         private readonly ICustomerClassService _customerClassService;

@@ -1,12 +1,22 @@
-﻿using System;
-using Fanex.Data;
-using Fanex.Data.SqlServer;
-
-namespace Fanex.Athena
+﻿namespace Fanex.Athena
 {
+    using System;
+    using System.Collections.Generic;
+    using Data;
+    using Data.SqlServer;
+
     [CLSCompliant(false)]
     public class ShardDbSettingProvider
     {
+        private readonly Dictionary<string, string> _replaceIps = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            { "10.146.11.130", "dbtrans.dp.gamora.prod,7104" },
+            { "10.146.11.160", "dbsite01.dp.gamora.prod,7131" },
+            { "10.146.11.161", "dbsite02.dp.gamora.prod,7132" },
+            { "10.146.11.162", "dbsite03.dp.gamora.prod,7133" },
+            { "10.146.11.150", "dbcust.dp.gamora.prod,7105" }
+        };
+
         private readonly IShardInfoAccessor _shardInfoAccessor;
 
         public ShardDbSettingProvider(IShardInfoAccessor shardInfoAccessor)
@@ -21,6 +31,11 @@ namespace Fanex.Athena
             if (_shardInfoAccessor.TryUseShardDB(settingKey, out var dbServer))
             {
                 serverIp = dbServer;
+            }
+
+            if (_replaceIps.TryGetValue(serverIp, out var replaceIp))
+            {
+                serverIp = replaceIp;
             }
 
             return new SqlObjectDb(settingKey, commandTimeout, serverIp);
