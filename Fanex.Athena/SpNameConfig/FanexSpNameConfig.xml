@@ -1,11 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Root>
 	<!--Do not delete this-->
-	<SpNameConfig Environment="KLDR" SpName="Lrf_CheckIn" EnvironmentText="_KL" DbName="DBCUST.bodb_Licensee.wsv_lap" DbEnvironmentText="DBCUST.bodb_Licensee.wsv_lap"></SpNameConfig>
-	<SpNameConfig Environment="KLDR" SpName="Lrf_ReCheckIn" EnvironmentText="_KL" DbName="DBCUST.bodb_Licensee.wsv_lap" DbEnvironmentText="DBCUST.bodb_Licensee.wsv_lap"></SpNameConfig>
-	<SpNameConfig Environment="KLDR" SpName="Lrf_UserLogin" EnvironmentText="_KL" DbName="DBCUST.bodb_Licensee.wsv_lap" DbEnvironmentText="DBCUST.bodb_Licensee.wsv_lap"></SpNameConfig>
-	<SpNameConfig Environment="KLDR" SpName="Lrf_UserLogout" EnvironmentText="_KL" DbName="DBCUST.bodb_Licensee.wsv_lap" DbEnvironmentText="DBCUST.bodb_Licensee.wsv_lap"></SpNameConfig>
-
 	<SpNameConfig Environment="UATTW" SpName="Lrf_SubsidiarySel" EnvironmentText="" DbName="DBCUST.SiteConfig.wsv_lap" DbEnvironmentText="DBCUST_UAT.SiteConfig.wsv_lap"></SpNameConfig>
 	<SpNameConfig Environment="UATTW" SpName="Lrf_MessageListSel" EnvironmentText="" DbName="DBCUST.SiteConfig.wsv_lap" DbEnvironmentText="DBCUST_UAT.SiteConfig.wsv_lap"></SpNameConfig>
 	<SpNameConfig Environment="UATTW" SpName="Lrf_MessageUserIns" EnvironmentText="" DbName="DBCUST.SiteConfig.wsv_lap" DbEnvironmentText="DBCUST_UAT.SiteConfig.wsv_lap"></SpNameConfig>
