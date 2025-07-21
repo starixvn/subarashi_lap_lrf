@@ -30,20 +30,12 @@
         },
         new SiteInfo
         {
-            SiteEnvironment = SiteEnvironment.PRO
+            SiteEnvironment = SiteEnvironment.PROD
         },
 		new SiteInfo
         {
             SiteEnvironment = SiteEnvironment.Staging
-        },
-        new SiteInfo
-        {
-            SiteEnvironment = SiteEnvironment.KLDR
-        },
-		new SiteInfo
-        {
-            SiteEnvironment = SiteEnvironment.KLPROD
-        },
+        }
     };
 #>
 <#+
@@ -54,10 +46,8 @@
         UAT,
 		UATTW,
 		SIT,
-        PRO,
-		Staging,
-		KLDR,
-		KLPROD
+        PROD,
+		Staging
     }
 
 	class SiteInfo

@@ -31,25 +31,13 @@
       "Properties": {}
     },
     {
-      "Filename": "FanexSpName.PRO.xml",
+      "Filename": "FanexSpName.PROD.xml",
       "Project": null,
       "Path": "SpNameConfig",
       "Properties": {}
     },
     {
       "Filename": "FanexSpName.Staging.xml",
-      "Project": null,
-      "Path": "SpNameConfig",
-      "Properties": {}
-    },
-    {
-      "Filename": "FanexSpName.KLDR.xml",
-      "Project": null,
-      "Path": "SpNameConfig",
-      "Properties": {}
-    },
-    {
-      "Filename": "FanexSpName.KLPROD.xml",
       "Project": null,
       "Path": "SpNameConfig",
       "Properties": {}
