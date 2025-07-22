@@ -3,7 +3,6 @@
     using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Fanex.Athena.Model.Core.DataDomain;
 
     public static class RouteConfig
     {
@@ -108,7 +107,7 @@
                 "WinlossAnalysisReport/{*url}",
                 new { Controller = "Proxy", Action = "ReportViews", });
             winlossAnalysisReportRoute.RouteHandler = new ReadonlySessionRouteHandler();
-            
+
             var winLossByTimeZoneReportRoute = routes.MapHttpRoute(
                 name: "winLossByTimeZoneReportRoute",
                 routeTemplate: "LicenseeWinLossByTimeZoneReport/{*url}",

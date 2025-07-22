@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Controllers
 {
     using System;
-    using System.Net.Http;
     using System.Text;
     using System.Web.Mvc;
     using System.Web.UI;

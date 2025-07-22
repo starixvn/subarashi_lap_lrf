@@ -1,6 +1,5 @@
 ﻿using Fanex.Athena.Extension.Helper;
 using Newtonsoft.Json.Linq;
-using System;
 
 namespace Fanex.Athena.Model.Customer.DTO.CustomerAdmin
 {

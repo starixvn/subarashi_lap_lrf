@@ -1,5 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -59,7 +60,14 @@
         public async Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId, ProductAccess productAccess)
         {
             var result = await _groupDataAccess.GetById(groupCommId, licenseeId, productAccess);
-            result.CommValues = result.CommValues
+
+            var commSettings = await _groupDataAccess.GetAllCommSettingAsync(productAccess).ConfigureAwait(false);
+            var existingCommissionValues = result.CommValues.ToList();
+            var existingProductCodes = existingCommissionValues.Select(p => p.ProductCode).ToHashSet();
+
+            existingCommissionValues.AddRange(commSettings.Where(setting => !existingProductCodes.Contains(setting.ProductCode)));
+
+            result.CommValues = existingCommissionValues
                 .Where(_ => CommissionGroupHelper.GetProductPermissions(productAccess, _.ProductCode))
                 .OrderBy(_ => _, new GroupCommSettingComparer())
                 .ThenBy(_ => _.ProductCode);

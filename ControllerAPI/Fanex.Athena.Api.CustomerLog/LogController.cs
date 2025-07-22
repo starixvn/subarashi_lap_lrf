@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Api.CustomerLog
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -12,8 +11,6 @@
     using Base.Attributes;
 
     using DataAccess.Customer.Interfaces;
-
-    using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.Helper;

@@ -4,7 +4,6 @@
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Customer.ViewModel;
     using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
     using Fanex.Athena.Web.ActionFilter;
     using System.Web.Mvc;
     using System.Web.SessionState;

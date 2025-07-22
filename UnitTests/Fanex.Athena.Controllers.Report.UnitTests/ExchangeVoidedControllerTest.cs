@@ -11,7 +11,6 @@ using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Model.Report.MetaModel;
 using Fanex.Athena.Model.Report.ViewModel;
-using Fanex.Athena.Service.Core.Common.Interfaces;
 using Fanex.Athena.Service.Report.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;
 using Fanex.Athena.UnitTest.Common.Helpers;

@@ -1,6 +1,4 @@
-﻿using Fanex.Athena.Model.Core.MetaModel;
-
-namespace Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting
+﻿namespace Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting
 {
     public class UpdateCustomerOddsGroupLogMetaModel
     {

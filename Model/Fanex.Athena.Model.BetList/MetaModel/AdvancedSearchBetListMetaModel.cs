@@ -1,5 +1,4 @@
-﻿using Fanex.Athena.Model.Core.DataDomain;
-using Fanex.Athena.Model.Core.MetaModel;
+﻿using Fanex.Athena.Model.Core.MetaModel;
 
 namespace Fanex.Athena.Model.BetList.MetaModel
 {

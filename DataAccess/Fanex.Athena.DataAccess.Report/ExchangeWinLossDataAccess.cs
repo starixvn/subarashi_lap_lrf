@@ -108,7 +108,7 @@
                 CustomerWL = g.Sum(x => x.CustomerWL),
                 CustomerComm = g.Sum(x => x.CustomerComm),
                 LicenseeWL = g.Sum(x => x.LicenseeWL),
-                CustomerWLTotal = g.Sum(x=> x.CustomerWLTotal),
+                CustomerWLTotal = g.Sum(x => x.CustomerWLTotal),
                 NetTurnover = g.Sum(x => x.NetTurnover)
             }).ToList();
         }

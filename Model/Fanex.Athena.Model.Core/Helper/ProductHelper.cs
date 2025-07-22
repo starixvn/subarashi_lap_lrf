@@ -1,10 +1,8 @@
 ﻿namespace Fanex.Athena.Model.Core.Helper
 {
-    using System;
     using System.Collections.Generic;
     using DataDomain;
     using DTO.Common;
-    using Resources;
 
     public static class ProductHelper
     {

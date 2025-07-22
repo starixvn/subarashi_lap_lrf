@@ -132,30 +132,30 @@
                 switch (columnName.Value)
                 {
                     case "DisableParlay":
-                    {
-                        var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
-                        row.Cells[columnName.Key].SetCellValue(text);
-                        break;
-                    }
+                        {
+                            var text = item.DisableParlay ? ViewResources.Yes : ViewResources.No;
+                            row.Cells[columnName.Key].SetCellValue(text);
+                            break;
+                        }
                     case "TopPriority":
-                    {
-                        var text = item.TopPriority ? ViewResources.Yes : ViewResources.No;
-                        row.Cells[columnName.Key].SetCellValue(text);
-                        break;
-                    }
+                        {
+                            var text = item.TopPriority ? ViewResources.Yes : ViewResources.No;
+                            row.Cells[columnName.Key].SetCellValue(text);
+                            break;
+                        }
                     default:
-                    {
-                        if (cellValue == null)
                         {
-                            row.Cells[columnName.Key].SetCellValue(DEFAULT_VALUE);
-                        }
-                        else
-                        {
-                            row.Cells[columnName.Key].SetCellValue(cellValue);
-                        }
+                            if (cellValue == null)
+                            {
+                                row.Cells[columnName.Key].SetCellValue(DEFAULT_VALUE);
+                            }
+                            else
+                            {
+                                row.Cells[columnName.Key].SetCellValue(cellValue);
+                            }
 
-                        break;
-                    }
+                            break;
+                        }
                 }
             }
         }

@@ -1,6 +1,5 @@
 ﻿using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.Helper;
-using Fanex.Athena.Model.Customer.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;

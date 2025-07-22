@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
 
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Core.Helper;

@@ -1,7 +1,5 @@
-﻿using System.Text;
-using Fanex.Athena.Model.Core.DataDomain;
+﻿using Fanex.Athena.Model.Core.DataDomain;
 using Fanex.Athena.Model.Core.DTO.Common;
-using Fanex.Athena.Model.Customer.MetaModel.CustomerLog;
 using Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting;
 
 namespace Fanex.Athena.Service.StatelessCore.Extensions

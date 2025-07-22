@@ -30,7 +30,7 @@ namespace Fanex.Athena.Api.Common
             ICacheRefAdapter cacheRefAdapter,
             IPortalApiService portalApiService,
             ISportService sportService)
-            :base(languageService)
+            : base(languageService)
         {
             _matchService = matchService;
             _cacheRefAdapter = cacheRefAdapter;
@@ -76,6 +76,7 @@ namespace Fanex.Athena.Api.Common
                 LeagueList = leagueList.OrderBy(i => i.LeagueName)
             };
         }
+
         private async Task<IEnumerable<Match>> GetMatchList(int sportId)
         {
             if (sportId == ProductTypes.Parlay)

@@ -10,7 +10,6 @@
     using Base.Attributes;
     using DataAccess.Core.Common.Interfaces;
     using Extension.Utility.Interfaces;
-    using Model.Auth.DataDomain;
     using Model.Core;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;

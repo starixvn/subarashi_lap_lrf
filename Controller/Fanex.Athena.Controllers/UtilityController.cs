@@ -32,7 +32,7 @@
             IAppSettings appSettings,
             ILanguageService languageService,
             IMaintenanceService maintenanceService,
-            ISessionService sessionService, 
+            ISessionService sessionService,
             IAuthorizationService authorizationService)
         {
             _appSettings = appSettings;
@@ -67,7 +67,7 @@
                     HasPermission = _authorizationService.HasPermissions(_sessionService.UserSession, permission)
                 }).ToList();
             }
-            
+
             return Json(new RequestInfo
             {
                 FunctionKeys = functionKeys,

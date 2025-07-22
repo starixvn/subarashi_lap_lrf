@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer.Interfaces
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Threading.Tasks;
 
     using Fanex.Athena.Model.Auth;

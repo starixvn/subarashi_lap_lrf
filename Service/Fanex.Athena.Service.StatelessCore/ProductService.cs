@@ -2,22 +2,11 @@
 {
     #region
 
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
-    using System.Threading.Tasks;
-    using System.Web.Hosting;
-    using System.Xml.Linq;
-
-    using Extension.Utility.Interfaces;
-
-    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
     using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 

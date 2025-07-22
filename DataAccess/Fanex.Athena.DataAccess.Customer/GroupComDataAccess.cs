@@ -3,7 +3,6 @@
     using Fanex.Athena.DataAccess.Core;
     using Fanex.Athena.DataAccess.Customer.Interfaces;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.Helper;
     using Fanex.Athena.Model.Customer.MetaModel;
     using Fanex.Common;
     using Fanex.Data;
