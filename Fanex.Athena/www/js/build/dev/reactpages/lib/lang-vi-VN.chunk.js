@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 7/22/2025 9:31:38 AM
+// Generated at: 7/22/2025 9:42:45 AM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
