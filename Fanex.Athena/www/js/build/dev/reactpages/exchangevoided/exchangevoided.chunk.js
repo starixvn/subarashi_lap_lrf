@@ -1544,12 +1544,14 @@ class DataService {
   static isCancel(thrown) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.isCancel(thrown);
   }
-  static postData(url, params) {
+  static postData(url, params, cancellationTokenSource) {
+    const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-      }
+      },
+      cancelToken: token
     });
   }
   static getFile(url, params, options) {

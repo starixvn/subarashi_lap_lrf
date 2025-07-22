@@ -1,4 +1,4 @@
-﻿// Generated at: 6/3/2025 10:27:21 AM
+﻿// Generated at: 7/22/2025 9:31:38 AM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -112,7 +112,6 @@ BettingLimit:"Giới hạn cược",
 BettingStatement:"Sao kê Cược",
 BettingTicketCenter:"Trung Tâm Vé Cược",
 BettingTicketCenter_AdvancedSearchTabNote1:"Bộ lọc Giải Đấu và Trận Đấu chỉ dành cho Sportsbook và chỉ hiển thị dữ liệu của một ngày nhất định",
-BettingTicketCenter_AdvancedSearchTabNote2:"Dữ liệu có sẵn từ {0}",
 BettingTicketCenter_BookedBetNote:"Hiển thị dữ liệu lên đến 7 ngày",
 BettingTicketCenter_Exchange_Note_1:"Chỉ hỗ trợ tìm kiếm vé cược bị hủy.",
 BettingTicketCenter_Exchange_Note_2:"Nhập tên người dùng để tra kết quả nhanh hơn.",

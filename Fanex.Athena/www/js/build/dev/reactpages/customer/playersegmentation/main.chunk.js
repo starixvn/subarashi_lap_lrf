@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/monitoredPlayer":"abe3a377d795edaf428f","customer/playersegmentation/vipPlayerManagement":"bd40c097c805f40ba730","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/monitoredPlayer":"ac0efb05ab38e606c613","customer/playersegmentation/vipPlayerManagement":"4d8388279fb7602ac445","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -497,12 +497,14 @@ class DataService {
   static isCancel(thrown) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.isCancel(thrown);
   }
-  static postData(url, params) {
+  static postData(url, params, cancellationTokenSource) {
+    const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-      }
+      },
+      cancelToken: token
     });
   }
   static getFile(url, params, options) {

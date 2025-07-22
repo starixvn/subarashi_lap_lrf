@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/26/2025 1:04:44 PM
+// Generated at: 7/22/2025 9:31:37 AM
 window._language_id_ID = {
   AbnormalBet: "Taruhan Abnormal",
   AccessDeniedMsg: "Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -106,6 +106,7 @@ window._language_id_ID = {
   ActiveCustomers: "Pelanggan Aktif",
   ActualStake: "Jumlah Taruhan Sebenarnya",
   AddContact: "Tambah Kontak",
+  Added: "Ditambahkan",
   AddNew: "Tambah Baru",
   Address: "Alamat",
   AddSuccess: "Berhasil ditambahkan!",
@@ -204,7 +205,6 @@ window._language_id_ID = {
   BettingStatement: "Rekapan Taruhan",
   BettingTicketCenter: "Pusat Tiket Taruhan",
   BettingTicketCenter_AdvancedSearchTabNote1: "Filter Liga dan Pertandingan hanya tersedia untuk Sportsbook pada hari tertentu",
-  BettingTicketCenter_AdvancedSearchTabNote2: "Data tersedia dari {0}",
   BettingTicketCenter_BookedBetNote: "Data tersedia hingga 7 hari",
   BettingTicketCenter_Exchange_Note_1: "Dukung pencarian tiket kosong saja",
   BettingTicketCenter_Exchange_Note_2: "Masukkan nama pengguna untuk mendapatkan hasil lebih cepat.",
@@ -683,7 +683,9 @@ window._language_id_ID = {
   Moderate: "Sedang",
   Monday: "Senin",
   MoneyLine: "Money Line",
+  MoneyLineNote: "Jika ada pertandingan yang perlu dipantau, silakan klik ikon “+” di kolom Monitor, atau klik pada Event pertandingan — ini juga akan mengarahkan Anda ke Pusat Pemantauan Pertandingan.",
   MoneyPlay: "Permainan Uang",
+  Monitor: "Pantau",
   MonitoredPlayer: "Pengaturan Pemantauan Ambang Batas",
   MonitoredPlayerList: "Daftar Pemain yang Dipantau",
   MonitoredPlayerNotificationHistoryTitle: "Riwayat Notifikasi {0} -&gt; {1} - {2}",

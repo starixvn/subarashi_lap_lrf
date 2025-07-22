@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/26/2025 1:04:44 PM
+// Generated at: 7/22/2025 9:31:38 AM
 window._language_vi_VN = {
   AA: "Đội Khách/Đội Khách",
   AbnormalBet: "Cược bất thường",
@@ -108,6 +108,7 @@ window._language_vi_VN = {
   ActualStake: "Cược thực tế",
   AD: "Đội Khách/Hòa",
   AddContact: "Thêm liên hệ",
+  Added: "Đã Thêm",
   AddNew: "Thêm Mới",
   AddSuccess: "Thêm thành công!",
   Adjustment: "Điều chỉnh",
@@ -206,7 +207,6 @@ window._language_vi_VN = {
   BettingStatement: "Sao kê Cược",
   BettingTicketCenter: "Trung Tâm Vé Cược",
   BettingTicketCenter_AdvancedSearchTabNote1: "Bộ lọc Giải Đấu và Trận Đấu chỉ dành cho Sportsbook và chỉ hiển thị dữ liệu của một ngày nhất định",
-  BettingTicketCenter_AdvancedSearchTabNote2: "Dữ liệu có sẵn từ {0}",
   BettingTicketCenter_BookedBetNote: "Hiển thị dữ liệu lên đến 7 ngày",
   BettingTicketCenter_Exchange_Note_1: "Chỉ hỗ trợ tìm kiếm vé cược bị hủy.",
   BettingTicketCenter_Exchange_Note_2: "Nhập tên người dùng để tra kết quả nhanh hơn.",
@@ -691,7 +691,9 @@ window._language_vi_VN = {
   Moderate: "Trung bình",
   Monday: "Thứ Hai",
   MoneyLine: "Cược Đội Thắng",
+  MoneyLineNote: "Nếu có trận đấu nào cần theo dõi, bạn có thể nhấn vào biểu tượng “+” trong cột Theo Dõi, hoặc nhấn vào Sự Kiện của trận đấu — thao tác này cũng sẽ chuyển bạn đến Trung Tâm Theo Dõi Trận Đấu.",
   MoneyPlay: "Money Play",
+  Monitor: "Theo Dõi",
   MonitoredPlayer: "Cài đặt Theo Dõi Giới Hạn Cược",
   MonitoredPlayerList: "Danh sách Theo Dõi Người Chơi",
   MonitoredPlayerNotificationHistoryTitle: "Lịch sử thông báo {0} -&gt; {1} - {2}",

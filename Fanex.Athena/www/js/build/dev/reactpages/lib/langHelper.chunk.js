@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/26/2025 1:04:44 PM
+// Generated at: 7/22/2025 9:31:38 AM
 window._language_en_US = {
   AA: "AA",
   AbnormalBet: "Abnormal Bet",
@@ -108,6 +108,7 @@ window._language_en_US = {
   ActualStake: "Actual Stake",
   AD: "AD",
   AddContact: "Add Contact",
+  Added: "Added",
   AddNew: "Add New",
   Address: "Address",
   AddSuccess: "Add successfully!",
@@ -206,7 +207,7 @@ window._language_en_US = {
   BettingStatement: "Betting Statement",
   BettingTicketCenter: "Betting Ticket Center",
   BettingTicketCenter_AdvancedSearchTabNote1: "League and Match filters are only available for Sportsbook on a specific day",
-  BettingTicketCenter_AdvancedSearchTabNote2: "Data is available from {0}",
+  BettingTicketCenter_AdvancedSearchTabNote2: "Maximum search range is {0} month(s).",
   BettingTicketCenter_BookedBetNote: "Data is available within up to 7 days",
   BettingTicketCenter_Exchange_Note_1: "Support searching void tickets only.",
   BettingTicketCenter_Exchange_Note_2: "Input username to return results faster.",
@@ -364,11 +365,11 @@ window._language_en_US = {
   DateOfBirth: "Date Of Birth",
   DateOfRegistration: "Date of Registration",
   DateRange: "Date Range",
-  DateRangeExceedMsg: "Date range exceeds {0} months. Please try again!",
+  DateRangeExceedMsg: "Date range exceeds {0} month(s). Please try again!",
   DateRangeLimitNote: "Data is available within 3 months, from {0} to {1}.",
   DateRangeNote: "Data is available from {0:d MMM yyyy}",
   Day: "Day",
-  DayRangeExceedMsg: "Date range exceeds {0} days. Please try again!",
+  DayRangeExceedMsg: "Date range exceeds {0} day(s). Please try again!",
   DD: "DD",
   DeactivateListOfPlayers: "Deactivate List of Players",
   DeactivateVip: "Deactivate VIP",
@@ -702,7 +703,9 @@ window._language_en_US = {
   Modify: "Modify",
   Monday: "Monday",
   MoneyLine: "Money Line",
+  MoneyLineNote: "If there are any matches that need to be monitored, please click the “+” icon in the Monitor column or click on the Event of the match — this will also redirect you to the Match Monitoring Center.",
   MoneyPlay: "Money Play",
+  Monitor: "Monitor",
   MonitoredPlayer: "Threshold Monitoring Setting",
   MonitoredPlayerList: "Monitored Player List",
   MonitoredPlayerNotificationHistoryTitle: "Notification History {0} -&gt; {1} - {2}",
@@ -853,6 +856,7 @@ window._language_en_US = {
   Product: "Product",
   ProductAB: "AllBet",
   ProductAGC: "AG Casino",
+  ProductAIG: "AI Gaming",
   ProductAP: "AdvantPlay",
   ProductAPM: "AdvantPlay Mini",
   ProductASK: "ASKMESLOT",
@@ -864,6 +868,7 @@ window._language_en_US = {
   ProductCC: "Arcadia Gaming",
   ProductCG: "CG",
   ProductCO: "Cash Out",
+  ProductCPRNG: "ClotPlay",
   ProductCS: "Saba Casino",
   ProductFAC: "FA CHAI",
   ProductFG: "Funky Games",
