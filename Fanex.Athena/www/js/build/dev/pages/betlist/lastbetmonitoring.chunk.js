@@ -5823,7 +5823,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
         ------------------------------------------------------------------------------------------*/
         _me.reloadData = function () {
             if (_isLoading) {
-                _me.doMonitor();
+                // _me.doMonitor();
                 return;
             }
 
@@ -5846,7 +5846,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                 dataType: 'json',
                 async: true,
                 cache: false,
-                timeout: 10000,
+                timeout: 300000,
                 beforeSend: function () {
                     $('#monitorLoader').css('visibility', 'visible');
                     _isLoading = true;
@@ -5869,6 +5869,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
                         : MIN_INTERVAL;
 
                     // Continue
+                    _isLoading = false;
                     _me.doMonitor();
                 },
                 error: function (jqXHR) {
@@ -5881,8 +5882,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
                     _betListResult.Updated = false;
                     _betListResult.Rows = '';
-                    _isLoading = false;
                     _intervalMiliseconds += 1000;
+                    _isLoading = false;
                     _me.doMonitor();
                 }
             });
@@ -5964,7 +5965,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
 
         _me.clearContent = function () {
             _postedParam.TransId = '0';
-            _postedParam.TransLogId = '0';;
+            _postedParam.TransLogId = '0';
             _me.bindNoInfoRow();
         };
 
@@ -5974,7 +5975,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;﻿
             _lastTransId = '0';
             _lastTransLogId = '0';
             _intervalMiliseconds = MIN_INTERVAL;
-            _me.doMonitor();
+            _me.reloadData();
         };
 
         _me.stopMonitor = function () {
