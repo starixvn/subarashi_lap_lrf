@@ -4,14 +4,12 @@
     Layout = "~/Views/Desktop/Shared/_ReactPageLayout.cshtml";
 }
 @using Fanex.Athena.Model.Core.DataDomain
-@using Fanex.Athena.Service.Core.Users.Interfaces
 @using Fanex.Athena.Service.Core.Common.Interfaces
 @using System.Linq
 
 @model Fanex.Athena.Model.BetList.ViewModel.BettingTicketCenterViewModel
 @{
     var appSettings = DependencyResolver.Current.GetService<IAppSettings>();
-    var session = DependencyResolver.Current.GetService<ISessionService>();
     var currencyService = DependencyResolver.Current.GetService<ICurrencyService>();
     var betTicketEventBuilderUrl = appSettings.BetTicketEventBuilderUrl;
     var selectedStatus = string.Join(",", Model.StatusList.Where(x => x.Checked).Select(x => x.ID).ToArray());
@@ -32,8 +30,6 @@
         customerClassList = string.Join(",", r.CustomerClassList),
         status = true
     });
-    var oddsGroup = Model.OddsGroup;
-    var platformList = Model.PlatformList;
 
     var cashOutModeList = SystemConstants.CashOutModeList
         .Select(c => new { value = c.Key, label = c.Value }).ToList();
@@ -84,7 +80,7 @@
     isAllowedCustomerComm: @Model.IsAllowedCustomerComm.ToJson(),
     productList: @Html.Raw(Model.ProductOptionList.Select(x => new { id = x.Code, value = x.Name, status = true }).ToJson()),
     currencyList: @Html.Raw(Model.CurrencyList.Select(x => new { id = x.Key, value = x.Value, status = true }).ToJson()),
-    dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 3 },
+    dateConstraint: { minDate: '@Model.MinDate.ToString("MM/dd/yyyy")', maxDate: '@Model.MaxDate.ToString("MM/dd/yyyy")', limitedMonthRange: 1 },
     tabList: @Html.Raw(Model.TabList.ToJson()),
     riskLevels: @Html.Raw(riskLevels.ToJson()),
     oddsGroups: @Html.Raw(Model.OddsGroup.Select(x => new { Id = x, Value = x, Status = true }).ToJson()),

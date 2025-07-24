@@ -3,8 +3,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using DataAccess.Core.Common.Interfaces;
-
     using Extension.Utility;
     using Extension.Utility.Interfaces;
 

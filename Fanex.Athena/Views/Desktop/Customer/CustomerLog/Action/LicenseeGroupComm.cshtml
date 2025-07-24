@@ -3,9 +3,10 @@
 @using Fanex.Athena.Api.CustomerLog;
 @using Fanex.Athena.Model.Core.Helper;
 @using Fanex.Common;
+
 @model ActionViewModel
 @{
-    Model.Resource = LogHelper.GetGroupCommissionLogResources(Model.ProductList);
+    Model.Resource = LogHelper.GetGroupCommissionLogResources(Model.ProductList, ActionViewModel.ProductAccess);
     var groupNameOld = Model.Data["GroupNameOld"];
     const int nameLength = LogHelper.MaxCommissionGroupNameShownLength;
     var groupNameOldTitle = groupNameOld.Length > nameLength ? "title='" + groupNameOld + "'" : "";

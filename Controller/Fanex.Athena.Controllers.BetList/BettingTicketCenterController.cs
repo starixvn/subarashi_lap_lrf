@@ -4,38 +4,33 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Auth.Enum;
-    using Fanex.Athena.Model.Core.DataDomain;
-    using Fanex.Athena.Model.Core.Helper;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
+    using DataAccess.Core.Configuration.Interfaces;
+    using Extension.Helper;
+    using Model.Auth.DataDomain;
+    using Model.Auth.Enum;
     using Model.BetList.ViewModel;
+    using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
+    using Model.Core.Helper;
     using Model.Core.MetaModel.Product;
     using Resources;
+    using Service.Core.Users.Interfaces;
+    using Service.Customer.Interfaces;
+    using Service.StatelessCore.Interfaces;
     using Web.ActionFilter;
 
     [FunctionAuthorization(PermissionKeys.BettingTicketCenter)]
     [UMFilter]
     public class BettingTicketCenterController : CultureBaseController
     {
-        private readonly IProductService _productService;
+        private readonly IAuthorizationService _authService;
 
         private readonly IBalanceUpDataAccess _balanceUpDataAccess;
 
-        private readonly IAuthorizationService _authService;
+        private readonly ICustomerClassService _customerClassService;
+        private readonly IProductService _productService;
 
         private readonly ISubsidiaryService _subsidiaryService;
-
-        private readonly ICustomerClassService _customerClassService;
-
-        private bool IsOneworksMaster =>
-           SessionServiceInstance.UserSession.UserLevel == UserLevelType.Oneworks
-           && SessionServiceInstance.UserSession.SubsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement;
 
         public BettingTicketCenterController(
             IProductService productService,
@@ -51,6 +46,10 @@
             _customerClassService = customerClassService;
         }
 
+        private bool IsOneworksMaster =>
+            SessionServiceInstance.UserSession.UserLevel == UserLevelType.Oneworks
+            && SessionServiceInstance.UserSession.SubsidiaryViewType == (byte)SubsidiaryViewType.NormalManagement;
+
         [FunctionAuthorization(
             PermissionKeys.BtcSingleCustomer,
             PermissionKeys.BtcRefNo,
@@ -64,26 +63,28 @@
             {
                 return RefNo();
             }
-            else if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
+
+            if (tabList.Any(x => PermissionKeys.BtcSingleCustomer == x))
             {
                 return SingleCustomer();
             }
-            else if (tabList.Any(x => PermissionKeys.BtcRunning == x))
+
+            if (tabList.Any(x => PermissionKeys.BtcRunning == x))
             {
                 return await Running();
             }
-            else if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
+
+            if (tabList.Any(x => PermissionKeys.BtcAdvancedSearch == x))
             {
                 return await AdvancedSearch();
             }
-            else if (tabList.Any(x => PermissionKeys.BtcBookedBet == x))
+
+            if (tabList.Any(x => PermissionKeys.BtcBookedBet == x))
             {
                 return BookedBet();
             }
-            else
-            {
-                return RedirectToAction("AccessDenied", "Utility");
-            }
+
+            return RedirectToAction("AccessDenied", "Utility");
         }
 
         [FunctionAuthorization(PermissionKeys.BtcAdvancedSearch)]
@@ -99,7 +100,7 @@
                 LiveStatusList = GetLiveStatusList(),
                 StatusList = GetStatusList(),
                 ProductOptionList = GetProductOptionList(FunctionNames.BettingTicketCenterAdvancedSearch),
-                MinDate = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay,
+                MinDate = DateTimeHelper.Today.AddYears(-3),
                 IsAllowedCustomerComm = SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm,
                 SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency,
                 SubsidiaryViewType = IsOneworksMaster ? (byte)SubsidiaryViewType.MasterManagement : userSession.SubsidiaryViewType,
@@ -110,7 +111,7 @@
                 RiskLevels = await _customerClassService.GetAllRiskLevel(),
                 PlatformList = PlatformHelper.GetPlatformList(licenseeSession.SpecialPlatform),
                 IsOfferCashOutProduct = _productService.IsOfferCashOutProduct(licenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language),
-                OddsGroup = licenseeSession.OfferedOddsGroupsList,
+                OddsGroup = licenseeSession.OfferedOddsGroupsList
             };
 
             ViewBag.IsAllowTxIDColumn = licenseeSession.IsEnableSingleWallet;
@@ -147,10 +148,8 @@
             var tabList = GetEnableTabList();
             var licenseeSession = SessionServiceInstance.LicenseeSession;
             var balanceUpDay = _balanceUpDataAccess.GetBalanceUp().BalanceUpDay.ToString(FormatKey.DateFormat);
-            ViewBag.ProductsRequireUseNameNote = string.Format(
-                ViewResources.BettingTicketCenter_RefnoTabNote2,
-                GetProductsRequireUseName(),
-                balanceUpDay);
+
+            ViewBag.ProductsRequireUseNameNote = GetProductsRequireUseName();
             ViewBag.SelectedBaseCurrency = SessionServiceInstance.UserSession.DefaultBaseCurrency;
             ViewBag.HasExchange = tabList.Any() && HasExchange();
             ViewBag.TabList = tabList;
@@ -161,6 +160,7 @@
                 ViewResources.BettingTicketCenter_RefnoTabNote_TxIDSearch2,
                 GetProductsSupportTxIDSearchOnly(),
                 balanceUpDay);
+
             return View(
                 "~/Views/Desktop/BetList/BettingTicketCenter/RefNo.cshtml",
                 SessionServiceInstance.LicenseeSession.IsAllowedCustomerComm);
@@ -224,9 +224,9 @@
                 return BtcViewInfo.TabList.ToList();
             }
 
-            var userFunctionKeyList = userSession.ApplicationMode == AppMode.Parasitic ?
-                userSession.PortalFunctionList.Select(x => x.FunctionKey) :
-                userSession.FunctionList.Select(x => x.FunctionKey);
+            var userFunctionKeyList = userSession.ApplicationMode == AppMode.Parasitic
+                ? userSession.PortalFunctionList.Select(x => x.FunctionKey)
+                : userSession.FunctionList.Select(x => x.FunctionKey);
 
             return BtcViewInfo.TabList.Intersect(userFunctionKeyList);
         }
@@ -265,14 +265,14 @@
                 FunctionNames.BettingTicketCenter);
 
             var licProductsRequire = productAccess.ProductList
-                    .Where(product => (isExclude && !productCode.Contains(product.ProductCode) || (!isExclude && productCode.Contains(product.ProductCode))))
-                    .Select(x => x.ProductName).ToList();
+                .Where(product => (isExclude && !productCode.Contains(product.ProductCode)) || (!isExclude && productCode.Contains(product.ProductCode)))
+                .Select(x => x.ProductName).ToList();
 
             var offeredSubProductList = SessionServiceInstance.LicenseeSession.OfferedSubProductList;
 
             if (offeredSubProductList.IsPresent(_ => _ == Product.SLT))
             {
-                licProductsRequire.Add(ViewResources.ProductSLT);
+                licProductsRequire.Add(productAccess.GetProductName(Product.SLT));
             }
 
             if (productAccess.IsAllow(Product.NG))

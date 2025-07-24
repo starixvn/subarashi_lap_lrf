@@ -1,6 +1,5 @@
 ﻿namespace Fanex.Athena.Api.CustomerLog.UnitTests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,8 +7,6 @@
     using Base.UnitTests;
 
     using DataAccess.Customer.Interfaces;
-
-    using Extension.Utility;
     using Extension.Utility.Interfaces;
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Service.Customer.Interfaces;

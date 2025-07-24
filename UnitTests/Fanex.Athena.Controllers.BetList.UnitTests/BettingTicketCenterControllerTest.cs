@@ -5,43 +5,38 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-
     using Base.UnitTests;
-
     using DataAccess.Core.Configuration.Interfaces;
-    using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Model.Auth;
-    using Fanex.Athena.Model.Auth.DataDomain;
-    using Fanex.Athena.Model.Auth.Enum;
-    using Fanex.Athena.Resources;
-    using Fanex.Athena.Service.Core.Users.Interfaces;
-    using Fanex.Athena.Service.Customer.Interfaces;
-    using Fanex.Athena.Service.StatelessCore.Interfaces;
-
+    using Extension.Helper;
+    using Model.Auth;
+    using Model.Auth.DataDomain;
+    using Model.Auth.Enum;
     using Model.BetList.ViewModel;
     using Model.Core.DataDomain;
     using Model.Core.DTO.Common;
     using Model.Core.DTO.Configuration;
     using Newtonsoft.Json;
     using NSubstitute;
-
     using NUnit.Framework;
-
+    using Resources;
+    using Service.Core.Users.Interfaces;
+    using Service.Customer.Interfaces;
+    using Service.StatelessCore.Interfaces;
     using UnitTest.Common.Helpers;
 
     public class BettingTicketCenterControllerTest : CultureBaseControllerHelperTest
     {
         private static readonly DateTime BalanceUpDate = DateTimeHelper.CreateDateTime(2018, 11, 2);
 
-        private IProductService _productService;
+        private IAuthorizationService _authService;
 
         private IBalanceUpDataAccess _balanceUpDataAccess;
 
-        private IAuthorizationService _authService;
+        private ICustomerClassService _customerClassService;
+
+        private IProductService _productService;
 
         private ISubsidiaryService _subsidiaryService;
-
-        private ICustomerClassService _customerClassService;
 
         [OneTimeSetUp]
         public override void FixtureSetUp()
@@ -53,7 +48,7 @@
             _subsidiaryService = Substitute.For<ISubsidiaryService>();
             _customerClassService = Substitute.For<ICustomerClassService>();
             _subsidiaryService.IsIgnoredSubsidiarySearch(Arg.Any<bool>(), Arg.Any<string>(), Arg.Any<UserAuthInfo>())
-            .Returns(true);
+                .Returns(true);
             _balanceUpDataAccess.GetBalanceUp().Returns(new BalanceUp
             {
                 BalanceUpDay = BalanceUpDate
@@ -326,7 +321,7 @@
                     Assert.That(viewModel.LiveStatusList, Is.Not.Empty);
                     Assert.That(viewModel.StatusList, Is.Not.Empty);
                     Assert.That(viewModel.ProductOptionList.Count(), Is.EqualTo(productCodes.Count()));
-                    Assert.That(viewModel.MinDate, Is.EqualTo(BalanceUpDate));
+                    Assert.That(viewModel.MinDate, Is.EqualTo(DateTimeHelper.Today.AddYears(-3)));
                     Assert.That(viewModel.IsAllowedCustomerComm, Is.EqualTo(DefaultLicenseeSession.IsAllowedCustomerComm));
                     Assert.That(viewModel.HasExchange, Is.EqualTo(hasExchangePermission));
                 });
@@ -351,11 +346,11 @@
                 DefaultLicenseeSession.LicenseeId,
                 DefaultUserSession.Language,
                 Arg.Is<string>(x =>
-                string.IsNullOrEmpty(x) ||
-                x == FunctionNames.BettingTicketCenterAdvancedSearch ||
-                x == FunctionNames.BettingTicketCenterRunning ||
-                x == FunctionNames.BettingTicketCenterSingleCustomer ||
-                x == FunctionNames.BettingTicketCenter)).Returns(new ProductAccess(productCodes));
+                    string.IsNullOrEmpty(x) ||
+                    x == FunctionNames.BettingTicketCenterAdvancedSearch ||
+                    x == FunctionNames.BettingTicketCenterRunning ||
+                    x == FunctionNames.BettingTicketCenterSingleCustomer ||
+                    x == FunctionNames.BettingTicketCenter)).Returns(new ProductAccess(productCodes));
             _productService.IsOfferCashOutProduct(DefaultLicenseeSession.LicenseeId, DefaultUserSession.Language).Returns(false);
 
             return productCodes;
@@ -365,13 +360,13 @@
         {
             var userSession = JsonConvert.DeserializeObject<UserAuthInfo>(JsonConvert.SerializeObject(DefaultUserSession));
             userSession.ApplicationMode = appMode;
-            userSession.PortalFunctionList = new PortalFunction[]
+            userSession.PortalFunctionList = new[]
             {
-                    new PortalFunction { FunctionKey =  permissionKey }
+                new PortalFunction { FunctionKey = permissionKey }
             };
             userSession.FunctionList = new List<Function>
             {
-                new Function { FunctionKey =  permissionKey }
+                new Function { FunctionKey = permissionKey }
             };
             StubUserSessionData(userSession);
         }

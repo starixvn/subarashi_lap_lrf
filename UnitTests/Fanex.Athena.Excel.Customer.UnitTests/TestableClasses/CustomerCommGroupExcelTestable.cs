@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
+﻿using Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList;
 using NPOI.SS.UserModel;
 
 namespace Fanex.Athena.Excel.Customer.UnitTests.TestableClasses

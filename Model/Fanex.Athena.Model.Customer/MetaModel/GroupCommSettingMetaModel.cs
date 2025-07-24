@@ -1,5 +1,5 @@
-﻿using Fanex.Athena.Model.Core.Helper;
-using Fanex.Athena.Model.Customer.DTO;
+﻿using Fanex.Athena.Model.Core.DTO.Common;
+using Fanex.Athena.Model.Core.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,16 +12,21 @@ namespace Fanex.Athena.Model.Customer.MetaModel
         {
         }
 
-        public GroupCommSettingMetaModel(IDataReader reader)
+        public GroupCommSettingMetaModel(IDataReader reader, ProductAccess productAccess)
         {
+            var productCode = Convert.ToString(reader["ProductCode"]);
+
             Sporttype = Convert.ToInt32(reader["Sporttype"]);
             Bettype = Convert.ToInt32(reader["Bettype"]);
-            ProductCode = Convert.ToString(reader["ProductCode"]);
+            ProductCode = productCode;
+            ProductName = productAccess.GetProductName(productCode);
         }
 
         public int GroupCommId { get; set; }
 
         public string ProductCode { get; set; }
+
+        public string ProductName { get; set; }
 
         public int Sporttype { get; set; }
 

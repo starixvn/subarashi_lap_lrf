@@ -1,6 +1,7 @@
 ﻿namespace Fanex.Athena.Model.Customer.ViewModel.CustomerLog
 {
     using System.Collections.Generic;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Resources;
 
     public class ActionViewModel
@@ -12,6 +13,8 @@
         public IDictionary<string, string> Resource { get; set; }
 
         public IEnumerable<string> ProductList { get; set; }
+
+        public static ProductAccess ProductAccess { get; set; }
 
         public string GetClassName(string fieldName)
         {

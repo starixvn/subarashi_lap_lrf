@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./www/js/source/reactpages",
+      "paths": {
+        "@jsroot/*": [ "./*" ]
+      }
+    }
+  }
+  

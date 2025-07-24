@@ -160,13 +160,13 @@
                     return await _service.GetSpreadSettingPolicy(metaModel);
 
                 case (byte)CustomerClassTabType.AllCustomerClass:
-                {
-                    var result = await _service.GetAllCustomerClass(metaModel.Language);
-                    return result.GroupBy(_ => _.Id).Select(_ => new CustomerClassModel(_.Key)
                     {
-                        Category = string.Join(", ", _.Select(c => c.Category))
-                    });
-                }
+                        var result = await _service.GetAllCustomerClass(metaModel.Language);
+                        return result.GroupBy(_ => _.Id).Select(_ => new CustomerClassModel(_.Key)
+                        {
+                            Category = string.Join(", ", _.Select(c => c.Category))
+                        });
+                    }
                 default:
                     return await _service.GetSettingPolicy(metaModel);
             }

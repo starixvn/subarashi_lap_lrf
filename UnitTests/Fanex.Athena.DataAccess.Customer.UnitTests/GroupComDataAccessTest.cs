@@ -4,7 +4,6 @@
     using Core.UnitTests.TestHelpers;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Customer.MetaModel;
-    using Model.Customer.MetaModel.CustomerLog;
 
     using NSubstitute;
 

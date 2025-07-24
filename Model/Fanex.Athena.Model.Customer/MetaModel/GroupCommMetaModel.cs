@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Data;
-    using Fanex.Athena.Model.Core.Helper;
     using Resources;
 
     public class GroupCommMetaModel

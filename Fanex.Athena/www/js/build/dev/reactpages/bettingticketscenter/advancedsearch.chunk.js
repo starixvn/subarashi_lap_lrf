@@ -2513,8 +2513,8 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     if (limitedMonthRange) {
       const startDate = date.startDate;
       const endDate = date.endDate;
-      const diffMonth = 12 * (endDate.year() - startDate.year()) + endDate.month() - startDate.month() + 1;
-      return diffMonth <= limitedMonthRange;
+      const adjustedStart = startDate.clone().add(limitedMonthRange, 'month');
+      return !endDate.isAfter(adjustedStart, 'day');
     }
     return true;
   }
@@ -4414,12 +4414,14 @@ class DataService {
   static isCancel(thrown) {
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.isCancel(thrown);
   }
-  static postData(url, params) {
+  static postData(url, params, cancellationTokenSource) {
+    const token = cancellationTokenSource ? cancellationTokenSource.token : this.genCancellationToken().token;
     return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, params, {
       headers: {
         'X-Requested-With': 'XMLHttpRequest',
         '__RequestVerificationToken': _jsroot_lib_site__WEBPACK_IMPORTED_MODULE_1__["default"].getXsrfToken()
-      }
+      },
+      cancelToken: token
     });
   }
   static getFile(url, params, options) {
@@ -6430,9 +6432,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @jsroot/lib/langHelper */ "./www/js/source/reactpages/lib/langHelper.js");
-/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @jsroot/lib/AppData */ "./www/js/source/reactpages/lib/AppData.js");
 
 
 
@@ -6442,11 +6444,11 @@ const Note = props => {
     className: "col-12 col-md-3 col-xl-1 note"
   }, _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('Note'), ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: props.contentClass
-  }, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BettingTicketCenter_AdvancedSearchTabNote1'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BettingTicketCenter_AdvancedSearchTabNote2').replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_2__["default"].dateConstraint.minDate)));
+  }, "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BettingTicketCenter_AdvancedSearchTabNote1'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "* ", _jsroot_lib_langHelper__WEBPACK_IMPORTED_MODULE_1__["default"].getSingleResource('BettingTicketCenter_AdvancedSearchTabNote2').replace("{0}", _jsroot_lib_AppData__WEBPACK_IMPORTED_MODULE_3__["default"].dateConstraint.limitedMonthRange)));
 };
 const propTypes = {
-  noteClass: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string,
-  contentClass: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.string
+  noteClass: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string,
+  contentClass: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string
 };
 const defaultProps = {
   contentClass: "col-9"

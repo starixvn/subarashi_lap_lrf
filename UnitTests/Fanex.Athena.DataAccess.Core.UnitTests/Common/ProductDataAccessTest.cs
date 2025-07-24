@@ -1,7 +1,5 @@
 ﻿namespace Fanex.Athena.DataAccess.Core.UnitTests.Common
 {
-    using Core.Common;
-
     using Model.Core.DTO.Common;
 
     using NSubstitute;

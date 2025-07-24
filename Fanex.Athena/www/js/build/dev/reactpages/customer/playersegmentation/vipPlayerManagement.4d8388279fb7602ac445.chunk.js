@@ -12214,8 +12214,8 @@ class DateRange extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     if (limitedMonthRange) {
       const startDate = date.startDate;
       const endDate = date.endDate;
-      const diffMonth = 12 * (endDate.year() - startDate.year()) + endDate.month() - startDate.month() + 1;
-      return diffMonth <= limitedMonthRange;
+      const adjustedStart = startDate.clone().add(limitedMonthRange, 'month');
+      return !endDate.isAfter(adjustedStart, 'day');
     }
     return true;
   }
@@ -16536,4 +16536,4 @@ const username = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["defa
 /***/ })
 
 }]);
-//# sourceMappingURL=vipPlayerManagement.bd40c097c805f40ba730.chunk.js.map
+//# sourceMappingURL=vipPlayerManagement.4d8388279fb7602ac445.chunk.js.map

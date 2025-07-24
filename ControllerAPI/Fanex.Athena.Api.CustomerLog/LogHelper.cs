@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Core.Helper;
 using Fanex.Athena.Model.Customer.ViewModel.CustomerLog;
 using Fanex.Athena.Resources;
@@ -61,7 +62,7 @@ namespace Fanex.Athena.Api.CustomerLog
             return result.ToArray();
         }
 
-        public static Dictionary<string, string> GetGroupCommissionLogResources(IDictionary<string, bool> productPermissions)
+        public static Dictionary<string, string> GetGroupCommissionLogResources(IDictionary<string, bool> productPermissions, ProductAccess productAccess)
         {
             var resource = new Dictionary<string, string>
             {
@@ -76,13 +77,13 @@ namespace Fanex.Athena.Api.CustomerLog
 
             foreach (var p in productPermissions)
             {
-                resource.Add(p.Key + "Comm", ViewResources.ResourceManager.GetString("Product" + p.Key));
+                resource.Add(p.Key + "Comm", productAccess.GetProductName(p.Key));
             }
 
             return resource;
         }
 
-        public static Dictionary<string, string> GetGroupCommissionLogResources(IEnumerable<string> productCode)
+        public static Dictionary<string, string> GetGroupCommissionLogResources(IEnumerable<string> productCode, ProductAccess productAccess)
         {
             var resource = new Dictionary<string, string>
             {
@@ -97,7 +98,7 @@ namespace Fanex.Athena.Api.CustomerLog
 
             foreach (var p in productCode)
             {
-                resource.Add(p, ViewResources.ResourceManager.GetString("Product" + p));
+                resource.Add(p, productAccess.GetProductName(p));
             }
 
             return resource;

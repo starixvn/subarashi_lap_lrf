@@ -57,7 +57,7 @@
         public async Task<ActionResult> Index()
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language, "CommissionGroups");
 
             var (groups, productList) = await _groupComService.GetAllAsync(licenseeId, productAccess).ConfigureAwait(false);
 
@@ -74,13 +74,13 @@
         public async Task<ActionResult> Create()
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language, "CommissionGroups");
 
             var cacheKey = $"{CacheKey.MemorycacheCommSettingsByLicensee}_{licenseeId}";
             var commSettings = _cacheService.Get<IEnumerable<GroupCommSettingMetaModel>>(cacheKey);
 
             if (commSettings == null)
             {
-                var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
                 commSettings = await _groupComService.InitCommValues(productAccess);
                 _cacheService.Set(cacheKey, commSettings);
             }
@@ -144,7 +144,7 @@
         public async Task<ActionResult> Update(int groupId)
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language, "CommissionGroups");
             var model = await _groupComService.GetById(groupId, licenseeId, productAccess);
 
             if (model == null)
@@ -186,7 +186,7 @@
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var userSession = SessionServiceInstance.UserSession;
-            var productAccess = _productService.GetProductAccess(licenseeId, userSession.Language);
+            var productAccess = _productService.GetProductAccess(licenseeId, userSession.Language, "CommissionGroups");
 
             var result = await _groupComService.DeleteGroupAsync(
                 new DeleteGroupMetaModel
@@ -217,7 +217,7 @@
         [HttpGet]
         public async Task<JsonResult> GetDefaultGroup()
         {
-            var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
+            var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language, "CommissionGroups");
             var (groupList, _) = await _groupComService.GetAllAsync(SessionServiceInstance.LicenseeSession.LicenseeId, productAccess).ConfigureAwait(false);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
 
@@ -234,7 +234,7 @@
         {
             const string FileName = "CustomerCommGroup";
             var templatePath = HostingEnvironment.MapPath(@"~/App_Data/Template/CustomerGroup/CustomerCommGroup.xls");
-            var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language);
+            var productAccess = _productService.GetProductAccess(SessionServiceInstance.LicenseeSession.LicenseeId, SessionServiceInstance.UserSession.Language, "CommissionGroups");
 
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
             var (groups, productList) = await _groupComService.GetAllAsync(licenseeId, productAccess).ConfigureAwait(false);
@@ -282,7 +282,7 @@
         private async Task CreateMetaModel(GroupCommMetaModel metaModel)
         {
             var licenseeId = SessionServiceInstance.LicenseeSession.LicenseeId;
-            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language);
+            var productAccess = _productService.GetProductAccess(licenseeId, SessionServiceInstance.UserSession.Language, "CommissionGroups");
 
             var (groupList, _) = await _groupComService.GetAllAsync(licenseeId, productAccess).ConfigureAwait(false);
             var defaultGroupId = groupList.FirstOrDefault(x => x.IsDefaultGroup)?.GroupCommId ?? 0;
@@ -295,7 +295,7 @@
         private async Task<IResultInfo> UpdateGroupComm(GroupCommMetaModel metaModel)
         {
             var userSession = SessionServiceInstance.UserSession;
-            var productAccess = _productService.GetProductAccess(metaModel.LicenseeId, SessionServiceInstance.UserSession.Language);
+            var productAccess = _productService.GetProductAccess(metaModel.LicenseeId, SessionServiceInstance.UserSession.Language, "CommissionGroups");
 
             var currentGroup = await _groupComService.GetById(metaModel.GroupCommId, metaModel.LicenseeId, productAccess).ConfigureAwait(false);
             if (currentGroup == null || CustomerComGroupHelper.IsSameGroup(currentGroup, metaModel))

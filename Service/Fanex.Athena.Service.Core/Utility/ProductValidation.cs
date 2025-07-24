@@ -40,10 +40,8 @@ namespace Fanex.Athena.Service.Core.Utility
 
             var productAccess = option.IsSingleWallet ? _productService.GetSingleWalletProductAccess(
                 _sessionService.LicenseeSession.LicenseeId,
-                _sessionService.UserSession.Language,
                 option.FunctionConfig) : _productService.GetProductAccess(
                 _sessionService.LicenseeSession.LicenseeId,
-                _sessionService.UserSession.Language,
                 option.FunctionConfig);
 
             var allowedProductCodes = productAccess.ProductList.Select(x => x.ProductCode).ToArray();

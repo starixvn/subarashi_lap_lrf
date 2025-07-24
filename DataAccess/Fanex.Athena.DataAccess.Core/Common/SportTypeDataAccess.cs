@@ -11,7 +11,6 @@ namespace Fanex.Athena.DataAccess.Core.Common
     using System.Linq;
     using System.Threading.Tasks;
     using Fanex.Athena.DataAccess.Core.Common.Interfaces;
-    using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Core.DataDomain;
     using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Common.Extensions;
@@ -52,14 +51,15 @@ namespace Fanex.Athena.DataAccess.Core.Common
 
                         if (!HiddenSports.Contains(id))
                         {
-                            var name = parentId == ProductType ? DataHelper.GetProductName(reader.ToString("Name")) : _cacheRefAdapter.GetSportName(id, languageCode);
+                            var name = parentId == ProductType ? reader.ToString("Name") : _cacheRefAdapter.GetSportName(id, languageCode);
 
                             result.Add(new SportProductItem
                             {
                                 Checked = true,
                                 ID = id,
                                 Name = name,
-                                ParentId = parentId
+                                ParentId = parentId,
+                                IsParent = parentId == ProductType
                             });
                         }
                     }

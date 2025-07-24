@@ -31,6 +31,7 @@
             if (_shardInfoAccessor.TryUseShardDB(settingKey, out var dbServer))
             {
                 serverIp = dbServer;
+                settingKey = _shardInfoAccessor.GetShardSPKey(settingKey);
             }
 
             if (_replaceIps.TryGetValue(serverIp, out var replaceIp))

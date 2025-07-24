@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Generated at: 5/26/2025 1:04:44 PM
+// Generated at: 7/22/2025 9:42:45 AM
 window._language_zh_CN = {
   AA: "客客",
   AbnormalBet: "非正规注单",
@@ -106,6 +106,7 @@ window._language_zh_CN = {
   Active: "活跃",
   AD: "客和",
   AddContact: "新增联络人",
+  Added: "已添加",
   AddNew: "新增",
   AddSuccess: "新增成功",
   Adjustment: "调整",
@@ -196,7 +197,6 @@ window._language_zh_CN = {
   BettingStatement: "投注详情",
   BettingTicketCenter: "注单中心",
   BettingTicketCenter_AdvancedSearchTabNote1: "联赛及赛事过滤器仅支持搜寻体育平台内特定日期范围",
-  BettingTicketCenter_AdvancedSearchTabNote2: "仅支援{0}以后的注单",
   BettingTicketCenter_BookedBetNote: "最多可以检索七天前的资料",
   BettingTicketCenter_Exchange_Note_1: "支援仅搜寻被取消注单。",
   BettingTicketCenter_Exchange_Note_2: "输入玩家名可更快返回结果。",
@@ -651,7 +651,9 @@ window._language_zh_CN = {
   Moderate: "中等",
   Monday: "星期一",
   MoneyLine: "胜负盘",
+  MoneyLineNote: "如果有任何需要监控的比赛，请点击“监控”栏中的“+”图标 或点击该比赛的赛事名称 — 这也会将您重定向到比赛监控中心。",
   MoneyPlay: "普通投注",
+  Monitor: "监控",
   MonitoredPlayer: "警示值监控设定",
   MonitoredPlayerList: "观察中玩家名单",
   MonitoredPlayerNotificationHistoryTitle: "通知纪录 {0} -&gt; {1} - {2}",

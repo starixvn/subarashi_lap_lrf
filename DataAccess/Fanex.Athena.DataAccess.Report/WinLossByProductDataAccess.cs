@@ -35,7 +35,7 @@ namespace Fanex.Athena.DataAccess.Report
             _balanceUpDataAccess = balanceUpDataAccess;
         }
 
-        public async Task<WinLossByProductResultModel> GetWinlossByProducts(WinLossByProductMetaModel metaModel, IDictionary<int, string> currencyList)
+        public async Task<WinLossByProductResultModel> GetWinlossByProducts(WinLossByProductMetaModel metaModel, IDictionary<int, string> currencyList, ProductAccess productAccess)
         {
             const string UspName = "Lrf_Rpt_WinlossByProduct";
 
@@ -50,7 +50,7 @@ namespace Fanex.Athena.DataAccess.Report
                 AddResultParam(db);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    data = GetData(reader, currencyList, metaModel, false);
+                    data = GetData(reader, currencyList, metaModel, false, productAccess);
                 }
 
                 var resultInfo = GetResult(db);
@@ -61,7 +61,7 @@ namespace Fanex.Athena.DataAccess.Report
             return data;
         }
 
-        public async Task<WinLossByProductResultModel> GetWinlossByProductAgents(WinLossByProductMetaModel metaModel, IDictionary<int, string> currencyList)
+        public async Task<WinLossByProductResultModel> GetWinlossByProductAgents(WinLossByProductMetaModel metaModel, IDictionary<int, string> currencyList, ProductAccess productAccess)
         {
             const string UspName = "Lrf_Rpt_WinlossByProductDetail_Ag";
 
@@ -71,12 +71,12 @@ namespace Fanex.Athena.DataAccess.Report
                 db.SetParameterValue("CustID", metaModel.MemberId);
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return GetData(reader, currencyList, metaModel, true);
+                    return GetData(reader, currencyList, metaModel, true, productAccess);
                 }
             }
         }
 
-        public async Task<WinLossByProductResultModel> GetWinlossByProductCustomers(WinLossByProductMetaModel metaModel, IDictionary<int, string> currencyList)
+        public async Task<WinLossByProductResultModel> GetWinlossByProductCustomers(WinLossByProductMetaModel metaModel, IDictionary<int, string> currencyList, ProductAccess productAccess)
         {
             const string UspName = "Lrf_Rpt_WinlossByProductDetail";
 
@@ -88,7 +88,7 @@ namespace Fanex.Athena.DataAccess.Report
 
                 using (var reader = await db.ExecuteReaderAsync().ConfigureAwait(false))
                 {
-                    return GetData(reader, currencyList, metaModel, true);
+                    return GetData(reader, currencyList, metaModel, true, productAccess);
                 }
             }
         }
@@ -116,8 +116,8 @@ namespace Fanex.Athena.DataAccess.Report
             }
         }
 
-        private static IDictionary<string, IEnumerable<WinLossByProduct>> CalculateSummaryTotal(
-            IDictionary<string, IList<WinLossByProduct>> summaryTotalTemp)
+        private IDictionary<string, IEnumerable<WinLossByProduct>> CalculateSummaryTotal(
+            IDictionary<string, IList<WinLossByProduct>> summaryTotalTemp, ProductAccess productAccess)
         {
             var summaryTotal = new Dictionary<string, IEnumerable<WinLossByProduct>>();
             foreach (var summary in summaryTotalTemp)
@@ -126,7 +126,7 @@ namespace Fanex.Athena.DataAccess.Report
                                     .Select(i => new WinLossByProduct
                                     {
                                         ProductCode = i.Key,
-                                        ProductName = ProductHelper.GetProductName(i.Key),
+                                        ProductName = productAccess.GetProductName(i.Key),
                                         TurnOver = i.Sum(j => j.TurnOver),
                                         CustomerWinLoss = i.Sum(j => j.CustomerWinLoss),
                                         CustomerComm = i.Sum(j => j.CustomerComm),
@@ -176,7 +176,8 @@ namespace Fanex.Athena.DataAccess.Report
             IDataReader reader,
              IDictionary<int, string> currencyList,
             WinLossByProductMetaModel metaModel,
-            bool drilldown)
+            bool drilldown,
+            ProductAccess productAccess)
         {
             var result = new List<WinLossByProduct>();
             var summaryTotalTemp = InitSummaryTotalList<IList<WinLossByProduct>>(metaModel.DefaultBaseCurrency, () => new List<WinLossByProduct>());
@@ -195,7 +196,7 @@ namespace Fanex.Athena.DataAccess.Report
                     ExternalId = hasExternalId ? reader.ToString("nickname") : string.Empty,
                     CustomerId = hasCustomerId ? reader.ToInt("custid") : 0,
                     ProductCode = productCode,
-                    ProductName = ProductHelper.GetProductName(productCode),
+                    ProductName = productAccess.GetProductName(productCode),
                     CurrencyId = currencyId,
                     CurrencyName = currencyList?.GetValueOrDefault(currencyId, currencyId.ToString()),
                     TurnOver = reader.ToDecimal("turnover"),
@@ -218,7 +219,7 @@ namespace Fanex.Athena.DataAccess.Report
             {
                 DataList = result,
                 TotalData = CalculateTotal(result),
-                SummaryTotal = CalculateSummaryTotal(summaryTotalTemp),
+                SummaryTotal = CalculateSummaryTotal(summaryTotalTemp, productAccess),
                 ResultInfo = new ResultInfo()
             };
         }

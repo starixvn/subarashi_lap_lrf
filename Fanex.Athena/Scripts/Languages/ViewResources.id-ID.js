@@ -1,4 +1,4 @@
-﻿// Generated at: 6/3/2025 10:27:21 AM
+﻿// Generated at: 7/22/2025 9:42:45 AM
 var _language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -110,7 +110,6 @@ BettingLimit:"Batas Taruhan",
 BettingStatement:"Rekapan Taruhan",
 BettingTicketCenter:"Pusat Tiket Taruhan",
 BettingTicketCenter_AdvancedSearchTabNote1:"Filter Liga dan Pertandingan hanya tersedia untuk Sportsbook pada hari tertentu",
-BettingTicketCenter_AdvancedSearchTabNote2:"Data tersedia dari {0}",
 BettingTicketCenter_BookedBetNote:"Data tersedia hingga 7 hari",
 BettingTicketCenter_Exchange_Note_1:"Dukung pencarian tiket kosong saja",
 BettingTicketCenter_Exchange_Note_2:"Masukkan nama pengguna untuk mendapatkan hasil lebih cepat.",

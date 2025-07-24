@@ -19,7 +19,7 @@ namespace Fanex.Athena.Model.BetList.MetaModel
 
         public int PageIndex { get; set; }
 
-        public int SortBy { get; set; } 
+        public int SortBy { get; set; }
 
         public byte SortOrder { get; set; }
 

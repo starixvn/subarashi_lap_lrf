@@ -26,6 +26,7 @@ namespace Fanex.Athena.Api.Report
     using Fanex.Athena.Extension.Helper;
     using Fanex.Athena.Model.Auth.DataDomain;
     using Fanex.Athena.Model.Core.DataDomain;
+    using Fanex.Athena.Model.Core.DTO.Common;
     using Fanex.Athena.Model.Report.DTO;
     using Fanex.Athena.Model.Report.MetaModel;
     using Fanex.Athena.Service.Core.Utility.Interfaces;
@@ -216,20 +217,20 @@ namespace Fanex.Athena.Api.Report
             return ExcelStream(winlossByProduct.Workbook, FileName);
         }
 
-        private async Task<WinLossByProductResultModel> GetData(WinLossByProductMetaModel metaModel)
+        private async Task<WinLossByProductResultModel> GetData(WinLossByProductMetaModel metaModel, ProductAccess productAccess)
         {
             var userCurrencyList = SessionService.UserSession.CurrencyList;
             if (metaModel.Level == 0)
             {
-                return await _winlossByProductDataAccess.GetWinlossByProducts(metaModel, userCurrencyList).ConfigureAwait(false);
+                return await _winlossByProductDataAccess.GetWinlossByProducts(metaModel, userCurrencyList, productAccess).ConfigureAwait(false);
             }
             else if (SessionService.LicenseeSession.LicenseeId != LicenseeIdentity.OneTwoBet || metaModel.Level == (int)ReportLevel.Customer)
             {
-                return await _winlossByProductDataAccess.GetWinlossByProductCustomers(metaModel, userCurrencyList).ConfigureAwait(false);
+                return await _winlossByProductDataAccess.GetWinlossByProductCustomers(metaModel, userCurrencyList, productAccess).ConfigureAwait(false);
             }
             else
             {
-                return await _winlossByProductDataAccess.GetWinlossByProductAgents(metaModel, userCurrencyList).ConfigureAwait(false);
+                return await _winlossByProductDataAccess.GetWinlossByProductAgents(metaModel, userCurrencyList, productAccess).ConfigureAwait(false);
             }
         }
 
@@ -252,6 +253,8 @@ namespace Fanex.Athena.Api.Report
                 return BadRequest(ViewResources.InvalidParams);
             }
             var userSession = SessionService.UserSession;
+            var productAccess = ProductService.GetProductAccess(LicenseeSession.LicenseeId, userSession.Language);
+
             metaModel.DefaultBaseCurrency = userSession.DefaultBaseCurrency;
             metaModel.Username = ValidateUserName(metaModel.Username);
             metaModel.AgentListXml = AuthParameterHelper.GenerateAgentListXml(CurrencyAgentListBySubsidiaryBusiness(metaModel),
@@ -268,7 +271,7 @@ namespace Fanex.Athena.Api.Report
             }
 
             AssignDrilldownDates(metaModel, fdate, tdate);
-            var result = await GetData(metaModel);
+            var result = await GetData(metaModel, productAccess);
             result.ResultInfo.Message = GetErrorMessage(result.ResultInfo.Code);
 
             var drillDownSystemId = systemId;

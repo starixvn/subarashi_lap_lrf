@@ -2,20 +2,11 @@
 {
     #region
 
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Hosting;
-    using System.Xml.Linq;
-
-    using Extension.Utility.Interfaces;
-
-    using Fanex.Athena.DataAccess.Core.Common.Interfaces;
+    using System.Threading;
     using Fanex.Athena.Extension.Helper;
-    using Fanex.Athena.Extension.Utility;
-    using Fanex.Athena.Model.Auth;
     using Fanex.Athena.Model.Core.DTO.Common;
-    using Fanex.Athena.Model.Core.DTO.Configuration;
     using Fanex.Athena.Model.Core.MetaModel.Product;
     using Fanex.Athena.Service.StatelessCore.Interfaces;
 
@@ -23,90 +14,60 @@
 
     public class ProductService : IProductService
     {
-        private readonly IProductDataAccess _productDataAccess;
+        private readonly ICommonApiClient _commonApiClient;
 
-        private readonly IAppSettings _appSettings;
+        private const string ProductAccessUrl = "api/productaccess";
+        private const string ProductResourceUrl = "api/productresource";
 
-        private readonly IXDocumentWrapper _xmlWrapper;
-
-        private readonly ICustomMemoryCacheService _cache;
-
-        public ProductService(IAppSettings appSettings, IProductDataAccess productDataAccess, IXDocumentWrapper xmlWrapper, ICustomMemoryCacheService cache)
+        public ProductService(ICommonApiClient commonApiClient)
         {
-            _appSettings = appSettings;
-            _productDataAccess = productDataAccess;
-            _xmlWrapper = xmlWrapper;
-            _cache = cache;
+            _commonApiClient = commonApiClient;
         }
 
         #region Public Methods and Operators
 
-        public IList<Product> GetProductList(int licenseeId, string languageCode)
+        private static object BuildProductAccessRequest(int licenseeId, string functionConfigKey) => new
         {
-            var cacheKey = CacheKey.MemorycacheCommonProduct + licenseeId + languageCode;
-            var productList = _cache.Get<IList<Product>>(cacheKey);
+            licenseeId,
+            functionKey = functionConfigKey
+        };
 
-            if (productList != null)
-            {
-                return productList;
-            }
+        public IList<Product> GetProductList(int licenseeId, string languageCode, string functionConfigKey = null) =>
+             _commonApiClient.GetAsync<IList<Product>>(
+                ProductAccessUrl,
+                languageCode,
+                BuildProductAccessRequest(licenseeId, functionConfigKey)).ConfigureAwait(false).GetAwaiter().GetResult();
 
-            productList = _productDataAccess.GetProductAccessList(licenseeId);
-            _cache.Set(cacheKey, productList);
-
-            return productList;
-        }
+        public string GetProductName(string productCode) =>
+            _commonApiClient.GetAsync<string>(
+                ProductResourceUrl,
+                GetCurrentIBCLanguageCode(),
+                new { productCode }).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public ProductAccess GetProductAccess(int licenseeId, string languageCode, string functionConfigKey = null)
         {
-            var allowedProducts = GetAllowedProducts(functionConfigKey);
+            var allowedProducts = GetProductList(licenseeId, languageCode, functionConfigKey);
 
-            var originalProducts = GetProductList(licenseeId, languageCode);
-
-            var productList = allowedProducts.Any() ? originalProducts.Where(i => allowedProducts.Contains(i.ProductCode)).ToList()
-                : originalProducts;
-            return new ProductAccess(productList);
+            return new ProductAccess(allowedProducts);
         }
 
         public ProductAccess GetSingleWalletProductAccess(int licenseeId, string languageCode, string functionConfigKey = null)
         {
-            var allowedProducts = GetAllowedProducts(functionConfigKey);
+            var allowedProducts = GetProductList(licenseeId, languageCode, functionConfigKey);
 
-            var originalProducts = GetProductList(licenseeId, languageCode);
+            var productList = allowedProducts.Where(i => i.IsOfferedSingleWallet).ToList();
 
-            var productList = allowedProducts.Any() ? originalProducts.Where(i => i.IsOfferedSingleWallet && allowedProducts.Contains(i.ProductCode)).ToList()
-                : originalProducts;
             return new ProductAccess(productList);
         }
 
         public bool IsOfferCashOutProduct(int licenseeId, string languageCode)
         {
-            var originalProducts = GetProductList(licenseeId, languageCode);
-            return originalProducts.Any(_ => _.ProductCode == Product.CO);
+            var allowedProducts = GetProductList(licenseeId, languageCode);
+
+            return allowedProducts.Any(_ => _.ProductCode == Product.CO);
         }
 
         #endregion
-
-        public string[] GetAllowedProducts(string functionName = null)
-        {
-            const string FunctionAllowedProductsKey = "FunctionAllowedProducts";
-
-            var functions = _cache.Get<IEnumerable<XElement>>(FunctionAllowedProductsKey);
-            if (functions == null)
-            {
-                var filePath = HostingEnvironment.MapPath(_appSettings.GetValue("FunctionAllowedProductFile"));
-                functions = _xmlWrapper.Load(filePath).Descendants(nameof(Function));
-                if (functions != null && functions.Any())
-                {
-                    _cache.Set(FunctionAllowedProductsKey, functions);
-                }
-            }
-
-            var configFunctionName = string.IsNullOrWhiteSpace(functionName) ? "_Default" : functionName;
-            var config = functions.FirstOrDefault(x => x.Attribute("Name").Value.Equals(configFunctionName, StringComparison.OrdinalIgnoreCase));
-            return config == null ? new string[] { } : config.Attribute(nameof(Product)).Value.Split(',')
-                    .Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).ToArray();
-        }
 
         public IList<ProductOption> GetAllowedSubProductOptions(IEnumerable<string> offeredSubProductList, IList<ProductOption> productOptions)
         {
@@ -133,6 +94,11 @@
             }
 
             return productCodes + "," + string.Join(",", offeredSubProductList);
+        }
+
+        private static string GetCurrentIBCLanguageCode(string languageCode = null)
+        {
+            return string.IsNullOrEmpty(languageCode) ? Thread.CurrentThread.CurrentUICulture.IetfLanguageTag : languageCode;
         }
     }
 }

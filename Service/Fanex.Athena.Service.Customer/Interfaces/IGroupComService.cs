@@ -1,7 +1,6 @@
 ﻿namespace Fanex.Athena.Service.Customer.Interfaces
 {
     using System.Collections.Generic;
-    using System.Data;
     using System.Threading.Tasks;
 
     using Fanex.Athena.Model.Auth;
@@ -16,7 +15,7 @@
 
         Task<IResultInfo> UpdateGroupAsync(GroupCommMetaModel newItem, IRequest request, UserAuthInfo user);
 
-        Task<(IList<GroupCommMetaModel>, IEnumerable<string>)> GetAllAsync(int licenseeId, ProductAccess productAccess);
+        Task<(IList<GroupCommMetaModel>, IDictionary<string, string>)> GetAllAsync(int licenseeId, ProductAccess productAccess);
 
         Task<GroupCommMetaModel> GetById(int groupCommId, int licenseeId, ProductAccess productAccess);
 

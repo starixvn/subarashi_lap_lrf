@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 6/3/2025 10:27:21 AM
+﻿// Generated at: 7/22/2025 9:42:45 AM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -208,7 +208,6 @@ BettingLimit:"วงเงินเดิมพัน",
 BettingStatement:"คำชี้แจงการเดิมพัน",
 BettingTicketCenter:"ศูนย์ตั๋วเดิมพัน",
 BettingTicketCenter_AdvancedSearchTabNote1:"ตัวกรองลีกและการแข่งขันใช้ได้เฉพาะกับสปอร์ตบุ๊ค ในบางวันเท่านั้น",
-BettingTicketCenter_AdvancedSearchTabNote2:"ข้อมูลจาก {0}",
 BettingTicketCenter_BookedBetNote:"แสดงข้อมูลได้มากที่สุดภายใน 7 วัน",
 BettingTicketCenter_Exchange_Note_1:"สนับสนุนการค้นหาตั๋วว่างเท่านั้น",
 BettingTicketCenter_Exchange_Note_2:"ป้อนชื่อผู้ใช้เพื่อรับผลลัพธ์ที่เร็วขึ้น.",

@@ -176,5 +176,11 @@
         {
             return ProductList.Any(p => p.ProductCode == productCode);
         }
+
+        public string GetProductName(string productCode)
+        {
+            var product = ProductList.FirstOrDefault(p => p.ProductCode == productCode);
+            return product?.ProductName ?? string.Empty;
+        }
     }
 }

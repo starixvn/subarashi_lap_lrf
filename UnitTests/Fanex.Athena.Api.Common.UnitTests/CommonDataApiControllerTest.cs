@@ -40,7 +40,7 @@
             const string DefaultLicenseeName = "12bet";
 
             _sessionService.LicenseeSession.Returns(new LicenseeAuthInfo
-                { LicenseeId = FakeHelper.Create<int>(), LicenseeName = DefaultLicenseeName, SpecialPlatform = 0 });
+            { LicenseeId = FakeHelper.Create<int>(), LicenseeName = DefaultLicenseeName, SpecialPlatform = 0 });
             _sessionService.UserSession.Returns(new UserAuthInfo
             {
                 UserId = FakeHelper.Create<int>(),

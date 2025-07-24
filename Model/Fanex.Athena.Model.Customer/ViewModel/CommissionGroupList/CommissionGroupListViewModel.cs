@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using Fanex.Athena.Model.Customer.MetaModel;
-using Fanex.Athena.Model.Core.Helper;
+﻿using Fanex.Athena.Model.Customer.MetaModel;
+using System.Collections.Generic;
 
 namespace Fanex.Athena.Model.Customer.ViewModel.CommissionGroupList
 {
     public class CommissionGroupListViewModel
     {
-        public CommissionGroupListViewModel(IList<GroupCommMetaModel> groups, IEnumerable<string> productList)
+        public CommissionGroupListViewModel(
+            IList<GroupCommMetaModel> groups,
+            IDictionary<string, string> productList)
         {
             Groups = groups;
-
-            ProductList = new Dictionary<string, string>();
-            foreach (var product in productList)
-            {
-                ProductList[product] = ProductHelper.GetProductName(product);
-            }
+            ProductList = productList;
         }
 
         public IList<GroupCommMetaModel> Groups { get; set; }

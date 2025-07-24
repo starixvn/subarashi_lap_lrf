@@ -7,7 +7,7 @@ namespace Fanex.Athena.Api.Base.Attributes
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public class CompressFilter : ActionFilterAttribute
     {
-        public CompressFilter() { } 
+        public CompressFilter() { }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {

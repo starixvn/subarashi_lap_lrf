@@ -102,6 +102,7 @@ namespace Fanex.Athena
             builder.WithHttpClient("OICAPICLIENT", ConfigurationManager.AppSettings["OicApiHostUrl"]);
 
             builder.WithHttpClient("CTSAPICLIENT", ConfigurationManager.AppSettings["CTSApiHostUrl"]);
+            builder.WithHttpClient("COMMONAPICLIENT", ConfigurationManager.AppSettings["CommonAPI_Host"]);
         }
 
         private static void RegisterThirdpartyServices(ContainerBuilder builder)
@@ -208,6 +209,10 @@ namespace Fanex.Athena
             builder.Register(x => new CTSApiClient(
                x.ResolveNamed<HttpClient>("CTSAPICLIENT")
               )).As<ICTSApiClient>().SingleInstance();
+
+            builder.Register(x => new CommonApiClient(
+               x.ResolveNamed<HttpClient>("COMMONAPICLIENT")
+              )).As<ICommonApiClient>().SingleInstance();
 
             builder.RegisterType<PortalApiService>().As<IPortalApiService>().SingleInstance();
             builder.RegisterType<SubsidiaryService>().As<ISubsidiaryService>().SingleInstance();

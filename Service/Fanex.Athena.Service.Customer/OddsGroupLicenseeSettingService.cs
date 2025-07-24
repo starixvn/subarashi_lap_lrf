@@ -9,7 +9,6 @@ using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting;
 using Fanex.Athena.Model.Report.DTO;
 using Fanex.Athena.Resources;
-using Fanex.Athena.Service.Core.Users;
 using Fanex.Athena.Service.Core.Users.Interfaces;
 using Fanex.Athena.Service.Customer.Interfaces;
 using Fanex.Athena.Service.StatelessCore.Interfaces;

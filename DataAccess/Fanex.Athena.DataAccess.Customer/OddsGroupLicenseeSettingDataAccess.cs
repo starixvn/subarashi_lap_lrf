@@ -4,7 +4,6 @@ using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Customer.DTO.OddsGroupLicenseeSetting;
 using Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting;
 using Fanex.Data;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

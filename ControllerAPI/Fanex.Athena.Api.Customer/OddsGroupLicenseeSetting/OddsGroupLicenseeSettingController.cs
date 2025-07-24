@@ -2,7 +2,6 @@
 using Fanex.Athena.Api.Base.Attributes;
 using Fanex.Athena.DataAccess.Core.Configuration.Interfaces;
 using Fanex.Athena.Model.Auth.DataDomain;
-using Fanex.Athena.Model.Core.DTO.Common;
 using Fanex.Athena.Model.Customer.MetaModel;
 using Fanex.Athena.Model.Customer.MetaModel.OddsGroupLicenseeSetting;
 using Fanex.Athena.Resources;
