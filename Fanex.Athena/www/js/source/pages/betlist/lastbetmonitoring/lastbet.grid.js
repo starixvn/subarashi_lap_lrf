@@ -125,7 +125,7 @@ define(
         ------------------------------------------------------------------------------------------*/
         _me.reloadData = function () {
             if (_isLoading) {
-                _me.doMonitor();
+                // _me.doMonitor();
                 return;
             }
 
@@ -148,7 +148,7 @@ define(
                 dataType: 'json',
                 async: true,
                 cache: false,
-                timeout: 10000,
+                timeout: 300000,
                 beforeSend: function () {
                     $('#monitorLoader').css('visibility', 'visible');
                     _isLoading = true;
@@ -171,6 +171,7 @@ define(
                         : MIN_INTERVAL;
 
                     // Continue
+                    _isLoading = false;
                     _me.doMonitor();
                 },
                 error: function (jqXHR) {
@@ -183,8 +184,8 @@ define(
 
                     _betListResult.Updated = false;
                     _betListResult.Rows = '';
-                    _isLoading = false;
                     _intervalMiliseconds += 1000;
+                    _isLoading = false;
                     _me.doMonitor();
                 }
             });
@@ -266,7 +267,7 @@ define(
 
         _me.clearContent = function () {
             _postedParam.TransId = '0';
-            _postedParam.TransLogId = '0';;
+            _postedParam.TransLogId = '0';
             _me.bindNoInfoRow();
         };
 
@@ -276,7 +277,7 @@ define(
             _lastTransId = '0';
             _lastTransLogId = '0';
             _intervalMiliseconds = MIN_INTERVAL;
-            _me.doMonitor();
+            _me.reloadData();
         };
 
         _me.stopMonitor = function () {
