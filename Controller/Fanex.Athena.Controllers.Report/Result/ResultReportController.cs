@@ -56,8 +56,8 @@
             ViewBag.IsAllowedI4D = productAccess.IsAllowI4D;
             ViewBag.IsAllowedKeno = productAccess.IsAllowKN;
             ViewBag.IsAllowedLottery = productAccess.IsAllow(Product.LT);
-            ViewBag.IsAllowedTG = productAccess.IsAllow(Product.TG);
-            ViewBag.IsAllowedSLT = offeredSubProductList.IsPresent(_ => _ == Product.SLT);
+            ViewBag.IsAllowedTG = productAccess.IsAllowTG;
+            ViewBag.IsAllowedSLT = productAccess.IsAllowSLT;
             return View("~/Views/Desktop/Report/Result/Main.cshtml", model);
         }
 
