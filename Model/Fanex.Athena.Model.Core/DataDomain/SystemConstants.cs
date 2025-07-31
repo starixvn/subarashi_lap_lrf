@@ -42,6 +42,7 @@
             { BaseCurrencyType.NGN, "NGN" },
             { BaseCurrencyType.BRL, "BRL" },
             { BaseCurrencyType.PKR, "PKR" },
+            { BaseCurrencyType.ZAR, "ZAR" },
 
             // crypto currency
             { BaseCurrencyType.USDT, "USDT" }
@@ -66,7 +67,8 @@
             { BaseCurrencyType.MXN, "MXN" },
             { BaseCurrencyType.NGN, "NGN" },
             { BaseCurrencyType.BRL, "BRL" },
-            { BaseCurrencyType.PKR, "PKR" }
+            { BaseCurrencyType.PKR, "PKR" },
+            { BaseCurrencyType.ZAR, "ZAR" }
         };
 
         public static readonly IReadOnlyDictionary<int, string> JollysportsBaseCurrencyList = new Dictionary<int, string>
@@ -88,8 +90,9 @@
             { BaseCurrencyType.MXN, "MXN" },
             { BaseCurrencyType.NGN, "NGN" },
             { BaseCurrencyType.BRL, "BRL" },
-            { BaseCurrencyType.PKR, "PKR" }
-        };
+            { BaseCurrencyType.PKR, "PKR" },
+            { BaseCurrencyType.ZAR, "ZAR" }
+    };
 
         public static readonly IReadOnlyDictionary<int, string> CryptoBaseCurrencyList = new Dictionary<int, string>
         {
