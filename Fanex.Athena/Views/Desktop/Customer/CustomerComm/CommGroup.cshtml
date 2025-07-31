@@ -16,6 +16,7 @@
     var dropdownId = comm.ProductCode + "CommDiscount";
 
     @Html.Hidden("CommValues[" + i + "].ProductCode", comm.ProductCode)
+    @Html.Hidden("CommValues[" + i + "].ProductName", comm.ProductName)
     @Html.Hidden("CommValues[" + i + "].Sporttype", comm.Sporttype)
     @Html.Hidden("CommValues[" + i + "].Bettype", comm.Bettype)
     @Html.Hidden("CommValues[" + i + "].Discount", comm.Discount, new { id = dropdownId })
