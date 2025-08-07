@@ -48,6 +48,7 @@ namespace Fanex.Athena.Model.Core.DataDomain
         public const int BRL = -19;
         public const int PKR = -20;
         public const int ZAR = -21;
+        public const int KRW = -22;
 
         public const int USDT = -99;
     }
