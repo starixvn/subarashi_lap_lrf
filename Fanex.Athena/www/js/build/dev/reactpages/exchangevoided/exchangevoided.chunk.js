@@ -2998,10 +2998,10 @@ const RunningDataGrid = props => {
       pageSize
     }));
   };
-  const onSort = (sortBy, sortOrder) => {
+  const onSort = (sortType, sortOrder) => {
     const requestSortOrder = sortOrder == "asc" ? _lib_constants__WEBPACK_IMPORTED_MODULE_8__["SortOrder"].ASC : _lib_constants__WEBPACK_IMPORTED_MODULE_8__["SortOrder"].DESC;
     const params = _objectSpread(_objectSpread({}, props.requestParam), {}, {
-      SortBy: sortBy,
+      SortType: sortType,
       SortOrder: requestSortOrder
     });
     props.setRequestParam(params);
@@ -3459,11 +3459,11 @@ const DefaultPagingOption = {
   PageList: [50, 100, 200, 300, 400, 500, 1000, 2000]
 };
 const SortOrder = {
-  ASC: 0,
-  DESC: 1
+  ASC: 1,
+  DESC: 2
 };
 const SortBy = {
-  BetPlaced: 0,
+  BetPlaced: 4,
   Stake: 1
 };
 

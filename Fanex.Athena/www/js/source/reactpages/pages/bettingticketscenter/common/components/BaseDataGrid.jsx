@@ -42,7 +42,7 @@ export const BaseDataGrid = (props) => {
     }
 
     const onSort = (sortBy, sortOrder) => {
-        const param = Object.assign({}, requestParam, { SortBy: sortBy === 'WinLoss' ? 'WinLost' : sortBy, SortOrder: sortOrder });
+        const param = Object.assign({}, requestParam, { SortType: sortBy, SortOrder: sortOrder });
 
         getData(param);
     }

@@ -33,9 +33,9 @@ const RunningDataGrid = (props) => {
         props.setRequestParam({ ...props.requestParam, pageIndex, pageSize });
     }
 
-    const onSort = (sortBy, sortOrder) => {
+    const onSort = (sortType, sortOrder) => {
         const requestSortOrder = sortOrder == "asc" ? SortOrder.ASC : SortOrder.DESC
-        const params = { ...props.requestParam, SortBy: sortBy, SortOrder: requestSortOrder };
+        const params = { ...props.requestParam, SortType: sortType, SortOrder: requestSortOrder };
         props.setRequestParam(params);
     }
 
