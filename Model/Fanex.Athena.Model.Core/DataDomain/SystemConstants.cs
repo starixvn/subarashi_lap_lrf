@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Constants;
-    using DTO.Common;
     using Resources;
 
     public static class SystemConstants
@@ -16,9 +15,6 @@
 
         public static readonly ReadOnlyCollection<string> BaseCurrencyListOfSummaryTotalRow = new ReadOnlyCollection<string>(
             new List<string> { "EUR", "USD", "GBP" });
-
-        public static readonly ReadOnlyCollection<string> SettlementTimeSupportProductList = new ReadOnlyCollection<string>(
-            new List<string> { Product.SB, Product.VS, Product.NG });
 
         public static readonly IReadOnlyDictionary<int, string> BaseCurrencyList = new Dictionary<int, string>
         {
@@ -43,6 +39,7 @@
             { BaseCurrencyType.BRL, "BRL" },
             { BaseCurrencyType.PKR, "PKR" },
             { BaseCurrencyType.ZAR, "ZAR" },
+            { BaseCurrencyType.KRW, "KRW" },
 
             // crypto currency
             { BaseCurrencyType.USDT, "USDT" }
@@ -68,7 +65,8 @@
             { BaseCurrencyType.NGN, "NGN" },
             { BaseCurrencyType.BRL, "BRL" },
             { BaseCurrencyType.PKR, "PKR" },
-            { BaseCurrencyType.ZAR, "ZAR" }
+            { BaseCurrencyType.ZAR, "ZAR" },
+            { BaseCurrencyType.KRW, "KRW" }
         };
 
         public static readonly IReadOnlyDictionary<int, string> JollysportsBaseCurrencyList = new Dictionary<int, string>
@@ -91,8 +89,9 @@
             { BaseCurrencyType.NGN, "NGN" },
             { BaseCurrencyType.BRL, "BRL" },
             { BaseCurrencyType.PKR, "PKR" },
-            { BaseCurrencyType.ZAR, "ZAR" }
-    };
+            { BaseCurrencyType.ZAR, "ZAR" },
+            { BaseCurrencyType.KRW, "KRW" }
+        };
 
         public static readonly IReadOnlyDictionary<int, string> CryptoBaseCurrencyList = new Dictionary<int, string>
         {
@@ -111,12 +110,6 @@
             // flat currency
             { TimeZoneType.AST, "GMT-4" },
             { TimeZoneType.CST, "GMT+8" }
-        };
-
-        public static IReadOnlyDictionary<int, string> VipOnyList => new Dictionary<int, string>
-        {
-            { 0, ViewResources.No },
-            { 1, ViewResources.Yes }
         };
 
 #pragma warning disable S109 // Magic numbers should not be used

@@ -17,7 +17,7 @@ var Site = (function ($) {
         'jpy': '-16', 'mxn': '-17',
         'ngn': '-18', 'brl': '-19',
         'pkr': '-20', 'zar': '-21',
-        'usdt': '-99'
+        'krw': '-22', 'usdt': '-99'
     };
     var REQUEST_VERIFICATION_TOKEN;
     var _historyDate = null;
