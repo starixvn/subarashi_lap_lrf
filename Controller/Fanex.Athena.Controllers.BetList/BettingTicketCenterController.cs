@@ -272,7 +272,7 @@
 
             if (offeredSubProductList.IsPresent(_ => _ == Product.SLT))
             {
-                licProductsRequire.Add(productAccess.GetProductName(Product.SLT));
+                licProductsRequire.Add(ViewResources.ProductSLT);
             }
 
             if (productAccess.IsAllow(Product.NG))
