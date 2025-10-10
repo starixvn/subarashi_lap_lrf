@@ -128,6 +128,10 @@
 
         BetbyBasketball = 134,
 
+        BetbyeSoccer = 116,
+
+        BetbyeVolleyball = 114,
+
         VirtuallySports = 147,
 
         VirtualSteepleChase = 125,
