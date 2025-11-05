@@ -2504,8 +2504,11 @@ const Popup = props => {
   }, isShowTitle && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "txt-title"
-  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "txt-title",
+    dangerouslySetInnerHTML: {
+      __html: title
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
     onClick: () => {
       props.onClose && props.onClose();
@@ -4178,4 +4181,4 @@ const userGuideContent = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1
 /***/ })
 
 }]);
-//# sourceMappingURL=oddsGroupSetting.4ede0496174da1499817.chunk.js.map
+//# sourceMappingURL=oddsGroupSetting.247571462c831a228a03.chunk.js.map

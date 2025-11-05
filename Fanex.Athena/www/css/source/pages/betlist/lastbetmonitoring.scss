@@ -131,6 +131,12 @@ $bgNewRow: #fcf4df;
     }
 }
 
+span.strikethrough {
+    text-decoration: line-through;
+    color: #bbb;
+    font-weight: bold !important;
+}
+
 /*-----------------Loader-------------------*/
 .loader {
     border: 5px solid #e4d8d8;

@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/monitoredPlayer":"ac0efb05ab38e606c613","customer/playersegmentation/vipPlayerManagement":"4d8388279fb7602ac445","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
+/******/ 		return __webpack_require__.p + "www/js/build/dev/reactpages/" + ({"customer/playersegmentation/monitoredPlayer":"customer/playersegmentation/monitoredPlayer","customer/playersegmentation/vipPlayerManagement":"customer/playersegmentation/vipPlayerManagement","lib/xlsx-style-sparta":"lib/xlsx-style-sparta"}[chunkId]||chunkId) + "." + {"customer/playersegmentation/monitoredPlayer":"2515efdf95ad9962b6cb","customer/playersegmentation/vipPlayerManagement":"d8470ea04cfa325d1d29","lib/xlsx-style-sparta":"fce9f6c19fab5be3b950"}[chunkId] + ".chunk.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

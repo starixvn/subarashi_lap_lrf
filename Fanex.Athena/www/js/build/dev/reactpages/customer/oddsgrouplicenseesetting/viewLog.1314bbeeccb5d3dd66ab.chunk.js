@@ -9931,8 +9931,11 @@ const Popup = props => {
   }, isShowTitle && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "popup-title"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "txt-title"
-  }, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "txt-title",
+    dangerouslySetInnerHTML: {
+      __html: title
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "popup-close",
     onClick: () => {
       props.onClose && props.onClose();
@@ -10903,4 +10906,4 @@ const isLoading = Object(_lib_createReducer_js__WEBPACK_IMPORTED_MODULE_1__["def
 /***/ })
 
 }]);
-//# sourceMappingURL=viewLog.8a76122f4ed2e848ebad.chunk.js.map
+//# sourceMappingURL=viewLog.1314bbeeccb5d3dd66ab.chunk.js.map
