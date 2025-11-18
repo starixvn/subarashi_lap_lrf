@@ -1,4 +1,4 @@
-﻿// Generated at: 8/7/2025 4:20:34 PM
+﻿// Generated at: 11/18/2025 4:26:03 PM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -121,6 +121,7 @@ BettingTicketCenter_RefnoTabNote_TxIDSearch:"ระบบรองรับก�
 BettingTicketCenter_RefnoTabNote_TxIDSearch2:"ระบบรองรับการค้นหา รหัสLicTx ของตั๋วที่ชำระแล้วเท่านั้น",
 BettingTicketCenter_RefnoTabNote1:"สำหรับสปอร์ตบุ๊ค ผลการค้นหาจะรวมตั๋วโบนัส/เงินสดที่เกี่ยวข้อง",
 BettingTicketCenter_RefnoTabNote2:"สำหรับ {0}: โปรดระบุชื่อผู้ใช้เพื่อค้นหาตั๋วหลังจาก {1}",
+BettingTicketCenter_RefnoTabNote3:"เมื่อค้นหาบิลเดิมพันสปอร์ตบุ๊คที่มีโปรโมชั่น โปรโมชั่น Saba Sportsbook - การเดิมพันแบบไม่มีความเสี่ยง SABA ข้อมูลจะแสดงทั้งบิลเดิมพันสปอร์ตบุ๊คและบิลโปรโมชั่นที่เกี่ยวข้องทั้งหมด อย่างไรก็ตาม บิลโปรโมชั่นที่เกี่ยวข้องจะแสดงเฉพาะตั้งแต่วันที่ {0} ถึงปัจจุบันเท่านั้น.",
 BetTradeCommission:"ค่าคอมมิชชั่นBet Trade",
 BetTradeNotOfferCurrency:"ไม่มีบริการ BetTrade ของสกุลเงินนี้",
 BetType:"ประเภทการเดิมพัน",

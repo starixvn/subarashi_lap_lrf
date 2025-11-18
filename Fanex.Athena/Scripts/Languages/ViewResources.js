@@ -1,4 +1,4 @@
-﻿// Generated at: 8/7/2025 4:20:34 PM
+﻿// Generated at: 11/18/2025 4:26:03 PM
 var _language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -122,6 +122,7 @@ BettingTicketCenter_RefnoTabNote_TxIDSearch:"The system supports searching LicTx
 BettingTicketCenter_RefnoTabNote_TxIDSearch2:"The system supports searching LicTxID for settled tickets only.",
 BettingTicketCenter_RefnoTabNote1:"For Sportsbook, the search result includes the related Bonus/Cash tickets.",
 BettingTicketCenter_RefnoTabNote2:"For {0}: Please provide username also in order to search ticket later than {1}",
+BettingTicketCenter_RefnoTabNote3:"When searching for Sportsbook bet tickets with the Saba Promotion - Saba Reward Risk-free Rebate offer, the data will display both the Sportsbook bet tickets and all relevant promotion tickets. However, the relevant promotion tickets will be displayed only from {0} up to the current date.",
 BetTradeCommission:"Bet Trade Commission",
 BetTradeNotOfferCurrency:"BetTrade is not offered for this currency.",
 BetType:"Bet type",
