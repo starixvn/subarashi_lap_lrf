@@ -3435,4 +3435,7 @@
   <data name="MoneyLineNote" xml:space="preserve">
     <value>Nếu có trận đấu nào cần theo dõi, bạn có thể nhấn vào biểu tượng “+” trong cột Theo Dõi, hoặc nhấn vào Sự Kiện của trận đấu — thao tác này cũng sẽ chuyển bạn đến Trung Tâm Theo Dõi Trận Đấu.</value>
   </data>
+  <data name="BettingTicketCenter_RefnoTabNote3" xml:space="preserve">
+    <value>Khi tìm kiếm các vé cược Thể thao có kèm ưu đãi Khuyến mãi Saba - Hoàn tiền không rủi ro, dữ liệu sẽ hiển thị cả vé cược Thể thao và tất cả các vé khuyến mãi có liên quan. Tuy nhiên, các vé khuyến mãi có liên quan sẽ chỉ được hiển thị từ ngày {0} cho đến ngày hiện tại.</value>
+  </data>
 </root>

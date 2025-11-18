@@ -1159,6 +1159,15 @@ namespace Fanex.Athena.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When searching for Sportsbook bet tickets with the Saba Promotion - Saba Reward Risk-free Rebate offer, the data will display both the Sportsbook bet tickets and all relevant promotion tickets. However, the relevant promotion tickets will be displayed only from {0} up to the current date..
+        /// </summary>
+        public static string BettingTicketCenter_RefnoTabNote3 {
+            get {
+                return ResourceManager.GetString("BettingTicketCenter_RefnoTabNote3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet Trade Commission.
         /// </summary>
         public static string BetTradeCommission {
