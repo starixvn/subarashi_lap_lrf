@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/7/2025 4:20:34 PM
+﻿// Generated at: 11/19/2025 10:49:39 AM
 window._language_en_US = {
 AA:"AA",
 AbnormalBet:"Abnormal Bet",
@@ -216,6 +216,7 @@ BettingTicketCenter_RefnoTabNote_TxIDSearch:"The system supports searching LicTx
 BettingTicketCenter_RefnoTabNote_TxIDSearch2:"The system supports searching LicTxID for settled tickets only.",
 BettingTicketCenter_RefnoTabNote1:"For Sportsbook, the search result includes the related Bonus/Cash tickets.",
 BettingTicketCenter_RefnoTabNote2:"For {0}: Please provide username also in order to search ticket later than {1}",
+BettingTicketCenter_RefnoTabNote3:"When searching for Sportsbook bet tickets with the Saba Promotion - Saba Reward Risk-free Rebate offer, the data will display both the Sportsbook bet tickets and all relevant promotion tickets. However, the relevant promotion tickets will be displayed only from {0} up to the current date.",
 BetTradeCommission:"Bet Trade Commission",
 BetTradeNotOfferCurrency:"BetTrade is not offered for this currency.",
 BetType:"Bet type",
@@ -258,6 +259,7 @@ CashOutWinLoss:"Cash Out Win Loss",
 CashOutWL_SportNote:"This report supports filter by Sport from 01/01/2023",
 CasinoAPI_UpdateCommError:"Having errors when calling CasinoAPI to update customer commission.",
 CasinoPromotion:"Casino Promotion",
+CasinoRoyale:"Casino Royale",
 CasinoTransfer:"Casino Transfer",
 CasinoTurnover:"Casino Turnover",
 CategoriesSelection:"Categories Selection",

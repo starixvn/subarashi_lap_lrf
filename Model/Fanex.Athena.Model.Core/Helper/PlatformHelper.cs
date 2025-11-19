@@ -29,6 +29,7 @@
             { PlatformType.WAP, ViewResources.WAP },
             { PlatformType.QuickBetWidget, ViewResources.QuickBetWidget },
             { PlatformType.ChatRoom, ViewResources.ChatRoom },
+            { PlatformType.CasinoRoyale, ViewResources.CasinoRoyale },
             { PlatformType.BetfromOthers, ViewResources.BetfromOthers }
         };
 

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/7/2025 4:20:35 PM
+﻿// Generated at: 11/19/2025 10:49:39 AM
 window._language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -215,6 +215,7 @@ BettingTicketCenter_RefnoTabNote_TxIDSearch:"Hệ thống hỗ trợ tìm kiếm
 BettingTicketCenter_RefnoTabNote_TxIDSearch2:"Hệ thống chỉ hỗ trợ tìm kiếm Mã giao dịch cho các vé đã tất toán.",
 BettingTicketCenter_RefnoTabNote1:"Đối với Sportsbook, kết quả tìm kiếm bao gồm vé Thưởng/Tiền mặt",
 BettingTicketCenter_RefnoTabNote2:"Đối với {0}: Vui lòng nhập tên người dùng để tìm vé sau thời điểm {1}",
+BettingTicketCenter_RefnoTabNote3:"Khi tìm kiếm các vé cược Thể thao có kèm ưu đãi Khuyến mãi Saba - Hoàn tiền không rủi ro, dữ liệu sẽ hiển thị cả vé cược Thể thao và tất cả các vé khuyến mãi có liên quan. Tuy nhiên, các vé khuyến mãi có liên quan sẽ chỉ được hiển thị từ ngày {0} cho đến ngày hiện tại.",
 BetTradeCommission:"Hoa Hồng cho Bet Trade",
 BetTradeNotOfferCurrency:"BetTrade không chấp nhận đơn vị tiền tệ này",
 BetType:"Loại cược",
@@ -255,6 +256,7 @@ CashOutWinLoss:"Thắng Thua Của Vé Cược Đã Bán",
 CashOutWL_SportNote:"Báo cáo này hỗ trợ bộ lọc theo Thể thao từ 01/01/2023",
 CasinoAPI_UpdateCommError:"Gặp lỗi khi gọi CasinoAPI để cập nhật hoa hồng khách hàng.",
 CasinoPromotion:"Casino Khuyến Mãi",
+CasinoRoyale:"Sòng Bạc Hoàng Gia",
 CasinoTransfer:"Chuyển khoản Casino",
 CasinoTurnover:"Doanh Thu Casino",
 CategoriesSelection:"Lựa chọn danh mục",

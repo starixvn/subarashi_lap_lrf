@@ -1,4 +1,4 @@
-﻿// Generated at: 11/18/2025 4:26:03 PM
+﻿// Generated at: 11/19/2025 10:49:39 AM
 var _language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -162,6 +162,7 @@ CashOutWinLoss:"เงินออก แพ้ชนะ",
 CashOutWL_SportNote:"รายงานนี้รองรับการกรองตามกีฬาตั้งแต่วันที่ 01/01/2023",
 CasinoAPI_UpdateCommError:"มีข้อผิดพลาดเมื่อเรียก APIคาสิโน เพื่ออัปเดตค่าคอมมิชชันของลูกค้า",
 CasinoPromotion:"โปรโมชั่นคาสิโน",
+CasinoRoyale:"Casino Royale",
 CasinoTransfer:"การโอนย้ายคาสิโน",
 CasinoTurnover:"เทิร์นโอเวอร์คาสิโน",
 CategoriesSelection:"การเลือกหมวดหมู่",
