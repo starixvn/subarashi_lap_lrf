@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/7/2025 4:20:35 PM
+﻿// Generated at: 11/19/2025 10:49:39 AM
 window._language_zh_CN = {
 AA:"客客",
 AbnormalBet:"非正规注单",
@@ -204,6 +204,7 @@ BettingTicketCenter_Exchange_Note_3:"仅支援一个月内的数据。",
 BettingTicketCenter_RefnoTabNote_TxIDSearch:"系统支持从 {0} 开始搜索 LicTxID",
 BettingTicketCenter_RefnoTabNote1:"在体育的搜寻结果将包含相关的红利与现金注单",
 BettingTicketCenter_RefnoTabNote2:"{0}: 请提供用户名以便查询{1}之后的注单",
+BettingTicketCenter_RefnoTabNote3:"当查询含有体育促销活动 - 沙巴零风险活动优惠的体育博彩注单时，系统会同时显示体育博彩的投注单及所有相关的优惠注单。不过，相关的优惠注单仅会显示从 {0} 起至当前日期的数据。",
 BetType:"投注类别",
 BONTeamToScore:"双方/一方/两者皆不得分",
 Bonus:"红利",
@@ -241,6 +242,7 @@ CashOutValue:"会员卖出的实际投注额",
 CashOutWinLoss:"实时兑现输赢",
 CashOutWL_SportNote:"此报告支持从 01/01/2023 开始以运动类型筛选",
 CasinoPromotion:"真人娱乐促销活动",
+CasinoRoyale:"皇家娱乐城",
 CasinoTransfer:"娱乐城的总转账额",
 CasinoTurnover:"电子游戏交易额",
 CategoriesSelection:"种类",

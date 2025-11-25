@@ -3438,4 +3438,7 @@
   <data name="BettingTicketCenter_RefnoTabNote3" xml:space="preserve">
     <value>Khi tìm kiếm các vé cược Thể thao có kèm ưu đãi Khuyến mãi Saba - Hoàn tiền không rủi ro, dữ liệu sẽ hiển thị cả vé cược Thể thao và tất cả các vé khuyến mãi có liên quan. Tuy nhiên, các vé khuyến mãi có liên quan sẽ chỉ được hiển thị từ ngày {0} cho đến ngày hiện tại.</value>
   </data>
+  <data name="CasinoRoyale" xml:space="preserve">
+    <value>Sòng Bạc Hoàng Gia</value>
+  </data>
 </root>

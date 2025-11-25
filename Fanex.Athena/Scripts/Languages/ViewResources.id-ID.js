@@ -1,4 +1,4 @@
-﻿// Generated at: 11/18/2025 4:26:03 PM
+﻿// Generated at: 11/19/2025 10:49:39 AM
 var _language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -159,6 +159,7 @@ CashOutWinLoss:"Kemenangan/Kerugian Cash Out",
 CashOutWL_SportNote:"Laporan ini mendukung filter berdasarkan Olahraga mulai dari 01/01/2023",
 CasinoAPI_UpdateCommError:"Kesalahan saat memanggil CasinoAPI untuk memperbarui komisi pelanggan.",
 CasinoPromotion:"Promosi Kasino",
+CasinoRoyale:"Casino Royale",
 CasinoTransfer:"Transfer Casino",
 CasinoTurnover:"Omset Kasino",
 CategoriesSelection:"Pemilihan Kategori",

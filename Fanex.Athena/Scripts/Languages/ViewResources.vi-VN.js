@@ -1,4 +1,4 @@
-﻿// Generated at: 11/18/2025 4:26:03 PM
+﻿// Generated at: 11/19/2025 10:49:39 AM
 var _language_vi_VN = {
 AA:"Đội Khách/Đội Khách",
 AbnormalBet:"Cược bất thường",
@@ -161,6 +161,7 @@ CashOutWinLoss:"Thắng Thua Của Vé Cược Đã Bán",
 CashOutWL_SportNote:"Báo cáo này hỗ trợ bộ lọc theo Thể thao từ 01/01/2023",
 CasinoAPI_UpdateCommError:"Gặp lỗi khi gọi CasinoAPI để cập nhật hoa hồng khách hàng.",
 CasinoPromotion:"Casino Khuyến Mãi",
+CasinoRoyale:"Sòng Bạc Hoàng Gia",
 CasinoTransfer:"Chuyển khoản Casino",
 CasinoTurnover:"Doanh Thu Casino",
 CategoriesSelection:"Lựa chọn danh mục",

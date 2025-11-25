@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/7/2025 4:20:34 PM
+﻿// Generated at: 11/19/2025 10:49:39 AM
 window._language_id_ID = {
 AbnormalBet:"Taruhan Abnormal",
 AccessDeniedMsg:"Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.",
@@ -213,6 +213,7 @@ BettingTicketCenter_RefnoTabNote_TxIDSearch:"Sistem mendukung pencarian LicTxID 
 BettingTicketCenter_RefnoTabNote_TxIDSearch2:"Sistem ini hanya mendukung pencarian LicTxID untuk tiket-tiket yang sudah diselesaikan.",
 BettingTicketCenter_RefnoTabNote1:"Untuk Sportsbook, hasil pencarian termasuk tiket Bonus/Uang tunai terkait.",
 BettingTicketCenter_RefnoTabNote2:"Untuk {0}: Harap berikan nama pengguna juga untuk mencari tiket setelah {1}",
+BettingTicketCenter_RefnoTabNote3:"Saat mencari tiket taruhan Sportsbook dengan Promosi Sportsbook Saba - Taruhan bebas risiko SABA, data akan menampilkan tiket taruhan Sportsbook serta semua tiket promo terkait. Namun, tiket promo terkait hanya akan ditampilkan dari tanggal {0} sampai tanggal saat ini.",
 BetTradeCommission:"Komisi Perdagangan Taruhan",
 BetTradeNotOfferCurrency:"BetTrade tidak ditawarkan untuk mata uang ini.",
 BetType:"Jenis Taruhan",
@@ -253,6 +254,7 @@ CashOutWinLoss:"Kemenangan/Kerugian Cash Out",
 CashOutWL_SportNote:"Laporan ini mendukung filter berdasarkan Olahraga mulai dari 01/01/2023",
 CasinoAPI_UpdateCommError:"Kesalahan saat memanggil CasinoAPI untuk memperbarui komisi pelanggan.",
 CasinoPromotion:"Promosi Kasino",
+CasinoRoyale:"Casino Royale",
 CasinoTransfer:"Transfer Casino",
 CasinoTurnover:"Omset Kasino",
 CategoriesSelection:"Pemilihan Kategori",

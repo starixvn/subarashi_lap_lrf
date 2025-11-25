@@ -3407,4 +3407,7 @@
   <data name="BettingTicketCenter_RefnoTabNote3" xml:space="preserve">
     <value>当查询含有体育促销活动 - 沙巴零风险活动优惠的体育博彩注单时，系统会同时显示体育博彩的投注单及所有相关的优惠注单。不过，相关的优惠注单仅会显示从 {0} 起至当前日期的数据。</value>
   </data>
+  <data name="CasinoRoyale" xml:space="preserve">
+    <value>皇家娱乐城</value>
+  </data>
 </root>

@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-﻿// Generated at: 8/7/2025 4:20:34 PM
+﻿// Generated at: 11/19/2025 10:49:39 AM
 window._language_th_TH = {
 AA:"ครึ่งแรกทีมเยือนนำ จบเกม ทีมเยือนชนะ",
 AbnormalBet:"การเดิมพันที่ผิดปกติ",
@@ -216,6 +216,7 @@ BettingTicketCenter_RefnoTabNote_TxIDSearch:"ระบบรองรับก�
 BettingTicketCenter_RefnoTabNote_TxIDSearch2:"ระบบรองรับการค้นหา รหัสLicTx ของตั๋วที่ชำระแล้วเท่านั้น",
 BettingTicketCenter_RefnoTabNote1:"สำหรับสปอร์ตบุ๊ค ผลการค้นหาจะรวมตั๋วโบนัส/เงินสดที่เกี่ยวข้อง",
 BettingTicketCenter_RefnoTabNote2:"สำหรับ {0}: โปรดระบุชื่อผู้ใช้เพื่อค้นหาตั๋วหลังจาก {1}",
+BettingTicketCenter_RefnoTabNote3:"เมื่อค้นหาบิลเดิมพันสปอร์ตบุ๊คที่มีโปรโมชั่น โปรโมชั่น Saba Sportsbook - การเดิมพันแบบไม่มีความเสี่ยง SABA ข้อมูลจะแสดงทั้งบิลเดิมพันสปอร์ตบุ๊คและบิลโปรโมชั่นที่เกี่ยวข้องทั้งหมด อย่างไรก็ตาม บิลโปรโมชั่นที่เกี่ยวข้องจะแสดงเฉพาะตั้งแต่วันที่ {0} ถึงปัจจุบันเท่านั้น.",
 BetTradeCommission:"ค่าคอมมิชชั่นBet Trade",
 BetTradeNotOfferCurrency:"ไม่มีบริการ BetTrade ของสกุลเงินนี้",
 BetType:"ประเภทการเดิมพัน",
@@ -256,6 +257,7 @@ CashOutWinLoss:"เงินออก แพ้ชนะ",
 CashOutWL_SportNote:"รายงานนี้รองรับการกรองตามกีฬาตั้งแต่วันที่ 01/01/2023",
 CasinoAPI_UpdateCommError:"มีข้อผิดพลาดเมื่อเรียก APIคาสิโน เพื่ออัปเดตค่าคอมมิชชันของลูกค้า",
 CasinoPromotion:"โปรโมชั่นคาสิโน",
+CasinoRoyale:"Casino Royale",
 CasinoTransfer:"การโอนย้ายคาสิโน",
 CasinoTurnover:"เทิร์นโอเวอร์คาสิโน",
 CategoriesSelection:"การเลือกหมวดหมู่",

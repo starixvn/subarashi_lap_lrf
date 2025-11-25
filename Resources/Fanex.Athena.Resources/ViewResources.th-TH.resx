@@ -3432,4 +3432,7 @@
   <data name="BettingTicketCenter_RefnoTabNote3" xml:space="preserve">
     <value>เมื่อค้นหาบิลเดิมพันสปอร์ตบุ๊คที่มีโปรโมชั่น โปรโมชั่น Saba Sportsbook - การเดิมพันแบบไม่มีความเสี่ยง SABA ข้อมูลจะแสดงทั้งบิลเดิมพันสปอร์ตบุ๊คและบิลโปรโมชั่นที่เกี่ยวข้องทั้งหมด อย่างไรก็ตาม บิลโปรโมชั่นที่เกี่ยวข้องจะแสดงเฉพาะตั้งแต่วันที่ {0} ถึงปัจจุบันเท่านั้น.</value>
   </data>
+  <data name="CasinoRoyale" xml:space="preserve">
+    <value>Casino Royale</value>
+  </data>
 </root>
